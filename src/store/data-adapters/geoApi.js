@@ -26,14 +26,10 @@ class riskIndexAPI {
 
   getChildGeo (geoid, type) {
     return new Promise((resolve, reject) => {
-      // console.time('topojson.get')
       this.getData(geoid).then(topology  => {
-        // console.timeEnd('topojson.get')
-        // console.time('topojson.feature')
         resolve(
           topojson.feature(topology, topology.objects[type])
         )
-        // console.timeEnd('topojson.feature')
       })
     })
   }

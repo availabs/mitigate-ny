@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Element from 'components/light-admin/containers/Element'
 import HazardList from './components/HazardList'
-import HazardScoreTable from './components/HazardScoreTable'
+import GeographyScoreTable from './components/GeographyScoreTable'
 import HazardMap from './components/HazardMap'
 
 class Hazard extends Component {
@@ -11,19 +11,11 @@ class Hazard extends Component {
     return (
       	<Element>
       		<h6 className="element-header">New York Statewide Risk Index</h6>
-          <div className='row'>
-            <div className='col-12'>
-      		    <HazardList />
+            <div className='row'>
+              <div className='col-lg-12'>
+                <GeographyScoreTable/>
+              </div>
             </div>
-          </div>
-          <div className='row'>
-            <div className='col-lg-8'>
-              <HazardMap />
-            </div>
-            <div className='col-lg-4'>
-              <HazardScoreTable/>
-            </div>
-          </div>
       	</Element>
     )
   }
@@ -41,13 +33,13 @@ const mapStateToProps = state => {
 
 export default [
   {
-    path: '/risk-index/h/:hazard',
+    path: '/risk-index/g/:geoid',
     subMenus: [],
     name: 'Risk Index',
     auth: true,
     breadcrumbs: [
       {name: 'RISK INDEX', path: '/risk-index'},
-      {param: 'hazard', path: '/risk-index/h/'}
+      {param: 'geoid', path: '/risk-index/g/'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(Hazard)

@@ -6,7 +6,7 @@ export default ({ tableData }) => {
   }
   let columns =  Object.keys(tableData[0])
   return (
-    <table className="table table-lightborder">
+    <table className="table table-lightborder table-hover">
       <thead>
         <tr>
           {columns.map((col,i) => (<th key={i}>{col}</th>))}
@@ -23,6 +23,6 @@ export default ({ tableData }) => {
       </tbody>
     </table>
 
-)
+  )
 }
 

@@ -8,7 +8,7 @@ class Logo extends Component {
       <div className="logo-w">
         <Link className="logo" to="/">
           <div className="logo-element" />
-          <div className="logo-label">NY Mitigates</div>
+          <div className="logo-label">Mitigate NY</div>
         </Link>
       </div>
     )
@@ -40,7 +40,6 @@ class AvatarUser extends Component {
             <ul>
               <li><a href="apps_email.html"><i className="os-icon os-icon-mail-01" /><span>Incoming Mail</span></a></li>
               <li><a href="users_profile_big.html"><i className="os-icon os-icon-user-male-circle2" /><span>Profile Details</span></a></li>
-              <li><a href="users_profile_small.html"><i className="os-icon os-icon-coins-4" /><span>Billing Details</span></a></li>
               <li><a href="/"><i className="os-icon os-icon-others-43" /><span>Notifications</span></a></li>
               <li><Link to="/logout"><i className="os-icon os-icon-signs-11" /><span>Logout</span></Link></li>
             </ul>

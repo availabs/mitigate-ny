@@ -5,7 +5,7 @@ class MobileMenu extends Component {
 		return (
 	 		<div className="menu-mobile menu-activated-on-click color-scheme-dark">
 				<div className="mm-logo-buttons-w">
-				  <a className="mm-logo" href="index.html"><img alt='' src="img/logo.png" /><span>Clean Admin</span></a>
+				  <a className="mm-logo" href="index.html"><img alt='' src="img/logo.png" /><span>Mitigate NY</span></a>
 				  <div className="mm-buttons">
 				    <div className="content-panel-open">
 				      <div className="os-icon os-icon-grid-circles" />

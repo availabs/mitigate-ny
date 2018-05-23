@@ -8,7 +8,7 @@ class RiskIndex extends Component {
   render () {
     return (
       	<Element>
-      		<h6 className="element-header">FEMA Risk Index</h6>
+      		<h6 className="element-header">New York Statewide Risk Index</h6>
       		<HazardList />
       	</Element>
     )
@@ -41,7 +41,7 @@ export default [
     component: connect(mapStateToProps, mapDispatchToProps)(RiskIndex),
     subMenus: [[
       {name: 'By Hazard', path: '/risk-index/'},
-      {name: 'By Geography', path: '/risk-index/'},
+      {name: 'By Geography', path: '/risk-index/g/36'},
     ]]
   }
 ]

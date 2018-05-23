@@ -37,8 +37,7 @@ export const getChildGeo = (geoid, geoType) => {
 // -------------------------------------
 // Initial State
 // -------------------------------------
-let initialState = {
-}
+let initialState = require('./geoInitialState.json')
 
 // ------------------------------------
 // Action Handlers

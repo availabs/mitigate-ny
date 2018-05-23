@@ -6,6 +6,7 @@ import Landing from './pages/Landing'
 // -- Private Routes
 import RiskIndex from './pages/auth/RiskIndex'
 import Hazard from './pages/auth/RiskIndex/Hazard'
+import Geography from './pages/auth/RiskIndex/Geography'
 
 // -- Util Routes
 import Login from './pages/Login'
@@ -16,6 +17,7 @@ const routes = [
   Landing,
   ...RiskIndex,
   ...Hazard,
+  ...Geography,
   Login,
   Logout,
   NoMatch

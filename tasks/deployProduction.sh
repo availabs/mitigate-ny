@@ -1,0 +1,1 @@
+scp -r build/* avail@mars.availabs.org:~/mitigate-ny/prod

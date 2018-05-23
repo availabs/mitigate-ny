@@ -57,17 +57,17 @@ class HazardMap extends Component {
   }
 
   elevationLegend (scale) {
-    let ticks = scale.ticks(5)
+    let ticks = scale.ticks(6)
     return (
      <span >
         <div className="layout">
           {ticks.map((t,i) => (
-           <div key={i} className="legend" style={{background: `#333`, height: `${i*5}`, width: `${100 / ticks.length}%`}} />
+           <div key={i} className="legend" style={{background: `#333`, height: `${(i*5)+1}px`, width: `${100 / ticks.length}%`}} />
           ))}
         </div>
         <div className="layout">
           {ticks.map(t => (
-           <div key={t} className="legend" style={{width: `${100 / ticks.length}%`, fontSize: 10}} >{t.toFixed(1)}</div>
+           <div key={t} className="legend" style={{width: `${100 / ticks.length}%`, fontSize: 10}} >{(t/1000000).toLocaleString()}M</div>
           ))}
         </div>
       </span>
@@ -78,11 +78,12 @@ class HazardMap extends Component {
   renderInfoContainer (hazard, colorScale, elevationScale) {
     return (
       <div className="control-panel">
-        <h5>{hazard} Risk Map</h5>
-        <p>Data source: <a target="_blank" rel="noopener noreferrer" href="http://riskindex.atkinsatg.com/Home/Index">FEMA Risk Index</a></p>
-        <hr />
+        {this.props.riskIndex.meta[hazard].name} Risk
         {this.colorLegend(colorScale)}
+        Built Environment ($)
         {this.elevationLegend(elevationScale)}
+        <hr style={{marginBottom: 5}}/>
+        <p style={{margin: 0, fontSize: 10}}>Data source: <a target="_blank" rel="noopener noreferrer" href="http://riskindex.atkinsatg.com/Home/Index">FEMA Risk Index</a></p>
       </div>
     )
   }
@@ -93,8 +94,6 @@ class HazardMap extends Component {
       return <div> Loading ... </div>
     }
     // console.log('hazard', hazardData)
-    console.log('the tracts', this.props.riskIndex[geoid].tracts)
-    console.log('the counties', this.props.riskIndex[geoid].counties)
     let hazardDomain = []
     let secondaryDomain = []
     // hazard = 'BUILTENV'
@@ -103,9 +102,9 @@ class HazardMap extends Component {
       this.props.geo[geoid][geoLevel]
         .features.forEach((feat, i) => { // for each tract
           
-          if( i < 10 ) {
-            console.log('raw tract or county',this.props.riskIndex[geoid][geoLevel][feat.properties.geoid], hazard)
-          }
+          // if( i < 10 ) {
+          //   console.log('raw tract or county',this.props.riskIndex[geoid][geoLevel][feat.properties.geoid], hazard)
+          // }
           feat.properties.hazard = this.props.riskIndex[geoid][geoLevel][feat.properties.geoid] 
           ? this.props.riskIndex[geoid][geoLevel][feat.properties.geoid][`${hazard}_SCORE`]
           : 0
@@ -127,8 +126,7 @@ class HazardMap extends Component {
       .range([5,500])
       .clamp(true)
 
-    console.log('secondaryDomain', [Math.min(...secondaryDomain), Math.max(...secondaryDomain)], [Math.min(...hazardDomain), Math.max(...hazardDomain)])
-
+   
     this.props.geo[geoid].tracts.features.forEach( (d,i) => {
       if(i < 10) {
         console.log(secondaryScale(d.properties.elevation))
@@ -177,6 +175,7 @@ class HazardMap extends Component {
         );
       }
     }
+  
 
     return (
         <ChoroplethMap 
