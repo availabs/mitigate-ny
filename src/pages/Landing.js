@@ -1,15 +1,42 @@
 import React, { Component } from 'react';
-import Home from './auth/Home'
+import { Link } from 'react-router-dom'
+import Element from 'components/light-admin/containers/Element'
+import ElementBox from 'components/light-admin/containers/ElementBox'
 
 class Landing extends Component {
   render () {
-    return this.props.authed ? (
-    	<Home />
-    ) : (
-    	<div>
-    		<h2>Landing</h2>
-    		Welcome to NY Mitigates.
-    	</div>
+   return (
+      <div>
+        <Element>
+          <h6 className="element-header">MITIGATE NY</h6>
+          <div className='row'>
+            <div className='col-6'>
+              <Link to='/risk-index'>
+                <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
+                  <h4 style={{color:'#047bf8'}}>Risk Index</h4>
+                </ElementBox>
+              </Link>
+            </div>
+            <div className='col-6'>
+              <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
+                <h4 style={{color:'#ddd'}}>Agencies</h4>
+              </ElementBox>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-6'>
+               <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
+                <h4 style={{color:'#ddd'}}>Projects & Capabilities</h4>
+              </ElementBox>
+            </div>
+            <div className='col-6' >
+               <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
+                <h4 style={{color:'#ddd'}}>Asset Inventory</h4>
+              </ElementBox>
+            </div>
+          </div>
+        </Element>          
+      </div>
     )
   }
 }

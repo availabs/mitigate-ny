@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Element from 'components/light-admin/containers/Element'
-import HazardList from './components/HazardList'
 import GeographyScoreTable from './components/GeographyScoreTable'
-import HazardMap from './components/HazardMap'
 
 class Hazard extends Component {
 
