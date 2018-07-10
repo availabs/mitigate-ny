@@ -13,17 +13,19 @@ class Hazard extends Component {
       		<h6 className="element-header">New York Statewide Risk Index</h6>
           <div className='row'>
             <div className='col-12'>
-      		    <HazardList />
+      		    <HazardList display={'full'}/>
             </div>
           </div>
+           
           <div className='row'>
             <div className='col-lg-8'>
-              <HazardMap />
+             {/* <HazardMap /> */}
             </div>
             <div className='col-lg-4'>
               <HazardScoreTable/>
             </div>
           </div>
+
       	</Element>
     )
   }
@@ -53,3 +55,4 @@ export default [
     component: connect(mapStateToProps, mapDispatchToProps)(Hazard)
   }
 ]
+

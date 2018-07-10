@@ -8,9 +8,9 @@ const SET_HAZARD_DETAIL = 'SET_HAZARD_DETAIL';
 const SET_HAZARD_TOTAL = 'SET_HAZARD_TOTAL';
 
 const HAZARD_META = {
-  'WIND':{name:'Wind'},
-  'WILDFIRE':{name:'Wildfire'},
-  'TSUNAMI':{name:'Tsunami'},
+  'wind':{name:'Wind'},
+  'wildfire':{name:'Wildfire'},
+  'tsunami':{name:'Tsunami'},
   'TORNADO':{name:'Tornado'},
   'RIVERINE':{name:'Riverine Flooding'},
   'LIGHTNING':{name:'Lightning'},

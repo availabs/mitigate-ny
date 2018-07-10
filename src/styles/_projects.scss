@@ -5,6 +5,7 @@
   }
   .project-link {
     display: block;
+     margin-top: 2rem;
   }
   .project-link:hover {
     text-decoration: none;
@@ -66,6 +67,6 @@
   }
 
   .project-link + .project-link {
-    margin-top: 2rem;
+   
   }
 }

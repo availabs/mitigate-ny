@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import {  routerReducer, routerMiddleware } from 'react-router-redux'
+import { reducer as graph } from 'utils/redux-falcor';
 
 import user from './modules/user'
 import riskIndex from './modules/riskIndex'
@@ -30,6 +31,7 @@ const store = createStore(
     user,
     riskIndex,
     geo,
+    graph,
     router: routerReducer
   }),
   applyMiddleware(...middleware)
