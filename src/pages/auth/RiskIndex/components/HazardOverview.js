@@ -22,7 +22,7 @@ const sheldusAttributes = {
 
 
 export default (props) => (
-	<Link className='project-link col-md-6' to={props.link || '/'} >
+	<Link className={`project-link col-${props.size}`} to={props.link || '/'} >
 		<ProjectBox title={props.title} >
 		    <div className="row align-items-center">
 		      <div className="col-sm-12">

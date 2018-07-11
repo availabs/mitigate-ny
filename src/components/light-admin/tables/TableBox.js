@@ -11,7 +11,7 @@ export default (props) => {
       </div>
   ) : <span />
   return (
-    <ElementBox title={props.title}>
+    <ElementBox title={props.title} desc={props.desc}>
       <div className="controls-above-table">
         <div className="row">
           <div className="col-sm-6">

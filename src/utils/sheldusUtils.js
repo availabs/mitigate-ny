@@ -61,7 +61,7 @@ module.exports = {
 				}
 				count += 1 
 			}
-			let avg = !isNaN(avgTotal / count)  > 0 
+			let avg = !isNaN(avgTotal / count) && count > 0 
 				? (avgTotal / count)
 				: 0 
 			total[year] = type === 'avg' ?  +(avg.toFixed(2)) : +(avgTotal.toFixed(2))

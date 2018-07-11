@@ -24,7 +24,7 @@ class HazardList extends Component {
       return this.props.falcor.get(
         ['riskIndex','meta', data.json.riskIndex.hazards, ['id', 'name']],
         ['riskIndex', geoid, data.json.riskIndex.hazards, ['score','value']],
-        ['sheldus', geoid, data.json.riskIndex.hazards,{from: 1961, to: 2012}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        ['sheldus', geoid, data.json.riskIndex.hazards,{from: 1961, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
     }).then(data => {
       console.log('all data back', data)
@@ -70,6 +70,7 @@ class HazardList extends Component {
             score={this.props.riskIndex[geoid][hazard].score || 'N/A'}
             sheldus={sheldus}
             display={this.props.display}
+            size={this.props.size || 12}
             link={`/risk-index/h/${hazard}`} 
           />
         )

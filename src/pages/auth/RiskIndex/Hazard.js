@@ -12,8 +12,11 @@ class Hazard extends Component {
       	<Element>
       		<h6 className="element-header">New York Statewide Risk Index</h6>
           <div className='row'>
-            <div className='col-12'>
-      		    <HazardList display={'full'}/>
+            <div className='col-7'>
+      		    <HazardList display={'full'} size={12}/>
+            </div>
+            <div className='col-lg-5'>
+              <HazardScoreTable/>
             </div>
           </div>
            
@@ -21,9 +24,7 @@ class Hazard extends Component {
             <div className='col-lg-8'>
              {/* <HazardMap /> */}
             </div>
-            <div className='col-lg-4'>
-              <HazardScoreTable/>
-            </div>
+            
           </div>
 
       	</Element>
