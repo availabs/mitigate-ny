@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import RiskIndex from './pages/auth/RiskIndex'
 import Hazard from './pages/auth/RiskIndex/Hazard'
 import Geography from './pages/auth/RiskIndex/Geography'
+import Vulnerabilities from "./pages/auth/Vulnerabilities"
 
 // -- Util Routes
 import Login from './pages/Login'
@@ -18,6 +19,7 @@ const routes = [
   ...RiskIndex,
   ...Hazard,
   ...Geography,
+  ...Vulnerabilities,
   Login,
   Logout,
   NoMatch
