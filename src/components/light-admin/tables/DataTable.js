@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default ({ tableData }) => {
+export default ({ tableData, columns }) => {
   if (!tableData || tableData.length === 0) {
     return ('No Data Sento to table')
   }
-  let columns =  Object.keys(tableData[0])
+  columns = columns.length ? columns : Object.keys(tableData[0]);
   return (
     <table className="table table-lightborder table-hover">
       <thead>
