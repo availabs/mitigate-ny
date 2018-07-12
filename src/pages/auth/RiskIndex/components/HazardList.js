@@ -4,7 +4,6 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import get from 'lodash.get'
 
 import { createMatchSelector } from 'react-router-redux'
-import { getHazardTotal } from 'store/modules/riskIndex'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import HazardOverview from './HazardOverview'
@@ -18,13 +17,14 @@ class HazardList extends Component {
 
   fetchFalcorDeps() {
     let geoid = this.props.geoid || '36'
+    let dataType = this.props.dataType || 'sheldus'
     return this.props.falcor.get(
       ['riskIndex', 'hazards']
     ).then(data => {
       return this.props.falcor.get(
         ['riskIndex','meta', data.json.riskIndex.hazards, ['id', 'name']],
         ['riskIndex', geoid, data.json.riskIndex.hazards, ['score','value']],
-        ['sheldus', geoid, data.json.riskIndex.hazards,{from: 1961, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        [dataType, geoid, data.json.riskIndex.hazards,{from: 1990, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
     }).then(data => {
       console.log('all data back', data)
@@ -32,18 +32,14 @@ class HazardList extends Component {
     })
   }
 
-  componentWillMount() {
-    let geoid = this.props.geoid || '36'
-    if (!this.props.riskIndex[geoid]) {
-      this.props.getHazardTotal(geoid)
-    } 
-  }
-
   render () {
     let geoid = this.props.geoid || '36'
+    let dataType = this.props.dataType || 'sheldus'
     const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
     console.log(this.props.riskIndex)
-    if (!this.props.riskIndex.meta) {
+    if (!this.props.riskIndex.meta
+        || !this.props.riskIndex.hazards
+        || !this.props.riskIndex[geoid]) {
       return (
          <ElementBox> Loading... </ElementBox>
       )
@@ -60,7 +56,7 @@ class HazardList extends Component {
         //     this.props.riskIndex.meta[hazard].name,
         //     this.props.riskIndex[geoid]
         // )
-        let sheldus = this.props.sheldus[geoid][hazard]
+        let sheldus = this.props[dataType][geoid][hazard]
         //console.log('sheldus', sheldus)
         return (
           <HazardOverview 
@@ -85,13 +81,14 @@ class HazardList extends Component {
   }
 }
 
-const mapDispatchToProps = { getHazardTotal };
+const mapDispatchToProps = { };
 
 const mapStateToProps = state => {
   console.log('mapping', state)
   return {
     riskIndex: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
+    severeweather: state.graph.severeweather || {},
     router: state.router
   };
 };

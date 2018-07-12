@@ -50,13 +50,13 @@ export default (props) => (
 						        <div className="col-6" style={{textAlign:'center'}}>
 						            <div className="el-tablo highlight">
 						              <div className="label">{sheldusAttributes[key]} (2012)</div>
-						              <div className="value">{props.sheldus[2012][key].toLocaleString()}</div>
+						              <div className="value">{props.sheldus[2017][key].toLocaleString()}</div>
 						            </div>
 						       	</div>
 						       	<div className="col-6" style={{textAlign:'center'}}>
 						            <div className="el-tablo highlight">
 						              <div className="label">5Y Avg {sheldusAttributes[key]} (2012)</div>
-						              <div className="value" style={{color: '#e65252'}}>{fullData[1].data.filter(d => d.x === 2012)[0].y.toLocaleString()}</div>
+						              <div className="value" style={{color: '#e65252'}}>{fullData[1].data.filter(d => d.x === 2017)[0].y.toLocaleString()}</div>
 						            </div>
 						       	</div>
 						       	<div className="col-12">
