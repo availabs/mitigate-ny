@@ -7,7 +7,7 @@ import { history } from "store"
 import { createMatchSelector } from 'react-router-redux';
 import { getHazardDetail } from 'store/modules/riskIndex';
 
-import { processSheldus5year } from 'utils/sheldusUtils'
+import { processSheldus5year, sumData, avgData } from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
@@ -22,7 +22,9 @@ class GeographyHazardScoreTable extends Component {
 
     this.state = {
       geoLevel,
-      geoid
+      geoid,
+      dataType: 'sheldus',
+      year: 2012
     }
   }
 
@@ -48,7 +50,7 @@ class GeographyHazardScoreTable extends Component {
   }
 
   fetchFalcorDeps() {
-    const { geoid, geoLevel } = this.state;
+    const { geoid, geoLevel, dataType } = this.state;
     return this.props.falcor.get(
       ['geo', geoid, geoLevel],
       ['riskIndex', 'hazards']
@@ -59,7 +61,7 @@ class GeographyHazardScoreTable extends Component {
         ['riskIndex', 'meta', hazards, ['id', 'name']],
         ['geo', geographies, ['name']],
         ['riskIndex', geographies, hazards, ['score', 'value']],
-        ['sheldus', geographies, hazards, { from: 2007, to: 2012 }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        [dataType, geographies, hazards, { from: 2007, to: 2012 }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
     })
   }
@@ -75,7 +77,7 @@ class GeographyHazardScoreTable extends Component {
   }
 
   renderGraphTable() {
-    const { geoid, geoLevel } = this.state;
+    const { geoid, geoLevel, dataType, year } = this.state;
     let graphTableData = [], countyName = "",
       columns = { [geoLevel]: true, 'Total Loss': true };
     try {
@@ -95,10 +97,10 @@ class GeographyHazardScoreTable extends Component {
               //output[`${hazard} Events`] = processSheldus5year(this.props.sheldus[geoLevelid][hazard],'num_events','total')[2012]
               const column = `${ hazard } Loss`;
               columns[column] = true;
-              const processed = processSheldus5year(this.props.sheldus[geoLevelid][hazard], 'property_damage', 'total');
-              output[column] = parseInt((processed[2012] / 1000)).toLocaleString();
-              output['Total Loss'] += processed[2012];
-              output['total-loss'] += processed[2012];
+              const processedSheldus = processSheldus5year(this.props.sheldus[geoLevelid][hazard], 'property_damage', 'total');
+              output[column] = parseInt((processedSheldus[year] / 1000)).toLocaleString();
+              output['Total Loss'] += processedSheldus[year];
+              output['total-loss'] += processedSheldus[year];
           })
           output['Total Loss'] = parseInt(output['Total Loss'] / 1000).toLocaleString();
           return output;
@@ -178,6 +180,7 @@ const mapStateToProps = state => {
   return {
     riskIndexGraph: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
+    severeweather: state.graph.severeweather || {},
     geoGraph: state.graph.geo || {},
     riskIndex: state.riskIndex,
     router: state.router,

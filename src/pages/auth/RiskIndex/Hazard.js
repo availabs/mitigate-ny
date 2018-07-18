@@ -13,7 +13,7 @@ class Hazard extends Component {
       		<h6 className="element-header">New York Statewide Risk Index</h6>
           <div className='row'>
             <div className='col-7'>
-      		    <HazardList display={'full'} size={12}/>
+      		    <HazardList display={'full'} size={12} dataType={'severeweather'}/>
             </div>
             <div className='col-lg-5'>
               <HazardScoreTable/>

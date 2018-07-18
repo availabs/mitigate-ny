@@ -49,7 +49,6 @@ module.exports = {
 		}
 		return [yearly,fiveYear]
 	},
-
 	processSheldus5year : (data,key,type) => {
 		type = type ? type : 'avg'
 		return Object.keys(data).reduce((total,year) => {
@@ -65,6 +64,42 @@ module.exports = {
 				? (avgTotal / count)
 				: 0 
 			total[year] = type === 'avg' ?  +(avg.toFixed(2)) : +(avgTotal.toFixed(2))
+			return total
+		}, {})
+		
+	},
+	sumData : (data,key, len) => {
+		return Object.keys(data).reduce((total,year) => {
+			let avgTotal = 0
+			let count = 0
+			for(let i=(len-1); i >= 0; i-- ) {
+				if(data[year-i] && data[year-i][key]){
+					avgTotal += data[year-i][key]
+				}
+				count += 1 
+			}
+			let avg = !isNaN(avgTotal / count) && count > 0 
+				? (avgTotal / count)
+				: 0 
+			total[year] = +(avgTotal.toFixed(2))
+			return total
+		}, {})
+		
+	},
+	avgData : (data,key, len) => {
+		return Object.keys(data).reduce((total,year) => {
+			let avgTotal = 0
+			let count = 0
+			for(let i=len-1; i >= 0; i-- ) {
+				if(data[year-i] && data[year-i][key]){
+					avgTotal += data[year-i][key]
+				}
+				count += 1 
+			}
+			let avg = !isNaN(avgTotal / count) && count > 0 
+				? (avgTotal / count)
+				: 0 
+			total[year] = +(avg.toFixed(2)) 
 			return total
 		}, {})
 		
