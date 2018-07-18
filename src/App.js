@@ -41,7 +41,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log('render', Routes)
     return (
       <div className="all-wrapper solid-bg-all">
         <Switch>

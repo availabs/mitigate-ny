@@ -76,7 +76,9 @@ import Pagination from './Pagination'
         </div>
         <div className="table-responsive">
           <DataTable tableData={ tableData }
-            columns={ this.props.columns }/>
+            columns={ this.props.columns }
+            links={ this.props.links }
+            onClick={ this.props.onClick }/>
         </div>
         { paginate }
       </ElementBox>
@@ -88,7 +90,9 @@ TableBox.defaultProps = {
   pageSize: 13,
   data: [],
   columns: [],
-  filterKey: ""
+  links: {},
+  filterKey: "",
+  onClick: null
 }
 
 export default TableBox;

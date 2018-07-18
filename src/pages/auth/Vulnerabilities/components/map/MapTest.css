@@ -1,0 +1,55 @@
+.map-test-table-div {
+	position: absolute;
+	z-index: 2000;
+	background-color: rgba(0, 0, 0, 0.75);
+	color: rgba(255, 255, 255, 1);
+	border-radius: 3px ;
+	padding: 2px 10px;
+}
+.map-test-table {
+	border-collapse: collapse;
+	border: 0;
+}
+.map-test-table th, td {
+	padding: 3px 5px;
+	border: none;
+}
+.map-test-table th {
+	font-size: 1.25em;
+	border-bottom: 2px solid #fff;
+}
+.map-test-table th.no-border-bottom {
+	border-bottom: none;
+}
+
+.map-test-table-div.top-left {
+	top: 10px;
+	left: 10px;
+}
+.map-test-table-div.top-right {
+	top: 10px;
+	right: 10px
+}
+
+.map-test-button {
+	background-color: rgba(0, 0, 0, 0);
+	color: #fff;
+	border-radius: 3px;
+	padding: 0px 15px;
+	border: none;
+	text-decoration: none;
+	width: 100%;
+}
+.map-test-button:focus {
+	outline: none;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+.map-test-button:hover {
+	background-color: rgba(255, 255, 255, 0.25);
+	cursor: pointer;
+}
+.map-test-button:disabled {
+	outline: none;
+	background-color: rgba(255, 255, 255, 0.1);
+	cursor: not-allowed;
+}

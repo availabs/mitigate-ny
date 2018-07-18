@@ -32,7 +32,7 @@ export default class DeckGLOverlay extends Component {
         // console.log('elevation',elevationScale(f.properties))
         return elevationScale(f.properties)
       },
-      getLineColor: f => [255, 255, 255],
+      getLineColor: f => [0, 0, 0],
       updateTriggers: {
         getFillColor: this.props.hoverFeature
       },

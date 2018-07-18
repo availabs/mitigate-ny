@@ -4,7 +4,6 @@ import DeckGLOverlay from './deckgl-overlay.js';
 import deepEqual from 'deep-equal'
 import './ChoroplethMap.css'
 
-
 export default class ChoroplethMap extends Component {
   constructor(props) {
     super(props);

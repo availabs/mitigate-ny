@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
+import { history } from "store"
+
 import { createMatchSelector } from 'react-router-redux';
 import { getHazardDetail } from 'store/modules/riskIndex';
 
@@ -11,80 +13,162 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
 class GeographyHazardScoreTable extends Component {
-  state = {
-    loading: true
+  constructor(props) {
+    super(props);
+
+    const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(props) || { params: { geoid: '36' } },
+      { geoid } = params,
+      geoLevel = (geoid.length === 2) ? 'counties' : 'cousubs';
+
+    this.state = {
+      geoLevel,
+      geoid,
+      dataType: 'sheldus',
+      year: 2012
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(newProps) || { params: { geoid: '36' } },
+      { geoid } = params;
+    let geoLevel, geojson;
+    switch (geoid.length) {
+      case 5:
+        geoLevel = 'cousubs';
+        break;
+      default:
+        geoLevel = 'counties';
+        break;
+    }
+    this.setState({ geoid, geoLevel });
+  }
+
+  componentDidUpdate(oldProps, oldState) {
+    if (oldState.geoid != this.state.geoid) {
+      this.fetchFalcorDeps();
+    }
   }
 
   fetchFalcorDeps() {
-    let geoid = this.props.geoid || '36'
-    let geoLevel = this.props.geoLevel || 'counties'
-    let dataType = this.props.dataType || 'sheldus'
+    const { geoid, geoLevel, dataType } = this.state;
     return this.props.falcor.get(
       ['geo', geoid, geoLevel],
-      ['riskIndex', 'hazards' ]
+      ['riskIndex', 'hazards']
     ).then(data => {
-      let geographies = data.json.geo['36'][geoLevel]
+      let geographies = data.json.geo[geoid][geoLevel],
+        hazards = data.json.riskIndex.hazards;
       return this.props.falcor.get(
-        ['riskIndex','meta', data.json.riskIndex.hazards , ['id', 'name']],
+        ['riskIndex', 'meta', hazards, ['id', 'name']],
         ['geo', geographies, ['name']],
-        ['riskIndex', geographies, data.json.riskIndex.hazards, ['score','value']],
-        [dataType, geographies, data.json.riskIndex.hazards, {from: 2007, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        ['riskIndex', geographies, hazards, ['score', 'value']],
+        [dataType, geographies, hazards, { from: 2007, to: 2012 }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
-    }).then(data => {
-      console.log('all data back', data)
-      this.setState({loading: false})
-      return data
     })
   }
 
-  renderGraphTable(geoid,type) {
-    let geoLevel = this.props.geoLevel || 'counties'
-    let dataType = this.props.dataType || 'sheldus'
-    let year = this.props.year || 2017
-    let sumTime = 10
+  setGeoid(geoid) {
+    let url = "/risk-index/g/36";
+    switch (geoid.toString().length) {
+      case 5:
+        url = `/risk-index/g/${ geoid }`
+        break;
+    }
+    history.push(url);
+  }
 
-    if(this.state.loading
-       || !this.props.geoGraph[geoid][geoLevel].value[0]
-       || !this.props.geoGraph[this.props.geoGraph[geoid][geoLevel].value[0]]
-       || !this.props[dataType][this.props.geoGraph[geoid][geoLevel].value[0]]) {
-      return <ElementBox> {this.state.loading.toString()} Loading... </ElementBox>
+  renderGraphTable() {
+    const { geoid, geoLevel, dataType, year } = this.state;
+    let graphTableData = [], countyName = "",
+      columns = { [geoLevel]: true, 'Total Loss': true };
+    try {
+      countyName = (geoLevel === 'cousubs') ? this.props.geoGraph[geoid].name : "";
+      graphTableData = this.props.geoGraph[geoid][geoLevel].value
+        .map((geoLevelid, i) => {
+          let output =  {
+            [geoLevel]: this.props.geoGraph[geoLevelid].name,
+            'Total Loss': 0,
+            "total-loss": 0,
+            geoid: geoLevelid
+          };
+          this.props.riskIndexGraph.hazards.value
+            .filter(hazard => ['tsunami', 'avalanche', 'volcano'].indexOf(hazard) === -1)
+            .forEach(hazard => {
+              //output[`${hazard} Score`] = this.props.riskIndexGraph[geoLevelid][hazard].score.toLocaleString()
+              //output[`${hazard} Events`] = processSheldus5year(this.props.sheldus[geoLevelid][hazard],'num_events','total')[2012]
+              const column = `${ hazard } Loss`;
+              columns[column] = true;
+              const processedSheldus = processSheldus5year(this.props.sheldus[geoLevelid][hazard], 'property_damage', 'total');
+              output[column] = parseInt((processedSheldus[year] / 1000)).toLocaleString();
+              output['Total Loss'] += processedSheldus[year];
+              output['total-loss'] += processedSheldus[year];
+          })
+          output['Total Loss'] = parseInt(output['Total Loss'] / 1000).toLocaleString();
+          return output;
+        })
+        .sort((a, b) => b['total-loss'] - a['total-loss'])
+    }
+    catch (e) {
+      return <ElementBox>Loading...</ElementBox>
     }
 
-    let graphTableData = this.props.geoGraph[geoid][geoLevel].value
-      .map((geoLevelid,i) => {
-        let output =  { 'County': this.props.geoGraph[geoLevelid].name, 'Total Loss': 0 }
-        this.props.riskIndexGraph.hazards.value
-          .filter(hazard => ['avalanche', 'volcano'].indexOf(hazard) === -1)
-          .forEach(hazard => {
-            //output[`${hazard} Score`] = this.props.riskIndexGraph[geoLevelid][hazard].score.toLocaleString()
-            //output[`${hazard} Events`] = processSheldus5year(this.props.sheldus[geoLevelid][hazard],'num_events','total')[2012]
-            output[`${hazard} Loss`] = (parseInt((sumData(this.props[dataType][geoLevelid][hazard],'property_damage',10)[year] / 1000)).toLocaleString())
-            output['Total Loss'] += sumData(this.props[dataType][geoLevelid][hazard],'property_damage',sumTime)[year]
-        })
-        output['Total Loss'] = parseInt(output['Total Loss']/1000)
-        return output
-      }).sort((a,b) => b['Total Loss'] - a['Total Loss']) 
-      .map(d => {
-        d['Total Loss'] = d['Total Loss'].toLocaleString()
-        return d
-      })
+    const onClick = (geoLevel === 'counties') ?
+      row => this.setGeoid(row.geoid) : null
     
     return (
       <TableBox
-        title={'NY Hazard Loss by County'}
-        desc={`in $1000 `}
-        data={graphTableData}
-        pageSize={62}
+        title={ `NY Hazard Loss ${ (geoLevel === 'counties') ? 'by County' : `for ${ countyName }` }` }
+        desc={ `in $1000 ` }
+        data={ graphTableData }
+        columns={ Object.keys(columns) }
+        onClick={ onClick }
       />
     )
 
   }
 
+  componentWillMount() {
+    const { geoid, geoLevel } = this.state;
+    if (!this.props.riskIndex[geoid] || !this.props.riskIndex[geoid][geoLevel]) {
+      this.props.getHazardDetail(geoid)
+    } 
+  }
+
+  // renderTable () {
+  //   const { geoid, geoLevel } = this.state;
+  //   if(!this.props.riskIndex[geoid] || !this.props.riskIndex[geoid][geoLevel]) {
+  //     return <ElementBox> Loading... </ElementBox>
+  //   }
+  //   let tableData = Object.keys(this.props.riskIndex[geoid][geoLevel])
+  //     // .sort((a,b) => {
+  //     //   let bdata = this.props.riskIndex[geoid][geoLevel][b][`${hazard}_SCORE`]
+  //     //   let adata = this.props.riskIndex[geoid][geoLevel][a][`${hazard}_SCORE`]
+  //     //   bdata = isNaN(bdata) ? 0 : bdata
+  //     //   adata = isNaN(adata) ? 0 : adata
+  //     //   return bdata - adata
+  //     // })
+  //     .map((childId,i) => {
+  //     let output =  { 'County': this.props.geo[childId].name }
+  //     Object.keys(this.props.riskIndex.meta)
+  //       .filter(hazard => ['TSUNAMI', 'AVALANCHE', 'VOLCANO'].indexOf(hazard) === -1)
+  //       .forEach(hazard => {
+  //         let hazardName = this.props.riskIndex.meta[hazard].name
+  //         output[`${hazardName}`] = this.props.riskIndex[geoid][geoLevel][childId][`${hazard}_SCORE`].toLocaleString()
+  //         output[`${hazardName}`] = isNaN(output[`${hazardName}`]) ? '' : output[`${hazardName}`]
+  //       })
+  //     return output
+  //   })
+  //   return (
+  //     <TableBox 
+  //       data={tableData}
+  //       pageSize={62}
+  //     />
+  //   )
+  // }
+
   render () {
-    const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(this.props) || {}
     return (
       <div>
-       {this.renderGraphTable(params.geoid)}
+       { this.renderGraphTable() }
       </div>
     ) 
   }
