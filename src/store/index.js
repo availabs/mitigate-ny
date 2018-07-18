@@ -1,10 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import {  routerReducer, routerMiddleware } from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 import { reducer as graph } from 'utils/redux-falcor';
 
 import user from './modules/user'
 import riskIndex from './modules/riskIndex'
 import geo from './modules/geo'
+import vulnerabilities from "./modules/vulnerabilities"
 
 import createHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk'
@@ -31,6 +32,7 @@ const store = createStore(
     user,
     riskIndex,
     geo,
+    vulnerabilities,
     graph,
     router: routerReducer
   }),

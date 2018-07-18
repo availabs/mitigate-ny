@@ -2,79 +2,84 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
-import { getHazardDetail } from 'store/modules/riskIndex';
+import * as d3format from "d3-format"
 
-import { processSheldus5year } from 'utils/sheldusUtils'
+import { createMatchSelector } from 'react-router-redux';
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
-const EARLIEST_YEAR = 2009,
-  LATEST_YEAR = 2016;
+import {
+  EARLIEST_YEAR,
+  LATEST_YEAR,
+  YEARS_OF_ACS_DATA
+} from "./yearsOfAcsData";
+
+const format = d3format.format(",d")
+
+const GEO_LEVEL_NAMES = {
+  counties: "County",
+  cousubs: "County Subdivisions"
+}
 
 class PopulationsTable extends Component {
-  constructor(props) {
-    super(props);
-    const years = [];
-    for (let y = EARLIEST_YEAR; y <= LATEST_YEAR; ++y) {
-      years.push(y);
-    }
-    this.state = {
-      years
-    }
-  }
-
-  fetchFalcorDeps() {
-    return this.props.falcor.get(
-      ['geo', '36', 'counties']
-    )
-    .then(falcorResponse => {
-      const geoids = falcorResponse.json.geo[36].counties;
-      return this.props.falcor.get(
-        ['geo', geoids, this.state.years, 'population'],
-        ['geo', geoids, ['name']]
-      );
-    })
-  }
-
   render () {
-    const geoGraph = this.props.geoGraph;
-    let data = [];
+    const geoGraph = this.props.geoGraph,
+      { geoid, geoLevel } = this.props,
+      GEO_LEVEL = (geoLevel === "counties") ? geoLevel : 'cousubs',
+      GEOID = geoid,
+      data = [];
     try {
-      const counties = geoGraph[36].counties.value;
-      counties.forEach(geoid => {
-        let row = { county: geoGraph[geoid].name };
-        this.state.years.forEach(year => {
+      geoGraph[GEOID][GEO_LEVEL].value.forEach(geoid => {
+        let row = { [GEO_LEVEL]: geoGraph[geoid].name, geoid };
+        YEARS_OF_ACS_DATA.forEach(year => {
           row[year] = geoGraph[geoid][year].population;
         })
-        row.change = row[LATEST_YEAR] - row[EARLIEST_YEAR];
+        let earliest = row[EARLIEST_YEAR],
+          latest = row[LATEST_YEAR],
+
+          currentYear = EARLIEST_YEAR;
+        while ((earliest === 0) && (currentYear <= LATEST_YEAR)) {
+          earliest = row[++currentYear];
+        }
+
+        currentYear = LATEST_YEAR;
+        while ((latest === 0) && (currentYear >= EARLIEST_YEAR)) {
+          latest = row[--currentYear];
+        }
+
+        row.change = format(latest - earliest);
+
+        YEARS_OF_ACS_DATA.forEach(year => {
+          row[year] = format(geoGraph[geoid][year].population);
+        })
         data.push(row);
-      }, this);
+      });
     }
     catch (e) {
       return <ElementBox>Loading...</ElementBox>;
     }
-    const columns = ['county', ...this.state.years, 'change'];
-    data.sort((a, b) => a.county < b.county ? -1 : 1);
+    const columns = [GEO_LEVEL, ...YEARS_OF_ACS_DATA, 'change'];
+    data.sort((a, b) => a[GEO_LEVEL] < b[GEO_LEVEL] ? -1 : 1);
+    const onClick = (GEO_LEVEL == 'counties') ?
+      row => this.props.setGeoid(row.geoid)
+      : null;
     return (
       <TableBox
-        title={ 'NY Populations by County' }
+        title={ `NY Populations by ${ GEO_LEVEL_NAMES[GEO_LEVEL] }` }
         data={ data }
         columns={ columns }
-        filterKey={ 'county' }/>
+        filterKey={ GEO_LEVEL }
+        onClick={ onClick }/>
     )
   }
 }
 
-const mapDispatchToProps = { getHazardDetail };
+const mapStateToProps = state => ({
+  geoGraph: state.graph.geo,
+  router: state.router
+})
 
-const mapStateToProps = state => {
-  return {
-    geoGraph: state.graph.geo,
-    router: state.router
-  }
-}
-
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(PopulationsTable))

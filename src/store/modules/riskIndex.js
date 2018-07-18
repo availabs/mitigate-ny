@@ -1,6 +1,6 @@
 import riskIndexAPI from 'store/data-adapters/riskIndexApi' 
 
-let risKAPI = new riskIndexAPI();
+let riskAPI = new riskIndexAPI();
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -49,7 +49,7 @@ function setHazardDetail(geoid, data, geoType) {
 
 export const getHazardTotal = (geoid) => {
   return dispatch => {
-    return risKAPI.getHazardTotal(geoid).then(data => {
+    return riskAPI.getHazardTotal(geoid).then(data => {
       dispatch(setHazardTotal(geoid,data))
     })
   } 
@@ -58,7 +58,7 @@ export const getHazardTotal = (geoid) => {
 export const getHazardDetail = (geoid, geoType) => {
   geoType = geoType ? geoType : 'counties'
   return dispatch => {
-    return risKAPI.getHazardDetail(geoid, geoType).then(data => {
+    return riskAPI.getHazardDetail(geoid, geoType).then(data => {
       dispatch(setHazardDetail(geoid, data, geoType))
     })
   } 

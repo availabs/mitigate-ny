@@ -18,8 +18,7 @@ function setChildGeo(geoid, data, geoType) {
   };
 }
 
-export const getChildGeo = (geoid, geoType) => {
-  geoType = geoType ? geoType : 'counties'
+export const getChildGeo = (geoid=36, geoType='counties') => {
   return dispatch => {
     return geoData.getChildGeo(geoid, geoType).then(data => {
       dispatch(setChildGeo(geoid,data, geoType))
