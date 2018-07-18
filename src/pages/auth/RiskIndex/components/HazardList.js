@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { reduxFalcor } from 'utils/redux-falcor'
 import get from 'lodash.get'
 
+import { processSheldus5year, sumData, avgData } from 'utils/sheldusUtils'
+
 import { createMatchSelector } from 'react-router-redux'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
@@ -50,7 +52,7 @@ class HazardList extends Component {
       // .filter(d => this.props.riskIndex[geoid][d].value || this.props.riskIndex[geoid][d].score)
       .filter(d => !hazard || hazard === d)
       // .filter(d => d === 'wind') // debugging
-      .sort((a,b) =>  this.props.riskIndex[geoid][b].score - this.props.riskIndex[geoid][a].score)
+      .sort((a,b) =>  avgData(this.props[dataType][geoid][b],'property_damage',5)[2017] - avgData(this.props[dataType][geoid][a],'property_damage',5)[2017] )
       .map((hazard,i) => {
         // console.log(
         //     this.props.riskIndex.meta[hazard].name,

@@ -4,7 +4,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 
 import { createMatchSelector } from 'react-router-redux';
 
-import { processSheldus5year } from 'utils/sheldusUtils'
+import { processSheldus5year, sumData } from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
@@ -40,6 +40,8 @@ class GeographyHazardScoreTable extends Component {
     let geoid = this.props.geoid || '36'
     let geoLevel = this.props.geoLevel || 'counties'
     let dataType = this.props.dataType || 'sheldus'
+    let year = this.props.year || 2017
+    let sumTime = 10
     if(!this.props.geoGraph[geoid] 
        || !this.props.geoGraph[geoid][geoLevel].value
        || !this.props.riskIndexGraph[this.props.geoGraph[geoid][geoLevel].value[0]]
@@ -51,8 +53,9 @@ class GeographyHazardScoreTable extends Component {
 
     let graphTableData = this.props.geoGraph[geoid][geoLevel].value
       .sort((ageoid, bgeoid) => {
-        let bdata = processSheldus5year(this.props[dataType][bgeoid][hazard],'property_damage')[2012]
-        let adata = processSheldus5year(this.props[dataType][ageoid][hazard],'property_damage')[2012]
+
+        let bdata = sumData(this.props[dataType][bgeoid][hazard],'property_damage',sumTime)[year]
+        let adata = sumData(this.props[dataType][ageoid][hazard],'property_damage',sumTime)[year]
         bdata = isNaN(bdata) ? 0 : bdata
         adata = isNaN(adata) ? 0 : adata
         
@@ -61,8 +64,8 @@ class GeographyHazardScoreTable extends Component {
       .map((geoLevelid,i) => {
         let output =  { 'County': this.props.geoGraph[geoLevelid].name }
         output[`${hazard} Score`] = this.props.riskIndexGraph[geoLevelid][hazard].score.toLocaleString()
-        output[`${hazard} Events`] = processSheldus5year(this.props[dataType][geoLevelid][hazard],'num_events','total')[2012]
-        output[`${hazard} Loss`] = processSheldus5year(this.props[dataType][geoLevelid][hazard],'property_damage','total')[2012].toLocaleString()
+        output[`${hazard} Events`] = sumData(this.props[dataType][geoLevelid][hazard],'num_events', sumTime)[year]
+        output[`${hazard} Loss`] = sumData(this.props[dataType][geoLevelid][hazard],'property_damage', sumTime)[year].toLocaleString()
         return output
       })
     
@@ -70,7 +73,7 @@ class GeographyHazardScoreTable extends Component {
       <TableBox 
         title={this.props.riskIndexGraph.meta[hazard].name}  
         data={graphTableData}
-        pageSize={10}
+        pageSize={12}
       />
     )
 

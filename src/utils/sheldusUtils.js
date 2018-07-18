@@ -68,6 +68,7 @@ module.exports = {
 		}, {})
 		
 	},
+	
 	sumData : (data,key, len) => {
 		return Object.keys(data).reduce((total,year) => {
 			let avgTotal = 0
@@ -86,6 +87,7 @@ module.exports = {
 		}, {})
 		
 	},
+
 	avgData : (data,key, len) => {
 		return Object.keys(data).reduce((total,year) => {
 			let avgTotal = 0

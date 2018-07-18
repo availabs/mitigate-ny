@@ -28,7 +28,7 @@ class GeographyHazardScoreTable extends Component {
         ['riskIndex','meta', data.json.riskIndex.hazards , ['id', 'name']],
         ['geo', geographies, ['name']],
         ['riskIndex', geographies, data.json.riskIndex.hazards, ['score','value']],
-        [dataType, geographies, data.json.riskIndex.hazards, {from: 2007, to: 2012}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        [dataType, geographies, data.json.riskIndex.hazards, {from: 2007, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
     }).then(data => {
       console.log('all data back', data)
@@ -41,6 +41,7 @@ class GeographyHazardScoreTable extends Component {
     let geoLevel = this.props.geoLevel || 'counties'
     let dataType = this.props.dataType || 'sheldus'
     let year = this.props.year || 2017
+    let sumTime = 10
 
     if(this.state.loading
        || !this.props.geoGraph[geoid][geoLevel].value[0]
@@ -57,8 +58,8 @@ class GeographyHazardScoreTable extends Component {
           .forEach(hazard => {
             //output[`${hazard} Score`] = this.props.riskIndexGraph[geoLevelid][hazard].score.toLocaleString()
             //output[`${hazard} Events`] = processSheldus5year(this.props.sheldus[geoLevelid][hazard],'num_events','total')[2012]
-            output[`${hazard} Loss`] = (parseInt((sumData(this.props[dataType][geoLevelid][hazard],'property_damage',20)[year] / 1000)).toLocaleString())
-            output['Total Loss'] += sumData(this.props[dataType][geoLevelid][hazard],'property_damage',20)[year]
+            output[`${hazard} Loss`] = (parseInt((sumData(this.props[dataType][geoLevelid][hazard],'property_damage',10)[year] / 1000)).toLocaleString())
+            output['Total Loss'] += sumData(this.props[dataType][geoLevelid][hazard],'property_damage',sumTime)[year]
         })
         output['Total Loss'] = parseInt(output['Total Loss']/1000)
         return output

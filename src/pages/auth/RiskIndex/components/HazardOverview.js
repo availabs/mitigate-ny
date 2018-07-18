@@ -25,7 +25,7 @@ export default (props) => (
 	<Link className={`project-link col-${props.size}`} to={props.link || '/'} >
 		<ProjectBox title={props.title} >
 		    <div className="row align-items-center">
-		      <div className="col-sm-12">
+		    { /*  <div className="col-sm-12">
 		        <div className="row">
 		          <div className="col-6" style={{textAlign:'center'}}>
 		            <div className="el-tablo highlight">
@@ -40,7 +40,7 @@ export default (props) => (
 		            </div>
 		          </div>
 		        </div>
-		      </div>
+		      </div> */ }
 		      <div className="col-sm-12">
 		        { 
 		        	Object.keys(props.display === 'full' ? sheldusAttributes : LimitedAttributes).map(key => {
@@ -49,13 +49,13 @@ export default (props) => (
 					     	<div className="row" key={key}>   
 						        <div className="col-6" style={{textAlign:'center'}}>
 						            <div className="el-tablo highlight">
-						              <div className="label">{sheldusAttributes[key]} (2012)</div>
+						              <div className="label">{sheldusAttributes[key]} (2017)</div>
 						              <div className="value">{props.sheldus[2017][key].toLocaleString()}</div>
 						            </div>
 						       	</div>
 						       	<div className="col-6" style={{textAlign:'center'}}>
 						            <div className="el-tablo highlight">
-						              <div className="label">5Y Avg {sheldusAttributes[key]} (2012)</div>
+						              <div className="label">5Y Avg {sheldusAttributes[key]} (2017)</div>
 						              <div className="value" style={{color: '#e65252'}}>{fullData[1].data.filter(d => d.x === 2017)[0].y.toLocaleString()}</div>
 						            </div>
 						       	</div>
