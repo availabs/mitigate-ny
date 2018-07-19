@@ -11,6 +11,15 @@ const sheldusAttributes = {
 	fatalities: "Fatalities"
 }
 
+const getHazardName = hazardid => {
+	switch (hazardid) {
+		case "winterweat":
+			return "Winter Weather";
+		default:
+			return hazardid.split("").map((d, i) => i == 0 ? d.toUpperCase() : d).join("");
+	}
+}
+
 module.exports = {
 	processSheldus : (data,key) => {
 		let yearly = {
@@ -49,7 +58,34 @@ module.exports = {
 		}
 		return [yearly,fiveYear]
 	},
-	processSheldus5year : (data,key,type) => {
+
+	getHazardName,
+
+	processDataForBarChart: (rawData, GEOID, lossType="property_damage") => {
+		const data = {}, keys = {};
+		for (const geoid in rawData) {
+			if (!geoid.includes(GEOID)) continue;
+			for (const hazardid in rawData[geoid]) {
+				const hazardName = getHazardName(hazardid);
+				if (!(hazardName in keys)) {
+					keys[hazardName] = true;
+				}
+				for (const year in rawData[geoid][hazardid]) {
+					if (!(year in data)) {
+						data[year] = { year };
+					}
+					if (!(hazardName in data[year])) {
+						data[year][hazardName] = 0;
+					}
+					const value = data[year][hazardName] + +rawData[geoid][hazardid][year].property_damage;
+					data[year][hazardName] = value;
+				}
+			}
+		}
+		return { data: Object.values(data), keys: Object.keys(keys) };
+	},
+
+	processSheldus5year : (data, key, type) => {
 		type = type ? type : 'avg'
 		return Object.keys(data).reduce((total,year) => {
 			let avgTotal = 0
@@ -66,10 +102,9 @@ module.exports = {
 			total[year] = type === 'avg' ?  +(avg.toFixed(2)) : +(avgTotal.toFixed(2))
 			return total
 		}, {})
-		
 	},
 	
-	sumData : (data,key, len) => {
+	sumData : (data, key, len) => {
 		return Object.keys(data).reduce((total,year) => {
 			let avgTotal = 0
 			let count = 0

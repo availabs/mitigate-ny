@@ -9,7 +9,7 @@ class RiskIndex extends Component {
     return (
       	<Element>
       		<h6 className="element-header">New York Statewide Risk Index</h6>
-      		<HazardList size={6} dataType={'severeweather'}/>
+      		<HazardList size={6} dataType={'severeWeather'}/>
       	</Element>
     )
   }
