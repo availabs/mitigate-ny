@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { processSheldus5year, sumData, avgData } from 'utils/sheldusUtils'
+import {
+  processSheldus5year,
+  getHazardName,
+  sumData,
+  avgData
+} from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
@@ -25,7 +30,7 @@ class GeographyHazardScoreTable extends Component {
           this.props.riskIndexGraph.hazards.value
             .filter(hazard => ['tsunami', 'avalanche', 'volcano'].indexOf(hazard) === -1)
             .forEach(hazard => {
-              const column = `${ hazard } Loss`;
+              const column = getHazardName(hazard);//`${ hazard } Loss`;
               columns[column] = true;
               const processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
               output[column] = parseInt((processedSheldus[year] / 1000)).toLocaleString();

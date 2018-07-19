@@ -61,10 +61,10 @@ module.exports = {
 
 	getHazardName,
 
-	processDataForBarChart: (rawData, GEOID, lossType="property_damage") => {
+	processDataForBarChart: (rawData, geoids, lossType="property_damage") => {
 		const data = {}, keys = {};
 		for (const geoid in rawData) {
-			if (!geoid.includes(GEOID)) continue;
+			if (!geoids.includes(geoid)) continue;
 			for (const hazardid in rawData[geoid]) {
 				const hazardName = getHazardName(hazardid);
 				if (!(hazardName in keys)) {

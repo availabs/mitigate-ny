@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ResponsiveBar } from "@nivo/bar"
 
 import * as d3color from "d3-color"
+import * as d3scale from "d3-scale"
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
@@ -14,40 +15,39 @@ import {
 	avgData
 } from 'utils/sheldusUtils'
 
+const D3_CATEGORY20 = [
+	"#1f77b4",
+	"#aec7e8",
+	"#ff7f0e",
+	"#ffbb78",
+	"#2ca02c",
+	"#98df8a",
+	"#d62728",
+	"#ff9896",
+	"#9467bd",
+	"#c5b0d5",
+	"#8c564b",
+	"#c49c94",
+	"#e377c2",
+	"#f7b6d2",
+	"#7f7f7f",
+	"#c7c7c7",
+	"#bcbd22",
+	"#dbdb8d",
+	"#17becf",
+	"#9edae5"
+];
+
+const COLOR_SCALE = d3scale.scaleOrdinal()
+		.range(D3_CATEGORY20);
+
 class GeographyScoreBarChart extends React.Component {
 
 	processData() {
     	const { geoid, geoLevel, dataType } = this.props;
-		// 	data = {},
-		// 	keys = {};
-		// try {
-  //     		this.props.geoGraph[geoid][geoLevel].value
-  //       		.forEach((geoLevelid, i) => {
-  //         			this.props.riskIndexGraph.hazards.value
-  //           			.filter(hazard => ['tsunami', 'avalanche', 'volcano'].indexOf(hazard) === -1)
-  //           			.forEach(hazard => {
-  //             				const column = `${ hazard.toUpperCase() } LOSS`,
-		// 	              		processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
-		// 	              	keys[column] = true;
-		// 					for (const year in processedSheldus) {
-		// 						if (!(year in data)) {
-		// 							data[year] = { year };
-		// 						}
-		// 						if (!(column in data[year])) {
-		// 							data[year][column] = 0;
-		// 						}
-		// 						let value = data[year][column];
-		// 						value += Math.round(processedSheldus[year] / 1000);
-		// 						data[year][column] = value;
-		// 					}
-  //         				})
-  //       		});
-		// }
-		// catch (e) {}
-		// return { data: Object.values(data), keys: Object.keys(keys) }
-
 		try {
-			return processDataForBarChart(this.props[dataType], geoid);
+			const geoids = this.props.geoGraph[geoid][geoLevel].value
+			return processDataForBarChart(this.props[dataType], geoids);
 		}
 		catch (e) {
 			return { data: [], keys: [] }
@@ -58,6 +58,7 @@ class GeographyScoreBarChart extends React.Component {
 		if (!data.length) {
 			return <ElementBox>Loading...</ElementBox>;
 		}
+		COLOR_SCALE.domain(keys);
 		return (
 			<ElementBox>
 				<div style={ { height: "500px" } }>
@@ -65,10 +66,8 @@ class GeographyScoreBarChart extends React.Component {
 						data={ data }
 						keys={ keys }
 						indexBy="year"
-						colors={ 'd320' }
+						colorBy={ d => COLOR_SCALE(d.id) }
 						enableLabel={ false }
-						// labelSkipHeight={ 15 }
-						// labelFormat="$,d"
 						tooltipFormat="$,d"
 						margin={ {
 				            "top": 25,
