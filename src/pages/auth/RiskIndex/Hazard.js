@@ -4,6 +4,7 @@ import Element from 'components/light-admin/containers/Element'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
+import HazardEventsMapController from "./components/HazardEventsMapController"
 
 class Hazard extends Component {
 
@@ -13,7 +14,7 @@ class Hazard extends Component {
       		<h6 className="element-header">New York Statewide Risk Index</h6>
           <div className='row'>
             <div className='col-7'>
-      		    <HazardList display={'full'} size={12} dataType={'severeweather'}/>
+      		    <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
             </div>
             <div className='col-lg-5'>
               <HazardScoreTable/>
@@ -24,8 +25,9 @@ class Hazard extends Component {
             <div className='col-lg-8'>
              {/* <HazardMap /> */}
             </div>
-            
           </div>
+
+          <HazardEventsMapController />
 
       	</Element>
     )
