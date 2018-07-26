@@ -12,7 +12,7 @@ import Element from 'components/light-admin/containers/Element'
 import GeographyScoreTable from './components/GeographyScoreTable'
 import GeographyScoreBarChart from './components/GeographyScoreBarChart'
 
-const EARLIEST_YEAR = 1990,
+const EARLIEST_YEAR = 1960,
   LATEST_YEAR = 2017;
 
 class Geography extends Component {
@@ -26,7 +26,7 @@ class Geography extends Component {
     this.state = {
       geoLevel,
       geoid,
-      dataType: 'severeWeather',
+      dataType: 'severeWeather',//'sheldus',
       year: LATEST_YEAR
     }
   }
@@ -105,6 +105,7 @@ class Geography extends Component {
                 <GeographyScoreBarChart { ...this.state }
                   setGeoid={ this.setGeoid }/>
               </div>
+              
             </div>
       	</Element>
     )

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createMatchSelector } from 'react-router-redux'
+
 import Element from 'components/light-admin/containers/Element'
+import ElementBox from 'components/light-admin/containers/ElementBox'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
@@ -8,12 +11,17 @@ import HazardMap from './components/HazardMap'
 class Hazard extends Component {
 
   render () {
+    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
     return (
       	<Element>
-      		<h6 className="element-header">New York Statewide Risk Index</h6>
+      		<h6 className="element-header">{params.hazard}</h6>
+          <div className='row'>
+            <ElementBox  title='Hazard Definition & Characteristics'>
+            </ElementBox> 
+          </div>
           <div className='row'>
             <div className='col-7'>
-      		    <HazardList display={'full'} size={12} dataType={'severeweather'}/>
+      		    <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
             </div>
             <div className='col-lg-5'>
               <HazardScoreTable/>
@@ -21,8 +29,8 @@ class Hazard extends Component {
           </div>
            
           <div className='row'>
-            <div className='col-lg-8'>
-             {/* <HazardMap /> */}
+            <div className='col-lg-12'>
+             <HazardMap />
             </div>
             
           </div>

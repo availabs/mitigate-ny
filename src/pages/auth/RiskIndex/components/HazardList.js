@@ -38,7 +38,7 @@ class HazardList extends Component {
     let geoid = this.props.geoid || '36'
     let dataType = this.props.dataType || 'sheldus'
     const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
-    console.log(this.props.riskIndex)
+    // console.log(this.props.riskIndex)
     if (!this.props.riskIndex.meta
         || !this.props.riskIndex.hazards
         || !this.props.riskIndex[geoid]) {
@@ -59,7 +59,7 @@ class HazardList extends Component {
         //     this.props.riskIndex[geoid]
         // )
         let sheldus = this.props[dataType][geoid][hazard]
-        //console.log('sheldus', sheldus)
+        // console.log('sheldus', sheldus)
         return (
           <HazardOverview 
             key={i} 
