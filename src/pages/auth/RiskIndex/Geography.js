@@ -96,7 +96,7 @@ class Geography extends Component {
   }
 
   render () {
-    const mapsOnly = true;
+    const mapsOnly = false;
     return (
       	<Element>
       		<h6 className="element-header">New York Statewide Risk Index</h6>
