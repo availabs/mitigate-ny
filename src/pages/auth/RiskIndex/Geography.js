@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { history } from "store"
-
 import { createMatchSelector } from 'react-router-redux';
+
+import * as d3scale from "d3-scale";
+
+import { history } from "store"
 
 import { getHazardDetail } from 'store/modules/riskIndex';
 
@@ -19,6 +21,32 @@ import {
   EARLIEST_YEAR,
   LATEST_YEAR
 } from "./components/yearsOfSevereWeatherData";
+
+const D3_CATEGORY20 = [
+  "#1f77b4",
+  "#aec7e8",
+  "#ff7f0e",
+  "#ffbb78",
+  "#2ca02c",
+  "#98df8a",
+  "#d62728",
+  "#ff9896",
+  "#9467bd",
+  "#c5b0d5",
+  "#8c564b",
+  "#c49c94",
+  "#e377c2",
+  "#f7b6d2",
+  "#7f7f7f",
+  "#c7c7c7",
+  "#bcbd22",
+  "#dbdb8d",
+  "#17becf",
+  "#9edae5"
+];
+
+const COLOR_SCALE = d3scale.scaleOrdinal()
+    .range(D3_CATEGORY20);
 
 class Geography extends Component {
   constructor(props) {
@@ -73,6 +101,7 @@ class Geography extends Component {
       const geographies = data.json.geo[geoid][geoLevel],
         hazards = data.json.riskIndex.hazards,
         requests = [];
+      COLOR_SCALE.domain(hazards);
       for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
         requests.push([dataType, geographies, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']])
       }
@@ -96,24 +125,27 @@ class Geography extends Component {
   }
 
   render () {
-    const mapsOnly = false;
     return (
       	<Element>
       		<h6 className="element-header">New York Statewide Risk Index</h6>
+
           <div className='row'>
             <div className='col-lg-12'>
-              { mapsOnly ? null : <GeographyScoreTable { ...this.state }
-                setGeoid={ this.setGeoid }/> }
+                <GeographyScoreTable { ...this.state }
+                  setGeoid={ this.setGeoid }/>
             </div>
           </div>
+
           <div className='row'>
             <div className='col-lg-12'>
-              { mapsOnly ? null : <GeographyScoreBarChart { ...this.state }
-                setGeoid={ this.setGeoid }/> }
+                <GeographyScoreBarChart { ...this.state }
+                  setGeoid={ this.setGeoid }
+                  colorScale={ COLOR_SCALE }/>
             </div>
           </div>
 
           <HazardEventsMapController
+            colorScale={ COLOR_SCALE }
             showLegend={ true }
             { ...this.state }
             numMaps={ 12 }/>

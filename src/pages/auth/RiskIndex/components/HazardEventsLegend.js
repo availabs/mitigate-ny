@@ -8,6 +8,8 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import TableBox from 'components/light-admin/tables/TableBox'
 
+import { getHazardName } from 'utils/sheldusUtils'
+
 const format = d3format.format(",.0f")
 
 export const CircleDiv = ({ color="#000", radius=10, thickness=2, children=null, style={} }) =>
@@ -36,18 +38,21 @@ export default class HazardEventsLegend extends React.Component {
 		const { colorScale, radiusScale, viewport } = this.props;
 		const distanceScales = getDistanceScales(viewport()),
 			domain = colorScale.domain(),
-			rows = [];
+			rows = [],
 
-		for (let r = 0; r < 3; ++r) {
+			numRows = 3,
+			numCols = Math.ceil(domain.length / numRows);
+
+		for (let r = 0; r < numRows; ++r) {
 			const columns = [];
-			for (let c = 0; c < 5; ++c) {
-				const i = (r * 5) + c;
+			for (let c = 0; c < numCols; ++c) {
+				const i = (r * numCols) + c;
 				columns.push(
 					<td key={ `row-${ r }-column-${ c }` }
-						style={ { color: colorScale(domain[i]), backgroundColor: "rgb(225, 225, 225)", border: "2px solid #fff", padding: "10px 30px 0px 15px" } }>
+						style={ { color: colorScale(domain[i]), backgroundColor: "rgb(225, 225, 225)", border: "2px solid #fff", padding: "10px 0px 0px 15px" } }>
 						<CircleDiv color={ colorScale(domain[i]) }/>
 						<div style={ { padding: "0px 10px", display: "inline-block", fontSize: "18px" } }>
-							{ domain[i] }
+							{ domain[i] ? getHazardName(domain[i]) : null }
 						</div>
 					</td>
 				)

@@ -23,31 +23,30 @@ import {
 } from "./yearsOfSevereWeatherData";
 
 const D3_CATEGORY20 = [
-	"#1f77b4",
-	"#aec7e8",
-	"#ff7f0e",
-	"#ffbb78",
-	"#2ca02c",
-	"#98df8a",
-	"#d62728",
-	"#ff9896",
-	"#9467bd",
-	"#c5b0d5",
-	"#8c564b",
-	"#c49c94",
-	"#e377c2",
-	"#f7b6d2",
-	"#7f7f7f",
-	"#c7c7c7",
-	"#bcbd22",
-	"#dbdb8d",
-	"#17becf",
-	"#9edae5"
+  "#1f77b4",
+  "#aec7e8",
+  "#ff7f0e",
+  "#ffbb78",
+  "#2ca02c",
+  "#98df8a",
+  "#d62728",
+  "#ff9896",
+  "#9467bd",
+  "#c5b0d5",
+  "#8c564b",
+  "#c49c94",
+  "#e377c2",
+  "#f7b6d2",
+  "#7f7f7f",
+  "#c7c7c7",
+  "#bcbd22",
+  "#dbdb8d",
+  "#17becf",
+  "#9edae5"
 ];
 
 const COLOR_SCALE = d3scale.scaleOrdinal()
-		.domain(["NO", "DATA"])
-		.range(D3_CATEGORY20);
+    .range(D3_CATEGORY20);
 
 const RADIUS_SCALE = d3scale.scaleLog()
 		.domain([50000, 10000000]) // Dollar amount
@@ -126,9 +125,7 @@ class HazardEventsMapController extends React.Component {
 	      	const geoids = falcorResponse.json.geo[geoid][geoLevel],
 	        	hazards = hazard ? [hazard] : falcorResponse.json.riskIndex.hazards,
         		requests = [];
-
-			COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
-
+      		// COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
       		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
         		requests.push([dataType, 'events', geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['property_damage']])
       		}
@@ -147,7 +144,7 @@ class HazardEventsMapController extends React.Component {
       					dataType={ this.props.dataType }
 	              		{ ...getMapDefaults(width) }
 		              	viewport={ this.state.viewport }
-		                colorScale={ COLOR_SCALE }
+		                colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }/>
 	            </div>
 	        , this);
@@ -157,7 +154,7 @@ class HazardEventsMapController extends React.Component {
 					this.props.showLegend ?
 					<HazardEventsLegend
 						viewport={ this.state.viewport }
-						colorScale={ COLOR_SCALE }
+						colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }/>
 					: null
 				}
@@ -171,7 +168,8 @@ HazardEventsMapController.defaultProps = {
 	dataType: 'severeWeather',
 	geoLevel: 'counties',
 	numMaps: 1,
-	showLegend: false
+	showLegend: false,
+	colorScale: COLOR_SCALE
 }
 
 const mapStateToProps = state => ({
