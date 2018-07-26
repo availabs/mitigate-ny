@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { reduxFalcor } from 'utils/redux-falcor'
+
 import { createMatchSelector } from 'react-router-redux';
+
 import { getHazardDetail } from 'store/modules/riskIndex'
 import { getChildGeo } from 'store/modules/geo'
+
 import * as scale from 'd3-scale'
 import * as chromatic from 'd3-scale-chromatic'
 import * as color from 'd3-color'
@@ -18,6 +22,28 @@ let toColorArray = c => {
 
 class HazardMap extends Component {
   
+  fetchFalcorDeps() {
+    let geoid = this.props.geoid || '36'
+    let geoLevel = this.props.geoLevel || 'tracts'
+    let dataType = this.props.dataType || 'sheldus'
+    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
+    const hazard = params.hazard
+    return this.props.falcor.get(
+      ['geo', geoid, geoLevel]
+    ).then(data => {
+      let geographies = data.json.geo['36'][geoLevel]
+      // console.log('geographies', geographies)
+      return this.props.falcor.get(
+        ['riskIndex','meta', hazard , ['id', 'name']],
+        ['riskIndex', geographies, hazard, ['score','value']],
+      )
+    }).then(data => {
+      //this.setState({loading: false})
+      console.log('falcor data', data)
+      return data
+    })
+  }
+
   componentWillMount() {
     let geoid = this.props.geoid || '36'
     if (!this.props.riskIndex[geoid] || !this.props.riskIndex[geoid].tracts) {
@@ -193,7 +219,7 @@ class HazardMap extends Component {
     }
     return (
       <ElementBox > 
-       {this.renderMap(params.hazard)}
+       {this.renderMap(params.hazard.toUpperCase())}
       </ElementBox>
     ) 
   }
@@ -203,11 +229,11 @@ const mapDispatchToProps = { getHazardDetail, getChildGeo };
 
 const mapStateToProps = state => {
   return {
-    riskIndex: state.riskIndex,
+    riskIndex: state.graph.riskIndex || {},
     geo: state.geo,
     router: state.router
   };
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HazardMap)
+export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(HazardMap))

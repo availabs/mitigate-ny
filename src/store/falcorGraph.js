@@ -2,7 +2,7 @@
 import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
-export const host = 'http://localhost:3333/'
+export const host = '/api/'
 
 
 class CustomSource extends HttpDataSource {
@@ -25,7 +25,7 @@ class CustomSource extends HttpDataSource {
     //   config.url = config.url + '?' + config.data.replace(/%22/g, '%27')
     //   // console.log(config.url)
     // }
-    console.log('FR:', config.url)
+    //console.log('FR:', config.url)
   }
 }
 
@@ -44,7 +44,7 @@ class CustomSource extends HttpDataSource {
 export const falcorGraph = (function () {
   var storedGraph = {} // graphFromCache() // {};//JSON.parse(localStorage.getItem('falcorCache'))
   let model = new Model({
-    source: new HttpDataSource(host + 'graph', {
+    source: new CustomSource(host + 'graph', {
       crossDomain: true,
       withCredentials: false
     }),

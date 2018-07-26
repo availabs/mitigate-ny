@@ -95,7 +95,7 @@ const mapStateToProps = state => {
   return {
     riskIndexGraph: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
-    severeweather: state.graph.severeweather || {},
+    severeweather: state.graph.severeWeather || {},
     geoGraph: state.graph.geo || {},
     router: state.router,
     

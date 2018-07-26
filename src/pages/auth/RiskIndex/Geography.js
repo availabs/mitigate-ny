@@ -59,7 +59,7 @@ class Geography extends Component {
     this.state = {
       geoLevel,
       geoid,
-      dataType: 'severeWeather',
+      dataType: 'severeWeather',//'sheldus',
       year: LATEST_YEAR
     }
   }

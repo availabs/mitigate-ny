@@ -60,7 +60,7 @@ class HazardList extends Component {
         //     this.props.riskIndex[geoid]
         // )
         let sheldus = this.props[dataType][geoid][hazard]
-        //console.log('sheldus', sheldus)
+        // console.log('sheldus', sheldus)
         return (
           <HazardOverview 
             key={i} 
