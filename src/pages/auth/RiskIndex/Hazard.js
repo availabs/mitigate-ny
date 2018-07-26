@@ -7,6 +7,7 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
+import HazardEventsMapController from "./components/HazardEventsMapController"
 
 class Hazard extends Component {
 
@@ -32,8 +33,9 @@ class Hazard extends Component {
             <div className='col-lg-12'>
              <HazardMap />
             </div>
-            
           </div>
+
+          <HazardEventsMapController />
 
       	</Element>
     )

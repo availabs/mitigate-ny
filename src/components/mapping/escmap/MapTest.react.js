@@ -9,13 +9,16 @@ import Viewport from "./Viewport"
 
 import "./MapTest.css"
 
+let UNIQUE_IDs = 0;
+const getUniqueId = () => `react-map-gl-${ ++UNIQUE_IDs }`;
+
 class MapTest extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.props.viewport.onChange(this.setState.bind(this));
 		this.state = {
-			viewport: this.props.viewport()
+			viewport: this.props.viewport(),
+			id: props.id || getUniqueId()
 		}
 
 		this._onViewportChange = this._onViewportChange.bind(this);
@@ -23,16 +26,19 @@ class MapTest extends React.Component {
 	}
 
   	componentDidMount() {
+console.log("<MapTest.componentDidMount>")
     	window.addEventListener('resize', this._resize);
+		this.props.viewport.register(this, this.setState);
     	this._resize();
   	}
   	componentWillUnmount() {
+console.log("<MapTest.componentWillUnmount>")
     	window.removeEventListener('resize', this._resize);
-    	this.props.viewport.onChange(null);
+    	this.props.viewport.unregister(this);
   	}
 
   	_resize() {
-    	let style = window.getComputedStyle(document.getElementById(this.props.id), null);
+    	let style = window.getComputedStyle(document.getElementById(this.state.id), null);
     	this._onViewportChange({
       		height: parseInt(style.getPropertyValue('height'), 10),
       		width: parseInt(style.getPropertyValue('width'), 10)
@@ -46,10 +52,14 @@ class MapTest extends React.Component {
 		const viewport = this.state.viewport,
 			layers = this.props.layers.map(layer => new GeojsonLayer(layer));
     	return (
-      		<div id={ this.props.id } style={ { width: '100%', height: 800 } }>
+      		<div id={ this.state.id } style={ { width: '100%', height: `${ this.props.height }px` } }>
 				<ReactMapGL { ...viewport }
+					mapStyle={ this.props.style }
 		          	onViewportChange={ this._onViewportChange }
-		          	mapboxApiAccessToken={ this.props.mapboxApiAccessToken }>
+		          	mapboxApiAccessToken={ this.props.mapboxApiAccessToken }
+		          	dragPan={ this.props.dragPan }
+		          	scrollZoom={ this.props.scrollZoom }
+		          	dragRotate={ this.props.dragRotate }>
 
 		          	<DeckGL { ...viewport }
 		          		layers={ layers }/>
@@ -70,16 +80,19 @@ class MapTest extends React.Component {
 
 MapTest.defaultProps = {
 	mapboxApiAccessToken: MAPBOX_TOKEN,
-	id: "react-map-gl",
 	layers: [],
 	viewport: Viewport(),
 	hoverData: null,
-	controls: []
+	controls: [],
+	height: 800,
+	dragPan: true,
+	scrollZoom: true,
+	dragRotate: true
 }
 
 const MapTestHover = ({ rows, x, y }) => {
 	if (!rows || (rows.length === 0)) return null;
-	const hasHeader = (rows[0].length === 1),
+	const hasHeader = (rows[0].length === 1) && (rows.length > 1),
 		bodyData = rows.slice(hasHeader ? 1 : 0);
 	return (
 		<div className="map-test-table-div"

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxFalcor } from 'utils/redux-falcor'
 
 import { setCurrrentPopulationYear } from 'store/modules/vulnerabilities'
 
@@ -10,7 +9,7 @@ import * as d3format from "d3-format"
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import MapTest from "./map/MapTest.react"
+import MapTest from "components/mapping/escmap/MapTest.react"
 
 import {
 	EARLIEST_YEAR,
@@ -285,4 +284,4 @@ const mapDispatchToProps = {
   setCurrrentPopulationYear
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(PopulationsMap));
+export default connect(mapStateToProps, mapDispatchToProps)(PopulationsMap);

@@ -18,6 +18,7 @@
 	font-size: 1.25em;
 	border-bottom: 2px solid #fff;
 }
+.map-test-table tr.no-border-bottom th,
 .map-test-table th.no-border-bottom {
 	border-bottom: none;
 }

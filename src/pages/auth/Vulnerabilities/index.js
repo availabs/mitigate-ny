@@ -12,7 +12,7 @@ import Element from 'components/light-admin/containers/Element'
 import PopulationsMap from "./components/PopulationsMap.react"
 import PopulationsTable from "./components/PopulationsTable.react"
 
-import Viewport from "./components/map/Viewport"
+import Viewport from "components/mapping/escmap/Viewport"
 
 import {
   YEARS_OF_ACS_DATA
