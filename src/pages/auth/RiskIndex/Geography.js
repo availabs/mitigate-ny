@@ -15,15 +15,10 @@ import GeographyScoreTable from './components/GeographyScoreTable'
 import GeographyScoreBarChart from './components/GeographyScoreBarChart'
 import HazardEventsMapController from "./components/HazardEventsMapController"
 
-<<<<<<< HEAD
-const EARLIEST_YEAR = 1960,
-  LATEST_YEAR = 2017;
-=======
 import {
   EARLIEST_YEAR,
   LATEST_YEAR
 } from "./components/yearsOfSevereWeatherData";
->>>>>>> 224c2544de989844749602105b84b63c9fcec8f1
 
 class Geography extends Component {
   constructor(props) {
