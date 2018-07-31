@@ -4,42 +4,17 @@ import { connect } from 'react-redux';
 import { ResponsiveBar } from "@nivo/bar"
 
 import * as d3color from "d3-color"
+import * as d3format from "d3-format"
 import * as d3scale from "d3-scale"
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import {
 	processDataForBarChart,
-	processSheldus5year,
-	sumData,
-	avgData
+	getHazardName
 } from 'utils/sheldusUtils'
 
-const D3_CATEGORY20 = [
-	"#1f77b4",
-	"#aec7e8",
-	"#ff7f0e",
-	"#ffbb78",
-	"#2ca02c",
-	"#98df8a",
-	"#d62728",
-	"#ff9896",
-	"#9467bd",
-	"#c5b0d5",
-	"#8c564b",
-	"#c49c94",
-	"#e377c2",
-	"#f7b6d2",
-	"#7f7f7f",
-	"#c7c7c7",
-	"#bcbd22",
-	"#dbdb8d",
-	"#17becf",
-	"#9edae5"
-];
-
-const COLOR_SCALE = d3scale.scaleOrdinal()
-		.range(D3_CATEGORY20);
+const format = d3format.format("$,d");
 
 class GeographyScoreBarChart extends React.Component {
 
@@ -58,7 +33,6 @@ class GeographyScoreBarChart extends React.Component {
 		if (!data.length) {
 			return <ElementBox>Loading...</ElementBox>;
 		}
-		COLOR_SCALE.domain(keys);
 		return (
 			<ElementBox>
 				<div style={ { height: "500px" } }>
@@ -66,7 +40,7 @@ class GeographyScoreBarChart extends React.Component {
 						data={ data }
 						keys={ keys }
 						indexBy="year"
-						colorBy={ d => COLOR_SCALE(d.id) }
+						colorBy={ d => this.props.colorScale(d.id) }
 						enableLabel={ false }
 						tooltipFormat="$,d"
 						margin={ {
@@ -94,23 +68,20 @@ class GeographyScoreBarChart extends React.Component {
 				            "legendOffset": -90,
 			            	"format":"$,d"
 				        } }
+				        tooltip={
+				        	d => (
+					        	<div>
+					        		<div style={ { display: "inline-block", width: "15px", height: "15px", backgroundColor: this.props.colorScale(d.id) } }/>
+					        		<span style={ { paddingLeft: "5px" } }>{ getHazardName(d.id) }</span>
+					        		<span style={ { paddingLeft: "5px" } }>{ format(d.value) }</span>
+					        	</div>
+					        )
+				        }
 				        theme={ {
 				        	"axis": {
 				        		"legendFontSize": "18px"
 				        	}
-				        } }
-				        legends={ [
-	            			// {
-				            //     "dataFrom": "keys",
-				            //     "anchor": "top-right",
-				            //     "direction": "column",
-				            //     "translateX": 120,
-				            //     "itemWidth": 100,
-				            //     "itemHeight": 20,
-				            //     "itemsSpacing": 2,
-				            //     "symbolSize": 20
-				            // }
-	        			] }/>
+				        } }/>
 				</div>
 	        </ElementBox>
 		)

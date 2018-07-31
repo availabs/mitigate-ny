@@ -11,14 +11,12 @@ const sheldusAttributes = {
 	fatalities: "Fatalities"
 }
 
-const getHazardName = hazardid => {
-	switch (hazardid) {
-		case "winterweat":
-			return "Winter Weather";
-		default:
-			return hazardid.split("").map((d, i) => i == 0 ? d.toUpperCase() : d).join("");
-	}
-}
+const getHazardName = hazardid =>
+	hazardid === "winterweat"
+		? "Winter Weather"
+		: hazardid.split("")
+			.map((d, i) => i === 0 ? d.toUpperCase() : d)
+			.join("")
 
 module.exports = {
 	processSheldus : (data,key) => {
@@ -66,19 +64,18 @@ module.exports = {
 		for (const geoid in rawData) {
 			if (!geoids.includes(geoid)) continue;
 			for (const hazardid in rawData[geoid]) {
-				const hazardName = getHazardName(hazardid);
-				if (!(hazardName in keys)) {
-					keys[hazardName] = true;
+				if (!(hazardid in keys)) {
+					keys[hazardid] = true;
 				}
 				for (const year in rawData[geoid][hazardid]) {
 					if (!(year in data)) {
 						data[year] = { year };
 					}
-					if (!(hazardName in data[year])) {
-						data[year][hazardName] = 0;
+					if (!(hazardid in data[year])) {
+						data[year][hazardid] = 0;
 					}
-					const value = data[year][hazardName] + +rawData[geoid][hazardid][year].property_damage;
-					data[year][hazardName] = value;
+					const value = data[year][hazardid] + +rawData[geoid][hazardid][year].property_damage;
+					data[year][hazardid] = value;
 				}
 			}
 		}

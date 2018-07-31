@@ -4,7 +4,6 @@ import HttpDataSource from 'falcor-http-datasource'
 
 export const host = 'http://localhost:3333/'
 
-
 class CustomSource extends HttpDataSource {
   onBeforeRequest (config) {
     // var token = ''
@@ -25,7 +24,7 @@ class CustomSource extends HttpDataSource {
     //   config.url = config.url + '?' + config.data.replace(/%22/g, '%27')
     //   // console.log(config.url)
     // }
-    //console.log('FR:', config.url)
+    console.log('FR:', config)
   }
 }
 

@@ -8,6 +8,8 @@ import RiskIndex from './pages/auth/RiskIndex'
 import Hazard from './pages/auth/RiskIndex/Hazard'
 import Geography from './pages/auth/RiskIndex/Geography'
 import Vulnerabilities from "./pages/auth/Vulnerabilities"
+import CMS from "./pages/auth/cms"
+import NewContentPage from "./pages/auth/cms/NewContentPage"
 
 // -- Util Routes
 import Login from './pages/Login'
@@ -20,6 +22,8 @@ const routes = [
   ...Hazard,
   ...Geography,
   ...Vulnerabilities,
+  ...CMS,
+  ...NewContentPage,
   Login,
   Logout,
   NoMatch
