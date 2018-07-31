@@ -24,7 +24,7 @@ class CustomSource extends HttpDataSource {
     //   config.url = config.url + '?' + config.data.replace(/%22/g, '%27')
     //   // console.log(config.url)
     // }
-    console.log('FR:', config)
+    // console.log('FR:', config)
   }
 }
 
