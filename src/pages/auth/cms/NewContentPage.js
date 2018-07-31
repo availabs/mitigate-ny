@@ -25,6 +25,7 @@ class NewContentPage extends React.Component {
       ['content', 'byId', content_id, ['attributes', 'body']]
     )
     .then(response => {
+console.log("GET RESPONSE:",response)
       const {
         attributes,
         body
@@ -32,20 +33,17 @@ class NewContentPage extends React.Component {
       if (attributes && body) {
         this.props.setEditTarget({ content_id, attributes, body });
       }
-      return response
+      return response;
     });
   }
 
   render () {
     const {
-      newContentData
-    } = this.props.cms;
-    const {
       content_id,
       attributes,
       body,
       isEditTarget
-    } = newContentData;
+    } = this.props.cms.newContentData;
     const title = isEditTarget ? "Edit Content" : "New Content Creation";
     return (
     	<Element>

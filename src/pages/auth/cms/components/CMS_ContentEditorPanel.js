@@ -89,13 +89,13 @@ class CMS_ContentEditorPanel extends React.Component {
 						byId: {
 							[content_id]: {
 								body,
-								attributes
+								attributes: JSON.stringify(attributes)
 							}
 						}
 					}
 				}
 			})
-			.then(response => console.log("SET RESPONSE:",response))
+			.then(response => (console.log("SET RESPONSE:",response),response))
 		}
 	}
 
@@ -120,7 +120,7 @@ class CMS_ContentEditorPanel extends React.Component {
     			['content', 'insert'],
     			[content_id, attributes, body], [], []
     		)
-    		.then(response => console.log("CALL RESPONSE:",response))
+    		.then(response => (console.log("CALL RESPONSE:",response),response))
     		.catch(error => console.log("CALL ERROR:",error));
     	}
 	}
@@ -139,10 +139,8 @@ class CMS_ContentEditorPanel extends React.Component {
     	} = this.state;
 
     	const disabled = (!key || !value);
-    	
-    	const tableData = Object.keys(attributes).map(key =>
-    			({ key, value: attributes[key] })
-    		);
+
+    	const length = Object.keys(attributes).length;
 
     	const onSubmit = isEditTarget ? this.editContent.bind(this)
     						: this.saveContent.bind(this);
@@ -155,7 +153,7 @@ class CMS_ContentEditorPanel extends React.Component {
 
 					<div className="form-group">
 						<label htmlFor="#content_id">Content ID</label>
-						<input type="text"
+						<input type="text" required
 							className="form-control form-control-sm"
 							id="content_id"
 							placeholder="Enter a content id..."
@@ -192,7 +190,7 @@ class CMS_ContentEditorPanel extends React.Component {
 					</div>
 
 					{
-						!tableData.length ? null :
+						!length ? null :
 						<div className="row">
 							<div className="col-lg-12">
 								<label>Current Attributes</label>
@@ -200,7 +198,7 @@ class CMS_ContentEditorPanel extends React.Component {
 						</div>
 					}
 					{
-						!tableData.length ? null :
+						!length ? null :
 						<div className="row">
 							<div className="col-lg-12">
 								<AttributesTable attributes={ attributes }
@@ -209,7 +207,7 @@ class CMS_ContentEditorPanel extends React.Component {
 						</div>
 					}
 					{
-						!tableData.length ? null :
+						!length ? null :
 						<div style={ { marginBottom: "1rem" } }/>
 					}
 
@@ -218,6 +216,7 @@ class CMS_ContentEditorPanel extends React.Component {
 						<textarea className="form-control form-control-sm"
 							rows="10"
 							id="body"
+							required
 							value={ body }
 							placeholder="Enter content body..."
 							onChange={ this.onChange.bind(this) }/>
