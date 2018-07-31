@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default ({ tableData, columns, links, onClick }) => {
+export default ({ tableData=[], columns=[], links={}, onClick=null }) => {
   if (!tableData || tableData.length === 0) {
     return ('No Data Sento to table')
   }

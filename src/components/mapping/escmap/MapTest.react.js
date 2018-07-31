@@ -26,13 +26,11 @@ class MapTest extends React.Component {
 	}
 
   	componentDidMount() {
-console.log("<MapTest.componentDidMount>")
     	window.addEventListener('resize', this._resize);
 		this.props.viewport.register(this, this.setState);
     	this._resize();
   	}
   	componentWillUnmount() {
-console.log("<MapTest.componentWillUnmount>")
     	window.removeEventListener('resize', this._resize);
     	this.props.viewport.unregister(this);
   	}

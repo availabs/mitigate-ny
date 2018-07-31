@@ -58,22 +58,24 @@ import Pagination from './Pagination'
       tableData = data.slice(page * size, page * size + size);
     return (
       <ElementBox title={this.props.title} desc={this.props.desc}>
-        <div className="controls-above-table">
-          <div className="row">
-            <div className="col-sm-6">
-              <form className="form-inline">
-                <input className="form-control form-control-sm bright"
-                  onChange={ this.setFilter }
-                  placeholder="Search" type="text" />
-              </form>
-            </div>
-            <div className="col-sm-6">
-              <form className="form-inline justify-content-sm-end">
-                <a className="btn btn-sm btn-secondary" href="">Download CSV</a>
-              </form>
+        { !this.props.showControls ? null :
+          <div className="controls-above-table">
+            <div className="row">
+              <div className="col-sm-6">
+                <form className="form-inline">
+                  <input className="form-control form-control-sm bright"
+                    onChange={ this.setFilter }
+                    placeholder="Search" type="text" />
+                </form>
+              </div>
+              <div className="col-sm-6">
+                <form className="form-inline justify-content-sm-end">
+                  <a className="btn btn-sm btn-secondary" href="">Download CSV</a>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        }
         <div className="table-responsive">
           <DataTable tableData={ tableData }
             columns={ this.props.columns }
@@ -92,7 +94,8 @@ TableBox.defaultProps = {
   columns: [],
   links: {},
   filterKey: "",
-  onClick: null
+  onClick: null,
+  showControls: true
 }
 
 export default TableBox;

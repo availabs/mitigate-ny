@@ -1,5 +1,5 @@
 import { FlyToInterpolator } from 'react-map-gl';
-import WebMercatorViewport, { fitBounds } from 'viewport-mercator-project';
+import { fitBounds } from 'viewport-mercator-project';
 import GeojsonExtent from '@mapbox/geojson-extent';
 import { easeCubic } from 'd3-ease'
 

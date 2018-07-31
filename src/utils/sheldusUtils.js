@@ -15,7 +15,7 @@ const getHazardName = hazardid =>
 	hazardid === "winterweat"
 		? "Winter Weather"
 		: hazardid.split("")
-			.map((d, i) => i == 0 ? d.toUpperCase() : d)
+			.map((d, i) => i === 0 ? d.toUpperCase() : d)
 			.join("")
 
 module.exports = {

@@ -6,6 +6,7 @@ import user from './modules/user'
 import riskIndex from './modules/riskIndex'
 import geo from './modules/geo'
 import vulnerabilities from "./modules/vulnerabilities"
+import cms from "./modules/cms"
 
 import createHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk'
@@ -33,6 +34,8 @@ const store = createStore(
     riskIndex,
     geo,
     vulnerabilities,
+    cms,
+
     graph,
     router: routerReducer
   }),

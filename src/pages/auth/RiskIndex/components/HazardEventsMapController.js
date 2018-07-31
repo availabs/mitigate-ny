@@ -125,7 +125,7 @@ class HazardEventsMapController extends React.Component {
 	      	const geoids = falcorResponse.json.geo[geoid][geoLevel],
 	        	hazards = hazard ? [hazard] : falcorResponse.json.riskIndex.hazards,
         		requests = [];
-      		// COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
+      		COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
       		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
         		requests.push([dataType, 'events', geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['property_damage']])
       		}

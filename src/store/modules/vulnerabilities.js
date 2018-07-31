@@ -1,12 +1,10 @@
 const SET_CURRENT_POPULATION_YEAR = "SET_CURRENT_POPULATION_YEAR"
 
-export const setCurrrentPopulationYear = year => {
-console.log("<setCurrrentPopulationYear>",year)
-  	return dispatch => {
+export const setCurrrentPopulationYear = year =>
+  	dispatch => {
 	    dispatch(_setCurrrentPopulationYear(year));
 	    return Promise.resolve();
   	}
-}
 
 const _setCurrrentPopulationYear = year => ({
 	type: SET_CURRENT_POPULATION_YEAR,

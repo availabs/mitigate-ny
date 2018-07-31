@@ -48,7 +48,7 @@ class Vulnerabilities extends Component {
             newProps.geo['36'].tracts.features.length) {
           const { geoid } = this.state,
             geojson = this.props.geo['36'].counties.features.reduce((a, c) => {
-              return c.properties.geoid == geoid ? c : a;
+              return c.properties.geoid === geoid ? c : a;
             }, null)
           this.state.viewport.fitGeojson(geojson);
         }
@@ -61,7 +61,7 @@ class Vulnerabilities extends Component {
       case 5:
         geoLevel = 'tracts-cousubs';
         geojson = this.props.geo['36'].counties.features.reduce((a, c) => {
-          return c.properties.geoid == geoid ? c : a;
+          return c.properties.geoid === geoid ? c : a;
         }, null)
         break;
       default:
@@ -79,7 +79,7 @@ class Vulnerabilities extends Component {
   }
 
   componentDidUpdate(oldProps, oldState) {
-    if (oldState.geoid != this.state.geoid) {
+    if (oldState.geoid !== this.state.geoid) {
       this.fetchFalcorDeps();
     }
   }

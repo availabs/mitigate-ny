@@ -11,7 +11,6 @@ import { history } from "store"
 import { getHazardDetail } from 'store/modules/riskIndex';
 
 import Element from 'components/light-admin/containers/Element'
-import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import GeographyScoreTable from './components/GeographyScoreTable'
 import GeographyScoreBarChart from './components/GeographyScoreBarChart'
@@ -74,7 +73,7 @@ class Geography extends Component {
   componentWillReceiveProps(newProps) {
     const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(newProps) || { params: { geoid: '36' } },
       { geoid } = params;
-    let geoLevel, geojson;
+    let geoLevel;
     switch (geoid.length) {
       case 5:
         geoLevel = 'cousubs';

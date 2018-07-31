@@ -1,12 +1,10 @@
 import React from 'react';
 
-import WebMercatorViewport, { getDistanceScales } from 'viewport-mercator-project';
+import { getDistanceScales } from 'viewport-mercator-project';
 
 import * as d3format from "d3-format"
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
-
-import TableBox from 'components/light-admin/tables/TableBox'
 
 import { getHazardName } from 'utils/sheldusUtils'
 
@@ -42,6 +40,10 @@ export default class HazardEventsLegend extends React.Component {
 
 			numRows = 3,
 			numCols = Math.ceil(domain.length / numRows);
+
+		if (!domain.length) {
+			return <div className="col-lg-12"><ElementBox>Loading...</ElementBox></div>
+		}
 
 		for (let r = 0; r < numRows; ++r) {
 			const columns = [];
