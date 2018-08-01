@@ -140,7 +140,6 @@ class CMS_ContentEditorPanel extends React.Component {
 							id="content_id"
 							placeholder="Enter a content id..."
 							value={ content_id }
-							disabled={ isEditTarget }
 							onChange={ this.onChange.bind(this) }/>
 					</div>
 

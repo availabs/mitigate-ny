@@ -4,6 +4,8 @@ import { createMatchSelector } from 'react-router-redux'
 
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
+
+import Content from 'components/cms/Content'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
@@ -14,30 +16,46 @@ class Hazard extends Component {
   render () {
     const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
     return (
-      	<Element>
-      		<h6 className="element-header">{params.hazard}</h6>
-          <div className='row'>
-            <ElementBox  title='Hazard Definition & Characteristics'>
-            </ElementBox> 
-          </div>
-          <div className='row'>
-            <div className='col-7'>
-      		    <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
+      <div className='property-single'>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            
+            <h1>{params && params.hazard ? params.hazard : ''}</h1>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-definition`} />
             </div>
-            <div className='col-lg-5'>
-              <HazardScoreTable/>
-            </div>
-          </div>
-           
-          <div className='row'>
-            <div className='col-lg-12'>
-             <HazardMap />
-            </div>
-          </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-location`} />
 
-          <HazardEventsMapController />
+            </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-magnitude`} />
+            </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-vulnerablity`} />
+              <HazardScoreTable />
+            </div>
+            
+          </div>
+          <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content'>
+              <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
+              <HazardEventsMapController />
+              
+            </div>
+          </div>
+        </div>
+      
+       
+      <div className='row'>
+        <div className='col-lg-12'>
+         <HazardMap />
+        </div>
+      </div>
+      
+    </div>
+      		
 
-      	</Element>
     )
   }
 }

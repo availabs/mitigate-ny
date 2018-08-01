@@ -16221,7 +16221,7 @@ TODO Application
           margin-right: 20px; }
         .property-single .property-info-w .property-info-side .property-side-features .feature:last-child {
           border-bottom: none; }
-    .property-single .property-info-w .property-section .property-section-header {
+    .property-single .property-info-w .property-section .property-section-header, .property-single .property-info-w .property-section h3 {
       padding: 20px 0px;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -16232,7 +16232,7 @@ TODO Application
       position: relative;
       color: #111;
       font-size: 0.99rem; }
-      .property-single .property-info-w .property-section .property-section-header:before {
+      .property-single .property-info-w .property-section .property-section-header:before, .property-single .property-info-w .property-section h3:before {
         content: "";
         background-color: #047bf8;
         width: 7px;
@@ -16241,7 +16241,7 @@ TODO Application
         top: 50%;
         transform: translateY(-50%);
         position: absolute; }
-      .property-single .property-info-w .property-section .property-section-header .filter-toggle {
+      .property-single .property-info-w .property-section .property-section-header .filter-toggle, .property-single .property-info-w .property-section h3 .filter-toggle {
         position: absolute;
         top: 20px;
         right: 20px;
@@ -16255,10 +16255,10 @@ TODO Application
         vertical-align: middle;
         cursor: pointer;
         z-index: 3; }
-        .property-single .property-info-w .property-section .property-section-header .filter-toggle i {
+        .property-single .property-info-w .property-section .property-section-header .filter-toggle i, .property-single .property-info-w .property-section h3 .filter-toggle i {
           display: inline-block;
           vertical-align: middle; }
-        .property-single .property-info-w .property-section .property-section-header .filter-toggle:hover {
+        .property-single .property-info-w .property-section .property-section-header .filter-toggle:hover, .property-single .property-info-w .property-section h3 .filter-toggle:hover {
           background-color: #111;
           color: #fff; }
     .property-single .property-info-w .property-section .property-section-body {
