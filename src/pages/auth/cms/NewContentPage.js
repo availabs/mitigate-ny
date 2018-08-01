@@ -17,6 +17,18 @@ import CMS_ContentEditorPanel from './components/CMS_ContentEditorPanel'
 
 class NewContentPage extends React.Component {
 
+  state = {
+    show: "hide",
+    msg: "GROOVEY"
+  }
+
+  showAlert(msg) {
+    this.setState({ show: "show", msg });
+  }
+  hideAlert() {
+    this.setState({ show: "hide" });
+  }
+
   fetchFalcorDeps() {
     const { params } = createMatchSelector({ path: '/cms/edit/:content_id' })(this.props) || { params: {} },
       { content_id } = params;
@@ -25,7 +37,6 @@ class NewContentPage extends React.Component {
       ['content', 'byId', content_id, ['attributes', 'body']]
     )
     .then(response => {
-console.log("GET RESPONSE:",response)
       const {
         attributes,
         body
@@ -51,7 +62,8 @@ console.log("GET RESPONSE:",response)
         <div className='row'>
 
           <div className="col-lg-6">
-            <CMS_ContentEditorPanel />
+            <CMS_ContentEditorPanel
+              showAlert={ this.showAlert.bind(this) }/>
           </div>
 
           <div className="col-lg-6">
@@ -61,6 +73,13 @@ console.log("GET RESPONSE:",response)
             </h5>
               <MarkdownRenderer markdown={ body }/>
             </ElementBox>
+          </div>
+
+          <div className={ `bg-warning cms-alert ${ this.state.show }` }>
+            <button className="close" onClick={ this.hideAlert.bind(this) }>
+              <span>X</span>
+            </button>
+            { this.state.msg }
           </div>
 
         </div>
