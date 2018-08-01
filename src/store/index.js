@@ -8,6 +8,8 @@ import geo from './modules/geo'
 import vulnerabilities from "./modules/vulnerabilities"
 import cms from "./modules/cms"
 
+import messages from "./modules/messages"
+
 import createHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk'
 
@@ -35,6 +37,8 @@ const store = createStore(
     geo,
     vulnerabilities,
     cms,
+
+    messages,
 
     graph,
     router: routerReducer

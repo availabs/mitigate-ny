@@ -5,12 +5,21 @@ let UNIQUE_ID = 0;
 const getUniqueId = () =>
 	`system-message-${ ++UNIQUE_ID }`;
 
-const getMessageOptions = options => {
-	if (!options.id) options.id = getUniqueId();
-	return options;
-}
+const MESSAGE_TYPES = ["success", "info", "warning", "danger"];
 const DEFAULT_MESSAGE_OPTIONS = {
-	duration: 10000
+	duration: 7500,
+	type: "warning",
+	onDismiss: () => {},
+	onConfirm: null
+}
+const getMessageOptions = options => {
+	if (!options.id) {
+		options.id = getUniqueId();
+	}
+	if (!MESSAGE_TYPES.includes(options.type)) {
+		options.type = "warning";
+	}
+	return options;
 }
 
 export const sendSystemMessage = (message, options={}) =>
@@ -33,13 +42,12 @@ export const dismissSystemMessage = id =>
 export default (state=[], action) => {
 	switch (action.type) {
 		case SEND_SYSTEM_MESSAGE: {
-			let newState = newState.filter(({ id }) => id != action.options.id);
+			let newState = state.filter(({ id }) => id != action.options.id);
 			newState.push({ message: action.message, ...action.options });
 			return newState;
 		};
 		case DISMISS_SYSTEM_MESSAGE: {
-			let newState = newState.filter(({ id }) => id != action.id);
-			return newState;
+			return state.filter(({ id }) => id != action.id);
 		};
 		default:
 			return state;

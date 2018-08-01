@@ -9,13 +9,15 @@ import AttributesTable from "./CMS_AttributesTable"
 import {
   updateNewContentData
 } from 'store/modules/cms';
+import {
+  sendSystemMessage
+} from 'store/modules/messages';
 
 class CMS_ContentEditorPanel extends React.Component {
 
 	state = {
 		key: "",
-		value: "",
-		show: "hide"
+		value: ""
 	}
 
 	onChange(e) {
@@ -79,7 +81,7 @@ class CMS_ContentEditorPanel extends React.Component {
 				}
 			})
 			.then(response => {
-				this.props.showAlert(`Content "${ content_id }" was successfully edited.`);
+				this.props.sendSystemMessage(`Content "${ content_id }" was successfully edited.`, { type: "success" });
 				return response;
 			})
 		}
@@ -100,7 +102,7 @@ class CMS_ContentEditorPanel extends React.Component {
     			[content_id, attributes, body], [], []
     		)
 			.then(response => {
-				this.props.showAlert(`Content "${ content_id }" was successfully created.`);
+				this.props.sendSystemMessage(`Content "${ content_id }" was successfully created.`, { type: "success" });
 				return response;
 			})
     		.catch(error => console.log("CALL ERROR:",error));
@@ -220,7 +222,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-	updateNewContentData
+	updateNewContentData,
+	sendSystemMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(CMS_ContentEditorPanel));
