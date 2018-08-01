@@ -19,9 +19,10 @@ class ContentItem extends React.Component {
 	}
 	deleteContent() {
 		this.props.sendSystemMessage(
-			`Are you sure you with to delete this content?`,
+			`Are you sure you with to delete content "${ this.props.content_id }"?`,
 			{
 				onConfirm: this.props.deleteContent.bind(this, this.props.content_id),
+				id: `delete-content-${ this.props.content_id }`,
 				type: "danger",
 				duration: 0
 			}
