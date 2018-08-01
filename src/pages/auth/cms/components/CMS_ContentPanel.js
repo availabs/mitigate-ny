@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import MarkdownRenderer from 'react-markdown-renderer';
-
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
+import BodyViewer from "./CMS_BodyViewer"
 
 class ContentItem extends React.Component {
 	state = {
@@ -46,13 +45,15 @@ class ContentItem extends React.Component {
 						</div>
 						{ !this.state.opened ? null :
 							<div className="row" style={ { paddingTop: "10px" } }>
-								<div className="col-lg-4">
-									<h5>Attributes</h5>
-									<AttributesTable attributes={ attributes }/>
-								</div>
+								{ !Object.keys(attributes).length ? null :
+									<div className="col-lg-4">
+										<h5>Attributes</h5>
+										<AttributesTable attributes={ attributes }/>
+									</div>
+								}
 								<div className="col-lg-8">
 									<h5>Body</h5>
-									<MarkdownRenderer markdown={ body }/>
+									<BodyViewer content_id={ content_id }/>
 								</div>
 							</div>
 						}

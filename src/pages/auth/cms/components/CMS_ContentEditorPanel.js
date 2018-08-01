@@ -14,7 +14,8 @@ class CMS_ContentEditorPanel extends React.Component {
 
 	state = {
 		key: "",
-		value: ""
+		value: "",
+		show: "hide"
 	}
 
 	onChange(e) {
@@ -43,7 +44,6 @@ class CMS_ContentEditorPanel extends React.Component {
 			[key]: value
 		}
 		this.props.updateNewContentData({ attributes });
-		this.setState({ key: "", value: "" });
 	}
 	removeAttribute(key) {
 		let {
@@ -53,21 +53,6 @@ class CMS_ContentEditorPanel extends React.Component {
 		this.props.updateNewContentData({ attributes: { ...attributes } });
 	}
 
-// const setEvent = {
-// 		'method': 'set',
-// 		'jsonGraph': {
-// 			'paths': [['content', 'byId', content_id, 'body']],
-// 			'jsonGraph': {
-//   			'content': {
-//   				'byId': {
-//   					[content_id]: {
-//   						'body': 'New body text here!'
-//   					}
-//   				}
-//   			}
-//   		}
-// 		}
-// 	}
 	editContent(e) {
 		e.preventDefault();
 
@@ -77,9 +62,7 @@ class CMS_ContentEditorPanel extends React.Component {
       		body
     	} = this.props.cms.newContentData;
 
-    	const length = Object.keys(attributes).length;
-
-    	if (content_id && length && body) {
+    	if (content_id && body) {
 			this.props.falcor.set({
 				paths: [
 					['content', 'byId', content_id, ['body', 'attributes']]
@@ -95,15 +78,13 @@ class CMS_ContentEditorPanel extends React.Component {
 					}
 				}
 			})
-			.then(response => (console.log("SET RESPONSE:",response),response))
+			.then(response => {
+				this.props.showAlert(`Content "${ content_id }" was successfully edited.`);
+				return response;
+			})
 		}
 	}
 
-// const callEvent = {
-// 		'method': 'call',
-// 		'callPath': ['content', 'insert'],
-// 		'args': [content_id, { test: "attribute", hello: "world" }, 'Some body text here.']
-// 	}
 	saveContent(e) {
 		e.preventDefault();
 
@@ -113,14 +94,15 @@ class CMS_ContentEditorPanel extends React.Component {
       		body
     	} = this.props.cms.newContentData;
 
-    	const length = Object.keys(attributes).length;
-
-    	if (content_id && length && body) {
+    	if (content_id && body) {
     		this.props.falcor.call(
     			['content', 'insert'],
     			[content_id, attributes, body], [], []
     		)
-    		.then(response => (console.log("CALL RESPONSE:",response),response))
+			.then(response => {
+				this.props.showAlert(`Content "${ content_id }" was successfully created.`);
+				return response;
+			})
     		.catch(error => console.log("CALL ERROR:",error));
     	}
 	}

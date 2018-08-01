@@ -35,3 +35,29 @@
 .filter-item.active:hover {
 	background-color: #24b314;
 }
+
+.cms-alert {
+	position: fixed;
+	padding: 1.25rem 1.5rem 1rem 1.5rem;
+	font-size: 1.25rem;
+	font-weight: 500;
+	left: 250px;
+	right: 250px;
+	border-radius: 4px;
+	color: #6e6446;
+	transition: opacity 0.5s ease-in-out,
+		top 0.5s ease-in-out;
+}
+.cms-alert > button.close {
+	font-size: 1.5rem;
+	font-weight: 900;
+	padding-right: 5px;
+}
+.cms-alert.hide {
+	opacity: 0;
+	top: 0px;
+}
+.cms-alert.show {
+	opacity: 1;
+	top: 400px;
+}
