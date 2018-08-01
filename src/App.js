@@ -8,6 +8,8 @@ import Layout from './layouts/Layout'
 import Routes from './routes'
 import './App.css';
 
+import Messages from "./components/messages"
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -63,6 +65,7 @@ class App extends Component {
 	    	  }) 
         }
         </Switch>
+        <Messages />
       </div>
     );
   }

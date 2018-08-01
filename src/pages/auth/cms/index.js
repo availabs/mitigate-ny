@@ -67,6 +67,16 @@ class CMS_HomePage extends React.Component {
     })
   }
 
+  deleteContent(content_id) {
+    return this.props.falcor.call(
+      ["content", "byId", "remove"],
+      [content_id]
+    ).then(response => {
+      console.log("DELETE RESPONSE:",response);
+      return response;
+    })
+  }
+
   render () {
     return (
     	<Element>
@@ -75,7 +85,8 @@ class CMS_HomePage extends React.Component {
 
           <CMS_FilterPanel className="col-lg-3"/>
 
-          <CMS_ContentPanel className="col-lg-9"/>
+          <CMS_ContentPanel className="col-lg-9"
+            deleteContent={ this.deleteContent.bind(this) }/>
 
         </div>
     	</Element>

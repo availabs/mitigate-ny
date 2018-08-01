@@ -5,6 +5,9 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
 import BodyViewer from "./CMS_BodyViewer"
+import {
+  sendSystemMessage
+} from 'store/modules/messages';
 
 class ContentItem extends React.Component {
 	state = {
@@ -13,6 +16,16 @@ class ContentItem extends React.Component {
 	toggleOpened() {
 		const opened = !this.state.opened;
 		this.setState({ opened });
+	}
+	deleteContent() {
+		this.props.sendSystemMessage(
+			`Are you sure you with to delete this content?`,
+			{
+				onConfirm: this.props.deleteContent.bind(this, this.props.content_id),
+				type: "danger",
+				duration: 0
+			}
+		)
 	}
 	render() {
 		const {
@@ -26,7 +39,7 @@ class ContentItem extends React.Component {
 				<div className="col-lg-12">
 					<ElementBox>
 						<div className="row">
-							<div className="col-lg-6">
+							<div className="col-lg-5">
 								<button className="btn btn-lg btn-light" onClick={ this.toggleOpened.bind(this) }>
 									<span style={ { padding: "0px 10px 0px 0px" } } className={ 'os-icon ' + (this.state.opened ? "os-icon-arrow-up4" : "os-icon-arrow-down3") }/>
 									{ content_id }
@@ -36,11 +49,17 @@ class ContentItem extends React.Component {
 								<h5 style={ { display: "inline-block", paddingRight: "10px" } }>Updated At:</h5>
 								{ updated_at.toLocaleString() }
 							</div>
-							<div className="col-lg-2">
-								<a href={ `/cms/edit/${ content_id }` }
-									className="btn btn-lg btn-block btn-outline-primary">
-									Edit <span className="os-icon os-icon-edit"/>
-								</a>
+							<div className="col-lg-3">
+								<div className="float-right">
+									<a href={ `/cms/edit/${ content_id }` }
+										className="btn btn-lg btn-outline-primary">
+										Edit
+									</a>
+									<a href="#" className="btn btn-lg btn-outline-danger"
+										onClick={ this.deleteContent.bind(this) }>
+										Delete
+									</a>
+								</div>
 							</div>
 						</div>
 						{ !this.state.opened ? null :
@@ -92,7 +111,8 @@ class CMS_ContentPanel extends React.Component {
 	      			content.sort((a, b) => b.updated_at.valueOf() - a.updated_at.valueOf())
 	      				.map(cntnt =>
 			      			<ContentItem key={ cntnt.content_id } { ...cntnt }
-			      				setEditTarget={ this.props.setEditTarget }/>
+			      				deleteContent={ this.props.deleteContent }
+			      				sendSystemMessage={ this.props.sendSystemMessage }/>
 			      		)
 		      	}
       		</div>
@@ -110,6 +130,8 @@ const mapStateToProps = state => ({
     cms: state.cms
 })
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+	sendSystemMessage
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CMS_ContentPanel);
