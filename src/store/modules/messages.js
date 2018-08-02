@@ -6,9 +6,10 @@ const getUniqueId = () =>
 	`system-message-${ ++UNIQUE_ID }`;
 
 const MESSAGE_TYPES = ["success", "info", "warning", "danger"];
+const DEFAULT_MESSAGE_TYPE = "warning";
 const DEFAULT_MESSAGE_OPTIONS = {
 	duration: 7500,
-	type: "warning",
+	type: DEFAULT_MESSAGE_TYPE,
 	onDismiss: () => {},
 	onConfirm: null
 }
@@ -17,7 +18,7 @@ const getMessageOptions = options => {
 		options.id = getUniqueId();
 	}
 	if (!MESSAGE_TYPES.includes(options.type)) {
-		options.type = "warning";
+		options.type = DEFAULT_MESSAGE_TYPE;
 	}
 	return options;
 }
