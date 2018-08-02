@@ -49,8 +49,8 @@ class CMS_HomePage extends React.Component {
               created_at,
               updated_at
             } = response.json.content.byId[content_id];
-            Object.keys(attributes)
-              .forEach(key => { filters[key] = true; });
+            Object.values(attributes)
+              .forEach(value => { filters[value] = true; });
             content.push({
               content_id,
               attributes,

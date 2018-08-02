@@ -92,8 +92,8 @@ class CMS_ContentPanel extends React.Component {
 			content
 		} = this.props.cms;
 		content = content.filter(c => {
-			const keys = Object.keys(c.attributes);
-			return activeFilters.reduce((a, c) => a || keys.includes(c), !activeFilters.length);
+			const values = Object.values(c.attributes);
+			return activeFilters.reduce((a, c) => a || values.includes(c), !activeFilters.length);
 		})
 		return (
           	<div className={ this.props.className }>
