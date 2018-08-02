@@ -40,7 +40,9 @@ class Hazard extends Component {
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content'>
               <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
-              <HazardEventsMapController />
+              <HazardEventsMapController 
+               
+              />
               
             </div>
           </div>

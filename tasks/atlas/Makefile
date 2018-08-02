@@ -8,18 +8,26 @@ all: $(GENERATED_FILES)
 clean:
 	rm -rf -- $(GENERATED_FILES) build
 
+# build/tl_2017_us_county.zip:
+# 	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/COUNTY/$(notdir $@)'
+
+# build/tl_2017_%_tract.zip:
+# 	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/TRACT/$(notdir $@)'
+
+# build/tl_2017_%_cousub.zip:
+# 	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/$(notdir $@)'
+
+build/cb_2017_us_county_500k.zip:
+ 	curl -o $@ 'https://www2.census.gov/geo/tiger/GENZ2017/shp/$(notdir $@)'
+
+build/cb_2017_%_tract_500k.zip:
+	curl -o $@ 'https://www2.census.gov/geo/tiger/GENZ2017/shp/$(notdir $@)'
+
+build/cb_2017_%_cousub_500k.zip:
+	curl -o $@ 'https://www2.census.gov/geo/tiger/GENZ2017/shp/$(notdir $@)'
 
 
-build/tl_2017_us_county.zip:
-	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/COUNTY/$(notdir $@)'
-
-build/tl_2017_%_tract.zip:
-	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/TRACT/$(notdir $@)'
-
-build/tl_2017_%_cousub.zip:
-	curl -o $@ 'https://www2.census.gov/geo/tiger/TIGER2017/COUSUB/$(notdir $@)'
-
-build/tracts.shp: build/tl_2017_36_tract.zip
+build/counties.shp: build/cb_2017_us_county_500k.zip
 	rm -rf $(basename $@)
 	mkdir -p $(basename $@)
 	unzip -d $(basename $@) $<
@@ -27,7 +35,7 @@ build/tracts.shp: build/tl_2017_36_tract.zip
 	rmdir $(basename $@)
 	touch $@
 
-build/counties.shp: build/tl_2017_us_county.zip
+build/tracts.shp: build/cb_2017_36_tract_500k.zip
 	rm -rf $(basename $@)
 	mkdir -p $(basename $@)
 	unzip -d $(basename $@) $<
@@ -35,7 +43,8 @@ build/counties.shp: build/tl_2017_us_county.zip
 	rmdir $(basename $@)
 	touch $@
 
-build/cousub.shp: build/tl_2017_36_cousub.zip
+
+build/cousub.shp: build/cb_2017_36_cousub_500k.zip
 	rm -rf $(basename $@)
 	mkdir -p $(basename $@)
 	unzip -d $(basename $@) $<
@@ -63,6 +72,10 @@ ny_tracts.ndjson: build/tracts.shp
 	| ndjson-map 'd.properties = {geoid: d.properties.GEOID}, d' \
 	> ny_tracts.ndjson
 
+# ny.json: ny_tracts.ndjson ny_cousub.ndjson ny_counties.ndjson
+# 	geo2topo -n tracts=ny_tracts.ndjson counties=ny_counties.ndjson cousub=ny_cousub.ndjson | toposimplify -s 0.001 -f | topoquantize 1e7 > ny.json
+# 	rm *.ndjson
+
 ny.json: ny_tracts.ndjson ny_cousub.ndjson ny_counties.ndjson
-	geo2topo -n tracts=ny_tracts.ndjson counties=ny_counties.ndjson cousub=ny_cousub.ndjson | toposimplify -s 0.001 -f | topoquantize 1e7 > ny.json
+	geo2topo -n tracts=ny_tracts.ndjson counties=ny_counties.ndjson cousubs=ny_cousub.ndjson > ny.json
 	rm *.ndjson
