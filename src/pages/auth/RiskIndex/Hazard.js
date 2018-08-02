@@ -4,6 +4,8 @@ import { createMatchSelector } from 'react-router-redux'
 
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
+
+import Content from 'components/cms/Content'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
@@ -13,51 +15,46 @@ import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarations
 class Hazard extends Component {
 
   render () {
-    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
-const TESTING = true;
+    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {};
     return (
-      	<Element>
-      		<h6 className="element-header">{params.hazard}</h6>
+      <div className='property-single'>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            
+            <h1>{params && params.hazard ? params.hazard : ''}</h1>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-definition`} />
+            </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-location`} />
+            </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-magnitude`} />
+            </div>
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-vulnerablity`} />
+              <HazardScoreTable />
+            </div>
+            
+          </div>
+          <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content'>
 
-{ TESTING ? null :
-          <div className='row'>
-            <div className='col-12'>
-              <ElementBox  title='Hazard Definition & Characteristics'>
-              </ElementBox> 
+              <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
+              <HazardEventsMapController />
+              
             </div>
           </div>
-}
-
-{ TESTING ? null :
-          <div className='row'>
-            <div className='col-7'>
-      		    <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
-            </div>
-            <div className='col-lg-5'>
-              <HazardScoreTable/>
-            </div>
-          </div>
-}
-           
-          <div className='row'>
-            <div className='col-lg-12'>
-             <FemaDisasterDeclarationsTable />
-            </div>
-          </div>
-           
-{ TESTING ? null :
-          <div className='row'>
-            <div className='col-lg-12'>
-             <HazardMap />
-            </div>
-          </div>
-}
-
-{ TESTING ? null :
-          <HazardEventsMapController />
-}
-
-      	</Element>
+        </div>
+      
+       
+      <div className='row'>
+        <div className='col-lg-12'>
+         <HazardMap />
+        </div>
+      </div>
+      
+    </div>
     )
   }
 }

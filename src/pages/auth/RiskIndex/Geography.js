@@ -147,7 +147,7 @@ class Geography extends Component {
             colorScale={ COLOR_SCALE }
             showLegend={ true }
             { ...this.state }
-            numMaps={ 12 }/>
+            />
 
       	</Element>
     )
