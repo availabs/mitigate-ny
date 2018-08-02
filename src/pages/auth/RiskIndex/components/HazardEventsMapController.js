@@ -148,15 +148,16 @@ class HazardEventsMapController extends React.Component {
 		                radiusScale={ RADIUS_SCALE }/>
 	            </div>
 	        , this);
+
+console.log("HAZARD EVENTS MAP:",this.props.showLegend);
 		return (
 			<div className='row'>
 				{
-					this.props.showLegend ?
+					!this.props.showLegend ? null :
 					<HazardEventsLegend
 						viewport={ this.state.viewport }
 						colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }/>
-					: null
 				}
 				{ maps }
 			</div>

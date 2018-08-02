@@ -25,14 +25,18 @@ class NewContentPage extends React.Component {
       ['content', 'byId', content_id, ['attributes', 'body']]
     )
     .then(response => {
-      const {
-        attributes,
-        body
-      } = response.json.content.byId[content_id];
-      if (attributes && body) {
-        this.props.setEditTarget({ content_id, attributes, body });
+      try {
+        const {
+          attributes,
+          body
+        } = response.json.content.byId[content_id];
+        if (attributes && body) {
+          this.props.setEditTarget({ content_id, attributes, body });
+        }
       }
-      return response;
+      catch (e) {
+        history.goBack();
+      }
     });
   }
 

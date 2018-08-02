@@ -68,6 +68,7 @@ const INITIAL_STATE = {
 	content: [],
 	newContentData: {
 		content_id: "",
+		new_content_id: "",
 		attributes: {},
 		body: "",
 		isEditTarget: false
@@ -107,7 +108,8 @@ export default (state=INITIAL_STATE, action) => {
 			newState.newContentData = {
 				...newState.newContentData,
 				...action.target,
-				isEditTarget: true
+				isEditTarget: true,
+				new_content_id: action.target.content_id
 			}
 			return newState;
 		};

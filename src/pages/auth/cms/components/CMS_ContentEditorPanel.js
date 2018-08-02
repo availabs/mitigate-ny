@@ -4,6 +4,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
+import { history } from "store"
+
 import AttributesTable from "./CMS_AttributesTable"
 
 import {
@@ -23,11 +25,19 @@ class CMS_ContentEditorPanel extends React.Component {
 	onChange(e) {
 		const id = e.target.id,
 			value = e.target.value;
+		const {
+      		isEditTarget
+    	} = this.props.cms.newContentData;
 		switch (id) {
 			case "key":
 			case "value":
 				this.setState({ [id]: value });
 				break;
+			case "content_id":
+				if (isEditTarget) {
+					this.props.updateNewContentData({ new_content_id: value });
+					break;
+				}
 			default:
 				this.props.updateNewContentData({ [id]: value });
 		}
@@ -60,6 +70,7 @@ class CMS_ContentEditorPanel extends React.Component {
 
     	const {
       		content_id,
+      		new_content_id,
       		attributes,
       		body
     	} = this.props.cms.newContentData;
@@ -67,12 +78,13 @@ class CMS_ContentEditorPanel extends React.Component {
     	if (content_id && body) {
 			this.props.falcor.set({
 				paths: [
-					['content', 'byId', content_id, ['body', 'attributes']]
+					['content', 'byId', content_id, ['content_id', 'body', 'attributes']]
 				],
 				jsonGraph: {
 					content: {
 						byId: {
 							[content_id]: {
+								content_id: new_content_id,
 								body,
 								attributes: JSON.stringify(attributes)
 							}
@@ -81,7 +93,10 @@ class CMS_ContentEditorPanel extends React.Component {
 				}
 			})
 			.then(response => {
-				this.props.sendSystemMessage(`Content "${ content_id }" was successfully edited.`, { type: "success" });
+				this.props.sendSystemMessage(`Content "${ new_content_id }" was successfully edited.`, { type: "success" });
+				if (new_content_id != content_id) {
+					history.replace(`/cms/edit/${ new_content_id }`);
+				}
 				return response;
 			})
 		}
@@ -112,6 +127,7 @@ class CMS_ContentEditorPanel extends React.Component {
 	render() {
     	const {
       		content_id,
+      		new_content_id,
       		attributes,
       		body,
       		isEditTarget
@@ -141,8 +157,7 @@ class CMS_ContentEditorPanel extends React.Component {
 							className="form-control form-control-sm"
 							id="content_id"
 							placeholder="Enter a content id..."
-							value={ content_id }
-							disabled={ isEditTarget }
+							value={ new_content_id || content_id }
 							onChange={ this.onChange.bind(this) }/>
 					</div>
 

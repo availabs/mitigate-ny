@@ -163,7 +163,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { getHazardDetail };
 
-
 export default [
   {
     path: '/risk-index/g/:geoid',

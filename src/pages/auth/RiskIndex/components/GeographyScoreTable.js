@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -11,7 +11,7 @@ import {
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
-class GeographyHazardScoreTable extends Component {
+class GeographyHazardScoreTable extends React.Component {
 
   renderGraphTable() {
     const { geoid, geoLevel, dataType, year } = this.props;

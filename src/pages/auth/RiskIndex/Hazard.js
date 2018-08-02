@@ -8,18 +8,27 @@ import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
 import HazardEventsMapController from "./components/HazardEventsMapController"
+import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
 
 class Hazard extends Component {
 
   render () {
     const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
+const TESTING = true;
     return (
       	<Element>
       		<h6 className="element-header">{params.hazard}</h6>
+
+{ TESTING ? null :
           <div className='row'>
-            <ElementBox  title='Hazard Definition & Characteristics'>
-            </ElementBox> 
+            <div className='col-12'>
+              <ElementBox  title='Hazard Definition & Characteristics'>
+              </ElementBox> 
+            </div>
           </div>
+}
+
+{ TESTING ? null :
           <div className='row'>
             <div className='col-7'>
       		    <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
@@ -28,14 +37,25 @@ class Hazard extends Component {
               <HazardScoreTable/>
             </div>
           </div>
+}
            
+          <div className='row'>
+            <div className='col-lg-12'>
+             <FemaDisasterDeclarationsTable />
+            </div>
+          </div>
+           
+{ TESTING ? null :
           <div className='row'>
             <div className='col-lg-12'>
              <HazardMap />
             </div>
           </div>
+}
 
+{ TESTING ? null :
           <HazardEventsMapController />
+}
 
       	</Element>
     )
