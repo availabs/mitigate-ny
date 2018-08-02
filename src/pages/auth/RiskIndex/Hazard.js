@@ -25,16 +25,25 @@ class Hazard extends Component {
             <div className="property-section">
               <Content content_id={`${params.hazard}-definition`} />
             </div>
+            
             <div className="property-section">
-              <Content content_id={`${params.hazard}-location`} />
+              <Content content_id={`${params.hazard}-characteristics`} />
             </div>
+            
+            <div className="property-section">
+              <Content content_id={`${params.hazard}-vulnerability`} />
+            </div>
+            
             <div className="property-section">
               <Content content_id={`${params.hazard}-magnitude`} />
             </div>
+
             <div className="property-section">
-              <Content content_id={`${params.hazard}-vulnerablity`} />
+              <Content content_id={`${params.hazard}-location`} />
               <HazardScoreTable />
             </div>
+            
+           
             
           </div>
           <div className='property-info-side' style={{maxWidth: 398}}>
@@ -51,6 +60,12 @@ class Hazard extends Component {
       <div className='row'>
         <div className='col-lg-12'>
          <HazardMap />
+        </div>
+      </div>
+       
+      <div className='row'>
+        <div className='col-lg-12'>
+         <FemaDisasterDeclarationsTable />
         </div>
       </div>
       
