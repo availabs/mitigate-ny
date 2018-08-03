@@ -26,7 +26,7 @@ class HazardMap extends Component {
     let geoid = this.props.geoid || '36'
     let geoLevel = this.props.geoLevel || 'tracts'
     let dataType = this.props.dataType || 'sheldus'
-    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
+    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
     const hazard = params.hazard
     return this.props.falcor.get(
       ['geo', geoid, geoLevel]
@@ -218,7 +218,8 @@ class HazardMap extends Component {
       return <ElementBox />
     }
     return (
-      <ElementBox > 
+      <ElementBox>
+       test 123 
        {this.renderMap(params.hazard.toUpperCase())}
       </ElementBox>
     ) 

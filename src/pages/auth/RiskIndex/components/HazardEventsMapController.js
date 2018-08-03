@@ -149,7 +149,7 @@ class HazardEventsMapController extends React.Component {
 	            </div>
 	        , this);
 
-console.log("HAZARD EVENTS MAP:",this.props.showLegend);
+		// console.log("HAZARD EVENTS MAP:",this.props.showLegend);
 		return (
 			<div className='row'>
 				{

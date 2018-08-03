@@ -18,7 +18,7 @@ class GeographyHazardScoreTable extends Component {
     let geoid = this.props.geoid || '36'
     let geoLevel = this.props.geoLevel || 'counties'
     let dataType = this.props.dataType || 'sheldus'
-    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
+    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
     const hazard = params.hazard
     return this.props.falcor.get(
       ['geo', geoid, geoLevel]
@@ -80,7 +80,7 @@ class GeographyHazardScoreTable extends Component {
   }
   
   render () {
-    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {}
+    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
     return (
       <div>
        {this.renderGraphTable(params.hazard)}

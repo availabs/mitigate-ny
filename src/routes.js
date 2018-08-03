@@ -10,6 +10,11 @@ import Geography from './pages/auth/RiskIndex/Geography'
 import Vulnerabilities from "./pages/auth/Vulnerabilities"
 import CMS from "./pages/auth/cms"
 import NewContentPage from "./pages/auth/cms/NewContentPage"
+import Plan from "pages/auth/SHMP"
+import Process from "pages/auth/Process"
+import Capabilities from "pages/auth/Capabilities"
+
+
 
 // -- Util Routes
 import Login from './pages/Login'
@@ -24,6 +29,9 @@ const routes = [
   ...Vulnerabilities,
   ...CMS,
   ...NewContentPage,
+  ...Plan,
+  ...Process,
+  ...Capabilities,
   Login,
   Logout,
   NoMatch

@@ -150,7 +150,7 @@ export default [
   {
     icon: 'icon-map',
     path: '/vulnerabilities',
-    name: 'Vulnerabilities',
+    name: 'Vulnerability',
     exact: true,
     mainNav: true,
     auth: true,

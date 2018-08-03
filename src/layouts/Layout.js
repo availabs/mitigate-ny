@@ -33,7 +33,7 @@ const DefaultLayout = ({component: Component, ...rest}) => {
     />
   ) : (
     <Route {...rest} render={matchProps => (
-      <div className="layout-w" style={{minHeight: '90vh'}}>
+      <div className="layout-w" style={{minHeight: '100vh'}}>
         <Menu {...rest} />
         <BreadcrumbBar layout={rest.breadcrumbs} match={rest.computedMatch}/>
         <ContentContainer>

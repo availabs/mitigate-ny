@@ -2177,7 +2177,7 @@ span.loginMenu {
 
 
   &.menu-with-image {
-    background-image: linear-gradient(to bottom, rgba(21, 32, 70, 0.1) 0%, rgba(16, 20, 41, 0.2) 75%, rgba(14, 21, 53, 0.65) 100%);
+    background-image: linear-gradient(to bottom, rgba(21,32,70,0.1) 0%, rgba(16,20,41,0.2) 75%, rgba(14,21,53,0.65) 100%),url(/img/header_image.png) !important;
     background-color: #4B6576;
     background-size: cover;
     background-position: center center;
@@ -2218,7 +2218,7 @@ span.loginMenu {
     .menu-page-header {
       display: block;
       flex: 0 0 100%;
-      padding: 30px 20px;
+      padding: calc(100vh - 592px) 20px;
       margin-bottom: 0px;
       order: 5;
       margin-top: 30px;
