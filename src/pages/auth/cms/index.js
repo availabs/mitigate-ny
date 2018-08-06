@@ -49,8 +49,14 @@ class CMS_HomePage extends React.Component {
               created_at,
               updated_at
             } = response.json.content.byId[content_id];
-            Object.values(attributes)
-              .forEach(value => { filters[value] = true; });
+            for (const key in attributes) {
+              if (!(key in filters)) {
+                filters[key] = [];
+              }
+              if (!filters[key].includes(attributes[key])) {
+                filters[key].push(attributes[key]);
+              }
+            }
             content.push({
               content_id,
               attributes,
@@ -59,7 +65,7 @@ class CMS_HomePage extends React.Component {
               updated_at: new Date(updated_at)
             });
           });
-          this.props.setContentFilters(Object.keys(filters));
+          this.props.setContentFilters(Object.keys(filters).map(key => ({ heading: key, filters: filters[key] })));
           this.props.receiveContent(content);
           return response;
         })

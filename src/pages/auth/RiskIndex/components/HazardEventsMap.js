@@ -101,17 +101,41 @@ class HazardEventsMap extends React.Component {
 			</table>
 		)
 	}
+	generateSmallLegend() {
+		const distanceScales = getDistanceScales(this.props.viewport());
+		return (
+			<table className="map-test-table" style={ { tableLayout: "fixed", width: "300px" } }>
+				<thead>
+					<tr><th>Property Damage</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style={ { position: "relative", height: "90px" } }>
+
+							<CircleLabel radius={ 25 } color={ "#fff" }
+								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000) }/>
+							<CircleLabel radius={ 15 } color={ "#fff" }
+								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000) }/>
+							<CircleLabel radius={ 5 } color={ "#fff" }
+								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000) }/>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		)
+	}
 	generateMapControls() {
 		const controls = [];
 		if (this.props.showLegend) {
 			controls.push(
-				{ pos: "top-right",
-					comp: this.generateLegend()
+				{ pos: this.props.mapLegendLocation,
+					comp: (this.props.mapLegendSize == "large") ? this.generateLegend() : this.generateSmallLegend()
 				}
 			)
 		}
 		controls.push(
-			{ pos: "top-left",
+			{ pos: this.props.mapControlsLocation,
 				comp: this.generateMapNavigator()
 			}
 		)
@@ -221,7 +245,10 @@ HazardEventsMap.defaultProps = {
 	dragPan: true,
 	scrollZoom: true,
 	dragRotate: true,
-	padding: null
+	padding: null,
+    mapLegendLocation: "top-right",
+    mapLegendSize: "large",
+    mapControlsLocation: "top-left"
 }
 
 const mapStateToProps = state => ({

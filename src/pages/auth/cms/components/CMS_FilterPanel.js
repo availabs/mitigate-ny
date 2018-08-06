@@ -11,9 +11,43 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 const FilterItem = ({ filter, active, onClick }) =>
 	<div className={ `filter-item ${ active ? "active" : "" }` }
-		onClick={ onClick.bind(null, filter) }>
+		onClick={ e => { e.stopPropagation(); onClick(filter); } }>
 		{ filter }
 	</div>
+
+class FilterHeading extends React.Component {
+	state = {
+		opened: false
+	}
+	toggleOpened() {
+		const opened = !this.state.opened;
+		this.setState({ opened });
+	}
+	render() {
+		const {
+			heading,
+			filters,
+			toggleActiveFilter,
+			activeFilters
+		} = this.props;
+		return (
+			<div className="filter-item filter-heading"
+				onClick={ this.toggleOpened.bind(this) }>
+				{ heading }
+				<div>
+					{ !this.state.opened ? null :
+						filters.map(filter =>
+							<FilterItem key={ filter }
+								filter={ filter }
+								onClick={ toggleActiveFilter }
+								active={ activeFilters.includes(filter) }/>
+						, this)
+					}
+				</div>
+			</div>
+		)
+	}
+}
 
 class CMS_FilterPanel extends React.Component {
 	render() {
@@ -21,13 +55,18 @@ class CMS_FilterPanel extends React.Component {
 			contentFilters,
 			activeFilters
 		} = this.props.cms;
-		contentFilters.sort((a, c) => a < c ? -1 : 1);
+		contentFilters.sort((a, b) => a.heading < b.heading ? -1 : 1);
 		return (
           	<div className={ this.props.className }>
 				<ElementBox>
-					<h5>Filters</h5>
+					<h5>Filter Keys</h5>
 					{
-						contentFilters.map(f => <FilterItem key={ f } onClick={ this.props.toggleActiveFilter }filter={ f } active={ activeFilters.includes(f) }/>, this)
+						contentFilters.map(filter =>
+							<FilterHeading { ...filter }
+								key={ filter.heading }
+								activeFilters={ activeFilters }
+								toggleActiveFilter={ this.props.toggleActiveFilter }/>
+						)
 					}
 				</ElementBox>
       		</div>
