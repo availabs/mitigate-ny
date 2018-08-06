@@ -31,6 +31,19 @@
 	top: 10px;
 	right: 10px
 }
+.map-test-table-div.bottom-left {
+	bottom: 10px;
+	left: 10px
+}
+.map-test-table-div.bottom-right {
+	bottom: 10px;
+	right: 10px;
+}
+.map-test-table-div.top-center {
+	top: 10px;
+	right: 0px;
+	left: 0px;
+}
 
 .map-test-button {
 	background-color: rgba(0, 0, 0, 0);

@@ -12,6 +12,7 @@ import HazardMap from './components/HazardMap'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
 import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
+import HazardEventsTable from "./components/HazardEventsTable"
 
 class Hazard extends Component {
 
@@ -23,6 +24,7 @@ class Hazard extends Component {
 
     return (
       <div className='property-single'>
+
         <div className='property-info-w'>
           <div className="property-info-main">
             
@@ -48,28 +50,38 @@ class Hazard extends Component {
               <Content content_id={`${hazard}-location`} />
               <HazardScoreTable />
             </div>
-
+            
           </div>
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content'>
 
               <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
-              <HazardEventsMapController />
-              
+
+              <HazardEventsMapController
+                mapLegendLocation="top-center"
+                mapLegendSize="small"
+                mapControlsLocation="bottom-left"
+                mapHeight="600"/>
+
             </div>
           </div>
         </div>
-      
-       
+
       <div className='row'>
         <div className='col-lg-12'>
          <HazardMap />
         </div>
       </div>
-       
+
       <div className='row'>
         <div className='col-lg-12'>
          <FemaDisasterDeclarationsTable />
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-lg-12'>
+         <HazardEventsTable />
         </div>
       </div>
       

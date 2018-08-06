@@ -13,6 +13,7 @@ import {
 } from "./yearsOfFemaDisasterDeclarationsData"
 
 class FemaDisasterDeclarationsTable extends React.Component {
+	
 	fetchFalcorDeps() {
 	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
 	     	{ hazard } = params;
@@ -46,34 +47,35 @@ class FemaDisasterDeclarationsTable extends React.Component {
 				return disasternumbers;
 		    })
 		    .then(disasternumbers => {
-// `femaDisaster.byDisasterNumber[{integers:disasternumbers}]['${ DISASTER_ATTRIUBUTES.join("','") }']`
-// 'disastername', 'declarationtype', 'geoid', 'year'
+// `femaDisaster.byDisasterNumber[{integers:disasternumbers}]['disastername', 'declarationtype', 'geoid', 'year']`
 		    	return this.props.falcor.get(
-		    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disastername', 'declarationtype', 'year']]
+		    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disasternumber', 'disastername', 'declarationtype', 'date']]
 		    	)
 		    })
 	    })
 	}
 
 	processData() {
-console.log(this.props.femaDisaster)
-		const graph = this.props.femaDisaster.byDisasterNumber
-		return Object.keys(graph)
-			.map(key => graph[key])
-			// .map(key => {
-			// 	let row = Object.assign({}, graph[key]);
-			// 	row.date = new Date(row.date).toLocaleString();
-			// 	return row;
-			// })
-			.sort((a, b) => b.date - a.date)
+		const graph = this.props.femaDisaster.byDisasterNumber,
+			keys = {},
+			data = Object.keys(graph)
+				.map(key => {
+					let row = Object.assign({}, graph[key]);
+					Object.keys(row).forEach(k => { keys[k] = true; });
+					const date = new Date(row.date);
+					row.date = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`;
+					row.dateValue = date.valueOf();
+					return row;
+				})
+				.sort((a, b) => b.dateValue - a.dateValue);
+		return { data, keys: Object.keys(keys) };
 	}
 
 	render() {
 		try {
-			const data = this.processData();
-console.log("DATA:",data);
+			const { data, keys } = this.processData();
 			return (
-				<TableBox data={ data }/>
+				<TableBox data={ data } columns={ keys }/>
 			)
 		}
 		catch (e) {

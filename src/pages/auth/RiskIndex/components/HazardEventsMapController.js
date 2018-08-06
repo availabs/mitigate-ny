@@ -52,16 +52,17 @@ const RADIUS_SCALE = d3scale.scaleLog()
 		.domain([50000, 10000000]) // Dollar amount
 		.range([4, 40]); // radius in kilometers
 
-const getMapDefaults = width =>
+const getMapDefaults = (width, height=null) =>
 	width == 12 ? {
-		showLegend: true
+		showLegend: true,
+		height: height || 800
 	}
 	: width == 6 ? {
 		showLegend: false,
         dragRotate: false,
         scrollZoom: false,
         dragPan: false,
-        height: 550,
+        height: height || 550,
         zoomPadding: 5,
         padding: "1em"
 	}
@@ -70,7 +71,7 @@ const getMapDefaults = width =>
         dragRotate: false,
         scrollZoom: false,
         dragPan: false,
-        height: 375,
+        height: height || 375,
         zoomPadding: 5,
         padding: "1em"
 	}
@@ -142,14 +143,16 @@ class HazardEventsMapController extends React.Component {
 	              		geoLevel={ this.props.geoLevel }
       					geoid={ this.props.geoid }
       					dataType={ this.props.dataType }
-	              		{ ...getMapDefaults(width) }
+	              		{ ...getMapDefaults(width, this.props.mapHeight) }
+	              		mapLegendLocation={ this.props.mapLegendLocation }
+	              		mapLegendSize={ this.props.mapLegendSize }
+	              		mapControlsLocation={ this.props.mapControlsLocation }
 		              	viewport={ this.state.viewport }
 		                colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }/>
 	            </div>
 	        , this);
 
-		// console.log("HAZARD EVENTS MAP:",this.props.showLegend);
 		return (
 			<div className='row'>
 				{
@@ -170,7 +173,11 @@ HazardEventsMapController.defaultProps = {
 	geoLevel: 'counties',
 	numMaps: 1,
 	showLegend: false,
-	colorScale: COLOR_SCALE
+	mapLegendLocation: 'top-right',
+	mapLegendSize: "large",
+	mapControlsLocation: "top-left",
+	colorScale: COLOR_SCALE,
+	mapHeight: null
 }
 
 const mapStateToProps = state => ({

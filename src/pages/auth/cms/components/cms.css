@@ -1,11 +1,11 @@
 .filter-item {
-	padding: 2px 0px;
+	padding: 0px 0px;
 	padding-left: 15px;
 
 	border-radius: 4px;
 	border: 2px solid #999;
 
-	margin: 5px 0px;
+	margin: 2px 0px;
 
 	font-weight: bold;
 	font-size: 1rem;
@@ -25,6 +25,15 @@
 }
 .filter-item:hover {
 	background-color: #999;
+	color: #fff;
+}
+.filter-item.filter-heading {
+	padding-right: 15px;
+	color: #aaa;
+	background-color: #fff;
+}
+.filter-item.filter-heading:hover {
+	background-color: #aaa;
 	color: #fff;
 }
 .filter-item.active {
