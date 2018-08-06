@@ -11,15 +11,15 @@ class Landing extends Component {
           <h6 className="element-header">MITIGATE NY</h6>
           <div className='row'>
             <div className='col-6'>
-              <Link to='/risk-index'>
+              <Link to='/risk'>
                 <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
-                  <h4 style={{color:'#047bf8'}}>Risk Index</h4>
+                  <h4 style={{color:'#047bf8'}}>Risk</h4>
                 </ElementBox>
               </Link>
             </div>
             <div className='col-6'>
               <ElementBox style={{height: '25vh', textAlign:'center', paddingTop: '14%'}}>
-                <h4 style={{color:'#ddd'}}>Agencies</h4>
+                <h4 style={{color:'#ddd'}}>Hazards</h4>
               </ElementBox>
             </div>
           </div>

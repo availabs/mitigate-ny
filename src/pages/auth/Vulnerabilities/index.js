@@ -153,7 +153,6 @@ export default [
     name: 'Vulnerability',
     exact: true,
     mainNav: true,
-    auth: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {name: 'Vulnerabilities', path: '/vulnerabilities'}

@@ -167,7 +167,6 @@ export default [
   {
     path: '/risk',
     name: 'Risk',
-    auth: true,
     mainNav: true,
     breadcrumbs: [
       {param: 'geoid', path: '/risk/'}

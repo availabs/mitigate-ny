@@ -33,10 +33,20 @@ export default [
     name: 'Hazards',
     exact: true,
     mainNav: true,
-    auth: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
-      {name: 'hazard', path: '/risk-index'}
+      {name: 'hazard', path: '/hazards/'}
+    ],
+    component: connect(mapStateToProps, mapDispatchToProps)(RiskIndex),
+  },
+  {
+    icon: 'icon-map',
+    path: '/hazards/',
+    name: 'Hazards',
+    exact: true,
+    menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
+    breadcrumbs: [
+      {name: 'hazard', path: '/hazards'}
     ],
     component: connect(mapStateToProps, mapDispatchToProps)(RiskIndex),
   }

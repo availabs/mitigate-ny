@@ -33,7 +33,6 @@ export default [
     name: 'Planning Process',
     exact: true,
     mainNav: true,
-    auth: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(() => {}, {})(Landing),
   }

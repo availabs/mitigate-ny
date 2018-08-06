@@ -91,7 +91,6 @@ const mapStateToProps = state => {
 export default [
   {
     path: '/hazards/:hazard',
-    auth: true,
     breadcrumbs: [
       {name: 'Hazard', path: '/hazards'},
       {param: 'hazard', path: '/hazards/'}

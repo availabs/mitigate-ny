@@ -29,10 +29,7 @@ class Landing extends Component {
 
             
           </div>
-           <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content'>
-            </div>
-          </div>
+           
         </div>
       </div>
     )
@@ -47,7 +44,6 @@ export default [
     name: 'Executive Summary',
     exact: true,
     mainNav: true,
-    auth: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {name: 'SHMP', path: '/plan'}
