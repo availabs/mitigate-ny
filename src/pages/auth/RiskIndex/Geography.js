@@ -114,10 +114,10 @@ class Geography extends Component {
   }
 
   setGeoid(geoid) {
-    let url = "/risk-index/g/36";
+    let url = "/risk/36";
     switch (geoid.toString().length) {
       case 5:
-        url = `/risk-index/g/${ geoid }`
+        url = `/risk/${ geoid }`
         break;
     }
     history.push(url);
@@ -165,13 +165,12 @@ const mapDispatchToProps = { getHazardDetail };
 
 export default [
   {
-    path: '/risk-index/g/:geoid',
-    subMenus: [],
-    name: 'Risk Index',
+    path: '/risk',
+    name: 'Risk',
     auth: true,
+    mainNav: true,
     breadcrumbs: [
-      {name: 'RISK INDEX', path: '/risk-index'},
-      {param: 'geoid', path: '/risk-index/g/'}
+      {param: 'geoid', path: '/risk/'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))

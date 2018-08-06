@@ -29,19 +29,15 @@ const mapStateToProps = state => {
 export default [
   {
     icon: 'icon-map',
-    path: '/risk-index',
-    name: 'Risk Index',
+    path: '/hazards',
+    name: 'Hazards',
     exact: true,
     mainNav: true,
     auth: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
-      {name: 'RISK INDEX', path: '/risk-index'}
+      {name: 'hazard', path: '/risk-index'}
     ],
     component: connect(mapStateToProps, mapDispatchToProps)(RiskIndex),
-    subMenus: [[
-      {name: 'By Hazard', path: '/risk-index/'},
-      {name: 'By Geography', path: '/risk-index/g/36'},
-    ]]
   }
 ]

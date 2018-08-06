@@ -9,6 +9,7 @@ import Content from 'components/cms/Content'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 import HazardMap from './components/HazardMap'
+
 import HazardEventsMapController from "./components/HazardEventsMapController"
 import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
 import HazardEventsTable from "./components/HazardEventsTable"
@@ -16,32 +17,37 @@ import HazardEventsTable from "./components/HazardEventsTable"
 class Hazard extends Component {
 
   render () {
-    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || {};
+    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {};
+    let hazard = params && params.hazard ? params.hazard : null
+    
+    if(!hazard) return null
+
     return (
       <div className='property-single'>
 
         <div className='property-info-w'>
           <div className="property-info-main">
             
-            <h1>{params && params.hazard ? params.hazard : ''}</h1>
+            <h1>{hazard}</h1>
+            
             <div className="property-section">
-              <Content content_id={`${params.hazard}-definition`} />
+              <Content content_id={`${hazard}-definition`} />
             </div>
             
             <div className="property-section">
-              <Content content_id={`${params.hazard}-characteristics`} />
+              <Content content_id={`${hazard}-characteristics`} />
             </div>
             
             <div className="property-section">
-              <Content content_id={`${params.hazard}-vulnerability`} />
+              <Content content_id={`${hazard}-vulnerability`} />
             </div>
             
             <div className="property-section">
-              <Content content_id={`${params.hazard}-magnitude`} />
+              <Content content_id={`${hazard}-magnitude`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`${params.hazard}-location`} />
+              <Content content_id={`${hazard}-location`} />
               <HazardScoreTable />
             </div>
             
@@ -96,13 +102,11 @@ const mapStateToProps = state => {
 
 export default [
   {
-    path: '/risk-index/h/:hazard',
-    subMenus: [],
-    name: 'Risk Index',
+    path: '/hazards/:hazard',
     auth: true,
     breadcrumbs: [
-      {name: 'RISK INDEX', path: '/risk-index'},
-      {param: 'hazard', path: '/risk-index/h/'}
+      {name: 'Hazard', path: '/hazards'},
+      {param: 'hazard', path: '/hazards/'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(Hazard)

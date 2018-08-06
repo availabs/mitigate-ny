@@ -46,6 +46,7 @@ export default {
 	path: '/',
 	exact: true,
 	mainNav: true,
+  title: '2019 New York State Hazard Mitigation Plan',
 	name: 'Home',
 	auth: false,
 	component: Landing
