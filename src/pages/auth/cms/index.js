@@ -60,7 +60,7 @@ class CMS_HomePage extends React.Component {
             content.push({
               content_id,
               attributes,
-              body,
+              body: body,
               created_at: new Date(created_at),
               updated_at: new Date(updated_at)
             });

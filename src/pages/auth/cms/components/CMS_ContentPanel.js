@@ -41,7 +41,8 @@ class CMS_ContentPanel extends React.Component {
 			searchFilterKey,
 			searchFilter
 		} = state;
-		let filteredContent = content;
+		let filteredContent = content
+			.sort((a, b) => b.updated_at.valueOf() - a.updated_at.valueOf());
 		if (searchFilter.length) {
 			filteredContent = filteredContent.filter(cntnt => {
 				switch (searchFilterKey) {
@@ -207,12 +208,11 @@ class CMS_ContentPanel extends React.Component {
   					</div>
   				</ElementBox>
 	      		{ 
-	      			content.sort((a, b) => b.updated_at.valueOf() - a.updated_at.valueOf())
-	      				.map(cntnt =>
-			      			<ContentItem key={ cntnt.content_id } { ...cntnt }
-			      				deleteContent={ this.props.deleteContent }
-			      				sendSystemMessage={ this.props.sendSystemMessage }/>
-			      		)
+	      			content.map(cntnt =>
+		      			<ContentItem key={ cntnt.content_id } { ...cntnt }
+		      				deleteContent={ this.props.deleteContent }
+		      				sendSystemMessage={ this.props.sendSystemMessage }/>
+		      		)
 		      	}
       		</div>
 		)
