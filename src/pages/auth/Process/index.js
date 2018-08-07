@@ -12,12 +12,33 @@ class Landing extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
             
-            <h1>Planning Process</h1>
+            <h1>Introduction</h1>
             
+            <div className="property-section">
+              <Content content_id={`section1-essentialterms`} />
+            </div>
+            
+            <div className="property-section">
+              <Content content_id={`section1-strategicframework`} />
+            </div>
+
             <div className="property-section">
               <Content content_id={`section1-2019whatsnew`} />
             </div>
+
+
+           
+
+            
+           
+            
+
+            
+          
+
+            
           </div>
+           
         </div>
       </div>
     )

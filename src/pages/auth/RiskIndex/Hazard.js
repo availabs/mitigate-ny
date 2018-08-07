@@ -48,9 +48,53 @@ class Hazard extends Component {
 
             <div className="property-section">
               <Content content_id={`${hazard}-location`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-historic`} />
               <HazardScoreTable />
             </div>
             
+            <div className="property-section">
+              <Content content_id={`${hazard}-previous_occurrences`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-presidential`} />
+            </div>
+            
+            <div className="property-section">
+              <Content content_id={`${hazard}-probability`} />
+            </div>
+            
+            <div className="property-section">
+              <Content content_id={`${hazard}-local_vulnerability`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-state_capability`} />
+            </div>
+            
+            <div className="property-section">
+              <Content content_id={`${hazard}-climate_change`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-repetitive`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-related_terms`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-related_narrative`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-bibliography`} />
+            </div>
+           
           </div>
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content'>
