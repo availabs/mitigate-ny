@@ -13,8 +13,7 @@ import NewContentPage from "./pages/auth/cms/NewContentPage"
 import Plan from "pages/auth/SHMP"
 import Process from "pages/auth/Process"
 import Capabilities from "pages/auth/Capabilities"
-
-
+import Compare from "pages/auth/RiskIndex/Compare"
 
 // -- Util Routes
 import Login from './pages/Login'
@@ -32,6 +31,7 @@ const routes = [
   ...Plan,
   ...Process,
   ...Capabilities,
+  ...Compare,
   Login,
   Logout,
   NoMatch

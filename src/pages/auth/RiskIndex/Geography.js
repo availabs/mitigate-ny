@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
+import { createMatchSelector, push } from 'react-router-redux';
 
 import * as d3scale from "d3-scale";
-
-import { history } from "store"
 
 import { getHazardDetail } from 'store/modules/riskIndex';
 
@@ -120,7 +118,7 @@ class Geography extends Component {
         url = `/risk/${ geoid }`
         break;
     }
-    history.push(url);
+    this.props.push(url);
   }
 
   render () {
@@ -138,7 +136,6 @@ class Geography extends Component {
           <div className='row'>
             <div className='col-lg-12'>
                 <GeographyScoreBarChart { ...this.state }
-                  setGeoid={ this.setGeoid }
                   colorScale={ COLOR_SCALE }/>
             </div>
           </div>
@@ -161,7 +158,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { getHazardDetail };
+const mapDispatchToProps = {
+  getHazardDetail,
+  push: url => dispatch => dispatch(push(url))
+};
 
 export default [
   {

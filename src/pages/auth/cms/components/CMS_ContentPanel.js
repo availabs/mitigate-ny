@@ -43,6 +43,12 @@ class CMS_ContentPanel extends React.Component {
 		} = state;
 		let filteredContent = content
 			.sort((a, b) => b.updated_at.valueOf() - a.updated_at.valueOf());
+		if (activeFilters.length) {
+			filteredContent = filteredContent.filter(cntnt => {
+				const values = Object.values(cntnt.attributes);
+				return activeFilters.reduce((a, c) => a || values.includes(c), false);
+			});
+		}
 		if (searchFilter.length) {
 			filteredContent = filteredContent.filter(cntnt => {
 				switch (searchFilterKey) {
@@ -62,12 +68,6 @@ class CMS_ContentPanel extends React.Component {
 							.includes(searchFilter.toLowerCase());
 				}
 			})
-		}
-		if (activeFilters.length) {
-			filteredContent = filteredContent.filter(cntnt => {
-				const values = Object.values(cntnt.attributes);
-				return activeFilters.reduce((a, c) => a || values.includes(c), false);
-			});
 		}
 		const maxPages = Math.max(Math.ceil(filteredContent.length / numPerPage) - 1, 0);
 		page = Math.min(maxPages, page);
