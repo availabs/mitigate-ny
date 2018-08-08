@@ -30,7 +30,7 @@ class FilterHeading extends React.Component {
 				{ heading }
 				<div>
 					{ !this.props.opened ? null :
-						filters.map(filter =>
+						filters.sort().map(filter =>
 							<FilterItem key={ filter }
 								filter={ filter }
 								onClick={ toggleActiveFilter }
