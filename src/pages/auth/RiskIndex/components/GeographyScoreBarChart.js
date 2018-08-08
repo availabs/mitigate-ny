@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import get from "lodash.get"
+
 import { ResponsiveBar } from "@nivo/bar"
 
 import * as d3color from "d3-color"
@@ -14,7 +16,7 @@ import {
 	getHazardName
 } from 'utils/sheldusUtils'
 
-const format = d3format.format("$,d");
+
 
 class GeographyScoreBarChart extends React.Component {
 
@@ -22,7 +24,7 @@ class GeographyScoreBarChart extends React.Component {
     	const { geoid, geoLevel, dataType } = this.props;
 		try {
 			const geoids = this.props.geoGraph[geoid][geoLevel].value
-			return processDataForBarChart(this.props[dataType], geoids);
+			return processDataForBarChart(get(this.props, this.props.dataType, {}), geoids, this.props.lossType);
 		}
 		catch (e) {
 			return { data: [], keys: [] }
@@ -30,19 +32,20 @@ class GeographyScoreBarChart extends React.Component {
 	}
 	render() {
 		const { data, keys } = this.processData();
+		const format = d3format.format(this.props.format);
 		if (!data.length) {
 			return <ElementBox>Loading...</ElementBox>;
 		}
 		return (
 			<ElementBox>
-				<div style={ { height: "500px" } }>
+				<div style={ { height: `${ this.props.height }px` } }>
 					<ResponsiveBar
 						data={ data }
 						keys={ keys }
 						indexBy="year"
 						colorBy={ d => this.props.colorScale(d.id) }
 						enableLabel={ false }
-						tooltipFormat="$,d"
+						tooltipFormat={ this.props.format }
 						margin={ {
 				            "top": 25,
 				            "right": 25,
@@ -63,10 +66,10 @@ class GeographyScoreBarChart extends React.Component {
 				            "tickSize": 5,
 				            "tickPadding": 5,
 				            "tickRotation": 0,
-				            "legend": "Property Damage",
+				            "legend": this.props.lossType,
 				            "legendPosition": "center",
-				            "legendOffset": -90,
-			            	"format":"$,d"
+				            "legendOffset": -100,
+			            	"format": this.props.format
 				        } }
 				        tooltip={
 				        	d => (
@@ -87,12 +90,18 @@ class GeographyScoreBarChart extends React.Component {
 		)
 	}
 }
+GeographyScoreBarChart.defaultProps = {
+	height: 500,
+	lossType: "property_damage",
+	format: "$,d"
+}
 
 const mapStateToProps = state => {
   return {
     riskIndexGraph: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
     severeWeather: state.graph.severeWeather || {},
+    sba: state.graph.sba || {},
     geoGraph: state.graph.geo || {},
     riskIndex: state.riskIndex,
     router: state.router,

@@ -1,5 +1,7 @@
 import argparse, csv, io, os, psycopg2
 
+from config import host
+
 HOME_DIR = os.environ['HOME']
 
 UNCONVERTED_BUSINESS_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_business_FY01-17.csv'
@@ -7,6 +9,65 @@ BUSINESS_FILE = 'sba_business_FY01-17.csv'
 
 UNCONVERTED_HOME_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_home_FY01-17.csv'
 HOME_FILE = 'sba_home_FY01-17.csv'
+
+# this can be copy-pasted from routes/metadata.js in mitigate-api
+HAZARD_ID_TO_FEMA_DISASTERS = {
+    'wind': [
+        "Severe Storm(s)"
+    ],
+    'wildfire': [
+        "Fire"
+    ],
+    'tsunami': [
+        "Tsunami"
+    ],
+    'tornado': [
+        "Tornado"
+    ],
+    'riverine': [
+        "Flood"
+    ],
+    'lightning': [
+    ],
+    'landslide': [
+        "Mud/Landslide"
+    ],
+    'icestorm': [
+        "Severe Ice Storm"
+    ],
+    'hurricane': [
+        "Hurricane",
+        "Typhoon"
+    ],
+    'heatwave': [
+    ],
+    'hail': [
+    ],
+    'earthquake': [
+        "Earthquake"
+    ],
+    'drought': [
+        "Drought"
+    ],
+    'avalanche': [
+    ],
+    'coldwave': [
+        "Freezing"
+    ],
+    'winterweat': [
+        "Snow"
+    ],
+    'volcano': [
+        "Volcano"
+    ],
+    'coastal': [
+        "Coastal Storm"
+    ]
+}
+FEMA_DISASTER_TO_HAZARDID = {}
+for hazardid in HAZARD_ID_TO_FEMA_DISASTERS:
+	for fema_disaster in HAZARD_ID_TO_FEMA_DISASTERS[hazardid]:
+		FEMA_DISASTER_TO_HAZARDID[fema_disaster] = hazardid
 
 def toFloat(string):
 	try:
@@ -78,7 +139,9 @@ def createTable(cursor):
 			{},
 
 			hazardid TEXT DEFAULT NULL,
-			geoid VARCHAR(10) DEFAULT NULL
+			geoid VARCHAR(10) DEFAULT NULL,
+			fema_date DATE DEFAULT NULL,
+			entry_id SERIAL PRIMARY KEY
 		)
 	"""
 
@@ -101,65 +164,6 @@ def prepareStatement(cursor):
 
 def deallocateStatement(cursor):
 	cursor.execute("DEALLOCATE stmt")
-
-# this can be copy-pasted from routes/metadata.js in mitigate-api
-HAZARD_ID_TO_FEMA_DISASTERS = {
-    'wind': [
-        "Severe Storm(s)"
-    ],
-    'wildfire': [
-        "Fire"
-    ],
-    'tsunami': [
-        "Tsunami"
-    ],
-    'tornado': [
-        "Tornado"
-    ],
-    'riverine': [
-        "Flood"
-    ],
-    'lightning': [
-    ],
-    'landslide': [
-        "Mud/Landslide"
-    ],
-    'icestorm': [
-        "Severe Ice Storm"
-    ],
-    'hurricane': [
-        "Hurricane",
-        "Typhoon"
-    ],
-    'heatwave': [
-    ],
-    'hail': [
-    ],
-    'earthquake': [
-        "Earthquake"
-    ],
-    'drought': [
-        "Drought"
-    ],
-    'avalanche': [
-    ],
-    'coldwave': [
-        "Freezing"
-    ],
-    'winterweat': [
-        "Snow"
-    ],
-    'volcano': [
-        "Volcano"
-    ],
-    'coastal': [
-        "Coastal Storm"
-    ]
-}
-FEMA_DISASTER_TO_HAZARDID = {}
-for hazardid in HAZARD_ID_TO_FEMA_DISASTERS:
-	for fema_disaster in HAZARD_ID_TO_FEMA_DISASTERS[hazardid]:
-		FEMA_DISASTER_TO_HAZARDID[fema_disaster] = hazardid
 
 def populateHazardids(cursor):
 	cases = []
@@ -188,6 +192,24 @@ def populateHazardids(cursor):
 	cursor.execute(sql)
 
 	print "COMPLETED POPULATION OF HAZARD IDs."
+
+def populateFemaDates(cursor):
+	sql = """
+		UPDATE public.sba_disaster_loan_data
+		SET fema_date = (
+			SELECT incidentbegindate
+			FROM public.fema_disaster_declarations
+			WHERE disasternumber::TEXT = fema_disaster_number
+		)
+		WHERE fema_disaster_number IS NOT NULL
+	"""
+
+	print "STARTING POPULATION OF FEMA DATES..."
+	print "THIS COULD TAKE A FEW MINUTES..."
+
+	cursor.execute(sql)
+
+	print "COMPLETED POPULATION OF FEMA DATES."
 
 def populateStateGeoids(cursor):
 	sql = """
@@ -345,6 +367,12 @@ parser.add_argument('-z', '--no-hazardids',
 				dest='noHazardids',
 				help='Skip population of hazardids.')
 
+parser.add_argument('-d', '--no-dates',
+				action='store_true',
+				default=False,
+				dest='noDates',
+				help='Skip population of fema dates.')
+
 parser.add_argument('-g', '--no-geoids',
 				action='store_true',
 				default=False,
@@ -383,18 +411,22 @@ parser.add_argument('-o', '--output-format',
 def main():
 	args = vars(parser.parse_args())
 
-	conn = psycopg2.connect("dbname=hazard_mitigation user=postgres host=mars.availabs.org password=Jedi21funk")
+	conn = psycopg2.connect(host)
 	cursor = conn.cursor()
 
 	if args["convert"]:
 		convertFiles(**args)
 
 	if not args["noTable"]:
-		loadTable()
+		loadTable(cursor)
 		conn.commit()
 
 	if not args["noHazardids"]:
 		populateHazardids(cursor)
+		conn.commit()
+
+	if not args["noDates"]:
+		populateFemaDates(cursor)
 		conn.commit()
 
 	if not args["noGeoids"]:
