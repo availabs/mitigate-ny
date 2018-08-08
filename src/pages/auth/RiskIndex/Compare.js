@@ -44,7 +44,7 @@ const COLOR_SCALE = d3scale.scaleOrdinal()
 class Compare extends Component {
 
 	state = {
-      	geoLevel: 'counties',
+      	geoLevel: 'state',
       	geoid: '36',
       	year: LATEST_YEAR
     }
@@ -55,11 +55,10 @@ class Compare extends Component {
 	    let dataTypes = [['sheldus'], ['severeWeather'],['sba', 'all']];
 
     	return this.props.falcor.get(
-      		['geo', geoid, geoLevel],
       		['riskIndex', 'hazards']
     	)
     	.then(data => {
-      		const geoids = data.json.geo[geoid][geoLevel],
+      		const geoids = ['36'],// data.json.geo[geoid][geoLevel],
         		hazards = data.json.riskIndex.hazards,
         		requests = [];
       		COLOR_SCALE.domain(hazards);
