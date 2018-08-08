@@ -14,7 +14,7 @@ import {
 class CMS_ContentPanel extends React.Component {
 	state = {
 		page: 0,
-		numPerPage: 5,
+		numPerPage: 6,
 		filteredContent: [],
 		maxPages: 0,
 		searchFilterKey: "content_id",
@@ -131,7 +131,7 @@ class CMS_ContentPanel extends React.Component {
           	<div className={ this.props.className }>
   				<ElementBox>
   					<div className="row">
-  						<div className="col-lg-5">
+  						<div className="col-lg-6">
   							<div>
   								Page: { page + 1 } of { maxPages + 1 }
   							</div>
@@ -171,7 +171,7 @@ class CMS_ContentPanel extends React.Component {
   							<div className="row" style={ { marginBottom: "-3px" } }>
   								<div className="col-lg-3">
 	  								<label style={ { paddingTop: "0.4rem" } }
-	  									htmlFor="search-filter-key">Search By:</label>
+	  									htmlFor="search-filter-key">Search:</label>
 	  							</div>
   								<div className="col-lg-9">
 	  								<select onChange={ this.setSearchFilterKey.bind(this) }
@@ -198,7 +198,6 @@ class CMS_ContentPanel extends React.Component {
   									placeholder="search for..."/>
   							</div>
   						</div>
-  						<div className="col-lg-1"/>
   						<div className="col-lg-2">
   							<a href="/cms/new" className="btn btn-lg btn-outline-success btn-block">
   								<span style={ { fontWeight: "900" } }>NEW</span>

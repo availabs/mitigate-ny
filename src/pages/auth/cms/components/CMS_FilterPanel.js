@@ -16,13 +16,6 @@ const FilterItem = ({ filter, active, onClick }) =>
 	</div>
 
 class FilterHeading extends React.Component {
-	state = {
-		opened: false
-	}
-	toggleOpened() {
-		const opened = !this.state.opened;
-		this.setState({ opened });
-	}
 	render() {
 		const {
 			heading,
@@ -32,11 +25,12 @@ class FilterHeading extends React.Component {
 		} = this.props;
 		return (
 			<div className="filter-item filter-heading"
-				onClick={ this.toggleOpened.bind(this) }>
+				style={ { maxHeight: "400px", overflow: "auto" } }
+				onClick={ this.props.toggleOpened }>
 				{ heading }
 				<div>
-					{ !this.state.opened ? null :
-						filters.map(filter =>
+					{ !this.props.opened ? null :
+						filters.sort().map(filter =>
 							<FilterItem key={ filter }
 								filter={ filter }
 								onClick={ toggleActiveFilter }
@@ -50,6 +44,16 @@ class FilterHeading extends React.Component {
 }
 
 class CMS_FilterPanel extends React.Component {
+	state = {
+		opened: -1
+	}
+	toggleOpened(index) {
+		let opened = -1;
+		if (index !== this.state.opened) {
+			opened = index;
+		}
+		this.setState({ opened })
+	}
 	render() {
 		let {
 			contentFilters,
@@ -61,8 +65,10 @@ class CMS_FilterPanel extends React.Component {
 				<ElementBox>
 					<h5>Filter Keys</h5>
 					{
-						contentFilters.map(filter =>
+						contentFilters.map((filter, i) =>
 							<FilterHeading { ...filter }
+								toggleOpened={ this.toggleOpened.bind(this, i) }
+								opened={ this.state.opened === i }
 								key={ filter.heading }
 								activeFilters={ activeFilters }
 								toggleActiveFilter={ this.props.toggleActiveFilter }/>
