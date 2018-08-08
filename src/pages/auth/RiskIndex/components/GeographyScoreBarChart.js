@@ -23,7 +23,13 @@ class GeographyScoreBarChart extends React.Component {
 	processData() {
     	const { geoid, geoLevel, dataType } = this.props;
 		try {
-			const geoids = this.props.geoGraph[geoid][geoLevel].value
+			let geoids = []
+			if (geoLevel === 'state') {
+				geoids = [geoid];
+			}
+			else {
+				geoids = this.props.geoGraph[geoid][geoLevel].value;
+			}
 			return processDataForBarChart(get(this.props, this.props.dataType, {}), geoids, this.props.lossType);
 		}
 		catch (e) {
