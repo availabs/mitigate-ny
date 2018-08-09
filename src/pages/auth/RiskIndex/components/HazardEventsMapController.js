@@ -255,7 +255,8 @@ class HazardEventsMapController extends React.Component {
 		              	viewport={ this.state.viewport }
 		                colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }
-		                zoomPadding={ this.props.zoomPadding }/>
+		                zoomPadding={ this.props.zoomPadding }
+		                hazard={ this.props.hazard }/>
 	            </div>
 	        , this);
 
