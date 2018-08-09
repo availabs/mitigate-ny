@@ -28,10 +28,10 @@ const routes = [
   ...Vulnerabilities,
   ...CMS,
   ...NewContentPage,
-  ...Plan,
   ...Process,
   ...Capabilities,
   ...Compare,
+  ...Plan,
   Login,
   Logout,
   NoMatch

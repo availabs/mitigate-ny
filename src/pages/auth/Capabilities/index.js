@@ -10,19 +10,8 @@ class Landing extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
             
-             <h1>Agencies</h1>
-            
-            <div className="property-section">
-              <Content content_id={`section1-2019whatsnew`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section1-adoptionassurances`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section1-essentialterms`} />
-            </div>
+            <h1>Agencies</h1>
+            <h1>Counties></h1>
     
           </div>
            

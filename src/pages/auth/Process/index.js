@@ -11,7 +11,7 @@ class Landing extends Component {
       <div className='property-single'>
         <div className='property-info-w'>
           <div className="property-info-main">
-            
+ 
             <h1>Introduction</h1>
             
             <div className="property-section">
@@ -26,19 +26,7 @@ class Landing extends Component {
               <Content content_id={`section1-2019whatsnew`} />
             </div>
 
-
-           
-
-            
-           
-            
-
-            
-          
-
-            
-          </div>
-           
+          </div>           
         </div>
       </div>
     )
