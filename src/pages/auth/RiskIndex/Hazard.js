@@ -124,11 +124,7 @@ class Hazard extends Component {
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-lg-12'>
-         <HazardEventsTable />
-        </div>
-      </div>
+      
       
     </div>
     )
