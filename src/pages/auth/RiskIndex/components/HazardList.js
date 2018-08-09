@@ -87,7 +87,7 @@ class HazardList extends Component {
 const mapDispatchToProps = { };
 
 const mapStateToProps = state => {
-  console.log('mapping', state)
+  // console.log('mapping', state)
   return {
     riskIndex: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
