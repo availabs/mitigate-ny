@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import Element from 'components/light-admin/containers/Element'
-import ElementBox from 'components/light-admin/containers/ElementBox'
+import Content from 'components/cms/Content'
 
 class Landing extends Component {
   render () {
    return (
-      <div>
-        The plan
+      <div className='property-single'>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            
+            <h1>Agencies</h1>
+            <h1>Counties></h1>
+    
+          </div>
+           
+        </div>
       </div>
     )
   }
