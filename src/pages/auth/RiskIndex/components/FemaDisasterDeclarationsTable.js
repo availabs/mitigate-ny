@@ -15,8 +15,7 @@ import {
 class FemaDisasterDeclarationsTable extends React.Component {
 	
 	fetchFalcorDeps() {
-	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
-	     	{ hazard } = params;
+	    const { hazard } = this.props;
 	    if (!hazard) return Promise.resolve();
 // `femaDisaster[{keys:geoids}][{keys:hazardids}][{integers:years}].length`
 	    return this.props.falcor.get(

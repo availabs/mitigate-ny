@@ -25,8 +25,7 @@ class HazardEventsTable extends React.Component {
 	// }
 	
 	fetchFalcorDeps() {
-	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
-	     	{ hazard } = params;
+	    const { hazard } = this.props;
 		return (hazard ? Promise.resolve([hazard]) :
 			this.props.falcor.get(
 		    	['riskIndex', 'hazards']
@@ -87,7 +86,7 @@ class HazardEventsTable extends React.Component {
 	    				requests.push({
 	    					year: +year,
 	    					request: [
-								"severeWeather",
+								this.props.dataType,
 								"events", "byId",
 								event_ids[hazardid][year],
 								[
@@ -109,8 +108,7 @@ class HazardEventsTable extends React.Component {
 	}
 
 	processData() {
-	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
-	     	{ hazard } = params,
+	    const { hazard } = this.props,
 
 	     	hazardids = hazard ? [hazard] : this.props.riskIndex.hazards,
 
