@@ -49,7 +49,7 @@ class Geography extends Component {
   constructor(props) {
     super(props);
 
-    const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(props) || { params: { geoid: '36' } },
+    const { params } = createMatchSelector({ path: '/risk/:geoid' })(props) || { params: { geoid: '36' } },
       { geoid } = params,
       geoLevel = (geoid.length === 2) ? 'counties' : 'cousubs';
 
@@ -69,7 +69,7 @@ class Geography extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { params } = createMatchSelector({ path: '/risk-index/g/:geoid' })(newProps) || { params: { geoid: '36' } },
+    const { params } = createMatchSelector({ path: '/risk/:geoid' })(newProps) || { params: { geoid: '36' } },
       { geoid } = params;
     let geoLevel;
     switch (geoid.length) {
@@ -112,7 +112,7 @@ class Geography extends Component {
   }
 
   setGeoid(geoid) {
-    let url = "/risk/36";
+    let url = "/risk";
     switch (geoid.toString().length) {
       case 5:
         url = `/risk/${ geoid }`
@@ -129,7 +129,7 @@ class Geography extends Component {
           <div className='row'>
             <div className='col-lg-12'>
                 <GeographyScoreTable { ...this.state }
-                  setGeoid={ this.setGeoid }/>
+                  setGeoid={ this.setGeoid.bind(this) }/>
             </div>
           </div>
 
@@ -142,7 +142,6 @@ class Geography extends Component {
 
           <HazardEventsMapController
             colorScale={ COLOR_SCALE }
-            showLegend={ true }
             { ...this.state }
             />
 

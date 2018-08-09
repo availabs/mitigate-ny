@@ -9,11 +9,11 @@ import * as d3scale from "d3-scale";
 import * as d3color from 'd3-color';
 import * as d3format from "d3-format";
 
-import * as turf from "@turf/turf"
-
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import MapTest from "components/mapping/escmap/MapTest.react"
+import DeckGL from 'deck.gl';
+import GeojsonLayer from "components/mapping/escmap/GeojsonLayer"
+import SvgMap from "components/mapping/escmap/SvgMap.react"
 
 import { CircleLabel } from "./HazardEventsLegend"
 
@@ -22,21 +22,41 @@ import {
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
 
+let UNIQUE_IDs = 0;
+const getUniqueId = () => `react-map-gl-${ ++UNIQUE_IDs }`;
+
 class HazardEventsMap extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentYear: LATEST_YEAR + props.yearDelta
+			currentYear: LATEST_YEAR + props.yearDelta,
+			viewport: this.props.viewport(),
+			id: props.id || getUniqueId()
 		}
+
+		this._onViewportChange = this._onViewportChange.bind(this);
+		this._resize = this._resize.bind(this);
 	}
 
+  	_resize() {
+    	let style = window.getComputedStyle(document.getElementById(this.state.id), null);
+    	this._onViewportChange({
+      		height: parseInt(style.getPropertyValue('height'), 10),
+      		width: parseInt(style.getPropertyValue('width'), 10)
+    	})
+  	}
+  	_onViewportChange(viewport) {
+  		this.props.viewport.onViewportChange(viewport);
+  	}
+
 	componentDidMount() {
-		if (this.props.showLegend) {
-			this.props.viewport.register(this, this.setState);
-		}
+    	window.addEventListener('resize', this._resize);
+		this.props.viewport.register(this, this.setState);
+    	this._resize();
 	}	
 	componentWillUnmount() {
-		this.props.viewport.unregister(this);
+    	window.removeEventListener('resize', this._resize);
+    	this.props.viewport.unregister(this);
 	}
 
 	decrementCurrentPopulationYear() {
@@ -141,15 +161,8 @@ class HazardEventsMap extends React.Component {
 		)
 		return controls;
 	}
-	generateLayer() {
-	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
-	     	{ hazard } = params,
-
-	     	{ currentYear } = this.state,
-
-			{ geoid, dataType, geoLevel, radiusScale, colorScale } = this.props,
-
-			features = this.props.geo['36'][geoLevel].features,
+	generateLayers() {
+	    const { colorScale } = this.props,
 
 			data = {
 				type: "FeatureCollection",
@@ -157,40 +170,18 @@ class HazardEventsMap extends React.Component {
 			};
 
 		try {
-			const allHazards = this.props.riskIndex.hazards.value,
-				hazards = hazard ? [hazard] : allHazards;
+	  		const { geoid, dataType, geoLevel, eventsData } = this.props,
 
-			this.props.geoGraph[geoid][geoLevel].value
-				.forEach(geoid => {
-					hazards.forEach(hazard => {
-						const events = this.props[dataType].events[geoid][hazard][currentYear]["property_damage"].value;
+		    	{ params } = createMatchSelector({ path: '/hazard/:hazard' })(this.props) || { params: {} },
+		     	{ hazard } = params,
 
-						if (events.length) {
-							const feature = features.reduce((a, c) => c.properties.geoid === geoid ? c : a);
+		    	hazards = hazard ? [hazard] : this.props.riskIndex.hazards.value;
 
-							events.forEach(event => {
-								const property_damage = +event.property_damage,
-									geom = event.geom,
-
-									properties = { property_damage, hazard };
-
-								let circle;
-
-								if ((property_damage < radiusScale.domain()[0]) &&
-									(geoLevel === "counties")) return;
-
-								if (geom) {
-									circle = turf.circle(JSON.parse(geom).coordinates, radiusScale(property_damage), { units: "kilometers", properties });
-								}
-								else {
-									const centroid = turf.centroid(feature);
-									circle = turf.circle(centroid.geometry.coordinates, radiusScale(property_damage), { units: "kilometers", properties });
-								}
-								if (circle) data.features.push(circle);
-							})
-						}
-					})
-				})
+		    for (const gid in eventsData[geoid][geoLevel]) {
+		    	hazards.forEach(hazard => {
+		    		data.features.push(...eventsData[geoid][geoLevel][gid][hazard][this.state.currentYear])
+		    	}, this)
+		    }
 
 			const getLineColor = ({ properties }) => {
 				const hexColor = colorScale(properties.hazard),
@@ -225,14 +216,13 @@ class HazardEventsMap extends React.Component {
   	render () {
     	return (
       		<ElementBox style={ { padding: this.props.padding } }>
-		        <MapTest layers={ this.generateLayer() }
-		        	controls={ this.generateMapControls() }
-		        	viewport={ this.props.viewport }
-		        	height={ this.props.height }
-		        	dragPan={ this.props.dragPan }
-		        	scrollZoom={ this.props.scrollZoom }
-		        	dragRotate={ this.props.dragRotate }
-		        	style={ "" }/>
+      			<div style={ { height: this.props.height, position: "relative" } } id={ this.state.id }>
+			        <SvgMap layers={ this.generateLayers() }
+			        	{ ...this.state.viewport }
+			        	padding={ this.props.zoomPadding }
+			        	controls={ this.generateMapControls() }/>
+			        
+			    </div>
       		</ElementBox>
     	) 
   	}
@@ -241,7 +231,6 @@ class HazardEventsMap extends React.Component {
 HazardEventsMap.defaultProps = {
 	yearDelta: 0,
 	height: 800,
-	zoomPadding: 20,
 	dragPan: true,
 	scrollZoom: true,
 	dragRotate: true,

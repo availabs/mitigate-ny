@@ -32,16 +32,16 @@
 	"merge": {
 		"36": {
 			"counties": {
-				"type": "FeatureCollection",
-				"features": []
+				"type": "MultiPolygon",
+				"coordinates": []
 			},
 			"cousubs": {
-				"type": "FeatureCollection",
-				"features": []
+				"type": "MultiPolygon",
+				"coordinates": []
 			},
 			"tracts": {
-				"type": "FeatureCollection",
-				"features": []
+				"type": "MultiPolygon",
+				"coordinates": []
 			}
 		}
 	}

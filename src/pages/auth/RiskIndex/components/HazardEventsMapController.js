@@ -6,6 +6,8 @@ import { createMatchSelector } from 'react-router-redux';
 
 import * as d3scale from "d3-scale";
 
+import * as turf from "@turf/turf"
+
 import {
 	getChildGeo,
 	getGeoMesh,
@@ -86,7 +88,9 @@ class HazardEventsMapController extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			viewport: Viewport()
+			viewport: Viewport(),
+			eventsData: {},
+			loadedRanges: {}
 		}
 	}
 
@@ -97,27 +101,48 @@ class HazardEventsMapController extends React.Component {
 	    this.props.getChildGeo('36', 'cousubs');
   	}
 
-  	componentDidUpdate() {
-  		const { geoid, geoLevel } = this.props;
-  		let geojson = null, padding = this.props.zoomPadding;
-  		switch (geoLevel) {
-			case 'counties':
-				geojson = this.props.geo['merge']['36']['counties']
-				break;
-			case 'cousubs':
-				padding = 20;
-				geojson = this.props.geo['36']['counties'].features
-						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
-				break;
+  	updateLoadedRanges({ from, to }) {
+  		const key = `loaded-${ from }-${ to }`;
+  		let { loadedRanges } = this.state;
+  		if (!(key in loadedRanges)) {
+  			loadedRanges = { ...loadedRanges, [key]: { range: [from, to], processed: false } }
+  			this.setState({ loadedRanges });
   		}
-  		this.state.viewport.fitGeojson(geojson, { padding });  			
+  	}
+  	componentDidUpdate() {
+  		const { loadedRanges } = this.state;
+  		for (const key in loadedRanges) {
+  			const { processed } = loadedRanges[key];
+  			if (!processed) {
+  				this.processData(key);
+  			}
+  		}
+  	}
+
+  	componentWillReceiveProps(newProps) {
+  		const { geoid, geoLevel } = newProps;
+  		let geojson = newProps.geo['merge']['36']['counties'],
+  			padding = this.props.zoomPadding,
+  			fitGeojson = false;
+  	// 	switch (geoLevel) {
+			// case 'counties':
+			// 	geojson = newProps.geo['merge']['36']['counties']
+			// 	fitGeojson = geojson.coordinates.length;
+			// 	break;
+			// case 'cousubs':
+			// 	geojson = newProps.geo['36']['counties'].features
+			// 			.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
+			// 	fitGeojson = geojson;
+			// 	break;
+  	// 	}
+  		this.state.viewport.fitGeojson(geojson, { padding });
+  		if (geoid != this.props.geoid) {
+  			this.setState({ loadedRanges: {} })
+  		}
   	}
 
   	fetchFalcorDeps() {
-	    const { params } = createMatchSelector({ path: '/risk-index/h/:hazard' })(this.props) || { params: {} },
-	     	{ hazard } = params,
-
-	    	{ geoid, dataType, geoLevel } = this.props;
+	    const { geoid, dataType, geoLevel, hazard } = this.props;
 
 	    return this.props.falcor.get(
 	      	['geo', geoid, geoLevel],
@@ -128,10 +153,89 @@ class HazardEventsMapController extends React.Component {
         		requests = [];
       		COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
       		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
-        		requests.push([dataType, 'events', geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['property_damage']])
+        		requests.push([dataType, 'events', 'borked', geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, 'property_damage'])
       		}
-	      	return requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve());
+	      	return requests.reduce((a, c) =>
+	      		a.then(() => this.props.falcor.get(c))
+	      			.then(() => this.updateLoadedRanges(c[5]))
+	      	, Promise.resolve());
 	    })
+  	}
+
+  	processData(key) {
+  		let {
+  			eventsData,
+  			loadedRanges
+  		} = this.state;
+
+  		const { range } = loadedRanges[key];
+
+  		const { geoid, dataType, geoLevel, hazard } = this.props,
+
+	    	features = this.props.geo['36'][geoLevel].features;
+
+	    if (!(geoid in eventsData)) {
+	    	eventsData[geoid] = {}
+	    }
+	    if (!(geoLevel in eventsData[geoid])) {
+	    	eventsData[geoid][geoLevel] = {};
+	    }
+	    const geoData = eventsData[geoid][geoLevel];
+
+  		try {
+  			const hazards = hazard ? [hazard] : this.props.riskIndex.hazards.value
+
+			this.props.geoGraph[geoid][geoLevel].value
+				.forEach(geoid => {
+					if (!(geoid in geoData)) {
+						geoData[geoid] = {};
+					}
+					hazards.forEach(hazard => {
+						if (!(hazard in geoData[geoid])) {
+							geoData[geoid][hazard] = {};
+						}
+						for (let year = range[0]; year <= range[1]; ++year) {
+							if (!(year in geoData[geoid][hazard])) {
+								geoData[geoid][hazard][year] = [];
+							}
+
+							const events = this.props[dataType].events.borked[geoid][hazard][year]["property_damage"].value;
+
+							if (events.length) {
+
+								const feature = features.reduce((a, c) => c.properties.geoid === geoid ? c : a);
+
+								events.forEach(event => {
+									const property_damage = +event.property_damage,
+										geom = event.geom,
+
+										properties = { property_damage, hazard };
+
+									let circle;
+
+									if ((property_damage < RADIUS_SCALE.domain()[0]) &&
+										(geoLevel === "counties")) return;
+
+									if (geom) {
+										circle = turf.circle(JSON.parse(geom).coordinates, RADIUS_SCALE(property_damage), { units: "kilometers", properties });
+									}
+									else {
+										const centroid = turf.centroid(feature);
+										circle = turf.circle(centroid.geometry.coordinates, RADIUS_SCALE(property_damage), { units: "kilometers", properties });
+									}
+									if (circle) geoData[geoid][hazard][year].push(circle);
+								})
+
+							}
+						}
+					})
+				})
+  		}
+  		catch (e) {
+  			return;
+  		}
+  		loadedRanges = { ...loadedRanges, [key]: { range, processed: true } }
+		this.setState({ eventsData, loadedRanges });
   	}
 
 	render() {
@@ -139,6 +243,7 @@ class HazardEventsMapController extends React.Component {
 			.map((width, n) =>
 				<div className={ `col-lg-${ width }` } key={ n }>
 	              	<HazardEventsMap
+	              		eventsData={ this.state.eventsData }
 	              		yearDelta={ n + 1 - this.props.numMaps }
 	              		geoLevel={ this.props.geoLevel }
       					geoid={ this.props.geoid }
@@ -149,7 +254,8 @@ class HazardEventsMapController extends React.Component {
 	              		mapControlsLocation={ this.props.mapControlsLocation }
 		              	viewport={ this.state.viewport }
 		                colorScale={ this.props.colorScale }
-		                radiusScale={ RADIUS_SCALE }/>
+		                radiusScale={ RADIUS_SCALE }
+		                zoomPadding={ this.props.zoomPadding }/>
 	            </div>
 	        , this);
 
@@ -177,7 +283,9 @@ HazardEventsMapController.defaultProps = {
 	mapLegendSize: "large",
 	mapControlsLocation: "top-left",
 	colorScale: COLOR_SCALE,
-	mapHeight: null
+	mapHeight: null,
+	zoomPadding: 20,
+	hazard: null
 }
 
 const mapStateToProps = state => ({
