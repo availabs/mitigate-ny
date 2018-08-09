@@ -268,7 +268,7 @@ class HazardEventsMapController extends React.Component {
 						colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }/>
 				}
-				{ maps }
+				{ maps.reverse() }
 			</div>
 		)
 	}

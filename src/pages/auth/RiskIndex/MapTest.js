@@ -11,37 +11,6 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
 
-import {
-  EARLIEST_YEAR,
-  LATEST_YEAR
-} from "./components/yearsOfSevereWeatherData";
-
-const D3_CATEGORY20 = [
-  "#1f77b4",
-  "#aec7e8",
-  "#ff7f0e",
-  "#ffbb78",
-  "#2ca02c",
-  "#98df8a",
-  "#d62728",
-  "#ff9896",
-  "#9467bd",
-  "#c5b0d5",
-  "#8c564b",
-  "#c49c94",
-  "#e377c2",
-  "#f7b6d2",
-  "#7f7f7f",
-  "#c7c7c7",
-  "#bcbd22",
-  "#dbdb8d",
-  "#17becf",
-  "#9edae5"
-];
-
-const COLOR_SCALE = d3scale.scaleOrdinal()
-    .range(D3_CATEGORY20);
-
 class Test extends React.Component {
   render() {
     return (
@@ -50,7 +19,7 @@ class Test extends React.Component {
 
         <HazardEventsMapController
           showLegend={ true }
-          numMaps={ 12 }
+          numMaps={ 21 }
           { ...this.state }
           />
 
