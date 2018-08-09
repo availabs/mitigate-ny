@@ -60,7 +60,7 @@ module.exports = {
 	getHazardName,
 
 	processDataForBarChart: (rawData, geoids, lossType="property_damage") => {
-console.log("<processDataForBarChart>",rawData)
+// console.log("<processDataForBarChart>",rawData)
 		const data = {}, keys = {};
 		for (const geoid in rawData) {
 			if (!geoids.includes(geoid)) continue;

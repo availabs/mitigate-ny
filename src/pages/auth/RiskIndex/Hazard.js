@@ -102,10 +102,11 @@ class Hazard extends Component {
               <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
 
               <HazardEventsMapController
+                hazard={ hazard }
                 mapLegendLocation="top-center"
                 mapLegendSize="small"
                 mapControlsLocation="bottom-left"
-                mapHeight="600"/>
+                mapHeight={ 600 }/>
 
             </div>
           </div>
