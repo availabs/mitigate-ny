@@ -18,7 +18,6 @@ class Test extends React.Component {
         <h6 className="element-header">Map Test</h6>
 
         <HazardEventsMapController
-          showLegend={ true }
           numMaps={ 21 }
           { ...this.state }
           />

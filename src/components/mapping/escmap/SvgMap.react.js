@@ -66,7 +66,15 @@ class SvgMap extends React.Component {
 		const {
 			width,
 			height,
+
+			longitude,
+			latitude,
+			zoom,
+
+			bounds,
+
 			padding,
+
 			layers,
 			controls
 		} = this.props;
@@ -74,10 +82,16 @@ class SvgMap extends React.Component {
 			projection,
 			path
 		} = this.state;
-		if (layers.length) {
+		if (!bounds && layers.length) {
 			projection.fitExtent(
 				[[padding, padding], [width-padding, height-padding]],
 				layers[0].data
+			)
+		}
+		else if (bounds) {
+			projection.fitExtent(
+				[[padding, padding], [width-padding, height-padding]],
+				bounds
 			)
 		}
 

@@ -7,11 +7,16 @@ import BodyViewer from "components/cms/Content"
 
 export default class ContentItem extends React.Component {
 	state = {
-		opened: false
+		opened: false,
+		attributesOpened: true
 	}
 	toggleOpened() {
 		const opened = !this.state.opened;
 		this.setState({ opened });
+	}
+	toggleAttributesOpened() {
+		const attributesOpened = !this.state.attributesOpened;
+		this.setState({ attributesOpened });
 	}
 	deleteContent() {
 		this.props.sendSystemMessage(
@@ -31,6 +36,11 @@ export default class ContentItem extends React.Component {
 			body,
 			updated_at
 		} = this.props;
+		const hasAttributes = Object.keys(attributes).length;
+		const {
+			opened,
+			attributesOpened
+		} = this.state;
 		return (
 			<div className="row">
 				<div className="col-lg-12">
@@ -59,15 +69,19 @@ export default class ContentItem extends React.Component {
 								</div>
 							</div>
 						</div>
-						{ !this.state.opened ? null :
+						{ !opened ? null :
 							<div className="row" style={ { paddingTop: "10px" } }>
-								{ !Object.keys(attributes).length ? null :
-									<div className="col-lg-4">
-										<h5>Attributes</h5>
-										<AttributesTable attributes={ attributes }/>
+								{ !hasAttributes ? null :
+									<div className={ `col-lg-${ attributesOpened ? 4 : 1 }` }
+										onClick={ this.toggleAttributesOpened.bind(this) }>
+										{ attributesOpened ? <AttributesOpened /> : <AttributesClosed /> }
+										{ !attributesOpened ? null :
+											<AttributesTable attributes={ attributes }/>
+										}
 									</div>
 								}
-								<div className="col-lg-8">
+								<div className={ `col-lg-${ !hasAttributes ? 12 : attributesOpened ? 8 : 11 }` }
+									style={ { maxHeight: "600px", overflow: "auto" } }>
 									<h5>Body</h5>
 									<BodyViewer content_id={ content_id }/>
 								</div>
@@ -79,3 +93,12 @@ export default class ContentItem extends React.Component {
 		)
 	}
 }
+
+const AttributesOpened = () =>
+	<h5>
+		<span className="os-icon os-icon-arrow-left5"/>
+		&nbsp;
+		Attributes
+	</h5>
+const AttributesClosed = () =>
+	<h5><span className="os-icon os-icon-arrow-right3"/></h5>

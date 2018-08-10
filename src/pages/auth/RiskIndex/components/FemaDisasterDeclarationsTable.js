@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
-
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
