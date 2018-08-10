@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { getDistanceScales } from 'viewport-mercator-project';
 
-import { createMatchSelector } from 'react-router-redux';
-
 import * as d3scale from "d3-scale";
 import * as d3color from 'd3-color';
 import * as d3format from "d3-format";
@@ -217,7 +215,8 @@ class HazardEventsMap extends React.Component {
 			        <SvgMap layers={ this.generateLayers() }
 			        	{ ...this.state.viewport }
 			        	padding={ this.props.zoomPadding }
-			        	controls={ this.generateMapControls() }/>
+			        	controls={ this.generateMapControls() }
+			        	bounds={ this.props.bounds }/>
 			        
 			    </div>
       		</ElementBox>

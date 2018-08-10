@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
-
 import * as d3scale from "d3-scale";
 
 import * as turf from "@turf/turf"
@@ -90,7 +88,8 @@ class HazardEventsMapController extends React.Component {
 		this.state = {
 			viewport: Viewport(),
 			eventsData: {},
-			loadedRanges: {}
+			loadedRanges: {},
+			bounds: null
 		}
 	}
 
@@ -121,21 +120,22 @@ class HazardEventsMapController extends React.Component {
 
   	componentWillReceiveProps(newProps) {
   		const { geoid, geoLevel } = newProps;
-  		let geojson = newProps.geo['merge']['36']['counties'],
+  		let geojson = null,
   			padding = this.props.zoomPadding,
   			fitGeojson = false;
-  	// 	switch (geoLevel) {
-			// case 'counties':
-			// 	geojson = newProps.geo['merge']['36']['counties']
-			// 	fitGeojson = geojson.coordinates.length;
-			// 	break;
-			// case 'cousubs':
-			// 	geojson = newProps.geo['36']['counties'].features
-			// 			.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
-			// 	fitGeojson = geojson;
-			// 	break;
-  	// 	}
+  		switch (geoLevel) {
+			case 'counties':
+				geojson = newProps.geo['merge']['36']['counties']
+				fitGeojson = geojson.coordinates.length;
+				break;
+			case 'cousubs':
+				geojson = newProps.geo['36']['counties'].features
+						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
+				fitGeojson = geojson;
+				break;
+  		}
   		this.state.viewport.fitGeojson(geojson, { padding });
+  		this.setState({ bounds: geojson })
   		if (geoid != this.props.geoid) {
   			this.setState({ loadedRanges: {} })
   		}
@@ -239,6 +239,11 @@ class HazardEventsMapController extends React.Component {
   	}
 
 	render() {
+		let {
+			showLegend,
+			numMaps
+		} = this.props;
+		showLegend = (showLegend !== "auto") ? showLegend : (numMaps > 1)
 		const maps = Array(this.props.numMaps).fill(getMapWidth(this.props.numMaps))
 			.map((width, n) =>
 				<div className={ `col-lg-${ width }` } key={ n }>
@@ -256,14 +261,15 @@ class HazardEventsMapController extends React.Component {
 		                colorScale={ this.props.colorScale }
 		                radiusScale={ RADIUS_SCALE }
 		                zoomPadding={ this.props.zoomPadding }
-		                hazard={ this.props.hazard }/>
+		                hazard={ this.props.hazard }
+		                bounds={ this.state.bounds }/>
 	            </div>
 	        , this);
 
 		return (
 			<div className='row'>
 				{
-					!this.props.showLegend ? null :
+					!showLegend ? null :
 					<HazardEventsLegend
 						viewport={ this.state.viewport }
 						colorScale={ this.props.colorScale }
@@ -279,7 +285,7 @@ HazardEventsMapController.defaultProps = {
 	dataType: 'severeWeather',
 	geoLevel: 'counties',
 	numMaps: 1,
-	showLegend: false,
+	showLegend: "auto",
 	mapLegendLocation: 'top-right',
 	mapLegendSize: "large",
 	mapControlsLocation: "top-left",

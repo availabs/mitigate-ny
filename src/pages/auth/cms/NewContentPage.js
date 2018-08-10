@@ -57,12 +57,14 @@ class NewContentPage extends React.Component {
             <CMS_ContentEditorPanel/>
           </div>
 
-          <div className="col-lg-6" style={ { maxHeight: "670px", overflow: "auto" } }>
+          <div className="col-lg-6">
             <ElementBox>
             <h5 className="form-header" style={ { borderBottom: "1px solid rgba(0, 0, 0, 0.1)" } }>
               Body Preview
             </h5>
-              <MarkdownRenderer markdown={ body }/>
+              <div style={ { maxHeight: "571px", overflow: "auto" } }>
+                <MarkdownRenderer markdown={ body }/>
+              </div>
             </ElementBox>
           </div>
 

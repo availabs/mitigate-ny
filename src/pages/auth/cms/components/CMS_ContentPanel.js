@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
-import BodyViewer from "./CMS_BodyViewer"
 import ContentItem from "./CMS_ContentItem"
 
 import {
