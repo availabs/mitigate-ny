@@ -63,14 +63,15 @@ class Hazard extends Component {
 
               <HazardList display={'full'} size={12} dataType={'severeWeather'}/>
 
-              <HazardEventsMapController
-                hazard={ hazard }
-                mapLegendLocation="top-center"
-                mapLegendSize="small"
-                mapControlsLocation="bottom-left"
-                mapHeight={ 600 }/>
-
             </div>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <HazardEventsMapController
+              showLegend={ false }
+              hazard={ hazard }
+              numMaps={ 12 }/>
           </div>
         </div>
         <div className='row'>

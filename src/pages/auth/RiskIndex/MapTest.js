@@ -1,15 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { reduxFalcor } from 'utils/redux-falcor'
-
-import { createMatchSelector } from 'react-router-redux';
-
-import * as d3scale from "d3-scale";
 
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
+import SbaChoropleth from "./components/SbaChoropleth"
 
 class Test extends React.Component {
   render() {
@@ -17,24 +12,28 @@ class Test extends React.Component {
       <Element>
         <h6 className="element-header">Map Test</h6>
 
-        <HazardEventsMapController
-          numMaps={ 21 }
-          { ...this.state }
-          />
+{ true ? null :
+        <div className="row">
+          <ElementBox>
+            <HazardEventsMapController
+              numMaps={ 21 }
+              { ...this.state }/>
+          </ElementBox>
+        </div>
+}
+
+        <div className="row">
+          <div className="col-lg-12">
+            <ElementBox>
+              <SbaChoropleth />
+            </ElementBox>
+          </div>
+        </div>
 
       </Element>
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    riskIndex: state.riskIndex,
-    router: state.router
-  };
-};
-
-const mapDispatchToProps = {};
 
 export default [
   {
@@ -45,6 +44,6 @@ export default [
     	{name: 'Map Test', path: '/test'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Test))
+    component: Test
   }
 ]

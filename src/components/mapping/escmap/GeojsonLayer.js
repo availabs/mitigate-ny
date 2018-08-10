@@ -30,7 +30,7 @@ const DEFAULT_SETTINGS = {
   	getElevation: 0,
   	wireframe: false,
 
-  	fp64: true,
+  	fp64: false,
   	pickable: true,
     lightSettings
 }

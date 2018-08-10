@@ -4,6 +4,11 @@ import * as d3color from "d3-color"
 import * as d3geo from "d3-geo"
 import * as d3projection from "d3-geo-projection";
 
+import Viewport from "./Viewport"
+
+let UNIQUE_IDs = 0;
+const getUniqueId = () => `svg-map-${ ++UNIQUE_IDs }`;
+
 class SvgMap extends React.Component {
 	constructor(props) {
 		super(props);
@@ -11,9 +16,35 @@ class SvgMap extends React.Component {
 		const projection = d3geo.geoMercator()
 		this.state = {
 			projection,
-			path: d3geo.geoPath(projection)
+			path: d3geo.geoPath(projection),
+			id: props.id || getUniqueId(),
+			viewport: this.props.viewport()
 		}
+
+		this._onViewportChange = this._onViewportChange.bind(this);
+		this._resize = this._resize.bind(this);
 	}
+
+  	componentDidMount() {
+    	window.addEventListener('resize', this._resize);
+		this.props.viewport.register(this, this.setState);
+    	this._resize();
+  	}
+  	componentWillUnmount() {
+    	window.removeEventListener('resize', this._resize);
+    	this.props.viewport.unregister(this);
+  	}
+
+  	_resize() {
+    	let style = window.getComputedStyle(document.getElementById(this.state.id), null);
+    	this._onViewportChange({
+      		height: parseInt(style.getPropertyValue('height'), 10),
+      		width: parseInt(style.getPropertyValue('width'), 10)
+    	})
+  	}
+  	_onViewportChange(viewport) {
+  		this.props.viewport.onViewportChange(viewport);
+  	}
 
 	getPath(data, {
 			stroked=true,
@@ -64,24 +95,21 @@ class SvgMap extends React.Component {
 	}
 	render() {
 		const {
+			projection,
+			path,
+			viewport
+		} = this.state;
+		const {
 			width,
-			height,
-
-			longitude,
-			latitude,
-			zoom,
-
+			height
+		} = viewport;
+		const {
 			bounds,
-
 			padding,
 
 			layers,
 			controls
 		} = this.props;
-		const {
-			projection,
-			path
-		} = this.state;
 		if (!bounds && layers.length) {
 			projection.fitExtent(
 				[[padding, padding], [width-padding, height-padding]],
@@ -96,24 +124,26 @@ class SvgMap extends React.Component {
 		}
 
 		return (
-			<div style={ { position: "absolute" } }>
-				<svg style={ {
-						width: `${ width }px`,
-						height: `${ height }px`,
-					} }>
+      		<div id={ this.state.id } style={ { width: '100%', height: `${ this.props.height }px`, position: "relative" } }>
+				<div style={ { position: "absolute" } }>
+					<svg style={ {
+							width: `${ width }px`,
+							height: `${ height }px`,
+						} }>
+						{
+							layers.map(layer => {
+								return (
+									<g id={ layer.id } key={ layer.id }>
+										{ this.getLayerPaths(layer) }
+									</g>
+								)
+							})
+						}
+					</svg>
 					{
-						layers.map(layer => {
-							return (
-								<g id={ layer.id } key={ layer.id }>
-									{ this.getLayerPaths(layer) }
-								</g>
-							)
-						})
+						controls.map((control, i) => <MapControl key={ i } { ...control }/>)
 					}
-				</svg>
-				{
-					controls.map((control, i) => <MapControl key={ i } { ...control }/>)
-				}
+				</div>
 			</div>
 		)
 	}
@@ -121,7 +151,9 @@ class SvgMap extends React.Component {
 SvgMap.defaultProps = {
 	layers: [],
 	controls: [],
-	padding: 20
+	padding: 20,
+	height: 800,
+	viewport: Viewport()
 }
 
 const MapControl = ({ comp, pos="top-left" }) => {

@@ -126,15 +126,17 @@ class HazardEventsMapController extends React.Component {
   		switch (geoLevel) {
 			case 'counties':
 				geojson = newProps.geo['merge']['36']['counties']
-				fitGeojson = geojson.coordinates.length;
+				fitGeojson = geojson.coordinates.length && !this.props.geo['merge']['36']['counties'].coordinates.length;
 				break;
 			case 'cousubs':
 				geojson = newProps.geo['36']['counties'].features
 						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
-				fitGeojson = geojson;
+				fitGeojson = newProps.geo['36']['counties'].features.length && !this.props.geo['36']['counties'].features.length;
 				break;
   		}
-  		this.state.viewport.fitGeojson(geojson, { padding });
+  		// if (fitGeojson) {
+  			this.state.viewport.fitGeojson(geojson, { padding });
+  		// }
   		this.setState({ bounds: geojson })
   		if (geoid != this.props.geoid) {
   			this.setState({ loadedRanges: {} })
@@ -150,10 +152,12 @@ class HazardEventsMapController extends React.Component {
 	    ).then(falcorResponse => {
 	      	const geoids = falcorResponse.json.geo[geoid][geoLevel],
 	        	hazards = hazard ? [hazard] : falcorResponse.json.riskIndex.hazards,
-        		requests = [];
+        		requests = [],
+
+        		yearsPerRequest = 3;
       		COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
-      		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
-        		requests.push([dataType, 'events', 'borked', geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, 'property_damage'])
+      		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= yearsPerRequest) {
+        		requests.push([dataType, 'events', 'borked', geoids, hazards, { from: Math.max(i - yearsPerRequest + 1, EARLIEST_YEAR), to: i }, 'property_damage'])
       		}
 	      	return requests.reduce((a, c) =>
 	      		a.then(() => this.props.falcor.get(c))
