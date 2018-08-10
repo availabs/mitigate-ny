@@ -23,7 +23,7 @@ import {
 } from "./yearsOfSevereWeatherData";
 
 let UNIQUE_IDs = 0;
-const getUniqueId = () => `react-map-gl-${ ++UNIQUE_IDs }`;
+const getUniqueId = () => `hazards-events-map-${ ++UNIQUE_IDs }`;
 
 class HazardEventsMap extends React.Component {
 	constructor(props) {
@@ -170,10 +170,7 @@ class HazardEventsMap extends React.Component {
 			};
 
 		try {
-	  		const { geoid, dataType, geoLevel, eventsData } = this.props,
-
-		    	{ params } = createMatchSelector({ path: '/hazard/:hazard' })(this.props) || { params: {} },
-		     	{ hazard } = params,
+	  		const { geoid, dataType, geoLevel, hazard, eventsData } = this.props,
 
 		    	hazards = hazard ? [hazard] : this.props.riskIndex.hazards.value;
 
@@ -237,7 +234,8 @@ HazardEventsMap.defaultProps = {
 	padding: null,
     mapLegendLocation: "top-right",
     mapLegendSize: "large",
-    mapControlsLocation: "top-left"
+    mapControlsLocation: "top-left",
+    hazard: null
 }
 
 const mapStateToProps = state => ({
