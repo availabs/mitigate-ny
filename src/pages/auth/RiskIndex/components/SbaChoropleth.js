@@ -14,10 +14,9 @@ import * as d3scale from 'd3-scale'
 import * as d3color from 'd3-color'
 import * as d3format from "d3-format"
 
-import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import DeckMap from "components/mapping/escmap/DeckMap.react"
-import MapTest from "components/mapping/escmap/MapTest.react"
+// import DeckMap from "components/mapping/escmap/DeckMap.react"
+// import MapTest from "components/mapping/escmap/MapTest.react"
 import SvgMap from "components/mapping/escmap/SvgMap.react"
 
 import {
