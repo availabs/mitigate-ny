@@ -93,7 +93,7 @@ class Hazard extends Component {
             <HazardEventsMapController
               showLegend={ false }
               hazard={ hazard }
-              numMaps={ 12 }/>
+              />
           </div>
         </div>
         <div className='row'>

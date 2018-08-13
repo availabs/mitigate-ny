@@ -201,7 +201,7 @@ SvgMap.defaultProps = {
 
 const SvgLayer = path => {
 	function svgLayer(layer, i) {
-console.log(layer, i)
+		//console.log(layer, i)
 		let paths = d3.select(this)
 			.selectAll("path")
 			.data((layer.data.type === "FeatureCollection") ? layer.data.features : layer.data)
