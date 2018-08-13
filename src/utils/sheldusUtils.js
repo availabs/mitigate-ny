@@ -121,6 +121,46 @@ module.exports = {
 		
 	},
 
+	total : (data,key) => {
+		// this is a stupid hack
+		// to remove crud keys that falcor adds to object
+		let numYears = Object.keys(data)
+			.filter(d => d.length === 4)
+			.length
+
+		if(numYears <= 0) return ''  
+
+		let total =  Object.keys(data).reduce((total,year) => {
+			if(data[year][key] && !isNaN(+data[year][key])) {
+				total += data[year][key]
+			}
+			return total
+		}, 0)
+		return fnum(total)
+	},
+
+	avg : (data,key) => {
+		// this is a stupid hack
+		// to remove crud keys that falcor adds to object
+		let numYears = Object.keys(data)
+			.filter(d => d.length === 4)
+			.length
+
+		if(numYears <= 0) return ''
+		
+
+		let total =  Object.keys(data).reduce((total,year) => {
+			if(data[year][key] && !isNaN(+data[year][key])) {
+				total += data[year][key]
+			}
+			return total
+		}, 0)
+
+			
+		
+		return fnum( total / numYears )
+	},
+
 	avgData : (data,key, len) => {
 		return Object.keys(data).reduce((total,year) => {
 			let avgTotal = 0
@@ -140,4 +180,31 @@ module.exports = {
 		
 	}
 
+}
+
+function fnum(x) {
+	if(isNaN(x)) return x;
+
+
+
+	if(x < 9999) {
+		return x.toFixed(0);
+	}
+
+	if(x < 1000000) {
+		return Math.round(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		return (x/1000000).toFixed(2) + "M";
+	}
+
+	if(x < 1000000000) {
+		return (x/1000000).toFixed(1) + "M";
+	}
+
+	if(x < 1000000000000) {
+		return (x/1000000000).toFixed(1) + "B";
+	}
+
+	return "1T+";
 }
