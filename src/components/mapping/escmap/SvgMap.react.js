@@ -1,5 +1,6 @@
 import React from "react"
 
+import * as d3 from "d3-selection"
 import * as d3color from "d3-color"
 import * as d3geo from "d3-geo"
 import * as d3projection from "d3-geo-projection";
@@ -51,7 +52,9 @@ class SvgMap extends React.Component {
 			lineWidthMinPixels=1,
 			filled=false,
 			getLineColor=[0, 0, 0, 255],
-			getFillColor=[225, 225, 225, 255]
+			getFillColor=[225, 225, 225, 255],
+			onHover=null,
+			onClick=null
 		}, i) {
 		let lineColor = getLineColor,
 			fillColor = getFillColor;
@@ -59,14 +62,14 @@ class SvgMap extends React.Component {
 			lineColor = getLineColor(data);
 		}
 		if (typeof getFillColor === "function") {
-			lineColor = getFillColor(data);
+			fillColor = getFillColor(data);
 		}
 		lineColor = d3color.color(
 			`rgba(
 				${lineColor[0]},
 				${lineColor[1]},
 				${lineColor[2]},
-				${255/lineColor[3]}
+				${lineColor[3]/255}
 			)`
 		)
 		fillColor = d3color.color(
@@ -74,24 +77,38 @@ class SvgMap extends React.Component {
 				${fillColor[0]},
 				${fillColor[1]},
 				${fillColor[2]},
-				${255/fillColor[3]}
+				${fillColor[3]/255}
 			)`
 		)
+		let onMouseMove = null,
+			onMouseOut = null;
+		if (onHover) {
+			onMouseMove = e => {
+				const x = e.clientX,
+					y = e.clientY;
+				onHover({ object: data, x, y });
+			}
+			onMouseOut = e => {
+				const x = e.clientX,
+					y = e.clientY;
+				onHover({ object: null, x, y });
+			}
+		}
 		return <path d={ this.state.path(data) }
 					key={ i }
+					onMouseMove={ onMouseMove }
+					onMouseOut={ onMouseOut }
 					stroke={ stroked ? lineColor.toString() : "none" }
 					fill={ filled ? fillColor.toString() : "none" }
 					strokeWidth={ lineWidthMinPixels }/>
 	}
 	getLayerPaths({ data, ...rest }) {
-		if ("features" in data) {
+		if (data.type == "FeatureCollection") {
 			return data.features.map((feature, i) =>
 				this.getPath(feature, rest, i)
 			);
 		}
-		else {
-			return this.getPath(data, rest);
-		}
+		return this.getPath(data, rest);
 	}
 	render() {
 		const {
@@ -101,7 +118,9 @@ class SvgMap extends React.Component {
 		} = this.state;
 		const {
 			width,
-			height
+			height,
+			longitude,
+			latitude
 		} = viewport;
 		const {
 			bounds,
@@ -110,7 +129,7 @@ class SvgMap extends React.Component {
 			layers,
 			controls
 		} = this.props;
-		if (!bounds && layers.length) {
+		if (!bounds && layers.length && isValidGeojson(layers[0].data)) {
 			projection.fitExtent(
 				[[padding, padding], [width-padding, height-padding]],
 				layers[0].data
@@ -122,15 +141,33 @@ class SvgMap extends React.Component {
 				bounds
 			)
 		}
+		else {
+			projection.center([longitude, latitude])
+				.translate([width * 0.5, height * 0.5])
+				.scale(4000)
+		}
+
+		let groups = d3.select("#" + this.state.id + "-svg")
+			.selectAll("g")
+			.data(layers, d => d.id);
+
+		groups.enter()
+			.append("g");
+		groups.exit()
+			.remove();
+
+		groups.each(SvgLayer(path))
 
 		return (
       		<div id={ this.state.id } style={ { width: '100%', height: `${ this.props.height }px`, position: "relative" } }>
 				<div style={ { position: "absolute" } }>
-					<svg style={ {
+					<svg id={ this.state.id + "-svg" }
+						style={ {
 							width: `${ width }px`,
 							height: `${ height }px`,
 						} }>
 						{
+							/*
 							layers.map(layer => {
 								return (
 									<g id={ layer.id } key={ layer.id }>
@@ -138,11 +175,16 @@ class SvgMap extends React.Component {
 									</g>
 								)
 							})
+							*/
 						}
 					</svg>
 					{
 						controls.map((control, i) => <MapControl key={ i } { ...control }/>)
 					}
+		          	{ this.props.hoverData ? 
+		          		<MapHover { ...this.props.hoverData }/>
+		          		: null
+		          	}
 				</div>
 			</div>
 		)
@@ -153,7 +195,96 @@ SvgMap.defaultProps = {
 	controls: [],
 	padding: 20,
 	height: 800,
-	viewport: Viewport()
+	viewport: Viewport(),
+	hoverData: null
+}
+
+const SvgLayer = path => {
+	function svgLayer(layer, i) {
+console.log(layer, i)
+		let paths = d3.select(this)
+			.selectAll("path")
+			.data((layer.data.type === "FeatureCollection") ? layer.data.features : layer.data)
+
+		paths.enter()
+			.append("path")
+			.merge(paths)
+				.attr("d", path)
+				.attr("fill", svgLayer.getFill.bind(null, layer))
+				.attr("stroke", svgLayer.getStroke.bind(null, layer));
+		paths.exit()
+			.remove();
+	}
+	svgLayer.getFill = ({ filled=false, getFillColor=[225, 225, 225, 255] }, data) => {
+		if (!filled) return "none";
+
+		let fillColor = getFillColor;
+		if (typeof getFillColor === "function") {
+			fillColor = getFillColor(data);
+		}
+		fillColor = d3color.color(
+			`rgba(
+				${ fillColor[0] },
+				${ fillColor[1] },
+				${ fillColor[2] },
+				${ fillColor[3] / 255 }
+			)`
+		)
+		return fillColor.toString();
+	}
+	svgLayer.getStroke = ({ stroked=true, getLineColor=[0, 0, 0, 255] }, data) => {
+		if (!stroked) return "none";
+
+		let lineColor = getLineColor;
+		if (typeof getLineColor === "function") {
+			lineColor = getLineColor(data);
+		}
+		lineColor = d3color.color(
+			`rgba(
+				${ lineColor[0] },
+				${ lineColor[1] },
+				${ lineColor[2] },
+				${ lineColor[3] / 255 }
+			)`
+		)
+		return lineColor.toString();
+	}
+	return svgLayer;
+}
+
+const MapHover = ({ rows, x, y }) => {
+	if (!rows || (rows.length === 0)) return null;
+	const hasHeader = (rows[0].length === 1) && (rows.length > 1),
+		bodyData = rows.slice(hasHeader ? 1 : 0);
+	return (
+		<div className="map-test-table-div"
+			style={ {
+				position: "fixed",
+				left: x + 10,
+				top: y + 10 } }>
+			<table className="map-test-table">
+				{ hasHeader ?
+					<thead>
+						<tr>
+							<th colSpan="2">
+								{ rows[0] }
+							</th>
+						</tr>
+					</thead>
+					: null
+				}
+				<tbody>
+					{
+						bodyData.map((row, i) =>
+							<tr key={ i }>
+								{ row.map((d, ii) => <td key={ i + "-" + ii }>{ d }</td>) }
+							</tr>
+						)
+					}
+				</tbody>
+			</table>
+		</div>
+	)
 }
 
 const MapControl = ({ comp, pos="top-left" }) => {
@@ -162,6 +293,19 @@ const MapControl = ({ comp, pos="top-left" }) => {
 			{ comp }
 		</div>
 	)
+}
+
+const isValidGeojson = geojson => {
+	if (geojson.type == "FeatureCollection") {
+		return geojson.features.length;
+	}
+	else if (geojson.type == "Feature") {
+		return geojson.geometry.coordinates.length;
+	}
+	else if ("coordinates" in geojson) {
+		return geojson.coordinates.length;
+	}
+	return false;
 }
 
 export default SvgMap

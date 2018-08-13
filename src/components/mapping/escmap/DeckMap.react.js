@@ -50,6 +50,10 @@ class SvgMap extends React.Component {
 				{
 					this.props.controls.map((control, i) => <MapControl key={ i } { ...control }/>)
 				}
+	          	{ this.props.hoverData ? 
+	          		<MapHover { ...this.props.hoverData }/>
+	          		: null
+	          	}
 			</div>
 		)
 	}
@@ -57,8 +61,43 @@ class SvgMap extends React.Component {
 SvgMap.defaultProps = {
 	layers: [],
 	controls: [],
+	hoverData: null,
 	height: 800,
 	viewport: Viewport()
+}
+
+const MapHover = ({ rows, x, y }) => {
+	if (!rows || (rows.length === 0)) return null;
+	const hasHeader = (rows[0].length === 1) && (rows.length > 1),
+		bodyData = rows.slice(hasHeader ? 1 : 0);
+	return (
+		<div className="map-test-table-div"
+			style={ {
+				left: x + 10,
+				top: y + 10 } }>
+			<table className="map-test-table">
+				{ hasHeader ?
+					<thead>
+						<tr>
+							<th colSpan="2">
+								{ rows[0] }
+							</th>
+						</tr>
+					</thead>
+					: null
+				}
+				<tbody>
+					{
+						bodyData.map((row, i) =>
+							<tr key={ i }>
+								{ row.map((d, ii) => <td key={ i + "-" + ii }>{ d }</td>) }
+							</tr>
+						)
+					}
+				</tbody>
+			</table>
+		</div>
+	)
 }
 
 const MapControl = ({ comp, pos="top-left" }) => {
