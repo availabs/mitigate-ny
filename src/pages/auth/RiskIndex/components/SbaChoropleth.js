@@ -158,13 +158,16 @@ class SbaChoropleth extends React.Component {
 	    		data: this.props.geo['merge']['36']['counties'],
 	    		filled: true,
 	    		stroked: false,
-	    		getFillColor: [242, 239, 233, 255]
+	    		getFillColor: [242, 239, 233, 255],
+		      	pickable: false
 	    	},
     		{ id: 'ny-zips-layer',
 		      	data,
 		      	getFillColor,
 		      	filled: true,
 		      	stroked: false,
+		      	pickable: true,
+		      	key: ({ properties }) => properties.geoid,
 		      	// onClick: (event => {
 		      	// 	const { object } = event;
 		      	// 	if (object) {
@@ -192,7 +195,8 @@ class SbaChoropleth extends React.Component {
 	    		data: this.props.geo['mesh']['36']['counties'],
 	    		filled: false,
 	    		stroked: true,
-	    		getLineColor: [0, 0, 0, 50]
+	    		getLineColor: [0, 0, 0, 50],
+		      	pickable: false
 	    	},
 	    	{
 	    		id: 'ny-merge-layer-stroked',
@@ -200,7 +204,8 @@ class SbaChoropleth extends React.Component {
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [242, 239, 233, 255],
-	    		lineWidthMinPixels: 2
+	    		lineWidthMinPixels: 2,
+		      	pickable: false
 	    	}
 	    ]
 	    return { scale, total_loss, layers };
