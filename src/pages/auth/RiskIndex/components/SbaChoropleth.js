@@ -159,48 +159,48 @@ class SbaChoropleth extends React.Component {
 	    		stroked: false,
 	    		getFillColor: [242, 239, 233, 255]
 	    	},
-    		// { id: 'ny-zips-layer',
-		    //   	data,
-		    //   	getFillColor,
-		    //   	filled: true,
-		    //   	stroked: false,
-		    //   	// onClick: (event => {
-		    //   	// 	const { object } = event;
-		    //   	// 	if (object) {
-		    //   	// 		const geoid = object.properties.geoid;
-		    //   	// 		this.props.setGeoid(geoid);
-		    //   	// 	}
-		    //   	// }).bind(this),
-		    //   	onHover: (event => {
-		    //   		const { object, x, y } = event;
-		    //   		let hoverData = null;
-		    //   		if (object) {
-		    //   			const total_loss = object.properties.total_loss || 0;
-		    //   			hoverData = {
-		    //   				rows: [
-		    //   					['Total Loss', format(total_loss)]
-		    //   				],
-		    //   				x, y
-		    //   			}
-		    //   		}
-		    //   		this.setState({ hoverData });
-		    //   	}).bind(this)
-	    	// },
-	    	// {
-	    	// 	id: 'ny-mesh-layer',
-	    	// 	data: this.props.geo['mesh']['36']['counties'],
-	    	// 	filled: false,
-	    	// 	stroked: true,
-	    	// 	getLineColor: [0, 0, 0, 50]
-	    	// },
-	    	// {
-	    	// 	id: 'ny-merge-layer-stroked',
-	    	// 	data: this.props.geo['merge']['36']['counties'],
-	    	// 	filled: false,
-	    	// 	stroked: true,
-	    	// 	getLineColor: [242, 239, 233, 255],
-	    	// 	lineWidthMinPixels: 2
-	    	// }
+    		{ id: 'ny-zips-layer',
+		      	data,
+		      	getFillColor,
+		      	filled: true,
+		      	stroked: false,
+		      	// onClick: (event => {
+		      	// 	const { object } = event;
+		      	// 	if (object) {
+		      	// 		const geoid = object.properties.geoid;
+		      	// 		this.props.setGeoid(geoid);
+		      	// 	}
+		      	// }).bind(this),
+		      	onHover: (event => {
+		      		const { object, x, y } = event;
+		      		let hoverData = null;
+		      		if (object) {
+		      			const total_loss = object.properties.total_loss || 0;
+		      			hoverData = {
+		      				rows: [
+		      					['Total Loss', format(total_loss)]
+		      				],
+		      				x, y
+		      			}
+		      		}
+		      		this.setState({ hoverData });
+		      	}).bind(this)
+	    	},
+	    	{
+	    		id: 'ny-mesh-layer',
+	    		data: this.props.geo['mesh']['36']['counties'],
+	    		filled: false,
+	    		stroked: true,
+	    		getLineColor: [0, 0, 0, 50]
+	    	},
+	    	{
+	    		id: 'ny-merge-layer-stroked',
+	    		data: this.props.geo['merge']['36']['counties'],
+	    		filled: false,
+	    		stroked: true,
+	    		getLineColor: [242, 239, 233, 255],
+	    		lineWidthMinPixels: 2
+	    	}
 	    ]
 	    return { scale, total_loss, layers };
 	}
