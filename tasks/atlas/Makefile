@@ -72,7 +72,7 @@ ny_zipcodes.ndjson: build/zipcodes.shp
 	shp2json $< \
 	| ndjson-split 'd.features' \
 	| ndjson-filter '+d.properties.GEOID10 >= 10001 && +d.properties.GEOID10 <= 14975' \
-	| ndjson-map 'd.properties = {geoid: d.properties.GEOID10, name: d.properties.GEOID10}, d' \
+	| ndjson-map 'd.properties = {geoid: d.properties.GEOID10}, d' \
 	> ny_zipcodes.ndjson
 
 ny_cousub.ndjson: build/cousub.shp

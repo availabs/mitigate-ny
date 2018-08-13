@@ -79,10 +79,11 @@ class Compare extends Component {
   render () {
     return (
       	<Element>
-      		<h6 className="element-header">New York Statewide Risk Index</h6>
+      		<h6 className="element-header">New York Statewide Weather Events Data Property Loss</h6>
 
           <div className='row'>
             <div className='col-lg-12'>
+                <h4> Severe Storm  </h4> 
                 <GeographyScoreBarChart { ...this.state }
                 	dataType={ "severeWeather" }
                   	colorScale={ COLOR_SCALE }
@@ -92,6 +93,7 @@ class Compare extends Component {
 
           <div className='row'>
             <div className='col-lg-12'>
+                <h4> Sheldus </h4>
                 <GeographyScoreBarChart { ...this.state }
                 	dataType={ "sheldus" }
                   	colorScale={ COLOR_SCALE }
@@ -101,6 +103,7 @@ class Compare extends Component {
 
           <div className='row'>
             <div className='col-lg-12'>
+                <h4> SBA </h4>
                 <GeographyScoreBarChart { ...this.state }
                 	dataType={ "sba.all" }
                   	colorScale={ COLOR_SCALE }
@@ -109,6 +112,7 @@ class Compare extends Component {
             </div>
           </div>
 
+          <h6 className="element-header">New York Statewide Weather Events Data Number of Events</h6>
           <div className='row'>
             <div className='col-lg-12'>
                 <GeographyScoreBarChart { ...this.state }
@@ -122,6 +126,7 @@ class Compare extends Component {
 
           <div className='row'>
             <div className='col-lg-12'>
+                <h4> Sheldus </h4> 
                 <GeographyScoreBarChart { ...this.state }
                   dataType={ "sheldus" }
                     colorScale={ COLOR_SCALE }
@@ -133,6 +138,7 @@ class Compare extends Component {
 
           <div className='row'>
             <div className='col-lg-12'>
+                <h4> SBA Disaster Loans </h4>
                 <GeographyScoreBarChart { ...this.state }
                   dataType={ "sba.all" }
                     colorScale={ COLOR_SCALE }

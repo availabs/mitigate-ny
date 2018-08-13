@@ -10,7 +10,10 @@ import { createMatchSelector } from 'react-router-redux'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import HazardOverview from './HazardOverview'
 
-
+import {
+  EARLIEST_YEAR,
+  LATEST_YEAR
+} from "./yearsOfSevereWeatherData";
 
 class HazardList extends Component {
   state = {
@@ -26,18 +29,14 @@ class HazardList extends Component {
       return this.props.falcor.get(
         ['riskIndex','meta', data.json.riskIndex.hazards, ['id', 'name']],
         ['riskIndex', geoid, data.json.riskIndex.hazards, ['score','value']],
-        [dataType, geoid, data.json.riskIndex.hazards,{from: 1990, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        [dataType, geoid, data.json.riskIndex.hazards, {from: EARLIEST_YEAR, to: LATEST_YEAR}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']]
       )
-    }).then(data => {
-      console.log('all data back', data)
-      return data
     })
   }
 
   render () {
     let geoid = this.props.geoid || '36'
     let dataType = this.props.dataType || 'sheldus'
-    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
     if (!this.props.riskIndex.meta
         || !this.props.riskIndex.hazards
         || !this.props.riskIndex[geoid]
@@ -47,7 +46,7 @@ class HazardList extends Component {
          <ElementBox> Loading... </ElementBox>
       )
     }
-    const hazard = params && params.hazard ? params.hazard : false
+    const hazard = this.props.hazard ? this.props.hazard : false
     // console.log('render data', this.props.riskIndex)
     let hazards =this.props.riskIndex.hazards.value
       // .filter(d => this.props.riskIndex[geoid][d].value || this.props.riskIndex[geoid][d].score)
