@@ -83,20 +83,21 @@ class Hazard extends Component {
                 <Content content_id={`${hazard}-characteristics`} />
               </div>
 
+
             </div>
           </div>
         </div>
 
         <div className='row'>
-          <div className='col-lg-12' style={{ padding: 50 }}>
-            
+          <div className='col-lg-12'>
             <HazardEventsMapController
+              showLegend={ false }
               hazard={ hazard }
-              mapLegendLocation="top-center"
-              mapLegendSize="small"
-              mapControlsLocation="bottom-left"
-              mapHeight={ 600 }/>
-            <h4> Table of Hazard Events </h4>
+              numMaps={ 12 }/>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-lg-12'>
             <HazardEventsTable hazard={hazard} />
           </div>
         </div>

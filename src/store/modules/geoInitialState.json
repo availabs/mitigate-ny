@@ -11,6 +11,10 @@
 		"tracts": {
 			"type": "FeatureCollection",
 			"features": []
+		},
+		"zips": {
+			"type": "FeatureCollection",
+			"features": []
 		}
 	},
 	"mesh": {
@@ -24,6 +28,10 @@
 				"features": []
 			},
 			"tracts": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"zips": {
 				"type": "FeatureCollection",
 				"features": []
 			}
@@ -40,6 +48,10 @@
 				"coordinates": []
 			},
 			"tracts": {
+				"type": "MultiPolygon",
+				"coordinates": []
+			},
+			"zips": {
 				"type": "MultiPolygon",
 				"coordinates": []
 			}

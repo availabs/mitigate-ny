@@ -9,8 +9,8 @@ import * as d3format from "d3-format";
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import DeckGL from 'deck.gl';
-import GeojsonLayer from "components/mapping/escmap/GeojsonLayer"
+import DeckMap from "components/mapping/escmap/DeckMap.react"
+import MapTest from "components/mapping/escmap/MapTest.react"
 import SvgMap from "components/mapping/escmap/SvgMap.react"
 
 import { CircleLabel } from "./HazardEventsLegend"
@@ -20,42 +20,20 @@ import {
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
 
-let UNIQUE_IDs = 0;
-const getUniqueId = () => `hazards-events-map-${ ++UNIQUE_IDs }`;
-
 class HazardEventsMap extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentYear: LATEST_YEAR + props.yearDelta,
-			viewport: this.props.viewport(),
-			id: props.id || getUniqueId()
+			currentYear: LATEST_YEAR + props.yearDelta
 		}
-
-		this._onViewportChange = this._onViewportChange.bind(this);
-		this._resize = this._resize.bind(this);
 	}
 
-  	_resize() {
-    	let style = window.getComputedStyle(document.getElementById(this.state.id), null);
-    	this._onViewportChange({
-      		height: parseInt(style.getPropertyValue('height'), 10),
-      		width: parseInt(style.getPropertyValue('width'), 10)
-    	})
-  	}
-  	_onViewportChange(viewport) {
-  		this.props.viewport.onViewportChange(viewport);
-  	}
-
-	componentDidMount() {
-    	window.addEventListener('resize', this._resize);
+  	componentDidMount() {
 		this.props.viewport.register(this, this.setState);
-    	this._resize();
-	}	
-	componentWillUnmount() {
-    	window.removeEventListener('resize', this._resize);
+  	}
+  	componentWillUnmount() {
     	this.props.viewport.unregister(this);
-	}
+  	}
 
 	decrementCurrentPopulationYear() {
 		const currentYear = Math.max(EARLIEST_YEAR, this.state.currentYear - 1);
@@ -211,14 +189,12 @@ class HazardEventsMap extends React.Component {
   	render () {
     	return (
       		<ElementBox style={ { padding: this.props.padding } }>
-      			<div style={ { height: this.props.height, position: "relative" } } id={ this.state.id }>
-			        <SvgMap layers={ this.generateLayers() }
-			        	{ ...this.state.viewport }
-			        	padding={ this.props.zoomPadding }
-			        	controls={ this.generateMapControls() }
-			        	bounds={ this.props.bounds }/>
-			        
-			    </div>
+		        <SvgMap layers={ this.generateLayers() }
+		        	height={ this.props.height }
+		        	viewport={ this.props.viewport }
+		        	controls={ this.generateMapControls() }
+		        	padding={ this.props.zoomPadding }
+		        	bounds={ this.props.bounds }/>
       		</ElementBox>
     	) 
   	}

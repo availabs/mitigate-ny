@@ -76,6 +76,7 @@ def toFloat(string):
 		return float(string.replace(",", ""))
 	except:
 		print "toFloat ERROR:", string
+		return None
 
 def toString(string):
 	try:
@@ -84,6 +85,16 @@ def toString(string):
 		return string
 	except:
 		print "toString ERROR:", string
+		return None
+
+def toZip(string):
+	try:
+		if len(string) is 0:
+			return None
+		return string.zfill(5)
+	except:
+		print "toZip ERROR:", string
+		return None
 
 def toInt(string):
 	try:
@@ -92,6 +103,7 @@ def toInt(string):
 		return int(string)
 	except:
 		print "toInt ERROR:", string
+		return None
 
 def tryTransformRow(row):
 # This transform is required because some rows
@@ -112,23 +124,23 @@ def convert(meta, v):
 	return meta["convert"](v)
 
 BUSINESS_META = [
-	{ "convert": toInt, "type": "INTEGER", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toInt, "type": "INTEGER", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toString, "type": "TEXT", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "convert": toFloat, "type": "NUMERIC", "name": None },
-	{ "type": "TEXT", "name": "loan_type" }
+	{ "convert": toInt,		"type": "INTEGER" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toZip,		"type": "VARCHAR(5)" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toString,	"type": "VARCHAR" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ "convert": toFloat,	"type": "NUMERIC" },
+	{ 						"type": "VARCHAR", "name": "loan_type" }
 ]
 
 def createTable(cursor):
@@ -191,7 +203,7 @@ def populateHazardids(cursor):
 
 	cursor.execute(sql)
 
-	print "COMPLETED POPULATION OF HAZARD IDs."
+	print "COMPLETED POPULATION OF HAZARD IDs.\n"
 
 def populateFemaDates(cursor):
 	sql = """
@@ -209,7 +221,7 @@ def populateFemaDates(cursor):
 
 	cursor.execute(sql)
 
-	print "COMPLETED POPULATION OF FEMA DATES."
+	print "COMPLETED POPULATION OF FEMA DATES.\n"
 
 def populateStateGeoids(cursor):
 	sql = """
@@ -282,7 +294,7 @@ def populateGeoids(cursor):
 	populateCountyGeoids(cursor)
 	populateStateGeoids(cursor)
 	
-	print "COMPLETED POPULATION OF GEO IDs."
+	print "COMPLETED POPULATION OF GEO IDs.\n"
 # END populateGeoids
 
 def loadTable(cursor):
@@ -315,7 +327,7 @@ def loadTable(cursor):
 			# end if
 		# end for
 	# end with
-	print "BUSINESS DATA LOADED."
+	print "BUSINESS DATA LOADED.\n"
 
 	print "LOADING HOME DATA..."
 	firstLineRead = False
@@ -334,7 +346,7 @@ def loadTable(cursor):
 			# end if
 		# end for
 	# end with
-	print "HOME DATA LOADED."
+	print "HOME DATA LOADED.\n"
 
 	deallocateStatement(cursor)
 
