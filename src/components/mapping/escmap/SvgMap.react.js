@@ -201,19 +201,23 @@ SvgMap.defaultProps = {
 
 const SvgLayer = path => {
 	function svgLayer(layer, i) {
-console.log(layer, i)
 		let paths = d3.select(this)
 			.selectAll("path")
-			.data((layer.data.type === "FeatureCollection") ? layer.data.features : layer.data)
+			.data((layer.data.type === "FeatureCollection") ? layer.data.features : [layer.data])
 
 		paths.enter()
 			.append("path")
 			.merge(paths)
 				.attr("d", path)
+				.on("mousemove", svgLayer.mousemove.bind(null, layer))
 				.attr("fill", svgLayer.getFill.bind(null, layer))
 				.attr("stroke", svgLayer.getStroke.bind(null, layer));
 		paths.exit()
 			.remove();
+	}
+	svgLayer.mousemove = ({ onHover }, data) => {
+		if (!onHover) return null;
+		onHover({ object: data, })
 	}
 	svgLayer.getFill = ({ filled=false, getFillColor=[225, 225, 225, 255] }, data) => {
 		if (!filled) return "none";
