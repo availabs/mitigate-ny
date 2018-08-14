@@ -11,63 +11,63 @@ UNCONVERTED_HOME_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_home_FY01-
 HOME_FILE = 'sba_home_FY01-17.csv'
 
 # this can be copy-pasted from routes/metadata.js in mitigate-api
-HAZARD_ID_TO_FEMA_DISASTERS = {
-    'wind': [
-        "Severe Storm(s)"
-    ],
-    'wildfire': [
-        "Fire"
-    ],
-    'tsunami': [
-        "Tsunami"
-    ],
-    'tornado': [
-        "Tornado"
-    ],
-    'riverine': [
-        "Flood"
-    ],
-    'lightning': [
-    ],
-    'landslide': [
-        "Mud/Landslide"
-    ],
-    'icestorm': [
-        "Severe Ice Storm"
-    ],
-    'hurricane': [
-        "Hurricane",
-        "Typhoon"
-    ],
-    'heatwave': [
-    ],
-    'hail': [
-    ],
-    'earthquake': [
-        "Earthquake"
-    ],
-    'drought': [
-        "Drought"
-    ],
-    'avalanche': [
-    ],
-    'coldwave': [
-        "Freezing"
-    ],
-    'winterweat': [
-        "Snow"
-    ],
-    'volcano': [
-        "Volcano"
-    ],
-    'coastal': [
-        "Coastal Storm"
-    ]
-}
-FEMA_DISASTER_TO_HAZARDID = {}
-for hazardid in HAZARD_ID_TO_FEMA_DISASTERS:
-	for fema_disaster in HAZARD_ID_TO_FEMA_DISASTERS[hazardid]:
-		FEMA_DISASTER_TO_HAZARDID[fema_disaster] = hazardid
+# HAZARD_ID_TO_FEMA_DISASTERS = {
+#     'wind': [
+#         "Severe Storm(s)"
+#     ],
+#     'wildfire': [
+#         "Fire"
+#     ],
+#     'tsunami': [
+#         "Tsunami"
+#     ],
+#     'tornado': [
+#         "Tornado"
+#     ],
+#     'riverine': [
+#         "Flood"
+#     ],
+#     'lightning': [
+#     ],
+#     'landslide': [
+#         "Mud/Landslide"
+#     ],
+#     'icestorm': [
+#         "Severe Ice Storm"
+#     ],
+#     'hurricane': [
+#         "Hurricane",
+#         "Typhoon"
+#     ],
+#     'heatwave': [
+#     ],
+#     'hail': [
+#     ],
+#     'earthquake': [
+#         "Earthquake"
+#     ],
+#     'drought': [
+#         "Drought"
+#     ],
+#     'avalanche': [
+#     ],
+#     'coldwave': [
+#         "Freezing"
+#     ],
+#     'winterweat': [
+#         "Snow"
+#     ],
+#     'volcano': [
+#         "Volcano"
+#     ],
+#     'coastal': [
+#         "Coastal Storm"
+#     ]
+# }
+# FEMA_DISASTER_TO_HAZARDID = {}
+# for hazardid in HAZARD_ID_TO_FEMA_DISASTERS:
+# 	for fema_disaster in HAZARD_ID_TO_FEMA_DISASTERS[hazardid]:
+# 		FEMA_DISASTER_TO_HAZARDID[fema_disaster] = hazardid
 
 def toFloat(string):
 	try:
@@ -107,7 +107,8 @@ def toInt(string):
 
 def tryTransformRow(row):
 # This transform is required because some rows
-# have their zip code and city name switched.
+# have their zip code (row[6]) and
+# city name (row[5]) switched.
 # If row[6] cannot be converted to an integer
 # and is not length 0, then swap rows 5 and 6.
 	try:
@@ -150,7 +151,7 @@ def createTable(cursor):
 		CREATE TABLE public.sba_disaster_loan_data (
 			{},
 
-			hazardid TEXT DEFAULT NULL,
+			incidenttype VARCHAR DEFAULT NULL,
 			geoid VARCHAR(10) DEFAULT NULL,
 			fema_date DATE DEFAULT NULL,
 			entry_id SERIAL PRIMARY KEY
@@ -177,33 +178,23 @@ def prepareStatement(cursor):
 def deallocateStatement(cursor):
 	cursor.execute("DEALLOCATE stmt")
 
-def populateHazardids(cursor):
-	cases = []
-	for key in FEMA_DISASTER_TO_HAZARDID:
-		cases.append("WHEN incidenttype = '{}' THEN '{}'\n".format(key, FEMA_DISASTER_TO_HAZARDID[key]))
-
+def populateIncidentTypes(cursor):
 	sql = """
-		UPDATE public.sba_disaster_loan_data
-		SET hazardid = (
-			SELECT 
-			  	CASE
-			  		{}
-					--WHEN incidenttype = 'X' THEN 'Y'
-					ELSE NULL
-			  	END
-			FROM (SELECT incidenttype 
-				FROM public.fema_disaster_declarations
-				WHERE disasternumber::TEXT = fema_disaster_number) AS foo
+		UPDATE public.sba_disaster_loan_data AS sba
+		SET incidenttype = (
+			SELECT fema.incidenttype 
+			FROM public.fema_disaster_declarations AS fema
+			WHERE fema.disasternumber::TEXT = sba.fema_disaster_number
 		)
 		WHERE fema_disaster_number IS NOT NULL
-	""".format("".join(cases))
+	"""
 
-	print "STARTING POPULATION OF HAZARD IDs..."
+	print "STARTING POPULATION OF INCIDENT TYPES..."
 	print "THIS COULD TAKE A FEW MINUTES..."
 
 	cursor.execute(sql)
 
-	print "COMPLETED POPULATION OF HAZARD IDs.\n"
+	print "COMPLETED POPULATION OF INCIDENT TYPES.\n"
 
 def populateFemaDates(cursor):
 	sql = """
@@ -371,19 +362,19 @@ parser.add_argument('-t', '--no-table',
 				action='store_true',
 				default=False,
 				dest='noTable',
-				help='Skip table population.')
+				help='Skip table creation and population.')
 
-parser.add_argument('-z', '--no-hazardids',
+parser.add_argument('-j', '--no-incident-types',
 				action='store_true',
 				default=False,
-				dest='noHazardids',
-				help='Skip population of hazardids.')
+				dest='noIncidentTypes',
+				help='Skip population of FEMA incident types.')
 
 parser.add_argument('-d', '--no-dates',
 				action='store_true',
 				default=False,
 				dest='noDates',
-				help='Skip population of fema dates.')
+				help='Skip population of FEMA dates.')
 
 parser.add_argument('-g', '--no-geoids',
 				action='store_true',
@@ -433,8 +424,8 @@ def main():
 		loadTable(cursor)
 		conn.commit()
 
-	if not args["noHazardids"]:
-		populateHazardids(cursor)
+	if not args["noIncidentTypes"]:
+		populateIncidentTypes(cursor)
 		conn.commit()
 
 	if not args["noDates"]:

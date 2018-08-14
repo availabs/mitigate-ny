@@ -12,6 +12,7 @@ import HazardScoreTable from './components/HazardScoreTable'
 import HazardStats from './components/HazardStats'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
+import SbaChoropleth from "./components/SbaChoropleth"
 import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
 import HazardEventsTable from "./components/HazardEventsTable"
 
@@ -35,12 +36,16 @@ class Hazard extends Component {
     
     if(!hazard) return null
 
+    let hazardName = this.props.riskIndex.meta &&  this.props.riskIndex.meta[hazard] ? this.props.riskIndex.meta[hazard].name : ''
     return (
       <div className='property-single'>
+        {/*
+           Section 1 - Intro, Overview & Stats
+        */}
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '60%'}}>
             
-            <h1>{this.props.riskIndex.meta &&  this.props.riskIndex.meta[hazard] ? this.props.riskIndex.meta[hazard].name : ''}</h1>
+            <h1>{hazardName}</h1>
 
             <div className="property-section">
               <Content content_id={`${hazard}-setting_context`} />
@@ -53,18 +58,9 @@ class Hazard extends Component {
             <div className="property-section">
               <Content content_id={`${hazard}-magnitude`} />
             </div>
-
-            <div className="property-section">
-              <Content content_id={`${hazard}-location`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`${hazard}-historic`} />
-              <HazardScoreTable />
-            </div>
             
             <div className="property-section">
-              <Content content_id={`${hazard}-previous_occurrences`} />
+              <Content content_id={`${hazard}-characteristics`} />
             </div>
           </div>
 
@@ -80,27 +76,49 @@ class Hazard extends Component {
               </ProjectBox>  
             </div>
             
-            <div className='projects-list row'>
-              <ProjectBox title={`characteristics`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`${hazard}-characteristics`} />
-              </ProjectBox>  
-            </div>
-
             </div>
           </div>
         </div>
 
-        <div className='row'>
-          <div className='col-lg-12'>
-            <HazardEventsMapController
-              showLegend={ false }
-              hazard={ hazard }
+        {/*
+           Section 2 - Location & Historic Events
+        */}
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
+            <div className="property-section">
+              <div className="property-section">
+              <Content content_id={`${hazard}-location`} />
+              <h5>Statewide Map of {hazardName} Events by Year </h5>
+                <HazardEventsMapController
+                showLegend={ false }
+                hazard={ hazard }
+                height={ 600 }
+                />
+              <h5>Statewide Map of SBA Disaster Loands for {hazardName}</h5>
+              2001-2017<br/>
+              <SbaChoropleth
+                hazard={ hazard }
+                height={ 600 }
               />
+              <br />
+              <br />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-historic`} />
+              <HazardScoreTable />
+            </div>
+            
+            <div className="property-section">
+              <Content content_id={`${hazard}-previous_occurrences`} />
+              <HazardEventsTable hazard={hazard} />
+            </div>
+            </div>
           </div>
         </div>
         <div className='row'>
           <div className='col-lg-12'>
-            <HazardEventsTable hazard={hazard} />
+            
           </div>
         </div>
 
