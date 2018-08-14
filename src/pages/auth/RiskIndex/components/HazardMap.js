@@ -18,14 +18,21 @@ import * as d3format from "d3-format"
 import DeckMap from "components/mapping/escmap/DeckMap.react"
 import Viewport from "components/mapping/escmap/Viewport"
 
-const format = d3format.format("$,d")
+const format = d3format.format(",d")
 
 class HazardMap extends React.Component {
 
 	state = {
 		hoverData: null,
 		viewport: Viewport(),
-		dataProcessed: false
+		dataProcessed: false,
+		scale: d3scale.scaleQuantize()
+			.domain([0, 100])
+			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
+		data: {
+			type: "FeatureCollection",
+			features: []
+		}
 	}
 
 	componentWillMount() {
@@ -172,6 +179,45 @@ class HazardMap extends React.Component {
 	    return { layers };
 	}
 
+	generateLegend() {
+		const { scale } = this.state,
+			range = scale.range(),
+  			width = `${ 100 / range.length }%`;
+		return (
+			<table className="map-test-table">
+				<thead>
+					<tr>
+						<th className="no-border-bottom" colSpan={ range.length }>
+							Risk Index
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						{
+							range.map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
+						}
+					</tr>
+					<tr>
+						{
+							range.map(t => <td key={ t } style={ { width } }>{ format(scale.invertExtent(t)[0] || 0) }</td>)
+						}
+					</tr>
+				</tbody>
+			</table>
+		)
+	}
+	generateControls() {
+		const controls = [];
+
+		controls.push({
+			pos: "top-left",
+			comp: this.generateLegend()
+		})
+
+		return controls;
+	}
+
   	render () {
   		const { layers } = this.generateLayers();
     	return (
@@ -179,7 +225,7 @@ class HazardMap extends React.Component {
     			height={ this.props.height }
     			hoverData={ this.state.hoverData }
 	        	viewport={ this.state.viewport }
-	        	controls={ [] }/>
+	        	controls={ this.generateControls() }/>
     	) 
   	}
 }
