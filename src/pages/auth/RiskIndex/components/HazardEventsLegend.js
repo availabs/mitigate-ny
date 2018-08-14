@@ -51,7 +51,7 @@ export default class HazardEventsLegend extends React.Component {
 				const i = (r * numCols) + c;
 				columns.push(
 					<td key={ `row-${ r }-column-${ c }` }
-						style={ { color: colorScale(domain[i]), backgroundColor: "rgb(225, 225, 225)", border: "2px solid #fff", padding: "10px 0px 0px 15px" } }>
+						style={ { color: colorScale(domain[i]), backgroundColor: "rgb(0, 0, 0, 0.75)", border: "2px solid #fff", padding: "10px 0px 0px 15px" } }>
 						<CircleDiv color={ colorScale(domain[i]) }/>
 						<div style={ { padding: "0px 10px", display: "inline-block", fontSize: "18px" } }>
 							{ domain[i] ? getHazardName(domain[i]) : null }

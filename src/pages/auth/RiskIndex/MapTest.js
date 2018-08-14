@@ -41,10 +41,12 @@ class Test extends React.Component {
 
             {
 
-              ['wind', 'hurricane'].map(hazard =>
+              //['wind', 'hurricane','riverine','avalanche','icestorm','landslide',]
+              hazards.map(hazard =>
                 <div className="col-lg-6" key={ hazard }>
                   <ElementBox>
-                    <SbaChoropleth
+                    <h4>{hazard}</h4>
+                    <HazardEventsMapController
                       hazard={ hazard }
                       height={ 400 }/>
                   </ElementBox>

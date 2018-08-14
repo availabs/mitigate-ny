@@ -89,7 +89,9 @@ class SbaChoropleth extends React.Component {
 			}
 			return this.props.falcor.get(
 				["sba", "all", "byZip", zip_codes, hazardids, yearsOfData, 'total_loss']
-			)
+			).then(data => {
+				console.log('got sba data', data)
+			})
 		})
 	}
 
@@ -330,7 +332,7 @@ class SbaChoropleth extends React.Component {
 	}
 
   	render () {
-console.log(this.props.hazard)
+		// console.log(this.props.hazard)
   		const { scale, total_loss, layers } = this.generateLayers();
     	return ( this.props.useDeck ?
     		<DeckMap layers={ layers }

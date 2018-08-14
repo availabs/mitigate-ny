@@ -6,7 +6,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
 import Content from 'components/cms/Content'
-// import HazardList from './components/HazardList'
+import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
 // import HazardMap from './components/HazardMap'
 import HazardStats from './components/HazardStats'
@@ -38,7 +38,7 @@ class Hazard extends Component {
     return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main">
+          <div className="property-info-main" style={{maxWidth: '60%'}}>
             
             <h1>{this.props.riskIndex.meta &&  this.props.riskIndex.meta[hazard] ? this.props.riskIndex.meta[hazard].name : ''}</h1>
 
@@ -105,7 +105,7 @@ class Hazard extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className="property-info-main">
+          <div className="property-info-main" style={{maxWidth: '60%'}}>
             <div className="property-section">
                 <Content content_id={`${hazard}-presidential`} />
                 <FemaDisasterDeclarationsTable
@@ -115,6 +115,10 @@ class Hazard extends Component {
                 
             <div className="property-section">
               <Content content_id={`${hazard}-probability`} />
+              <HazardList
+                hazard={hazard}
+                dataType={'severeWeather'}
+              />
             </div>
             
 

@@ -84,11 +84,11 @@ class HazardEventsMap extends React.Component {
 					<tr>
 						<td style={ { position: "relative", height: "120px" } }>
 
-							<CircleLabel radius={ 40 } color={ "#fff" }
+							<CircleLabel radius={ 40 } color={ "#000" }
 								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000) }/>
-							<CircleLabel radius={ 30 } color={ "#fff" }
+							<CircleLabel radius={ 30 } color={ "#000" }
 								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000) }/>
-							<CircleLabel radius={ 10 } color={ "#fff" }
+							<CircleLabel radius={ 10 } color={ "#000" }
 								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000) }/>
 
 						</td>
