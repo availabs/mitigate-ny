@@ -54,7 +54,7 @@ class SbaChoropleth extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		this.fetchFalcorDeps();
+		//this.fetchFalcorDeps();
 		this.state.viewport.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
 		if (!this.state.dataProcessed) {
 			this.processData(this.state.currentYear, newProps);
@@ -91,6 +91,9 @@ class SbaChoropleth extends React.Component {
 			return this.props.falcor.get(
 				["sba", "all", "byZip", zip_codes, hazardids, yearsOfData, 'total_loss']
 			)
+			// .then(data => {
+			// 	console.log('got sba data', data)
+			// })
 		})
 	}
 

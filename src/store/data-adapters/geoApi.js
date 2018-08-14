@@ -28,7 +28,7 @@ class riskIndexAPI {
   getChildGeo (geoid, type) {
     return new Promise((resolve, reject) => {
       this.getData(geoid).then(topology  => {
-        console.log('testing messups', Object.keys(topology.objects), type)
+        // console.log('testing messups', Object.keys(topology.objects), type)
         resolve(
           topojson.feature(topology, topology.objects[type])
         )
