@@ -10,12 +10,12 @@ const ADD_ACTIVE_FILTER = "ADD_ACTIVE_FILTER",
 	UPDATE_NEW_CONTENT_DATA = "UPDATE_NEW_CONTENT_DATA";
 
 export const addActiveFilter = filter =>
-	dispatch =>
-		(dispatch({
+	dispatch => (
+		dispatch({
 			type: ADD_ACTIVE_FILTER,
 			filter
-		}),
-		Promise.resolve())
+		}), Promise.resolve())
+
 export const removeActiveFilter = filter =>
 	dispatch =>
 		(dispatch({

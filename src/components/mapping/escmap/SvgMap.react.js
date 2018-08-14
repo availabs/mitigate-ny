@@ -3,7 +3,7 @@ import React from "react"
 import * as d3 from "d3-selection"
 import * as d3color from "d3-color"
 import * as d3geo from "d3-geo"
-import * as d3projection from "d3-geo-projection";
+// import * as d3projection from "d3-geo-projection";
 
 import Viewport from "./Viewport"
 

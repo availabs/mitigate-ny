@@ -4,7 +4,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 
 import { createMatchSelector } from 'react-router-redux';
 
-import { processSheldus5year, sumData } from 'utils/sheldusUtils'
+import { sumData } from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'

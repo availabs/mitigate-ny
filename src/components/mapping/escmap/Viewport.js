@@ -54,7 +54,7 @@ export default (args={}) => {
 		return Viewport;
 	}
 	Viewport.unregister = _owner => {
-		onChangeHandlers = onChangeHandlers.filter(({ owner }) => owner != _owner);
+		onChangeHandlers = onChangeHandlers.filter(({ owner }) => owner !== _owner);
 		return Viewport;
 	}
 	Viewport.fitBounds = (bounds, options={ padding: 50 }) => {

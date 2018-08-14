@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import LineGraph from 'components/charts/line/simple'
-import BarGraph from 'components/charts/bar/simple'
+// import BarGraph from 'components/charts/bar/simple'
 import { processSheldus } from 'utils/sheldusUtils'
 import SbaChoropleth from "./SbaChoropleth"
 

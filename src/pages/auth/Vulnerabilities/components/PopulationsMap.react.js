@@ -57,7 +57,7 @@ class PopulationsMap extends React.Component {
 				YEARS_OF_ACS_DATA.forEach(year => {
 					const population = +geoGraph[geoid][year].population;
 					newFeature.properties.populations[year] = population;
-					if ((population !== 0) && (year == currentPopulationYear)) {
+					if ((population !== 0) && (year === currentPopulationYear)) {
 						minPopulation = Math.min(minPopulation, population);
 						maxPopulation = Math.max(maxPopulation, population);
 					}
@@ -70,13 +70,12 @@ class PopulationsMap extends React.Component {
 				.domain([minPopulation, maxPopulation])
 				.range(["#ffffff", "#ff0000"]);
 		const getFillColor = ({ properties }) => {
-			const geoid = properties.geoid,
-				population = properties.populations[currentPopulationYear],
-				color = population && (geoLevel == 'counties') ? countiesPopScale(population) : "#000000",
+			const population = properties.populations[currentPopulationYear],
+				color = population && (geoLevel === 'counties') ? countiesPopScale(population) : "#000000",
 				rgbColor = d3color.rgb(color);
-			return [rgbColor.r, rgbColor.g, rgbColor.b, population && (geoLevel == 'counties') ? 255 : 175];
+			return [rgbColor.r, rgbColor.g, rgbColor.b, population && (geoLevel === 'counties') ? 255 : 175];
 		}
-		const updateTriggers ={
+		const updateTriggers = {
 			getFillColor: [geoLevel, currentPopulationYear]
 		}
 		return { countiesPopScale, data, getFillColor, updateTriggers };
@@ -109,7 +108,7 @@ class PopulationsMap extends React.Component {
 				YEARS_OF_ACS_DATA.forEach(year => {
 					const population = +geoGraph[geoid][year].population;
 					newFeature.properties.populations[year] = population;
-					if ((population !== 0) && (year == currentPopulationYear)) {
+					if ((population !== 0) && (year === currentPopulationYear)) {
 						minPopulation = Math.min(minPopulation, population);
 						maxPopulation = Math.max(maxPopulation, population);
 					}
@@ -122,8 +121,7 @@ class PopulationsMap extends React.Component {
 				.domain([minPopulation, maxPopulation])
 				.range(["#ffffff", "#ff0000"]);
 		const getFillColor = ({ properties }) => {
-			const geoid = properties.geoid,
-				population = properties.populations[currentPopulationYear],
+			const population = properties.populations[currentPopulationYear],
 				color = population ? tractsPopScale(population) : "#000000",
 				rgbColor = d3color.rgb(color);
 			return [rgbColor.r, rgbColor.g, rgbColor.b, population ? 255 : 175];
@@ -209,8 +207,8 @@ class PopulationsMap extends React.Component {
 	}
 	generateMapNavigator() {
   		const { currentPopulationYear } = this.props.vulnerabilities,
-  			decDisabled = (currentPopulationYear == EARLIEST_YEAR),
-  			incDisabled = (currentPopulationYear == LATEST_YEAR);
+  			decDisabled = (currentPopulationYear === EARLIEST_YEAR),
+  			incDisabled = (currentPopulationYear === LATEST_YEAR);
 		return (	
 			<table className="map-test-table" style={ { tableLayout: "fixed" } }>
 				<tbody>
@@ -249,7 +247,7 @@ class PopulationsMap extends React.Component {
 		const { geoLevel } = this.props;
 		return [
 			{ pos: "top-right",
-				comp: this.generatePopulationLegend(geoLevel == "counties" ? cScale : tScale)
+				comp: this.generatePopulationLegend(geoLevel === "counties" ? cScale : tScale)
 			},
 			{ pos: "top-left",
 				comp: this.generateMapNavigator()

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import { getDistanceScales } from 'viewport-mercator-project';
 
-import * as d3scale from "d3-scale";
+// import * as d3scale from "d3-scale";
 import * as d3color from 'd3-color';
-import * as d3format from "d3-format";
+// import * as d3format from "d3-format";
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import DeckMap from "components/mapping/escmap/DeckMap.react"
-import MapTest from "components/mapping/escmap/MapTest.react"
+// import DeckMap from "components/mapping/escmap/DeckMap.react"
+// import MapTest from "components/mapping/escmap/MapTest.react"
 import SvgMap from "components/mapping/escmap/SvgMap.react"
 
 import { CircleLabel } from "./HazardEventsLegend"
@@ -45,8 +45,8 @@ class HazardEventsMap extends React.Component {
 	}
 	generateMapNavigator() {
   		const currentYear = this.state.currentYear,
-  			decDisabled = (currentYear == EARLIEST_YEAR),
-  			incDisabled = (currentYear == LATEST_YEAR);
+  			decDisabled = (currentYear === EARLIEST_YEAR),
+  			incDisabled = (currentYear === LATEST_YEAR);
 		return (
 			<table className="map-test-table" style={ { tableLayout: "fixed" } }>
 				<tbody>

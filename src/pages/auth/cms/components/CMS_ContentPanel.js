@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import AttributesTable from "./CMS_AttributesTable"
+// import AttributesTable from "./CMS_AttributesTable"
 import ContentItem from "./CMS_ContentItem"
 
 import {
@@ -49,7 +49,7 @@ class CMS_ContentPanel extends React.Component {
 			});
 		}
 		if (searchFilter.length) {
-			filteredContent = filteredContent.filter(cntnt => {
+			filteredContent = filteredContent.filter(function switchFilter(cntnt) {
 				switch (searchFilterKey) {
 					case "content_id":
 						return cntnt.content_id.toLowerCase()
@@ -64,6 +64,9 @@ class CMS_ContentPanel extends React.Component {
 								, false)
 					case "body":
 						return cntnt.body.toLowerCase()
+							.includes(searchFilter.toLowerCase());
+					default:
+						return cntnt.content_id.toLowerCase()
 							.includes(searchFilter.toLowerCase());
 				}
 			})
