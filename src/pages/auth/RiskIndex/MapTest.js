@@ -33,8 +33,6 @@ class Test extends React.Component {
           <h6 className="element-header">Map Test</h6>
 
           <HazardEventsMapController
-            showLegend={ false }
-            { ...this.state }
             numMaps={ 0 }/>
 
           <div className="row">
@@ -42,6 +40,7 @@ class Test extends React.Component {
             {
 
               ['wind', 'hurricane'].map(hazard =>
+              // hazards.map(hazard =>
                 <div className="col-lg-6" key={ hazard }>
                   <ElementBox>
                     <SbaChoropleth

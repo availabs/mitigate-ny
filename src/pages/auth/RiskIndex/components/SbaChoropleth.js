@@ -83,6 +83,7 @@ class SbaChoropleth extends React.Component {
 			const zip_codes = [...new Set(this.props.geo['36'].zips.features.map(({ properties }) => properties.geoid))];
 
 			if (!zip_codes.length) return;
+			
 			let yearsOfData = { from: EARLIEST_YEAR, to: LATEST_YEAR };
 			const { years } = this.props;
 			if (years === "All Time") {
@@ -174,20 +175,20 @@ class SbaChoropleth extends React.Component {
 		      	// 	}
 		      	// }).bind(this),
 
-		      	// onHover: this.props.useDeck ? (event => {
-		      	// 	const { object, x, y } = event;
-		      	// 	let hoverData = null;
-		      	// 	if (object) {
-		      	// 		const total_loss = object.properties.total_loss || 0;
-		      	// 		hoverData = {
-		      	// 			rows: [
-		      	// 				['Total Loss', format(total_loss)]
-		      	// 			],
-		      	// 			x, y
-		      	// 		}
-		      	// 	}
-		      	// 	this.setState({ hoverData });
-		      	// }).bind(this) : null
+		      	onHover: this.props.useDeck ? (event => {
+		      		const { object, x, y } = event;
+		      		let hoverData = null;
+		      		if (object) {
+		      			const total_loss = object.properties.total_loss || 0;
+		      			hoverData = {
+		      				rows: [
+		      					['Total Loss', format(total_loss)]
+		      				],
+		      				x, y
+		      			}
+		      		}
+		      		this.setState({ hoverData });
+		      	}).bind(this) : null
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
@@ -331,7 +332,6 @@ class SbaChoropleth extends React.Component {
 	}
 
   	render () {
-console.log(this.props.hazard)
   		const { scale, total_loss, layers } = this.generateLayers();
     	return ( this.props.useDeck ?
     		<DeckMap layers={ layers }
