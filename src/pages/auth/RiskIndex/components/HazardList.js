@@ -62,6 +62,7 @@ class HazardList extends Component {
         // console.log('sheldus', sheldus)
         return (
           <HazardOverview 
+            hazard={ hazard }
             key={i} 
             title={this.props.riskIndex.meta[hazard].name} 
             value={this.props.riskIndex[geoid][hazard].value || 'N/A'}

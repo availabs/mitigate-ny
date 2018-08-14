@@ -18,8 +18,8 @@ class SvgMap extends React.Component {
 		this.state = {
 			projection,
 			path: d3geo.geoPath(projection),
-			id: props.id || getUniqueId(),
-			viewport: this.props.viewport()
+			viewport: this.props.viewport(),
+			id: props.id || getUniqueId()
 		}
 
 		this._onViewportChange = this._onViewportChange.bind(this);
@@ -54,7 +54,8 @@ class SvgMap extends React.Component {
 			getLineColor=[0, 0, 0, 255],
 			getFillColor=[225, 225, 225, 255],
 			onHover=null,
-			onClick=null
+			onClick=null,
+			key=null
 		}, i) {
 		let lineColor = getLineColor,
 			fillColor = getFillColor;
@@ -80,10 +81,10 @@ class SvgMap extends React.Component {
 				${fillColor[3]/255}
 			)`
 		)
-		let onMouseMove = null,
+		let onMouseOver = null,
 			onMouseOut = null;
 		if (onHover) {
-			onMouseMove = e => {
+			onMouseOver = e => {
 				const x = e.clientX,
 					y = e.clientY;
 				onHover({ object: data, x, y });
@@ -95,20 +96,40 @@ class SvgMap extends React.Component {
 			}
 		}
 		return <path d={ this.state.path(data) }
-					key={ i }
-					onMouseMove={ onMouseMove }
+					key={ key ? key(data) : i }
+					onMouseOver={ onMouseOver }
 					onMouseOut={ onMouseOut }
 					stroke={ stroked ? lineColor.toString() : "none" }
 					fill={ filled ? fillColor.toString() : "none" }
 					strokeWidth={ lineWidthMinPixels }/>
 	}
-	getLayerPaths({ data, ...rest }) {
-		if (data.type == "FeatureCollection") {
+	getLayerPaths({ data, key, ...rest }) {
+		if (data.type === "FeatureCollection") {
 			return data.features.map((feature, i) =>
 				this.getPath(feature, rest, i)
 			);
 		}
 		return this.getPath(data, rest);
+	}
+	componentDidUpdate() {
+		// const {
+		// 	path
+		// } = this.state;
+		// const {
+		// 	layers
+		// } = this.props;
+		// let groups = d3.select("#" + this.state.id + "-svg")
+		// 	.selectAll("g")
+		// 	.data(layers, layer => layer.id);
+
+		// groups.enter()
+		// 	.append("g")
+		// 	.merge(groups)
+		// 		.attr("id", layer => layer.id)
+		// 		.attr("pointer-events", layer => layer.pickable ? "auto" : "none")
+		// 		.each(SvgLayer(path));
+		// groups.exit()
+		// 	.remove();
 	}
 	render() {
 		const {
@@ -129,6 +150,7 @@ class SvgMap extends React.Component {
 			layers,
 			controls
 		} = this.props;
+
 		if (!bounds && layers.length && isValidGeojson(layers[0].data)) {
 			projection.fitExtent(
 				[[padding, padding], [width-padding, height-padding]],
@@ -147,17 +169,6 @@ class SvgMap extends React.Component {
 				.scale(4000)
 		}
 
-		let groups = d3.select("#" + this.state.id + "-svg")
-			.selectAll("g")
-			.data(layers, d => d.id);
-
-		groups.enter()
-			.append("g");
-		groups.exit()
-			.remove();
-
-		groups.each(SvgLayer(path))
-
 		return (
       		<div id={ this.state.id } style={ { width: '100%', height: `${ this.props.height }px`, position: "relative" } }>
 				<div style={ { position: "absolute" } }>
@@ -167,15 +178,13 @@ class SvgMap extends React.Component {
 							height: `${ height }px`,
 						} }>
 						{
-							/*
-							layers.map(layer => {
-								return (
-									<g id={ layer.id } key={ layer.id }>
-										{ this.getLayerPaths(layer) }
-									</g>
-								)
-							})
-							*/
+							
+							layers.map(layer =>
+								<g id={ layer.id } key={ layer.id }>
+									{ this.getLayerPaths(layer) }
+								</g>
+							)
+							
 						}
 					</svg>
 					{
@@ -200,24 +209,36 @@ SvgMap.defaultProps = {
 }
 
 const SvgLayer = path => {
-	function svgLayer(layer, i) {
+	function svgLayer({ data, key, ...rest }, i) {
 		let paths = d3.select(this)
 			.selectAll("path")
-			.data((layer.data.type === "FeatureCollection") ? layer.data.features : [layer.data])
+			.data((data.type === "FeatureCollection") ? data.features : [data],
+				(d, i) => key ? key(d) : i)
 
 		paths.enter()
 			.append("path")
 			.merge(paths)
 				.attr("d", path)
-				.on("mousemove", svgLayer.mousemove.bind(null, layer))
-				.attr("fill", svgLayer.getFill.bind(null, layer))
-				.attr("stroke", svgLayer.getStroke.bind(null, layer));
+				.attr("fill", svgLayer.getFill.bind(null, rest))
+				.attr("stroke", svgLayer.getStroke.bind(null, rest))
+				.on("mousemove", svgLayer.mousemove.bind(null, rest))
+				.on("mouseout", svgLayer.mouseout.bind(null, rest));
 		paths.exit()
 			.remove();
 	}
 	svgLayer.mousemove = ({ onHover }, data) => {
 		if (!onHover) return null;
-		onHover({ object: data, })
+		const event = d3.event,
+			x = event.clientX,
+			y = event.clientY;
+		onHover({ object: data, x, y })
+	}
+	svgLayer.mouseout = ({ onHover }, data) => {
+		if (!onHover) return null;
+		const event = d3.event,
+			x = event.clientX,
+			y = event.clientY;
+		onHover({ object: null, x, y })
 	}
 	svgLayer.getFill = ({ filled=false, getFillColor=[225, 225, 225, 255] }, data) => {
 		if (!filled) return "none";

@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { reduxFalcor } from 'utils/redux-falcor'
 
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
@@ -9,8 +11,13 @@ import SbaChoropleth from "./components/SbaChoropleth"
 class Test extends React.Component {
 
   state = {
-    hazard: "hurricane",
-    years: "Individual Years"
+    years: "All Time"
+  }
+
+  fetchFalcorDeps() {
+    return this.props.falcor.get(
+      ["riskIndex", "hazards"]
+    )
   }
 
   toggleYears() {
@@ -19,29 +26,51 @@ class Test extends React.Component {
   }
 
   render() {
-    return (
-      <Element>
-        <h6 className="element-header">Map Test</h6>
+    try {
+      const hazards = this.props.riskIndex.hazards.value;
+      return (
+        <Element>
+          <h6 className="element-header">Map Test</h6>
 
-        <HazardEventsMapController
-          showLegend={ false }
-          { ...this.state }
-          numMaps={ 0 }/>
+          <HazardEventsMapController
+            showLegend={ false }
+            { ...this.state }
+            numMaps={ 0 }/>
 
-        <div className="row">
-          <div className="col-lg-12">
-            <ElementBox>
-              <SbaChoropleth
-                toggle={ this.toggleYears.bind(this) }
-                { ...this.state }/>
-            </ElementBox>
+          <div className="row">
+
+            {
+
+              ['wind', 'hurricane'].map(hazard =>
+                <div className="col-lg-6" key={ hazard }>
+                  <ElementBox>
+                    <SbaChoropleth
+                      hazard={ hazard }
+                      height={ 400 }/>
+                  </ElementBox>
+                </div>
+              )
+
+            }
           </div>
-        </div>
 
-      </Element>
-    )
+        </Element>
+      )
+    }
+    catch (e) {
+      return <ElementBox>Loading...</ElementBox>
+    }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    riskIndex: state.graph.riskIndex,
+    router: state.router
+  };
+};
+
+const mapDispatchToProps = {};
 
 export default [
   {
@@ -52,6 +81,6 @@ export default [
     	{name: 'Map Test', path: '/test'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: Test
+    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Test))
   }
 ]
