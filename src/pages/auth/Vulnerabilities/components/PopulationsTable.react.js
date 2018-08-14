@@ -4,7 +4,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 
 import * as d3format from "d3-format"
 
-import { createMatchSelector } from 'react-router-redux';
+// import { createMatchSelector } from 'react-router-redux';
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
@@ -61,7 +61,7 @@ class PopulationsTable extends Component {
     }
     const columns = [GEO_LEVEL, ...YEARS_OF_ACS_DATA, 'change'];
     data.sort((a, b) => a[GEO_LEVEL] < b[GEO_LEVEL] ? -1 : 1);
-    const onClick = (GEO_LEVEL == 'counties') ?
+    const onClick = (GEO_LEVEL === 'counties') ?
       row => this.props.setGeoid(row.geoid)
       : null;
     return (

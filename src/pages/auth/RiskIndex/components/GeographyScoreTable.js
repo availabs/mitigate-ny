@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   processSheldus5year,
-  getHazardName,
-  sumData,
-  avgData
+  getHazardName
 } from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
@@ -33,11 +31,11 @@ class GeographyHazardScoreTable extends React.Component {
               const column = getHazardName(hazard);//`${ hazard } Loss`;
               columns[column] = true;
               const processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
-              output[column] = parseInt((processedSheldus[year] / 1000)).toLocaleString();
+              output[column] = parseInt((processedSheldus[year] / 1000), 10).toLocaleString();
               output['Total Loss'] += processedSheldus[year];
               output['total-loss'] += processedSheldus[year];
           })
-          output['Total Loss'] = parseInt(output['Total Loss'] / 1000).toLocaleString();
+          output['Total Loss'] = parseInt(output['Total Loss'] / 1000, 10).toLocaleString();
           return output;
         })
         .sort((a, b) => b['total-loss'] - a['total-loss']);

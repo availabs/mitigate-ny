@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { createMatchSelector } from 'react-router-redux'
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import Element from 'components/light-admin/containers/Element'
-import ElementBox from 'components/light-admin/containers/ElementBox'
+import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
 import Content from 'components/cms/Content'
-import HazardList from './components/HazardList'
+// import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
-import HazardMap from './components/HazardMap'
+// import HazardMap from './components/HazardMap'
 import HazardStats from './components/HazardStats'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
@@ -75,14 +74,17 @@ class Hazard extends Component {
                 hazard={hazard} 
                 dataType={'severeWeather'}
               />
-              <div className="property-section" style={{padding: 25}}>
+            <div className='projects-list row'>
+              <ProjectBox title={`definition`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`${hazard}-definition`} />
-              </div>
+              </ProjectBox>  
+            </div>
             
-              <div className="property-section"  style={{padding: 25}}>
+            <div className='projects-list row'>
+              <ProjectBox title={`characteristics`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`${hazard}-characteristics`} />
-              </div>
-
+              </ProjectBox>  
+            </div>
 
             </div>
           </div>

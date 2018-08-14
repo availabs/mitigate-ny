@@ -84,7 +84,7 @@ class Geography extends Component {
   }
 
   componentDidUpdate(oldProps, oldState) {
-    if (oldState.geoid != this.state.geoid) {
+    if (oldState.geoid !== this.state.geoid) {
       this.fetchFalcorDeps();
     }
   }

@@ -53,11 +53,11 @@ const RADIUS_SCALE = d3scale.scaleLog()
 		.range([4, 40]); // radius in kilometers
 
 const getMapDefaults = (width, height=null) =>
-	width == 12 ? {
+	width === 12 ? {
 		showLegend: true,
 		height: height || 800
 	}
-	: width == 6 ? {
+	: width === 6 ? {
 		showLegend: false,
         dragRotate: false,
         scrollZoom: false,
@@ -77,7 +77,7 @@ const getMapDefaults = (width, height=null) =>
 	}
 
 const getMapWidth = numMaps =>
-	numMaps == 1 ? 12
+	numMaps === 1 ? 12
 	: (numMaps % 3) === 0 ? 4
 	: (numMaps === 2) || (numMaps === 4) ? 6
 	: 4
@@ -120,18 +120,18 @@ class HazardEventsMapController extends React.Component {
 
   	componentWillReceiveProps(newProps) {
   		const { geoid, geoLevel } = newProps;
-  		let geojson = null,
-  			padding = this.props.zoomPadding,
-  			fitGeojson = false;
+  		let geojson = null
+  		let padding = this.props.zoomPadding
+  		// let fitGeojson = false;
   		switch (geoLevel) {
 			case 'counties':
 				geojson = newProps.geo['merge']['36']['counties']
-				fitGeojson = geojson.coordinates.length && !this.props.geo['merge']['36']['counties'].coordinates.length;
+				// fitGeojson = geojson.coordinates.length && !this.props.geo['merge']['36']['counties'].coordinates.length;
 				break;
 			case 'cousubs':
 				geojson = newProps.geo['36']['counties'].features
 						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
-				fitGeojson = newProps.geo['36']['counties'].features.length && !this.props.geo['36']['counties'].features.length;
+				// fitGeojson = newProps.geo['36']['counties'].features.length && !this.props.geo['36']['counties'].features.length;
 				break;
   		}
   		// if (fitGeojson) {

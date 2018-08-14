@@ -5,9 +5,9 @@ import get from "lodash.get"
 
 import { ResponsiveBar } from "@nivo/bar"
 
-import * as d3color from "d3-color"
+// import * as d3color from "d3-color"
 import * as d3format from "d3-format"
-import * as d3scale from "d3-scale"
+// import * as d3scale from "d3-scale"
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 

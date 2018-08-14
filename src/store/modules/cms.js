@@ -10,12 +10,12 @@ const ADD_ACTIVE_FILTER = "ADD_ACTIVE_FILTER",
 	UPDATE_NEW_CONTENT_DATA = "UPDATE_NEW_CONTENT_DATA";
 
 export const addActiveFilter = filter =>
-	dispatch =>
-		(dispatch({
+	dispatch => (
+		dispatch({
 			type: ADD_ACTIVE_FILTER,
 			filter
-		}),
-		Promise.resolve())
+		}), Promise.resolve())
+
 export const removeActiveFilter = filter =>
 	dispatch =>
 		(dispatch({
@@ -81,12 +81,12 @@ export default (state=INITIAL_STATE, action) => {
 			const newState = Object.assign({}, state);
 			newState.activeFilters.push(action.filter);
 			return newState;
-		};
+		}
 		case REMOVE_ACTIVE_FILTER: {
 			const newState = Object.assign({}, state);
-			newState.activeFilters = newState.activeFilters.filter(f => f != action.filter);
+			newState.activeFilters = newState.activeFilters.filter(f => f !== action.filter);
 			return newState;
-		};
+		}
 		case TOGGLE_ACTIVE_FILTER: {
 			let newState = Object.assign({}, state);
 			if (newState.activeFilters.includes(action.filter)) {

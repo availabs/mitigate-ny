@@ -3,13 +3,9 @@ import { connect } from 'react-redux'
 import { reduxFalcor } from 'utils/redux-falcor'
 import get from 'lodash.get'
 
-import { processSheldus5year, sumData, avgData, total, avg } from 'utils/sheldusUtils'
+import { total, avg } from 'utils/sheldusUtils'
 
-import { createMatchSelector } from 'react-router-redux'
-
-import ElementBox from 'components/light-admin/containers/ElementBox'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
-import HazardOverview from './HazardOverview'
 
 import {
   EARLIEST_YEAR,

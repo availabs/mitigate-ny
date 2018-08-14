@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
-
 import * as d3scale from "d3-scale";
 
 import Element from 'components/light-admin/containers/Element'
@@ -50,7 +48,7 @@ class Compare extends Component {
     }
 
   	fetchFalcorDeps() {
-	    const { geoid, geoLevel } = this.state;
+	    const { geoLevel } = this.state;
 
 	    let dataTypes = [['sheldus'], ['severeWeather'],['sba', 'all']];
 
@@ -64,7 +62,7 @@ class Compare extends Component {
       		COLOR_SCALE.domain(hazards);
       		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
       			dataTypes.forEach(dataType => {
-        			requests.push([...dataType, geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['property_damage', 'total_loss', 'num_events', 'num_loans']])
+        			requests.push([...dataType, geoids, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['property_damage', 'total_loss', 'num_events','num_episodes', 'num_loans']])
         		})
       		}
       		return this.props.falcor.get(
@@ -118,7 +116,7 @@ class Compare extends Component {
                 <GeographyScoreBarChart { ...this.state }
                   dataType={ "severeWeather" }
                     colorScale={ COLOR_SCALE }
-                    lossType="num_events"
+                    lossType="num_episodes"
                     height={ 400 }
                     format={ ",d" }/>
             </div>
