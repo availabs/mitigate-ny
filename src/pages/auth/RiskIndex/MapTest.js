@@ -33,25 +33,9 @@ class Test extends React.Component {
           <h6 className="element-header">Map Test</h6>
 
           <HazardEventsMapController
-            numMaps={ 0 }/>
-
-          <div className="row">
-
-            {
-
-              ['wind', 'hurricane'].map(hazard =>
-              // hazards.map(hazard =>
-                <div className="col-lg-6" key={ hazard }>
-                  <ElementBox>
-                    <SbaChoropleth
-                      hazard={ hazard }
-                      height={ 400 }/>
-                  </ElementBox>
-                </div>
-              )
-
-            }
-          </div>
+            allTime={ true }
+            hazard={ "riverine" }
+            numMaps={ 1 }/>
 
         </Element>
       )

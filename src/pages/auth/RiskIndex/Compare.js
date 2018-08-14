@@ -116,7 +116,7 @@ class Compare extends Component {
                 <GeographyScoreBarChart { ...this.state }
                   dataType={ "severeWeather" }
                     colorScale={ COLOR_SCALE }
-                    lossType="num_episodes"
+                    lossType="num_events"
                     height={ 400 }
                     format={ ",d" }/>
             </div>

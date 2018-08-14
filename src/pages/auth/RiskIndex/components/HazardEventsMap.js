@@ -130,11 +130,13 @@ class HazardEventsMap extends React.Component {
 				}
 			)
 		}
-		controls.push(
-			{ pos: this.props.mapControlsLocation,
-				comp: this.generateMapNavigator()
-			}
-		)
+		if (!this.props.allTime) {
+			controls.push(
+				{ pos: this.props.mapControlsLocation,
+					comp: this.generateMapNavigator()
+				}
+			)
+		}
 		return controls;
 	}
 	generateLayers() {
@@ -152,7 +154,7 @@ class HazardEventsMap extends React.Component {
 
 		    for (const gid in eventsData[geoid][geoLevel]) {
 		    	hazards.forEach(hazard => {
-		    		data.features.push(...eventsData[geoid][geoLevel][gid][hazard][this.state.currentYear])
+		    		data.features.push(...eventsData[geoid][geoLevel][gid][hazard][this.props.allTime ? "allTime" : this.state.currentYear])
 		    	}, this)
 		    }
 
@@ -165,12 +167,18 @@ class HazardEventsMap extends React.Component {
 				{ id: 'counties-merge-layer',
 					data: this.props.geo['merge']['36']['counties'],
 					filled: true,
-					getFillColor: [225, 225, 225, 255]
+					getFillColor: [242, 239, 233, 255]
 				},
 				{ id: 'counties-mesh-layer',
 					data: this.props.geo['mesh']['36']['counties'],
 					filled: false,
-					getLineColor: [255, 255, 255, 255],
+					getLineColor: [0, 0, 0, 50],
+					lineWidthMinPixels: 1
+				},
+				{ id: 'counties-merge-layer',
+					data: this.props.geo['merge']['36']['counties'],
+					stroked: true,
+					getLineColor: [242, 239, 233, 255],
 					lineWidthMinPixels: 2
 				},
 				{ id: 'events-layer',
@@ -210,7 +218,8 @@ HazardEventsMap.defaultProps = {
     mapLegendLocation: "top-right",
     mapLegendSize: "large",
     mapControlsLocation: "top-left",
-    hazard: null
+    hazard: null,
+    allTime: false
 }
 
 const mapStateToProps = state => ({

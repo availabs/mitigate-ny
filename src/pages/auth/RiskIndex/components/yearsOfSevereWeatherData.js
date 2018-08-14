@@ -1,4 +1,4 @@
-export const EARLIEST_YEAR = 1996;
+export const EARLIEST_YEAR = 1960;
 export const LATEST_YEAR = 2017;
 
 const YEARS_OF_SEVERE_WEATHER_DATA = [];

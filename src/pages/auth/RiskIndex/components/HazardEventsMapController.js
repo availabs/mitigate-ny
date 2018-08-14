@@ -202,6 +202,9 @@ class HazardEventsMapController extends React.Component {
 							if (!(year in geoData[geoid][hazard])) {
 								geoData[geoid][hazard][year] = [];
 							}
+							if (!("allTime" in geoData[geoid][hazard])) {
+								geoData[geoid][hazard].allTime = [];
+							}
 
 							const events = this.props[dataType].events.borked[geoid][hazard][year]["property_damage"].value;
 
@@ -228,6 +231,7 @@ class HazardEventsMapController extends React.Component {
 										circle = turf.circle(centroid.geometry.coordinates, RADIUS_SCALE(property_damage), { units: "kilometers", properties });
 									}
 									if (circle) geoData[geoid][hazard][year].push(circle);
+									if (circle) geoData[geoid][hazard].allTime.push(circle);
 								})
 
 							}
@@ -266,7 +270,8 @@ class HazardEventsMapController extends React.Component {
 		                radiusScale={ RADIUS_SCALE }
 		                zoomPadding={ this.props.zoomPadding }
 		                hazard={ this.props.hazard }
-		                bounds={ this.state.bounds }/>
+		                bounds={ this.state.bounds }
+		                allTime={ this.props.allTime }/>
 	            </div>
 	        , this);
 
@@ -296,7 +301,8 @@ HazardEventsMapController.defaultProps = {
 	colorScale: COLOR_SCALE,
 	mapHeight: null,
 	zoomPadding: 20,
-	hazard: null
+	hazard: null,
+	allTime: false
 }
 
 const mapStateToProps = state => ({
