@@ -172,7 +172,7 @@ class HazardEventsMap extends React.Component {
 				{ id: 'counties-mesh-layer',
 					data: this.props.geo['mesh']['36']['counties'],
 					filled: false,
-					getLineColor: [0, 0, 0, 50],
+					getLineColor: [200, 200, 200, 255],
 					lineWidthMinPixels: 1
 				},
 				{ id: 'counties-merge-layer',

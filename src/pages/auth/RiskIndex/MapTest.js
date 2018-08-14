@@ -5,14 +5,9 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import HazardEventsMapController from "./components/HazardEventsMapController"
-import SbaChoropleth from "./components/SbaChoropleth"
+import HazardMap from "./components/HazardMap"
 
 class Test extends React.Component {
-
-  state = {
-    years: "All Time"
-  }
 
   fetchFalcorDeps() {
     return this.props.falcor.get(
@@ -32,10 +27,13 @@ class Test extends React.Component {
         <Element>
           <h6 className="element-header">Map Test</h6>
 
-          <HazardEventsMapController
-            allTime={ true }
-            hazard={ "riverine" }
-            numMaps={ 1 }/>
+          <div className="row">
+            <div className="col-12">
+              <ElementBox>
+                <HazardMap hazard="riverine"/>
+              </ElementBox>
+            </div>
+          </div>
 
         </Element>
       )

@@ -197,7 +197,7 @@ class SbaChoropleth extends React.Component {
 	    		data: this.props.geo['mesh']['36']['counties'],
 	    		filled: false,
 	    		stroked: true,
-	    		getLineColor: [0, 0, 0, 50],
+	    		getLineColor: [200, 200, 200, 255],
 		      	pickable: false
 	    	},
 	    	{
