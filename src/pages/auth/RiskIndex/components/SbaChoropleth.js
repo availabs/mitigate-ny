@@ -19,6 +19,7 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 import DeckMap from "components/mapping/escmap/DeckMap.react"
 import MapTest from "components/mapping/escmap/MapTest.react"
 import SvgMap from "components/mapping/escmap/SvgMap.react"
+import Viewport from "components/mapping/escmap/Viewport"
 
 import {
 	EARLIEST_YEAR,
@@ -37,9 +38,11 @@ class SbaChoropleth extends React.Component {
 			currentYear: LATEST_YEAR,
 			data: null,
 			scale: d3scale.scaleThreshold()
-				.domain([50000, 150000, 500000, 2000000])
+				.domain([150000, 500000, 1000000, 5000000])
 				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
-			total_loss: 0
+			total_loss: 0,
+			viewport: Viewport(),
+			dataProcessed: false
 		}
 	}
 
@@ -52,14 +55,11 @@ class SbaChoropleth extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		if ((newProps.geo['36'].zips.features.length &&
-			!this.props.geo['36'].zips.features.length) ||
-
-			(newProps.geo['merge']['36']['counties'].coordinates.length &&
-			!this.props.geo['merge']['36']['counties'].coordinates.length)) {
-			this.fetchFalcorDeps();
+		this.fetchFalcorDeps();
+		this.state.viewport.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+		if (!this.state.dataProcessed) {
+			this.processData(this.state.currentYear, newProps);
 		}
-		this.processData(this.state.currentYear, newProps);
 	}
 
 	incrementCurrentYear() {
@@ -83,15 +83,19 @@ class SbaChoropleth extends React.Component {
 			const zip_codes = [...new Set(this.props.geo['36'].zips.features.map(({ properties }) => properties.geoid))];
 
 			if (!zip_codes.length) return;
+			let yearsOfData = { from: EARLIEST_YEAR, to: LATEST_YEAR };
+			const { years } = this.props;
+			if (years === "All Time") {
+				yearsOfData = "allTime";
+			}
 			return this.props.falcor.get(
-// `sba['business', 'home', 'all'].byZip[{keys:zip_codes}][{keys:hazardids}][{integers:years}]['total_loss', 'loan_total', 'num_loans']`
-				["sba", "all", "byZip", zip_codes, hazardids, { from: EARLIEST_YEAR, to: LATEST_YEAR }, 'total_loss']
+				["sba", "all", "byZip", zip_codes, hazardids, yearsOfData, 'total_loss']
 			)
 		})
 	}
 
 	processData(currentYear=this.state.currentYear, props=this.props) {
-		const yearsOfData = (props.years === "All Time") ? YEARS_OF_SBA_LOAN_DATA : [currentYear],
+		const year = (props.years === "All Time") ? "allTime" : currentYear,
 
 			geoData = props.geo['36'].zips.features,
 			data = {
@@ -101,9 +105,7 @@ class SbaChoropleth extends React.Component {
 
 			{ hazard } = props;
 
-		let min = Infinity,
-			max = -Infinity,
-
+		let dataProcessed = true,
 			total_loss = 0;
 
 		try {
@@ -119,28 +121,23 @@ class SbaChoropleth extends React.Component {
 				data.features.push(feature);
 
 				hazardids.forEach(hazardid => {
-					yearsOfData.forEach(year => {
-						const value = +sbaData[zip_code][hazardid][year].total_loss;
+					const value = +sbaData[zip_code][hazardid][year].total_loss;
 
-						feature.properties.total_loss += value;
-					})
+					feature.properties.total_loss += value;
 				})
 			}
-			data.features = data.features.filter(({ properties }) => properties.total_loss)
 			data.features.forEach(({ properties }) => {
-				const value = properties.total_loss;
-
-				if (value) {
-					min = Math.min(min, value);
-					max = Math.max(max, value);
-					total_loss += value;
-				}
+				total_loss += properties.total_loss;
 			})
+			data.features = data.features.filter(({ properties }) =>
+				properties.total_loss >=  this.state.scale.domain()[0]
+			)
 		}
 		catch (e) {
 // console.log("<processData> ERROR:",e)
+			dataProcessed = false;
 		}
-		this.setState({ currentYear, total_loss, data });
+		this.setState({ currentYear, total_loss, data, dataProcessed });
 	}
 
 	generateLayers() {
@@ -168,6 +165,7 @@ class SbaChoropleth extends React.Component {
 		      	stroked: false,
 		      	pickable: true,
 		      	key: ({ properties }) => properties.geoid,
+
 		      	// onClick: (event => {
 		      	// 	const { object } = event;
 		      	// 	if (object) {
@@ -175,20 +173,21 @@ class SbaChoropleth extends React.Component {
 		      	// 		this.props.setGeoid(geoid);
 		      	// 	}
 		      	// }).bind(this),
-		      	onHover: (event => {
-		      		const { object, x, y } = event;
-		      		let hoverData = null;
-		      		if (object) {
-		      			const total_loss = object.properties.total_loss || 0;
-		      			hoverData = {
-		      				rows: [
-		      					['Total Loss', format(total_loss)]
-		      				],
-		      				x, y
-		      			}
-		      		}
-		      		this.setState({ hoverData });
-		      	}).bind(this)
+
+		      	// onHover: this.props.useDeck ? (event => {
+		      	// 	const { object, x, y } = event;
+		      	// 	let hoverData = null;
+		      	// 	if (object) {
+		      	// 		const total_loss = object.properties.total_loss || 0;
+		      	// 		hoverData = {
+		      	// 			rows: [
+		      	// 				['Total Loss', format(total_loss)]
+		      	// 			],
+		      	// 			x, y
+		      	// 		}
+		      	// 	}
+		      	// 	this.setState({ hoverData });
+		      	// }).bind(this) : null
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
@@ -211,7 +210,7 @@ class SbaChoropleth extends React.Component {
 	    return { scale, total_loss, layers };
 	}
 
-	generatePopulationLegend(scale) {
+	generateLegend(scale) {
   		const range = scale.range(),
   			width = `${ 100 / range.length }%`,
   			domainValues = range.map(r => scale.invertExtent(r)[0]);
@@ -220,7 +219,7 @@ class SbaChoropleth extends React.Component {
 			<table className="map-test-table">
 				<thead>
 					<tr>
-						<th className="no-border-bottom" colSpan={ range.length }>Population Legend</th>
+						<th className="no-border-bottom" colSpan={ range.length }>Total Losses</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -302,20 +301,20 @@ class SbaChoropleth extends React.Component {
 	}
 	generateMapControls(scale, total_loss) {
 		const controls = [],
-			legend = this.generatePopulationLegend(scale);
+			legend = this.generateLegend(scale);
 		if (legend) {
 			controls.push(
-				{ pos: "top-right",
+				{ pos: "bottom-left",
 					comp: legend
 				},
-				{ pos: "bottom-right",
+				{ pos: "top-left",
 					comp: this.generateTotalLoss(total_loss)
 				}
 			)
 		}
 		if (this.props.years === "Individual Years") {
 			controls.push(
-				{ pos: "top-left",
+				{ pos: "top-right",
 					comp: this.generateMapNavigator()
 				}
 			)
@@ -323,7 +322,7 @@ class SbaChoropleth extends React.Component {
 		if (this.props.toggle) {
 			controls.push(
 				{
-					pos: "bottom-left",
+					pos: "bottom-right",
 					comp: this.generateYearsToggle(this.props.toggle)
 				}
 			)
@@ -332,19 +331,27 @@ class SbaChoropleth extends React.Component {
 	}
 
   	render () {
+console.log(this.props.hazard)
   		const { scale, total_loss, layers } = this.generateLayers();
-    	return (
-	        <SvgMap layers={ layers }
-	        	viewport={ this.props.viewport }
-	        	hoverData={ this.state.hoverData }
+    	return ( this.props.useDeck ?
+    		<DeckMap layers={ layers }
+    			height={ this.props.height }
+    			hoverData={ this.state.hoverData }
+	        	viewport={ this.state.viewport }
+	        	controls={ this.generateMapControls(scale, total_loss) }/>
+	        : <SvgMap layers={ layers }
+    			height={ this.props.height }
+	        	viewport={ this.state.viewport }
 	        	controls={ this.generateMapControls(scale, total_loss) }/>
     	) 
   	}
 }
 
 SbaChoropleth.defaultProps = {
-	years: "Individual Years", // or "All Time"
-	toggle: null
+	years: "All Time", // or "Individual Years"
+	toggle: null,
+	useDeck: false,
+	height: 800
 }
 
 const mapStateToProps = state => ({

@@ -81,12 +81,12 @@ export default (state=INITIAL_STATE, action) => {
 			const newState = Object.assign({}, state);
 			newState.activeFilters.push(action.filter);
 			return newState;
-		};
+		}
 		case REMOVE_ACTIVE_FILTER: {
 			const newState = Object.assign({}, state);
-			newState.activeFilters = newState.activeFilters.filter(f => f != action.filter);
+			newState.activeFilters = newState.activeFilters.filter(f => f !== action.filter);
 			return newState;
-		};
+		}
 		case TOGGLE_ACTIVE_FILTER: {
 			let newState = Object.assign({}, state);
 			if (newState.activeFilters.includes(action.filter)) {
@@ -96,13 +96,11 @@ export default (state=INITIAL_STATE, action) => {
 				newState.activeFilters.push(action.filter);
 			}
 			return newState;
-		};
-		case RECEIVE_CONTENT: {
+		}
+		case RECEIVE_CONTENT:
 			return Object.assign({}, state, { content: action.content });
-		};
-		case SET_CONTENT_FILTERS: {
+		case SET_CONTENT_FILTERS:
 			return Object.assign({}, state, { contentFilters: action.filters });
-		};
 		case SET_EDIT_TARGET: {
 			let newState = Object.assign({}, state);
 			newState.newContentData = {
@@ -112,7 +110,7 @@ export default (state=INITIAL_STATE, action) => {
 				new_content_id: action.target.content_id
 			}
 			return newState;
-		};
+		}
 		case UPDATE_NEW_CONTENT_DATA: {
 			let newState = Object.assign({}, state);
 			newState.newContentData = {
@@ -120,7 +118,7 @@ export default (state=INITIAL_STATE, action) => {
 				...action.update
 			}
 			return newState;
-		};
+		}
 		default:
 			return state;
 	}
