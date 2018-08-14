@@ -69,7 +69,7 @@ class HazardList extends Component {
             score={this.props.riskIndex[geoid][hazard].score || 'N/A'}
             sheldus={sheldus}
             display={this.props.display}
-            size={this.props.size || 12}
+            size={this.props.size}
             link={`/hazards/${hazard}`} 
           />
         )
@@ -82,6 +82,11 @@ class HazardList extends Component {
       </div>
     ) 
   }
+}
+
+HazardList.defaultProps = {
+  geoid: 36,
+  size: 12
 }
 
 const mapDispatchToProps = { };

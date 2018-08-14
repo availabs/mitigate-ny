@@ -27,7 +27,6 @@ class GeographyHazardScoreTable extends Component {
       return this.props.falcor.get(
         ['riskIndex','meta', hazard , ['id', 'name']],
         ['geo', geographies, ['name']],
-        ['riskIndex', geographies, hazard, ['score','value']],
         [dataType, geographies, hazard,{from: 1996, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']] 
       )
     }).then(data => {
@@ -44,7 +43,6 @@ class GeographyHazardScoreTable extends Component {
     let sumTime = 10
     if(!this.props.geoGraph[geoid] 
        || !this.props.geoGraph[geoid][geoLevel].value
-       || !this.props.riskIndexGraph[this.props.geoGraph[geoid][geoLevel].value[0]]
        || !this.props[dataType][this.props.geoGraph[geoid][geoLevel].value[0]]
        || !this.props[dataType][this.props.geoGraph[geoid][geoLevel].value[0]][hazard]
        ) {
@@ -63,7 +61,6 @@ class GeographyHazardScoreTable extends Component {
       })
       .map((geoLevelid,i) => {
         let output =  { 'County': this.props.geoGraph[geoLevelid].name }
-        output[`${hazard} Score`] = this.props.riskIndexGraph[geoLevelid][hazard].score.toLocaleString()
         output[`${hazard} Events`] = sumData(this.props[dataType][geoLevelid][hazard],'num_events', sumTime)[year]
         output[`${hazard} Loss`] = sumData(this.props[dataType][geoLevelid][hazard],'property_damage', sumTime)[year].toLocaleString()
         return output
@@ -73,17 +70,17 @@ class GeographyHazardScoreTable extends Component {
       <TableBox 
         title={this.props.riskIndexGraph.meta[hazard].name}  
         data={graphTableData}
-        pageSize={12}
+        pageSize={this.props.pageSize || 12}
       />
     )
 
   }
   
   render () {
-    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
+    const hazard = this.props.hazard || 'riverine'
     return (
       <div>
-       {this.renderGraphTable(params.hazard)}
+       {this.renderGraphTable(hazard)}
       </div>
     ) 
   }

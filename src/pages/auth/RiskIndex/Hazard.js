@@ -84,62 +84,98 @@ class Hazard extends Component {
            Section 2 - Location & Historic Events
         */}
         <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '60%'}}>
+            <div className="property-section">
+              <div className="property-section">
+                <Content content_id={`${hazard}-location`} />
+              </div>
+            </div>
+          </div>
+          <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content' style={{paddingTop: 60 }}>
+             
+              <div className='projects-list row'>
+                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', height: 300}}>
+                
+                </ProjectBox>  
+              </div>
+          
+            </div>
+          </div>
+        </div>
+        <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <div className="property-section">
-              <Content content_id={`${hazard}-location`} />
-              <h5>Statewide Map of {hazardName} Events by Year </h5>
-                <HazardEventsMapController
-                showLegend={ false }
-                hazard={ hazard }
-                height={ 600 }
+                <h5>Statewide Map of SBA Disaster Loans for {hazardName}</h5>
+                2001-2017<br/>
+                <SbaChoropleth
+                  hazard={ hazard }
+                  height={ 600 }
                 />
-              <h5>Statewide Map of SBA Disaster Loands for {hazardName}</h5>
-              2001-2017<br/>
-              <SbaChoropleth
-                hazard={ hazard }
-                height={ 600 }
-              />
-              <br />
-              <br />
-            </div>
+                <br />
+                <br />
+              </div>
 
-            <div className="property-section">
-              <Content content_id={`${hazard}-historic`} />
-              <HazardScoreTable />
-            </div>
+              <div className="property-section">
+                <Content content_id={`${hazard}-historic`} />
+                <h5>Statewide Map of {hazardName} Events </h5>
+                  <HazardEventsMapController
+                    allTime={ true }
+                    showLegend={ false }
+                    hazard={ hazard }
+                    height={ 600 }
+                  />
+                <HazardScoreTable />
+              </div>
             
-            <div className="property-section">
-              <Content content_id={`${hazard}-previous_occurrences`} />
-              <HazardEventsTable hazard={hazard} />
-            </div>
+           
             </div>
           </div>
         </div>
         <div className='row'>
-          <div className='col-lg-12'>
-            
+          <div className= 'col-12'>
+             <HazardEventsMapController
+                  showLegend={ false }
+                  hazard={ hazard }
+                  numMaps={ 12 }
+                />
+          </div>
+        </div>
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
+           
+             <div className="property-section">
+              <Content content_id={`${hazard}-previous_occurrences`} />
+              <HazardEventsTable hazard={hazard} />
+            </div>
           </div>
         </div>
 
+        {/*
+           Section 3 - Probability
+        */}
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '60%'}}>
             <div className="property-section">
-                <Content content_id={`${hazard}-presidential`} />
-                <FemaDisasterDeclarationsTable
-                 hazard={ hazard }
-                />
-            </div>
-                
-            <div className="property-section">
               <Content content_id={`${hazard}-probability`} />
-              <HazardList
+            </div>
+          </div>
+          <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content'>
+                <HazardList
                 hazard={hazard}
-                dataType={'severeWeather'}
+                dataType='severeWeather'
+                display='full'
               />
             </div>
-            
-
+          </div>
+        </div>
+        {/*
+           Section 3 - Vulnerability
+        */}
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <Content content_id={`${hazard}-local_vulnerability`} />
             </div>
@@ -168,13 +204,7 @@ class Hazard extends Component {
               <Content content_id={`${hazard}-bibliography`} />
             </div>
           </div>
-          <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content'>
-                test 123
-            </div>
-          </div>
         </div>
-     
  
     </div>
     )
