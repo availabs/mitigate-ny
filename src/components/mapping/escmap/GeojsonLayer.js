@@ -1,12 +1,12 @@
 import { GeoJsonLayer } from 'deck.gl';
 
 const lightSettings = {
-  lightsPosition: [-125, 50.5, 5000, -122.8, 48.5, 8000],
-  ambientRatio: 0.2,
-  diffuseRatio: 0.5,
-  specularRatio: 0.3,
-  lightsStrength: [1.0, 0.0, 2.0, 0.0],
-  numberOfLights: 2
+  lightsPosition: [0, 0, 150000],
+  ambientRatio: 0.4,
+  diffuseRatio: 0.6,
+  specularRatio: 0.8,
+  lightsStrength: [2.5, 0.0],
+  numberOfLights: 1
 };
 
 let UNIQUE_IDs = 0;

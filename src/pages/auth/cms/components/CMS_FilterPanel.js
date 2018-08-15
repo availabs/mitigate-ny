@@ -23,11 +23,18 @@ class FilterHeading extends React.Component {
 			toggleActiveFilter,
 			activeFilters
 		} = this.props;
+		const isActive = activeFilters.reduce((a, c) =>
+			a || filters.includes(c)
+		, false)
 		return (
 			<div className="filter-item filter-heading"
 				style={ { maxHeight: "400px", overflow: "auto" } }
 				onClick={ this.props.toggleOpened }>
 				{ heading }
+				{ !isActive ? null :
+					<span className="os-icon os-icon-others-43 float-right"
+						style={ { paddingTop: "1px", fontSize: "1.25em" } }/>
+				}
 				<div>
 					{ !this.props.opened ? null :
 						filters.sort().map(filter =>
