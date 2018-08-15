@@ -19,7 +19,8 @@ class CMS_ContentEditorPanel extends React.Component {
 
 	state = {
 		key: "",
-		value: ""
+		value: "",
+		oldKey: ""
 	}
 
 	onChange(e) {
@@ -49,13 +50,18 @@ class CMS_ContentEditorPanel extends React.Component {
 		} = this.props.cms.newContentData;
 		const {
 			key,
-			value
+			value,
+			oldKey
 		} = this.state;
+		if (oldKey) {
+			delete attributes[oldKey];
+		}
 		attributes = {
 			...attributes,
 			[key]: value
 		}
 		this.props.updateNewContentData({ attributes });
+		this.setState({ key: "", value: "", oldKey: "" });
 	}
 	removeAttribute(key) {
 		let {
@@ -63,6 +69,14 @@ class CMS_ContentEditorPanel extends React.Component {
 		} = this.props.cms.newContentData;
 		delete attributes[key];
 		this.props.updateNewContentData({ attributes: { ...attributes } });
+	}
+	editAttribute(key) {
+		let {
+			attributes
+		} = this.props.cms.newContentData;
+		this.setState({
+			key: key, value: attributes[key],
+			oldKey: key });
 	}
 
 	editContent(e) {
@@ -135,7 +149,8 @@ class CMS_ContentEditorPanel extends React.Component {
 
     	const {
     		key,
-    		value
+    		value,
+    		oldKey
     	} = this.state;
 
     	const disabled = (!key || !value);
@@ -183,7 +198,7 @@ class CMS_ContentEditorPanel extends React.Component {
 							<button className="btn btn-block btn-outline-primary"
 								type="button" disabled={ disabled }
 								onClick={ this.addAttribute.bind(this) }>
-								Add Attribute
+								{ oldKey ? "Edit" : "Add" } Attribute
 							</button>
 						</div>
 					</div>
@@ -201,7 +216,8 @@ class CMS_ContentEditorPanel extends React.Component {
 						<div className="row">
 							<div className="col-lg-12">
 								<AttributesTable attributes={ attributes }
-									remove={ this.removeAttribute.bind(this) }/>
+									remove={ this.removeAttribute.bind(this) }
+									edit={ this.editAttribute.bind(this) }/>
 							</div>
 						</div>
 					}
