@@ -10,9 +10,66 @@ class Landing extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
             
-            <h1>Agencies</h1>
-            <h1>Counties></h1>
-    
+            <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-whats_changed_2014`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section2-coordination_agency_departments`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-programs_table`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-mitigation_strategies_by_hazard`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-dhses_admin_plan`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-agency_administered_fundng_sources`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-local_fundng_sources`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section7-integration_local_state_mitigation_efforts`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-submittal_review_process`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section7-funding_plans_projects`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-local_assets_table`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-hmgp`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-lhmp_stats_map`} />
+            </div>
+
           </div>
            
         </div>

@@ -8,7 +8,7 @@ import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import Content from 'components/cms/Content'
 import HazardList from './components/HazardList'
 import HazardScoreTable from './components/HazardScoreTable'
-// import HazardMap from './components/HazardMap'
+import HazardMap from "./components/HazardMap"
 import HazardStats from './components/HazardStats'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
@@ -87,6 +87,8 @@ class Hazard extends Component {
           <div className="property-info-main" style={{maxWidth: '60%'}}>
             <div className="property-section">
               <div className="property-section">
+                  <h5>FEMA Risk Index Score for {hazardName}</h5>
+                  
                 <Content content_id={`${hazard}-location`} />
               </div>
             </div>
@@ -126,7 +128,9 @@ class Hazard extends Component {
                     hazard={ hazard }
                     height={ 600 }
                   />
-                <HazardScoreTable />
+                <HazardScoreTable 
+                  hazard={hazard}
+                />
               </div>
             
            
