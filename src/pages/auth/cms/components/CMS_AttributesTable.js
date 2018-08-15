@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ attributes, remove=null }) => {
+export default ({ attributes, remove=null, edit=null }) => {
 	const rows = Object.keys(attributes)
 		.sort((a, b) => (a < b) ? -1 : 1)
 		.map(key => ({ key, value: attributes[key] }))
@@ -9,23 +9,33 @@ export default ({ attributes, remove=null }) => {
 			style={ { tableLayout: "fixed" } }>
 			<thead>
 				<tr>
-					<th colSpan={ 2 }>Key</th>
-					<th colSpan={ 2 }>Value</th>
-					{ remove ? <th /> : null }
+					<th>Key</th>
+					<th>Value</th>
+					{ (remove || edit) ? <th /> : null }
 				</tr>
 			</thead>
 			<tbody>
 				{
 					rows.map(row =>
 	    				<tr key={ row.key }>
-	    					<td colSpan={ 2 }>{ row.key }</td>
-	    					<td colSpan={ 2 }>{ row.value }</td>
-	    					{ !remove ? null :
+	    					<td>{ row.key }</td>
+	    					<td>{ row.value }</td>
+	    					{ !(remove || edit) ? null :
 		    					<td>
-		    						<button className="btn btn-sm btn-outline-danger"
-		    							onClick={ () => remove(row.key) }>
-		    							Remove
-		    						</button>
+		    						{ !remove ? null :
+			    						<button className="btn btn-sm btn-outline-danger"
+			    							onClick={ () => remove(row.key) }
+			    							type="button">
+			    							Remove
+			    						</button>
+			    					}
+		    						{ !edit ? null :
+			    						<button className="btn btn-sm btn-outline-success"
+			    							onClick={ () => edit(row.key) }
+			    							type="button">
+			    							Edit
+			    						</button>
+			    					}
 		    					</td>
 		    				}
 	    				</tr>
