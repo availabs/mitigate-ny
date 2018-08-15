@@ -30,7 +30,7 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <HazardMap hazard="riverine"/>
+                <HazardMap hazard="sovist"/>
               </ElementBox>
             </div>
           </div>

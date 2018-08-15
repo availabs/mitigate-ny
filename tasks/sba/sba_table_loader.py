@@ -10,65 +10,6 @@ BUSINESS_FILE = 'sba_business_FY01-17.csv'
 UNCONVERTED_HOME_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_home_FY01-17.csv'
 HOME_FILE = 'sba_home_FY01-17.csv'
 
-# this can be copy-pasted from routes/metadata.js in mitigate-api
-# HAZARD_ID_TO_FEMA_DISASTERS = {
-#     'wind': [
-#         "Severe Storm(s)"
-#     ],
-#     'wildfire': [
-#         "Fire"
-#     ],
-#     'tsunami': [
-#         "Tsunami"
-#     ],
-#     'tornado': [
-#         "Tornado"
-#     ],
-#     'riverine': [
-#         "Flood"
-#     ],
-#     'lightning': [
-#     ],
-#     'landslide': [
-#         "Mud/Landslide"
-#     ],
-#     'icestorm': [
-#         "Severe Ice Storm"
-#     ],
-#     'hurricane': [
-#         "Hurricane",
-#         "Typhoon"
-#     ],
-#     'heatwave': [
-#     ],
-#     'hail': [
-#     ],
-#     'earthquake': [
-#         "Earthquake"
-#     ],
-#     'drought': [
-#         "Drought"
-#     ],
-#     'avalanche': [
-#     ],
-#     'coldwave': [
-#         "Freezing"
-#     ],
-#     'winterweat': [
-#         "Snow"
-#     ],
-#     'volcano': [
-#         "Volcano"
-#     ],
-#     'coastal': [
-#         "Coastal Storm"
-#     ]
-# }
-# FEMA_DISASTER_TO_HAZARDID = {}
-# for hazardid in HAZARD_ID_TO_FEMA_DISASTERS:
-# 	for fema_disaster in HAZARD_ID_TO_FEMA_DISASTERS[hazardid]:
-# 		FEMA_DISASTER_TO_HAZARDID[fema_disaster] = hazardid
-
 def toFloat(string):
 	try:
 		if len(string) is 0:
@@ -288,7 +229,7 @@ def populateGeoids(cursor):
 	print "COMPLETED POPULATION OF GEO IDs.\n"
 # END populateGeoids
 
-def loadTable(cursor):
+def loadTable(cursor, businessIn, homeIn):
 
 	inserts = ",".join(["%s"] * len(BUSINESS_META))
 	sql = """
@@ -298,7 +239,7 @@ def loadTable(cursor):
 	print "LOADING BUSINESS DATA..."
 	firstLineRead = False
 	META_DATA = []
-	with open(BUSINESS_FILE, 'rb') as businessData:
+	with open(businessIn, 'rb') as businessData:
 		reader = csv.reader(businessData, delimiter=',', dialect='excel')
 		for row in reader:
 			if firstLineRead:
@@ -322,7 +263,7 @@ def loadTable(cursor):
 
 	print "LOADING HOME DATA..."
 	firstLineRead = False
-	with open(HOME_FILE) as homeData:
+	with open(homeIn) as homeData:
 		reader = csv.reader(homeData, delimiter=',', dialect='excel')
 		for row in reader:
 			if firstLineRead:
@@ -349,7 +290,6 @@ def convertFile(inFile, outFile, inFormat, outFormat):
 def convertFiles(ucBusiness, businessIn, ucHome, homeIn, inFormat, outFormat, **rest):
 	convertFile(ucBusiness, businessIn, inFormat, outFormat)
 	convertFile(ucHome, homeIn, inFormat, outFormat)
-
 
 parser = argparse.ArgumentParser(description='SBA Data Tools.')
 parser.add_argument('-c', '--convert',
@@ -421,7 +361,7 @@ def main():
 		convertFiles(**args)
 
 	if not args["noTable"]:
-		loadTable(cursor)
+		loadTable(cursor, businessIn, homeIn)
 		conn.commit()
 
 	if not args["noIncidentTypes"]:
