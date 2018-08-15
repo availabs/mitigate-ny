@@ -37,9 +37,7 @@ const store = createStore(
     geo,
     vulnerabilities,
     cms,
-
     messages,
-
     graph,
     router: routerReducer
   }),

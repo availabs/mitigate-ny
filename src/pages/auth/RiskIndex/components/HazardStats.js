@@ -25,7 +25,7 @@ class HazardList extends Component {
     
     return this.props.falcor.get(
         ['riskIndex','meta', hazard, ['id', 'name']],
-        [dataType, geoid, hazard, {from: EARLIEST_YEAR, to: LATEST_YEAR}, ['num_events','num_episodes', 'num_severe_events' ,'property_damage', 'crop_damage', 'injuries', 'fatalities']]
+        [dataType, geoid, hazard, {from: EARLIEST_YEAR, to: LATEST_YEAR}, ['num_events','num_episodes', 'num_severe_events' ,'total_damage', 'injuries', 'fatalities']]
     )
     // .then(data => {
     //   console.log('all data back', Object.keys(data.json[dataType][geoid][hazard]), data.json[dataType][geoid][hazard])
@@ -95,6 +95,15 @@ class HazardList extends Component {
               </div>
             </div>
 
+            <div className="row">   
+              <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
+                  <div className="el-tablo highlight">
+                    <div className="value"> {total(hazardData,'injuries')}  </div>
+                    <div className="label"> Total {hazardName} Injuries
+                    <br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
+                  </div>
+              </div>
+            </div>
 
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>

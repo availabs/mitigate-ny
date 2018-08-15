@@ -215,7 +215,7 @@ HazardEventsMap.defaultProps = {
 	scrollZoom: true,
 	dragRotate: true,
 	padding: null,
-    mapLegendLocation: "top-right",
+    mapLegendLocation: "bottom-left",
     mapLegendSize: "large",
     mapControlsLocation: "top-left",
     hazard: null,

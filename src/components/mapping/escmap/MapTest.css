@@ -1,7 +1,7 @@
 .map-test-table-div {
 	position: absolute;
 	z-index: 900;
-	background-color: rgba(255, 255, 255, 0.25);
+	background-color: rgba(255, 255, 255, 0.85);
 	color: #3E4B5B; /*rgba(0, 0, 0, 0.75);*/
 	border-radius: 3px ;
 	padding: 2px 10px;

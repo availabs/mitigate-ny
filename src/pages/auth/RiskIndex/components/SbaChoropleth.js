@@ -222,7 +222,7 @@ class SbaChoropleth extends React.Component {
 			<table className="map-test-table">
 				<thead>
 					<tr>
-						<th className="no-border-bottom" colSpan={ range.length }>Total Losses</th>
+						<th className="no-border-bottom" colSpan={ range.length }>SBA Verified Loss</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -292,7 +292,7 @@ class SbaChoropleth extends React.Component {
 				<thead>
 					<tr className="no-border-bottom">
 						<th>
-							Total Loss:
+							SBA Verified Loss:
 						</th>
 						<th>
 							{ format(total_loss) }
@@ -307,10 +307,10 @@ class SbaChoropleth extends React.Component {
 			legend = this.generateLegend(scale);
 		if (legend) {
 			controls.push(
-				{ pos: "bottom-left",
+				{ pos: "top-left",
 					comp: legend
 				},
-				{ pos: "top-left",
+				{ pos: "top-right",
 					comp: this.generateTotalLoss(total_loss)
 				}
 			)
