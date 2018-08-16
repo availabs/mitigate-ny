@@ -1,3 +1,5 @@
+const { format } = require("d3-format")
+
 const LimitedAttributes = {
 	num_events: "Occurances",
 	property_damage: "Property Damage $"
@@ -18,7 +20,41 @@ const getHazardName = hazardid =>
 			.map((d, i) => i === 0 ? d.toUpperCase() : d)
 			.join("")
 
+function fnum(x) {
+	if(isNaN(x)) return x;
+
+	if(x < 9999) {
+		const frmt = format(",.0f")
+		return frmt(x);
+	}
+
+	if(x < 1000000) {
+		const frmt = format(",.0f")
+		return frmt(x/1000) + "K";
+	}
+	if( x < 10000000) {
+		const frmt = format(",.2f")
+		return frmt(x/1000000) + "M";
+	}
+
+	if(x < 1000000000) {
+		const frmt = format(",.1f")
+		return frmt(x/1000000) + "M";
+	}
+
+	if(x < 1000000000000) {
+		const frmt = format(",.1f")
+		return frmt(x/1000000000) + "B";
+	}
+
+	return "1T+";
+}
+
 module.exports = {
+
+	getHazardName,
+	fnum,
+
 	processSheldus : (data,key) => {
 		let yearly = {
 			id: sheldusAttributes[key],
@@ -56,8 +92,6 @@ module.exports = {
 		}
 		return [yearly,fiveYear]
 	},
-
-	getHazardName,
 
 	processDataForBarChart: (rawData, geoids, lossType="property_damage") => {
 // console.log("<processDataForBarChart>",rawData)
@@ -180,31 +214,4 @@ module.exports = {
 		
 	}
 
-}
-
-function fnum(x) {
-	if(isNaN(x)) return x;
-
-
-
-	if(x < 9999) {
-		return x.toFixed(0);
-	}
-
-	if(x < 1000000) {
-		return Math.round(x/1000) + "K";
-	}
-	if( x < 10000000) {
-		return (x/1000000).toFixed(2) + "M";
-	}
-
-	if(x < 1000000000) {
-		return (x/1000000).toFixed(1) + "M";
-	}
-
-	if(x < 1000000000000) {
-		return (x/1000000000).toFixed(1) + "B";
-	}
-
-	return "1T+";
 }

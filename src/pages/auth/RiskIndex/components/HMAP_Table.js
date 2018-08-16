@@ -54,6 +54,8 @@ class HMAP_Table extends React.Component {
 	    		['hmap', 'byId', project_ids,
 	    			[
 				  		"year",
+				  		"county",
+				  		"subgrantee",
 				  		"projecttype",
 				  		"projectamount"
 				  	]
@@ -66,8 +68,10 @@ class HMAP_Table extends React.Component {
 		const row = {};
 		row["year"] = data.year;
 		row["project amount"] = format(data.projectamount);
-		row["value"] = data.projectamount;
+		row["county"] = data.county;
+		row["subgrantee"] = data.subgrantee;
 		row["project type"] = data.projecttype;
+		row["value"] = data.projectamount;
 		return row;
 	}
 

@@ -2,88 +2,140 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import { createMatchSelector } from 'react-router-redux';
+import { format as d3format } from "d3-format"
 
-import { sumData } from 'utils/sheldusUtils'
+import { fnum } from 'utils/sheldusUtils'
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
-class GeographyHazardScoreTable extends Component {
-  state = {
-    loading: true
-  }
+class HazardScoreTable extends Component {
 
   fetchFalcorDeps() {
-    let geoid = this.props.geoid || '36'
-    let geoLevel = this.props.geoLevel || 'counties'
-    let dataType = this.props.dataType || 'sheldus'
-    const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {}
-    const hazard = params.hazard
+    const { geoid, geoLevel, dataType, hazard } = this.props;
     return this.props.falcor.get(
       ['geo', geoid, geoLevel]
     ).then(data => {
-      let geographies = data.json.geo['36'][geoLevel]
+      const geoids = data.json.geo['36'][geoLevel];
       return this.props.falcor.get(
         ['riskIndex','meta', hazard , ['id', 'name']],
-        ['geo', geographies, ['name']],
-        [dataType, geographies, hazard,{from: 1996, to: 2017}, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']] 
+        ['geo', geoids, ['name']],
+        [dataType, geoids, hazard, "allTime",
+          ['num_events',
+            'total_damage',
+            'annualized_damage',
+            'annualized_num_events',
+            'num_severe_events',
+            'annualized_num_severe_events',
+            'daily_event_prob',
+            'daily_severe_event_prob'
+          ]
+        ] 
       )
-    }).then(data => {
-      this.setState({loading: false})
-      return data
     })
   }
 
-  renderGraphTable(hazard) {
-    let geoid = this.props.geoid || '36'
-    let geoLevel = this.props.geoLevel || 'counties'
-    let dataType = this.props.dataType || 'sheldus'
-    let year = this.props.year || 2017
-    let sumTime = 10
-    if(!this.props.geoGraph[geoid] 
-       || !this.props.geoGraph[geoid][geoLevel].value
-       || !this.props[dataType][this.props.geoGraph[geoid][geoLevel].value[0]]
-       || !this.props[dataType][this.props.geoGraph[geoid][geoLevel].value[0]][hazard]
-       ) {
-      return <ElementBox> Loading... </ElementBox>
+  renderEventsTable() {
+    const { geoid, geoLevel, dataType, hazard, pageSize } = this.props;
+
+    let tableData = [],
+      keys = [
+        "county",
+        "damage",
+        "annualized damage",
+        "events",
+        "annualized events",
+        "severe events",
+        "annualized severe events"
+      ];
+
+    try {
+      tableData = this.props.geoGraph[geoid][geoLevel].value
+        .map((geoid,i) => {
+          const data = this.props[dataType][geoid][hazard].allTime;
+          return {
+            "county": this.props.geoGraph[geoid].name,
+            "damage": fnum(data.total_damage),
+            "annualized damage": fnum(data.annualized_damage),
+            "events": data.num_events,
+            "annualized events": data.annualized_num_events,
+            "severe events": data.num_severe_events,
+            "annualized severe events": data.annualized_num_severe_events,
+            "sort": data.total_damage
+          }
+        })
+        .sort((a, b) => b.sort - a.sort)
     }
-
-    let graphTableData = this.props.geoGraph[geoid][geoLevel].value
-      .sort((ageoid, bgeoid) => {
-
-        let bdata = sumData(this.props[dataType][bgeoid][hazard],'property_damage',sumTime)[year]
-        let adata = sumData(this.props[dataType][ageoid][hazard],'property_damage',sumTime)[year]
-        bdata = isNaN(bdata) ? 0 : bdata
-        adata = isNaN(adata) ? 0 : adata
-        
-        return bdata - adata
-      })
-      .map((geoLevelid,i) => {
-        let output =  { 'County': this.props.geoGraph[geoLevelid].name }
-        output[`${hazard} Events`] = sumData(this.props[dataType][geoLevelid][hazard],'num_events', sumTime)[year]
-        output[`${hazard} Loss`] = sumData(this.props[dataType][geoLevelid][hazard],'property_damage', sumTime)[year].toLocaleString()
-        return output
-      })
+    catch (e) {
+// console.log(e);
+      return <ElementBox>Loading...</ElementBox>
+    }
     
     return (
       <TableBox 
-        title={this.props.riskIndexGraph.meta[hazard].name}  
-        data={graphTableData}
-        pageSize={this.props.pageSize || 12}
+        title={ this.props.riskIndexGraph.meta[hazard].name }
+        data={ tableData }
+        pageSize={ pageSize }
+        columns={ keys }
       />
     )
 
   }
+
+  renderProbTable() {
+    const { geoid, geoLevel, dataType, hazard, pageSize } = this.props;
+
+    let tableData = [],
+      keys = [
+        "county",
+        "daily event chance",
+        "daily severe event chance"
+      ];
+
+    try {
+      const format = d3format(".2f");
+      tableData = this.props.geoGraph[geoid][geoLevel].value
+        .map((geoid,i) => {
+          const data = this.props[dataType][geoid][hazard].allTime;
+          return {
+            "county": this.props.geoGraph[geoid].name,
+            "daily event chance": format(data.daily_event_prob * 100) + "%",
+            "daily severe event chance": format(data.daily_severe_event_prob * 100) + "%",
+            "sort": data.sort_damage
+          }
+        })
+        .sort((a, b) => b.sort - a.sort)
+    }
+    catch (e) {
+// console.log(e);
+      return <ElementBox>Loading...</ElementBox>
+    }
+    
+    return (
+      <TableBox 
+        title={ this.props.riskIndexGraph.meta[hazard].name }
+        data={ tableData }
+        pageSize={ pageSize }
+        columns={ keys }
+      />
+    )
+  }
   
   render () {
-    const hazard = this.props.hazard || 'riverine'
-    return (
-      <div>
-       {this.renderGraphTable(hazard)}
-      </div>
-    ) 
+    const { tableType } = this.props;
+    return tableType == "events" ? this.renderEventsTable()
+      : this.renderProbTable()
   }
+}
+
+HazardScoreTable.defaultProps = {
+  geoid: '36',
+  geoLevel: 'counties',
+  dataType: 'severeWeather',
+  hazard: 'riverine',
+  sumTime: 10,
+  pageSize: 12,
+  tableType: "events" // or "prob"
 }
 
 const mapDispatchToProps = { };
@@ -92,7 +144,7 @@ const mapStateToProps = state => {
   return {
     riskIndexGraph: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
-    severeweather: state.graph.severeWeather || {},
+    severeWeather: state.graph.severeWeather || {},
     geoGraph: state.graph.geo || {},
     router: state.router,
     
@@ -100,4 +152,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(GeographyHazardScoreTable))
+export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(HazardScoreTable))

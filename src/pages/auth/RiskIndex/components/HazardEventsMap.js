@@ -164,7 +164,7 @@ class HazardEventsMap extends React.Component {
 				return [rgbColor.r, rgbColor.g, rgbColor.b, 255];
 			}
 			return [
-				{ id: 'counties-merge-layer',
+				{ id: 'counties-merge-layer-filled',
 					data: this.props.geo['merge']['36']['counties'],
 					filled: true,
 					getFillColor: [242, 239, 233, 255]
@@ -175,7 +175,7 @@ class HazardEventsMap extends React.Component {
 					getLineColor: [200, 200, 200, 255],
 					lineWidthMinPixels: 1
 				},
-				{ id: 'counties-merge-layer',
+				{ id: 'counties-merge-layer-stroked',
 					data: this.props.geo['merge']['36']['counties'],
 					stroked: true,
 					getLineColor: [242, 239, 233, 255],

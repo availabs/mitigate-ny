@@ -6,6 +6,9 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardEventsMapController from "./components/HazardEventsMapController"
+import HMAP_Table from "./components/HMAP_Table"
+
+import HazardScoreTable from "./components/HazardScoreTable"
 
 class Test extends React.Component {
 
@@ -30,7 +33,17 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <HazardEventsMapController
+                <HazardScoreTable
+                  hazard="riverine"
+                  tableType="prob"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <ElementBox>
+                <HazardScoreTable
                   hazard="riverine"/>
               </ElementBox>
             </div>
