@@ -10,7 +10,11 @@ class Home extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
           
-             <div className="property-section">
+            <div className="property-section">
+              <Content content_id={`home-about`} />
+            </div>
+
+            <div className="property-section">
               <Content content_id={`section1-essentialterms`} />
             </div>
 
@@ -18,9 +22,7 @@ class Home extends Component {
               <Content content_id={`section1-strategicframework`} />
             </div>
 
-             <div className="property-section">
-              <Content content_id={`section2-glossary`} />
-            </div>
+            
 
           </div>           
         </div>
@@ -29,6 +31,10 @@ class Home extends Component {
   }
 }
 
+
+// <div className="property-section">
+//   <Content content_id={`section2-glossary`} />
+// </div>
 // class Home extends Component {
 //   render () {
 //    return (

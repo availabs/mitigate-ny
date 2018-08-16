@@ -150,8 +150,7 @@ class Hazard extends Component {
           <div className="property-info-main" style={{maxWidth: '100%'}}>
            
              <div className="property-section">
-              <Content content_id={`${hazard}-previous_occurrences`} />
-              <HazardEventsTable hazard={hazard} />
+               <HazardEventsTable hazard={hazard} />
             </div>
           </div>
         </div>
@@ -190,10 +189,6 @@ class Hazard extends Component {
             
             <div className="property-section">
               <Content content_id={`${hazard}-climate_change`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`${hazard}-repetitive`} />
             </div>
 
             <div className="property-section">

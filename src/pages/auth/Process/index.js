@@ -22,14 +22,7 @@ class Landing extends Component {
               <Content content_id={`section2-planning_process`} />
             </div>
 
-            <div className="property-section">
-              <Content content_id={`section2-genplanguidelines`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section1-adoptionassurances`} />
-            </div>
-
+           
             <div className="property-section">
               <Content content_id={`section2-plan_maintenance`} />
             </div>
@@ -54,7 +47,13 @@ class Landing extends Component {
               <Content content_id={`planning-monitoring_progress`} />
             </div>
 
-            
+            <div className="property-section">
+              <Content content_id={`section1-adoptionassurances`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section2-genplanguidelines`} />
+            </div>            
 
           </div>           
         </div>
