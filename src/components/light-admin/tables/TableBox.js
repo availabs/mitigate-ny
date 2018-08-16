@@ -8,7 +8,8 @@ import Pagination from './Pagination'
     super(props);
     this.state = {
       page: 0,
-      filter: ""
+      filter: "",
+      sortKey: props.sortKey
     }
     this.setPage = this.setPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -34,7 +35,7 @@ import Pagination from './Pagination'
     if (!filterKey.length) {
       filterKey = Object.keys(this.props.data[0])[0];
     }
-    return this.props.data.filter(d => d[filterKey].toLowerCase().includes(filter));
+    return this.props.data.filter(d => d[filterKey].toString().toLowerCase().includes(filter));
   }
   setFilter(e) {
     this.setState({ filter: e.target.value.toLowerCase() });
@@ -70,7 +71,7 @@ import Pagination from './Pagination'
               </div>
               <div className="col-sm-6">
                 <form className="form-inline justify-content-sm-end">
-                  <a className="btn btn-sm btn-secondary" href="">Download CSV</a>
+                  <a className="btn btn-sm btn-secondary" href="#">Download CSV</a>
                 </form>
               </div>
             </div>

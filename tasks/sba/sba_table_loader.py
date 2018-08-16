@@ -229,7 +229,7 @@ def populateGeoids(cursor):
 	print "COMPLETED POPULATION OF GEO IDs.\n"
 # END populateGeoids
 
-def loadTable(cursor, businessIn, homeIn):
+def loadTable(cursor, businessIn, homeIn, **rest):
 
 	inserts = ",".join(["%s"] * len(BUSINESS_META))
 	sql = """
@@ -361,7 +361,7 @@ def main():
 		convertFiles(**args)
 
 	if not args["noTable"]:
-		loadTable(cursor, businessIn, homeIn)
+		loadTable(cursor, **args)
 		conn.commit()
 
 	if not args["noIncidentTypes"]:

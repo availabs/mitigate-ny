@@ -63,7 +63,8 @@ class NewContentPage extends React.Component {
               Body Preview
             </h5>
               <div style={ { maxHeight: "571px", overflow: "auto" } }>
-                <MarkdownRenderer markdown={ body }/>
+                <MarkdownRenderer markdown={ body }
+                  options={ { html: true } }/>
               </div>
             </ElementBox>
           </div>

@@ -28,14 +28,13 @@ class FilterHeading extends React.Component {
 		, false)
 		return (
 			<div className="filter-item filter-heading"
-				style={ { maxHeight: "400px", overflow: "auto" } }
 				onClick={ this.props.toggleOpened }>
 				{ heading }
 				{ !isActive ? null :
 					<span className="os-icon os-icon-others-43 float-right"
 						style={ { paddingTop: "1px", fontSize: "1.25em" } }/>
 				}
-				<div>
+				<div style={ { maxHeight: "400px", overflow: "auto" } }>
 					{ !this.props.opened ? null :
 						filters.sort().map(filter =>
 							<FilterItem key={ filter }

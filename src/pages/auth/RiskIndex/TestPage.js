@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import HazardMap from "./components/HazardMap"
+import HazardEventsMapController from "./components/HazardEventsMapController"
 
 class Test extends React.Component {
 
@@ -30,7 +30,8 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <HazardMap hazard="sovist"/>
+                <HazardEventsMapController
+                  hazard="riverine"/>
               </ElementBox>
             </div>
           </div>
@@ -56,10 +57,10 @@ const mapDispatchToProps = {};
 export default [
   {
     path: '/test',
-    name: 'Map Test',
+    name: 'Test Page',
     mainNav: false,
     breadcrumbs: [
-    	{name: 'Map Test', path: '/test'}
+    	{name: 'Test Page', path: '/test'}
     ],
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Test))

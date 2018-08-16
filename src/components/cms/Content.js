@@ -34,7 +34,8 @@ class CMS_BodyViewer extends React.Component {
 			body
 		} = this.state;
 		const {
-			maxHeight
+			maxHeight,
+			content_id
 		} = this.props;
 		const style = {
 			maxHeight: `${ maxHeight }px`,
@@ -42,17 +43,14 @@ class CMS_BodyViewer extends React.Component {
 		};
 		return (
 			!error ?
-				<div style={ style }>
-					<MarkdownRenderer markdown={ body }/>
+				<div style={ style } id={ content_id }>
+					<MarkdownRenderer markdown={ body }
+                  		options={ { html: true } }/>
 				</div>
 			:
 				<div>{ `There was an error: ${ error }` }</div>
 		)
 	}
-}
-
-CMS_BodyViewer.defaultProps = {
-	maxHeight: null
 }
 
 export default reduxFalcor(CMS_BodyViewer);

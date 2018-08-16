@@ -80,10 +80,11 @@ export default class ContentItem extends React.Component {
 										}
 									</div>
 								}
-								<div className={ `col-lg-${ !hasAttributes ? 12 : attributesOpened ? 8 : 11 }` }
-									style={ { maxHeight: "600px", overflow: "auto" } }>
+								<div className={ `col-lg-${ !hasAttributes ? 12 : attributesOpened ? 8 : 11 }` }>
 									<h5>Body</h5>
-									<BodyViewer content_id={ content_id }/>
+									<div style={ { maxHeight: "600px", overflow: "auto", paddingRight: "10px" } }>
+										<BodyViewer content_id={ content_id }/>
+									</div>
 								</div>
 							</div>
 						}
