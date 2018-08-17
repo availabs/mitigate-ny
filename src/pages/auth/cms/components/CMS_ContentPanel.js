@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from "react-router-dom"
+
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 // import AttributesTable from "./CMS_AttributesTable"
@@ -201,10 +203,10 @@ class CMS_ContentPanel extends React.Component {
   							</div>
   						</div>
   						<div className="col-lg-2">
-  							<a href="/cms/new" className="btn btn-lg btn-outline-success btn-block">
+  							<Link to="/cms/new" className="btn btn-lg btn-outline-success btn-block">
   								<span style={ { fontWeight: "900" } }>NEW</span>
   								<span style={ { fontWeight: "900", fontSize: "1.5em" } } className="os-icon os-icon-plus-circle"/>
-  							</a>
+  							</Link>
   						</div>
   					</div>
   				</ElementBox>

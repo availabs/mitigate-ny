@@ -16,12 +16,19 @@ import {
 	getHazardName
 } from 'utils/sheldusUtils'
 
-
-
 class GeographyScoreBarChart extends React.Component {
 
+	getHazardName(hazard) {
+		try {
+			return this.props.riskIndexGraph.meta[hazard].name;
+		}
+		catch (e) {
+			return getHazardName(hazard)
+		}
+	}
+
 	processData() {
-    	const { geoid, geoLevel, dataType } = this.props;
+    	const { geoid, geoLevel, dataType, hazard, lossType } = this.props;
 		try {
 			let geoids = []
 			if (geoLevel === 'state') {
@@ -30,15 +37,15 @@ class GeographyScoreBarChart extends React.Component {
 			else {
 				geoids = this.props.geoGraph[geoid][geoLevel].value;
 			}
-			return processDataForBarChart(get(this.props, this.props.dataType, {}), geoids, this.props.lossType);
+			return processDataForBarChart(get(this.props, dataType, {}), geoids, lossType, hazard);
 		}
 		catch (e) {
 			return { data: [], keys: [] }
 		}
 	}
 	render() {
-		const { data, keys } = this.processData();
-		const format = d3format.format(this.props.format);
+		const { data, keys } = this.processData(),
+			format = d3format.format(this.props.format);
 		if (!data.length) {
 			return <ElementBox>Loading...</ElementBox>;
 		}
@@ -81,7 +88,7 @@ class GeographyScoreBarChart extends React.Component {
 				        	d => (
 					        	<div>
 					        		<div style={ { display: "inline-block", width: "15px", height: "15px", backgroundColor: this.props.colorScale(d.id) } }/>
-					        		<span style={ { paddingLeft: "5px" } }>{ getHazardName(d.id) }</span>
+					        		<span style={ { paddingLeft: "5px" } }>{ this.getHazardName(d.id) }</span>
 					        		<span style={ { paddingLeft: "5px" } }>{ format(d.value) }</span>
 					        	</div>
 					        )
@@ -99,7 +106,8 @@ class GeographyScoreBarChart extends React.Component {
 GeographyScoreBarChart.defaultProps = {
 	height: 500,
 	lossType: "property_damage",
-	format: "$,d"
+	format: "$,d",
+	hazard: null
 }
 
 const mapStateToProps = state => {
@@ -109,9 +117,7 @@ const mapStateToProps = state => {
     severeWeather: state.graph.severeWeather || {},
     sba: state.graph.sba || {},
     geoGraph: state.graph.geo || {},
-    riskIndex: state.riskIndex,
-    router: state.router,
-    geo: state.geo
+    router: state.router
   }
 }
 

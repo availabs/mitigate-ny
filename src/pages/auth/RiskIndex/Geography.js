@@ -15,35 +15,13 @@ import GeographyScoreBarChart from './components/GeographyScoreBarChart'
 import HazardEventsMapController from "./components/HazardEventsMapController"
 
 import {
+  getColorScale
+} from 'utils/sheldusUtils'
+
+import {
   EARLIEST_YEAR,
   LATEST_YEAR
 } from "./components/yearsOfSevereWeatherData";
-
-const D3_CATEGORY20 = [
-  "#1f77b4",
-  "#aec7e8",
-  "#ff7f0e",
-  "#ffbb78",
-  "#2ca02c",
-  "#98df8a",
-  "#d62728",
-  "#ff9896",
-  "#9467bd",
-  "#c5b0d5",
-  "#8c564b",
-  "#c49c94",
-  "#e377c2",
-  "#f7b6d2",
-  "#7f7f7f",
-  "#c7c7c7",
-  "#bcbd22",
-  "#dbdb8d",
-  "#17becf",
-  "#9edae5"
-];
-
-const COLOR_SCALE = d3scale.scaleOrdinal()
-    .range(D3_CATEGORY20);
 
 class Geography extends Component {
   constructor(props) {
@@ -56,8 +34,9 @@ class Geography extends Component {
     this.state = {
       geoLevel,
       geoid,
-      dataType: 'severeWeather',//'sheldus',
-      year: LATEST_YEAR
+      dataType: 'severeWeather',
+      year: LATEST_YEAR,
+      colorScale: getColorScale([1, 2])
     }
   }
 
@@ -98,14 +77,15 @@ class Geography extends Component {
       const geographies = data.json.geo[geoid][geoLevel],
         hazards = data.json.riskIndex.hazards,
         requests = [];
-      COLOR_SCALE.domain(hazards);
+      this.setState({ colorScale: getColorScale(hazards) });
       for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
         requests.push([dataType, geographies, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']])
       }
       return this.props.falcor.get(
         ['riskIndex', 'meta', hazards, ['id', 'name']],
         ['geo', geographies, ['name']],
-        ['riskIndex', geographies, hazards, ['score', 'value']]
+        ['riskIndex', geographies, hazards, ['score', 'value']],
+        ['riskIndex', 'meta', hazards, ['id', 'name']]
       )
       .then(data => requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve()))
     })
@@ -135,15 +115,13 @@ class Geography extends Component {
 
           <div className='row'>
             <div className='col-lg-12'>
-                <GeographyScoreBarChart { ...this.state }
-                  colorScale={ COLOR_SCALE }/>
+                <GeographyScoreBarChart
+                  { ...this.state }/>
             </div>
           </div>
 
           <HazardEventsMapController
-            colorScale={ COLOR_SCALE }
-            { ...this.state }
-            />
+            { ...this.state }/>
 
       	</Element>
     )

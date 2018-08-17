@@ -5,22 +5,50 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
+import GeographyScoreBarChart from "./components/GeographyScoreBarChart"
+import GeographyScoreTable from "./components/GeographyScoreTable"
 import HazardEventsMapController from "./components/HazardEventsMapController"
-import HMAP_Table from "./components/HMAP_Table"
 
-import HazardScoreTable from "./components/HazardScoreTable"
+import {
+  getColorScale,
+  getColors
+} from 'utils/sheldusUtils'
+
+import {
+  EARLIEST_YEAR,
+  LATEST_YEAR
+} from "./components/yearsOfSevereWeatherData";
 
 class Test extends React.Component {
 
-  fetchFalcorDeps() {
-    return this.props.falcor.get(
-      ["riskIndex", "hazards"]
-    )
+  state = {
+    geoid: '36',
+    geoLevel: 'counties',
+    dataType: 'severeWeather',
+    year: LATEST_YEAR,
+    colorScale: getColorScale([1, 2])
   }
 
-  toggleYears() {
-    const years = (this.state.years === "Individual Years") ? "All Time" : "Individual Years";
-    this.setState({ years });
+  fetchFalcorDeps() {
+    const { geoid, geoLevel, dataType } = this.state;
+    return this.props.falcor.get(
+      ['geo', geoid, geoLevel],
+      ['riskIndex', 'hazards']
+    ).then(data => {
+      const geographies = data.json.geo[geoid][geoLevel],
+        hazards = data.json.riskIndex.hazards,
+        requests = [];
+      this.setState({ colorScale: getColorScale(hazards) });
+      for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 8) {
+        requests.push([dataType, geographies, hazards, { from: Math.max(i - 7, EARLIEST_YEAR), to: i }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']])
+      }
+      return this.props.falcor.get(
+        ['riskIndex', 'meta', hazards, ['id', 'name']],
+        ['geo', geographies, ['name']],
+        ['riskIndex', geographies, hazards, ['score', 'value']],
+      )
+      .then(data => requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve()))
+    })
   }
 
   render() {
@@ -33,9 +61,8 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <HazardScoreTable
-                  hazard="riverine"
-                  tableType="prob"/>
+                <GeographyScoreBarChart
+                  { ...this.state }/>
               </ElementBox>
             </div>
           </div>
@@ -43,8 +70,10 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <HazardScoreTable
-                  hazard="riverine"/>
+                <HazardEventsMapController
+                  showLegend={ true }
+                  { ...this.state }
+                  numMaps={ 12 }/>
               </ElementBox>
             </div>
           </div>

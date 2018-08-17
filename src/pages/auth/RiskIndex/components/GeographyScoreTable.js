@@ -11,6 +11,15 @@ import TableBox from 'components/light-admin/tables/TableBox'
 
 class GeographyHazardScoreTable extends React.Component {
 
+  getHazardName(hazard) {
+    try {
+      return this.props.riskIndexGraph.meta[hazard].name;
+    }
+    catch (e) {
+      return getHazardName(hazard)
+    }
+  }
+
   renderGraphTable() {
     const { geoid, geoLevel, dataType, year } = this.props;
     let graphTableData = [], countyName = "",
@@ -28,7 +37,7 @@ class GeographyHazardScoreTable extends React.Component {
           this.props.riskIndexGraph.hazards.value
             .filter(hazard => ['tsunami', 'avalanche', 'volcano'].indexOf(hazard) === -1)
             .forEach(hazard => {
-              const column = getHazardName(hazard);//`${ hazard } Loss`;
+              const column = this.getHazardName(hazard);//`${ hazard } Loss`;
               columns[column] = true;
               const processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
               output[column] = parseInt((processedSheldus[year] / 1000), 10).toLocaleString();

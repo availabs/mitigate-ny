@@ -1,4 +1,5 @@
-const { format } = require("d3-format")
+const { scaleOrdinal } = require("d3-scale");
+const { format } = require("d3-format");
 
 const LimitedAttributes = {
 	num_events: "Occurances",
@@ -12,6 +13,83 @@ const sheldusAttributes = {
 	injuries: "Injuries",
 	fatalities: "Fatalities"
 }
+
+const increase = 100
+const getColors = num => {
+  const colors = [];
+  let r = 0, g = increase, b = 0;
+  for (let i = 0; i < num; ++i) {
+
+    colors.push(`rgb(${ r },${ g },${ b })`);
+
+    b += increase;
+
+    if (b > 255) {
+      b %= 255;
+      g += increase;
+    }
+
+    if (g > 255) {
+      g %= 255;
+      r += increase;
+    }
+
+    if (r > 255) {
+      r %= 255;
+    }
+  }
+  return colors;
+}
+
+const increase2 = 85
+const getColors2 = num => {
+  const colors = [];
+  let r = 0, g = increase2, b = 0;
+  for (let i = 0; i < num; ++i) {
+
+    colors.push(`rgb(${ r },${ g },${ b })`);
+
+    b += increase2;
+
+    if (b > 255) {
+      b = 0;
+      g += increase2;
+    }
+
+    if (g > 255) {
+      g = 0;
+      r += increase2;
+    }
+
+    if (r > 255) {
+      r = 0;
+    }
+  }
+  return colors;
+}
+
+const D3_CATEGORY20 = [
+  "#1f77b4",
+  "#aec7e8",
+  "#ff7f0e",
+  "#ffbb78",
+  "#2ca02c",
+  "#98df8a",
+  "#d62728",
+  "#ff9896",
+  "#9467bd",
+  "#c5b0d5",
+  "#8c564b",
+  "#c49c94",
+  "#e377c2",
+  "#f7b6d2",
+  "#7f7f7f",
+  "#c7c7c7",
+  "#bcbd22",
+  "#dbdb8d",
+  "#17becf",
+  "#9edae5"
+];
 
 const getHazardName = hazardid =>
 	hazardid === "winterweat"
@@ -54,6 +132,13 @@ module.exports = {
 
 	getHazardName,
 	fnum,
+	getColors,
+	getColors2,
+
+	getColorScale: domain =>
+		scaleOrdinal()
+			.domain(domain)
+			.range(D3_CATEGORY20),
 
 	processSheldus : (data,key) => {
 		let yearly = {
@@ -93,12 +178,14 @@ module.exports = {
 		return [yearly,fiveYear]
 	},
 
-	processDataForBarChart: (rawData, geoids, lossType="property_damage") => {
+	processDataForBarChart: (rawData, geoids, lossType="property_damage", hazard=null) => {
 // console.log("<processDataForBarChart>",rawData)
 		const data = {}, keys = {};
 		for (const geoid in rawData) {
 			if (!geoids.includes(geoid)) continue;
 			for (const hazardid in rawData[geoid]) {
+				if (hazard && (hazardid != hazard)) continue;
+
 				if (!(hazardid in keys)) {
 					keys[hazardid] = true;
 				}
