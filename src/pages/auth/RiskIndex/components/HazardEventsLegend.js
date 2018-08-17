@@ -8,6 +8,8 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import { getHazardName } from 'utils/sheldusUtils'
 
+import "./HazardEventsLegend.css"
+
 const format = d3format.format(",.0f")
 
 export const CircleDiv = ({ color="#000", radius=10, thickness=2, children=null, style={} }) =>
@@ -32,6 +34,15 @@ export default class HazardEventsLegend extends React.Component {
 		this.props.viewport.unregister(this);
 	}
 
+  	getHazardName(hazard) {
+    	try {
+      		return this.props.riskIndexGraph.meta[hazard].name;
+    	}
+    	catch (e) {
+      		return getHazardName(hazard)
+    	}
+  	}
+
 	render() {
 		const { colorScale, radiusScale, viewport } = this.props;
 		const distanceScales = getDistanceScales(viewport()),
@@ -51,10 +62,14 @@ export default class HazardEventsLegend extends React.Component {
 				const i = (r * numCols) + c;
 				columns.push(
 					<td key={ `row-${ r }-column-${ c }` }
-						style={ { color: colorScale(domain[i]), backgroundColor: "rgb(0, 0, 0, 0.75)", border: "2px solid #fff", padding: "10px 0px 0px 15px" } }>
+						style={ {
+							color: colorScale(domain[i]),
+							backgroundColor: "rgb(242, 239, 233)",
+							padding: "10px 0px 0px 15px"
+						} }>
 						<CircleDiv color={ colorScale(domain[i]) }/>
 						<div style={ { padding: "0px 10px", display: "inline-block", fontSize: "18px" } }>
-							{ domain[i] ? getHazardName(domain[i]) : null }
+							{ domain[i] ? this.getHazardName(domain[i]) : null }
 						</div>
 					</td>
 				)
@@ -69,7 +84,8 @@ export default class HazardEventsLegend extends React.Component {
 		return (
 			<div className="col-lg-12">
 				<ElementBox>
-					<table style={ { width: "70%", display: "inline-block", tableLayout: "fixed" } }>
+					<table className="hazard-events-legend"
+						style={ { width: "70%" } }>
 						<tbody>
 							{ rows }
 						</tbody>

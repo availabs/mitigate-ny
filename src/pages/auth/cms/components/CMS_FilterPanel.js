@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addActiveFilter,
-  removeActiveFilter,
   toggleActiveFilter
 } from 'store/modules/cms';
 
@@ -97,8 +95,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  addActiveFilter,
-  removeActiveFilter,
   toggleActiveFilter
 };
 

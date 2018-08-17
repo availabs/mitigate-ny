@@ -18,39 +18,13 @@ import HazardEventsLegend from "./HazardEventsLegend"
 import Viewport from "components/mapping/escmap/Viewport"
 
 import {
+  getColorScale
+} from 'utils/sheldusUtils'
+
+import {
   EARLIEST_YEAR,
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
-
-const D3_CATEGORY20 = [
-  "#1f77b4",
-  "#aec7e8",
-  "#ff7f0e",
-  "#ffbb78",
-  "#2ca02c",
-  "#98df8a",
-  "#d62728",
-  "#ff9896",
-  "#9467bd",
-  "#c5b0d5",
-  "#8c564b",
-  "#c49c94",
-  "#e377c2",
-  "#f7b6d2",
-  "#7f7f7f",
-  "#c7c7c7",
-  "#bcbd22",
-  "#dbdb8d",
-  "#17becf",
-  "#9edae5"
-];
-
-const COLOR_SCALE = d3scale.scaleOrdinal()
-    .range(D3_CATEGORY20);
-
-const RADIUS_SCALE = d3scale.scaleLog()
-		.domain([50000, 10000000]) // Dollar amount
-		.range([4, 40]); // radius in kilometers
 
 const getMapDefaults = (width, height=null) =>
 	width === 12 ? {
@@ -89,7 +63,11 @@ class HazardEventsMapController extends React.Component {
 			viewport: Viewport(),
 			eventsData: {},
 			loadedRanges: {},
-			bounds: null
+			bounds: null,
+			colorScale: getColorScale([1, 2]),
+			radiusScale: d3scale.scaleLog()
+				.domain([50000, 10000000]) // Dollar amount
+				.range([4, 40]) // radius in kilometers
 		}
 	}
 
@@ -150,26 +128,29 @@ class HazardEventsMapController extends React.Component {
 	      	['geo', geoid, geoLevel],
 	      	['riskIndex', 'hazards']
 	    ).then(falcorResponse => {
+      		this.setState({ colorScale: getColorScale(falcorResponse.json.riskIndex.hazards) });
+
 	      	const geoids = falcorResponse.json.geo[geoid][geoLevel],
 	        	hazards = hazard ? [hazard] : falcorResponse.json.riskIndex.hazards,
         		requests = [],
 
         		yearsPerRequest = 3;
-      		COLOR_SCALE.domain(falcorResponse.json.riskIndex.hazards);
+
       		for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= yearsPerRequest) {
         		requests.push([dataType, 'events', 'borked', geoids, hazards, { from: Math.max(i - yearsPerRequest + 1, EARLIEST_YEAR), to: i }, 'property_damage'])
       		}
 	      	return requests.reduce((a, c) =>
 	      		a.then(() => this.props.falcor.get(c))
 	      			.then(() => this.updateLoadedRanges(c[5]))
-	      	, Promise.resolve());
+	      	, this.props.falcor.get(['riskIndex', 'meta', falcorResponse.json.riskIndex.hazards, ['id', 'name']]));
 	    })
   	}
 
   	processData(key) {
   		let {
   			eventsData,
-  			loadedRanges
+  			loadedRanges,
+  			radiusScale
   		} = this.state;
 
   		const { range } = loadedRanges[key];
@@ -187,7 +168,7 @@ class HazardEventsMapController extends React.Component {
 	    const geoData = eventsData[geoid][geoLevel];
 
   		try {
-  			const hazards = hazard ? [hazard] : this.props.riskIndex.hazards.value
+  			const hazards = hazard ? [hazard] : this.props.riskIndexGraph.hazards.value
 
 			this.props.geoGraph[geoid][geoLevel].value
 				.forEach(geoid => {
@@ -220,15 +201,15 @@ class HazardEventsMapController extends React.Component {
 
 									let circle;
 
-									if ((property_damage < RADIUS_SCALE.domain()[0]) &&
+									if ((property_damage < radiusScale.domain()[0]) &&
 										(geoLevel === "counties")) return;
 
 									if (geom) {
-										circle = turf.circle(JSON.parse(geom).coordinates, RADIUS_SCALE(property_damage), { units: "kilometers", properties });
+										circle = turf.circle(JSON.parse(geom).coordinates, radiusScale(property_damage), { units: "kilometers", properties });
 									}
 									else {
 										const centroid = turf.centroid(feature);
-										circle = turf.circle(centroid.geometry.coordinates, RADIUS_SCALE(property_damage), { units: "kilometers", properties });
+										circle = turf.circle(centroid.geometry.coordinates, radiusScale(property_damage), { units: "kilometers", properties });
 									}
 									if (circle) geoData[geoid][hazard][year].push(circle);
 									if (circle) geoData[geoid][hazard].allTime.push(circle);
@@ -266,8 +247,8 @@ class HazardEventsMapController extends React.Component {
 	              		mapLegendSize={ this.props.mapLegendSize }
 	              		mapControlsLocation={ this.props.mapControlsLocation }
 		              	viewport={ this.state.viewport }
-		                colorScale={ this.props.colorScale }
-		                radiusScale={ RADIUS_SCALE }
+		                colorScale={ this.props.colorScale || this.state.colorScale }
+		                radiusScale={ this.state.radiusScale }
 		                zoomPadding={ this.props.zoomPadding }
 		                hazard={ this.props.hazard }
 		                bounds={ this.state.bounds }
@@ -280,9 +261,10 @@ class HazardEventsMapController extends React.Component {
 				{
 					!showLegend ? null :
 					<HazardEventsLegend
+						riskIndexGraph={ this.props.riskIndexGraph }
 						viewport={ this.state.viewport }
 						colorScale={ this.props.colorScale }
-		                radiusScale={ RADIUS_SCALE }/>
+		                radiusScale={ this.state.radiusScale }/>
 				}
 				{ maps.reverse() }
 			</div>
@@ -298,7 +280,7 @@ HazardEventsMapController.defaultProps = {
 	mapLegendLocation: 'top-left',
 	mapLegendSize: "large",
 	mapControlsLocation: "top-right",
-	colorScale: COLOR_SCALE,
+	colorScale: null,
 	mapHeight: null,
 	zoomPadding: 20,
 	hazard: null,
@@ -310,7 +292,7 @@ const mapStateToProps = state => ({
     geo: state.geo,
     geoGraph: state.graph.geo,
     severeWeather: state.graph.severeWeather,
-    riskIndex: state.graph.riskIndex
+    riskIndexGraph: state.graph.riskIndex
 })
 
 const mapDispatchToProps = {

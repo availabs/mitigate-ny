@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from "react-router-dom"
+
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
@@ -47,7 +49,8 @@ export default class ContentItem extends React.Component {
 					<ElementBox>
 						<div className="row">
 							<div className="col-lg-5">
-								<button className="btn btn-lg btn-light" onClick={ this.toggleOpened.bind(this) }>
+								<button className="btn btn-lg btn-light" onClick={ this.toggleOpened.bind(this) }
+									style={ { maxWidth: "100%", overflow: "hidden" } }>
 									<span style={ { padding: "0px 10px 0px 0px" } } className={ 'os-icon ' + (this.state.opened ? "os-icon-arrow-up4" : "os-icon-arrow-down3") }/>
 									{ content_id }
 								</button>
@@ -58,10 +61,10 @@ export default class ContentItem extends React.Component {
 							</div>
 							<div className="col-lg-3">
 								<div className="float-right">
-									<a href={ `/cms/edit/${ content_id }` }
+									<Link to={ `/cms/edit/${ content_id }` }
 										className="btn btn-lg btn-outline-primary">
 										Edit
-									</a>
+									</Link>
 									<a href="#" className="btn btn-lg btn-outline-danger"
 										onClick={ this.deleteContent.bind(this) }>
 										Delete
