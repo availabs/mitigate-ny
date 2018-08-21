@@ -76,7 +76,7 @@ const INITIAL_STATE = {
 }
 
 export default (state=INITIAL_STATE, action) => {
-console.log("<CMS>",state,action);
+	// console.log("<CMS>",state,action);
 	switch (action.type) {
 		case ADD_ACTIVE_FILTER: {
 			const newState = Object.assign({}, state);

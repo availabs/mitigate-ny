@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
+import AgencyList from './components/AgencyList'
 
 class Landing extends Component {
   render () {
@@ -73,6 +74,7 @@ class Landing extends Component {
           </div>
            
         </div>
+        <AgencyList />
       </div>
     )
   }
