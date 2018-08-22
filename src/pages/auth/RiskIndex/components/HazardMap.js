@@ -26,7 +26,6 @@ class HazardMap extends React.Component {
 	state = {
 		hoverData: null,
 		viewport: Viewport(),
-		dataProcessed: false,
 		scale: d3scale.scaleQuantize()
 			.domain([0, 100])
 			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
@@ -40,20 +39,36 @@ class HazardMap extends React.Component {
 	}
 
 	componentWillMount() {
-    	const { geoid, geoLevel } = this.props;
-		this.props.getChildGeo(geoid, geoLevel);
+		this.props.getChildGeo('36', 'tracts');
+		this.props.getChildGeo('36', 'counties');
 		this.props.getGeoMerge('36', 'counties');
 		this.props.getGeoMesh('36', 'counties');
 	}
 
 	componentWillReceiveProps(newProps) {
-		this.state.viewport
-			.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 })
-			.onViewportChange({ pitch: 45 });
+		const { geoid } = this.props;
+		if (geoid.length === 5) {
+			const counties = newProps.geo['36']['counties'].features,
+				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
+			if (geo) {
+				this.state.viewport
+					.fitGeojson(geo, { padding: 20 })
+					.onViewportChange({ pitch: 45 });
+			}
+		}
+		else {
+			this.state.viewport
+				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 })
+				.onViewportChange({ pitch: 45 });
+		}
+
+		if (newProps.hazard !== this.props.hazard) {
+			this.fetchFalcorDeps(newProps);
+			this.processData(this.state.asHeight, newProps)
+		}
 	}
 
-	fetchFalcorDeps() {
-    	const { geoid, geoLevel, hazard } = this.props;
+	fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
 		return this.props.falcor.get(
 			["geo", geoid, geoLevel],
 			["riskIndex", "hazards"]
@@ -62,9 +77,10 @@ class HazardMap extends React.Component {
 			return response.json.geo[geoid][geoLevel]
 		})
 		.then(geoids => {
+console.log("geoids:",geoids)
 //`riskIndex[{keys:geoids}]['nri','bric','sovi','sovist']['score']`
 			return this.props.falcor.get(
-				["riskIndex", geoids, [hazard, 'nri', 'bric', 'sovi', 'sovist', 'builtenv'], 'score']
+				["riskIndex", geoids, [hazard, 'sovi', 'builtenv'], 'score']
 			)
 		})
 		.then(() => this.processData())
@@ -75,11 +91,9 @@ class HazardMap extends React.Component {
 		this.processData(asHeight);
 	}
 
-	processData(asHeight=this.state.asHeight) {
+	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard } = this.props) {
 
-    	const { geoid, geoLevel, hazard } = this.props,
-
-    		scale = d3scale.scaleQuantize()
+    	const scale = d3scale.scaleQuantize()
     			.domain([0, 100])
     			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
 
@@ -96,12 +110,10 @@ class HazardMap extends React.Component {
     		max = -Infinity,
 
     		minHeight = Infinity,
-    		maxHeight = -Infinity,
-
-    		dataProcessed = true;
+    		maxHeight = -Infinity;
 
     	try {
-    		const geoData = this.props.geo[geoid][geoLevel].features;
+    		const geoData = this.props.geo['36'][geoLevel].features;
     		this.props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
 				if (this.props.riskIndex[geoid][hazard] === null) return;
     			let score = +this.props.riskIndex[geoid][hazard].score;
@@ -124,15 +136,13 @@ class HazardMap extends React.Component {
 					}
     			}
     		})
-    		scale.domain([min, max]);
+    		// scale.domain([min, max]);
     		heightScale.domain([minHeight , maxHeight]);
-    		dataProcessed = Boolean(data.features.length);
     	}
     	catch (e) {
 // console.log("ERROR:",e)
-			dataProcessed = false;
     	}
-    	this.setState({ scale, heightScale, data, dataProcessed, asHeight });
+    	this.setState({ scale, heightScale, data, asHeight });
 	}
 
 	generateLayers() {

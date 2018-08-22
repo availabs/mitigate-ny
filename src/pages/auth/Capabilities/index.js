@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
+import AgencyList from './components/AgencyList'
 
 class Landing extends Component {
   render () {
@@ -23,11 +24,11 @@ class Landing extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-programs_table`} />
+              <Content content_id={`capabilities-program_table`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-mitigation_strategies_by_hazard`} />
+              <Content content_id={`capabilities-mitigation_strategies`} />
             </div>
 
             <div className="property-section">
@@ -35,11 +36,11 @@ class Landing extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-agency_administered_fundng_sources`} />
+              <Content content_id={`capabilities-agency_administered_funding_sources`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-local_fundng_sources`} />
+              <Content content_id={`capabilities-local_funding_sources`} />
             </div>
 
             <div className="property-section">
@@ -67,12 +68,13 @@ class Landing extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-lhmp_stats_map`} />
+              <Content content_id={`capabilities-lhmp_status_map`} />
             </div>
 
           </div>
            
         </div>
+        <AgencyList />
       </div>
     )
   }
