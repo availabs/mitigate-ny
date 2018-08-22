@@ -5,9 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import GeographyScoreBarChart from "./components/GeographyScoreBarChart"
-import GeographyScoreTable from "./components/GeographyScoreTable"
-import HazardEventsMapController from "./components/HazardEventsMapController"
+import HazardList from "./components/HazardListNew"
 
 import {
   getColorScale,
@@ -61,19 +59,7 @@ class Test extends React.Component {
           <div className="row">
             <div className="col-12">
               <ElementBox>
-                <GeographyScoreBarChart
-                  { ...this.state }/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-12">
-              <ElementBox>
-                <HazardEventsMapController
-                  showLegend={ true }
-                  { ...this.state }
-                  numMaps={ 12 }/>
+                <HazardList geoid="36"/>
               </ElementBox>
             </div>
           </div>

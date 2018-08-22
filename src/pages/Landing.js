@@ -16,6 +16,10 @@ class Home extends Component {
             </div>
 
             <div className="property-section">
+              <Content content_id={`home-about`} />
+            </div>
+          
+            <div className="property-section">
               <Content content_id={`section1-essentialterms`} />
             </div>
 

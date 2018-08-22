@@ -38,7 +38,7 @@ class HazardEventsTable extends React.Component {
 		    	return max;
 		    })
 			.then(max => {
-				if (!max) return;
+				if (!max) return [];
 // 'severeWeather.events[{keys:geoids}][{keys:hazardids}][{integers:years}][{integers:indices}].event_id'
 		    	return this.props.falcor.get(
 					[this.props.dataType, "events", this.props.geoid, hazardids, year, "byIndex", { from: 0, to: max - 1 }, "event_id"]
