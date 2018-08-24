@@ -13,18 +13,17 @@ import HazardMap from "./HazardMap"
 
 import "./HazardList.css"
 
+// <i class="os-icon os-icon-phone-21"></i>
+			
 const ListItem = ({ hazard, name, onClick, active }) =>
-	<div className={ "hazard-list-item" + (active ? " active" : "") }
-		onClick={ onClick }
+	<li className={ active ? " active" : "" }
 		key={ hazard }>
-		{ name }
-		<span className="float-right">
-			<Link to={ `hazards/${ hazard }` }
-				className="hazard-link">
-				view...
-			</Link>
-		</span>
-	</div>
+		<a onClick={ onClick }>
+			<i class="os-icon os-icon-arrow-right2"></i>
+			<span>{ name } </span>
+		</a>
+		
+	</li>
 
 class HazardList extends React.Component {
 	constructor(props) {
@@ -71,17 +70,19 @@ class HazardList extends React.Component {
 
 	render() {
 		return (
-			<div className="row">
+			<div className="row m-0">
 
-				<div className="col-4"
-					style={ { height: "500px" } }>
-					<ElementBox>
+				<div className="col-2"
+					style={ { minHeight: "500px" } }>
+					<div className='ae-side-menu'>
+						<ul className='ae-main-menu'>
 						{ this.renderHazardSelector() }
-					</ElementBox>
+						</ul>
+					</div>
 				</div>
 
 
-				<div className="col-8">
+				<div className="col-10">
 					<div className="row">
 						<div className="col-12">
 							<ElementBox>

@@ -90,6 +90,7 @@ class Hazard extends Component {
                   <h5>FEMA Risk Index Score for {hazardName}</h5>
                   
                 <Content content_id={`${hazard}-location`} />
+
               </div>
             </div>
           </div>
@@ -109,12 +110,13 @@ class Hazard extends Component {
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <div className="property-section">
-                <h5>Statewide Map of SBA Disaster Loans for {hazardName}</h5>
-                2001-2017<br/>
-                <SbaChoropleth
-                  hazard={ hazard }
+                <h5> FEMA Risk Index Score map for {hazardName}</h5>
+                <HazardMap 
                   height={ 600 }
+                  hazard={hazard}
+                  geoid='36'
                 />
+               
                 <br />
                 <br />
               </div>
