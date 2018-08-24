@@ -52,7 +52,7 @@ class MapTest extends React.Component {
     	return (
       		<div id={ this.state.id } style={ { width: '100%', height: `${ this.props.height }px` } }>
 				<ReactMapGL { ...viewport }
-					mapStyle={ this.props.style }
+					mapStyle={ this.props.mapStyle }
 		          	onViewportChange={ this._onViewportChange }
 		          	mapboxApiAccessToken={ this.props.mapboxApiAccessToken }
 		          	dragPan={ this.props.dragPan }
@@ -85,7 +85,8 @@ MapTest.defaultProps = {
 	height: 800,
 	dragPan: true,
 	scrollZoom: true,
-	dragRotate: true
+	dragRotate: true,
+	mapStyle: undefined
 }
 
 const MapTestHover = ({ rows, x, y }) => {

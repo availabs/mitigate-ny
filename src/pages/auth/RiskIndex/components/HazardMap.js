@@ -5,6 +5,10 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import get from "lodash.get";
 
 import {
+  getHazardName
+} from 'utils/sheldusUtils'
+
+import {
 	getChildGeo,
 	getGeoMerge,
 	getGeoMesh
@@ -23,19 +27,24 @@ const format = d3format.format(".2f")
 
 class HazardMap extends React.Component {
 
-	state = {
-		hoverData: null,
-		viewport: Viewport(),
-		scale: d3scale.scaleQuantize()
-			.domain([0, 100])
-			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
-		heightScale: d3scale.scaleLinear()
-			.range([0, 100000]),
-		data: {
-			type: "FeatureCollection",
-			features: []
-		},
-		asHeight: 'sovi'
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			hoverData: null,
+			viewport: Viewport(),
+			scale: d3scale.scaleQuantize()
+				.domain([0, 100])
+				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
+			heightScale: d3scale.scaleLinear()
+				.range([0, 100000]),
+			data: {
+				type: "FeatureCollection",
+				features: []
+			},
+			asHeight: 'sovi',
+			threeD: props.threeD
+		}
 	}
 
 	componentWillMount() {
@@ -58,8 +67,10 @@ class HazardMap extends React.Component {
 		}
 		else {
 			this.state.viewport
-				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 })
-				.onViewportChange({ pitch: 45 });
+				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+			if (this.props.threeD) {
+				this.state.viewport.onViewportChange({ pitch: 45 });
+			}
 		}
 
 		if (newProps.hazard !== this.props.hazard) {
@@ -74,10 +85,14 @@ class HazardMap extends React.Component {
 			["riskIndex", "hazards"]
 		)
 		.then(response => {
-			return response.json.geo[geoid][geoLevel]
+			const hazards = response.json.riskIndex.hazards;
+			return this.props.falcor.get(
+				["riskIndex", "meta", hazards, "name"]
+			)
+			.then(() => response.json.geo[geoid][geoLevel]);
 		})
 		.then(geoids => {
-console.log("geoids:",geoids)
+// console.log("geoids:",geoids)
 //`riskIndex[{keys:geoids}]['nri','bric','sovi','sovist']['score']`
 			return this.props.falcor.get(
 				["riskIndex", geoids, [hazard, 'sovi', 'builtenv'], 'score']
@@ -89,6 +104,10 @@ console.log("geoids:",geoids)
 	toggleAsHeight() {
 		const asHeight = this.state.asHeight === 'builtenv' ? 'sovi' : 'builtenv';
 		this.processData(asHeight);
+	}
+	toggleThreeD() {
+		const threeD = !this.state.threeD;
+		this.setState({ threeD });
 	}
 
 	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard } = this.props) {
@@ -157,7 +176,13 @@ console.log("geoids:",geoids)
 				return heightScale(properties.height);
 			},
 
-			{ width, height } = viewport();
+			{ width, height } = viewport(),
+
+  			{
+  				threeD,
+  				interactiveMap,
+  				showBaseMap
+  			} = this.props;
 
     	const layers = [
 	    	{
@@ -175,11 +200,11 @@ console.log("geoids:",geoids)
 		      	stroked: false,
 		      	pickable: true,
 		      	getElevation,
-		      	extruded: true,
+		      	extruded: threeD,
 		      	fp64: true,
 		      	autoHighlight: true,
 		      	highlightColor: [0, 0, 225, 255],
-		      	wireframe: true,
+		      	wireframe: threeD,
 		      	lightSettings: {
 				  	lightsPosition: [-width, 0, 5000],
 				  	ambientRatio: 0.4,
@@ -227,8 +252,19 @@ console.log("geoids:",geoids)
 	    return { layers };
 	}
 
+  	getHazardName(hazard) {
+    	try {
+      		return this.props.riskIndex.meta[hazard].name;
+    	}
+    	catch (e) {
+      		return getHazardName(hazard)
+    	}
+  	}
+
 	generateLegend() {
 		const { scale } = this.state,
+			{ hazard } = this.props,
+			name = this.getHazardName(hazard),
 			range = scale.range(),
   			width = `${ 100 / range.length }%`;
 		return (
@@ -236,7 +272,7 @@ console.log("geoids:",geoids)
 				<thead>
 					<tr>
 						<th className="no-border-bottom" colSpan={ range.length }>
-							Risk Index: { this.props.hazard }
+							Risk Index: { name }
 						</th>
 					</tr>
 				</thead>
@@ -287,13 +323,27 @@ console.log("geoids:",geoids)
 	}
 
   	render () {
-  		const { layers } = this.generateLayers();
+  		const { layers } = this.generateLayers(),
+  			{
+  				threeD,
+  				hoverData,
+  				viewport
+  			} = this.state,
+  			{
+  				interactiveMap,
+  				showBaseMap,
+  				height
+  			} = this.props;
     	return (
     		<MapTest layers={ layers }
-    			height={ this.props.height }
-    			hoverData={ this.state.hoverData }
-	        	viewport={ this.state.viewport }
-	        	controls={ this.generateControls() }/>
+    			height={ height }
+    			hoverData={ hoverData }
+	        	viewport={ viewport }
+	        	controls={ this.generateControls() }
+				dragPan={ interactiveMap }
+				scrollZoom={ interactiveMap }
+				dragRotate={ interactiveMap }
+				mapStyle={ showBaseMap ? undefined : "" }/>
     	) 
   	}
 }
@@ -302,7 +352,10 @@ HazardMap.defaultProps = {
 	height: 800,
 	geoid: '36',
 	geoLevel: "tracts",
-	hazard: "riverine"
+	hazard: "riverine",
+	threeD: true,
+	interactiveMap: false,
+	showBaseMap: false
 }
 
 const mapStateToProps = state => ({

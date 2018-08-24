@@ -7,12 +7,20 @@ import {
 
 class SystemMessage extends React.Component {
 	state = {
-		show: "init"
+		show: "init",
+		dismiss: null
 	}
 	componentDidMount() {
-		setTimeout(this.setState.bind(this), 250, { show: "show" });
+		setTimeout(this.setState.bind(this), 50, { show: "show" });
 		if (this.props.duration) {
-			setTimeout(this.dismiss.bind(this), this.props.duration);
+			const dismiss = setTimeout(this.dismiss.bind(this), this.props.duration);
+			this.setState({ dismiss });
+		}
+	}
+	componentWillUnmount() {
+		const { dismiss } = this.state;
+		if (dismiss !== null) {
+			clearTimeout(dismiss);
 		}
 	}
 	dismiss() {

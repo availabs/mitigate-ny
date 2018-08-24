@@ -92,9 +92,9 @@ const D3_CATEGORY20 = [
 ];
 
 const getHazardName = hazardid =>
-	hazardid === "winterweat"
-		? "Winter Weather"
-		: hazardid.split("")
+	(hazardid === "winterweat") ? "Winter Weather" :
+		['sovi', 'builtenv'].includes(hazardid) ? hazardid.toUpperCase() :
+		hazardid.split("")
 			.map((d, i) => i === 0 ? d.toUpperCase() : d)
 			.join("")
 
