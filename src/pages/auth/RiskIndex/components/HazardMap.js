@@ -111,8 +111,6 @@ class HazardMap extends React.Component {
 			.then(() => response.json.geo[geoid][geoLevel]);
 		})
 		.then(geoids => {
-// console.log("geoids:",geoids)
-//`riskIndex[{keys:geoids}]['nri','bric','sovi','sovist']['score']`
 			return this.props.falcor.get(
 				["riskIndex", geoids, [hazard, 'sovi', 'builtenv'], 'score']
 			)

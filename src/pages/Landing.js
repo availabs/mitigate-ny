@@ -11,6 +11,10 @@ class Home extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
           
+           <div className="property-section">
+              <Content content_id={`home-about`} />
+            </div>
+
             <div className="property-section">
               <Content content_id={`home-about`} />
             </div>
@@ -21,10 +25,6 @@ class Home extends Component {
 
             <div className="property-section">
               <Content content_id={`section1-strategicframework`} />
-            </div>
-
-             <div className="property-section">
-              <Content content_id={`section2-glossary`} />
             </div>
 
           </div>           

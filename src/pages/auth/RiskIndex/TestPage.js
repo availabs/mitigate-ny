@@ -43,7 +43,7 @@ class Test extends React.Component {
       return this.props.falcor.get(
         ['riskIndex', 'meta', hazards, ['id', 'name']],
         ['geo', geographies, ['name']],
-        ['riskIndex', geographies, hazards, ['score', 'value']],
+        ['riskIndex', geographies, hazards, ['score']],
       )
       .then(data => requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve()))
     })
@@ -54,13 +54,9 @@ class Test extends React.Component {
       const hazards = this.props.riskIndex.hazards.value;
       return (
         <Element>
-          <h6 className="element-header">Map Test</h6>
-
           <div className="row">
             <div className="col-12">
-              <ElementBox>
-                <HazardList geoid="36"/>
-              </ElementBox>
+              <HazardList geoid="36"/>
             </div>
           </div>
 

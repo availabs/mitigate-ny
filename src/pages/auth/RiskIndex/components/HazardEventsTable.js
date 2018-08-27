@@ -111,7 +111,7 @@ class HazardEventsTable extends React.Component {
 				county,
 				date
 			} = graphEventsById[event_id];
-console.log("DATE:",date)
+ // console.log("DATE:",date)
 			data.push({
 				"property damage": fnum(+property_damage),
 				property_damage: +property_damage,

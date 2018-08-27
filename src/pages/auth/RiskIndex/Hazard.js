@@ -90,6 +90,7 @@ class Hazard extends Component {
                   <h5>FEMA Risk Index Score for {hazardName}</h5>
                   
                 <Content content_id={`${hazard}-location`} />
+
               </div>
             </div>
           </div>
@@ -109,12 +110,14 @@ class Hazard extends Component {
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <div className="property-section">
-                <h5>Statewide Map of SBA Disaster Loans for {hazardName}</h5>
-                2001-2017<br/>
-                <SbaChoropleth
-                  hazard={ hazard }
+                <h5> FEMA Risk Index Score map for {hazardName}</h5>
+                <HazardMap 
                   height={ 600 }
+                  hazard={hazard}
+                  threeD={false}
+                  geoid='36'
                 />
+               
                 <br />
                 <br />
               </div>
@@ -181,6 +184,28 @@ class Hazard extends Component {
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <Content content_id={`${hazard}-local_vulnerability`} />
+              <h5> Social Vulnerability by Census Tract</h5>
+              <HazardMap 
+                  height={ 600 }
+                  hazard={'sovi'}
+                  threeD={false}
+                  geoid='36'
+                />
+
+              <h5>Built Environment by Census Tract</h5>
+              <HazardMap 
+                  height={ 600 }
+                  hazard={'builtenv'}
+                  threeD={false}
+                  geoid='36'
+                />
+              <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
+              <HazardMap 
+                  height={ 600 }
+                  hazard={'bric'}
+                  threeD={false}
+                  geoid='36'
+                />
             </div>
 
             <div className="property-section">
