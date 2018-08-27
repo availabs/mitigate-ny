@@ -25,6 +25,17 @@ import Viewport from "components/mapping/escmap/Viewport"
 
 const format = d3format.format(".2f")
 
+const getScale = () =>
+	d3scale.scaleQuantize()
+		.domain([0, 100])
+		.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
+
+const MAX_HEIGHT = 100000;
+const getHeightScale = () =>
+	d3scale.scaleLinear()
+		.domain([0, 100])
+		.range([0, MAX_HEIGHT])
+
 class HazardMap extends React.Component {
 
 	constructor(props) {
@@ -32,12 +43,9 @@ class HazardMap extends React.Component {
 
 		this.state = {
 			hoverData: null,
-			viewport: Viewport(),
-			scale: d3scale.scaleQuantize()
-				.domain([0, 100])
-				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
-			heightScale: d3scale.scaleLinear()
-				.range([0, 100000]),
+			Viewport: Viewport(),
+			scale: getScale(),
+			heightScale: getHeightScale(),
 			data: {
 				type: "FeatureCollection",
 				features: []
@@ -52,6 +60,21 @@ class HazardMap extends React.Component {
 		this.props.getChildGeo('36', 'counties');
 		this.props.getGeoMerge('36', 'counties');
 		this.props.getGeoMesh('36', 'counties');
+		if (this.state.threeD) {
+			// this.state.Viewport.transition({ pitch: 45 });
+			this.state.Viewport.onViewportChange({ pitch: 45 });
+		}
+		else {
+			// this.state.Viewport.transition({ pitch: 0 });
+			this.state.Viewport.onViewportChange({ pitch: 0 });
+		}
+	}
+
+	componentDidMount() {
+		this.state.Viewport.register(this, this.setState);
+	}
+	componentWillnmount() {
+		this.state.Viewport.unregister(this);
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -60,17 +83,13 @@ class HazardMap extends React.Component {
 			const counties = newProps.geo['36']['counties'].features,
 				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
 			if (geo) {
-				this.state.viewport
-					.fitGeojson(geo, { padding: 20 })
-					.onViewportChange({ pitch: 45 });
+				this.state.Viewport
+					.fitGeojson(geo, { padding: 20 });
 			}
 		}
 		else {
-			this.state.viewport
+			this.state.Viewport
 				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
-			if (this.props.threeD) {
-				this.state.viewport.onViewportChange({ pitch: 45 });
-			}
 		}
 
 		if (newProps.hazard !== this.props.hazard) {
@@ -108,17 +127,21 @@ class HazardMap extends React.Component {
 	toggleThreeD() {
 		const threeD = !this.state.threeD;
 		this.setState({ threeD });
+		if (threeD) {
+			// this.state.Viewport.transition({ pitch: 45 });
+			this.state.Viewport.ease("pitch", 45);
+		}
+		else {
+			// this.state.Viewport.transition({ pitch: 0 });
+			this.state.Viewport.ease("pitch", 0);
+		}
 	}
 
 	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard } = this.props) {
 
-    	const scale = d3scale.scaleQuantize()
-    			.domain([0, 100])
-    			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
+    	const scale = getScale(),
 
-    		heightScale = d3scale.scaleLinear()
-    			.domain([0, 100])
-				.range([0, 50000]),
+    		heightScale = getHeightScale(),
 
     		data = {
     			type: "FeatureCollection",
@@ -155,7 +178,9 @@ class HazardMap extends React.Component {
 					}
     			}
     		})
-    		// scale.domain([min, max]);
+    		if (['nri', 'bric', 'sovi', 'sovist', 'builtenv'].includes(hazard)) {
+    			scale.domain([min, max]);
+    		}
     		heightScale.domain([minHeight , maxHeight]);
     	}
     	catch (e) {
@@ -165,9 +190,15 @@ class HazardMap extends React.Component {
 	}
 
 	generateLayers() {
-		const { scale, heightScale, data, viewport } = this.state,
+		const { scale, heightScale, data, Viewport, threeD } = this.state,
 
-			getFillColor = ({ properties }) => {
+			{ width, height, pitch } = Viewport(),
+
+			elevation = (pitch / 45);
+
+		heightScale.range([0, MAX_HEIGHT * elevation]);
+
+		const getFillColor = ({ properties }) => {
 				const value = get(properties, `score`, 0),
 					color = d3color.color(scale(value));
 				return [color.r, color.g, color.b, 255];
@@ -176,13 +207,12 @@ class HazardMap extends React.Component {
 				return heightScale(properties.height);
 			},
 
-			{ width, height } = viewport(),
-
   			{
-  				threeD,
   				interactiveMap,
   				showBaseMap
   			} = this.props;
+
+
 
     	const layers = [
 	    	{
@@ -200,11 +230,11 @@ class HazardMap extends React.Component {
 		      	stroked: false,
 		      	pickable: true,
 		      	getElevation,
-		      	extruded: threeD,
+		      	extruded: threeD || (pitch > 0),
 		      	fp64: true,
 		      	autoHighlight: true,
 		      	highlightColor: [0, 0, 225, 255],
-		      	wireframe: threeD,
+		      	wireframe: true,
 		      	lightSettings: {
 				  	lightsPosition: [-width, 0, 5000],
 				  	ambientRatio: 0.4,
@@ -212,6 +242,9 @@ class HazardMap extends React.Component {
 				  	specularRatio: 0.8,
 				  	lightsStrength: [2.5, 2.5],
 				  	numberOfLights: 1
+				},
+				updateTriggers: {
+					getElevation: [elevation]
 				},
 
 		      	onHover: (event => {
@@ -307,6 +340,22 @@ class HazardMap extends React.Component {
 			</table>
 		)
 	}
+	generateThreeDtoggle() {
+		return (
+			<table className="map-test-table">
+				<thead>
+					<tr>
+						<th className="no-border-bottom">
+							<button className="map-test-button"
+								onClick={ this.toggleThreeD.bind(this) }>
+								3-D: { this.state.threeD ? "On" : "Off" }
+							</button>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		)
+	}
 	generateControls() {
 		const controls = [];
 
@@ -314,9 +363,15 @@ class HazardMap extends React.Component {
 			pos: "top-left",
 			comp: this.generateLegend()
 		})
+		if (this.state.threeD) {
+			controls.push({
+				pos: "top-right",
+				comp: this.generateHeightToggle()
+			})
+		}
 		controls.push({
-			pos: "top-right",
-			comp: this.generateHeightToggle()
+			pos: "bottom-left",
+			comp: this.generateThreeDtoggle()
 		})
 
 		return controls;
@@ -327,7 +382,7 @@ class HazardMap extends React.Component {
   			{
   				threeD,
   				hoverData,
-  				viewport
+  				Viewport
   			} = this.state,
   			{
   				interactiveMap,
@@ -338,7 +393,7 @@ class HazardMap extends React.Component {
     		<MapTest layers={ layers }
     			height={ height }
     			hoverData={ hoverData }
-	        	viewport={ viewport }
+	        	viewport={ Viewport }
 	        	controls={ this.generateControls() }
 				dragPan={ interactiveMap }
 				scrollZoom={ interactiveMap }

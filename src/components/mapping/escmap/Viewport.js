@@ -21,7 +21,12 @@ export default (args={}) => {
 			...args
 		},
 		onChangeHandlers = [],
-		transitioning = false;
+		transitioning = false,
+
+		start, now,
+		duration = 2000,
+		from, to,
+		property;
 
 	function Viewport() {
 		if (transitioning) {
@@ -44,19 +49,35 @@ export default (args={}) => {
 		}
 		if (onChangeHandlers.length) {
 			const update = { viewport: Viewport() };
-			onChangeHandlers.forEach(({ owner, func }) => func.call(owner, update));
+			onChangeHandlers.forEach(({ owner, func, sendUpdate }) => sendUpdate ? func.call(owner, update) : func.call(owner));
 		}
 		return Viewport;
 	}
-	Viewport.register = (owner, func) => {
+
+	Viewport.transition = update => {
+		transitioning = true;
+		return Viewport.onViewportChange(update);
+	}
+	Viewport.ease = (prop, _to) => {
+		start = Date.now();
+		now = start;
+		from = viewport[prop];
+		to = _to;
+		property = prop;
+		window.requestAnimationFrame(doTransition);
+		return Viewport;
+	}
+
+	Viewport.register = (owner, func, sendUpdate=true) => {
 		Viewport.unregister(owner);
-		onChangeHandlers.push({ owner, func });
+		onChangeHandlers.push({ owner, func, sendUpdate });
 		return Viewport;
 	}
 	Viewport.unregister = _owner => {
 		onChangeHandlers = onChangeHandlers.filter(({ owner }) => owner !== _owner);
 		return Viewport;
 	}
+
 	Viewport.fitBounds = (bounds, options={ padding: 50 }) => {
 		if (!bounds.length) return Viewport;
 		transitioning = true;
@@ -70,6 +91,23 @@ export default (args={}) => {
 	}
 	Viewport.fitGeojson = (geojson, options={ padding: 50 }) =>
 		Viewport.fitBounds(getGeojsonBounds(geojson), options);
+
+	const doTransition = viewport => {
+		now = Date.now();
+		const time = (now - start) / duration,
+			ease = easeCubic(time);
+		let value = from + (to - from) * ease;
+		if (to < from) {
+			value = Math.max(to, value);
+		}
+		else {
+			value = Math.min(to, value);
+		}
+		Viewport.onViewportChange({ [property]: value });
+		if (ease < 1.0) {
+			window.requestAnimationFrame(doTransition);
+		}
+	}
 
 	return Viewport;
 }
