@@ -96,7 +96,6 @@ class HazardList extends React.Component {
 						<div className="col-12">
 							<ElementBox>
 								<HazardMap height={ 600 }
-									threeD={false}
 									{ ...this.state }/>
 							</ElementBox>
 						</div>
