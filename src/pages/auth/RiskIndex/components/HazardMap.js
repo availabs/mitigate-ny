@@ -43,7 +43,7 @@ class HazardMap extends React.Component {
 
 		this.state = {
 			hoverData: null,
-			Viewport: Viewport(),
+			viewport: Viewport(),
 			scale: getScale(),
 			heightScale: getHeightScale(),
 			data: {
@@ -61,20 +61,20 @@ class HazardMap extends React.Component {
 		this.props.getGeoMerge('36', 'counties');
 		this.props.getGeoMesh('36', 'counties');
 		if (this.state.threeD) {
-			// this.state.Viewport.transition({ pitch: 45 });
-			this.state.Viewport.onViewportChange({ pitch: 45 });
+			// this.state.viewport.transition({ pitch: 45 });
+			this.state.viewport.onViewportChange({ pitch: 45 });
 		}
 		else {
-			// this.state.Viewport.transition({ pitch: 0 });
-			this.state.Viewport.onViewportChange({ pitch: 0 });
+			// this.state.viewport.transition({ pitch: 0 });
+			this.state.viewport.onViewportChange({ pitch: 0 });
 		}
 	}
 
 	componentDidMount() {
-		this.state.Viewport.register(this, this.setState);
+		this.state.viewport.register(this, this.forceUpdate, false);
 	}
 	componentWillnmount() {
-		this.state.Viewport.unregister(this);
+		this.state.viewport.unregister(this);
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -83,12 +83,12 @@ class HazardMap extends React.Component {
 			const counties = newProps.geo['36']['counties'].features,
 				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
 			if (geo) {
-				this.state.Viewport
+				this.state.viewport
 					.fitGeojson(geo, { padding: 20 });
 			}
 		}
 		else {
-			this.state.Viewport
+			this.state.viewport
 				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
 		}
 
@@ -126,12 +126,12 @@ class HazardMap extends React.Component {
 		const threeD = !this.state.threeD;
 		this.setState({ threeD });
 		if (threeD) {
-			// this.state.Viewport.transition({ pitch: 45 });
-			this.state.Viewport.ease("pitch", 45);
+			// this.state.viewport.transition({ pitch: 45 });
+			this.state.viewport.ease("pitch", 45);
 		}
 		else {
-			// this.state.Viewport.transition({ pitch: 0 });
-			this.state.Viewport.ease("pitch", 0);
+			// this.state.viewport.transition({ pitch: 0 });
+			this.state.viewport.ease("pitch", 0);
 		}
 	}
 
@@ -188,9 +188,9 @@ class HazardMap extends React.Component {
 	}
 
 	generateLayers() {
-		const { scale, heightScale, data, Viewport, threeD } = this.state,
+		const { scale, heightScale, data, viewport, threeD } = this.state,
 
-			{ width, height, pitch } = Viewport(),
+			{ width, height, pitch } = viewport(),
 
 			elevation = (pitch / 45);
 
@@ -253,10 +253,12 @@ class HazardMap extends React.Component {
 		      				height = object.properties.height;
 		      			hoverData = {
 		      				rows: [
-		      					[this.props.hazard, format(score)],
-		      					[this.state.asHeight, format(height)]
+		      					[this.getHazardName(this.props.hazard), format(score)]
 		      				],
 		      				x, y
+		      			}
+		      			if (threeD) {
+		      				hoverData.rows.push([this.state.asHeight, format(height)]);
 		      			}
 		      		}
 		      		this.setState({ hoverData });
@@ -380,7 +382,7 @@ class HazardMap extends React.Component {
   			{
   				threeD,
   				hoverData,
-  				Viewport
+  				viewport
   			} = this.state,
   			{
   				interactiveMap,
@@ -391,7 +393,7 @@ class HazardMap extends React.Component {
     		<MapTest layers={ layers }
     			height={ height }
     			hoverData={ hoverData }
-	        	viewport={ Viewport }
+	        	viewport={ viewport }
 	        	controls={ this.generateControls() }
 				dragPan={ interactiveMap }
 				scrollZoom={ interactiveMap }

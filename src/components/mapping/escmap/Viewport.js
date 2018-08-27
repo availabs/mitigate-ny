@@ -14,6 +14,12 @@ const DEFAULT_VIEWPORT_SETTINGS = {
     height: 500,
     altitude: 1.5
 }
+const DEFAULT_FIT_OPTIONS = { padding: 50 };
+
+const Ease = ({ ...args }) => ({
+	start: Date.now(),
+	...args
+})
 
 export default (args={}) => {
 	let viewport = {
@@ -23,10 +29,7 @@ export default (args={}) => {
 		onChangeHandlers = [],
 		transitioning = false,
 
-		start, now,
-		duration = 2000,
-		from, to,
-		property;
+		intervals = {};
 
 	function Viewport() {
 		if (transitioning) {
@@ -58,13 +61,12 @@ export default (args={}) => {
 		transitioning = true;
 		return Viewport.onViewportChange(update);
 	}
-	Viewport.ease = (prop, _to) => {
-		start = Date.now();
-		now = start;
-		from = viewport[prop];
-		to = _to;
-		property = prop;
-		window.requestAnimationFrame(doTransition);
+	Viewport.ease = (prop, to, { duration=2000, func=easeCubic }={}) => {
+		const from = viewport[prop];
+		if (prop in intervals) {
+			clearInterval(intervals[prop]);
+		}
+		intervals[prop] = setInterval(doEase, 50, Ease({ prop, from, to, duration, func }));
 		return Viewport;
 	}
 
@@ -78,7 +80,7 @@ export default (args={}) => {
 		return Viewport;
 	}
 
-	Viewport.fitBounds = (bounds, options={ padding: 50 }) => {
+	Viewport.fitBounds = (bounds, options=DEFAULT_FIT_OPTIONS) => {
 		if (!bounds.length) return Viewport;
 		transitioning = true;
 		const opts = {
@@ -89,13 +91,14 @@ export default (args={}) => {
 		}
 		return Viewport.onViewportChange(fitBounds(opts));
 	}
-	Viewport.fitGeojson = (geojson, options={ padding: 50 }) =>
+	Viewport.fitGeojson = (geojson, options=DEFAULT_FIT_OPTIONS) =>
 		Viewport.fitBounds(getGeojsonBounds(geojson), options);
 
-	const doTransition = viewport => {
-		now = Date.now();
-		const time = (now - start) / duration,
-			ease = easeCubic(time);
+	const doEase = ({ prop, from, to, start, duration, func }) => {
+		const  now = Date.now(),
+			time = (now - start) / duration,
+			ease = func(time);
+
 		let value = from + (to - from) * ease;
 		if (to < from) {
 			value = Math.max(to, value);
@@ -103,9 +106,11 @@ export default (args={}) => {
 		else {
 			value = Math.min(to, value);
 		}
-		Viewport.onViewportChange({ [property]: value });
-		if (ease < 1.0) {
-			window.requestAnimationFrame(doTransition);
+		Viewport.onViewportChange({ [prop]: value });
+
+		if (ease >= 1.0) {
+			clearInterval(intervals[prop]);
+			delete intervals[prop];
 		}
 	}
 
