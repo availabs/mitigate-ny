@@ -19,7 +19,7 @@ const ListItem = ({ hazard, name, onClick, active }) =>
 	<li className={ active ? " active" : "" }
 		key={ hazard }>
 		<a onClick={ onClick }>
-			<i class="os-icon os-icon-arrow-right2"></i>
+			<i className="os-icon os-icon-arrow-right2"></i>
 			<span>{ name } </span>
 		</a>
 		

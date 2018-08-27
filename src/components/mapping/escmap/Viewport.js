@@ -14,6 +14,12 @@ const DEFAULT_VIEWPORT_SETTINGS = {
     height: 500,
     altitude: 1.5
 }
+const DEFAULT_FIT_OPTIONS = { padding: 50 };
+
+const Ease = ({ ...args }) => ({
+	start: Date.now(),
+	...args
+})
 
 export default (args={}) => {
 	let viewport = {
@@ -21,7 +27,9 @@ export default (args={}) => {
 			...args
 		},
 		onChangeHandlers = [],
-		transitioning = false;
+		transitioning = false,
+
+		intervals = {};
 
 	function Viewport() {
 		if (transitioning) {
@@ -44,20 +52,35 @@ export default (args={}) => {
 		}
 		if (onChangeHandlers.length) {
 			const update = { viewport: Viewport() };
-			onChangeHandlers.forEach(({ owner, func }) => func.call(owner, update));
+			onChangeHandlers.forEach(({ owner, func, sendUpdate }) => sendUpdate ? func.call(owner, update) : func.call(owner));
 		}
 		return Viewport;
 	}
-	Viewport.register = (owner, func) => {
+
+	Viewport.transition = update => {
+		transitioning = true;
+		return Viewport.onViewportChange(update);
+	}
+	Viewport.ease = (prop, to, { duration=2000, func=easeCubic }={}) => {
+		const from = viewport[prop];
+		if (prop in intervals) {
+			clearInterval(intervals[prop]);
+		}
+		intervals[prop] = setInterval(doEase, 50, Ease({ prop, from, to, duration, func }));
+		return Viewport;
+	}
+
+	Viewport.register = (owner, func, sendUpdate=true) => {
 		Viewport.unregister(owner);
-		onChangeHandlers.push({ owner, func });
+		onChangeHandlers.push({ owner, func, sendUpdate });
 		return Viewport;
 	}
 	Viewport.unregister = _owner => {
 		onChangeHandlers = onChangeHandlers.filter(({ owner }) => owner !== _owner);
 		return Viewport;
 	}
-	Viewport.fitBounds = (bounds, options={ padding: 50 }) => {
+
+	Viewport.fitBounds = (bounds, options=DEFAULT_FIT_OPTIONS) => {
 		if (!bounds.length) return Viewport;
 		transitioning = true;
 		const opts = {
@@ -68,8 +91,28 @@ export default (args={}) => {
 		}
 		return Viewport.onViewportChange(fitBounds(opts));
 	}
-	Viewport.fitGeojson = (geojson, options={ padding: 50 }) =>
+	Viewport.fitGeojson = (geojson, options=DEFAULT_FIT_OPTIONS) =>
 		Viewport.fitBounds(getGeojsonBounds(geojson), options);
+
+	const doEase = ({ prop, from, to, start, duration, func }) => {
+		const  now = Date.now(),
+			time = (now - start) / duration,
+			ease = func(time);
+
+		let value = from + (to - from) * ease;
+		if (to < from) {
+			value = Math.max(to, value);
+		}
+		else {
+			value = Math.min(to, value);
+		}
+		Viewport.onViewportChange({ [prop]: value });
+
+		if (ease >= 1.0) {
+			clearInterval(intervals[prop]);
+			delete intervals[prop];
+		}
+	}
 
 	return Viewport;
 }
