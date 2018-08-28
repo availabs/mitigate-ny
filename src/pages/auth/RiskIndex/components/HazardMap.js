@@ -85,7 +85,7 @@ class HazardMap extends React.Component {
 	componentWillReceiveProps(newProps) {
 		const { geoid } = this.props;
 		if (geoid.length === 5) {
-			const counties = newProps.geo['36']['counties'].features,
+			const counties = newProps.geo[this.props.geoid]['counties'].features,
 				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
 			if (geo) {
 				this.state.viewport
@@ -94,7 +94,7 @@ class HazardMap extends React.Component {
 		}
 		else {
 			this.state.viewport
-				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+				.fitGeojson(newProps.geo['merge'][this.props.geoid]['counties'], { padding: 20 });
 		}
 
 		if (newProps.hazard !== this.props.hazard) {
@@ -160,7 +160,7 @@ class HazardMap extends React.Component {
     		maxHeight = -Infinity;
 
     	try {
-    		const geoData = this.props.geo['36'][geoLevel].features;
+    		const geoData = this.props.geo[this.props.geoid][geoLevel].features;
     		this.props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
 				if (this.props.riskIndex[geoid][hazard] === null) return;
     			let score = +this.props.riskIndex[geoid][hazard].score;
@@ -226,7 +226,7 @@ class HazardMap extends React.Component {
     	const layers = [
 	    	{
 	    		id: 'ny-merge-layer-filled',
-	    		data: this.props.geo['merge']['36']['counties'],
+	    		data: this.props.geo['merge'][this.props.geoid]['counties'],
 	    		filled: true,
 	    		stroked: false,
 	    		getFillColor: [242, 239, 233, 255],
@@ -277,7 +277,7 @@ class HazardMap extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
-	    		data: this.props.geo['mesh']['36']['counties'],
+	    		data: this.props.geo['mesh'][this.props.geoid]['counties'],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [200, 200, 200, 255],
@@ -285,7 +285,7 @@ class HazardMap extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-merge-layer-stroked',
-	    		data: this.props.geo['merge']['36']['counties'],
+	    		data: this.props.geo['merge'][this.props.geoid]['counties'],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [242, 239, 233, 255],

@@ -56,32 +56,13 @@ class Test extends React.Component {
       return (
         <Element>
 
-          { /*<div className="row">
-            <div className="col-12">
-              <HazardList geoid="36"/>
-            </div>
-          </div>*/ }
-        
           <div className="row">
             <div className="col-12">
-              <HazardMap hazard="sovi"
-                threeD={ false }/>
+              <HazardList geoid="72"/>
             </div>
           </div>
         
-          <div className="row">
-            <div className="col-12">
-              <HazardMap hazard="bric"
-                threeD={ false }/>
-            </div>
-          </div>
-        
-          <div className="row">
-            <div className="col-12">
-              <HazardMap hazard="builtenv"
-                threeD={ false }/>
-            </div>
-          </div>
+         
 
         </Element>
       )
