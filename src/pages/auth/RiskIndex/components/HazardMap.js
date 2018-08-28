@@ -5,7 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import get from "lodash.get";
 
 import {
-  getHazardName
+  getHazardName,
+  scaleCk
 } from 'utils/sheldusUtils'
 
 import {
@@ -59,10 +60,11 @@ class HazardMap extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.getChildGeo('36', 'tracts');
-		this.props.getChildGeo('36', 'counties');
-		this.props.getGeoMerge('36', 'counties');
-		this.props.getGeoMesh('36', 'counties');
+		const { geoid } = this.props;
+		this.props.getChildGeo(geoid, 'tracts');
+		this.props.getChildGeo(geoid, 'counties');
+		this.props.getGeoMerge(geoid, 'counties');
+		this.props.getGeoMesh(geoid, 'counties');
 		if (this.state.threeD) {
 			// this.state.viewport.transition({ pitch: 45 });
 			this.state.viewport.onViewportChange({ pitch: 45 });
@@ -183,6 +185,8 @@ class HazardMap extends React.Component {
     			}
     		})
     		if (['nri', 'bric', 'sovist', 'sovi', 'builtenv'].includes(hazard)) {
+    			// scale = scaleCk()
+    			// 	.domain(domain);
     			scale = getQuantileScale()
     				.domain(domain);
     		}

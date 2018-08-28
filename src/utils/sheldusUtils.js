@@ -1,4 +1,10 @@
-const { scaleOrdinal } = require("d3-scale");
+const {
+	scaleOrdinal,
+	scaleThreshold
+} = require("d3-scale");
+
+const ss = require("simple-statistics");
+
 const { format } = require("d3-format");
 
 const LimitedAttributes = {
@@ -12,6 +18,43 @@ const sheldusAttributes = {
 	crop_damage: "Crop Damage $",
 	injuries: "Injuries",
 	fatalities: "Fatalities"
+}
+
+const scaleCk = () => {
+	let domain = [0, 1, 2, 3],
+		range = ["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"],
+		scale = scaleThreshold()
+			.domain(domain)
+			.range(range);
+	function Scale(d) {
+		return scale(d);
+	}
+	Scale.domain = function(d) {
+		if (!arguments.length) {
+			return domain;
+		}
+		domain = d;
+		ckmeans();
+		return Scale;
+	}
+	Scale.range = function(r) {
+		if (!arguments.length) {
+			return range;
+		}
+		range = r;
+		ckmeans();
+		return Scale;
+	}
+	Scale.invertExtent = function(e) {
+		return scale.invertExtent(e);
+	}
+	function ckmeans() {
+		const ckmeans = ss.ckmeans(domain, range.length - 1),
+			thresholds = ckmeans.map(ck => ck[0]);
+		scale.domain(thresholds)
+			.range(range);
+	}
+	return Scale;
 }
 
 const increase = 100
@@ -134,6 +177,7 @@ module.exports = {
 	fnum,
 	getColors,
 	getColors2,
+	scaleCk,
 
 	getColorScale: domain =>
 		scaleOrdinal()
