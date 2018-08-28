@@ -6,6 +6,7 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardList from "./components/HazardListNew"
+import HazardMap from "./components/HazardMap"
 
 import {
   getColorScale,
@@ -54,9 +55,31 @@ class Test extends React.Component {
       const hazards = this.props.riskIndex.hazards.value;
       return (
         <Element>
-          <div className="row">
+
+          { /*<div className="row">
             <div className="col-12">
               <HazardList geoid="36"/>
+            </div>
+          </div>*/ }
+        
+          <div className="row">
+            <div className="col-12">
+              <HazardMap hazard="sovi"
+                threeD={ false }/>
+            </div>
+          </div>
+        
+          <div className="row">
+            <div className="col-12">
+              <HazardMap hazard="bric"
+                threeD={ false }/>
+            </div>
+          </div>
+        
+          <div className="row">
+            <div className="col-12">
+              <HazardMap hazard="builtenv"
+                threeD={ false }/>
             </div>
           </div>
 

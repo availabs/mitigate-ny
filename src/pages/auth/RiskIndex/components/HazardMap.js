@@ -29,6 +29,9 @@ const getScale = () =>
 	d3scale.scaleQuantize()
 		.domain([0, 100])
 		.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
+const getQuantileScale = () =>
+	d3scale.scaleQuantile()
+		.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
 
 const MAX_HEIGHT = 100000;
 const getHeightScale = () =>
@@ -137,16 +140,18 @@ class HazardMap extends React.Component {
 
 	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard } = this.props) {
 
-    	const scale = getScale(),
+    	let scale = getScale(),
 
     		heightScale = getHeightScale(),
+
+    		domain = [],
 
     		data = {
     			type: "FeatureCollection",
     			features: []
-    		};
+    		},
 
-    	let min = Infinity,
+    		min = Infinity,
     		max = -Infinity,
 
     		minHeight = Infinity,
@@ -166,6 +171,7 @@ class HazardMap extends React.Component {
 						data.features.push(feature);
 						min = Math.min(min, score);
 						max = Math.max(max, score);
+						domain.push(score);
 
 						const heightValue = this.props.riskIndex[geoid][asHeight].score;
 						if (heightValue > 0) {
@@ -176,8 +182,9 @@ class HazardMap extends React.Component {
 					}
     			}
     		})
-    		if (['nri', 'bric', 'sovi', 'sovist', 'builtenv'].includes(hazard)) {
-    			scale.domain([min, max]);
+    		if (['nri', 'bric', 'sovist', 'sovi', 'builtenv'].includes(hazard)) {
+    			scale = getQuantileScale()
+    				.domain(domain);
     		}
     		heightScale.domain([minHeight , maxHeight]);
     	}
@@ -245,7 +252,7 @@ class HazardMap extends React.Component {
 					getElevation: [elevation]
 				},
 
-		      	onHover: (event => {
+		      	onHover: event => {
 		      		const { object, x, y } = event;
 		      		let hoverData = null;
 		      		if (object) {
@@ -262,7 +269,7 @@ class HazardMap extends React.Component {
 		      			}
 		      		}
 		      		this.setState({ hoverData });
-		      	}).bind(this)
+		      	}
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
@@ -317,7 +324,7 @@ class HazardMap extends React.Component {
 					</tr>
 					<tr>
 						{
-							range.map(t => <td key={ t } style={ { width } }>{ Math.round(scale.invertExtent(t)[0] || 0) }</td>)
+							range.map(t => <td key={ t } style={ { width } }>{ +(scale.invertExtent(t)[0] || 0).toFixed(2) }</td>)
 						}
 					</tr>
 				</tbody>
