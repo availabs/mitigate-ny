@@ -36,6 +36,7 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
+    "simple-statistics": "^6.1.0",
     "topojson": "^3.0.2",
     "viewport-mercator-project": "^5.2.0"
   },
@@ -48,5 +49,6 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ --include-path ./node_modules src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {}
 }
