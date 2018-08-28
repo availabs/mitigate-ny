@@ -17,20 +17,20 @@ SET geoid = (
 	WHERE ST_Contains(geotl.geom, ST_Transform(begin_coords_geom, 4269))
 )
 WHERE geoid IS NULL
-AND state_fips = '36'
+AND state_fips = 36
 AND begin_coords_geom IS NOT NULL;
 
 -- Check for county fips
 UPDATE severe_weather.details
-SET geoid = state_fips || LPAD(cz_fips::TEXT, 3, '0')
+SET geoid = LPAD(state_fips::TEXT, 2, '0') || LPAD(cz_fips::TEXT, 3, '0')
 WHERE geoid IS NULL
-AND state_fips = '36';
+AND (state_fips = 36 OR state_fips = 72);
 
 -- Otherwise set geoid based on state_fips
 UPDATE severe_weather.details
-SET geoid = state_fips
+SET geoid = state_fips::TEXT
 WHERE geoid IS NULL
-AND state_fips = '36';
+AND (state_fips = 36 OR state_fips = 72);
 
 -- Check for cousub geoids from geo.tl_2017_36_cousub
 UPDATE severe_weather.details
@@ -40,5 +40,5 @@ SET cousub_geoid = (
 	WHERE ST_Contains(geotl.geom, ST_Transform(begin_coords_geom, 4269))
 )
 WHERE cousub_geoid IS NULL
-AND state_fips = '36'
+AND state_fips = 36
 AND begin_coords_geom IS NOT NULL;
