@@ -140,7 +140,7 @@ class HazardEventsMap extends React.Component {
 		return controls;
 	}
 	generateLayers() {
-	    const { colorScale } = this.props,
+	    const { colorScale, geoid } = this.props,
 
 			data = {
 				type: "FeatureCollection",
@@ -165,18 +165,18 @@ class HazardEventsMap extends React.Component {
 			}
 			return [
 				{ id: 'counties-merge-layer-filled',
-					data: this.props.geo['merge']['36']['counties'],
+					data: this.props.geo['merge'][geoid.slice(0, 2)]['counties'],
 					filled: true,
 					getFillColor: [242, 239, 233, 255]
 				},
 				{ id: 'counties-mesh-layer',
-					data: this.props.geo['mesh']['36']['counties'],
+					data: this.props.geo['mesh'][geoid.slice(0, 2)]['counties'],
 					filled: false,
 					getLineColor: [200, 200, 200, 255],
 					lineWidthMinPixels: 1
 				},
 				{ id: 'counties-merge-layer-stroked',
-					data: this.props.geo['merge']['36']['counties'],
+					data: this.props.geo['merge'][geoid.slice(0, 2)]['counties'],
 					stroked: true,
 					getLineColor: [242, 239, 233, 255],
 					lineWidthMinPixels: 2

@@ -72,10 +72,11 @@ class HazardEventsMapController extends React.Component {
 	}
 
   	componentWillMount() {
-	    this.props.getChildGeo('36', 'counties');
-	    this.props.getGeoMesh('36', 'counties');
-	    this.props.getGeoMerge('36', 'counties');
-	    this.props.getChildGeo('36', 'cousubs');
+  		const { geoid } = this.props;
+	    this.props.getChildGeo(geoid.slice(0, 2), 'counties');
+	    this.props.getGeoMesh(geoid.slice(0, 2), 'counties');
+	    this.props.getGeoMerge(geoid.slice(0, 2), 'counties');
+	    this.props.getChildGeo(geoid.slice(0, 2), 'cousubs');
   	}
 
   	updateLoadedRanges({ from, to }) {
@@ -103,13 +104,11 @@ class HazardEventsMapController extends React.Component {
   		// let fitGeojson = false;
   		switch (geoLevel) {
 			case 'counties':
-				geojson = newProps.geo['merge']['36']['counties']
-				// fitGeojson = geojson.coordinates.length && !this.props.geo['merge']['36']['counties'].coordinates.length;
+				geojson = newProps.geo['merge'][geoid.slice(0, 2)]['counties']
 				break;
 			case 'cousubs':
-				geojson = newProps.geo['36']['counties'].features
+				geojson = newProps.geo[geoid.slice(0, 2)]['counties'].features
 						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
-				// fitGeojson = newProps.geo['36']['counties'].features.length && !this.props.geo['36']['counties'].features.length;
 				break;
   		}
   		// if (fitGeojson) {
@@ -157,7 +156,11 @@ class HazardEventsMapController extends React.Component {
 
   		const { geoid, dataType, geoLevel, hazard } = this.props,
 
-	    	features = this.props.geo['36'][geoLevel].features;
+	    	features = this.props.geo[geoid.slice(0, 2)][geoLevel].features;
+
+  		if (geoid.slice(0, 2) === '72') {
+  			radiusScale.range([1, 10])
+  		}
 
 	    if (!(geoid in eventsData)) {
 	    	eventsData[geoid] = {}
@@ -224,7 +227,7 @@ class HazardEventsMapController extends React.Component {
   			return;
   		}
   		loadedRanges = { ...loadedRanges, [key]: { range, processed: true } }
-		this.setState({ eventsData, loadedRanges });
+		this.setState({ eventsData, loadedRanges, radiusScale });
   	}
 
 	render() {

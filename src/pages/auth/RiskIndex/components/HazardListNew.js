@@ -10,6 +10,7 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardListHeroStats from "./HazardListHeroStats"
 import HazardMap from "./HazardMap"
+import HazardEventsMapController from "./HazardEventsMapController"
 
 import "./HazardList.css"
 
@@ -92,14 +93,9 @@ class HazardList extends React.Component {
 						</div>
 					</div>
 
-					<div className="row">
-						<div className="col-12">
-							<ElementBox>
-								<HazardMap height={ 600 }
-									{ ...this.state }/>
-							</ElementBox>
-						</div>
-					</div>
+					<HazardEventsMapController height={ 600 }
+						{ ...this.state }/>
+									
 				</div>
 
 			</div>
@@ -108,7 +104,7 @@ class HazardList extends React.Component {
 }
 
 HazardList.defaultProps = {
-  geoid: 36,
+  geoid: '36',
   hazard: 'riverine'
 }
 

@@ -61,10 +61,10 @@ class HazardMap extends React.Component {
 
 	componentWillMount() {
 		const { geoid } = this.props;
-		this.props.getChildGeo(geoid, 'tracts');
-		this.props.getChildGeo(geoid, 'counties');
-		this.props.getGeoMerge(geoid, 'counties');
-		this.props.getGeoMesh(geoid, 'counties');
+		this.props.getChildGeo(geoid.slice(0, 2), 'tracts');
+		this.props.getChildGeo(geoid.slice(0, 2), 'counties');
+		this.props.getGeoMerge(geoid.slice(0, 2), 'counties');
+		this.props.getGeoMesh(geoid.slice(0, 2), 'counties');
 		if (this.state.threeD) {
 			// this.state.viewport.transition({ pitch: 45 });
 			this.state.viewport.onViewportChange({ pitch: 45 });
@@ -85,16 +85,16 @@ class HazardMap extends React.Component {
 	componentWillReceiveProps(newProps) {
 		const { geoid } = this.props;
 		if (geoid.length === 5) {
-			const counties = newProps.geo['36']['counties'].features,
+			const counties = newProps.geo[geoid.slice(0, 2)]['counties'].features,
 				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
 			if (geo) {
 				this.state.viewport
 					.fitGeojson(geo, { padding: 20 });
 			}
 		}
-		else {
+		else if (geoid.length === 2) {
 			this.state.viewport
-				.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+				.fitGeojson(newProps.geo['merge'][geoid]['counties'], { padding: 20 });
 		}
 
 		if (newProps.hazard !== this.props.hazard) {
@@ -106,16 +106,11 @@ class HazardMap extends React.Component {
 	fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
 		return this.props.falcor.get(
 			["geo", geoid, geoLevel],
-			["riskIndex", "hazards"]
+			["riskIndex", "meta", hazard, "name"]
 		)
-		.then(response => {
-			const hazards = response.json.riskIndex.hazards;
-			return this.props.falcor.get(
-				["riskIndex", "meta", hazards, "name"]
-			)
-			.then(() => response.json.geo[geoid][geoLevel]);
-		})
+		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
+			if (!geoids.length) return;
 			return this.props.falcor.get(
 				["riskIndex", geoids, [hazard, 'sovi', 'builtenv'], 'score']
 			)
@@ -160,8 +155,9 @@ class HazardMap extends React.Component {
     		maxHeight = -Infinity;
 
     	try {
-    		const geoData = this.props.geo['36'][geoLevel].features;
+    		const geoData = this.props.geo[geoid.slice(0, 2)][geoLevel].features;
     		this.props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
+console.log("this.props.riskIndex[geoid][hazard]:",this.props.riskIndex[geoid][hazard])
 				if (this.props.riskIndex[geoid][hazard] === null) return;
     			let score = +this.props.riskIndex[geoid][hazard].score;
     			if (!isNaN(score) && score > -99) {
@@ -218,7 +214,8 @@ class HazardMap extends React.Component {
 
   			{
   				interactiveMap,
-  				showBaseMap
+  				showBaseMap,
+  				geoid
   			} = this.props;
 
 
@@ -226,7 +223,7 @@ class HazardMap extends React.Component {
     	const layers = [
 	    	{
 	    		id: 'ny-merge-layer-filled',
-	    		data: this.props.geo['merge']['36']['counties'],
+	    		data: this.props.geo['merge'][geoid.slice(0, 2)]['counties'],
 	    		filled: true,
 	    		stroked: false,
 	    		getFillColor: [242, 239, 233, 255],
@@ -277,7 +274,7 @@ class HazardMap extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
-	    		data: this.props.geo['mesh']['36']['counties'],
+	    		data: this.props.geo['mesh'][geoid.slice(0, 2)]['counties'],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [200, 200, 200, 255],
@@ -285,7 +282,7 @@ class HazardMap extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-merge-layer-stroked',
-	    		data: this.props.geo['merge']['36']['counties'],
+	    		data: this.props.geo['merge'][geoid.slice(0, 2)]['counties'],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [242, 239, 233, 255],

@@ -54,11 +54,7 @@ class SbaChoropleth extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		//this.fetchFalcorDeps();
 		this.state.viewport.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
-		if (!this.state.dataProcessed) {
-			this.processData(this.state.currentYear, newProps);
-		}
 	}
 
 	incrementCurrentYear() {
@@ -95,6 +91,7 @@ class SbaChoropleth extends React.Component {
 			// 	console.log('got sba data', data)
 			// })
 		})
+		.then(() => this.processData())
 	}
 
 	processData(currentYear=this.state.currentYear, props=this.props) {
@@ -108,8 +105,7 @@ class SbaChoropleth extends React.Component {
 
 			{ hazard } = props;
 
-		let dataProcessed = true,
-			total_loss = 0;
+		let total_loss = 0;
 
 		try {
 			const hazardids = hazard ? [hazard] : props.riskIndex.hazards.value,
@@ -138,9 +134,8 @@ class SbaChoropleth extends React.Component {
 		}
 		catch (e) {
 // console.log("<processData> ERROR:",e)
-			dataProcessed = false;
 		}
-		this.setState({ currentYear, total_loss, data, dataProcessed });
+		this.setState({ currentYear, total_loss, data });
 	}
 
 	generateLayers() {
