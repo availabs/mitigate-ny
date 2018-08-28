@@ -17,8 +17,44 @@
 			"features": []
 		}
 	},
+	"72": {
+		"counties": {
+			"type": "FeatureCollection",
+			"features": []
+		},
+		"cousubs": {
+			"type": "FeatureCollection",
+			"features": []
+		},
+		"tracts": {
+			"type": "FeatureCollection",
+			"features": []
+		},
+		"zips": {
+			"type": "FeatureCollection",
+			"features": []
+		}
+	},
 	"mesh": {
 		"36": {
+			"counties": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"cousubs": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"tracts": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"zips": {
+				"type": "FeatureCollection",
+				"features": []
+			}
+		},
+		"72": {
 			"counties": {
 				"type": "FeatureCollection",
 				"features": []
@@ -40,20 +76,38 @@
 	"merge": {
 		"36": {
 			"counties": {
-				"type": "MultiPolygon",
-				"coordinates": []
+				"type": "FeatureCollection",
+				"features": []
 			},
 			"cousubs": {
-				"type": "MultiPolygon",
-				"coordinates": []
+				"type": "FeatureCollection",
+				"features": []
 			},
 			"tracts": {
-				"type": "MultiPolygon",
-				"coordinates": []
+				"type": "FeatureCollection",
+				"features": []
 			},
 			"zips": {
-				"type": "MultiPolygon",
-				"coordinates": []
+				"type": "FeatureCollection",
+				"features": []
+			}
+		},
+		"72": {
+			"counties": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"cousubs": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"tracts": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"zips": {
+				"type": "FeatureCollection",
+				"features": []
 			}
 		}
 	}
