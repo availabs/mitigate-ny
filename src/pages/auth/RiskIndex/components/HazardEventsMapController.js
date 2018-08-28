@@ -98,7 +98,7 @@ class HazardEventsMapController extends React.Component {
   	}
 
   	componentWillReceiveProps(newProps) {
-  		const { geoid, geoLevel } = newProps;
+  		const { geoid, geoLevel, hazard } = newProps;
   		let geojson = null
   		let padding = this.props.zoomPadding
   		// let fitGeojson = false;
@@ -115,13 +115,14 @@ class HazardEventsMapController extends React.Component {
   			this.state.viewport.fitGeojson(geojson, { padding });
   		// }
   		this.setState({ bounds: geojson })
-  		if (geoid != this.props.geoid) {
-  			this.setState({ loadedRanges: {} })
+  		if ((geoid != this.props.geoid) ||
+  			(hazard != this.props.hazard)) {
+  			this.setState({ loadedRanges: {} });
+  			this.fetchFalcorDeps(newProps);
   		}
   	}
 
-  	fetchFalcorDeps() {
-	    const { geoid, dataType, geoLevel, hazard } = this.props;
+  	fetchFalcorDeps({ geoid, dataType, geoLevel, hazard } = this.props) {
 
 	    return this.props.falcor.get(
 	      	['geo', geoid, geoLevel],

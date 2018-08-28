@@ -93,9 +93,10 @@ class HazardList extends React.Component {
 						</div>
 					</div>
 
-					<HazardMap height={ 600 }
+					<HazardEventsMapController height={ 600 }
+						mapHeight={ 600 }
 						{ ...this.state }/>
-									
+
 				</div>
 
 			</div>
