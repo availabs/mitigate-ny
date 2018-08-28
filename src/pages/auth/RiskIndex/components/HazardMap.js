@@ -157,7 +157,6 @@ class HazardMap extends React.Component {
     	try {
     		const geoData = this.props.geo[geoid.slice(0, 2)][geoLevel].features;
     		this.props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
-console.log("this.props.riskIndex[geoid][hazard]:",this.props.riskIndex[geoid][hazard])
 				if (this.props.riskIndex[geoid][hazard] === null) return;
     			let score = +this.props.riskIndex[geoid][hazard].score;
     			if (!isNaN(score) && score > -99) {
