@@ -14,13 +14,6 @@ const format2f = d3format("$,.2f"),
 
 class HazardListHeroStats extends React.Component {
 
-// "severeWeather[{keys:geoids}][{keys:hazardids}].allTime"+
-// " ['num_events', 'num_episodes', 'num_severe_events', "+
-// " 'total_damage', 'property_damage', 'crop_damage', "+
-// " 'injuries', 'fatalities', 'annualized_damage', "+
-// " 'annualized_num_events', 'annualized_num_severe_events', "+
-// " 'daily_event_prob', 'daily_severe_event_prob'] "
-
 	fetchFalcorDeps({ hazard, dataType, geoid }=this.props) {
 		return this.props.falcor.get(
 			['riskIndex', 'meta', hazard, 'name'],
@@ -66,7 +59,7 @@ class HazardListHeroStats extends React.Component {
 			)
 		}
 		catch (e) {
-			return <h4>Loading...</h4>
+			return <h4 style={ { minHeight: "63px", margin: 0 } }>Loading...</h4>
 		}
 	}
 }

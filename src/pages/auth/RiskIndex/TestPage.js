@@ -60,7 +60,15 @@ class Test extends React.Component {
 
           <div className="row">
             <div className="col-12">
-              <HazardList geoid="72"/>
+              <HazardMap highRisk={ 0.95 }
+                threeD={ false }/>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <HazardMap
+                threeD={ false }/>
             </div>
           </div>
 

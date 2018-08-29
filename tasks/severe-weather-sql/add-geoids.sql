@@ -9,15 +9,15 @@ ALTER TABLE severe_weather.details
 	ADD COLUMN geoid VARCHAR(11) DEFAULT NULL,
 	ADD COLUMN cousub_geoid VARCHAR(10) DEFAULT NULL;
 
--- Check for tract geoids from geo.tl_2017_36_tract
+-- Check for tract geoids from geo.tl_2017_tract
 UPDATE severe_weather.details
 SET geoid = (
 	SELECT geotl.geoid
-	FROM geo.tl_2017_36_tract AS geotl
+	FROM geo.tl_2017_tract AS geotl
 	WHERE ST_Contains(geotl.geom, ST_Transform(begin_coords_geom, 4269))
 )
 WHERE geoid IS NULL
-AND state_fips = 36
+AND (state_fips = 36 OR state_fips = 72)
 AND begin_coords_geom IS NOT NULL;
 
 -- Check for county fips
@@ -32,13 +32,13 @@ SET geoid = state_fips::TEXT
 WHERE geoid IS NULL
 AND (state_fips = 36 OR state_fips = 72);
 
--- Check for cousub geoids from geo.tl_2017_36_cousub
+-- Check for cousub geoids from geo.tl_2017_cousub
 UPDATE severe_weather.details
 SET cousub_geoid = (
 	SELECT geotl.geoid
-	FROM geo.tl_2017_36_cousub AS geotl
+	FROM geo.tl_2017_cousub AS geotl
 	WHERE ST_Contains(geotl.geom, ST_Transform(begin_coords_geom, 4269))
 )
 WHERE cousub_geoid IS NULL
-AND state_fips = 36
+AND (state_fips = 36 OR state_fips = 72)
 AND begin_coords_geom IS NOT NULL;

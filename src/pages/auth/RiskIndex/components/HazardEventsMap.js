@@ -140,15 +140,13 @@ class HazardEventsMap extends React.Component {
 		return controls;
 	}
 	generateLayers() {
-	    const { colorScale, geoid } = this.props,
-
-			data = {
+	    const data = {
 				type: "FeatureCollection",
 				features: []
 			};
 
 		try {
-	  		const { geoid, dataType, geoLevel, hazard, eventsData } = this.props,
+	  		const { colorScale, geoid, dataType, geoLevel, hazard, eventsData } = this.props,
 
 		    	hazards = hazard ? [hazard] : this.props.riskIndex.hazards.value;
 

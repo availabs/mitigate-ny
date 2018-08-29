@@ -101,7 +101,6 @@ class HazardEventsMapController extends React.Component {
   		const { geoid, geoLevel, hazard } = newProps;
   		let geojson = null
   		let padding = this.props.zoomPadding
-  		// let fitGeojson = false;
   		switch (geoLevel) {
 			case 'counties':
 				geojson = newProps.geo['merge'][geoid.slice(0, 2)]['counties']
@@ -111,9 +110,8 @@ class HazardEventsMapController extends React.Component {
 						.reduce((a, c) => (c.properties.geoid == geoid) ? c : a, null);
 				break;
   		}
-  		// if (fitGeojson) {
-  			this.state.viewport.fitGeojson(geojson, { padding });
-  		// }
+  		this.state.viewport.fitGeojson(geojson, { padding });
+
   		this.setState({ bounds: geojson })
   		if ((geoid != this.props.geoid) ||
   			(hazard != this.props.hazard)) {
@@ -234,7 +232,20 @@ class HazardEventsMapController extends React.Component {
 	render() {
 		let {
 			showLegend,
-			numMaps
+			numMaps,
+			height,
+			mapHeight,
+			mapControlsLocation,
+			mapLegendLocation,
+			mapLegendSize,
+			geoLevel,
+			geoid,
+			dataType,
+			colorScale,
+			radiusScale,
+			zoomPadding,
+			hazard,
+			allTime
 		} = this.props;
 		showLegend = (showLegend !== "auto") ? showLegend : (numMaps > 1)
 		const maps = Array(this.props.numMaps).fill(getMapWidth(this.props.numMaps))
@@ -243,20 +254,20 @@ class HazardEventsMapController extends React.Component {
 	              	<HazardEventsMap
 	              		eventsData={ this.state.eventsData }
 	              		yearDelta={ n + 1 - this.props.numMaps }
-	              		geoLevel={ this.props.geoLevel }
-      					geoid={ this.props.geoid }
-      					dataType={ this.props.dataType }
-	              		{ ...getMapDefaults(width, this.props.mapHeight) }
-	              		mapLegendLocation={ this.props.mapLegendLocation }
-	              		mapLegendSize={ this.props.mapLegendSize }
-	              		mapControlsLocation={ this.props.mapControlsLocation }
+	              		geoLevel={ geoLevel }
+      					geoid={ geoid }
+      					dataType={ dataType }
+	              		{ ...getMapDefaults(width, (height || mapHeight)) }
+	              		mapLegendLocation={ mapLegendLocation }
+	              		mapLegendSize={ mapLegendSize }
+	              		mapControlsLocation={ mapControlsLocation }
 		              	viewport={ this.state.viewport }
-		                colorScale={ this.props.colorScale || this.state.colorScale }
+		                colorScale={ colorScale || this.state.colorScale }
 		                radiusScale={ this.state.radiusScale }
-		                zoomPadding={ this.props.zoomPadding }
-		                hazard={ this.props.hazard }
+		                zoomPadding={ zoomPadding }
+		                hazard={ hazard }
 		                bounds={ this.state.bounds }
-		                allTime={ this.props.allTime }/>
+		                allTime={ allTime }/>
 	            </div>
 	        , this);
 
@@ -286,6 +297,7 @@ HazardEventsMapController.defaultProps = {
 	mapControlsLocation: "top-right",
 	colorScale: null,
 	mapHeight: null,
+	height: null,
 	zoomPadding: 20,
 	hazard: null,
 	allTime: false
