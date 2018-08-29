@@ -7,7 +7,9 @@ const ADD_ACTIVE_FILTER = "ADD_ACTIVE_FILTER",
 
 	SET_EDIT_TARGET = "SET_EDIT_TARGET",
 
-	UPDATE_NEW_CONTENT_DATA = "UPDATE_NEW_CONTENT_DATA";
+	UPDATE_NEW_CONTENT_DATA = "UPDATE_NEW_CONTENT_DATA",
+
+	CLEAR_NEW_CONTENT_DATA = "CLEAR_NEW_CONTENT_DATA";
 
 export const addActiveFilter = filter =>
 	dispatch => (
@@ -59,6 +61,12 @@ export const updateNewContentData = update =>
 		(dispatch({
 			type: UPDATE_NEW_CONTENT_DATA,
 			update
+		}),
+		Promise.resolve())
+export const clearNewContentData = () =>
+	dispatch =>
+		(dispatch({
+			type: CLEAR_NEW_CONTENT_DATA
 		}),
 		Promise.resolve())
 
@@ -120,6 +128,8 @@ export default (state=INITIAL_STATE, action) => {
 			}
 			return newState;
 		}
+		case CLEAR_NEW_CONTENT_DATA:
+			return INITIAL_STATE;
 		default:
 			return state;
 	}

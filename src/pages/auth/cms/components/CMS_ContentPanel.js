@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import { Link } from "react-router-dom"
 
@@ -11,6 +12,10 @@ import ContentItem from "./CMS_ContentItem"
 import {
   sendSystemMessage
 } from 'store/modules/messages';
+
+import {
+	clearNewContentData
+} from 'store/modules/cms'
 
 class CMS_ContentPanel extends React.Component {
 	state = {
@@ -119,6 +124,11 @@ class CMS_ContentPanel extends React.Component {
 		return range;
 	}
 
+	createNewContent() {
+		this.props.clearNewContentData();
+		this.props.push("/cms/new");
+	}
+
 	render() {
 		const {
 			page,
@@ -203,10 +213,11 @@ class CMS_ContentPanel extends React.Component {
   							</div>
   						</div>
   						<div className="col-lg-2">
-  							<Link to="/cms/new" className="btn btn-lg btn-outline-success btn-block">
+  							<button type="button" className="btn btn-lg btn-outline-success btn-block"
+  								onClick={ this.createNewContent.bind(this) }>
   								<span style={ { fontWeight: "900" } }>NEW</span>
   								<span style={ { fontWeight: "900", fontSize: "1.5em" } } className="os-icon os-icon-plus-circle"/>
-  							</Link>
+  							</button>
   						</div>
   					</div>
   				</ElementBox>
@@ -233,7 +244,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-	sendSystemMessage
+	sendSystemMessage,
+	clearNewContentData,
+	push: url => dispatch => dispatch(push(url))
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CMS_ContentPanel);
