@@ -18,7 +18,7 @@ import {
 import * as d3scale from 'd3-scale'
 import * as d3color from 'd3-color'
 import * as d3format from "d3-format"
-
+import { quantile } from "d3-array"
 
 import DeckMap from "components/mapping/escmap/DeckMap.react"
 import MapTest from "components/mapping/escmap/MapTest.react"
@@ -33,6 +33,9 @@ const getScale = () =>
 const getQuantileScale = () =>
 	d3scale.scaleQuantile()
 		.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
+const getHighRiskScale = () =>
+	d3scale.scaleThreshold()
+		.range(["#f2efe9", "#cf4010"])
 
 const MAX_HEIGHT = 100000;
 const getHeightScale = () =>
@@ -104,10 +107,12 @@ class HazardMap extends React.Component {
 	}
 
 	fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
-		return this.props.falcor.get(
-			["geo", geoid, geoLevel],
-			["riskIndex", "meta", hazard, "name"]
-		)
+		const requests = [];
+		requests.push(["geo", geoid, geoLevel]);
+		if (!['nri', 'bric', 'sovist', 'sovi', 'builtenv'].includes(hazard)) {
+			["riskIndex", "meta", hazard, "name"];
+		}
+		return this.props.falcor.get(...requests)
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
 			if (!geoids.length) return;
@@ -135,7 +140,7 @@ class HazardMap extends React.Component {
 		}
 	}
 
-	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard } = this.props) {
+	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard, highRisk } = this.props) {
 
     	let scale = getScale(),
 
@@ -179,9 +184,12 @@ class HazardMap extends React.Component {
 					}
     			}
     		})
-    		if (['nri', 'bric', 'sovist', 'sovi', 'builtenv'].includes(hazard)) {
-    			// scale = scaleCk()
-    			// 	.domain(domain);
+    		if (highRisk > 0.0) {
+    			const q90 = quantile(domain.sort(), highRisk);
+    			scale = getHighRiskScale()
+    				.domain([q90]);
+    		}
+    		else if (['nri', 'bric', 'sovist', 'sovi', 'builtenv'].includes(hazard)) {
     			scale = getQuantileScale()
     				.domain(domain);
     		}
@@ -196,26 +204,20 @@ class HazardMap extends React.Component {
 	generateLayers() {
 		const { scale, heightScale, data, viewport, threeD } = this.state,
 
-			{ width, height, pitch } = viewport(),
+  			{ geoid } = this.props,
 
-			elevation = (pitch / 45);
+			{ width, pitch } = viewport(),
 
-		heightScale.range([0, MAX_HEIGHT * elevation]);
+			elevationScale = (pitch / 45),
 
-		const getFillColor = ({ properties }) => {
+			getFillColor = ({ properties }) => {
 				const value = get(properties, `score`, 0),
 					color = d3color.color(scale(value));
 				return [color.r, color.g, color.b, 255];
 			},
 			getElevation = ({ properties }) => {
 				return heightScale(properties.height);
-			},
-
-  			{
-  				interactiveMap,
-  				showBaseMap,
-  				geoid
-  			} = this.props;
+			};
 
 
 
@@ -235,6 +237,7 @@ class HazardMap extends React.Component {
 		      	stroked: false,
 		      	pickable: true,
 		      	getElevation,
+		      	elevationScale,
 		      	extruded: threeD || (pitch > 0),
 		      	fp64: true,
 		      	autoHighlight: true,
@@ -249,7 +252,7 @@ class HazardMap extends React.Component {
 				  	numberOfLights: 1
 				},
 				updateTriggers: {
-					getElevation: [elevation]
+					elevationScale: [elevationScale]
 				},
 
 		      	onHover: event => {
@@ -418,7 +421,8 @@ HazardMap.defaultProps = {
 	hazard: "riverine",
 	threeD: true,
 	interactiveMap: false,
-	showBaseMap: false
+	showBaseMap: false,
+	highRisk: 0.0
 }
 
 const mapStateToProps = state => ({
