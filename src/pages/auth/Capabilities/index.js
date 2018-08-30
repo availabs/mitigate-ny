@@ -3,18 +3,113 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import AgencyList from './components/AgencyList'
+import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
 class Landing extends Component {
   render () {
    return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main">
+          <div className="property-info-main" style={{paddingBottom: 30}}>
             
             <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives`} />
             </div>
+          </div>
+        </div>
 
+        <div className='property-info-w'>
+          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`goal 1`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-2019_goals_1`} />
+              </ProjectBox>  
+            </div>
+            
+            </div>
+          </div>
+         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives_1`} />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`goal 2`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-2019_goals_2`} />
+              </ProjectBox>  
+            </div>
+            
+            </div>
+          </div>
+         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives_2`} />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`goal 3`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-2019_goals_3`} />
+              </ProjectBox>  
+            </div>
+            
+            </div>
+          </div>
+         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives_3`} />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`goal 4`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-2019_goals_4`} />
+              </ProjectBox>  
+            </div>
+            
+            </div>
+          </div>
+         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives_4`} />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none' }}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`goal 5`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-2019_goals_5`} />
+              </ProjectBox>  
+            </div>
+            
+            </div>
+          </div>
+         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-2019_goals_objectives_5`} />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main">
             <div className="property-section">
               <Content content_id={`capabilities-whats_changed_2014`} />
             </div>
@@ -72,8 +167,8 @@ class Landing extends Component {
             </div>
 
           </div>
-           
-        </div>
+         </div>
+
         <AgencyList />
       </div>
     )
