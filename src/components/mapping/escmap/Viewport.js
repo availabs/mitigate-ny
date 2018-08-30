@@ -61,12 +61,12 @@ export default (args={}) => {
 		transitioning = true;
 		return Viewport.onViewportChange(update);
 	}
-	Viewport.ease = (prop, to, { duration=2000, func=easeCubic }={}) => {
+	Viewport.ease = (prop, to, { duration=2000, easeFunc=easeCubic, onTransitionEnd=null }={}) => {
 		const from = viewport[prop];
 		if (prop in intervals) {
 			clearInterval(intervals[prop]);
 		}
-		intervals[prop] = setInterval(doEase, 50, Ease({ prop, from, to, duration, func }));
+		intervals[prop] = setInterval(doEase, 50, Ease({ prop, from, to, duration, easeFunc, onTransitionEnd }));
 		return Viewport;
 	}
 
@@ -94,10 +94,10 @@ export default (args={}) => {
 	Viewport.fitGeojson = (geojson, options=DEFAULT_FIT_OPTIONS) =>
 		Viewport.fitBounds(getGeojsonBounds(geojson), options);
 
-	const doEase = ({ prop, from, to, start, duration, func }) => {
+	const doEase = ({ prop, from, to, start, duration, easeFunc, onTransitionEnd }) => {
 		const  now = Date.now(),
 			time = (now - start) / duration,
-			ease = func(time);
+			ease = easeFunc(time);
 
 		let value = from + (to - from) * ease;
 		if (to < from) {
@@ -111,6 +111,9 @@ export default (args={}) => {
 		if (ease >= 1.0) {
 			clearInterval(intervals[prop]);
 			delete intervals[prop];
+			if (onTransitionEnd) {
+				onTransitionEnd();
+			}
 		}
 	}
 

@@ -171,6 +171,14 @@ function fnum(x) {
 	return "1T+";
 }
 
+const ftypeMap = {
+	730: { name: "Education", color: D3_CATEGORY20[0] },
+	740: { name: "Emergency Response and Law Enforcement", color: D3_CATEGORY20[1] },
+	800: { name: "Health and Medical", color: D3_CATEGORY20[4] },
+	820: { name: "Public Attractions and Landmark Buildings", color: D3_CATEGORY20[5] },
+	830: { name: "Government and Military", color: D3_CATEGORY20[16] }
+}
+
 module.exports = {
 
 	getHazardName,
@@ -178,6 +186,7 @@ module.exports = {
 	getColors,
 	getColors2,
 	scaleCk,
+	ftypeMap,
 
 	getColorScale: domain =>
 		scaleOrdinal()

@@ -48,6 +48,7 @@ class HazardList extends Component {
       <ProjectBox title={`Statewide Statistics`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
         <div className="row align-items-center">
           <div className="col-sm-12">
+          
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
