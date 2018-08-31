@@ -9,6 +9,14 @@ class Landing extends Component {
   render () {
    return (
       <div className='property-single'>
+         <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingBottom: 0}}>
+            <div className="property-section">
+              <Content content_id={`capabilities-overview`} />
+            </div>
+          </div>
+        </div>
+      
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingBottom: 30}}>
             
@@ -19,7 +27,7 @@ class Landing extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 1`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -29,7 +37,7 @@ class Landing extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_1`} />
             </div>
@@ -37,7 +45,7 @@ class Landing extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 2`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -47,7 +55,7 @@ class Landing extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_2`} />
             </div>
@@ -55,7 +63,7 @@ class Landing extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 3`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -65,7 +73,7 @@ class Landing extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_3`} />
             </div>
@@ -73,7 +81,7 @@ class Landing extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 4`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -83,7 +91,7 @@ class Landing extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_4`} />
             </div>
@@ -91,7 +99,7 @@ class Landing extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: 398, borderRight: 'none' }}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' }}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 5`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -101,7 +109,7 @@ class Landing extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_5`} />
             </div>
@@ -123,35 +131,7 @@ class Landing extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-mitigation_strategies`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-dhses_admin_plan`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-agency_administered_funding_sources`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-local_funding_sources`} />
-            </div>
-
-            <div className="property-section">
               <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section7-integration_local_state_mitigation_efforts`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-submittal_review_process`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section7-funding_plans_projects`} />
             </div>
 
             <div className="property-section">
@@ -161,11 +141,6 @@ class Landing extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-hmgp`} />
             </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-lhmp_status_map`} />
-            </div>
-
           </div>
          </div>
 

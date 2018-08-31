@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
+import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
 class Landing extends Component {
   render () {
@@ -21,32 +22,35 @@ class Landing extends Component {
             <div className="property-section">
               <Content content_id={`section2-planning_process`} />
             </div>
-
            
+            <div className="property-section">
+              <Content content_id={`section7-local_mitigation_coordination`} />
+            </div>
+
             <div className="property-section">
               <Content content_id={`section2-plan_maintenance`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`section2-implementation_maintenance_agency_activity_evaluation`} />
+              <Content content_id={`section7-lhmp_maintenance`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`section2-implementation_maintenance_agency_activity_evaluation`} />
+              <Content content_id={`planning-critical_infrastructure_state_owned_assets`} />
             </div>
 
             <div className="property-section">
               <Content content_id={`section2-implementation_maintenance_softwaretech`} />
             </div>
-            
+
             <div className="property-section">
-              <Content content_id={`section7-lhmp_maintenance`} />
-            </div>
-            
-            <div className="property-section">
-              <Content content_id={`planning-monitoring_progress`} />
+              <Content content_id={`process-updating_the_plan`} />
             </div>
 
+            <div className="property-section">
+              <Content content_id={`planning-enhanced_plan`} />
+            </div>
+                      
             <div className="property-section">
               <Content content_id={`section1-adoptionassurances`} />
             </div>
