@@ -11,15 +11,13 @@ class Capabilities extends Component {
   render () {
    return (
       <div className='property-single'>
-         <div className='property-info-w'>
-          <div className="property-info-main" style={{paddingBottom: 0}}>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+
             <div className="property-section">
               <Content content_id={`capabilities-overview`} />
             </div>
-          </div>
-        </div>
-        <div className='property-info-w'>
-          <div className="property-info-main">
+
             <div className="property-section">
               <Content content_id={`capabilities-whats_changed_2014`} />
             </div>

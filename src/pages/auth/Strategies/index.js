@@ -113,7 +113,28 @@ class Strategies extends Component {
               <Content content_id={`capabilities-2019_goals_objectives_5`} />
             </div>
           </div>
-        </div>  
+        </div>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+
+            <div className="property-section">
+              <Content content_id={`strategies-actions_table`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-mitigation_strategies`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-agency_administered_funding_sources`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-local_funding_sources`} />
+            </div>
+          </div>
+         </div>
+          
       </div>
     )
   }
