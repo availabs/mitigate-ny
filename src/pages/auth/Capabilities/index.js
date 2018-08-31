@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
-import AgencyList from './components/AgencyList'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
-class Landing extends Component {
+import Counties from './Counties'
+import Agencies from './Agencies'
+
+class Capabilities extends Component {
   render () {
    return (
       <div className='property-single'>
@@ -143,8 +145,6 @@ class Landing extends Component {
             </div>
           </div>
          </div>
-
-        <AgencyList />
       </div>
     )
   }
@@ -160,6 +160,12 @@ export default [
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: connect(() => {}, {})(Landing),
-  }
+    subMenus: [[
+       {name: 'Agencies', path: '/agencies'},
+       {name: 'Counties', path: '/counties'},
+    ]],
+    component: connect(() => {}, {})(Capabilities),
+  },
+  ...Counties,
+  ...Agencies
 ]
