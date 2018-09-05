@@ -66,7 +66,7 @@ class Capabilities extends Component {
           <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`National Flood Insurance Program NFIP`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+              <ProjectBox title={`RiskMAP`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`capabilities-riskmap`} />
               </ProjectBox>
             </div>
@@ -76,8 +76,8 @@ class Capabilities extends Component {
           <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`FEMA Cooperating Technical Partners (CTP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`capabilities-cdbg`} />
+              <ProjectBox title={`National Flood Insurance Program (NFIP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-nfip`} />
               </ProjectBox>  
             </div>
            </div>
@@ -88,8 +88,8 @@ class Capabilities extends Component {
           <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`National Flood Insurance Program (NFIP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`capabilities-nfip`} />
+              <ProjectBox title={`FEMA Cooperating Technical Partners (CTP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-cdbg`} />
               </ProjectBox>
             </div>
           </div>
@@ -98,7 +98,7 @@ class Capabilities extends Component {
           <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`CDBG`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+              <ProjectBox title={`Community Development Block Grant (CDBG)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`capabilities-cdbg`} />
               </ProjectBox>  
             </div>
