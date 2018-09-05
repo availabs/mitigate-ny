@@ -21,9 +21,100 @@ class Capabilities extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-whats_changed_2014`} />
             </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '70%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-coordination_among_agencies`} />
+            </div>
+          </div>
+          <div className='property-info-side' style={{maxWidth: '30%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`Disaster Preparedness Commission`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-dpc`} />
+              </ProjectBox>  
+            </div>
+           </div>
+          </div>
+        </div>  
+
+
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-federal_funding`} />
+            </div>
+          </div>
+        </div>
+
+         <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`Federal Funding Administered by DHSES`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-dhses_administered_federal_funding`} />
+              </ProjectBox>  
+            </div>
+           </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`National Flood Insurance Program NFIP`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-riskmap`} />
+              </ProjectBox>
+            </div>
+          </div>
+        </div>
+
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`FEMA Cooperating Technical Partners (CTP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-cdbg`} />
+              </ProjectBox>  
+            </div>
+           </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`National Flood Insurance Program (NFIP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-nfip`} />
+              </ProjectBox>
+            </div>
+          </div>
+        </div>
+
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`CDBG`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-cdbg`} />
+              </ProjectBox>  
+            </div>
+           </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main"style={{paddingTop: 0}}> 
 
             <div className="property-section">
-              <Content content_id={`section2-coordination_agency_departments`} />
+              <Content content_id={`capabilities-integration-statewide-efforts`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section2-integration_climate_adaptation`} />
             </div>
 
             <div className="property-section">

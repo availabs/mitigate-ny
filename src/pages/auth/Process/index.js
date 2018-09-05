@@ -11,18 +11,25 @@ class Landing extends Component {
    return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main">
- 
-            <h1>Introduction</h1>
-            
-            <div className="property-section">
-              <Content content_id={`section1-2019whatsnew`} />
-            </div>
-
-            <div className="property-section">
+          <div className="property-info-main" style={{maxWidth: '70%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+           <div className="property-section">
               <Content content_id={`section2-planning_process`} />
             </div>
-           
+          </div>
+          <div className='property-info-side' style={{maxWidth: '30%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`What's New in the 2019 Update to the New York State Hazard Mitigation Plan`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`section1-2019whatsnew`} />
+              </ProjectBox>  
+            </div>
+           </div>
+          </div>
+         
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main"style={{paddingTop: 0}}>   
             <div className="property-section">
               <Content content_id={`section7-local_mitigation_coordination`} />
             </div>

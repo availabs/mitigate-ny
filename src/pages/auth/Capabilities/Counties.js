@@ -24,12 +24,13 @@ class Counties extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`section7-lhmp_submittal_review_process`} />
-            </div>  
-
-            <div className="property-section">
               <Content content_id={`section7-funding_plans_projects`} />
             </div>
+
+            <div className="property-section">
+              <Content content_id={`section7-lhmp_submittal_review_process`} />
+            </div>  
+            
           </div>
          </div>
       </div>
