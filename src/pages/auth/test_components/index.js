@@ -117,6 +117,7 @@ export default [
     path: '/test/capabilities',
     exact: true,
     name: 'Capabilities',
+    auth: true,
     mainNav: false,
     breadcrumbs: [
       { name: 'Capabilities', path: '/test/capabilities' }

@@ -518,6 +518,7 @@ export default [
     path: '/test/capabilities/new',
     name: 'Capabilities',
     mainNav: false,
+    auth: true,
     breadcrumbs: [
       { name: 'Capabilities', path: '/test/capabilities' },
       { name: 'New Capability', path: '/test/capabilities/new' }
@@ -529,6 +530,7 @@ export default [
     path: '/test/capabilities/edit/:id',
     name: 'Capabilities',
     mainNav: false,
+    auth: true,
     breadcrumbs: [
       { name: 'Capabilities', path: '/test/capabilities' },
       { param: 'id', path: '/test/capabilities/edit/edit/' }
