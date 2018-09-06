@@ -11,7 +11,9 @@ import Vulnerabilities from "./pages/auth/Vulnerabilities"
 import CMS from "./pages/auth/cms"
 import NewContentPage from "./pages/auth/cms/NewContentPage"
 import Plan from "pages/auth/SHMP"
+import Strategies from "pages/auth/Strategies"
 import Process from "pages/auth/Process"
+
 import Capabilities from "pages/auth/Capabilities"
 import Compare from "pages/auth/RiskIndex/Compare"
 import TestPage from "pages/auth/RiskIndex/TestPage"
@@ -35,6 +37,7 @@ const routes = [
   ...NewContentPage,
   ...Process,
   ...Capabilities,
+  ...Strategies,
   ...Compare,
   ...Plan,
   ...TestPage,
