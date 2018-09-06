@@ -4,6 +4,7 @@ const ADD_ACTIVE_FILTER = "ADD_ACTIVE_FILTER",
 	SET_CONTENT_FILTERS = "SET_CONTENT_FILTERS",
 
 	RECEIVE_CONTENT = "RECEIVE_CONTENT",
+	UPDATE_CONTENT = "UPDATE_CONTENT",
 
 	SET_EDIT_TARGET = "SET_EDIT_TARGET",
 
@@ -37,6 +38,13 @@ export const receiveContent = content =>
 	dispatch =>
 		(dispatch({
 			type: RECEIVE_CONTENT,
+			content
+		}),
+		Promise.resolve())
+export const updateContent = content =>
+	dispatch =>
+		(dispatch({
+			type: UPDATE_CONTENT,
 			content
 		}),
 		Promise.resolve())
@@ -79,6 +87,8 @@ const INITIAL_STATE = {
 		new_content_id: "",
 		attributes: {},
 		body: "",
+		created_at: "",
+		updated_at: "",
 		isEditTarget: false
 	}
 }
@@ -108,6 +118,13 @@ export default (state=INITIAL_STATE, action) => {
 		}
 		case RECEIVE_CONTENT:
 			return Object.assign({}, state, { content: action.content });
+		case UPDATE_CONTENT:
+			const content = state.content.filter(c => c.id !== action.content.id);
+			content.push(action.content);
+			return {
+				...state,
+				content
+			}
 		case SET_CONTENT_FILTERS:
 			return Object.assign({}, state, { contentFilters: action.filters });
 		case SET_EDIT_TARGET: {

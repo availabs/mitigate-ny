@@ -14,6 +14,8 @@ import {
   receiveHazards
 } from "store/modules/capabilities"
 
+import "./components/capabilities.css"
+
 const Capability = ({ id, name, description }) =>
   <ElementBox key={ id }>
     <h6>{ name }</h6>
@@ -23,6 +25,10 @@ const Capability = ({ id, name, description }) =>
 // STOP THE MADNESS!!!;
 
 class CapabilitiesIndex extends React.Component {
+
+  componentDidMount() {
+    this.fetchFalcorDeps();
+  }
 
   fetchFalcorDeps() {
     return this.props.falcor.get(
@@ -76,7 +82,7 @@ class CapabilitiesIndex extends React.Component {
     return this.props.falcor.call(
         ["capabilities", "remove"],
         [id]
-    ).then(r => r);
+    ).then(() => this.fetchFalcorDeps());
   }
 
   render() {

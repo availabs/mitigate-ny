@@ -260,51 +260,51 @@ class CapabilityItem extends React.Component {
 						{ !opened ? null :
 							<div className="row" style={ { marginTop: "10px" } }>
 								<div className="col-sm-8" style={ { borderBottom: "solid 2px rgba(83, 101, 140, 0.33)", marginBottom: "5px" } }>
-									<span style={ { fontWeight: "bold", fontSize: "1.5rem" } }>{ contact }</span>
+									<span className="contact-name">{ contact }</span>
 								</div>
 								<div className="col-sm-4" style={ { borderBottom: "solid 2px rgba(83, 101, 140, 0.33)", marginBottom: "5px", paddingTop: "5px" } }>
-									<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Agency</span>: { agency }
+									<span className="label-header">Agency</span>: { agency }
 								</div>
 								<div className="col-sm-4">
-									<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Email</span>: { contact_email }
+									<span className="label-header">Email</span>: { contact_email }
 								</div>
 								<div className="col-sm-4">
-									<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Title</span>: { contact_title }
+									<span className="label-header">Title</span>: { contact_title }
 								</div>
 								<div className="col-sm-4">
-									<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Dept</span>: { contact_department }
+									<span className="label-header">Dept</span>: { contact_department }
 								</div>
 								
 								{ !partners ? null :
-									<div className="col-sm-4" style={ { margin: "10px 0px" } }>
-										<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Partners</span>: { partners }
+									<div className="col-sm-4">
+										<span className="label-header">Partners</span>: { partners }
 									</div>
 								}
 
-								<div className="col-sm-12" style={ { margin: "10px 0px" } }>
-									<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Description</span>: { description }
+								<div className="col-sm-12 capability-section">
+									<span className="label-header">Description</span>: { description }
 								</div>
 
 								{ !(hazards && hazards.length) ? null :
 									this.makeHazardList()
 								}
 
-								<div className="col-sm-12">
+								<div className="col-sm-12 capability-section">
 									<div className="row">
 
 										{ !status.length ? <div className="col-sm-4"/> :
 											<div className="col-sm-4">
-												<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Status</span>
+												<span className="label-header">Status</span>
 											</div>
 										}
 										{ !admin.length ? <div className="col-sm-4"/> :
 											<div className="col-sm-4">
-												<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Administration</span>
+												<span className="label-header">Administration</span>
 											</div>
 										}
 										{ !capability.length ? <div className="col-sm-4"/> :
 											<div className="col-sm-4">
-												<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Capabilities</span>
+												<span className="label-header">Capabilities</span>
 											</div>
 										}
 
@@ -347,7 +347,7 @@ class CapabilityItem extends React.Component {
 
 								{ !url ? null :
 									<div className="col-sm-12">
-										<a href={ url }>Project URL</a>
+										<a href={ url } target="_blank">Project URL</a>
 									</div>
 								}
 

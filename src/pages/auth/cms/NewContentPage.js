@@ -26,16 +26,18 @@ class NewContentPage extends React.Component {
       return Promise.resolve();
     }
     return this.props.falcor.get(
-      ['content', 'byId', content_id, ['attributes', 'body']]
+      ['content', 'byId', content_id, ['attributes', 'body', 'created_at', 'updated_at']]
     )
     .then(response => {
       try {
         const {
           attributes,
-          body
+          body,
+          created_at,
+          updated_at
         } = response.json.content.byId[content_id];
         if (attributes && body) {
-          this.props.setEditTarget({ content_id, attributes, body });
+          this.props.setEditTarget({ content_id, attributes, body, created_at, updated_at });
         }
       }
       catch (e) {

@@ -1,0 +1,27 @@
+.contact-name {
+  font-weight: bold;
+  font-size: 1.5rem; }
+
+.label-header {
+  font-weight: bold;
+  font-size: 1.1rem; }
+
+.capability-section {
+  margin: 10px 0px; }
+
+.accordion-container {
+  border: solid 1px #334152;
+  border-radius: 4px;
+  margin-bottom: 15px; }
+
+.accordion-header {
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.25s ease-in-out; }
+
+.accordion-header.opened {
+  margin-bottom: 15px; }
+
+.accordion-header:hover {
+  background-color: #ddd;
+  cursor: pointer; }

@@ -9,7 +9,8 @@ import { history } from "store"
 import AttributesTable from "./CMS_AttributesTable"
 
 import {
-  updateNewContentData
+  updateNewContentData,
+  updateContent
 } from 'store/modules/cms';
 import {
   sendSystemMessage
@@ -92,7 +93,7 @@ class CMS_ContentEditorPanel extends React.Component {
     	if (content_id && body) {
 			this.props.falcor.set({
 				paths: [
-					['content', 'byId', content_id, ['content_id', 'body', 'attributes']]
+					['content', 'byId', content_id, ['content_id', 'body', 'attributes', 'updated_at', 'created_at']]
 				],
 				jsonGraph: {
 					content: {
@@ -111,7 +112,14 @@ class CMS_ContentEditorPanel extends React.Component {
 				if (new_content_id != content_id) {
 					history.replace(`/cms/edit/${ new_content_id }`);
 				}
-				return response;
+				const {
+					content_id,
+					body,
+					attributes,
+					updated_at,
+					created_at
+				} = response.json.content.byId[new_content_id]
+				this.props.updateContent({ content_id, body, attributes, updated_at, created_at });
 			})
 		}
 	}
@@ -255,7 +263,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	updateNewContentData,
-	sendSystemMessage
+	sendSystemMessage,
+	updateContent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(CMS_ContentEditorPanel));

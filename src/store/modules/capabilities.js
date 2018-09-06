@@ -1,4 +1,5 @@
 const RECEIVE_CAPABILITIES = "RECEIVE_CAPABILITIES",
+	UPDATE_CAPABILITY = "UPDATE_CAPABILITY",
 	RECEIVE_HAZARDS = "RECEIVE_HAZARDS",
 	TOGGLE_ACTIVE_FILTER = "TOGGLE_ACTIVE_FILTER",
 	SET_CAPABILITY_DATA = "SET_CAPABILITY_DATA",
@@ -90,7 +91,7 @@ export const META_DATA = {
 	"secondary_funding": { defaultValue: null, label: "Secondary Funding" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: null, label: "Hazards" },
+	"hazards": { defaultValue: [], label: "Hazards" },
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
 	"capability_response": { defaultValue: false, label: "Response" },
@@ -124,6 +125,13 @@ export const receiveCapabilities = capabilities =>
 		dispatch({
 			type: RECEIVE_CAPABILITIES,
 			capabilities
+		}), Promise.resolve())
+
+export const updateCapability = capability =>
+	dispatch => (
+		dispatch({
+			type: UPDATE_CAPABILITY,
+			capability
 		}), Promise.resolve())
 
 export const receiveHazards = hazards =>
@@ -170,6 +178,13 @@ export default (state=INITIAL_STATE, action) => {
 				...state,
 				capabilities: action.capabilities
 			};
+		case UPDATE_CAPABILITY:
+			const capabilities = state.capabilities.filter(d => d.id !== action.capability.id);
+			capabilities.push(action.capability);
+			return {
+				...state,
+				capabilities
+			}
 		case RECEIVE_HAZARDS:
 			return {
 				...state,

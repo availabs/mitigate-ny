@@ -21,8 +21,11 @@ import {
   setCapabilityData,
   getDefaultValue,
   getLabel,
-  clearCapabilityData
+  clearCapabilityData,
+  updateCapability
 } from "store/modules/capabilities"
+
+import "./components/capabilities.css"
 
 const FormRow = ({ type="text", id, placeholder, value, onChange }) =>
   <div className="form-group row">
@@ -82,10 +85,10 @@ class Accordion extends React.Component {
   render() {
     const { opened } = this.state;
     return (
-      <div style={ { border: "solid 1px #334152", borderRadius: "4px", marginBottom: "15px" } }>
+      <div className="accordion-container">
         <div onClick={ this.toggle.bind(this) }
-          style={ { padding: "10px 10px 0px 10px" } }>
-          <h5>{ this.props.title }</h5>
+          className={ `accordion-header ${ this.state.opened ? "opened" : "" }` }>
+          <h5 style={ { marginBottom: 0 } }>{ this.props.title }</h5>
         </div>
         <div style={ { overflowY: "auto", overflowX: "hidden", height: opened ? "auto" : 0, padding: "0px 10px 0px 10px" } }>
           { this.props.children }
@@ -179,7 +182,7 @@ class NewCapability extends React.Component {
     this.setState({ hazards: this.props.capabilities.hazards })
   }
   deselectAllHazards() {
-    this.setState({ hazards: null })
+    this.setState({ hazards: [] })
   }
   onSubmit(e) {
     e.preventDefault();
@@ -193,9 +196,9 @@ class NewCapability extends React.Component {
       const data = { ...this.state },
         { hazards } = data;
       data.hazards = { $type: "atom", value: hazards };
-      this.props.falcor.set({
+      return this.props.falcor.set({
         paths: [
-          ['capabilities', 'byId', id, NEW_CAPABILITY_ATTRIBUTES]
+          ['capabilities', 'byId', id, ATTRIBUTES]
         ],
         jsonGraph:{
           capabilities: {
@@ -207,24 +210,29 @@ class NewCapability extends React.Component {
             }
           }
       })
-      .then(() => {
+      .then(response => {
+        const graph = response.json.capabilities.byId[id],
+          capability = {};
+        ATTRIBUTES.forEach(attribute => {
+          capability[attribute] = graph[attribute];
+        })
+        this.props.updateCapability(capability);
         this.props.sendSystemMessage(`Capability "${ name }" was successfully edited.`, { type: "success" });
       })
     }
     else {
       const args = NEW_CAPABILITY_ATTRIBUTES.map(attribute => {
         if (attribute === "hazards") {
-          return this.state.hazards === null ? null : { $type: "atom", value: this.state.hazards };
+          return { $type: "atom", value: this.state.hazards || getDefaultValue(attribute) };
         }
         return this.state[attribute] || getDefaultValue(attribute)
       })
-      this.props.falcor.call(
+      return this.props.falcor.call(
         ['capabilities', 'insert'],
         args, [], []
       )
       .then(response => {
         this.props.sendSystemMessage(`Capability "${ name }" was successfully created.`, { type: "success" });
-        return response;
       })
     }
   }
@@ -492,6 +500,7 @@ class NewCapability extends React.Component {
 
 const mapStateToProps = state => ({
   router: state.router,
+  capabilitiesGraph: state.graph.capabilities,
   capabilities: state.capabilities,
   riskIndex: state.graph.riskIndex
 })
@@ -500,7 +509,8 @@ const mapDispatchToProps = {
   sendSystemMessage,
   setCapabilityData,
   receiveHazards,
-  clearCapabilityData
+  clearCapabilityData,
+  updateCapability
 };
 
 export default [
