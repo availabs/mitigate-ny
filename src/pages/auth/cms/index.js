@@ -77,10 +77,7 @@ class CMS_HomePage extends React.Component {
     return this.props.falcor.call(
       ["content", "byId", "remove"],
       [content_id]
-    ).then(response => {
-      console.log("DELETE RESPONSE:",response);
-      return response;
-    })
+    ).then(response => response)
   }
 
   render () {

@@ -66,7 +66,8 @@ class HazardMap extends React.Component {
 			},
 			asHeight: 'sovi',
 			threeD: props.threeD,
-			transitioning: false
+			transitioning: false,
+			standardScale: props.standardScale
 		}
 	}
 
@@ -111,7 +112,7 @@ class HazardMap extends React.Component {
 		if ((newProps.hazard !== this.props.hazard) ||
 			(newProps.highRisk && !this.props.highRisk)) {
 			this.fetchFalcorDeps(newProps);
-			this.processData(this.state.asHeight, newProps)
+			this.processData(this.state, newProps)
 		}
 	}
 
@@ -198,7 +199,7 @@ class HazardMap extends React.Component {
 
 	toggleAsHeight() {
 		const asHeight = this.state.asHeight === 'builtenv' ? 'sovi' : 'builtenv';
-		this.processData(asHeight);
+		this.processData({ asHeight });
 	}
 	toggleThreeD() {
 		const threeD = !this.state.threeD,
@@ -212,7 +213,7 @@ class HazardMap extends React.Component {
 		}
 	}
 
-	processData(asHeight=this.state.asHeight, { geoid, geoLevel, hazard, highRisk } = this.props) {
+	processData({ asHeight, standardScale }=this.state, { geoid, geoLevel, hazard, highRisk }=this.props) {
 		let scale = getScale(),
 
     		heightScale = getHeightScale(),
@@ -273,6 +274,9 @@ class HazardMap extends React.Component {
     		else if (SOCIAL_SCORES.includes(hazard)) {
     			scale = getQuantileScale()
     				.domain(domain);
+    		}
+    		else if (!standardScale) {
+    			scale.domain([min, max]);
     		}
     		heightScale.domain([minHeight , maxHeight]);
     	}
@@ -583,7 +587,8 @@ HazardMap.defaultProps = {
 	threeD: true,
 	interactive: false,
 	showBaseMap: false,
-	highRisk: 0.0
+	highRisk: 0.0,
+	standardScale: true
 }
 
 const mapStateToProps = state => ({

@@ -17,7 +17,6 @@ class MunicipalityStats extends React.Component {
 	processData({ geoid }=this.props) {
 		let data = [];
 		try {
-console.log(this.props.geoGraph)
 			data = [
 				{ 
 					label: "County Population (2016)",

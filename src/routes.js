@@ -17,6 +17,9 @@ import Compare from "pages/auth/RiskIndex/Compare"
 import TestPage from "pages/auth/RiskIndex/TestPage"
 import CountyPage from "pages/auth/RiskIndex/CountyPage"
 
+import CapabilitiesTest from "pages/auth/test_components"
+import NewCapability from "pages/auth/test_components/NewCapability"
+
 // -- Util Routes
 import Login from './pages/Login'
 import Logout from './pages/Logout'
@@ -36,6 +39,10 @@ const routes = [
   ...Plan,
   ...TestPage,
   ...CountyPage,
+
+  ...CapabilitiesTest,
+  ...NewCapability,
+  
   Login,
   Logout,
   NoMatch

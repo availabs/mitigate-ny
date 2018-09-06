@@ -7,7 +7,8 @@ import MarkdownRenderer from 'react-markdown-renderer';
 import { history } from "store"
 
 import {
-  setEditTarget
+  setEditTarget,
+  clearNewContentData
 } from 'store/modules/cms';
 
 import Element from 'components/light-admin/containers/Element'
@@ -20,7 +21,10 @@ class NewContentPage extends React.Component {
   fetchFalcorDeps() {
     const { params } = createMatchSelector({ path: '/cms/edit/:content_id' })(this.props) || { params: {} },
       { content_id } = params;
-    if (!content_id) return Promise.resolve();
+    if (!content_id) {
+      this.props.clearNewContentData();
+      return Promise.resolve();
+    }
     return this.props.falcor.get(
       ['content', 'byId', content_id, ['attributes', 'body']]
     )
@@ -82,7 +86,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  setEditTarget
+  setEditTarget,
+  clearNewContentData
 };
 
 const component = connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(NewContentPage));

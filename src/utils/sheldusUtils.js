@@ -145,30 +145,30 @@ function fnum(x) {
 	if(isNaN(x)) return x;
 
 	if(x < 9999) {
-		const frmt = format(",.0f")
+		const frmt = format("$,.0f")
 		return frmt(x);
 	}
 
 	if(x < 1000000) {
-		const frmt = format(",.0f")
+		const frmt = format("$,.0f")
 		return frmt(x/1000) + "K";
 	}
 	if( x < 10000000) {
-		const frmt = format(",.2f")
+		const frmt = format("$,.2f")
 		return frmt(x/1000000) + "M";
 	}
 
 	if(x < 1000000000) {
-		const frmt = format(",.1f")
+		const frmt = format("$,.1f")
 		return frmt(x/1000000) + "M";
 	}
 
 	if(x < 1000000000000) {
-		const frmt = format(",.1f")
+		const frmt = format("$,.1f")
 		return frmt(x/1000000000) + "B";
 	}
 
-	return "1T+";
+	return "$1T+";
 }
 
 const ftypeMap = {
@@ -190,7 +190,7 @@ module.exports = {
 
 	getColorScale: domain =>
 		scaleOrdinal()
-			.domain(domain)
+			.domain(domain.sort())
 			.range(D3_CATEGORY20),
 
 	processSheldus : (data,key) => {
@@ -232,7 +232,7 @@ module.exports = {
 	},
 
 	processDataForBarChart: (rawData, geoids, lossType="property_damage", hazard=null) => {
-// console.log("<processDataForBarChart>",rawData)
+// console.log("<processDataForBarChart>",rawData,geoids)
 		const data = {}, keys = {};
 		for (const geoid in rawData) {
 			if (!geoids.includes(geoid)) continue;
@@ -243,6 +243,7 @@ module.exports = {
 					keys[hazardid] = true;
 				}
 				for (const year in rawData[geoid][hazardid]) {
+					if (year === 'allTime') continue;
 					if (!(year in data)) {
 						data[year] = { year };
 					}

@@ -13,10 +13,6 @@ import {
   sendSystemMessage
 } from 'store/modules/messages';
 
-import {
-	clearNewContentData
-} from 'store/modules/cms'
-
 class CMS_ContentPanel extends React.Component {
 	state = {
 		page: 0,
@@ -80,7 +76,7 @@ class CMS_ContentPanel extends React.Component {
 		}
 		const maxPages = Math.max(Math.ceil(filteredContent.length / numPerPage) - 1, 0);
 		page = Math.min(maxPages, page);
-		this.setState({ ...state, ...{ filteredContent, maxPages, page } });
+		this.setState({ ...state, filteredContent, maxPages, page });
 	}
 
 	setSearchFilter(e) {
@@ -122,11 +118,6 @@ class CMS_ContentPanel extends React.Component {
 			range.push(i);
 		}
 		return range;
-	}
-
-	createNewContent() {
-		this.props.clearNewContentData();
-		this.props.push("/cms/new");
 	}
 
 	render() {
@@ -213,11 +204,11 @@ class CMS_ContentPanel extends React.Component {
   							</div>
   						</div>
   						<div className="col-lg-2">
-  							<button type="button" className="btn btn-lg btn-outline-success btn-block"
-  								onClick={ this.createNewContent.bind(this) }>
+  							<Link className="btn btn-lg btn-outline-success btn-block"
+  								to="/cms/new">
   								<span style={ { fontWeight: "900" } }>NEW</span>
   								<span style={ { fontWeight: "900", fontSize: "1.5em" } } className="os-icon os-icon-plus-circle"/>
-  							</button>
+  							</Link>
   						</div>
   					</div>
   				</ElementBox>
@@ -245,7 +236,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	sendSystemMessage,
-	clearNewContentData,
 	push: url => dispatch => dispatch(push(url))
 };
 

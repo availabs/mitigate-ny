@@ -34,7 +34,6 @@ export default ({ tableData=[], columns=[], links={}, onClick=null }) => {
         }
       </tbody>
     </table>
-
   )
 }
 
