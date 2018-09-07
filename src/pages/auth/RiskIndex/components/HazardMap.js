@@ -439,7 +439,7 @@ class HazardMap extends React.Component {
 			name = this.getHazardName(hazard),
 			range = scale.range(),
   			width = `${ 100 / range.length }%`;
-  		console.log( name )
+  		// console.log( name )
 		return (
 			<table className="map-test-table">
 				<thead>

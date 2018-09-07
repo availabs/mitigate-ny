@@ -73,7 +73,6 @@ class HazardScoreTable extends Component {
     
     return (
       <TableBox 
-        title={ this.props.riskIndexGraph.meta[hazard].name }
         data={ tableData }
         pageSize={ pageSize }
         columns={ keys }
@@ -113,7 +112,7 @@ class HazardScoreTable extends Component {
     
     return (
       <TableBox 
-        title={ this.props.riskIndexGraph.meta[hazard].name }
+        
         data={ tableData }
         pageSize={ pageSize }
         columns={ keys }
