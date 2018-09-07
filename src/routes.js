@@ -16,7 +16,7 @@ import Process from "pages/auth/Process"
 
 import Capabilities from "pages/auth/Capabilities"
 import Compare from "pages/auth/RiskIndex/Compare"
-import TestPage from "pages/auth/RiskIndex/TestPage"
+import TestPage from "pages/auth/test_components/TestPage"
 import CountyPage from "pages/auth/RiskIndex/CountyPage"
 
 import CapabilitiesTest from "pages/auth/test_components"

@@ -5,6 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
+import CapabilitiesTable from "./components/CapabilitiesTable"
+
 class TestPage extends React.Component {
 
   // fetchFalcorDeps() {
@@ -13,7 +15,13 @@ class TestPage extends React.Component {
   render() {
     try {
       return (
-        null
+        <Element>
+          <div className='row'>
+            <div className='col-lg-12'>
+                <CapabilitiesTable />
+            </div>
+          </div>
+        </Element>
       )
     }
     catch (e) {
