@@ -1,7 +1,13 @@
 const RECEIVE_CAPABILITIES = "RECEIVE_CAPABILITIES",
 	UPDATE_CAPABILITY = "UPDATE_CAPABILITY",
+
 	RECEIVE_HAZARDS = "RECEIVE_HAZARDS",
-	TOGGLE_ACTIVE_FILTER = "TOGGLE_ACTIVE_FILTER",
+
+	RECEIVE_AGENCIES = "RECEIVE_AGENCIES",
+
+	TOGGLE_HAZARD_FILTER = "TOGGLE_HAZARD_FILTER",
+	TOGGLE_AGENCY_FILTER = "TOGGLE_AGENCY_FILTER",
+
 	SET_CAPABILITY_DATA = "SET_CAPABILITY_DATA",
 	CLEAR_CAPABILITY_DATA = "CLEAR_CAPABILITY_DATA";
 
@@ -141,11 +147,24 @@ export const receiveHazards = hazards =>
 			hazards
 		}), Promise.resolve())
 
-export const toggleActiveFilter = filter =>
+export const receiveAgencies = agencies =>
 	dispatch => (
 		dispatch({
-			type: TOGGLE_ACTIVE_FILTER,
-			filter
+			type: RECEIVE_AGENCIES,
+			agencies
+		}), Promise.resolve())
+
+export const toggleHazardFilter = hazard =>
+	dispatch => (
+		dispatch({
+			type: TOGGLE_HAZARD_FILTER,
+			hazard
+		}), Promise.resolve())
+export const toggleAgencyFilter = agency =>
+	dispatch => (
+		dispatch({
+			type: TOGGLE_AGENCY_FILTER,
+			agency
 		}), Promise.resolve())
 
 export const setCapabilityData = capabilityData =>
@@ -167,8 +186,10 @@ const INITIAL_STATE = {
 		name: "",
 		description: ""
 	},
-	activeFilters: [],
-	hazards: []
+	hazardFilters: [],
+	hazards: [],
+	agencyFilters: [],
+	agencies: []
 }
 
 export default (state=INITIAL_STATE, action) => {
@@ -190,17 +211,29 @@ export default (state=INITIAL_STATE, action) => {
 				...state,
 				hazards: action.hazards
 			}
-		case TOGGLE_ACTIVE_FILTER:
-			let activeFilters = state.activeFilters.slice();
-			if (!activeFilters.includes(action.filter)) {
-				activeFilters.push(action.filter);
+		case TOGGLE_HAZARD_FILTER:
+			let hazardFilters = state.hazardFilters.slice();
+			if (!hazardFilters.includes(action.hazard)) {
+				hazardFilters.push(action.hazard);
 			}
 			else {
-				activeFilters = activeFilters.filter(af => af !== action.filter)
+				hazardFilters = hazardFilters.filter(h => h !== action.hazard)
 			}
 			return {
 				...state,
-				activeFilters
+				hazardFilters
+			}
+		case TOGGLE_AGENCY_FILTER:
+			let agencyFilters = state.agencyFilters.slice();
+			if (!agencyFilters.includes(action.agency)) {
+				agencyFilters.push(action.agency);
+			}
+			else {
+				agencyFilters = agencyFilters.filter(a => a !== action.agency)
+			}
+			return {
+				...state,
+				agencyFilters
 			}
 		case SET_CAPABILITY_DATA:
 			return {
@@ -211,6 +244,11 @@ export default (state=INITIAL_STATE, action) => {
 			return {
 				...state,
 				capabilityData: INITIAL_STATE.capabilityData
+			}
+		case RECEIVE_AGENCIES:
+			return {
+				...state,
+				agencies: action.agencies
 			}
 		default:
 			return state;

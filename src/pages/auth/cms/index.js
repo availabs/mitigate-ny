@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 import { createMatchSelector } from 'react-router-redux';
 
-import { history } from "store"
-
 import {
   addActiveFilter,
   removeActiveFilter,

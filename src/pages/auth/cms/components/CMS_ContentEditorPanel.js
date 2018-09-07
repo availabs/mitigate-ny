@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import ElementBox from 'components/light-admin/containers/ElementBox'
-
 import { history } from "store"
+import { push } from 'react-router-redux';
+
+import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
 
@@ -140,9 +141,8 @@ class CMS_ContentEditorPanel extends React.Component {
     		)
 			.then(response => {
 				this.props.sendSystemMessage(`Content "${ content_id }" was successfully created.`, { type: "success" });
-				return response;
+				this.props.push(`/cms/edit/${ content_id }`)
 			})
-    		.catch(error => console.log("CALL ERROR:",error));
     	}
 	}
 
@@ -264,7 +264,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	updateNewContentData,
 	sendSystemMessage,
-	updateContent
+	updateContent,
+	push: url => dispatch => dispatch(push(url))
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(CMS_ContentEditorPanel));

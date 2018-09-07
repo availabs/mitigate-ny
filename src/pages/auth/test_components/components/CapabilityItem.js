@@ -129,36 +129,38 @@ class CapabilityItem extends React.Component {
 
 	makeHazardList() {
 		const { hazards } = this.props,
-			slice = Math.ceil(hazards.length / 3);
+			slice = Math.ceil(hazards.length / 3),
+			mappedHazards = hazards.map(hazard => ({ hazard, name: this.getHazardName(hazard) }))
+				.sort((a, b) => a.name < b.name ? -1 : 1);
 		return (
 			<div className="col-sm-12">
 				<div className="row">
 					<div className="col-sm-12">
 						<span style={ { fontWeight: "bold", fontSize: "1.1rem" } }>Hazards</span>:
 					</div>
-					{ !hazards.slice(0, slice).length ? null :
+					{ !mappedHazards.slice(0, slice).length ? null :
 						<div className="col-sm-4">
 							<table className="table">
 								<tbody>
-									{ hazards.slice(0, slice).map(h => <tr key={ h }><td>{ this.getHazardName(h) }</td></tr>) }
+									{ mappedHazards.slice(0, slice).map(h => <tr key={ h.hazard }><td>{ h.name }</td></tr>) }
 								</tbody>
 							</table>
 						</div>
 					}
-					{ !hazards.slice(slice, slice * 2).length ? null :
+					{ !mappedHazards.slice(slice, slice * 2).length ? null :
 						<div className="col-sm-4">
 							<table className="table">
 								<tbody>
-									{ hazards.slice(slice, slice * 2).map(h => <tr key={ h }><td>{ this.getHazardName(h) }</td></tr>) }
+									{ mappedHazards.slice(slice, slice * 2).map(h => <tr key={ h.hazard }><td>{ h.name }</td></tr>) }
 								</tbody>
 							</table>
 						</div>
 					}
-					{ !hazards.slice(slice * 2).length ? null :
+					{ !mappedHazards.slice(slice * 2).length ? null :
 						<div className="col-sm-4">
 							<table className="table">
 								<tbody>
-									{ hazards.slice(slice * 2).map(h => <tr key={ h }><td>{ this.getHazardName(h) }</td></tr>) }
+									{ mappedHazards.slice(slice * 2).map(h => <tr key={ h.hazard }><td>{ h.name }</td></tr>) }
 								</tbody>
 							</table>
 						</div>
@@ -240,11 +242,11 @@ class CapabilityItem extends React.Component {
 									{ name }
 								</button>
 							</div>
-							<div className="col-lg-4" style={ { paddingTop: "10px" } }>
+							<div className="col-lg-3" style={ { paddingTop: "10px" } }>
 								<h5 style={ { display: "inline-block", paddingRight: "10px" } }>Updated At:</h5>
 								{ new Date(updated_at).toLocaleString() }
 							</div>
-							<div className="col-lg-3">
+							<div className="col-lg-4">
 								<div className="float-right">
 									<Link className="btn btn-lg btn-outline-primary"
 										to={ `/test/capabilities/edit/${ id }` }>
@@ -278,6 +280,12 @@ class CapabilityItem extends React.Component {
 								{ !partners ? null :
 									<div className="col-sm-4">
 										<span className="label-header">Partners</span>: { partners }
+									</div>
+								}
+								
+								{ !budget_provided ? null :
+									<div className="col-sm-4">
+										<span className="label-header">Budget Provided</span>: { budget_provided }
 									</div>
 								}
 

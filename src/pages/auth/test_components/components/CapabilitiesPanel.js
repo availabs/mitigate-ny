@@ -15,18 +15,28 @@ import {
 class CapabilitiesPanel extends React.Component {
 	state = {
 		page: 0,
-		numPerPage: 6,
+		numPerPage: 5,
 		filteredCapabilities: [],
-		maxPages: 0
+		maxPages: 0,
+		searchFilterKey: "",
+		searchFilter: ""
 	}
 
 	componentWillReceiveProps(newProps) {
 		this.updateState(newProps);
 	}
 
+	setSearchFilterKey(e) {
+		this.updateState(this.props, { searchFilterKey: e.target.value });
+	}
+	setSearchFilter(e) {
+		this.updateState(this.props, { searchFilter: e.target.value });
+	}
+
 	updateState(props=this.props, newState={}) {
 		const {
-			activeFilters,
+			hazardFilters,
+			agencyFilters,
 			capabilities
 		} = props.capabilities;
 		const state = {
@@ -40,8 +50,45 @@ class CapabilitiesPanel extends React.Component {
 			searchFilterKey,
 			searchFilter
 		} = state;
+
 		let filteredCapabilities = capabilities
-			.sort((a, b) => new Date(b.updated_at).valueOf() - new Date(a.updated_at).valueOf());
+			.sort((a, b) => {
+				const aDate = (new Date(a.updated_at)).valueOf(),
+					bDate = (new Date(b.updated_at)).valueOf();
+				if (aDate === bDate) {
+					return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+				}
+				return bDate - aDate
+			})
+
+		if (hazardFilters.length) {
+			filteredCapabilities = filteredCapabilities.filter(c =>
+				Boolean(c.hazards) && c.hazards.reduce((a, h) => a || hazardFilters.includes(h), false)
+			)
+		}
+		if (agencyFilters.length) {
+			filteredCapabilities = filteredCapabilities.filter(c =>
+				Boolean(c.agency) && agencyFilters.includes(c.agency)
+			)
+		}
+		if (searchFilter.length) {
+			filteredCapabilities = filteredCapabilities.filter(cap => {
+				switch (searchFilterKey) {
+					case "name":
+						return cap.name && cap.name.toLowerCase()
+							.includes(searchFilter.toLowerCase());
+					case "agency":
+						return cap.agency && cap.agency.toLowerCase()
+							.includes(searchFilter.toLowerCase());
+					case "partners":
+						return cap.partners && cap.partners.toLowerCase()
+							.includes(searchFilter.toLowerCase());
+					case "contact":
+						return cap.contact && cap.contact.toLowerCase()
+							.includes(searchFilter.toLowerCase());
+				}
+			})
+		}
 
 		const maxPages = Math.max(Math.ceil(filteredCapabilities.length / numPerPage) - 1, 0);
 		page = Math.min(maxPages, page);
@@ -135,7 +182,37 @@ class CapabilitiesPanel extends React.Component {
 	  							</button>
 	  						</div>
   						</div>
-  						<div className="col-sm-4"/>
+  						<div className="col-lg-4" style={ { marginTop: "-0.4em", marginBottom: "-0.4em" } }>
+  							<div className="row" style={ { marginBottom: "-3px" } }>
+  								<div className="col-lg-3">
+	  								<label style={ { paddingTop: "0.4rem" } }
+	  									htmlFor="search-filter-key">Search:</label>
+	  							</div>
+  								<div className="col-lg-9">
+	  								<select onChange={ this.setSearchFilterKey.bind(this) }
+	  									id="search-filter-key"
+	  									className="form-control form-control-sm"
+	  									style= { {
+	  										borderBottomLeftRadius: "0px",
+	  										borderBottomRightRadius: "0px",
+	  										paddingTop: "0",
+	  										paddingBottom: "0" } }
+	  									value={ this.state.searchFilterKey }>
+	  									<option value="name">Name</option>
+	  									<option value="agency">Agency</option>
+	  									<option value="partners">Partners</option>
+	  									<option value="contact">Contact</option>
+	  								</select>
+	  							</div>
+  							</div>
+  							<div>
+  								<input type="text" value={ this.state.searchFilter }
+  									style={ { borderTopRightRadius: "0px" } }
+  									className="form-control form-control-sm"
+  									onChange={ this.setSearchFilter.bind(this) }
+  									placeholder="search for..."/>
+  							</div>
+  						</div>
   						<div className="col-sm-2">
   							<Link className="btn btn-lg btn-outline-success btn-block"
   								to="/test/capabilities/new">

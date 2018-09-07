@@ -60,7 +60,7 @@ class NewContentPage extends React.Component {
         <div className='row'>
 
           <div className="col-lg-6">
-            <CMS_ContentEditorPanel/>
+            <CMS_ContentEditorPanel />
           </div>
 
           <div className="col-lg-6">

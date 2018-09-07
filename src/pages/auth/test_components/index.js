@@ -11,7 +11,8 @@ import CapabilitiesPanel from "./components/CapabilitiesPanel"
 import {
   ATTRIBUTES,
   receiveCapabilities,
-  receiveHazards
+  receiveHazards,
+  receiveAgencies
 } from "store/modules/capabilities"
 
 import "./components/capabilities.css"
@@ -62,7 +63,8 @@ class CapabilitiesIndex extends React.Component {
         ['capabilities', 'byId', ids, ATTRIBUTES]
       )
       .then(response => {
-        const capabilities = [];
+        const capabilities = [],
+          agencies = {};
         ids.forEach(id => {
           const graph = response.json.capabilities.byId[id],
             capability = {
@@ -71,8 +73,12 @@ class CapabilitiesIndex extends React.Component {
             ATTRIBUTES.forEach(attribute => {
               capability[attribute] = graph[attribute];
             })
+            if (graph.agency) {
+              agencies[graph.agency] = true;
+            }
           capabilities.push(capability);
         })
+        this.props.receiveAgencies(Object.keys(agencies));
         this.props.receiveCapabilities(capabilities);
       })
     )
@@ -109,7 +115,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   receiveCapabilities,
-  receiveHazards
+  receiveHazards,
+  receiveAgencies
 };
 
 export default [

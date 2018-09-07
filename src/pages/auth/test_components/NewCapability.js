@@ -531,6 +531,7 @@ export default [
     name: 'Capabilities',
     mainNav: false,
     auth: true,
+    exact: true,
     breadcrumbs: [
       { name: 'Capabilities', path: '/test/capabilities' },
       { param: 'id', path: '/test/capabilities/edit/edit/' }
