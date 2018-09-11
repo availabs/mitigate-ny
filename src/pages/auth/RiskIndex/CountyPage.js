@@ -8,7 +8,7 @@ import GeographyScoreBarChart from "./components/GeographyScoreBarChart"
 import MunicipalityStats from "./components/MunicipalityStats"
 import HazardList from "./components/HazardListNew"
 import CousubTotalLossTable from "./components/CousubTotalLossTable"
-import HMAP_Table from "./components/HMAP_Table"
+import HMGPTable from "./components/HMGPTable"
 
 import {
   getColorScale,
@@ -115,7 +115,7 @@ class CountyPage extends React.Component {
 
         <div className='row'>
           <div className= 'col-12'>
-            <HMAP_Table { ...this.state }/>
+            <HMGPTable { ...this.state }/>
           </div>
         </div>
 
