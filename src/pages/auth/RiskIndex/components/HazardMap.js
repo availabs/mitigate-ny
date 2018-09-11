@@ -64,6 +64,10 @@ class HazardMap extends React.Component {
 				type: "FeatureCollection",
 				features: []
 			},
+			ogsData: {
+				type: "FeatureCollection",
+				features: []
+			},
 			asHeight: 'sovi',
 			threeD: props.threeD,
 			transitioning: false,
@@ -168,9 +172,9 @@ class HazardMap extends React.Component {
 				['critical', 'byId', ids, ['location', 'desc', 'name', 'address', 'ftype', 'fcode']]
 			))
 		})
-		.then(() => this.processCriticalData())
+		.then(() => this.processCriticalInfrastructure())
 	}
-	processCriticalData() {
+	processCriticalInfrastructure() {
 		let criticalData = {
 			type: "FeatureCollection",
 			features: []
@@ -194,6 +198,75 @@ class HazardMap extends React.Component {
 		}
 		finally {
 			this.setState({ criticalData });
+		}
+	}
+
+	fetchOgsData(geoids) {
+		return this.props.falcor.get(
+			['ogs', 'byGeoid', geoids, 'length']
+		)
+		.then(response => {
+			const data = response.json.ogs.byGeoid;
+			let max = 0;
+			geoids.forEach(geoid => {
+				max = Math.max(max, data[geoid].length);
+			})
+			return max;
+		})
+		.then(max => {
+			if (max === 0) return [];
+			return this.props.falcor.get(
+				['ogs', 'byGeoid', geoids, 'byIndex', { from: 0, to: max -1 }, 'id']
+			)
+			.then(response => {
+				const data = response.json.ogs.byGeoid,
+					ids = [];
+				geoids.forEach(geoid => {
+					for (let i = 0; i < max; ++i) {
+						const indices = data[geoid].byIndex;
+						if (indices[i]) {
+							ids.push(indices[i].id)
+						}
+					}
+				})
+				return ids;
+			})
+			.then(ids => {
+				if (!ids.length) return;
+				return this.props.falcor.get(
+					['ogs', 'byId', ids, ['location', 'desc', 'agency', 'status']]
+				)
+			})
+			.then(response => {
+				this.processOgsData()
+				return response;
+			})
+		})
+	}
+	processOgsData() {
+		let ogsData = {
+			type: "FeatureCollection",
+			features: []
+		}
+		try {
+			const features = [];
+			for (const id in this.props.ogs.byId) {
+				const data = this.props.ogs.byId[id];
+				features.push({
+					type: "Feature",
+					geometry: JSON.parse(data.location),
+					properties: {
+						...data
+					}
+				})
+			}
+			ogsData.features = features;
+		}
+		catch (e) {
+			ogsData.features = [];
+		}
+		finally {
+			this.setState({ ogsData });
 		}
 	}
 
@@ -270,6 +343,7 @@ class HazardMap extends React.Component {
     				return properties.score >= qntl;
     			})
     			this.fetchCriticalInfrastructure(geoids);
+    			this.fetchOgsData(geoids);
     		}
     		else if (SOCIAL_SCORES.includes(hazard)) {
     			scale = getQuantileScale()
@@ -287,7 +361,7 @@ class HazardMap extends React.Component {
 	}
 
 	generateLayers() {
-		const { scale, heightScale, data, criticalData, viewport, threeD, transitioning } = this.state,
+		const { scale, heightScale, data, criticalData, ogsData, viewport, threeD, transitioning } = this.state,
 
   			{ geoid } = this.props,
 
@@ -419,6 +493,33 @@ class HazardMap extends React.Component {
 		      		}
 		      		this.setState({ hoverData });
 	    		}
+	    	},
+
+	    	{
+	    		id: 'ogs-layer',
+	    		data: ogsData,
+	    		pointRadiusMinPixels: 3,
+	    		stroked: true,
+	    		getLineColor: [255, 0, 0, 255],
+	    		filled: true,
+	    		getFillColor: [0, 0, 0, 255],
+	    		pickable: true,
+		      	fp64: true,
+		      	autoHighlight: true,
+		      	highlightColor: [0, 225, 0, 255],
+	    		onHover: event => {
+	    			const { object, x, y } = event;
+		      		let hoverData = null;
+		      		if (object) {
+		      			const { desc } = object.properties;
+		      			hoverData = {
+		      				rows: [
+			      				[desc]
+		      				], x, y
+		      			}
+		      		}
+		      		this.setState({ hoverData });
+	    		}
 	    	}
 	    ]
 	    return { layers };
@@ -439,7 +540,6 @@ class HazardMap extends React.Component {
 			name = this.getHazardName(hazard),
 			range = scale.range(),
   			width = `${ 100 / range.length }%`;
-  		console.log( name )
 		return (
 			<table className="map-test-table">
 				<thead>
@@ -509,7 +609,7 @@ class HazardMap extends React.Component {
 				<tbody>
 					{
 						Object.keys(ftypeMap).map(key =>
-							<tr>
+							<tr key={ key }>
 								<td>
 									<div style={ {
 											width: "16px", height: "16px",
@@ -523,6 +623,18 @@ class HazardMap extends React.Component {
 							</tr>
 						)
 					}
+					<tr>
+						<td>
+							<div style={ {
+								width: "16px", height: "16px",
+								borderRadius: "8px",
+								backgroundColor: "#000"
+							} }/>
+						</td>
+						<td>
+							OGS Building
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		)
@@ -597,7 +709,8 @@ const mapStateToProps = state => ({
   	riskIndex: state.graph.riskIndex,
   	geo: state.geo,
   	geoGraph: state.graph.geo,
-  	critical: state.graph.critical
+  	critical: state.graph.critical,
+  	ogs: state.graph.ogs
 })
 
 const mapDispatchToProps = {

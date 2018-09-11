@@ -1,0 +1,1 @@
+host = "dbname=hazard_mitigation user=postgres host=mars.availabs.org password=Jedi21funk"

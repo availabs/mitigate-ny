@@ -4,27 +4,6 @@ from config import host
 
 HOME_DIR = os.environ['HOME']
 
-# HAZARD_META: {
-#     'wind': { id: 'wind', name:'Wind' },
-#     'wildfire': { id: 'wildfire', name:'Wildfire' },
-#     'tsunami': { id: 'tsunami', name:'Tsunami' },
-#     'tornado': { id: 'tornado', name:'Tornado' },
-#     'riverine': { id: 'riverine', name:'Flooding' },
-#     'lightning': { id: 'lightning', name:'Lightning' },
-#     'landslide': { id: 'landslide', name:'Landslide' },
-#     'icestorm': { id: 'icestorm', name:'Ice Storm' },
-#     'hurricane': { id: 'hurricane', name:'Hurricane' },
-#     'heatwave': { id: 'heatwave', name:'Heat Wave' },
-#     'hail': { id: 'hail', name:'Hail' },
-#     'earthquake': { id: 'earthquake', name:'Earthquake' },
-#     'drought': { id: 'drought', name:'Drought' },
-#     'avalanche': { id: 'avalanche', name:'Avalanche' },
-#     'coldwave': { id: 'coldwave', name:'Coldwave' },
-#     'winterweat': { id: 'winterweat', name:'Snow Storm' },
-#     'volcano': { id: 'volcano', name:'Volcano' },
-#     'coastal': { id: 'coastal', name:'Coastal Erosion' }
-# }
-
 HAZARDS = [
     'wind',
     'wildfire',
