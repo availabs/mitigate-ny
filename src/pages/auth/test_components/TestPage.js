@@ -21,8 +21,8 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HazardMap highRisk={ 0.95 }
-                  threeD={ false }/>
+                {/*<HazardMap highRisk={ 0.95 }
+                  threeD={ false }/>*/}
               </ElementBox>
             </div>
           </div>

@@ -30,19 +30,28 @@ class CountyPlanChoropleth extends React.Component {
 					.domain([0.0, 1.0, 3.0])
 					.range(["#666", "#fc8d59","#ffffbf","#91cf60"]),
 		viewport: Viewport(),
-		hoverData: null
+		hoverData: null,
+		dataProcessed: false
 	}
 
 	componentWillMount() {
 		this.props.getChildGeo('36', 'counties');
 		this.props.getGeoMerge('36', 'counties');
 		this.props.getGeoMesh('36', 'counties');
+	}
 
-		this.processData();
+	componentDidMount() {
+		this.state.viewport.register(this, this.forceUpdate, false);
+	}
+	componentWillnmount() {
+		this.state.viewport.unregister(this);
 	}
 
 	componentWillReceiveProps(newProps) {
 		this.state.viewport.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+		if (!this.state.dataProcessed) {
+			this.processData(newProps)
+		}
 	}
 
 	fetchFalcorDeps() {
@@ -59,11 +68,11 @@ class CountyPlanChoropleth extends React.Component {
 		.then(() => this.processData())
 	}
 
-	processData() {
+	processData(props=this.props) {
 		try {
 			const scale = this.state.scale,
 
-				geoids = this.props.geoGraph['36']['counties'].value,
+				geoids = props.geoGraph['36']['counties'].value,
 
 				data = {
 					type: "FeatureCollection",
@@ -74,11 +83,11 @@ class CountyPlanChoropleth extends React.Component {
 
 				millisecondsPerYear = 1000 * 60 * 60 * 24 * 365;
 
-			this.props.geo['36']['counties'].features.forEach(feature => {
+			props.geo['36']['counties'].features.forEach(feature => {
 				const { properties, geometry } = feature,
 					geoid = properties.geoid,
-					name = this.props.geoGraph[geoid].name,
-					graph = this.props.counties.byFips[geoid],
+					name = props.geoGraph[geoid].name,
+					graph = props.counties.byFips[geoid],
 					exp = new Date(graph["plan_expiration"]),
 
 					time = (exp.valueOf() - now.valueOf()) / millisecondsPerYear;
@@ -95,7 +104,7 @@ class CountyPlanChoropleth extends React.Component {
 					geometry
 				})
 			})
-			this.setState({ data })
+			this.setState({ data, dataProcessed: Boolean(data.features.length) })
 		}
 		catch (e) {
 
@@ -194,7 +203,7 @@ class CountyPlanChoropleth extends React.Component {
 		)
 	}
 
-// ;
+// //
 	generateMapControls() {
 		const controls = [{
 			pos: 'top-left',
@@ -202,8 +211,8 @@ class CountyPlanChoropleth extends React.Component {
 		}];
 		return controls;
 	}
-// ;
 
+// //
   	render () {
   		const { layers } = this.generateLayers();
     	return (
@@ -216,8 +225,7 @@ class CountyPlanChoropleth extends React.Component {
   	}
 }
 
-// ;
-
+// //
 CountyPlanChoropleth.defaultProps = {
 	height: 800
 }

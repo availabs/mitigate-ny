@@ -564,6 +564,8 @@ class HazardMap extends React.Component {
 			</table>
 		)
 	}
+
+// //
 	generateHeightToggle() {
 		return (
 			<table className="map-test-table">
@@ -580,6 +582,8 @@ class HazardMap extends React.Component {
 			</table>
 		)
 	}
+
+// //
 	generateThreeDtoggle() {
 		return (
 			<table className="map-test-table">
@@ -596,6 +600,8 @@ class HazardMap extends React.Component {
 			</table>
 		)
 	}
+
+// //
 	generateFtypeLegend() {
 		return (
 			<table className="map-test-table">
@@ -639,6 +645,8 @@ class HazardMap extends React.Component {
 			</table>
 		)
 	}
+
+// //
 	generateControls() {
 		const controls = [];
 
@@ -666,6 +674,7 @@ class HazardMap extends React.Component {
 		return controls;
 	}
 
+// //
   	render () {
   		const { layers } = this.generateLayers(),
   			{
@@ -692,6 +701,7 @@ class HazardMap extends React.Component {
   	}
 }
 
+// //
 HazardMap.defaultProps = {
 	height: 800,
 	geoid: '36',
