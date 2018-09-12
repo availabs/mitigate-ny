@@ -72,7 +72,7 @@ class HazardList extends Component {
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
                     <div className="value"> { (avg(hazardData,'num_episodes') / (365) * 100).toFixed(2) }% </div>
-                    <div className="label">  Daily Propbability of {hazardName} Episode</div>
+                    <div className="label">  Daily Probability of {hazardName} Episode</div>
                   </div>
               </div>
             </div>
