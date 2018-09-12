@@ -43,6 +43,7 @@ class HazardList extends Component {
 
     let hazardData =   get(this.props,`${dataType}[${geoid}][${hazard}]`, {})
     
+// console.log("HAZARD DATA:",hazardData)
     return (
       <div className='projects-list row'>
       <ProjectBox title={`Statewide Statistics`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>

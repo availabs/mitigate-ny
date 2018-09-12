@@ -3,205 +3,259 @@ import argparse, csv, os, psycopg2, re
 from config import host
 
 CSV_FILE = 'nfip.csv'
-'''
-State Name
-Community Name
-Comm Nbr
-Prop Locatr
-Mitigated?
-Insured?
-Address Line 1
-Address Line 2
-City
-State
-Zip Code
-Prior Address Line 1
-Prior Address Line 2
-Prior City
-Prior State
-Prior Zip Code
-Prior Comm Nbr
-Insureds Name
-Last Claimant
-NOTSPECSW
-NOBLDGSW
-FLOODPRSW
-GT100SW
-UNABLIDSW
-BOX_1_SW
-BOX_2_SW
-BOX_3_SW
-BOX_4_SW
----HISTBLDGSW
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
----Building Value
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
-Dt of Loss
-Occupancy
-Zone
-Firm
-Building Payment
-Contents Payment
----Tot Building Payment
-Tot Contents Payment
-Losses
-Total Paid
-Average Pay
-Data Type
-As of Date
-Local Property Identifier
-County Name
-County Nbr
-SRL Indicator
-'''
 
+def toString(string):
+	try:
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		return string
+	except:
+		print "toString ERROR:", string
+		return None
+# END toString
+
+def toBoolean(string):
+	try:
+		string = string.strip()
+		if len(string) is 0:
+			return False
+		return True
+	except:
+		print "toBoolean ERROR:", string
+		return None
+# END toString
+
+def toFloat(string):
+	try:
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		float(string)
+	except:
+		print "toFloat ERROR:", string
+		return None
+# END toString
+
+def toInt(string):
+	try:
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		int(string)
+	except:
+		print "toInt ERROR:", string
+		return None
+# END toString
 
 META = [
-	{ "column": None, "type": "VARCHAR" }, #State Name
-	{ "column": None, "type": "VARCHAR" }, #Community Name
-	{ "column": None, "type": "VARCHAR" }, #Comm Nbr
-	{ "column": None, "type": "VARCHAR" }, #Prop Locatr
-	{ "column": None, "type": "VARCHAR" }, #Mitigated?
-	{ "column": None, "type": "VARCHAR" }, #Insured?
-	{ "column": None, "type": "VARCHAR" }, #Address Line 1
-	{ "column": None, "type": "VARCHAR" }, #Address Line 2
-	{ "column": None, "type": "VARCHAR" }, #City
-	{ "column": None, "type": "VARCHAR" }, #State
-	{ "column": None, "type": "VARCHAR" }, #Zip Code
-	{ "column": None, "type": "VARCHAR" }, #Prior Address Line 1
-	{ "column": None, "type": "VARCHAR" }, #Prior Address Line 2
-	{ "column": None, "type": "VARCHAR" }, #Prior City
-	{ "column": None, "type": "VARCHAR" }, #Prior State
-	{ "column": None, "type": "VARCHAR" }, #Prior Zip Code
-	{ "column": None, "type": "VARCHAR" }, #Prior Comm Nbr
-	{ "column": None, "type": "VARCHAR" }, #Insureds Name
-	{ "column": None, "type": "VARCHAR" }, #Last Claimant
-	{ "column": None, "type": "VARCHAR" }, #NOTSPECSW
-	{ "column": None, "type": "VARCHAR" }, #NOBLDGSW
-	{ "column": None, "type": "VARCHAR" }, #FLOODPRSW
-	{ "column": None, "type": "VARCHAR" }, #GT100SW
-	{ "column": None, "type": "VARCHAR" }, #UNABLIDSW
-	{ "column": None, "type": "VARCHAR" }, #BOX_1_SW
-	{ "column": None, "type": "VARCHAR" }, #BOX_2_SW
-	{ "column": None, "type": "VARCHAR" }, #BOX_3_SW
-	{ "column": None, "type": "VARCHAR" }, #BOX_4_SW
-	{ "column": None, "type": "VARCHAR" }, #HISTBLDGSW
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	{ "column": None, "type": "NUMERIC(2)" }, #Building Value
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	# { "column": None, "type": "VARCHAR" }, #Dt of Loss
-	# { "column": None, "type": "VARCHAR" }, #Occupancy
-	# { "column": None, "type": "VARCHAR" }, #Zone
-	# { "column": None, "type": "VARCHAR" }, #Firm
-	# { "column": None, "type": "VARCHAR" }, #Building Payment
-	# { "column": None, "type": "VARCHAR" }, #Contents Payment
-	{ "column": None, "type": "NUMERIC(2)" }, #Tot Building Payment
-	{ "column": None, "type": "NUMERIC(2)" }, #Tot Contents Payment
-	{ "column": None, "type": "INTEGER" }, #Losses
-	{ "column": None, "type": "NUMERIC(2)" }, #Total Paid
-	{ "column": None, "type": "NUMERIC(2)" }, #Average Pay
-	{ "column": None, "type": "VARCHAR" }, #Data Type
-	{ "column": None, "type": "DATE" }, #As of Date
-	{ "column": None, "type": "VARCHAR" }, #Local Property Identifier
-	{ "column": None, "type": "VARCHAR" }, #County Name
-	{ "column": None, "type": "VARCHAR" }, #County Nbr
-	{ "column": None, "type": "VARCHAR" }, #SRL Indicator
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #State Name
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Community Name
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Comm Nbr
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prop Locatr
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Mitigated?
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Insured?
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Address Line 1
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Address Line 2
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #City
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #State
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Zip Code
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior Address Line 1
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior Address Line 2
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior City
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior State
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior Zip Code
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Prior Comm Nbr
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Insureds Name
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Last Claimant
+
+	{ "column": None, "type": "BOOLEAN", "convert": toBoolean }, #NOTSPECSW
+	{ "column": None, "type": "BOOLEAN", "convert": toBoolean }, #NOBLDGSW
+	{ "column": None, "type": "BOOLEAN", "convert": toBoolean }, #FLOODPRSW
+	{ "column": None, "type": "BOOLEAN", "convert": toBoolean }, #GT100SW
+	{ "column": None, "type": "BOOLEAN", "convert": toBoolean }, #UNABLIDSW
+
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #BOX_1_SW
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #BOX_2_SW
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #BOX_3_SW
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #BOX_4_SW
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #HISTBLDGSW
+
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+
+	{ "column": None, "type": "NUMERIC(2)", "convert": toFloat }, #Building Value
+
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Dt of Loss
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Occupancy
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Zone
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Firm
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Building Payment
+	# { "column": None, "type": "VARCHAR", "convert": toString }, #Contents Payment
+
+	{ "column": None, "type": "NUMERIC(2)", "convert": toFloat }, #Tot Building Payment
+	{ "column": None, "type": "NUMERIC(2)", "convert": toFloat }, #Tot Contents Payment
+	{ "column": None, "type": "INTEGER", "convert": toInt }, #Losses
+	{ "column": None, "type": "NUMERIC(2)", "convert": toFloat }, #Total Paid
+	{ "column": None, "type": "NUMERIC(2)", "convert": toFloat }, #Average Pay
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Data Type
+	{ "column": None, "type": "DATE", "convert": toString }, #As of Date
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #Local Property Identifier
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #County Name
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #County Nbr
+	{ "column": None, "type": "VARCHAR", "convert": toString }, #SRL Indicator
 ]
+
+def sliceRow(row):
+	return row[0 : 30] + row[35 : 36] + row[84 : 95]
 
 def makeColumnName(string):
 	return "_".join(string.lower().replace("?", "").split(" "))
 
-def transform(row):
-	return row[0 : 30] + row[35 : 36] + row[84 : 95]
+def fillColumns(row):
+	for i, column in enumerate(sliceRow(row)):
+		META[i]["column"] = makeColumnName(column)
+
+def convert(meta, v):
+	return meta["convert"](v)
+# END convert
+
+def createTable(cursor):
+	print "CREATING TABLE..."
+	sql = """
+		DROP TABLE IF EXISTS public.nfip;
+		CREATE TABLE public.nfip (
+			{}
+		)
+	"""
+	columns = ["{} {}".format(meta["column"], meta["type"]) for meta in META]
+	cursor.execute(sql.format(",".join(columns)))
+	print "TABLE CREATED.\n"
+# END createTable
+
+def prepareStatement(cursor):
+	columns = ",".join([meta["column"] for meta in META])
+	variables = ",".join(['$' + str(i + 1) for i in range(len(META))])
+
+	sql = """
+		INSERT INTO public.nfip({})
+		VALUES ({})
+	""".format(columns, variables)
+	try:
+		cursor.execute("PREPARE stmt AS {}".format(sql))
+	except Exception as e:
+		print e
+		return False
+	else:
+		return True
+# END prepareStatement
+
+def deallocateStatement(cursor):
+	cursor.execute("DEALLOCATE stmt")
+# END deallocateStatement
+
+def loadCsvData(cursor, inputUrl):
+	if not prepareStatement(cursor):
+		return
+
+	inserts = ",".join(["%s" for meta in META])
+	sql = """
+		EXECUTE stmt({})
+	""".format(inserts)
+
+	print 'LOADING CSV DATA "{}"...'.format(inputUrl)
+
+	firstLineRead = False
+	try:
+		with open(inputUrl, 'rb') as data:
+			reader = csv.reader(data, delimiter=',')
+			for row in reader:
+				if firstLineRead:
+					print len(META),len(sliceRow(row))
+					row = map(convert, META, sliceRow(row))
+					# cursor.execute(sql, row)
+				else:
+					firstLineRead = True
+				# end if
+			# end for
+		# end with
+	except Exception as e:
+		print e
+	else:
+		print "CSV DATA LOADED.\n"
+
+	deallocateStatement(cursor)
+# END loadCsvData
+
+parser = argparse.ArgumentParser(description='OGS CSV table loader.')
+
+parser.add_argument('-i', '--input-url',
+				dest='inputUrl',
+				default=CSV_FILE,
+				metavar='<Input URL>',
+				help='URL for .csv input file. Defaults to {}.'.format(CSV_FILE))
+
+def main():
+	args = vars(parser.parse_args())
+
+	connection = psycopg2.connect(host)
+	cursor = connection.cursor()
+
+	# createTable(cursor)
+	# connection.commit()
+
+	loadCsvData(cursor, **args)
+	connection.commit()
+
+	cursor.close()
+	connection.close()
+# END main
+
+if __name__ == "__main__":
+	main()

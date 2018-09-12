@@ -141,30 +141,30 @@ const getHazardName = hazardid =>
 			.map((d, i) => i === 0 ? d.toUpperCase() : d)
 			.join("")
 
-function fnum(x) {
+function fnum(x, withDollar=true) {
 	if(isNaN(x)) return x;
 
 	if(x < 9999) {
-		const frmt = format("$,.0f")
+		const frmt = format(withDollar ? "$,.0f" : ",.0f")
 		return frmt(x);
 	}
 
 	if(x < 1000000) {
-		const frmt = format("$,.0f")
+		const frmt = format(withDollar ? "$,.0f" : ",.0f")
 		return frmt(x/1000) + "K";
 	}
 	if( x < 10000000) {
-		const frmt = format("$,.2f")
+		const frmt = format(withDollar ? "$,.2f" : ",.2f")
 		return frmt(x/1000000) + "M";
 	}
 
 	if(x < 1000000000) {
-		const frmt = format("$,.1f")
+		const frmt = format(withDollar ? "$,.1f" : ",.1f")
 		return frmt(x/1000000) + "M";
 	}
 
 	if(x < 1000000000000) {
-		const frmt = format("$,.1f")
+		const frmt = format(withDollar ? "$,.1f" : ",.1f")
 		return frmt(x/1000000000) + "B";
 	}
 
@@ -311,7 +311,7 @@ module.exports = {
 			}
 			return total
 		}, 0)
-		return fnum(total)
+		return fnum(total, false)
 	},
 
 	avg : (data,key) => {
@@ -322,7 +322,7 @@ module.exports = {
 			.length
 
 		if(numYears <= 0) return ''
-		
+console.log(data,numYears)
 
 		let total =  Object.keys(data).reduce((total,year) => {
 			if(data[year][key] && !isNaN(+data[year][key])) {
@@ -333,7 +333,7 @@ module.exports = {
 
 			
 		
-		return fnum( total / numYears )
+		return fnum( total / numYears , false)
 	},
 
 	avgData : (data,key, len) => {
