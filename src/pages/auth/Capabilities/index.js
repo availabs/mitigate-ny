@@ -25,15 +25,15 @@ class Capabilities extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '70%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
            <div className="property-section">
-              <Content content_id={`capabilities-coordination_among_agencies`} />
+              <Content content_id={`capabilities-integration-statewide-efforts`} />
             </div>
           </div>
-          <div className='property-info-side' style={{maxWidth: '30%', borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '40%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`Disaster Preparedness Commission`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+              <ProjectBox title={`Disaster Preparedness Commission (DPC)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`capabilities-dpc`} />
               </ProjectBox>  
             </div>
@@ -110,7 +110,7 @@ class Capabilities extends Component {
           <div className="property-info-main"style={{paddingTop: 0}}> 
 
             <div className="property-section">
-              <Content content_id={`capabilities-integration-statewide-efforts`} />
+              <Content content_id={`capabilities-coordination_among_agencies`} />
             </div>
 
             <div className="property-section">

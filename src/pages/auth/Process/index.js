@@ -63,11 +63,11 @@ class Landing extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`process-updating_the_plan`} />
+              <Content content_id={`planning-enhanced_plan`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`planning-enhanced_plan`} />
+              <Content content_id={`process-updating_the_plan`} />
             </div>
                       
             <div className="property-section">
