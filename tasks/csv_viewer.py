@@ -1,23 +1,33 @@
 import argparse, csv
 
-def viewCSV(input, num, **rest):
+Infinity = float("inf")
+
+def viewCSV(input, num, columns, **rest):
 	firstLineRead = False
 	rows = 0
+	rowsToPrint = 0
+
+	if num == "all":
+		rowsToPrint = Infinity
+	else:
+		rowsToPrint = int(num)
+
 	with open(input, 'rb') as businessData:
 		reader = csv.reader(businessData, delimiter=',', dialect='excel')
 		for row in reader:
-			if rows < num:
-				if firstLineRead:
-					for i, v in enumerate(row):
+			if not firstLineRead:
+				print "printing headers...\n"
+				for i, v in enumerate(row):
+					if (len(columns) == 0) or (i in columns):
 						print "{}: {}".format(i, v)
-					print "\n"
-					rows += 1
-				else:
-					print "printing headers...\n"
-					for i, v in enumerate(row):
+				print "\nprinting {} rows...\n".format(num)
+				firstLineRead = True
+			elif rows < rowsToPrint:
+				for i, v in enumerate(row):
+					if (len(columns) == 0) or (i in columns):
 						print "{}: {}".format(i, v)
-					print "\nprinting {} rows...\n".format(num)
-					firstLineRead = True
+				print "\n"
+				rows += 1
 			else:
 				break
 			# end if
@@ -34,10 +44,29 @@ DEFAULT_NUM = 5
 parser.add_argument('-n', '--num-rows',
 				default=DEFAULT_NUM,
 				dest='num',
-				help='Number of rows of CSV to view. Defaults to {}.'.format(DEFAULT_NUM))
+				help='Number of rows of CSV to view. Use "all" to view all rows. Defaults to {}.'.format(DEFAULT_NUM))
+
+parser.add_argument('-c', '--columns',
+				default='-1',
+				dest='columns',
+				help='View selected columns.')
+
+def coerceArgs(args):
+	result = {
+		'input': args['input'],
+		'num': args['num']
+	}
+
+	columns = args['columns'].split(",")
+
+	result['columns'] = [int(c) for c in columns if int(c) > -1]
+
+	return result
 
 def main():
-	viewCSV(**vars(parser.parse_args()))
+	args = vars(parser.parse_args())
+	args = coerceArgs(args)
+	viewCSV(**args)
 
 if __name__ == "__main__":
 	main()

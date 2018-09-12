@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 import { createMatchSelector } from 'react-router-redux'
 
-import Element from 'components/light-admin/containers/Element'
-import ElementBox from 'components/light-admin/containers/ElementBox'
-
-import ProjectBox from 'components/light-admin/containers/ProjectBox'
-
-import MunicipalityStats from "./components/MunicipalityStats"
 import CountyHeroStats from "./components/CountyHeroStats"
+import GeographyScoreBarChart from "./components/GeographyScoreBarChart"
+import MunicipalityStats from "./components/MunicipalityStats"
 import HazardList from "./components/HazardListNew"
+import CousubTotalLossTable from "./components/CousubTotalLossTable"
+import HMGPTable from "./components/HMGPTable"
 
 import {
   getColorScale,
@@ -31,14 +29,31 @@ class CountyPage extends React.Component {
       { geoid } = params;
 
     this.state = {
-      geoid
+      geoid,
+      geoLevel: 'county',
+      dataType: 'severeWeather',
+      colorScale: getColorScale([1, 2])
     }
   }
 
-  fetchFalcorDeps() {
+  fetchFalcorDeps({ geoid, geoLevel, dataType }=this.state) {
+    return this.props.falcor.get(
+      ['geo', geoid, 'name'],
+      ['geo', geoid, 'cousubs'],
+      ['riskIndex', 'hazards']
+    )
+    .then(response => {
+      const geoids = response.json.geo[geoid]['cousubs'],
+        hazards = response.json.riskIndex.hazards,
+        requests = [];
+      this.setState({ colorScale: getColorScale(hazards) });
       return this.props.falcor.get(
-        ['geo', this.state.geoid, 'name']
+        ['riskIndex', 'meta', hazards, ['id', 'name']],
+        ['geo', geoids, ['name']],
+        ['riskIndex', 'meta', hazards, ['id', 'name']],
+        [dataType, geoid, hazards, { from:EARLIEST_YEAR, to: LATEST_YEAR }, ['property_damage', 'total_damage']],
       )
+    })
   }
 
   getGeoidName() {
@@ -51,7 +66,6 @@ class CountyPage extends React.Component {
   }
 
   render() {
-    const { geoid } = this.state;
     return (
       <div className='property-single'>
 
@@ -61,20 +75,18 @@ class CountyPage extends React.Component {
             <h1>{ this.getGeoidName() }</h1>
 
             <div className="property-section">
-              <HazardList { ...this.state }/>
+              <GeographyScoreBarChart
+                showYlabel={ false }
+                showXlabel={ false }
+                lossType={ 'total_damage' }
+                { ...this.state }/>
             </div>
 
             <div className="property-section">
-              ???????????????
+              <CousubTotalLossTable
+                { ...this.state }/>
             </div>
             
-            <div className="property-section">
-              ???????????????
-            </div>
-            
-            <div className="property-section">
-              ???????????????
-            </div>
           </div>
 
           <div className='property-info-side' style={ { maxWidth: 398 } }>
@@ -91,6 +103,20 @@ class CountyPage extends React.Component {
             </div>
           </div>
 
+        </div>
+
+        <div className="property-info-w">
+          <div className="property-info-main" style={ { paddingLeft: 0, paddingRight: 0 } }>
+            <HazardList { ...this.state }
+              standardScale={ false }
+              threeD={ false }/>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className= 'col-12'>
+            <HMGPTable { ...this.state }/>
+          </div>
         </div>
 
       </div>

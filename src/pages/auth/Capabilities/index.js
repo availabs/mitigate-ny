@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 
 import Counties from './Counties'
 import Agencies from './Agencies'
@@ -119,6 +120,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-program_table`} />
+              <CapabilitiesTable />
             </div>
 
             <div className="property-section">

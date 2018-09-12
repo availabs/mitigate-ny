@@ -44,7 +44,8 @@ class CountyHeroStats extends React.Component {
 				if (value) {
 					data.push({
 						label: this.getHazardName(hazard),
-						value: FORMAT(value)
+						value: FORMAT(value),
+						sort: value
 					})
 				}
 			}
@@ -53,7 +54,7 @@ class CountyHeroStats extends React.Component {
 			data = [];
 		}
 		finally {
-			return data;
+			return data.sort((a, b) => b.sort - a.sort);
 		}
 	}
 
@@ -61,7 +62,7 @@ class CountyHeroStats extends React.Component {
 		const rows = this.processData();
 		return (
 			<SideInfoProjectBox rows={ rows }
-				title="Annualized Damage"/>
+				title="Annualized Damages"/>
 		)
 	}
 }

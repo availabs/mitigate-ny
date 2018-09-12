@@ -12,12 +12,15 @@ const BoxRow = ({ value, label }, i) =>
         </div>
     </div>
 
-export default ({ title, rows }) =>
+export default ({ title, rows, content=null }) =>
     <ProjectBox title={ title } style={ { backgroundColor: '#f2f4f8', width:'100%' } }>
 		<div className="row align-items-center">
 			<div className="col-12">
 
-				{ rows.map(BoxRow) }
+				{ rows.length ?
+                    rows.map(BoxRow)
+                    : content
+                }
 
             </div>
 		</div>

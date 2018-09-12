@@ -7,7 +7,8 @@ import MarkdownRenderer from 'react-markdown-renderer';
 import { history } from "store"
 
 import {
-  setEditTarget
+  setEditTarget,
+  clearNewContentData
 } from 'store/modules/cms';
 
 import Element from 'components/light-admin/containers/Element'
@@ -20,18 +21,23 @@ class NewContentPage extends React.Component {
   fetchFalcorDeps() {
     const { params } = createMatchSelector({ path: '/cms/edit/:content_id' })(this.props) || { params: {} },
       { content_id } = params;
-    if (!content_id) return Promise.resolve();
+    if (!content_id) {
+      this.props.clearNewContentData();
+      return Promise.resolve();
+    }
     return this.props.falcor.get(
-      ['content', 'byId', content_id, ['attributes', 'body']]
+      ['content', 'byId', content_id, ['attributes', 'body', 'created_at', 'updated_at']]
     )
     .then(response => {
       try {
         const {
           attributes,
-          body
+          body,
+          created_at,
+          updated_at
         } = response.json.content.byId[content_id];
         if (attributes && body) {
-          this.props.setEditTarget({ content_id, attributes, body });
+          this.props.setEditTarget({ content_id, attributes, body, created_at, updated_at });
         }
       }
       catch (e) {
@@ -54,7 +60,7 @@ class NewContentPage extends React.Component {
         <div className='row'>
 
           <div className="col-lg-6">
-            <CMS_ContentEditorPanel/>
+            <CMS_ContentEditorPanel />
           </div>
 
           <div className="col-lg-6">
@@ -82,7 +88,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  setEditTarget
+  setEditTarget,
+  clearNewContentData
 };
 
 const component = connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(NewContentPage));

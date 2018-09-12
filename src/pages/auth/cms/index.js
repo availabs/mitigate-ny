@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 import { createMatchSelector } from 'react-router-redux';
 
-import { history } from "store"
-
 import {
   addActiveFilter,
   removeActiveFilter,
@@ -77,10 +75,7 @@ class CMS_HomePage extends React.Component {
     return this.props.falcor.call(
       ["content", "byId", "remove"],
       [content_id]
-    ).then(response => {
-      console.log("DELETE RESPONSE:",response);
-      return response;
-    })
+    ).then(() => this.fetchFalcorDeps())
   }
 
   render () {

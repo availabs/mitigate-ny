@@ -53,7 +53,8 @@ class HazardList extends React.Component {
 	renderHazardSelector() {
 		try {
 			return this.props.riskIndex.hazards.value
-				.sort().map(hazard => {
+				.sort((a, b) => this.props.riskIndex.meta[a].name < this.props.riskIndex.meta[b].name ? -1 : 1)
+				.map(hazard => {
 					const name = this.props.riskIndex.meta[hazard].name
 					return (
 						<ListItem onClick={ this.selectHazard.bind(this, hazard) }
@@ -73,7 +74,7 @@ class HazardList extends React.Component {
 		return (
 			<div className="row m-0">
 
-				<div className="col-2"
+				<div className="col-3"
 					style={ { minHeight: "500px" } }>
 					<div className='ae-side-menu'>
 						<ul className='ae-main-menu'>
@@ -83,7 +84,7 @@ class HazardList extends React.Component {
 				</div>
 
 
-				<div className="col-10">
+				<div className="col-9">
 					<div className="row">
 						<div className="col-12">
 							<ElementBox>
@@ -96,8 +97,10 @@ class HazardList extends React.Component {
 					<div className="row">
 						<div className="col-12">
 							<ElementBox>
-								<HazardMap height={ 616 }
-									{ ...this.state }/>
+								<HazardMap height={ 600 }
+									{ ...this.state }
+									threeD={ this.props.threeD }
+									standardScale={ this.props.standardScale }/>
 							</ElementBox>
 						</div>
 					</div>
@@ -111,7 +114,9 @@ class HazardList extends React.Component {
 
 HazardList.defaultProps = {
   geoid: '36',
-  hazard: 'riverine'
+  hazard: 'riverine',
+  threeD: true,
+  standardScale: true
 }
 
 const mapStateToProps = state => ({

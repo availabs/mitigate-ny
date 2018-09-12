@@ -13,7 +13,8 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import {
 	processDataForBarChart,
-	getHazardName
+	getHazardName,
+	fnum
 } from 'utils/sheldusUtils'
 
 class GeographyScoreBarChart extends React.Component {
@@ -31,7 +32,7 @@ class GeographyScoreBarChart extends React.Component {
     	const { geoid, geoLevel, dataType, hazard, lossType } = this.props;
 		try {
 			let geoids = []
-			if (geoLevel === 'state') {
+			if (geoLevel === 'state' || geoLevel === 'county') {
 				geoids = [geoid];
 			}
 			else {
@@ -50,56 +51,55 @@ class GeographyScoreBarChart extends React.Component {
 			return <ElementBox>Loading...</ElementBox>;
 		}
 		return (
-			<ElementBox>
-				<div style={ { height: `${ this.props.height }px` } }>
-					<ResponsiveBar
-						data={ data }
-						keys={ keys }
-						indexBy="year"
-						colorBy={ d => this.props.colorScale(d.id) }
-						enableLabel={ false }
-						tooltipFormat={ this.props.format }
-						margin={ {
-				            "top": 25,
-				            "right": 25,
-				            "bottom": 50,
-				            "left": 115
-			        	} }
-						axisBottom={ {
-				            "orient": "bottom",
-				            "tickSize": 5,
-				            "tickPadding": 5,
-				            "tickRotation": 0,
-				            "legend": "Year",
-				            "legendPosition": "center",
-			            	"legendOffset": 40
-			        	} }
-				        axisLeft={ {
-				            "orient": "left",
-				            "tickSize": 5,
-				            "tickPadding": 5,
-				            "tickRotation": 0,
-				            "legend": this.props.lossType,
-				            "legendPosition": "center",
-				            "legendOffset": -100,
-			            	"format": this.props.format
-				        } }
-				        tooltip={
-				        	d => (
-					        	<div>
-					        		<div style={ { display: "inline-block", width: "15px", height: "15px", backgroundColor: this.props.colorScale(d.id) } }/>
-					        		<span style={ { paddingLeft: "5px" } }>{ this.getHazardName(d.id) }</span>
-					        		<span style={ { paddingLeft: "5px" } }>{ format(d.value) }</span>
-					        	</div>
-					        )
-				        }
-				        theme={ {
-				        	"axis": {
-				        		"legendFontSize": "18px"
-				        	}
-				        } }/>
-				</div>
-	        </ElementBox>
+			<div style={ { height: `${ this.props.height }px` } }>
+				<ResponsiveBar
+					data={ data }
+					keys={ keys }
+					indexBy="year"
+					colorBy={ d => this.props.colorScale(d.id) }
+					enableLabel={ false }
+					tooltipFormat={ this.props.format }
+					margin={ {
+			            "top": 25,
+			            "right": this.props.showYlabel ? 25 : 0,
+			            "bottom": this.props.showXlabel ? 50 : 40,
+			            "left": this.props.showYlabel ? 90 : 50
+		        	} }
+					axisBottom={ {
+			            "orient": "bottom",
+			            "tickSize": 5,
+			            "tickPadding": 5,
+			            "tickRotation": 0,
+			            "legend": this.props.showXlabel ? "Year" : undefined,
+			            "legendPosition": "center",
+		            	"legendOffset": 40,
+		            	"tickRotation": this.props.showYlabel ? 0 : 45
+		        	} }
+			        axisLeft={ {
+			            "orient": "left",
+			            "tickSize": 5,
+			            "tickPadding": 5,
+			            "tickRotation": 0,
+			            "legend": this.props.showYlabel ? this.props.lossType : undefined,
+			            "legendPosition": "center",
+			            "legendOffset": -100,
+		            	"format": fnum
+			        } }
+			        tooltip={
+			        	d => (
+				        	<div>
+				        		<div style={ { display: "inline-block", width: "15px", height: "15px", backgroundColor: this.props.colorScale(d.id) } }/>
+				        		<span style={ { paddingLeft: "5px" } }>{ this.getHazardName(d.id) }</span>
+				        		<span style={ { paddingLeft: "5px" } }>{ format(d.value) }</span>
+				        	</div>
+				        )
+			        }
+			        theme={ {
+			        	"axis": {
+			        		"legendFontSize": "18px"
+			        	}
+			        } }/>
+			</div>
 		)
 	}
 }
@@ -107,7 +107,9 @@ GeographyScoreBarChart.defaultProps = {
 	height: 500,
 	lossType: "property_damage",
 	format: "$,d",
-	hazard: null
+	hazard: null,
+	showYlabel: true,
+	showXlabel: true
 }
 
 const mapStateToProps = state => {

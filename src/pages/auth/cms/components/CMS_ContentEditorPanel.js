@@ -2,14 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import ElementBox from 'components/light-admin/containers/ElementBox'
-
 import { history } from "store"
+import { push } from 'react-router-redux';
+
+import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import AttributesTable from "./CMS_AttributesTable"
 
 import {
-  updateNewContentData
+  updateNewContentData,
+  updateContent
 } from 'store/modules/cms';
 import {
   sendSystemMessage
@@ -92,7 +94,7 @@ class CMS_ContentEditorPanel extends React.Component {
     	if (content_id && body) {
 			this.props.falcor.set({
 				paths: [
-					['content', 'byId', content_id, ['content_id', 'body', 'attributes']]
+					['content', 'byId', content_id, ['content_id', 'body', 'attributes', 'updated_at', 'created_at']]
 				],
 				jsonGraph: {
 					content: {
@@ -111,7 +113,14 @@ class CMS_ContentEditorPanel extends React.Component {
 				if (new_content_id != content_id) {
 					history.replace(`/cms/edit/${ new_content_id }`);
 				}
-				return response;
+				const {
+					content_id,
+					body,
+					attributes,
+					updated_at,
+					created_at
+				} = response.json.content.byId[new_content_id]
+				this.props.updateContent({ content_id, body, attributes, updated_at, created_at });
 			})
 		}
 	}
@@ -132,9 +141,8 @@ class CMS_ContentEditorPanel extends React.Component {
     		)
 			.then(response => {
 				this.props.sendSystemMessage(`Content "${ content_id }" was successfully created.`, { type: "success" });
-				return response;
+				this.props.push(`/cms/edit/${ content_id }`)
 			})
-    		.catch(error => console.log("CALL ERROR:",error));
     	}
 	}
 
@@ -255,7 +263,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	updateNewContentData,
-	sendSystemMessage
+	sendSystemMessage,
+	updateContent,
+	push: url => dispatch => dispatch(push(url))
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(CMS_ContentEditorPanel));

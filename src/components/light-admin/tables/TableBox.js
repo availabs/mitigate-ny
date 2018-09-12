@@ -77,7 +77,8 @@ import Pagination from './Pagination'
             </div>
           </div>
         }
-        <div className="table-responsive">
+        <div className="table-responsive"
+          style={ { minHeight: `${ this.props.pageSize * 46 + 39 }px` } }>
           <DataTable tableData={ tableData }
             columns={ this.props.columns }
             links={ this.props.links }

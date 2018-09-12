@@ -7,6 +7,7 @@ import riskIndex from './modules/riskIndex'
 import geo from './modules/geo'
 import vulnerabilities from "./modules/vulnerabilities"
 import cms from "./modules/cms"
+import capabilities from "./modules/capabilities"
 import agencies from './modules/agencies'
 
 import messages from "./modules/messages"
@@ -41,6 +42,7 @@ const store = createStore(
     messages,
     graph,
     agencies,
+    capabilities,
     router: routerReducer
   }),
   applyMiddleware(...middleware)

@@ -55,11 +55,11 @@ export default class ContentItem extends React.Component {
 									{ content_id }
 								</button>
 							</div>
-							<div className="col-lg-4" style={ { paddingTop: "10px" } }>
+							<div className="col-lg-3" style={ { paddingTop: "10px" } }>
 								<h5 style={ { display: "inline-block", paddingRight: "10px" } }>Updated At:</h5>
 								{ updated_at.toLocaleString() }
 							</div>
-							<div className="col-lg-3">
+							<div className="col-lg-4">
 								<div className="float-right">
 									<Link to={ `/cms/edit/${ content_id }` }
 										className="btn btn-lg btn-outline-primary">
@@ -86,7 +86,8 @@ export default class ContentItem extends React.Component {
 								<div className={ `col-lg-${ !hasAttributes ? 12 : attributesOpened ? 8 : 11 }` }>
 									<h5>Body</h5>
 									<div style={ { maxHeight: "600px", overflow: "auto", paddingRight: "10px" } }>
-										<BodyViewer content_id={ content_id }/>
+										<BodyViewer showLink={ false }
+											content_id={ content_id }/>
 									</div>
 								</div>
 							</div>
