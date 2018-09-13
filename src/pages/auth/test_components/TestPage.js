@@ -5,8 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
-import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
+import NfipChoropleth from "pages/auth/Capabilities/components/NfipChoropleth"
 
 class TestPage extends React.Component {
 
@@ -21,8 +20,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                {/*<HazardMap highRisk={ 0.95 }
-                  threeD={ false }/>*/}
+                <NfipChoropleth />
               </ElementBox>
             </div>
           </div>
@@ -30,7 +28,24 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CountyPlanChoropleth />
+                <NfipChoropleth attribute="total_loss"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <NfipChoropleth geoLevel="counties"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <NfipChoropleth attribute="total_loss"
+                  geoLevel="counties"/>
               </ElementBox>
             </div>
           </div>

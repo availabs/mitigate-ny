@@ -17,7 +17,10 @@ import * as d3format from "d3-format"
 import DeckMap from "components/mapping/escmap/DeckMap.react"
 import Viewport from "components/mapping/escmap/Viewport"
 
-const format = d3format.format("$,d")
+const formats = {
+	num_losses: d => d,
+	total_loss: d3format.format("$,d")
+}
 
 class CountyPlanChoropleth extends React.Component {
 
@@ -26,18 +29,17 @@ class CountyPlanChoropleth extends React.Component {
 			type: "FeatureCollection",
 			features: []
 		},
-		scale: d3scale.scaleThreshold()
-					.domain([0.0, 1.0, 3.0])
-					.range(["#666", "#fc8d59","#ffffbf","#91cf60"]),
+		scale: d3scale.scaleQuantile()
+					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
 		viewport: Viewport(),
 		hoverData: null,
 		dataProcessed: false
 	}
 
-	componentWillMount() {
-		this.props.getChildGeo('36', 'counties');
-		this.props.getGeoMerge('36', 'counties');
-		this.props.getGeoMesh('36', 'counties');
+	componentWillMount({ geoLevel }=this.props) {
+		this.props.getChildGeo('36', geoLevel);
+		this.props.getGeoMerge('36', geoLevel);
+		this.props.getGeoMesh('36', geoLevel);
 	}
 
 	componentDidMount() {
@@ -48,81 +50,108 @@ class CountyPlanChoropleth extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		this.state.viewport.fitGeojson(newProps.geo['merge']['36']['counties'], { padding: 20 });
+		this.state.viewport.fitGeojson(newProps.geo['merge']['36'][newProps.geoLevel], { padding: 20 });
 		if (!this.state.dataProcessed) {
 			this.processData(newProps)
 		}
 	}
 
-	fetchFalcorDeps() {
+	fetchFalcorDeps({ geoid, geoLevel, attribute }=this.props) {
 		return this.props.falcor.get(
-			["geo", '36', 'counties']
+			["geo", geoid, geoLevel]
 		)
-		.then(response => response.json.geo['36'].counties)
+		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
 			return this.props.falcor.get(
-				['geo', geoids, 'name'],
-				['counties', 'byFips', geoids, ['plan_expiration', 'plan_consultant', 'plan_url']]
+				['nfip', 'byGeoid', geoids, 'allTime', attribute]
 			)
+			.then(() => {
+				return this.props.falcor.get(
+					['geo', geoids, 'name']
+				)
+			});
 		})
 		.then(() => this.processData())
 	}
 
 	processData(props=this.props) {
 		try {
-			const scale = this.state.scale,
 
-				geoids = props.geoGraph['36']['counties'].value,
+			const { geoid, geoLevel, attribute } = props,
 
 				data = {
 					type: "FeatureCollection",
 					features: []
 				},
 
-				now = new Date(),
+				domain = [];
 
-				millisecondsPerYear = 1000 * 60 * 60 * 24 * 365;
+			let scale = d3scale.scaleThreshold()
+					.domain([5, 25, 100, 250])
+					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
 
-			props.geo['36']['counties'].features.forEach(feature => {
+			if (attribute === 'total_loss') {
+				scale = d3scale.scaleQuantile()
+					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
+			}
+			if ((attribute === 'num_losses') && (geoLevel === 'counties')) {
+				scale.domain([25, 50, 200, 500])
+			}
+
+			props.geo['36'][geoLevel].features.forEach(feature => {
 				const { properties, geometry } = feature,
 					geoid = properties.geoid,
 					name = props.geoGraph[geoid].name,
-					graph = props.counties.byFips[geoid],
-					exp = new Date(graph["plan_expiration"]),
+					d = props.nfip.byGeoid[geoid].allTime[attribute];
 
-					time = (exp.valueOf() - now.valueOf()) / millisecondsPerYear;
+				if (d > 0) {
+					domain.push(d);
+				}
 
 				data.features.push({
 					type: "Feature",
 					properties: {
 						geoid,
 						name,
-						time,
-						exp: graph.plan_expiration,
-						consultant: graph.plan_consultant
+						data: d
 					},
 					geometry
 				})
+
 			})
-			this.setState({ data, dataProcessed: Boolean(data.features.length) })
+
+			if (attribute === 'total_loss') {
+				scale.domain(domain);
+			}
+
+			this.setState({ data, scale, dataProcessed: Boolean(data.features.length) })
 		}
 		catch (e) {
-
+// console.log("ERROR:",e)
 		}
 	}
 
 	generateLayers() {
-		const { scale, data } = this.state,
+		const { geoid, geoLevel, attribute } = this.props,
+			{ scale, data } = this.state,
 
 			getFillColor = ({ properties }) => {
-				const time = get(properties, `time`, 0),
-					color = d3color.color(scale(time));
+				const data = get(properties, `data`, 0),
+					color = d3color.color(scale(data));
 				return [color.r, color.g, color.b, 255];
 			}
 
     	const layers = [
 	    	{
-	    		id: 'counties-layer',
+	    		id: 'ny-merge-layer-filled',
+	    		data: this.props.geo['merge']['36'][geoLevel],
+	    		filled: true,
+	    		stroked: false,
+	    		getFillColor: [242, 239, 233, 255],
+		      	pickable: false
+	    	},
+	    	{
+	    		id: 'choropleth-layer',
 	    		data,
 	    		filled: true,
 	    		stroked: false,
@@ -138,17 +167,13 @@ class CountyPlanChoropleth extends React.Component {
 		      			const {
 		      					geoid,
 			      				name,
-			      				exp,
-			      				consultant
+			      				data
 			      			} = object.properties,
 			      			rows = [
 			      				[name],
 			      				['geoid', geoid],
-			      				['Expiration', exp || "No Date"]
+			      				[attribute.replace("_", " "), formats[attribute](data)]
 			      			];
-			      		if (consultant) {
-			      			rows.push(['Consultant', consultant])
-			      		}
 		      			hoverData = {
 		      				rows, x, y
 		      			}
@@ -158,7 +183,7 @@ class CountyPlanChoropleth extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-mesh-layer',
-	    		data: this.props.geo['mesh']['36']['counties'],
+	    		data: geoLevel === 'counties' ? this.props.geo['mesh']['36'][geoLevel] : [],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [200, 200, 200, 255],
@@ -166,7 +191,7 @@ class CountyPlanChoropleth extends React.Component {
 	    	},
 	    	{
 	    		id: 'ny-merge-layer-stroked',
-	    		data: this.props.geo['merge']['36']['counties'],
+	    		data: this.props.geo['merge']['36'][geoLevel],
 	    		filled: false,
 	    		stroked: true,
 	    		getLineColor: [255, 255, 255, 255],
@@ -177,16 +202,17 @@ class CountyPlanChoropleth extends React.Component {
 	    return { scale, layers };
 	}
 
-	generateLegend(scale=this.state.scale) {
+	generateLegend(scale=this.state.scale, { attribute }=this.props) {
   		const range = scale.range(),
   			width = `${ 100 / range.length }%`,
   			domainValues = range.map(r => scale.invertExtent(r)[0]);
   		if (!domainValues.reduce((a, c) => a || Boolean(c), false)) return false;
+  		const label = attribute.split("_").map(d => d.split("").map((c, i) => i === 0 ? c.toUpperCase() : c).join("")).join(" ")
 		return (	
 			<table className="map-test-table">
 				<thead>
 					<tr>
-						<th className="no-border-bottom" colSpan={ range.length }>Expiration&nbsp;Years</th>
+						<th className="no-border-bottom" colSpan={ range.length }>{ label }</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -197,7 +223,7 @@ class CountyPlanChoropleth extends React.Component {
 					</tr>
 					<tr>
 						{
-							range.map(t => <td key={ t } style={ { width } }>{ scale.invertExtent(t)[0] }</td>)
+							range.map(t => <td key={ t } style={ { width } }>{ formats[attribute](scale.invertExtent(t)[0]) }</td>)
 						}
 					</tr>
 				</tbody>
@@ -229,14 +255,17 @@ class CountyPlanChoropleth extends React.Component {
 
 // //
 CountyPlanChoropleth.defaultProps = {
-	height: 800
+	height: 800,
+	geoid: '36',
+	geoLevel: 'tracts',
+	attribute: 'num_losses'
 }
 
 const mapStateToProps = state => ({
   	router: state.router,
     geo: state.geo,
     geoGraph: state.graph.geo,
-    counties: state.graph.counties
+    nfip: state.graph.nfip
 })
 
 const mapDispatchToProps = {
