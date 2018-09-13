@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import NfipChoropleth from "pages/auth/Capabilities/components/NfipChoropleth"
+import NfipTable from "pages/auth/Capabilities/components/NfipTable"
 
 class TestPage extends React.Component {
 
@@ -20,7 +20,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <NfipChoropleth />
+                <NfipTable />
               </ElementBox>
             </div>
           </div>
@@ -28,7 +28,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <NfipChoropleth attribute="total_loss"/>
+                <NfipTable geoLevel="cousubs" geoid="36001"/>
               </ElementBox>
             </div>
           </div>
@@ -36,16 +36,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <NfipChoropleth geoLevel="counties"/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <NfipChoropleth attribute="total_loss"
-                  geoLevel="counties"/>
+                <NfipTable geoLevel="cousubs" geoid="36011"/>
               </ElementBox>
             </div>
           </div>
