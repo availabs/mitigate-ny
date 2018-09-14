@@ -6,7 +6,6 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
-import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
 
 class TestPage extends React.Component {
 
@@ -21,16 +20,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                {/*<HazardMap highRisk={ 0.95 }
-                  threeD={ false }/>*/}
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CountyPlanChoropleth />
+                <HazardMap
+                  tractTotals={ true }
+                  threeD={ false }/>
               </ElementBox>
             </div>
           </div>
