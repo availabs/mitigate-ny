@@ -72,7 +72,8 @@ class HazardMap extends React.Component {
 			asHeight: 'sovi',
 			threeD: props.threeD,
 			transitioning: false,
-			standardScale: props.standardScale
+			standardScale: props.standardScale,
+			highRisk: props.highRisk
 		}
 	}
 
@@ -100,7 +101,7 @@ class HazardMap extends React.Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		const { geoid } = this.props;
+		const { geoid, tractTotals } = this.props;
 		if (geoid.length === 5) {
 			const counties = newProps.geo[geoid.slice(0, 2)]['counties'].features,
 				geo = counties.reduce((a, c) => c.properties.geoid === geoid ? c : a, null);
@@ -114,14 +115,12 @@ class HazardMap extends React.Component {
 				.fitGeojson(newProps.geo['merge'][geoid]['counties'], { padding: 20 });
 		}
 
-		if ((newProps.hazard !== this.props.hazard) ||
-			(newProps.highRisk && !this.props.highRisk)) {
+		if (newProps.hazard !== this.props.hazard) {
 			this.fetchFalcorDeps(newProps);
-			this.processData(this.state, newProps)
 		}
 	}
 
-	fetchFalcorDeps({ geoid, geoLevel, hazard, highRisk } = this.props) {
+	fetchFalcorDeps({ geoid, geoLevel, hazard, tractTotals } = this.props) {
 		const requests = [];
 		requests.push(["geo", geoid, geoLevel]);
 		if (!SOCIAL_SCORES.includes(hazard)) {
@@ -140,10 +139,11 @@ class HazardMap extends React.Component {
 					)
 				})
 			})
-			.then(() => this.processData())
+			.then(() => tractTotals ? this.processTractData() : this.processData())
 	}
 
 	fetchCriticalInfrastructure(geoids) {
+		if (!geoids.length) return;
 		return this.props.falcor.get(
 			['critical', 'byGeoid', geoids, 'length']
 		)
@@ -173,13 +173,16 @@ class HazardMap extends React.Component {
 				})
 				return ids;
 			})
-			.then(ids => this.props.falcor.get(
-				['critical', 'byId', ids, ['location', 'desc', 'name', 'address', 'ftype', 'fcode']]
-			))
+			.then(ids => {
+				if (!ids.length) return;
+				return this.props.falcor.get(
+					['critical', 'byId', ids, ['geoid', 'location', 'desc', 'name', 'address', 'ftype', 'fcode']]
+				)
+			})
 		})
-		.then(() => this.processCriticalInfrastructure())
+		.then(() => this.processCriticalInfrastructure(geoids))
 	}
-	processCriticalInfrastructure() {
+	processCriticalInfrastructure(geoids) {
 		let criticalData = {
 			type: "FeatureCollection",
 			features: []
@@ -188,6 +191,7 @@ class HazardMap extends React.Component {
 			const features = [];
 			for (const id in this.props.critical.byId) {
 				const data = this.props.critical.byId[id];
+				if (!geoids.includes(data.geoid)) continue;
 				features.push({
 					type: "Feature",
 					geometry: JSON.parse(data.location),
@@ -207,6 +211,7 @@ class HazardMap extends React.Component {
 	}
 
 	fetchOgsData(geoids) {
+		if (!geoids.length) return;
 		return this.props.falcor.get(
 			['ogs', 'byGeoid', geoids, 'length']
 		)
@@ -220,35 +225,36 @@ class HazardMap extends React.Component {
 		})
 		.then(max => {
 			if (max === 0) return [];
-			return this.props.falcor.get(
-				['ogs', 'byGeoid', geoids, 'byIndex', { from: 0, to: max -1 }, 'id']
-			)
-			.then(response => {
-				const data = response.json.ogs.byGeoid,
-					ids = [];
-				geoids.forEach(geoid => {
-					for (let i = 0; i < max; ++i) {
-						const indices = data[geoid].byIndex;
-						if (indices[i]) {
-							ids.push(indices[i].id)
-						}
-					}
-				})
-				return ids;
-			})
-			.then(ids => {
-				if (!ids.length) return;
-				return this.props.falcor.get(
-					['ogs', 'byId', ids, ['location', 'desc', 'agency', 'status']]
-				)
-			})
-			.then(response => {
-				this.processOgsData()
-				return response;
-			})
+			const requests = [];
+			for (let i = 0; i < max; i += 200) {
+				requests.push(['ogs', 'byGeoid', geoids, 'byIndex', { from: i, to: Math.min(max - 1, i + 200) }, 'id'])
+			}
+			return requests.reduce((a, c) => {
+				return a.then(() => this.props.falcor.get(c))
+					.then(response => {
+						const data = response.json.ogs.byGeoid,
+							ids = [];
+						geoids.forEach(geoid => {
+							for (let i = 0; i < max; ++i) {
+								const indices = data[geoid].byIndex;
+								if (indices[i]) {
+									ids.push(indices[i].id)
+								}
+							}
+						})
+						return ids;
+					})
+					.then(ids => {
+						if (!ids.length) return;
+						return this.props.falcor.get(
+							['ogs', 'byId', ids, ['geoid', 'location', 'desc', 'agency', 'status']]
+						)
+					})
+			}, Promise.resolve())
+			.then(response => this.processOgsData(geoids))
 		})
 	}
-	processOgsData() {
+	processOgsData(geoids) {
 		let ogsData = {
 			type: "FeatureCollection",
 			features: []
@@ -257,6 +263,7 @@ class HazardMap extends React.Component {
 			const features = [];
 			for (const id in this.props.ogs.byId) {
 				const data = this.props.ogs.byId[id];
+				if (!geoids.includes(data.geoid)) continue;
 				features.push({
 					type: "Feature",
 					geometry: JSON.parse(data.location),
@@ -276,8 +283,11 @@ class HazardMap extends React.Component {
 	}
 
 	toggleAsHeight() {
-		const asHeight = this.state.asHeight === 'builtenv' ? 'sovi' : 'builtenv';
-		this.processData({ asHeight });
+		const { tractTotals } = this.props,
+			asHeight = this.state.asHeight === 'builtenv' ? 'sovi' : 'builtenv';
+		tractTotals ?
+			this.processTractData({ ...this.state, asHeight }) :
+			this.processData({ ...this.state, asHeight })
 	}
 	toggleThreeD() {
 		const threeD = !this.state.threeD,
@@ -290,9 +300,22 @@ class HazardMap extends React.Component {
 			this.state.viewport.ease("pitch", 0, { onTransitionEnd });
 		}
 	}
+	toggleHighRisk() {
+		const { tractTotals } = this.props;
+		let highRisk = this.state.highRisk;
+		if (highRisk === 0.0) {
+			highRisk = this.props.highRisk;
+		}
+		else {
+			highRisk = 0.0;
+		}
+		tractTotals ?
+			this.processTractData({ ...this.state, highRisk }) :
+			this.processData({ ...this.state, highRisk });
+	}
 
-	processTractData({ asHeight, standardScale }=this.state,
-		{ geoid, geoLevel, hazard, highRisk }=this.props) {
+	processTractData({ asHeight, standardScale, highRisk }=this.state,
+		{ geoid, geoLevel, hazard, minLoss }=this.props) {
 
 		let scale = d3scale.scaleThreshold()
 				.domain([50000, 500000, 5000000, 10000000])
@@ -306,6 +329,14 @@ class HazardMap extends React.Component {
     			type: "FeatureCollection",
     			features: []
     		},
+			criticalData = {
+				type: "FeatureCollection",
+				features: []
+			},
+			ogsData = {
+				type: "FeatureCollection",
+				features: []
+			},
 
     		min = Infinity,
     		max = -Infinity,
@@ -344,7 +375,8 @@ class HazardMap extends React.Component {
     			// }
     		})
     		if (highRisk > 0.0) {
-    			const qntl = quantile(domain.sort(), highRisk);
+    			let qntl = quantile(domain.sort(), highRisk);
+    			if (qntl < minLoss) qntl = minLoss;
     			scale = getHighRiskScale()
     				.domain([qntl]);
     			const geoids = [];
@@ -362,12 +394,11 @@ class HazardMap extends React.Component {
     	catch (e) {
 // console.log("ERROR:",e)
     	}
-    	this.setState({ scale, heightScale, data, asHeight });
+    	this.setState({ scale, heightScale, data, asHeight, ogsData, criticalData, highRisk });
 	}
 
-	processData({ asHeight, standardScale }=this.state,
-		{ geoid, geoLevel, hazard, highRisk, tractTotals }=this.props) {
-		if (tractTotals) return this.processTractData();
+	processData({ asHeight, standardScale, highRisk }=this.state,
+		{ geoid, geoLevel, hazard, tractTotals }=this.props) {
 
 		let scale = getScale(),
 
@@ -379,6 +410,14 @@ class HazardMap extends React.Component {
     			type: "FeatureCollection",
     			features: []
     		},
+			criticalData = {
+				type: "FeatureCollection",
+				features: []
+			},
+			ogsData = {
+				type: "FeatureCollection",
+				features: []
+			},
 
     		min = Infinity,
     		max = -Infinity,
@@ -439,7 +478,7 @@ class HazardMap extends React.Component {
     	catch (e) {
 // console.log("ERROR:",e)
     	}
-    	this.setState({ scale, heightScale, data, asHeight });
+    	this.setState({ scale, heightScale, data, asHeight, ogsData, criticalData, highRisk });
 	}
 
 	generateLayers() {
@@ -692,8 +731,14 @@ class HazardMap extends React.Component {
 			<table className="map-test-table">
 				<thead>
 					<tr>
-						<th colSpan={ 2 }>
+						<th>
 							Type Legend
+						</th>
+						<th>
+							<button className="map-test-button"
+								onClick={ this.toggleHighRisk.bind(this) }>
+								Toggle High Risk Off
+							</button>
 						</th>
 					</tr>
 				</thead>
@@ -732,6 +777,24 @@ class HazardMap extends React.Component {
 	}
 
 // //
+	generateHighRiskToggle() {
+		return (
+			<table className="map-test-table">
+				<thead>
+					<tr>
+						<th className="no-border-bottom">
+							<button className="map-test-button"
+								onClick={ this.toggleHighRisk.bind(this) }>
+								Toggle High Risk On
+							</button>
+						</th>
+					</tr>
+				</thead>
+			</table>
+		)
+	}
+
+// //
 	generateControls() {
 		const controls = [];
 
@@ -746,13 +809,19 @@ class HazardMap extends React.Component {
 			})
 		}
 		controls.push({
-			pos: "bottom-left",
+			pos: "bottom-right",
 			comp: this.generateThreeDtoggle()
 		})
-		if (this.props.highRisk > 0.0) {
+		if (this.state.highRisk > 0.0) {
 			controls.push({
-				pos: "bottom-right",
+				pos: "bottom-left",
 				comp: this.generateFtypeLegend()
+			})
+		}
+		else if (this.props.highRisk > 0.0) {
+			controls.push({
+				pos: "bottom-left",
+				comp: this.generateHighRiskToggle()
 			})
 		}
 
@@ -797,7 +866,8 @@ HazardMap.defaultProps = {
 	showBaseMap: false,
 	highRisk: 0.0,
 	standardScale: true,
-	tractTotals: false
+	tractTotals: false,
+	minLoss: 500000
 }
 
 const mapStateToProps = state => ({

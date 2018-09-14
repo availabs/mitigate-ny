@@ -99,8 +99,10 @@ class HazardList extends React.Component {
 							<ElementBox>
 								<HazardMap height={ 600 }
 									{ ...this.state }
-									threeD={ this.props.threeD }
-									standardScale={ this.props.standardScale }/>
+									threeD={ false }
+									standardScale={ this.props.standardScale }
+									tractTotals={ true }
+									highRisk={ 0.975 }/>
 							</ElementBox>
 						</div>
 					</div>

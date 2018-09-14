@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
+import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 
 class TestPage extends React.Component {
 
@@ -20,9 +20,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HazardMap
-                  tractTotals={ true }
-                  threeD={ false }/>
+                <HazardList />
               </ElementBox>
             </div>
           </div>
