@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
 
 class Counties extends Component {
   render () {
@@ -13,6 +14,7 @@ class Counties extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_narrative`} />
+              <CountyPlanChoropleth />
             </div>
 
             <div className="property-section">

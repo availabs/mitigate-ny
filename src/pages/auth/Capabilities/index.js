@@ -124,6 +124,12 @@ class Capabilities extends Component {
             </div>
 
             <div className="property-section">
+              <Content content_id={`capabilities-risk-assement`} />
+              <CapabilitiesTable type={'risk-assesment'}/>
+            </div>
+
+
+            <div className="property-section">
               <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
             </div>
 

@@ -52,14 +52,14 @@ class CMS_BodyViewer extends React.Component {
 					{ !(authed && showLink) ? null :
 						<Link to={ `/cms/edit/${ content_id }` }
 							style={ { position: "absolute", right: "5px", top: "5px", zIndex: 1000 } }>
-							edit...
+							edit #{ content_id }
 						</Link>
 					}
 					<MarkdownRenderer markdown={ body }
                   		options={ { html: true } }/>
 				</div>
 			:
-				<div>{ `There was an error: ${ error }` }</div>
+				authed ? <div>{ `There was an error: ${ error }` }</div> : <span />
 		)
 	}
 }

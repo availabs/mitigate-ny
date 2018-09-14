@@ -56,14 +56,21 @@ class Hazard extends Component {
           <div className= 'col-12'>
             <h5>Historic {hazardName} Events</h5>
             <HazardEventsMapController
-                  showLegend={ false }
-                  hazard={ hazard }
-                  numMaps={ 12 }
-                />
+              showLegend={ false }
+              hazard={ hazard }
+              numMaps={ 12 }
+            />
           </div>
         </div>
       )
     }
+  }
+
+  repetitive (hazard) {
+    if (hazard === 'riverine') {
+      return <Content content_id={`${hazard}-repetitive_loss`} />
+    }
+    return
   }
 
   render () {
@@ -165,9 +172,11 @@ class Hazard extends Component {
                 <HazardScoreTable 
                   hazard={hazard}
                 />
+
+                {this.repetitive(hazard)}
                   
-                  {this.presidential(hazard)}
-                  <Content content_id={`${hazard}-historic`} />
+                {this.presidential(hazard)}
+                <Content content_id={`${hazard}-historic`} />
                   
 
               </div>
@@ -227,11 +236,11 @@ class Hazard extends Component {
               <CapabilitiesTable hazard={hazard} />
               <HMGPTable hazard={hazard} />
             </div>
-
+            { /*
             <div className="property-section">
               <Content content_id={`${hazard}-related_narrative`} />
             </div>
-
+             */ }
             <div className="property-section">
               <Content content_id={`${hazard}-bibliography`} />
             </div>
