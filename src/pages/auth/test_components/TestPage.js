@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import NfipTable from "pages/auth/Capabilities/components/NfipTable"
+import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 
 class TestPage extends React.Component {
 
@@ -20,23 +20,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <NfipTable />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <NfipTable geoLevel="cousubs" geoid="36001"/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <NfipTable geoLevel="cousubs" geoid="36011"/>
+                <HazardMap
+                  tractTotals={ true }
+                  threeD={ false }/>
               </ElementBox>
             </div>
           </div>
