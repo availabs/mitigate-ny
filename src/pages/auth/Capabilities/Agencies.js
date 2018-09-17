@@ -8,6 +8,9 @@ import ProjectBox from 'components/light-admin/containers/ProjectBox'
 class Agencies extends Component {
   render () {
    return (
+      
+      
+
       <div className='property-single'>
         <AgencyList />
       </div>

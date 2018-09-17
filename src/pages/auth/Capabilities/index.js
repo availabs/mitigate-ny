@@ -21,6 +21,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-whats_changed_2014`} />
+              <CapabilitiesTable />
             </div>
           </div>
         </div>
@@ -28,7 +29,7 @@ class Capabilities extends Component {
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
            <div className="property-section">
-              <Content content_id={`capabilities-integration-statewide-efforts`} />
+              <Content content_id={`capabilities-coordination_among_agencies`} />
             </div>
           </div>
           <div className='property-info-side' style={{maxWidth: '40%', borderRight: 'none'}}>
@@ -42,9 +43,39 @@ class Capabilities extends Component {
           </div>
         </div>  
 
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+        
+            <div className="property-section">
+              <Content content_id={`capabilities-mitigation_agencies_participation`} />
+            </div>  
+
+            <div className="property-section">
+              <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-risk_assessment`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-techsupport_training_planning`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-integration-statewide-efforts`} />
+            </div>     
+
+          </div>
+        </div>
 
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+           
+           <div className="property-section">
+              <Content content_id={`capabilities-administer_funding`} />
+            </div>
+
            <div className="property-section">
               <Content content_id={`capabilities-federal_funding`} />
             </div>
@@ -90,7 +121,7 @@ class Capabilities extends Component {
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`FEMA Cooperating Technical Partners (CTP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`capabilities-cdbg`} />
+                <Content content_id={`capabilities-ctp`} />
               </ProjectBox>
             </div>
           </div>
@@ -111,7 +142,31 @@ class Capabilities extends Component {
           <div className="property-info-main"style={{paddingTop: 0}}> 
 
             <div className="property-section">
-              <Content content_id={`capabilities-coordination_among_agencies`} />
+              <Content content_id={`capabilities-agency_administered_funding_sources`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`local_funding_sources`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-project_management`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-construction`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-education_outreach`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-research`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-climate_related`} />
             </div>
 
             <div className="property-section">
@@ -119,13 +174,13 @@ class Capabilities extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-program_table`} />
-              <CapabilitiesTable />
+              <Content content_id={`capabilities-historic_evironmental_preservation`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
+              <Content content_id={`capabilities-planning_regulatory`} />
             </div>
+            
 
             <div className="property-section">
               <Content content_id={`capabilities-local_assets_table`} />
