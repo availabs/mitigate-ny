@@ -92,7 +92,7 @@ class CapabilitiesTable extends React.Component {
 
 	processData() {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
-			attributes = ["name", "agency", "description", "budget_provided"],
+			attributes = ["name", "agency", "description", "budget_provided", "goal", "primary_funding"],
 			data = this.props.capabilities
 				.filter(capability => !this.props.capability || capability[this.props.capability])
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
@@ -127,10 +127,25 @@ class CapabilitiesTable extends React.Component {
 							}
 						}
 					}
+					row.status = [
+						"status_new_shmp",
+						"status_carryover_shmp",
+						"status_in_progess",
+						"status_on_going",
+						"status_unchanged",
+						"status_completed",
+						"status_discontinued"
+					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
+					row.admin = [
+						"admin_statewide",
+						"admin_regional",
+						"admin_county",
+						"admin_local"
+					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
 					return row;
 				})
 				.sort((a, b) => b.budget - a.budget);
-		return { data, columns: attributes.map(att => getLabel(att)) };
+		return { data, columns: [...attributes.map(att => getLabel(att)), "status", "admin"] };
 	}
 
 	render() {
