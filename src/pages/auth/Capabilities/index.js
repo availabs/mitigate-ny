@@ -56,7 +56,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-risk_assessment`} />
-              <CapabilitiesTable capability={'capability_risk_assessment'}/>
+              <CapabilitiesTable title='Risk Assessment Capabilities' capability={'capability_risk_assessment'}/>
             </div>
 
             <div className="property-section">
@@ -66,7 +66,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-integration-statewide-efforts`} />
-              <CapabilitiesTable capability={'capability_tech_support'}/>
+              <CapabilitiesTable title='Technical Support and Training Capabilities'  capability={'capability_tech_support'}/>
             </div>     
 
           </div>
@@ -151,27 +151,27 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`local_funding_sources`} />
-               <CapabilitiesTable capability={'capability_administer_funding'}/>
+               <CapabilitiesTable title='Mitigation Funding Capabilities'  capability={'capability_administer_funding'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-project_management`} />
-               <CapabilitiesTable capability={'capability_risk_assessment'}/>
+               <CapabilitiesTable title='Project Management Capabilities' capability={'capability_project_management'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-construction`} />
-               <CapabilitiesTable capability={'capability_construction'}/>
+               <CapabilitiesTable title='Mitigation Construction Capabilities' capability={'capability_construction'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-education_outreach`} />
-               <CapabilitiesTable capability={'capability_outreach'}/>
+               <CapabilitiesTable title='Outreach and Public Education Capabilities' capability={'capability_outreach'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-research`} />
-               <CapabilitiesTable capability={'capability_research'}/>
+               <CapabilitiesTable title='Hazard Mitigation Research Capabilities' capability={'capability_research'}/>
             </div>
 
             <div className="property-section">
@@ -180,17 +180,17 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`section2-integration_climate_adaptation`} />
-               <CapabilitiesTable capability={'capability_climate'}/>
+               <CapabilitiesTable title='Climate Adaptation Capabilities' capability={'capability_climate'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-historic_evironmental_preservation`} />
-               <CapabilitiesTable capability={'capability_preservation' , 'capability_environmental'}/>
+               <CapabilitiesTable title='Historic and Environmental Preservation Capabilities' capability={'capability_preservation' , 'capability_environmental'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-planning_regulatory`} />
-               <CapabilitiesTable capability={'capability_policy' , 'capability_regulatory'}/>              
+               <CapabilitiesTable title='Planning and Regulatory Capabilities' capability={'capability_policy' , 'capability_regulatory'}/>              
             </div>            
 
             <div className="property-section">
