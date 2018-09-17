@@ -151,7 +151,7 @@ class CapabilitiesTable extends React.Component {
 	render() {
 		return (
 			<TableBox { ...this.processData() }
-				title="Capabilities"
+				title={ this.props.title }
 				pageSize={ 6 }/>
 		)
 	}
@@ -161,7 +161,8 @@ CapabilitiesTable.defaultProps = {
 	agency: null,
 	hazard: null,
 	capability: null,
-	capabilities: []
+	capabilities: [],
+	title: "Capabilities"
 }
 
 const mapStateToProps = state => ({
