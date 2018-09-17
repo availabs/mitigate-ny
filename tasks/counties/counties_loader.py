@@ -89,6 +89,8 @@ def loadCsvData(cursor, inputUrl):
 
 	print 'LOADING CSV DATA "{}"...'.format(inputUrl)
 
+	rows = []
+
 	firstLineRead = False
 	try:
 		with open(inputUrl, 'rb') as data:
@@ -96,7 +98,7 @@ def loadCsvData(cursor, inputUrl):
 			for row in reader:
 				if firstLineRead:
 					row = map(convert, META, transform(row))
-					cursor.execute(sql, row)
+					rows.append(row)
 				else:
 					firstLineRead = True
 				# end if
@@ -104,10 +106,23 @@ def loadCsvData(cursor, inputUrl):
 		# end with
 	except Exception as e:
 		print e
-	else:
-		print "CSV DATA LOADED.\n"
+
+	ny_county_row = []
+	for row in rows:
+		if row[0] == "36061":
+			ny_county_row = row
+
+	ny_city = ["36005", "36047", "36081", "36085"]
+	for i, row in enumerate(rows):
+		if row[0] in ny_city:
+			rows[i] = row[0:1] + ny_county_row[1:]
+
+	for row in rows:
+		cursor.execute(sql, row)
 
 	deallocateStatement(cursor)
+
+	print "CSV DATA LOADED.\n"
 # END loadCsvData
 
 parser = argparse.ArgumentParser(description='OGS CSV table loader.')

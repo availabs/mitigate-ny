@@ -12,16 +12,22 @@ import HazardListHeroStats from "./HazardListHeroStats"
 import HazardMap from "./HazardMap"
 import HazardEventsMapController from "./HazardEventsMapController"
 
+import { fnum } from "utils/sheldusUtils"
+
 import "./HazardList.css"
 
 // <i class="os-icon os-icon-phone-21"></i>
 			
-const ListItem = ({ hazard, name, onClick, active }) =>
+const ListItem = ({ hazard, name, onClick, active, annualized_damage }) =>
 	<li className={ active ? " active" : "" }
 		key={ hazard }>
 		<a onClick={ onClick }>
 			<i className="os-icon os-icon-arrow-right2"></i>
 			<span>{ name } </span>
+			<span className="float-right"
+				style={ { paddingRight: "10px" } }>
+				{ fnum(annualized_damage) }
+			</span>
 		</a>
 		
 	</li>
@@ -42,7 +48,8 @@ class HazardList extends React.Component {
 		)
 		.then(response => response.json.riskIndex.hazards)
 		.then(hazards => this.props.falcor.get(
-			['riskIndex', 'meta', hazards, 'name']
+			['riskIndex', 'meta', hazards, 'name'],
+			['severeWeather', '36', hazards, 'allTime', 'annualized_damage']
 		))
 	}
 
@@ -52,8 +59,12 @@ class HazardList extends React.Component {
 
 	renderHazardSelector() {
 		try {
-			return this.props.riskIndex.hazards.value
-				.sort((a, b) => this.props.riskIndex.meta[a].name < this.props.riskIndex.meta[b].name ? -1 : 1)
+			return this.props.riskIndex.hazards.value.slice()
+				.sort((a, b) => {
+					const aVal = this.props.severeWeather['36'][a].allTime.annualized_damage,
+						bVal = this.props.severeWeather['36'][b].allTime.annualized_damage;
+					return bVal < aVal ? -1 : 1;
+				})
 				.map(hazard => {
 					const name = this.props.riskIndex.meta[hazard].name
 					return (
@@ -61,7 +72,8 @@ class HazardList extends React.Component {
 							key={ hazard }
 							hazard={ hazard }
 							name={ name }
-							active={ hazard === this.state.hazard }/>
+							active={ hazard === this.state.hazard }
+							annualized_damage={ this.props.severeWeather['36'][hazard].allTime.annualized_damage }/>
 					)
 				})
 		}
@@ -99,8 +111,10 @@ class HazardList extends React.Component {
 							<ElementBox>
 								<HazardMap height={ 600 }
 									{ ...this.state }
-									threeD={ this.props.threeD }
-									standardScale={ this.props.standardScale }/>
+									threeD={ false }
+									standardScale={ this.props.standardScale }
+									tractTotals={ true }
+									highRisk={ 0.975 }/>
 							</ElementBox>
 						</div>
 					</div>

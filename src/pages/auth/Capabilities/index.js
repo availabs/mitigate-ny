@@ -56,6 +56,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-risk_assessment`} />
+              <CapabilitiesTable type={'risk-assesment'}/>
             </div>
 
             <div className="property-section">
@@ -178,9 +179,8 @@ class Capabilities extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-planning_regulatory`} />
-            </div>
-            
+              <Content content_id={`capabilities-planning_regulatory`} />              
+            </div>            
 
             <div className="property-section">
               <Content content_id={`capabilities-local_assets_table`} />

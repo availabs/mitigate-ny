@@ -322,7 +322,6 @@ module.exports = {
 			.length
 
 		if(numYears <= 0) return ''
-console.log(data,numYears)
 
 		let total =  Object.keys(data).reduce((total,year) => {
 			if(data[year][key] && !isNaN(+data[year][key])) {
