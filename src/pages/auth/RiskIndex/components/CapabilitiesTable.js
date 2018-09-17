@@ -14,6 +14,27 @@ import {
   	getLabel
 } from "store/modules/capabilities"
 
+/*
+	capability_mitigation
+	capability_preparedness
+	capability_response
+	capability_recovery
+	capability_climate
+	capability_critical
+	capability_preservation
+	capability_environmental
+	capability_risk_assessment
+	capability_administer_funding
+	capability_funding_amount
+	capability_tech_support
+	capability_construction
+	capability_outreach
+	capability_project_management
+	capability_research
+	capability_policy
+	capability_regulatory
+*/
+
 class CapabilitiesTable extends React.Component {
 
 	fetchFalcorDeps() {
@@ -73,6 +94,7 @@ class CapabilitiesTable extends React.Component {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
 			attributes = ["name", "agency", "description", "budget_provided"],
 			data = this.props.capabilities
+				.filter(capability => !this.props.capability || capability[this.props.capability])
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
 				.filter(({ hazards }) => !this.props.hazard || (hazards && (hazards.includes(this.props.hazard))))
 				.map(capability => {
@@ -122,7 +144,8 @@ class CapabilitiesTable extends React.Component {
 
 CapabilitiesTable.defaultProps = {
 	agency: null,
-	hazard: null
+	hazard: null,
+	capability: null
 }
 
 const mapStateToProps = state => ({

@@ -56,7 +56,7 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-risk_assessment`} />
-              <CapabilitiesTable type={'Capability-Risk Assessment'}/>
+              <CapabilitiesTable capability={'capability_risk_assessment'}/>
             </div>
 
             <div className="property-section">
