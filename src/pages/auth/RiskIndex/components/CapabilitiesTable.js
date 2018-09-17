@@ -94,7 +94,7 @@ class CapabilitiesTable extends React.Component {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
 			attributes = ["name", "agency", "description", "budget_provided", "goal", "primary_funding"],
 			data = this.props.capabilities
-				.filter(capability => !this.props.capability || capability[this.props.capability])
+				.filter(capability => !this.props.capability || this.props.capability.split(",").reduce((a, c) => a || capability[c.trim()], false))
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
 				.filter(({ hazards }) => !this.props.hazard || (hazards && (hazards.includes(this.props.hazard))))
 				.map(capability => {
@@ -160,7 +160,8 @@ class CapabilitiesTable extends React.Component {
 CapabilitiesTable.defaultProps = {
 	agency: null,
 	hazard: null,
-	capability: null
+	capability: null,
+	capabilities: []
 }
 
 const mapStateToProps = state => ({
