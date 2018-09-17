@@ -92,9 +92,9 @@ class CapabilitiesTable extends React.Component {
 
 	processData() {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
-			attributes = ["name", "agency", "description", "budget_provided"],
+			attributes = ["name", "agency", "description", "budget_provided", "goal", "primary_funding"],
 			data = this.props.capabilities
-				.filter(capability => !this.props.capability || capability[this.props.capability])
+				.filter(capability => !this.props.capability || this.props.capability.split(",").reduce((a, c) => a || capability[c.trim()], false))
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
 				.filter(({ hazards }) => !this.props.hazard || (hazards && (hazards.includes(this.props.hazard))))
 				.map(capability => {
@@ -127,16 +127,31 @@ class CapabilitiesTable extends React.Component {
 							}
 						}
 					}
+					row.status = [
+						"status_new_shmp",
+						"status_carryover_shmp",
+						"status_in_progess",
+						"status_on_going",
+						"status_unchanged",
+						"status_completed",
+						"status_discontinued"
+					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
+					row.admin = [
+						"admin_statewide",
+						"admin_regional",
+						"admin_county",
+						"admin_local"
+					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
 					return row;
 				})
 				.sort((a, b) => b.budget - a.budget);
-		return { data, columns: attributes.map(att => getLabel(att)) };
+		return { data, columns: [...attributes.map(att => getLabel(att)), "status", "admin"] };
 	}
 
 	render() {
 		return (
 			<TableBox { ...this.processData() }
-				title="Capabilities"
+				title={ this.props.title }
 				pageSize={ 6 }/>
 		)
 	}
@@ -145,7 +160,9 @@ class CapabilitiesTable extends React.Component {
 CapabilitiesTable.defaultProps = {
 	agency: null,
 	hazard: null,
-	capability: null
+	capability: null,
+	capabilities: [],
+	title: "Capabilities"
 }
 
 const mapStateToProps = state => ({
