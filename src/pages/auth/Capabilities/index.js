@@ -218,8 +218,8 @@ export default [
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: [[
-       {name: 'Agencies', path: '/agencies'},
-       {name: 'Counties', path: '/counties'},
+       {name: 'State', path: '/state'},
+       {name: 'Local', path: '/local'},
     ]],
     component: connect(() => {}, {})(Capabilities),
   },

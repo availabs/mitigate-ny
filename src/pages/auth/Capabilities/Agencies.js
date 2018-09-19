@@ -23,14 +23,14 @@ class Agencies extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/agencies',
-    name: 'Agencies',
+    path: '/state',
+    name: 'State Capabilities',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: [[
-       {name: 'Agencies', path: '/agencies'},
-       {name: 'Counties', path: '/counties'},
+       {name: 'State', path: '/state'},
+       {name: 'Local', path: '/local'},
     ]],
     component: connect(() => {}, {})(Agencies),
 
