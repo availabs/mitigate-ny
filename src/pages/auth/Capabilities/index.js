@@ -5,8 +5,22 @@ import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 
-import Counties from './Counties'
-import Agencies from './Agencies'
+import MitigatingAgencies from './Mitigating-Agencies'
+import Resiliency from './Resiliency'
+import RiskAssessment from './Risk-Assessment'
+import TechSupport from './Tech-Support'
+import AdministerFunding from './Administer-Funding'
+import ProjectManagement from './Project-Management'
+import MitigationConstruction from './Construction'
+import OutreachEducation from './Outreach-Education'
+import Research from './Research'
+import ClimateAdaptation from './Climate-Adaptation'
+import HistoricEnvironmental from './Historic-Environmental'
+import PlanningRegulatory from './Planning-Regulatory'
+import Local from './Counties'
+
+import subMenus from './capabilities-submenu'
+
 
 class Capabilities extends Component {
   render () {
@@ -217,12 +231,22 @@ export default [
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    subMenus: [[
-       {name: 'State', path: '/state'},
-       {name: 'Local', path: '/local'},
-    ]],
+    subMenus: subMenus,
     component: connect(() => {}, {})(Capabilities),
   },
-  ...Counties,
-  ...Agencies
+  ...Local,
+  ...MitigatingAgencies,
+  ...Resiliency,
+  ...RiskAssessment,
+  ...TechSupport,
+  ...AdministerFunding,
+  ...ProjectManagement,
+  ...MitigationConstruction,
+  ...OutreachEducation,
+  ...Research,
+  ...ClimateAdaptation,
+  ...HistoricEnvironmental,
+  ...PlanningRegulatory,
 ]
+
+

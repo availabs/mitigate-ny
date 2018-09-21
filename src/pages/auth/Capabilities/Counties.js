@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
+import subMenus from "./capabilities-submenu"
 
-class Counties extends Component {
+class Local extends Component {
   render () {
    return (
       <div className='property-single'>
@@ -46,14 +47,11 @@ export default [
   {
     icon: 'icon-map',
     path: '/local',
-    name: 'Counties',
+    name: 'Local',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    subMenus: [[
-       {name: 'State', path: '/state'},
-       {name: 'Local', path: '/local'},
-    ]],
-    component: connect(() => {}, {})(Counties),
+    subMenus: subMenus,
+    component: connect(() => {}, {})(Local),
   }
 ]
