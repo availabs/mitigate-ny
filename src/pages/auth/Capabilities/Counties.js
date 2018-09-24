@@ -31,10 +31,6 @@ class Local extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`section7-integration_local_state_mitigation_efforts`} />
-            </div>
-
-            <div className="property-section">
               <Content content_id={`capabilities-implementation`} />
             </div>
             
