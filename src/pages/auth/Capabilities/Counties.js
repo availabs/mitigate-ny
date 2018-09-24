@@ -19,6 +19,14 @@ class Local extends Component {
             </div>
 
             <div className="property-section">
+              <Content content_id={`capabilities-lhmp`} />
+            </div>  
+
+            <div className="property-section">
+              <Content content_id={`section7-lhmp_submittal_review_process`} />
+            </div>  
+            
+            <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_map`} />
             </div>
 
@@ -27,12 +35,11 @@ class Local extends Component {
             </div>
 
             <div className="property-section">
-              <Content content_id={`section7-funding_plans_projects`} />
+              <Content content_id={`capabilities-implementation`} />
             </div>
+            
 
-            <div className="property-section">
-              <Content content_id={`section7-lhmp_submittal_review_process`} />
-            </div>  
+            
             
           </div>
          </div>

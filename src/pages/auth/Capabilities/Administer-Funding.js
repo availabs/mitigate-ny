@@ -92,6 +92,11 @@ class AdministerFunding extends Component {
               <Content content_id={`local_funding_sources`} />
                <CapabilitiesTable title='Mitigation Funding Capabilities'  capability={'capability_administer_funding'}/>
             </div>
+
+            <div className="property-section">
+              <Content content_id={`section7-funding_plans_projects`} />
+            </div>
+
           </div>
          </div>
       </div>
