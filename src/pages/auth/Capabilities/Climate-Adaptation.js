@@ -37,7 +37,7 @@ class ClimateAdaptation extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/climate',
+    path: '/capabilities/climate',
     name: 'ClimateAdaptation',
     exact: true,
     mainNav: false,

@@ -33,7 +33,7 @@ class HistoricEnvironmental extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/historicenvironmental',
+    path: '/capabilities/historicenvironmental',
     name: 'HistoricEnvironmental',
     exact: true,
     mainNav: false,

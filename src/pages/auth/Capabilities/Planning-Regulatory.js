@@ -33,7 +33,7 @@ class PlanningRegulatory extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/planningregulatory',
+    path: '/capabilities/planningregulatory',
     name: 'PlanningRegulatory',
     exact: true,
     mainNav: false,

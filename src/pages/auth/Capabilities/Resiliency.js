@@ -34,7 +34,7 @@ class Resiliency extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/resiliency',
+    path: '/capabilities/resiliency',
     name: 'Resiliency',
     exact: true,
     mainNav: false,

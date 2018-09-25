@@ -109,7 +109,7 @@ class AdministerFunding extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/administerfunding',
+    path: '/capabilities/administerfunding',
     name: 'AdministerFunding',
     exact: true,
     mainNav: false,
