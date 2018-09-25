@@ -37,7 +37,7 @@ class TechSupport extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/techsupport',
+    path: '/capabilities/techsupport',
     name: 'TechSupport',
     exact: true,
     mainNav: false,

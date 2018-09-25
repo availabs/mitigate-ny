@@ -49,7 +49,7 @@ class Local extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/local',
+    path: '/capabilities/local',
     name: 'Local',
     exact: true,
     mainNav: false,

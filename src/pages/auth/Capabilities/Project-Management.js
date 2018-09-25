@@ -33,7 +33,7 @@ class ProjectManagement extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/projectmanagement',
+    path: '/capabilities/projectmanagement',
     name: 'ProjectManagement',
     exact: true,
     mainNav: false,

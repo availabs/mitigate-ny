@@ -33,7 +33,7 @@ class Research extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/research',
+    path: '/capabilities/research',
     name: 'Research',
     exact: true,
     mainNav: false,

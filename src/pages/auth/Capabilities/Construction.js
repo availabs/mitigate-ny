@@ -33,7 +33,7 @@ class Construction extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/construction',
+    path: '/capabilities/construction',
     name: 'Construction',
     exact: true,
     mainNav: false,

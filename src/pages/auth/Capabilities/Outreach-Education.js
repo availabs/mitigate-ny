@@ -33,7 +33,7 @@ class Outreach extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/outreach',
+    path: '/capabilities/outreach',
     name: 'Outreach',
     exact: true,
     mainNav: false,

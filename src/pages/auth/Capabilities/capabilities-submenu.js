@@ -1,16 +1,18 @@
-export default [[
-       {name: 'Agencies', path: '/agencies'},
-       {name: 'Local', path: '/local'},
-       {name: 'Resiliency', path: '/resiliency'},
-       {name: 'RiskAssessment', path: '/riskassessment'},
-       {name: 'TechSupport', path: '/techsupport'},
-       {name: 'Funding', path: '/administerfunding'},
-       {name: 'Project Mgmt', path: '/projectmanagement'},
-       {name: 'Construction', path: '/construction'},
-       {name: 'Outreach', path: '/outreach'},
-       {name: 'Research', path: '/research'},
-       {name: 'Climate', path: '/climate'},
-       {name: 'Historic/Environmental', path: '/historicenvironmental'},
-       {name: 'Regulatory', path: '/planningregulatory'},
+export default [
+[
+       {name: 'Agencies', path: '/capabilities/agencies'},
+       {name: 'Local', path: '/capabilities/local'},
+       {name: 'Resiliency', path: '/capabilities/resiliency'},
+       {name: 'RiskAssessment', path: '/capabilities/riskassessment'},
+       {name: 'TechSupport', path: '/capabilities/techsupport'},
+       {name: 'Funding', path: '/capabilities/administerfunding'},
+       {name: 'Project Mgmt', path: '/capabilities/projectmanagement'},
+       {name: 'Construction', path: '/capabilities/construction'},
+       {name: 'Outreach', path: '/capabilities/outreach'},
+       {name: 'Research', path: '/capabilities/research'},
+       {name: 'Climate', path: '/capabilities/climate'},
+       {name: 'Historic/Environmental', path: '/capabilities/historicenvironmental'},
+       {name: 'Regulatory', path: '/capabilities/planningregulatory'},
 
-    ]]
+    ]
+]

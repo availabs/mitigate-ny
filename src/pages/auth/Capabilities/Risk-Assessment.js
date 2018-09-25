@@ -33,7 +33,7 @@ class RiskAssessment extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/riskassessment',
+    path: '/capabilities/riskassessment',
     name: 'RiskAssessment',
     exact: true,
     mainNav: false,
