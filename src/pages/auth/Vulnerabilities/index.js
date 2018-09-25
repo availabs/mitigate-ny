@@ -206,7 +206,7 @@ class Vulnerabilities extends Component {
         <div className='property-single'>
             <div className='property-info-w'>
               <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-change_pop_built`} />
+                <Content content_id={`vulnerabilities-population_change_table`} />
               </div>
             </div>
           </div> 
