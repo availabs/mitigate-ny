@@ -13,6 +13,7 @@ import PopulationsMap from "./components/PopulationsMap.react"
 import PopulationsTable from "./components/PopulationsTable.react"
 
 import Viewport from "components/mapping/escmap/Viewport"
+import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 
 import {
   YEARS_OF_ACS_DATA
@@ -116,7 +117,52 @@ class Vulnerabilities extends Component {
   render () {
     return (
     	<Element>
-    		<h6 className="element-header">New York Statewide Populations</h6>
+    		<h6 className="element-header">New York Statewide Vulnerabilities</h6>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section">
+              <h5> Social Vulnerability Index (SOVI) </h5>
+              <HazardMap  
+                height={ 600 }
+                hazard={'sovi'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section">
+              <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
+              <HazardMap  
+                height={ 600 }
+                hazard={'bric'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section">
+              <h5> Risk Index Built Environment </h5>
+              <HazardMap  
+                height={ 600 }
+                hazard={'builtenv'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
+            </div>
+          </div>
+        </div>
+
         <div className='row'>
           <div className='col-lg-12'>
             <PopulationsMap { ...this.state }

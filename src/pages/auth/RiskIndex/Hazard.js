@@ -107,15 +107,16 @@ class Hazard extends Component {
 
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 60 }}>
-              <HazardStats 
-                hazard={hazard} 
-                dataType={'severeWeather'}
-              />
-            <div className='projects-list row'>
+              <div className='projects-list row'>
               <ProjectBox title={`definition`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`${hazard}-definition`} />
               </ProjectBox>  
             </div>
+              <HazardStats 
+                hazard={hazard} 
+                dataType={'severeWeather'}
+              />
+            
             
             </div>
           </div>

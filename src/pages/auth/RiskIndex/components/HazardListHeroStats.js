@@ -35,25 +35,26 @@ class HazardListHeroStats extends React.Component {
 			return (
 				<div className="row">
 					<div className="col-6">
-						<h4><Link to={ `hazards/${ hazard }` }
+						<h4><Link style={{color: '#047bf8'}} to={ `hazards/${ hazard }` }
 							className="hazard-link">
-							{ name }
+							{ name } <span style={{fontSize: 10}}>View Hazard Profile</span>  
 						</Link></h4>
+
 					</div>
 					<div className="col-6">
 						<h4>Annualized Damage: { fnum(data.annualized_damage) }</h4>
-					</div>
-					<div className="col-3">
-						<h6>Ann. Events: { data.annualized_num_events }</h6>
-					</div>
-					<div className="col-3">
-						<h6>Ann. Severe Events: { data.annualized_num_severe_events }</h6>
 					</div>
 					<div className="col-3">
 						<h6>Daily Prob.: { formatPercent(data.daily_event_prob) }%</h6>
 					</div>
 					<div className="col-3">
 						<h6>Daily Severe Prob.: { formatPercent(data.daily_severe_event_prob) }%</h6>
+					</div>
+					<div className="col-3">
+						<h6>Ann. Events: { data.annualized_num_events }</h6>
+					</div>
+					<div className="col-3">
+						<h6>Ann. Severe Events: { data.annualized_num_severe_events }</h6>
 					</div>
 				</div>
 			)

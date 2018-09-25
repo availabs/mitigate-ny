@@ -13,6 +13,9 @@ import Element from 'components/light-admin/containers/Element'
 import GeographyScoreTable from './components/GeographyScoreTable'
 import GeographyScoreBarChart from './components/GeographyScoreBarChart'
 import HazardEventsMapController from "./components/HazardEventsMapController"
+import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
+import ElementBox from 'components/light-admin/containers/ElementBox'
+import Content from 'components/cms/Content'
 
 import {
   getColorScale
@@ -103,8 +106,28 @@ class Geography extends Component {
 
   render () {
     return (
-      	<Element>
-      		<h6 className="element-header">New York Statewide Risk Index</h6>
+      	
+        <Element>
+          <h6 className="element-header">New York Statewide Risk</h6>
+          <div className='property-single'> 
+            <div className='property-info-w'>
+
+
+                <div className="property-section">
+                  <Content content_id={`capabilities-techsupport_training_planning`} />
+                </div>
+
+
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HazardList />
+              </ElementBox>
+            </div>
+          </div>
 
           <div className='row'>
             <div className='col-lg-12'>

@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Element from 'components/light-admin/containers/Element'
-import HazardList from './components/HazardList'
+import HazardList from './components/HazardListNew'
+import ElementBox from 'components/light-admin/containers/ElementBox'
 
 class RiskIndex extends Component {
 
   render () {
     return (
-      	<Element>
-      		<h6 className="element-header">New York Statewide Risk Index</h6>
-      		<HazardList size={6} dataType={'severeWeather'}/>
-      	</Element>
+	 
+   <Element>
+     <div className='row'>
+        <div className='col-lg-12'>
+          <ElementBox>
+            <HazardList />
+          </ElementBox>
+        </div>
+      </div>
+    </Element>
     )
   }
 }
