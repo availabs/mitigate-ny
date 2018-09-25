@@ -61,7 +61,7 @@ class HMAP_Table extends React.Component {
 	    })
 	    .then(project_ids => {
 // console.log("project_ids:",project_ids)
-	    	if (!project_ids.length) return;
+	    	if (!project_ids || project_ids.length === 0) return;
 	    	return this.props.falcor.get(
 	    		['hmap', 'byId', project_ids,
 	    			[
@@ -100,7 +100,7 @@ class HMAP_Table extends React.Component {
 		try {
 			return (
 				<TableBox { ...this.processData() }
-					title="HMAP Table"
+					title="HMGP Projects"
 					filterKey="year"/>
 			)
 		}

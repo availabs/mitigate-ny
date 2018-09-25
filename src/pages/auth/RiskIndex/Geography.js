@@ -114,7 +114,7 @@ class Geography extends Component {
 
 
                 <div className="property-section">
-                  <Content content_id={`capabilities-techsupport_training_planning`} />
+                  <Content content_id={`risk-hazards`} />
                 </div>
 
 
@@ -129,6 +129,15 @@ class Geography extends Component {
             </div>
           </div>
 
+            
+           <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section">
+                <Content content_id={`risk-hazards-county-loss`} />
+              </div>
+            </div>
+          </div>
+
           <div className='row'>
             <div className='col-lg-12'>
                 <GeographyScoreTable { ...this.state }
@@ -136,10 +145,26 @@ class Geography extends Component {
             </div>
           </div>
 
+          <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section">
+                <Content content_id={`risk-hazards-loss-timeline`} />
+              </div>
+            </div>
+          </div>
+
           <div className='row'>
             <div className='col-lg-12'>
                 <GeographyScoreBarChart
                   { ...this.state }/>
+            </div>
+          </div>
+
+          <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section">
+                <Content content_id={`risk-hazards-events-map`} />
+              </div>
             </div>
           </div>
 

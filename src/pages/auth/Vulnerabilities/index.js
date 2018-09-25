@@ -14,6 +14,7 @@ import PopulationsTable from "./components/PopulationsTable.react"
 
 import Viewport from "components/mapping/escmap/Viewport"
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
+import Content from 'components/cms/Content'
 
 import {
   YEARS_OF_ACS_DATA
@@ -118,6 +119,15 @@ class Vulnerabilities extends Component {
     return (
     	<Element>
     		<h6 className="element-header">New York Statewide Vulnerabilities</h6>
+        <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-riskindex_vulnerabilities`} />
+              </div>
+            </div>
+          </div>
+
+
         <div className='property-info-w'>
           <div className="property-info-main">
             <div className="property-section">
@@ -132,6 +142,14 @@ class Vulnerabilities extends Component {
             </div>
           </div>
         </div>
+
+        <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-bric`} />
+              </div>
+            </div>
+          </div>
 
         <div className='property-info-w'>
           <div className="property-info-main">
@@ -148,6 +166,14 @@ class Vulnerabilities extends Component {
           </div>
         </div>
 
+        <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-built_environment`} />
+              </div>
+            </div>
+          </div>
+
         <div className='property-info-w'>
           <div className="property-info-main">
             <div className="property-section">
@@ -163,12 +189,28 @@ class Vulnerabilities extends Component {
           </div>
         </div>
 
+        <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-change_pop_built`} />
+              </div>
+            </div>
+          </div>
+
         <div className='row'>
           <div className='col-lg-12'>
             <PopulationsMap { ...this.state }
               setGeoid={ this.setGeoid }/>
           </div>
         </div>
+        <div className='property-single'>
+            <div className='property-info-w'>
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-change_pop_built`} />
+              </div>
+            </div>
+          </div> 
+
         <div className='row'>
           <div className='col-lg-12'>
             <PopulationsTable { ...this.state }

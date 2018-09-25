@@ -34,7 +34,7 @@ class Hazard extends Component {
   }
 
   presidential (hazard) {
-    if(['wildfire'].includes(hazard)) {
+    if(['wildfire' , 'heatwave' , 'tsunami' , 'volcano'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -46,13 +46,57 @@ class Hazard extends Component {
     }
   }
 
+  statewideEvents (hazard,hazardName) {
+    if(['heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'tsunami'].includes(hazard)) {
+      return ''
+    } else {
+      return (
+
+        
+        <div className="property-section">
+            <div className="property-section">
+              <Content content_id={`${hazard}-all_statewide_events`} />
+            </div>
+              <div className="property-section">
+                  <h5>Statewide Map of {hazardName} Events </h5>
+                  <strong>1996-2017</strong>
+                  <HazardEventsMapController
+                    allTime={ true }
+                    showLegend={ false }
+                    hazard={ hazard }
+                    height={ 600 }
+                  />
+               </div>           
+        </div>
+      )
+    }
+  }
+
+  HeroStats (hazard) {
+    if(['volcano'].includes(hazard)) {
+      return ''
+    } else {
+      return (
+       <HazardStats 
+          hazard={hazard} 
+          dataType={'severeWeather'}
+        />
+      )
+    }
+  }
+
   historicMaps (hazard, hazardName) {
-    if(['wildfire','anExample'].includes(hazard)) {
+    if(['wildfire' , 'heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'landslide' , 'coldwave' , 'tsunami' , 'hail' , 'icestorm' , 'winterweat'].includes(hazard)) {
       return ''
     } else {
       console.log('historicMaps', ['wildfire'].includes(hazard), hazard)
       return (
+        
         <div className='row'>
+        <div className="property-section">
+              <Content content_id={`${hazard}-historical_occurances`} />
+        </div>
+
           <div className= 'col-12'>
             <h5>Historic {hazardName} Events</h5>
             <HazardEventsMapController
@@ -62,6 +106,97 @@ class Hazard extends Component {
             />
           </div>
         </div>
+      )
+    }
+  }
+
+  eventsLossTable (hazard) {
+    if(['wildfire' , 'avalanche' , 'tsunami' , 'volcano' , 'earthquake'].includes(hazard)) {
+      return ''
+    } else {
+      return (
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%', paddingTop:0}}>
+           
+            <div className="property-section">
+              <Content content_id={`${hazard}-highest_reported_loss`} />
+            </div>
+             
+             <div className="property-section">
+               <h4>Events with Highest Reported Loss in Dollars</h4>
+               <strong>1996-2017</strong>
+               <HazardEventsTable hazard={hazard} />
+               <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+probability (hazard) {
+    if(['volcano'].includes(hazard)) {
+      return ''
+    } else {
+      return (
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0}}>
+            <div className="property-section">
+              <Content content_id={`${hazard}-probability`} />
+            </div>
+          </div>
+          <div className='property-info-side' style={{maxWidth: 398,  paddingTop: 0}}>
+            <div className='side-section-content'>
+                <HazardList
+                hazard={hazard}
+                dataType='severeWeather'
+                display='full'
+              />
+            </div>
+          </div>
+        </div>  
+      )
+    }
+  }
+
+municipalityTable (hazard) {
+    if(['volcano'].includes(hazard)) {
+      return ''
+    } else {
+      return (
+          <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+              
+              <div className='projects-list row'>
+                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', height: 300}}>
+                
+                </ProjectBox>  
+              </div>
+          
+            </div>
+          </div>
+      )
+    }
+  }
+
+
+
+criticalInfrastructure (hazard) {
+    if(['volcano' , 'avalanche' , 'tsunami' ].includes(hazard)) {
+      return ''
+    } else {
+      return (
+        <div className="property-section">
+              <h5>Critical Infrastructure & State Assets in High Risk Census Tract</h5>
+              <HazardMap 
+                  height={ 600 }
+                  hazard={hazard}
+                  threeD={false}
+                  highRisk={0.95}
+                  geoid='36'
+                />
+                <CriticalInfrastructureTable  />
+            </div>
       )
     }
   }
@@ -85,37 +220,41 @@ class Hazard extends Component {
         {/*
            Section 1 - Intro, Overview & Stats
         */}
+        
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0}}>
-            
+          <div className="property-info-main" style={{paddingBottom: 0}}>
             <h1>{hazardName}</h1>
+
+            
+          </div>
+        </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
+            
 
             <div className="property-section">
               <Content content_id={`${hazard}-setting_context`} />
             </div>
 
-           
-            
+          <div className="property-section">
+              <Content content_id={`${hazard}-characteristics`} />
+           </div>
+
             <div className="property-section">
               <Content content_id={`${hazard}-magnitude`} />
-            </div>
-            
-            <div className="property-section">
-              <Content content_id={`${hazard}-characteristics`} />
-            </div>
+           </div>
+           
           </div>
-
           <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content' style={{paddingTop: 60 }}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
               <ProjectBox title={`definition`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`${hazard}-definition`} />
               </ProjectBox>  
             </div>
-              <HazardStats 
-                hazard={hazard} 
-                dataType={'severeWeather'}
-              />
+                {this.HeroStats(hazard)}
+              
             
             
             </div>
@@ -128,22 +267,16 @@ class Hazard extends Component {
         
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
-            <div className="property-section">
-              <div className="property-section">
-                  <h5>Statewide Map of {hazardName} Events </h5>
-                  <strong>1996-2017</strong>
-                  <HazardEventsMapController
-                    allTime={ true }
-                    showLegend={ false }
-                    hazard={ hazard }
-                    height={ 600 }
-                  />
-              </div>           
-            </div>
+            
+            
+            {this.statewideEvents(hazard,hazardName)}
+
+
+            
           </div>
         </div>
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0}}>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
             <div className="property-section">
               <div className="property-section">
 
@@ -152,20 +285,19 @@ class Hazard extends Component {
               </div>
             </div>
           </div>
-          <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content' style={{paddingTop: 60 }}>
-              
-              <div className='projects-list row'>
-                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', height: 300}}>
-                
-                </ProjectBox>  
-              </div>
-          
-            </div>
-          </div>
+          {this.municipalityTable(hazard)}
         </div>
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0}}>
+              
+              <div className="property-section" >
+                  <Content content_id={`${hazard}-basemap`} />
+              </div>
+
+            <div className="property-section">
+              <Content content_id={`${hazard}-all_reported_loss`} />
+            </div>
+
               <div className="property-section">
                 <h5> {hazardName} - Reported Loss in Dollars by County </h5>
                 <strong>1996-2017</strong>
@@ -184,54 +316,25 @@ class Hazard extends Component {
           </div>
         </div>
         {this.historicMaps(hazard, hazardName)}
-        <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%', paddingTop:0}}>
-           
-             <div className="property-section">
-               <h4>Events with Highest Reported Loss in Dollars</h4>
-               <strong>1996-2017</strong>
-               <HazardEventsTable hazard={hazard} />
-               <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
-            </div>
-          </div>
-        </div>
+        {this.eventsLossTable(hazard)}
+
 
         {/*
            Section 3 - Probability
         */}
-        <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%'}}>
-            <div className="property-section">
-              <Content content_id={`${hazard}-probability`} />
-            </div>
-          </div>
-          <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content'>
-                <HazardList
-                hazard={hazard}
-                dataType='severeWeather'
-                display='full'
-              />
-            </div>
-          </div>
-        </div>
+          {this.probability(hazard)}
         {/*
            Section 3 - Vulnerability
         */}
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
-            <div className="property-section">
-              <h5>Critical Infrastructure & State Assets in High Risk Census Tract</h5>
-              <HazardMap 
-                  height={ 600 }
-                  hazard={hazard}
-                  threeD={false}
-                  highRisk={0.95}
-                  geoid='36'
-                />
-                <CriticalInfrastructureTable  />
-            </div>
+            
+            {this.criticalInfrastructure (hazard)}
 
+            
+            <div className="property-section">
+              <Content content_id={`${hazard}-hmgp`} />
+            </div>
             <div className="property-section">
               <Content content_id={`${hazard}-state_capability`} />
               <CapabilitiesTable hazard={hazard} />
@@ -242,6 +345,8 @@ class Hazard extends Component {
               <Content content_id={`${hazard}-related_narrative`} />
             </div>
              */ }
+
+
             <div className="property-section">
               <Content content_id={`${hazard}-bibliography`} />
             </div>

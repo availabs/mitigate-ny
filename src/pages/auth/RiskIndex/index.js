@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Element from 'components/light-admin/containers/Element'
 import HazardList from './components/HazardListNew'
 import ElementBox from 'components/light-admin/containers/ElementBox'
+import Content from 'components/cms/Content'
 
 class RiskIndex extends Component {
 
@@ -10,6 +11,15 @@ class RiskIndex extends Component {
     return (
 	 
    <Element>
+     
+     <div className='property-single'> 
+      <div className='property-info-w'>
+        <div className="property-section">
+         <Content content_id={`risk-hazards`} />
+       </div>
+      </div>
+     </div>
+
      <div className='row'>
         <div className='col-lg-12'>
           <ElementBox>
