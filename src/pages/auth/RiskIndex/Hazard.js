@@ -18,6 +18,7 @@ import HazardEventsTable from "./components/HazardEventsTable"
 import CriticalInfrastructureTable from './components/CriticalInfrastructureTable'
 import CapabilitiesTable from './components/CapabilitiesTable'
 import HMGPTable from './components/HMGPTable'
+import HighRiskMunicipalities from "./components/HighRiskMunicipalities"
 
 class Hazard extends Component {
 
@@ -155,8 +156,8 @@ class Hazard extends Component {
             <div className='side-section-content' style={{paddingTop: 60 }}>
               
               <div className='projects-list row'>
-                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', height: 300}}>
-                
+                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%' }}>
+                  <HighRiskMunicipalities />
                 </ProjectBox>  
               </div>
           
