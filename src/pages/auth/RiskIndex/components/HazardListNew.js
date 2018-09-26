@@ -114,7 +114,7 @@ class HazardList extends React.Component {
 									threeD={ false }
 									standardScale={ this.props.standardScale }
 									tractTotals={ true }
-									highRisk={ 0.975 }/>
+									highRisk={ 0.0}/>
 							</ElementBox>
 						</div>
 					</div>

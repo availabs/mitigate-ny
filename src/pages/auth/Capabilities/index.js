@@ -5,8 +5,22 @@ import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 
-import Counties from './Counties'
-import Agencies from './Agencies'
+import MitigatingAgencies from './Mitigating-Agencies'
+import Resiliency from './Resiliency'
+import RiskAssessment from './Risk-Assessment'
+import TechSupport from './Tech-Support'
+import AdministerFunding from './Administer-Funding'
+import ProjectManagement from './Project-Management'
+import MitigationConstruction from './Construction'
+import OutreachEducation from './Outreach-Education'
+import Research from './Research'
+import ClimateAdaptation from './Climate-Adaptation'
+import HistoricEnvironmental from './Historic-Environmental'
+import PlanningRegulatory from './Planning-Regulatory'
+import Local from './Counties'
+
+import subMenus from './capabilities-submenu'
+
 
 class Capabilities extends Component {
   render () {
@@ -56,15 +70,17 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-risk_assessment`} />
-              <CapabilitiesTable capability={'capability_risk_assessment'}/>
+              <CapabilitiesTable title='Risk Assessment Capabilities' capability={'capability_risk_assessment'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-techsupport_training_planning`} />
+               
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-integration-statewide-efforts`} />
+              <CapabilitiesTable title='Technical Support and Training Capabilities'  capability={'capability_tech_support'}/>
             </div>     
 
           </div>
@@ -133,7 +149,8 @@ class Capabilities extends Component {
              <div className='projects-list row'>
               <ProjectBox title={`Community Development Block Grant (CDBG)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`capabilities-cdbg`} />
-              </ProjectBox>  
+              </ProjectBox> 
+
             </div>
            </div>
           </div>
@@ -148,22 +165,27 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`local_funding_sources`} />
+               <CapabilitiesTable title='Mitigation Funding Capabilities'  capability={'capability_administer_funding'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-project_management`} />
+               <CapabilitiesTable title='Project Management Capabilities' capability={'capability_project_management'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-construction`} />
+               <CapabilitiesTable title='Mitigation Construction Capabilities' capability={'capability_construction'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-education_outreach`} />
+               <CapabilitiesTable title='Outreach and Public Education Capabilities' capability={'capability_outreach'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-research`} />
+               <CapabilitiesTable title='Hazard Mitigation Research Capabilities' capability={'capability_research'}/>
             </div>
 
             <div className="property-section">
@@ -172,14 +194,17 @@ class Capabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`section2-integration_climate_adaptation`} />
+               <CapabilitiesTable title='Climate Adaptation Capabilities' capability={'capability_climate'}/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-historic_evironmental_preservation`} />
+               <CapabilitiesTable title='Historic and Environmental Preservation Capabilities' capability={'capability_preservation' , 'capability_environmental'}/>
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-planning_regulatory`} />              
+              <Content content_id={`capabilities-planning_regulatory`} />
+               <CapabilitiesTable title='Planning and Regulatory Capabilities' capability={'capability_policy' , 'capability_regulatory'}/>              
             </div>            
 
             <div className="property-section">
@@ -206,12 +231,22 @@ export default [
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    subMenus: [[
-       {name: 'Agencies', path: '/agencies'},
-       {name: 'Counties', path: '/counties'},
-    ]],
+    subMenus: subMenus,
     component: connect(() => {}, {})(Capabilities),
   },
-  ...Counties,
-  ...Agencies
+  ...Local,
+  ...MitigatingAgencies,
+  ...Resiliency,
+  ...RiskAssessment,
+  ...TechSupport,
+  ...AdministerFunding,
+  ...ProjectManagement,
+  ...MitigationConstruction,
+  ...OutreachEducation,
+  ...Research,
+  ...ClimateAdaptation,
+  ...HistoricEnvironmental,
+  ...PlanningRegulatory,
 ]
+
+

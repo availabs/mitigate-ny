@@ -46,6 +46,11 @@ class Landing extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main"style={{paddingTop: 0}}>    
+            
+            <div className="property-section">
+              <Content content_id={`section7-integration_local_state_mitigation_efforts`} />
+            </div>
+
             <div className="property-section">
               <Content content_id={`section2-plan_maintenance`} />
             </div>

@@ -9,7 +9,6 @@ class AgencyList extends Component {
    return (
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
-            <h1>Agencies</h1>
             {agencies.map(agencyId => {
               return (
                 <div>
