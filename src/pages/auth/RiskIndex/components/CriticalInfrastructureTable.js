@@ -25,7 +25,7 @@ class CritTable extends React.Component {
       		return this.props.riskIndexGraph.meta[hazard].name;
     	}
     	catch (e) {
-      		return getHazardName(hazard)
+      		return '' //getHazardName(hazard)
     	}
   	}
 

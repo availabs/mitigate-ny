@@ -100,7 +100,7 @@ class HMAP_Table extends React.Component {
 		try {
 			return (
 				<TableBox { ...this.processData() }
-					title="HMGP Projects"
+					title="HMA Projects"
 					filterKey="year"/>
 			)
 		}

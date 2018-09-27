@@ -2,9 +2,9 @@
 import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
-// export const host = 'http://mitigateny.availabs.org/api/'
+export const host = 'http://mitigateny.availabs.org/api/'
 
- export const host = 'http://localhost:3333/'
+//export const host = 'http://localhost:3333/'
 
 
 class CustomSource extends HttpDataSource {
@@ -44,7 +44,8 @@ class CustomSource extends HttpDataSource {
 // }
 
 export const falcorGraph = (function () {
-  var storedGraph = {} // graphFromCache() // {};//JSON.parse(localStorage.getItem('falcorCache'))
+  var storedGraph = JSON.parse(localStorage.getItem('falcorCache')) || {};
+  console.log('loading cache', storedGraph)
   let model = new Model({
     source: new CustomSource(host + 'graph', {
       crossDomain: true,

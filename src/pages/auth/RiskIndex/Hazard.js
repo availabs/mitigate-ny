@@ -35,7 +35,7 @@ class Hazard extends Component {
   }
 
   presidential (hazard) {
-    if(['wildfire' , 'heatwave' , 'tsunami' , 'volcano'].includes(hazard)) {
+    if(['wildfire' , 'heatwave' , 'tsunami' , 'volcano', 'lightning'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -90,7 +90,7 @@ class Hazard extends Component {
     if(['wildfire' , 'heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'landslide' , 'coldwave' , 'tsunami' , 'hail' , 'icestorm' , 'winterweat'].includes(hazard)) {
       return ''
     } else {
-      console.log('historicMaps', ['wildfire'].includes(hazard), hazard)
+      // console.log('historicMaps', ['wildfire'].includes(hazard), hazard)
       return (
         
         <div className='row'>
@@ -99,11 +99,11 @@ class Hazard extends Component {
         </div>
 
           <div className= 'col-12'>
-            <h5>Historic {hazardName} Events</h5>
+           
             <HazardEventsMapController
               showLegend={ false }
               hazard={ hazard }
-              numMaps={ 12 }
+              numMaps={ 3 }
             />
           </div>
         </div>
@@ -196,7 +196,7 @@ criticalInfrastructure (hazard) {
                   highRisk={0.95}
                   geoid='36'
                 />
-                <CriticalInfrastructureTable  />
+                <CriticalInfrastructureTable  hazard={hazard} />
             </div>
       )
     }
@@ -256,8 +256,6 @@ criticalInfrastructure (hazard) {
             </div>
                 {this.HeroStats(hazard)}
               
-            
-            
             </div>
           </div>
         </div>
@@ -276,6 +274,7 @@ criticalInfrastructure (hazard) {
             
           </div>
         </div>
+        {this.historicMaps(hazard, hazardName)}
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
             <div className="property-section">
@@ -318,7 +317,7 @@ criticalInfrastructure (hazard) {
               </div>
           </div>
         </div>
-        {this.historicMaps(hazard, hazardName)}
+        
         {this.eventsLossTable(hazard)}
 
 
