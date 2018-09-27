@@ -4,7 +4,7 @@ import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import LineGraph from 'components/charts/line/simple'
 // import BarGraph from 'components/charts/bar/simple'
 import { processSheldus } from 'utils/sheldusUtils'
-import SbaChoropleth from "./SbaChoropleth"
+import Content from 'components/cms/Content'
 
 const LimitedAttributes = {
 	num_events: "Occurances",
@@ -22,6 +22,7 @@ const sheldusAttributes = {
 export default (props) => (
 	<Link className={`project-link col-${props.size}`} to={props.link || '/'} >
 		<ProjectBox title={props.title} >
+			<Content content_id={'hazard-by-year-probability'} />
 		    <div className="row align-items-center">
 		    { /*  <div className="col-sm-12">
 		        <div className="row">
