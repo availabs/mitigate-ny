@@ -4,7 +4,7 @@ export default [
        {name: 'Wind', path: '/hazards/wind'},
        {name: 'Snow Storm', path: '/hazards/winterweat'},
        {name: 'Tornado', path: '/hazards/tornado'},
-       {name: 'Costal Erosion', path: '/hazards/costal'},
+       {name: 'Costal Erosion', path: '/hazards/coastal'},
        {name: 'Ice Storm', path: '/hazards/icestorm'},
        {name: 'Hail', path: '/hazards/hail'},
        {name: 'Drought', path: '/hazards/drought'},
