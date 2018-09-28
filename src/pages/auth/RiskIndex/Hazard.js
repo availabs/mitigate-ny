@@ -149,28 +149,42 @@ probability (hazard) {
     } else {
       return (
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0}}>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, paddingBottom: 0}}>
             <div className="property-section">
               <Content content_id={`${hazard}-probability`} />
             </div>
-            <div className="property-section">
-              <Content content_id={`${hazard}-basemap`} />
-            </div>
           </div>
-          <div className='property-info-side' style={{maxWidth: 398,  paddingTop: 0}}>
+          <div className='property-info-side' style={{maxWidth: 398,  paddingTop: 0, paddingBottom: 0, marginBottom: 0}}>
             <div className='side-section-content'>
                 <HazardList
                 hazard={hazard}
                 dataType='severeWeather'
                 display='full'
               />
-              <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
+              <i style={{color: '#afafaf', paddingBottom: 0}}>Source: NCDC Storm Events Dataset</i>
             </div>
           </div>
-        </div>  
+        </div>
       )
     }
   }
+
+probabilityMap (hazard) {
+    if(['volcano'].includes(hazard)) {
+      return ''
+    } else {
+      return (      
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+            <div className="property-section">
+              <Content content_id={`${hazard}-basemap`} />
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
 
 municipalityTable (hazard) {
     if(['volcano'].includes(hazard)) {
@@ -178,11 +192,12 @@ municipalityTable (hazard) {
     } else {
       return (
           <div className='property-info-side' style={{maxWidth: 398}}>
-            <div className='side-section-content' style={{paddingTop: 0 }}>
+            <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
               
               <div className='projects-list row'>
-                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%' }}>
-                  <HighRiskMunicipalities hazard={hazard} />
+
+                <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', paddingBottom: 0 }}>
+                  <HighRiskMunicipalities hazard={hazard}  />
                 </ProjectBox> 
                 
               </div>
@@ -204,7 +219,7 @@ criticalInfrastructure (hazard) {
     } else {
       return (
         <div className="property-section">
-              {/*<h5>Critical Infrastructure & State Assets in High Risk Census Tract</h5>
+              <h5>Critical Infrastructure & State Assets in High Risk Census Tract</h5>
               <HazardMap 
                   height={ 600 }
                   hazard={hazard}
@@ -212,8 +227,8 @@ criticalInfrastructure (hazard) {
                   highRisk={0.95}
                   geoid='36'
                 />
-                <CriticalInfrastructureTable  hazard={hazard} />*/}
-                <Content content_id={`${hazard}-critical_infrastructure`} />
+                <CriticalInfrastructureTable  hazard={hazard} />
+                <Content content_id={`${hazard}-critical_infrastructure`}/>
             </div>
       )
     }
@@ -335,6 +350,7 @@ criticalInfrastructure (hazard) {
            Section 3 - Probability
         */}
           {this.probability(hazard)}
+          {this.probabilityMap (hazard)}
         {/*
            Section 3 - Vulnerability
         */}

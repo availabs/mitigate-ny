@@ -2,7 +2,7 @@ let topojson = require('topojson')
 const HOST = '/';
 
 
-class riskIndexAPI {
+class geoApi {
   constructor () { 
     this.data = {}
   }
@@ -13,6 +13,7 @@ class riskIndexAPI {
         resolve(this.data[geoid]);
       }
       else { 
+        console.log('what?', `${HOST}geo/${geoid}.json`)
         fetch(`${HOST}geo/${geoid}.json`, {
           headers: { 'Content-Type': 'text/csv' }
         })
@@ -72,4 +73,4 @@ class riskIndexAPI {
   
 }
 
-export default riskIndexAPI
+export default geoApi

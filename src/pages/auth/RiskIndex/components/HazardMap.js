@@ -79,6 +79,7 @@ class HazardMap extends React.Component {
 
 	componentWillMount() {
 		const { geoid } = this.props;
+		console.log('HazardMap geoid', geoid)
 		this.props.getChildGeo(geoid.slice(0, 2), 'tracts');
 		this.props.getChildGeo(geoid.slice(0, 2), 'counties');
 		this.props.getGeoMerge(geoid.slice(0, 2), 'counties');

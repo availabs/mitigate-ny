@@ -51,7 +51,7 @@ class GeographyScoreBarChart extends React.Component {
 			return <ElementBox>Loading...</ElementBox>;
 		}
 		return (
-			<div style={ { height: `${ this.props.height }px` } }>
+			<div style={ { height: `${ this.props.height }px`, background: '#fff'} }>
 				<ResponsiveBar
 					data={ data }
 					keys={ keys }
