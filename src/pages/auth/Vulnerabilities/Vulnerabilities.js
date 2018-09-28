@@ -15,6 +15,7 @@ import PopulationsTable from "./components/PopulationsTable.react"
 import Viewport from "components/mapping/escmap/Viewport"
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 import Content from 'components/cms/Content'
+import Submenus from './risk-submenus'
 
 import {
   YEARS_OF_ACS_DATA
@@ -130,8 +131,10 @@ class Vulnerabilities extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main">
-            <div className="property-section">
-              <h5> Social Vulnerability Index (SOVI) </h5>
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Social Vulnerability Index (SOVI) </h5>
+              </div>
               <HazardMap  
                 height={ 600 }
                 hazard={'sovi'}
@@ -153,8 +156,10 @@ class Vulnerabilities extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main">
-            <div className="property-section">
-              <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
+              </div>
               <HazardMap  
                 height={ 600 }
                 hazard={'bric'}
@@ -176,8 +181,10 @@ class Vulnerabilities extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main">
-            <div className="property-section">
-              <h5> Risk Index Built Environment </h5>
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Risk Index Built Environment </h5>
+              </div>
               <HazardMap  
                 height={ 600 }
                 hazard={'builtenv'}
@@ -257,6 +264,7 @@ export default [
     exact: true,
     mainNav: false,
     auth: true,
+    subMenus: Submenus,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {name: 'Vulnerabilities', path: '/vulnerabilities'},
