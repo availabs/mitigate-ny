@@ -195,15 +195,16 @@ municipalityTable (hazard) {
             <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
               
               <div className='projects-list row'>
+
                 <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', paddingBottom: 0 }}>
-                  <HighRiskMunicipalities />
+                  <HighRiskMunicipalities hazard={hazard}  />
                 </ProjectBox> 
                 
               </div>
               
             </div>
             <i style={{color: '#afafaf'}}>
-                Source: NCDC Storm Events Dataset
+                Source: NCDC Storm Events Dataset, 1996-2017
               </i>
           </div>
       )

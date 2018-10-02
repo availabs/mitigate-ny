@@ -31,333 +31,341 @@ class HazardException(Exception):
 		super(HazardException, self).__init__(message)
 
 def mapHazards(string):
-	string = string.strip()
-	if len(string) is 0:
-		return None
-	if string.lower() == "all":
-		return HAZARDS
-	hazards = [s.strip() for s in string.split(",")]
-	if not reduce(lambda a, c: a and (c in HAZARDS), hazards, True):
-		raise HazardException(string)
-	return hazards
-
-BUDGET_REGEX = '[$]*(\d+)([kKmMbBtT])'
-def budgetToInt(string):
-	string = string.strip()
 	try:
+		string = string.strip().lower()
 		if len(string) is 0:
 			return None
-		m = re.search(BUDGET_REGEX, string)
-		if m is not None:
-			dollars = m.group(1)
-			mult = m.group(2)
-			if dollars and mult:
-				dollars = int(dollars)
-				mult = mult.lower()
-				if mult == 'k':
-					return dollars * 1000
-				elif mult == 'm':
-					return dollars * 1000000
-				elif mult == 'b':
-					return dollars * 1000000000
-				elif mult == 't':
-					return dollars * 1000000000000
-			elif dollars:
-				return int(dollars)
-			else:
-				return None
-		else:
-			return None
-	except:
-		print "budgetToInt ERROR:", string
-		return None
-
-def toInt(string):
-	string = string.strip()
-	try:
-		if len(string) is 0:
-			return None
-		return int(string)
-	except:
-		print "toInt ERROR:", string
-		return None
+		if string == "all" or string == "all hazards":
+			return HAZARDS
+		hazards = [s.strip() for s in string.split(",")]
+		if not reduce(lambda a, c: a and (c in HAZARDS), hazards, True):
+			print string
+			raise HazardException(string)
+		return hazards
+	except Exception as e:
+		print "mapHazards ERROR:", string
+		raise e
 
 def toString(string):
-	string = string.strip()
 	try:
+		if string is None:
+			return None
+		string = string.strip()
 		if len(string) is 0:
 			return None
 		return string
-	except:
+	except Exception as e:
 		print "toString ERROR:", string
-		return None
+		raise e
 
 def toBoolean(string):
-	string = string.strip()
 	try:
-		return string.lower() == 'x'
-	except:
+		if string is None:
+			return False
+		string = string.strip().lower()
+		return string == 'x'
+	except Exception as e:
 		print "toBoolean ERROR:", string
-		return None
+		raise e
+
+TYPES = [
+	'program',
+	'measure',
+	'action'
+]
+
+class TypeException(Exception):
+	def __init__(self, t):
+		message = "Bad type: {}.".format(t)
+		super(TypeException, self).__init__(message)
+
+def toType(string):
+	try:
+		if string is None:
+			string = 'program'
+		string = string.strip().lower()
+		if not string in TYPES:
+			raise TypeException(string)
+		return string
+	except:
+		print "toType ERROR:", string
+		raise e
 
 def convert(meta, v):
-	return meta["convert"](v)
+	try:
+		return meta["convert"](v)
+	except Exception as e:
+		print e, "\n"
+		raise e
 
 META = [
-	{ "csvName": "Program Name",
-		"column": "name",
+	{ "column": "name",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Program Description",
-		"column": "description",
+	{ "column": "description",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Program Lead Contact Name",
-		"column": "contact",
+	{ "column": "contact",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Lead Contact E-mail Address",
-		"column": "contact_email",
+	{ "column": "contact_email",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Lead Contact Title/Role",
-		"column": "contact_title",
+	{ "column": "contact_title",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Lead Contact Department/Division/Office",
-		"column": "contact_department",
+	{ "column": "contact_department",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Program Lead Agency",
-		"column": "agency",
+	{ "column": "agency",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Agency Partner(s)",
-		"column": "partners",
+	{ "column": "partners",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Status-New SHMP",
-		"column": "status_new_shmp",
+	{ "column": "status_new_shmp",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-Carryover SHMP",
-		"column": "status_carryover_shmp",
+	{ "column": "status_carryover_shmp",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-In Progress",
-		"column": "status_in_progess",
+	{ "column": "status_in_progess",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-On-going",
-		"column": "status_on_going",
+	{ "column": "status_on_going",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-Unchanged",
-		"column": "status_unchanged",
+	{ "column": "status_unchanged",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-Completed",
-		"column": "status_completed",
+	{ "column": "status_completed",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Status-Discontinued",
-		"column": "status_discontinued",
+	{ "column": "status_discontinued",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Administered-Statewide",
-		"column": "admin_statewide",
+	{ "column": "admin_statewide",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Administered-Regional",
-		"column": "admin_regional",
+	{ "column": "admin_regional",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Administered-County",
-		"column": "admin_county",
+	{ "column": "admin_county",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Administered-Local",
-		"column": "admin_local",
+	{ "column": "admin_local",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "FileType-shp",
-		"column": "file_type_shp",
+	{ "column": "file_type_shp",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "FileType-lat/long .csv / excel",
-		"column": "file_type_lat_lon",
+	{ "column": "file_type_lat_lon",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "FileType-geo/address .csv / excel",
-		"column": "file_type_address",
+	{ "column": "file_type_address",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "FileType-not tracked",
-		"column": "file_type_not_tracked",
+	{ "column": "file_type_not_tracked",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Budget provided to run the Program",
-		"column": "budget_provided",
+	{ "column": "budget_provided",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Primary Source Funding the Program",
-		"column": "primary_funding",
+	{ "column": "primary_funding",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Secondary Source Funding the Program",
-		"column": "secondary_funding",
+	{ "column": "secondary_funding",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Approximate # of Staff Assigned FTE",
-		"column": "num_staff",
-		"type": "INT",
-		"convert": toInt },
+	{ "column": "num_staff",
+		"type": "VARCHAR",
+		"convert": toString },
 
-	{ "csvName": "Approximate # Contract Staff (if applicable)",
-		"column": "num_contract_staff",
-		"type": "INT",
-		"convert": toInt },
+	{ "column": "num_contract_staff",
+		"type": "VARCHAR",
+		"convert": toString },
 
-	{ "csvName": "Associated Hazards",
-		"column": "hazards",
+	{ "column": "hazards",
 		"type": "VARCHAR[]",
 		"convert": mapHazards },
 
-	{ "csvName": "Capability-Mitigation",
-		"column": "capability_mitigation",
+	{ "column": "capability_mitigation",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Preparedness",
-		"column": "capability_preparedness",
+	{ "column": "capability_preparedness",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Response",
-		"column": "capability_response",
+	{ "column": "capability_response",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Recovery",
-		"column": "capability_recovery",
+	{ "column": "capability_recovery",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Climate Related",
-		"column": "capability_climate",
+	{ "column": "capability_climate",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Critical Facilities",
-		"column": "capability_critical",
+	{ "column": "capability_critical",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Historic Preservation",
-		"column": "capability_preservation",
+	{ "column": "capability_preservation",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Environmental Protection",
-		"column": "capability_environmental",
+	{ "column": "capability_environmental",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Risk Assessment",
-		"column": "capability_risk_assessment",
+	{ "column": "capability_risk_assessment",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Administer Funding",
-		"column": "capability_administer_funding",
+	{ "column": "capability_administer_funding",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Funding Amount",
-		"column": "capability_funding_amount",
+	{ "column": "capability_funding_amount",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Technical Support",
-		"column": "capability_tech_support",
+	{ "column": "capability_tech_support",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Construction",
-		"column": "capability_construction",
+	{ "column": "capability_construction",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Education/ Outreach",
-		"column": "capability_outreach",
+	{ "column": "capability_outreach",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Project Management",
-		"column": "capability_project_management",
+	{ "column": "capability_project_management",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Research",
-		"column": "capability_research",
+	{ "column": "capability_research",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Policy Framework",
-		"column": "capability_policy",
+	{ "column": "capability_policy",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Capability-Regulatory",
-		"column": "capability_regulatory",
+	{ "column": "capability_regulatory",
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "csvName": "Related Regulation or Policy",
-		"column": "related_policy",
+	{ "column": "related_policy",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Program WebURL",
-		"column": "url",
+	{ "column": "url",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Goal",
-		"column": "goal",
+	{ "column": "goal",
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "csvName": "Objective",
-		"column": "objective",
+	{ "column": "objective",
 		"type": "VARCHAR",
-		"convert": toString }
+		"convert": toString },
+
+	{ "column": "priority",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_1",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_2",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_3",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_4",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_5",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_6",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_7",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "priority_total",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "benefit_cost_analysis",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "engineering_required",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "engineering_complete",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "type",
+		"type": "VARCHAR",
+		"convert": toType },
+
+	{ "column": "municipality",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "county",
+		"type": "VARCHAR",
+		"convert": toString },
+
+	{ "column": "capability_resiliencyy",
+		"type": "BOOLEAN",
+		"convert": toBoolean }
 ]
 
 def createTable(cursor):
@@ -399,7 +407,7 @@ def deallocateStatement(cursor):
 
 def loadCsvData(cursor, inputUrl):
 	if not prepareStatement(cursor):
-		return
+		return False
 
 	inserts = ",".join(["%s" for meta in META])
 	sql = """
@@ -409,24 +417,33 @@ def loadCsvData(cursor, inputUrl):
 	print 'LOADING CSV DATA "{}"...'.format(inputUrl)
 
 	firstLineRead = False
-	try:
-		with open(inputUrl, 'rb') as data:
-			reader = csv.reader(data, delimiter=',')
-			for row in reader:
-				if firstLineRead:
-					row = map(convert, META, row)
-					cursor.execute(sql, row)
-				else:
-					firstLineRead = True
-				# end if
-			# end for
-		# end with
-	except Exception as e:
-		print e
+
+	rows = []
+	CONVERT_ERRORS = 0
+
+	with open(inputUrl, 'rb') as data:
+		reader = csv.reader(data, delimiter=',')
+		for row in reader:
+			if firstLineRead:
+				try:
+					rows.append(map(convert, META, row))
+				except:
+					CONVERT_ERRORS += 1
+			else:
+				firstLineRead = True
+			# end if
+		# end for
+	# end with
+
+	if CONVERT_ERRORS > 0:
+		print "CSV DATA WAS NOT LOADED.\n"
 	else:
+		for row in rows:
+			cursor.execute(sql, row)
 		print "CSV DATA LOADED.\n"
 
 	deallocateStatement(cursor)
+	return CONVERT_ERRORS == 0
 # END loadCsvData
 
 parser = argparse.ArgumentParser(description='Capabilities CSV table loader.')
@@ -457,11 +474,11 @@ def main():
 		if os.path.isdir(inputUrl):
 			files = [os.path.join(inputUrl, file) for file in os.listdir(inputUrl) if os.path.isfile(os.path.join(inputUrl, file))]
 			for file in files:
-				loadCsvData(cursor, file)
-				connection.commit()
+				if loadCsvData(cursor, file):
+					connection.commit()
 		elif os.path.isfile(inputUrl):
-			loadCsvData(cursor, inputUrl)
-			connection.commit()
+			if loadCsvData(cursor, inputUrl):
+				connection.commit()
 
 	cursor.close()
 	connection.close()

@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import HighRiskMunicipalities from "pages/auth/RiskIndex/components/HighRiskMunicipalities"
+import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
 
 class TestPage extends React.Component {
 
@@ -20,7 +20,29 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HighRiskMunicipalities />
+                <CapabilitiesTable />
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesTable
+                  columns={ ["name", "agency", "goal", "status", "admin"] }
+                  title="Measures"
+                  type="measure"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesTable
+                  columns={ ["name", "agency", "goal", "status", "admin"] }
+                  title="Actions"
+                  type="action"/>
               </ElementBox>
             </div>
           </div>

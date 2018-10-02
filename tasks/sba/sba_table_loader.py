@@ -1,13 +1,11 @@
-import argparse, csv, io, os, psycopg2
+import argparse, csv, io, psycopg2
 
 from config import host
 
-HOME_DIR = os.environ['HOME']
-
-UNCONVERTED_BUSINESS_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_business_FY01-17.csv'
+UNCONVERTED_BUSINESS_FILE = 'sba_disaster_loan_data_business_FY01-17.csv'
 BUSINESS_FILE = 'sba_business_FY01-17.csv'
 
-UNCONVERTED_HOME_FILE = HOME_DIR + '/Downloads/sba_disaster_loan_data_home_FY01-17.csv'
+UNCONVERTED_HOME_FILE = 'sba_disaster_loan_data_home_FY01-17.csv'
 HOME_FILE = 'sba_home_FY01-17.csv'
 
 def toFloat(string):

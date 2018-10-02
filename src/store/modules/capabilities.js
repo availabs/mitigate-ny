@@ -63,11 +63,29 @@ export const ATTRIBUTES = [
 	"url",
 	"goal",
 	"objective",
+
+	"priority",
+	"priority_1",
+	"priority_2",
+	"priority_3",
+	"priority_4",
+	"priority_5",
+	"priority_6",
+	"priority_7",
+	"priority_total",
+	"benefit_cost_analysis",
+	"engineering_required",
+	"engineering_complete",
+	"type",
+	"municipality",
+	"county",
+	"capability_resiliency",
+
 	"id",
 	"created_at",
 	"updated_at"
 ]
-export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, 51);
+export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, ATTRIBUTES.length - 3);
 export const META_DATA = {
 	"name": { defaultValue: null, label: "Name" },
 	"description": { defaultValue: null, label: "Description" },
@@ -119,7 +137,10 @@ export const META_DATA = {
 	"related_policy": { defaultValue: null, label: "Related Policy" },
 	"url": { defaultValue: null, label: "Project URL" },
 	"goal": { defaultValue: null, label: "Goal" },
-	"objective": { defaultValue: null, label: "Objective" }
+	"objective": { defaultValue: null, label: "Objective" },
+	
+	"status": { defaultValue: [], label: "Status" },
+	"admin": { defaultValue: [], label: "Admin" }
 }
 export const getDefaultValue = attribute =>
 	META_DATA[attribute].defaultValue;
