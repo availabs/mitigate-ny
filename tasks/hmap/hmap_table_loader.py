@@ -2,9 +2,7 @@ import argparse, csv, os, psycopg2
 
 from config import host
 
-HOME_DIR = os.environ['HOME']
-
-HMAP_FILE = HOME_DIR + "/Downloads/HazardMitigationAssistanceProjects.csv"
+HMAP_FILE = "./HazardMitigationAssistanceProjects.csv"
 
 def toFloat(string):
 	try:

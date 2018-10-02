@@ -92,60 +92,42 @@ class CapabilitiesTable extends React.Component {
 
 	processData() {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
-			attributes = ["name", "agency", "description", "budget_provided", "goal", "primary_funding"],
+			columns = this.props.columns,
 			data = this.props.capabilities
 				.filter(capability => !this.props.capability || this.props.capability.split(",").reduce((a, c) => a || capability[c.trim()], false))
+				.filter(({ type }) => !this.props.type || (type && (type === this.props.type)))
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
 				.filter(({ hazards }) => !this.props.hazard || (hazards && (hazards.includes(this.props.hazard))))
 				.map(capability => {
 					const row = {};
-					attributes.forEach(att => row[getLabel(att)] = capability[att]);
-					row.budget = 0;
-					if (capability.budget_provided) {
-						const m = budgetRegex.exec(capability.budget_provided);
-						if (m) {
-							const amount = m[1],
-								mult = m[2];
-							if (amount && mult) {
-								switch (mult.toLowerCase()) {
-									case "k":
-										row.budget = +amount * 1000;
-										break;
-									case "m":
-										row.budget = +amount * 1000000;
-										break;
-									case "b":
-										row.budget = +amount * 1000000000;
-										break;
-									case "t":
-										row.budget = +amount * 1000000000000;
-										break;
-								}
-							}
-							else if (amount) {
-								row.budget = +amount;
-							}
+					columns.forEach(att => {
+						switch (att) {
+							case "status":
+								row.Status = [
+									"status_new_shmp",
+									"status_carryover_shmp",
+									"status_in_progess",
+									"status_on_going",
+									"status_unchanged",
+									"status_completed",
+									"status_discontinued"
+								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
+								break;
+							case "admin":
+								row.Admin = [
+									"admin_statewide",
+									"admin_regional",
+									"admin_county",
+									"admin_local"
+								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
+								break;
+							default:
+								row[getLabel(att)] = capability[att]
 						}
-					}
-					row.status = [
-						"status_new_shmp",
-						"status_carryover_shmp",
-						"status_in_progess",
-						"status_on_going",
-						"status_unchanged",
-						"status_completed",
-						"status_discontinued"
-					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
-					row.admin = [
-						"admin_statewide",
-						"admin_regional",
-						"admin_county",
-						"admin_local"
-					].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
+					});
 					return row;
-				})
-				.sort((a, b) => b.budget - a.budget);
-		return { data, columns: [...attributes.map(att => getLabel(att)), "status", "admin"] };
+				});
+		return { data, columns: columns.map(c => getLabel(c)) };
 	}
 
 	render() {
@@ -162,7 +144,9 @@ CapabilitiesTable.defaultProps = {
 	hazard: null,
 	capability: null,
 	capabilities: [],
-	title: "Capabilities"
+	title: "Capabilities",
+	columns: ["name", "agency", "description", "budget_provided", "goal", "primary_funding", "status", "admin"],
+	type: null
 }
 
 const mapStateToProps = state => ({
