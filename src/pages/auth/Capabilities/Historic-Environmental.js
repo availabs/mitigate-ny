@@ -17,12 +17,16 @@ class HistoricEnvironmental extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-historic_evironmental_preservation`} />
-               <CapabilitiesTable title='Historic and Environmental Preservation Capabilities' capability={'capability_preservation' , 'capability_environmental'}/>
+               
             </div>
 
          
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Historic and Environmental Preservation Capabilities' 
+         type="program"
+         capability={'capability_preservation' , 'capability_environmental'}/>
       </div>
     )
   }

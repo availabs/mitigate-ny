@@ -17,12 +17,15 @@ class Construction extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-construction`} />
-               <CapabilitiesTable title='Mitigation Construction Capabilities' capability={'capability_construction'}/>
+              
             </div>
-
          
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Mitigation Construction Capabilities' 
+         type="program"
+         capability={'capability_construction'}/>
       </div>
     )
   }

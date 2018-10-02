@@ -23,6 +23,10 @@ class Research extends Component {
          
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Hazard Mitigation Research Capabilities' 
+         type="program"
+         capability={'capability_research'}/>
       </div>
     )
   }

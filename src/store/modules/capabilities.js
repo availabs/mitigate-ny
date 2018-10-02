@@ -134,13 +134,33 @@ export const META_DATA = {
 	"capability_research": { defaultValue: false, label: "Research" },
 	"capability_policy": { defaultValue: false, label: "Policy Framework" },
 	"capability_regulatory": { defaultValue: false, label: "Regulatory" },
+	"capability_resiliency": { defaultValue: null, label: "Resiliency" },
 	"related_policy": { defaultValue: null, label: "Related Policy" },
 	"url": { defaultValue: null, label: "Project URL" },
 	"goal": { defaultValue: null, label: "Goal" },
 	"objective": { defaultValue: null, label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
-	"admin": { defaultValue: [], label: "Admin" }
+	"admin": { defaultValue: [], label: "Admin" },
+	"priority": { defaultValue: null, label: "Priority"},
+	"type": { defaultValue: null, label: "Type"},
+
+	
+	"priority_1": { defaultValue: null, label: "Priority 1" }, 
+	"priority_2": { defaultValue: null, label: "Priority 2" },
+	"priority_3": { defaultValue: null, label: "Priority 3" },
+	"priority_4": { defaultValue: null, label: "Priority 4" },
+	"priority_5": { defaultValue: null, label: "Priority 5" },
+	"priority_6": { defaultValue: null, label: "Priority 6" },
+	"priority_7": { defaultValue: null, label: "Priority 7" },
+	"priority_total": { defaultValue: null, label: "Priority_Total" },
+	"benefit_cost_analysis": { defaultValue: null, label: "BCA" },
+	"engineering_required": { defaultValue: null, label: "Engineering Required" },
+	"engineering_complete": { defaultValue: null, label: "Engineering Completed" },
+	
+	"municipality": {defaultValue: null, label: "Municipality" },
+	"county": { defaultValue: null, label: "County" },
+	
 }
 export const getDefaultValue = attribute =>
 	META_DATA[attribute].defaultValue;

@@ -23,6 +23,10 @@ class PlanningRegulatory extends Component {
          
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Planning and Regulatory Capabilities' 
+         type="program"
+         capability={'capability_policy' , 'capability_regulatory'}/> 
       </div>
     )
   }

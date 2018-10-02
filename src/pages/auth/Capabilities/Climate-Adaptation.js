@@ -21,12 +21,16 @@ class ClimateAdaptation extends Component {
 
             <div className="property-section">
               <Content content_id={`section2-integration_climate_adaptation`} />
-               <CapabilitiesTable title='Climate Adaptation Capabilities' capability={'capability_climate'}/>
+               
             </div>
 
          
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Climate Adaptation Capabilities' 
+         type="program"
+         capability={'capability_climate'}/>
       </div>
     )
   }
