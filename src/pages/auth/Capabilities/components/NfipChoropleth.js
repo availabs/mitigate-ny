@@ -258,7 +258,7 @@ CountyPlanChoropleth.defaultProps = {
 	height: 800,
 	geoid: '36',
 	geoLevel: 'tracts',
-	attribute: 'num_losses'
+	attribute: 'total_loss'
 }
 
 const mapStateToProps = state => ({
