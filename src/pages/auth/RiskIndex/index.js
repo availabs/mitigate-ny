@@ -4,6 +4,7 @@ import Element from 'components/light-admin/containers/Element'
 import HazardList from './components/HazardListNew'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
+import Submenus from './submenus'
 
 class RiskIndex extends Component {
 
@@ -54,6 +55,7 @@ export default [
     breadcrumbs: [
       {name: 'hazard', path: '/hazards/'}
     ],
+    subMenus: Submenus,
     component: connect(mapStateToProps, mapDispatchToProps)(RiskIndex),
   },
   {

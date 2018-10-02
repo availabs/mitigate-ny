@@ -64,7 +64,7 @@ class HazardList extends Component {
           <HazardOverview 
             hazard={ hazard }
             key={i} 
-            title={this.props.riskIndex.meta[hazard].name} 
+            title={this.props.riskIndex.meta[hazard].name + ' Occurences By Year'} 
             value={this.props.riskIndex[geoid][hazard].value || 'N/A'}
             score={this.props.riskIndex[geoid][hazard].score || 'N/A'}
             sheldus={sheldus}

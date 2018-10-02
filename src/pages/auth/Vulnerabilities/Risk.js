@@ -10,12 +10,16 @@ import { getHazardDetail } from 'store/modules/riskIndex';
 
 import Element from 'components/light-admin/containers/Element'
 
-import GeographyScoreTable from './components/GeographyScoreTable'
-import GeographyScoreBarChart from './components/GeographyScoreBarChart'
-import HazardEventsMapController from "./components/HazardEventsMapController"
+import GeographyScoreTable from '../RiskIndex/components/GeographyScoreTable'
+import GeographyScoreBarChart from '../RiskIndex/components/GeographyScoreBarChart'
+import HazardEventsMapController from "../RiskIndex/components/HazardEventsMapController"
 import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
+import Submenus from './risk-submenus'
+
+
+
 
 import {
   getColorScale
@@ -24,7 +28,7 @@ import {
 import {
   EARLIEST_YEAR,
   LATEST_YEAR
-} from "./components/yearsOfSevereWeatherData";
+} from "../RiskIndex/components/yearsOfSevereWeatherData";
 
 class Geography extends Component {
   constructor(props) {
@@ -121,15 +125,7 @@ class Geography extends Component {
             </div>
           </div>
 
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <HazardList />
-              </ElementBox>
-            </div>
-          </div>
-
-            
+           
            <div className='property-single'>
             <div className='property-info-w'>
               <div className="property-section">
@@ -196,6 +192,7 @@ export default [
     breadcrumbs: [
       {param: 'geoid', path: '/risk/'}
     ],
+    subMenus: Submenus,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
   }

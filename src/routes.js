@@ -6,8 +6,8 @@ import Landing from './pages/Landing'
 // -- Private Routes
 import RiskIndex from './pages/auth/RiskIndex'
 import Hazard from './pages/auth/RiskIndex/Hazard'
-import Geography from './pages/auth/RiskIndex/Geography'
-import Vulnerabilities from "./pages/auth/Vulnerabilities"
+import Risk from './pages/auth/Vulnerabilities/Risk'
+import Vulnerabilities from "./pages/auth/Vulnerabilities/Vulnerabilities"
 import CMS from "./pages/auth/cms"
 import NewContentPage from "./pages/auth/cms/NewContentPage"
 import Plan from "pages/auth/SHMP"
@@ -31,7 +31,7 @@ const routes = [
   Landing,
   ...RiskIndex,
   ...Hazard,
-  ...Geography,
+  ...Risk,
   ...Vulnerabilities,
   ...CMS,
   ...NewContentPage,

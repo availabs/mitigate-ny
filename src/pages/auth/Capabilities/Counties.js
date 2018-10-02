@@ -14,6 +14,14 @@ class Local extends Component {
           <div className="property-info-main">
 
             <div className="property-section">
+              <Content content_id={` capabilities-lhmp_overview`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-implementation`} />
+            </div>
+           
+            <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_narrative`} />
               <CountyPlanChoropleth />
             </div>
@@ -29,14 +37,6 @@ class Local extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_map`} />
             </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-implementation`} />
-            </div>
-            
-
-            
-            
           </div>
          </div>
       </div>
