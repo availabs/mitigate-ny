@@ -129,14 +129,11 @@ const mapDispatchToProps = {
 
 export default [
   {
-    path: '/riskindex',
+    path: '/risk/riskindex',
     name: 'Risk',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    breadcrumbs: [
-      {param: 'geoid', path: '/riskindex/'}
-    ],
     subMenus: Submenus,
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(riskindexpage))
   },

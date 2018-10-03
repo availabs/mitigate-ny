@@ -1,5 +1,6 @@
 export default [
 [
+       {name: 'Hazards List', path: '/hazards'},
        {name: 'Avalanche', path: '/hazards/avalanche'},
        {name: 'Coastal Erosion', path: '/hazards/coastal'},
        {name: 'Coldwave', path: '/hazards/coldwave'},

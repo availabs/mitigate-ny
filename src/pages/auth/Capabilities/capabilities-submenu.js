@@ -1,7 +1,7 @@
 export default [
 [
+       {name: 'NYS Capabilities', path: '/capabilities'},
        {name: 'Agencies', path: '/capabilities/agencies'},
-       {name: 'Local', path: '/capabilities/local'},
        {name: 'Resiliency', path: '/capabilities/resiliency'},
        {name: 'RiskAssessment', path: '/capabilities/riskassessment'},
        {name: 'TechSupport', path: '/capabilities/techsupport'},

@@ -227,7 +227,7 @@ export default [
   {
     icon: 'icon-map',
     path: '/capabilities',
-    name: 'Capabilities',
+    name: 'NYS Capabilities',
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
