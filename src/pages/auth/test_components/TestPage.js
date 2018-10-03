@@ -20,7 +20,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable filterColumns={ ["agency", "goal"] }/>
+                <CapabilitiesTable />
               </ElementBox>
             </div>
           </div>
@@ -29,24 +29,14 @@ class TestPage extends React.Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <CapabilitiesTable
-                  columns={ ["name", "goal", "status", "admin"] }
+                  columns={ ["name", "description", "goal"] }
                   filterColumns={ ["goal"] }
+                  expandColumns={ ["description"] }
                   title="Measures"
                   type="measure"/>
               </ElementBox>
             </div>
           </div>
-
-          {/*<div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CapabilitiesTable
-                  columns={ ["name", "agency", "goal", "status", "admin"] }
-                  title="Actions"
-                  type="action"/>
-              </ElementBox>
-            </div>
-          </div>*/}
 
         </Element>
       )

@@ -127,7 +127,11 @@ class CapabilitiesTable extends React.Component {
 					});
 					return row;
 				});
-		return { data, columns: columns.map(c => getLabel(c)) };
+		return {
+			data,
+			columns: columns.filter(c => !this.props.expandColumns.includes(c))
+									.map(c => getLabel(c))
+		};
 	}
 
 	render() {
@@ -136,7 +140,8 @@ class CapabilitiesTable extends React.Component {
 				title={ this.props.title }
 				filterKey="Name"
 				pageSize={ 6 }
-				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }/>
+				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }
+				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }/>
 		)
 	}
 }
@@ -149,7 +154,8 @@ CapabilitiesTable.defaultProps = {
 	title: "Capabilities",
 	columns: ["name", "agency", "description", "budget_provided", "goal", "primary_funding", "status", "admin"],
 	type: null,
-	filterColumns: []
+	filterColumns: [],
+	expandColumns: []
 }
 
 const mapStateToProps = state => ({
