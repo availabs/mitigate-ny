@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 
 class Strategies extends Component {
   render () {
@@ -119,10 +120,18 @@ class Strategies extends Component {
 
             <div className="property-section">
               <Content content_id={`strategies-actions_table`} />
+              <CapabilitiesTable
+                  columns={ ["name" , "description" , "agency" , "hazards" , "goal" , "status" , "priority" , "benefit_cost_analysis"] }
+                  title="Mitigation Actions"
+                  type="action"/>
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-mitigation_strategies`} />
+              <CapabilitiesTable
+                  columns={ ["name" , "description" , "hazards" , "goal"] }
+                  title="Mitigation Measures"
+                  type="measure"/>
             </div>
 
             <div className="property-section">

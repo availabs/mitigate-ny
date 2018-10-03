@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
-import subMenus from "./capabilities-submenu"
+import Submenus from './risk-submenus'
+import NfipTable from 'pages/auth/Capabilities/components/NfipTable'
+import NfipChoropleth from 'pages/auth/Capabilities/components/NfipChoropleth'
 
 
-class ClimateAdaptation extends Component {
+class nfip extends Component {
   render () {
    return (
       <div className='property-single'>
@@ -16,21 +18,27 @@ class ClimateAdaptation extends Component {
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
         
             <div className="property-section">
-              <Content content_id={`capabilities-climate_related`} />
+              <Content content_id={`nfip`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`section2-integration_climate_adaptation`} />
-               
+               <NfipChoropleth/>
             </div>
 
-         
+            <div className="property-section">
+               <NfipTable/>
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`nfip-rlstrategy`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`nfip-acquisitions_process`} />
+            </div>
+
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Climate Adaptation Capabilities' 
-         type="program"
-         capability={'capability_climate'}/>
       </div>
     )
   }
@@ -41,12 +49,12 @@ class ClimateAdaptation extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/capabilities/climate',
-    name: 'ClimateAdaptation',
+    path: '/risk/nfip',
+    name: 'nfip',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    subMenus: subMenus,
-    component: connect(() => {}, {})(ClimateAdaptation),
+    subMenus: Submenus,
+    component: connect(() => {}, {})(nfip),
   },
 ]

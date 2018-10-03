@@ -18,11 +18,15 @@ class ProjectManagement extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-project_management`} />
-               <CapabilitiesTable title='Project Management Capabilities' capability={'capability_project_management'}/>
+               
             </div>
 
           </div>
          </div>
+         <CapabilitiesTable 
+         title='Project Management Capabilities' 
+         type="program"
+         capability={'capability_project_management'}/>
       </div>
     )
   }

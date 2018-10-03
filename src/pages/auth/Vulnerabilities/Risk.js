@@ -17,6 +17,7 @@ import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
+import nfip from './nfip'
 
 
 
@@ -188,12 +189,16 @@ export default [
   {
     path: '/risk',
     name: 'Risk',
+    exact: true,
     mainNav: true,
+    menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {param: 'geoid', path: '/risk/'}
     ],
     subMenus: Submenus,
-    menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
-  }
+  },
+
+  ...nfip,
+
 ]
