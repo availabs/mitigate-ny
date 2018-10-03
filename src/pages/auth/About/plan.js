@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
+import Element from 'components/light-admin/containers/Element'
+import ElementBox from 'components/light-admin/containers/ElementBox'
+import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import Submenus from './about-submenus'
 
-
-class Landing extends Component {
+class ExecutiveSummary extends Component {
   render () {
    return (
-      <div className='property-single'>
+  	<div className='property-single'>
         <div className='property-info-w'>
           <div className="property-info-main">
             
@@ -19,22 +22,23 @@ class Landing extends Component {
            
         </div>
       </div>
+
+
     )
   }
 }
 
 
+
 export default [
   {
     icon: 'icon-map',
-    path: '/plan',
+    path: '/about/plan',
     name: 'Executive Summary',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    breadcrumbs: [
-      {name: 'SHMP', path: '/plan'}
-    ],
-    component: connect(() => {}, {})(Landing),
+    subMenus: Submenus,
+    component: connect(() => {}, {})(ExecutiveSummary),
   }
 ]

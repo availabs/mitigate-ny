@@ -10,14 +10,11 @@ import { getHazardDetail } from 'store/modules/riskIndex';
 
 import Element from 'components/light-admin/containers/Element'
 
-import GeographyScoreTable from '../RiskIndex/components/GeographyScoreTable'
-import GeographyScoreBarChart from '../RiskIndex/components/GeographyScoreBarChart'
-import HazardEventsMapController from "../RiskIndex/components/HazardEventsMapController"
-import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
+import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
-import nfip from './nfip'
+
 
 
 
@@ -31,142 +28,87 @@ import {
   LATEST_YEAR
 } from "../RiskIndex/components/yearsOfSevereWeatherData";
 
-class Geography extends Component {
-  constructor(props) {
-    super(props);
-
-    const { params } = createMatchSelector({ path: '/risk/:geoid' })(props) || { params: { geoid: '36' } },
-      { geoid } = params,
-      geoLevel = (geoid.length === 2) ? 'counties' : 'cousubs';
-
-    this.state = {
-      geoLevel,
-      geoid,
-      dataType: 'severeWeather',
-      year: LATEST_YEAR,
-      colorScale: getColorScale([1, 2])
-    }
-  }
-
-  componentWillMount() {
-    const { geoid, geoLevel } = this.state;
-    if (!this.props.riskIndex[geoid] || !this.props.riskIndex[geoid][geoLevel]) {
-      this.props.getHazardDetail(geoid)
-    } 
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { params } = createMatchSelector({ path: '/risk/:geoid' })(newProps) || { params: { geoid: '36' } },
-      { geoid } = params;
-    let geoLevel;
-    switch (geoid.length) {
-      case 5:
-        geoLevel = 'cousubs';
-        break;
-      default:
-        geoLevel = 'counties';
-        break;
-    }
-    this.setState({ geoid, geoLevel });
-  }
-
-  componentDidUpdate(oldProps, oldState) {
-    if (oldState.geoid !== this.state.geoid) {
-      this.fetchFalcorDeps();
-    }
-  }
-
-  fetchFalcorDeps() {
-    const { geoid, geoLevel, dataType } = this.state;
-    return this.props.falcor.get(
-      ['geo', geoid, geoLevel],
-      ['riskIndex', 'hazards']
-    ).then(data => {
-      const geographies = data.json.geo[geoid][geoLevel],
-        hazards = data.json.riskIndex.hazards,
-        requests = [];
-      this.setState({ colorScale: getColorScale(hazards) });
-      for (let i = LATEST_YEAR; i >= EARLIEST_YEAR; i -= 5) {
-        requests.push([dataType, geographies, hazards, { from: Math.max(i - 4, EARLIEST_YEAR), to: i }, ['num_events','property_damage', 'crop_damage', 'injuries', 'fatalities']])
-      }
-      return this.props.falcor.get(
-        ['riskIndex', 'meta', hazards, ['id', 'name']],
-        ['geo', geographies, ['name']],
-        ['riskIndex', geographies, hazards, ['score', 'value']],
-        ['riskIndex', 'meta', hazards, ['id', 'name']]
-      )
-      .then(data => requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve()))
-    })
-  }
-
-  setGeoid(geoid) {
-    let url = "/risk";
-    switch (geoid.toString().length) {
-      case 5:
-        url = `/risk/${ geoid }`
-        break;
-    }
-    this.props.push(url);
-  }
-
+class riskindexpage extends Component {
   render () {
     return (
       	
         <Element>
-          <h6 className="element-header">New York Statewide Risk</h6>
-          <div className='property-single'> 
+        <h6 className="element-header">New York Statewide Vulnerabilities</h6>
+        <div className='property-single'>
             <div className='property-info-w'>
-
-
-                <div className="property-section">
-                  <Content content_id={`risk-hazards`} />
-                </div>
-
-
-            </div>
-          </div>
-
-           
-           <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-county-loss`} />
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-riskindex_vulnerabilities`} />
               </div>
             </div>
           </div>
 
-          <div className='row'>
-            <div className='col-lg-12'>
-                <GeographyScoreTable { ...this.state }
-                  setGeoid={ this.setGeoid.bind(this) }/>
+
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Social Vulnerability Index (SOVI) </h5>
+              </div>
+              <HazardMap  
+                height={ 600 }
+                hazard={'sovi'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
             </div>
           </div>
+        </div>
 
-          <div className='property-single'>
+        <div className='property-single'>
             <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-loss-timeline`} />
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-bric`} />
               </div>
             </div>
           </div>
 
-          <div className='row'>
-            <div className='col-lg-12'>
-                <GeographyScoreBarChart
-                  { ...this.state }/>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
+              </div>
+              <HazardMap  
+                height={ 600 }
+                hazard={'bric'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
             </div>
           </div>
+        </div>
 
-          <div className='property-single'>
+        <div className='property-single'>
             <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-events-map`} />
+              <div className="property-section" style={{paddingTop:30}}>
+                <Content content_id={`vulnerabilities-built_environment`} />
               </div>
             </div>
           </div>
 
-          <HazardEventsMapController
-            { ...this.state }/>
+        <div className='property-info-w'>
+          <div className="property-info-main">
+            <div className="property-section" style={{background: '#fff'}}>
+              <div style={{paddingLeft:15}}>
+                  <h5> Risk Index Built Environment </h5>
+              </div>
+              <HazardMap  
+                height={ 600 }
+                hazard={'builtenv'}
+                threeD={false}
+                highRisk={0.0}
+                geoid='36'
+              />
+            </div>
+          </div>
+        </div>
 
       	</Element>
     )
@@ -190,13 +132,13 @@ export default [
     path: '/riskindex',
     name: 'Risk',
     exact: true,
-    mainNav: true,
+    mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {param: 'geoid', path: '/riskindex/'}
     ],
     subMenus: Submenus,
-    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
+    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(riskindexpage))
   },
 
 

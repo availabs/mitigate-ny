@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
+import Submenus from './strategies-submenus'
+import Actions from './actions'
+import Measures from './measures'
+import Funding from './funding'
 
 class Strategies extends Component {
   render () {
@@ -114,36 +118,7 @@ class Strategies extends Component {
               <Content content_id={`capabilities-2019_goals_objectives_5`} />
             </div>
           </div>
-        </div>
-        <div className='property-info-w'>
-          <div className="property-info-main">
-
-            <div className="property-section">
-              <Content content_id={`strategies-actions_table`} />
-              <CapabilitiesTable
-                  columns={ ["name" , "description" , "agency" , "hazards" , "goal" , "status" , "priority" , "benefit_cost_analysis"] }
-                  title="Mitigation Actions"
-                  type="action"/>
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-mitigation_strategies`} />
-              <CapabilitiesTable
-                  columns={ ["name" , "description" , "hazards" , "goal"] }
-                  title="Mitigation Measures"
-                  type="measure"/>
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-agency_administered_funding_sources`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`capabilities-local_funding_sources`} />
-            </div>
-          </div>
-         </div>
-          
+        </div>          
       </div>
     )
   }
@@ -157,10 +132,16 @@ export default [
     name: 'Strategies',
     exact: true,
     mainNav: true,
+    subMenus: Submenus,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
       {name: 'Strategies', path: '/strategies'}
     ],
     component: connect(() => {}, {})(Strategies),
-  }
+  },
+
+...Actions,
+...Measures,
+...Funding,
+
 ]

@@ -5,8 +5,9 @@ import Content from 'components/cms/Content'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import Submenus from './about-submenus'
 
-class Landing extends Component {
+class PlanningProcess extends Component {
   render () {
    return (
       <div className='property-single'>
@@ -95,11 +96,11 @@ class Landing extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/process',
-    name: 'Planning Process',
+    path: '/about/process',
+    name: 'The Planning Process',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: connect(() => {}, {})(Landing),
+    component: connect(() => {}, {})(PlanningProcess),
   }
 ]
