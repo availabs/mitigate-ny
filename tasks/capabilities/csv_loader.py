@@ -35,15 +35,14 @@ def mapHazards(string):
 		string = string.strip().lower()
 		if len(string) is 0:
 			return None
-		if (string == "all") or string == ("all hazards"):
-			return HAZARDS
+		if (string == "all") or (string == "all hazards"):
+			return "|".join(HAZARDS)
 		hazards = [s.strip() for s in string.split(",")]
 		if len(hazards) == 1:
 			hazards = [s.strip() for s in string.split("|")]
 		if not reduce(lambda a, c: a and (c in HAZARDS), hazards, True):
-			print string
 			raise HazardException(string)
-		return ",".join(hazards)
+		return "|".join(hazards)
 	except Exception as e:
 		print "mapHazards ERROR:", string
 		raise e

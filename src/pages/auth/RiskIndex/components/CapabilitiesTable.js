@@ -14,6 +14,10 @@ import {
   	getLabel
 } from "store/modules/capabilities"
 
+import {
+  getHazardName
+} from 'utils/sheldusUtils'
+
 /*
 	capability_mitigation
 	capability_preparedness
@@ -90,6 +94,15 @@ class CapabilitiesTable extends React.Component {
     	)
 	}
 
+	getHazardName(hazard) {
+  	try {
+    		return this.props.riskIndexGraph.meta[hazard].name;
+  	}
+  	catch (e) {
+    		return getHazardName(hazard);
+  	}
+	}
+
 	processData() {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
 			columns = this.props.columns,
@@ -120,6 +133,10 @@ class CapabilitiesTable extends React.Component {
 									"admin_county",
 									"admin_local"
 								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
+								break;
+							case "hazards":
+								if (!capability.hazards) break;
+								row.Hazards = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
 								break;
 							default:
 								row[getLabel(att)] = capability[att]
