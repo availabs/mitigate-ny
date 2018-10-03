@@ -19,7 +19,7 @@ import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
 import nfip from './nfip'
 
-import riskindex from './riskindex'
+
 
 
 import {
@@ -187,19 +187,18 @@ const mapDispatchToProps = {
 
 export default [
   {
-    path: '/risk',
+    path: '/riskindex',
     name: 'Risk',
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     breadcrumbs: [
-      {param: 'geoid', path: '/risk/'}
+      {param: 'geoid', path: '/riskindex/'}
     ],
     subMenus: Submenus,
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
   },
 
-  ...nfip,
-  ...riskindex
+
 
 ]
