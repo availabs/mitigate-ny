@@ -28,7 +28,7 @@ class Menu extends Component {
   		'submenucolor': 'sub-menu-color-light',
   		'position': 'menu-position-top', 
   		'layout': 'menu-layout-full',
-  		'subemenustyle': 'sub-menu-style-inside'
+  		'subemenustyle': 'sub-menu-style-flyout'
   	}
     let displayOptions = Object.values(defaultOptions).join(' ')
 

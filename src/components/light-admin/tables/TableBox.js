@@ -34,7 +34,7 @@ import Pagination from './Pagination'
       data = this.props.data,
       fc = this.state.filteredColumns;
     for (const c in fc) {
-      data = data.filter(d => fc[c].includes(d[c]))
+      data = data.filter(d => d[c] && fc[c].reduce((a, v) => a || d[c].toString().toLowerCase().includes(v), false))
     }
     if (!filter) return data;
     if (!filterKey.length) {
@@ -52,7 +52,8 @@ import Pagination from './Pagination'
     const values = {};
     this.props.data.forEach(d => {
       if (d[column]) {
-        values[d[column]] = true
+        const split = d[column].split("|").map(s => s.toString().trim().toLowerCase());
+        split.forEach(s => values[s] = true);
       }
     })
     return Object.keys(values).filter(d => d)
@@ -73,7 +74,6 @@ import Pagination from './Pagination'
         filteredColumns[column].push(value)
       }
     }
-console.log("<toggleFilterColumn>",filteredColumns)
     this.setState({ filteredColumns });
   }
 

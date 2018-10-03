@@ -40,7 +40,13 @@ let initialState = {
 		"eiso",
 		"ovs",
 		"gosr",
-		"nycoem"
+		"nycoem",
+		"fema",
+		"usgs",
+		"usace",
+		"nypa",
+		"nysfma",
+		"noaa"
 	]
 }
 

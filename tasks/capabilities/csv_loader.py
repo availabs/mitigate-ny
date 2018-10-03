@@ -35,13 +35,14 @@ def mapHazards(string):
 		string = string.strip().lower()
 		if len(string) is 0:
 			return None
-		if string == "all" or string == "all hazards":
-			return HAZARDS
+		if (string == "all") or (string == "all hazards"):
+			return "|".join(HAZARDS)
 		hazards = [s.strip() for s in string.split(",")]
+		if len(hazards) == 1:
+			hazards = [s.strip() for s in string.split("|")]
 		if not reduce(lambda a, c: a and (c in HAZARDS), hazards, True):
-			print string
 			raise HazardException(string)
-		return hazards
+		return "|".join(hazards)
 	except Exception as e:
 		print "mapHazards ERROR:", string
 		raise e
@@ -81,13 +82,13 @@ class TypeException(Exception):
 
 def toType(string):
 	try:
-		if string is None:
+		if string is None or len(string) is 0:
 			string = 'program'
 		string = string.strip().lower()
 		if not string in TYPES:
 			raise TypeException(string)
 		return string
-	except:
+	except Exception as e:
 		print "toType ERROR:", string
 		raise e
 
@@ -212,7 +213,7 @@ META = [
 		"convert": toString },
 
 	{ "column": "hazards",
-		"type": "VARCHAR[]",
+		"type": "VARCHAR",
 		"convert": mapHazards },
 
 	{ "column": "capability_mitigation",
