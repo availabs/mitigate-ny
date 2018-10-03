@@ -9,7 +9,7 @@ import Pagination from './Pagination'
     this.state = {
       page: 0,
       filter: "",
-      sortKey: props.sortKey
+      filteredColumns: {}
     }
     this.setPage = this.setPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -30,16 +30,53 @@ import Pagination from './Pagination'
   }
   getFilteredData() {
     let filterKey = this.props.filterKey,
-      filter = this.state.filter;
-    if (!filter) return this.props.data;
-    if (!filterKey.length) {
-      filterKey = Object.keys(this.props.data[0])[0];
+      filter = this.state.filter,
+      data = this.props.data,
+      fc = this.state.filteredColumns;
+    for (const c in fc) {
+      data = data.filter(d => fc[c].includes(d[c]))
     }
-    return this.props.data.filter(d => d[filterKey].toString().toLowerCase().includes(filter));
+    if (!filter) return data;
+    if (!filterKey.length) {
+      filterKey = Object.keys(data[0])[0];
+    }
+    return data.filter(d =>
+      d[filterKey] && d[filterKey].toString().toLowerCase().includes(filter)
+    );
   }
   setFilter(e) {
     this.setState({ filter: e.target.value.toLowerCase() });
   }
+
+  getFilterValues(column) {
+    const values = {};
+    this.props.data.forEach(d => {
+      if (d[column]) {
+        values[d[column]] = true
+      }
+    })
+    return Object.keys(values).filter(d => d)
+  }
+  toggleFilterColumn(column, value) {
+    let { filteredColumns } = this.state;
+    if (!(column in filteredColumns)) {
+      filteredColumns[column] = [value];
+    }
+    else {
+      if (filteredColumns[column].includes(value)) {
+        filteredColumns[column] = filteredColumns[column].filter(v => v !== value)
+        if (!filteredColumns[column].length) {
+          delete filteredColumns[column];
+        }
+      }
+      else {
+        filteredColumns[column].push(value)
+      }
+    }
+console.log("<toggleFilterColumn>",filteredColumns)
+    this.setState({ filteredColumns });
+  }
+
   render() {
     const data = this.getFilteredData(),
       paginate = data.length > this.props.pageSize ? (
@@ -54,9 +91,15 @@ import Pagination from './Pagination'
           />
         </div>
     ) : null;
+
+////
     const page = this.state.page,
       size = this.props.pageSize,
       tableData = data.slice(page * size, page * size + size);
+
+    const filterColumns = this.props.filterColumns.map(column =>
+      ({ column, values: this.getFilterValues(column) }))
+
     return (
       <ElementBox title={this.props.title} desc={this.props.desc}>
         { !this.props.showControls ? null :
@@ -82,7 +125,10 @@ import Pagination from './Pagination'
           <DataTable tableData={ tableData }
             columns={ this.props.columns }
             links={ this.props.links }
-            onClick={ this.props.onClick }/>
+            onClick={ this.props.onClick }
+            filterColumns={ filterColumns }
+            toggleFilterColumn={ this.toggleFilterColumn.bind(this) }
+            filteredColumns={ this.state.filteredColumns }/>
         </div>
         { paginate }
       </ElementBox>
@@ -97,7 +143,8 @@ TableBox.defaultProps = {
   links: {},
   filterKey: "",
   onClick: null,
-  showControls: true
+  showControls: true,
+  filterColumns: []
 }
 
 export default TableBox;

@@ -134,7 +134,9 @@ class CapabilitiesTable extends React.Component {
 		return (
 			<TableBox { ...this.processData() }
 				title={ this.props.title }
-				pageSize={ 6 }/>
+				filterKey="Name"
+				pageSize={ 6 }
+				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }/>
 		)
 	}
 }
@@ -146,7 +148,8 @@ CapabilitiesTable.defaultProps = {
 	capabilities: [],
 	title: "Capabilities",
 	columns: ["name", "agency", "description", "budget_provided", "goal", "primary_funding", "status", "admin"],
-	type: null
+	type: null,
+	filterColumns: []
 }
 
 const mapStateToProps = state => ({
