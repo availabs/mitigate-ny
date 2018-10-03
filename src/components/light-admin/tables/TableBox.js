@@ -128,7 +128,8 @@ console.log("<toggleFilterColumn>",filteredColumns)
             onClick={ this.props.onClick }
             filterColumns={ filterColumns }
             toggleFilterColumn={ this.toggleFilterColumn.bind(this) }
-            filteredColumns={ this.state.filteredColumns }/>
+            filteredColumns={ this.state.filteredColumns }
+            expandColumns={ this.props.expandColumns }/>
         </div>
         { paginate }
       </ElementBox>
@@ -144,7 +145,8 @@ TableBox.defaultProps = {
   filterKey: "",
   onClick: null,
   showControls: true,
-  filterColumns: []
+  filterColumns: [],
+  expandColumns: []
 }
 
 export default TableBox;

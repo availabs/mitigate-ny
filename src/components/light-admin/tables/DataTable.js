@@ -21,58 +21,104 @@ const Selector = ({ value, options, onSelect, column }) =>
     </div>
   </div>
 
-export default ({ tableData=[],
-                  columns=[],
-                  links={},
-                  onClick=null,
-                  filterColumns,
-                  toggleFilterColumn,
-                  filteredColumns }) => {
-  // if (!tableData || tableData.length === 0) {
-  //   return ('No Data Sento to table')
-  // }
-  if (!columns.length) {
-    columns = Object.keys(tableData[0])
-  }
-  return (
-    <table className="table table-lightborder table-hover">
-      <thead>
-        <tr>
-          {
-            columns.map(col => {
-              const filtered = filterColumns.filter(d => d.column === col);
-              if (!filtered.length) {
-                return <th key={ col }>{ col }</th>;
-              }
-              return <th key={ col }>
-                <Selector column={ col }
-                  options={ filtered[0].values }
-                  value={ filteredColumns[col] || [] }
-                  onSelect={ toggleFilterColumn }/>
-              </th>
-            })
-          }
-        </tr>
-      </thead>
-      <tbody>
-        {
-          tableData.map((row, i) => (
-            <tr key={ i } onClick={ onClick ? onClick.bind(null, row) : null }>
-              { columns.map((col, ii) => {
-                  return (
-                    (col in links) ?
-                    <td key={ ii }>
-                      <Link to={ links[col](row) }>{ row[col] }</Link>
-                    </td>
-                    : <td key={ ii }>{ row[col] }</td>
-                  )
-                })
-              }
-            </tr>
-          ))
+////
+
+class Row extends React.Component {
+  render() {
+    const {
+      onClick,
+      columns,
+      links,
+      row,
+      expandColumns,
+      numColumns = 0,
+      expansionRow = false,
+      expanded = false
+    } = this.props
+    return (
+      <tr onClick={ onClick ? onClick.bind(null, row) : null }
+        style={ expansionRow ? { backgroundColor: "#eee" } : expanded ? { backgroundColor: "#ddd" } : null }>
+        { columns.map((col, ii) => {
+            return (
+              (col in links) ?
+              <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
+                <Link to={ links[col](row) }>{ row[col] }</Link>
+              </td>
+              : <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>{ row[col] }</td>
+            )
+          })
         }
-      </tbody>
-    </table>
-  )
+      </tr>
+    )
+  }
+}
+
+export default class DataTable extends React.Component {
+  state = {
+    expanded: -1
+  }
+  onClick(i) {
+    if (i === this.state.expanded) {
+      this.setState({ expanded: -1 });
+    }
+    else {
+      this.setState({ expanded: i })
+    }
+  }
+  render() {
+    let { tableData=[],
+      columns=[],
+      links={},
+      onClick=null,
+      filterColumns,
+      toggleFilterColumn,
+      filteredColumns,
+      expandColumns=[]
+    } = this.props;
+    if (!columns.length) {
+      columns = Object.keys(tableData[0])
+    }
+    return (
+      <table className="table table-lightborder table-hover">
+        <thead>
+          <tr>
+            {
+              columns.map(col => {
+                const filtered = filterColumns.filter(d => d.column === col);
+                if (!filtered.length) {
+                  return <th key={ col }>{ col }</th>;
+                }
+                return <th key={ col }>
+                  <Selector column={ col }
+                    options={ filtered[0].values }
+                    value={ filteredColumns[col] || [] }
+                    onSelect={ toggleFilterColumn }/>
+                </th>
+              })
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            tableData.slice(0, this.state.expanded + 1).map((row, i) =>
+              <Row key={ i } row={ row } columns={ columns } links={ links }
+                onClick={ onClick || (expandColumns.length && this.onClick.bind(this, i)) }
+                expanded={ this.state.expanded === i }/>
+            )
+          }
+          { this.state.expanded === -1 ? null :
+            <Row key={ -1 } row={ tableData.slice(this.state.expanded, this.state.expanded + 1).pop() }
+              columns={ expandColumns } links={ {} } numColumns={ columns.length } expansionRow={ true }/>
+          }
+          {
+            tableData.slice(this.state.expanded + 1, tableData.length).map((row, i) =>
+              <Row key={ i } row={ row } columns={ columns } links={ links }
+                onClick={ onClick || (expandColumns.length && this.onClick.bind(this, this.state.expanded + 1 + i)) }/>
+            )
+          }
+        </tbody>
+      </table>
+    )
+  }
 }
 
