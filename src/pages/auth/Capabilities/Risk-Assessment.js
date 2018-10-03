@@ -17,16 +17,19 @@ class RiskAssessment extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-risk_assessment`} />
-              
+              <CapabilitiesTable 
+                 title='Risk Assessment Capabilities' 
+                 type="program"
+                 capability={'capability_risk_assessment'}
+                 columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+                 filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 expandColumns={ ["description"] }/>
             </div>
 
          
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Risk Assessment Capabilities' 
-         type="program"
-         capability={'capability_risk_assessment'}/>
+         
       </div>
     )
   }

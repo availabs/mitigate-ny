@@ -6,8 +6,8 @@ import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import Planning from './Planning-process'
 import Submenus from './about-submenus'
 import ExecutiveSummary from './plan'
-
-
+import Glossary from './glossary'
+import Authorities from './authorities'
 class About extends Component {
   render () {
 return (
@@ -79,5 +79,7 @@ export default [
   },
 ...Planning,
 ...ExecutiveSummary,
+...Authorities,
+...Glossary,
 
 ]

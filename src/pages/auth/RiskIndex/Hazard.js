@@ -363,7 +363,7 @@ criticalInfrastructure (hazard) {
 
             
             <div className="property-section">
-              <Content content_id={`${hazard}-hmgp`} />
+              <Content content_id={`${hazard}-hmgp`} /> 
             </div>
             <div className="property-section">
               <Content content_id={`hazards-state-capability`} />
@@ -371,11 +371,17 @@ criticalInfrastructure (hazard) {
               hazard={hazard}
               title= {hazardName + " Mitigation Capabilities"} 
               type="program"
+              columns={ ["name" , "agency" , 'contact_department' , "description" , 'admin' , 'url' ] }
+              filterColumns={ ["goal" , 'agency' , 'admin'] }
+              expandColumns={ ["description"] }
               />
               <CapabilitiesTable 
               hazard={hazard}
               title= {hazardName + " Mitigation Actions"} 
               type="action"
+              columns={ ["name" , "agency" , "description" , "budget_provided" , 'goal'] }
+              filterColumns={ ["goal" , 'agency'] }
+              expandColumns={ ["description"] }
               />
               <div className="property-section">
                 <Content content_id={'hazards-hmgp-overview'} />
@@ -387,6 +393,8 @@ criticalInfrastructure (hazard) {
               hazard={hazard} 
               title= {hazardName + " Mitigation Measures"} 
               type="measure"
+              columns={ ["name" ,  "description" , 'goal'] }
+              filterColumns={ ["goal"] }
               />
             </div>
           </div>
