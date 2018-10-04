@@ -115,7 +115,7 @@ class Geography extends Component {
     return (
       	
         <Element>
-          <h6 className="element-header">New York Statewide Hazard History</h6>
+          <h6 className="element-header">New York Statewide Risk</h6>
           <div className='property-single'> 
             <div className='property-info-w'>
 
@@ -123,52 +123,18 @@ class Geography extends Component {
                 <div className="property-section">
                   <Content content_id={`risk-landing`} />
                 </div>
-
-
             </div>
-          </div>
-
-           
-           <div className='property-single'>
             <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-county-loss`} />
-              </div>
+                <div className="property-section">
+                  <Content content_id={`risk-index`} />
+                </div>
             </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-                <GeographyScoreTable { ...this.state }
-                  setGeoid={ this.setGeoid.bind(this) }/>
-            </div>
-          </div>
-
-          <div className='property-single'>
             <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-loss-timeline`} />
-              </div>
+                <div className="property-section">
+                  <Content content_id={`risk-methodology`} />
+                </div>
             </div>
           </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-                <GeographyScoreBarChart
-                  { ...this.state }/>
-            </div>
-          </div>
-
-          <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-events-map`} />
-              </div>
-            </div>
-          </div>
-
-          <HazardEventsMapController
-            { ...this.state }/>
 
       	</Element>
     )

@@ -117,19 +117,10 @@ class Hazardhistory extends Component {
 
 
                 <div className="property-section">
-                  <Content content_id={`risk-hazards`} />
+                  <Content content_id={`risk-hazard_history`} />
                 </div>
 
 
-            </div>
-          </div>
-
-           
-           <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section">
-                <Content content_id={`risk-hazards-county-loss`} />
-              </div>
             </div>
           </div>
 
