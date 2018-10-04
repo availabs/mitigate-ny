@@ -51,7 +51,9 @@ export const ATTRIBUTES = [
 	"capability_environmental",
 	"capability_risk_assessment",
 	"capability_administer_funding",
-	"capability_funding_amount",
+
+	"funding_amount",
+
 	"capability_tech_support",
 	"capability_construction",
 	"capability_outreach",
@@ -115,7 +117,7 @@ export const META_DATA = {
 	"secondary_funding": { defaultValue: null, label: "Secondary Funding" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: [], label: "Hazards" },
+	"hazards": { defaultValue: null, label: "Hazards" },
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
 	"capability_response": { defaultValue: false, label: "Response" },
@@ -126,7 +128,9 @@ export const META_DATA = {
 	"capability_environmental": { defaultValue: false, label: "Environmental Protection" },
 	"capability_risk_assessment": { defaultValue: false, label: "Risk Assessment" },
 	"capability_administer_funding": { defaultValue: false, label: "Administer Funding" },
-	"capability_funding_amount": { defaultValue: false, label: "Funding Amount" },
+
+	"funding_amount": { defaultValue: null, label: "Funding Amount" },
+
 	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
 	"capability_construction": { defaultValue: false, label: "Construction" },
 	"capability_outreach": { defaultValue: false, label: "Education / Outreach" },
@@ -142,10 +146,8 @@ export const META_DATA = {
 	
 	"status": { defaultValue: [], label: "Status" },
 	"admin": { defaultValue: [], label: "Location" },
-	"priority": { defaultValue: null, label: "Priority"},
-	"type": { defaultValue: null, label: "Type"},
 
-	
+	"priority": { defaultValue: null, label: "Priority"},
 	"priority_1": { defaultValue: null, label: "Priority 1" }, 
 	"priority_2": { defaultValue: null, label: "Priority 2" },
 	"priority_3": { defaultValue: null, label: "Priority 3" },
@@ -157,6 +159,8 @@ export const META_DATA = {
 	"benefit_cost_analysis": { defaultValue: null, label: "BCA" },
 	"engineering_required": { defaultValue: null, label: "Engineering Required" },
 	"engineering_complete": { defaultValue: null, label: "Engineering Completed" },
+
+	"type": { defaultValue: null, label: "Type"},
 	
 	"municipality": {defaultValue: null, label: "Municipality" },
 	"county": { defaultValue: null, label: "County" },

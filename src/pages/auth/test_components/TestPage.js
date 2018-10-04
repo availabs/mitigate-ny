@@ -18,11 +18,9 @@ class TestPage extends React.Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <CapabilitiesTable
-                  columns={ ["name", "agency", "hazards", "budget_provided", "goal", "primary_funding", "status", "admin", "url"] }
-                  filterColumns={ ["hazards", "goal"] }
-                  urlColumn="url"
-                  status="status_new_shmp"
-                  goalRange="1,3"/>
+                  columns={ ["name", "agency", "funding_amount", "budget_provided", "goal", "primary_funding", "status", "admin", "url"] }
+                  filterColumns={ ["goal", "funding_amount"] }
+                  urlColumn="url"/>
               </ElementBox>
             </div>
           </div>

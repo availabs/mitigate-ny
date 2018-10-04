@@ -256,9 +256,9 @@ META = [
 		"type": "BOOLEAN",
 		"convert": toBoolean },
 
-	{ "column": "capability_funding_amount",
-		"type": "BOOLEAN",
-		"convert": toBoolean },
+	{ "column": "funding_amount",
+		"type": "VARCHAR",
+		"convert": toString },
 
 	{ "column": "capability_tech_support",
 		"type": "BOOLEAN",
@@ -364,7 +364,7 @@ META = [
 		"type": "VARCHAR",
 		"convert": toString },
 
-	{ "column": "capability_resiliencyy",
+	{ "column": "capability_resiliency",
 		"type": "BOOLEAN",
 		"convert": toBoolean }
 ]

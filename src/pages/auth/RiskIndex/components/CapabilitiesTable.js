@@ -37,6 +37,7 @@ import {
 	capability_research
 	capability_policy
 	capability_regulatory
+	capability_resiliency
 */
 
 /*
