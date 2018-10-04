@@ -17,11 +17,7 @@ import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
-import nfip from './nfip'
-import bric from './bric'
-import builtenv from './builtenv'
-import hazardhistory from './hazard-history'
-import riskindex from './riskindex'
+
 
 
 import {
@@ -33,7 +29,7 @@ import {
   LATEST_YEAR
 } from "../RiskIndex/components/yearsOfSevereWeatherData";
 
-class Geography extends Component {
+class Hazardhistory extends Component {
   constructor(props) {
     super(props);
 
@@ -189,22 +185,13 @@ const mapDispatchToProps = {
 
 export default [
   {
-    path: '/risk',
+    path: '/hazardhistory',
     name: 'Hazard History',
     exact: true,
-    mainNav: true,
+    mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    breadcrumbs: [
-      {param: 'geoid', path: '/risk/'}
-    ],
     subMenus: Submenus,
-    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
-  },
-
-  ...nfip,
-  ...riskindex,
-  ...builtenv,
-  ...bric,
-  ...hazardhistory
+    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Hazardhistory))
+  }
 
 ]

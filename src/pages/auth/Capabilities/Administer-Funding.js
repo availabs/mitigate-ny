@@ -99,7 +99,7 @@ class AdministerFunding extends Component {
                title='Mitigation Funding Capabilities'  
                type="program"
                capability={'capability_administer_funding'}
-               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , "capability_funding_amount" , 'url'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                expandColumns={ ["description"] }/>
 
