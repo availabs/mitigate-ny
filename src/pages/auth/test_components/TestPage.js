@@ -9,9 +9,6 @@ import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable
 
 class TestPage extends React.Component {
 
-  // fetchFalcorDeps() {
-  // }
-
   render() {
     try {
       return (
@@ -21,8 +18,11 @@ class TestPage extends React.Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <CapabilitiesTable
-                  columns={ ["name", "agency", "hazards", "budget_provided", "goal", "primary_funding", "status", "admin"] }
-                  filterColumns={ ["hazards"] }/>
+                  columns={ ["name", "agency", "hazards", "budget_provided", "goal", "primary_funding", "status", "admin", "url"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  status="status_new_shmp"
+                  goalRange="1,3"/>
               </ElementBox>
             </div>
           </div>
