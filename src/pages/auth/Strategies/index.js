@@ -45,8 +45,17 @@ class Strategies extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_1`} />
             </div>
+            <CapabilitiesTable
+                  title= "NYS Agency Programs Addressing Goal 1"
+                  type="program"
+                  columns={ ["name", "description" , "agency", "hazards", "goal"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  goalRange="1"
+                  expandColumns={ ["description"] }/>
           </div>
         </div>
+        
 
         <div className='property-info-w'>
           <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
@@ -63,6 +72,14 @@ class Strategies extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_2`} />
             </div>
+            <CapabilitiesTable
+                  title= "NYS Agency Programs Addressing Goal 2"
+                  type="program"
+                  columns={ ["name", "description" , "agency", "hazards", "goal"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  goalRange="2"
+                  expandColumns={ ["description"] }/>
           </div>
         </div>
 
@@ -81,6 +98,14 @@ class Strategies extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_3`} />
             </div>
+            <CapabilitiesTable
+                  title= "NYS Agency Programs Addressing Goal 3"
+                  type="program"
+                  columns={ ["name", "description" , "agency", "hazards", "goal"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  goalRange="3"
+                  expandColumns={ ["description"] }/>
           </div>
         </div>
 
@@ -99,6 +124,14 @@ class Strategies extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_4`} />
             </div>
+            <CapabilitiesTable
+                  title= "NYS Agency Programs Addressing Goal 4"
+                  type="program"
+                  columns={ ["name", "description" , "agency", "hazards", "goal"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  goalRange="4"
+                  expandColumns={ ["description"] }/>
           </div>
         </div>
 
@@ -117,7 +150,16 @@ class Strategies extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_5`} />
             </div>
+            <CapabilitiesTable
+                  title= "NYS Agency Programs Addressing Goal 5"
+                  type="program"
+                  columns={ ["name", "description" , "agency", "hazards", "goal"] }
+                  filterColumns={ ["hazards", "goal"] }
+                  urlColumn="url"
+                  goalRange="5"
+                  expandColumns={ ["description"] }/>
           </div>
+          
         </div>          
       </div>
     )

@@ -121,7 +121,7 @@ class Geography extends Component {
 
 
                 <div className="property-section">
-                  <Content content_id={`risk-hazards`} />
+                  <Content content_id={`risk-landing`} />
                 </div>
 
 
@@ -190,7 +190,7 @@ const mapDispatchToProps = {
 export default [
   {
     path: '/risk',
-    name: 'Hazard History',
+    name: 'Risk',
     exact: true,
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},

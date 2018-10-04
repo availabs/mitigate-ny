@@ -12,16 +12,18 @@ class AgencyList extends Component {
             {agencies.map(agencyId => {
               return (
                 <div>
-                   <div className="property-section">
-                    <Content content_id={`agency-${agencyId}_logo`} />
-                  </div>
-                  <div className="property-section">
-                    <Content content_id={`agency-${agencyId}_narrative`} />
-                  </div>
-
-                  <div className="property-section">
-                    <Content content_id={`agency-${agencyId}_casestudy`} />
-                  </div>
+                   <div className="property-section" style={{paddingTop: 30, paddingBottom: 30, borderBottom: '1px solid black'}}>
+                     <div className='row'>
+                        <div className='col-8'>
+                        <Content content_id={`agency-${agencyId}_narrative`} />
+                        </div>
+                        <div className='col-4'>
+                        <Content content_id={`agency-${agencyId}_logo`} />
+                        </div>
+                        
+                        <hr/>
+                    </div>
+                   </div>
                 </div>
               )
             })}
@@ -30,6 +32,8 @@ class AgencyList extends Component {
     )
   }
 }
+
+
 
 
 const mapStateToProps = state => ({
