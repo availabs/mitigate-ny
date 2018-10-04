@@ -278,7 +278,7 @@ class HazardEventsMapController extends React.Component {
 					<HazardEventsLegend
 						riskIndexGraph={ this.props.riskIndexGraph }
 						viewport={ this.state.viewport }
-						colorScale={ this.props.colorScale }
+						colorScale={ colorScale || this.state.colorScale }
 		                radiusScale={ this.state.radiusScale }/>
 				}
 				{ maps.reverse() }

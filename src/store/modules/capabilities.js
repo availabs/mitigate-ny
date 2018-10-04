@@ -20,6 +20,7 @@ export const ATTRIBUTES = [
 	"contact_department",
 	"agency", 
 	"partners",
+
 	"status_new_shmp",
 	"status_carryover_shmp",
 	"status_in_progess",
@@ -27,10 +28,12 @@ export const ATTRIBUTES = [
 	"status_unchanged",
 	"status_completed",
 	"status_discontinued",
+
 	"admin_statewide",
 	"admin_regional",
 	"admin_county",
 	"admin_local",
+
 	"file_type_shp",
 	"file_type_lat_lon",
 	"file_type_address",
@@ -41,6 +44,7 @@ export const ATTRIBUTES = [
 	"num_staff",
 	"num_contract_staff",
 	"hazards",
+
 	"capability_mitigation",
 	"capability_preparedness",
 	"capability_response",
@@ -61,6 +65,7 @@ export const ATTRIBUTES = [
 	"capability_research",
 	"capability_policy",
 	"capability_regulatory",
+	
 	"related_policy",
 	"url",
 	"goal",

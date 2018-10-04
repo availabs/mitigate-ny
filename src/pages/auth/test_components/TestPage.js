@@ -6,6 +6,7 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
+import HazardEventsMapController from "pages/auth/RiskIndex/components/HazardEventsMapController"
 
 class TestPage extends React.Component {
 
@@ -34,6 +35,15 @@ class TestPage extends React.Component {
                   expandColumns={ ["description"] }
                   title="Measures"
                   type="measure"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HazardEventsMapController
+                  showLegend={ true }/>
               </ElementBox>
             </div>
           </div>
