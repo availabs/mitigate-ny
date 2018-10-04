@@ -58,57 +58,7 @@ class riskindexpage extends Component {
               />
             </div>
           </div>
-        </div>
-
-        <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-bric`} />
-              </div>
-            </div>
-          </div>
-
-        <div className='property-info-w'>
-          <div className="property-info-main">
-            <div className="property-section" style={{background: '#fff'}}>
-              <div style={{paddingLeft:15}}>
-                  <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
-              </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'bric'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-built_environment`} />
-              </div>
-            </div>
-          </div>
-
-        <div className='property-info-w'>
-          <div className="property-info-main">
-            <div className="property-section" style={{background: '#fff'}}>
-              <div style={{paddingLeft:15}}>
-                  <h5> Risk Index Built Environment </h5>
-              </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'builtenv'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
-            </div>
-          </div>
-        </div>
+        </div>       
 
       	</Element>
     )
@@ -129,8 +79,8 @@ const mapDispatchToProps = {
 
 export default [
   {
-    path: '/risk/riskindex',
-    name: 'Risk',
+    path: '/risk/vulnerablepopulations',
+    name: 'Vulnerable Populations',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},

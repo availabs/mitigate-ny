@@ -1,9 +1,10 @@
 export default [
 [
        {name: 'Risk', path: '/risk'},
-       {name: 'Population +/- and Vulnerable Populations', path: '/vulnerabilities'},
-       {name: 'Vulnerability, Resilience and Built Environment', path: '/risk/riskindex'},
+       {name: 'Population +/-', path: '/vulnerabilities'},
+       {name: 'Vulnerable Populations', path: '/risk/vulnerablepopulations'},
+       {name: 'Baseline Resilience', path: '/risk/bric'},
+       {name: 'Built Environment', path: '/risk/builtenvironment'},
        {name: 'Flooding Impacts', path: '/risk/nfip'},
-       
     ]
 ]
