@@ -355,7 +355,7 @@ criticalInfrastructure (hazard) {
            Section 3 - Vulnerability
         */}
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%'}}>
+          <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0}}>
             <div className="property-section">
               <Content content_id={'hazard-vulnerability-introduction'} />
             </div>
@@ -363,24 +363,49 @@ criticalInfrastructure (hazard) {
 
             
             <div className="property-section">
-              <Content content_id={`${hazard}-hmgp`} />
+              <Content content_id={`${hazard}-hmgp`} /> 
             </div>
             <div className="property-section">
               <Content content_id={`hazards-state-capability`} />
-              <CapabilitiesTable hazard={hazard} />
+              <CapabilitiesTable 
+              hazard={hazard}
+              title= {hazardName + " Mitigation Capabilities"} 
+              type="program"
+              columns={ ["name" , "agency" , 'contact_department' , "description" , 'admin' , 'url' ] }
+              filterColumns={ ["goal" , 'agency' , 'admin'] }
+              expandColumns={ ["description"] }
+              />
+              <CapabilitiesTable 
+              hazard={hazard}
+              title= {hazardName + " Mitigation Actions"} 
+              type="action"
+              columns={ ["name" , "agency" , "description" , "budget_provided" , 'goal'] }
+              filterColumns={ ["goal" , 'agency'] }
+              expandColumns={ ["description"] }
+              />
               <div className="property-section">
                 <Content content_id={'hazards-hmgp-overview'} />
               </div>
-              <HMGPTable hazard={hazard} />
-              <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+                <HMGPTable hazard={hazard} />
+                <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+              </div>
+              <CapabilitiesTable 
+              hazard={hazard} 
+              title= {hazardName + " Mitigation Measures"} 
+              type="measure"
+              columns={ ["name" ,  "description" , 'goal'] }
+              filterColumns={ ["goal"] }
+              />
             </div>
+          </div>
             { /*
             <div className="property-section">
               <Content content_id={`${hazard}-related_narrative`} />
             </div>
              */ }
 
-
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
               <Content content_id={`${hazard}-bibliography`} />
             </div>

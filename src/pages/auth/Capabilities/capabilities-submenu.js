@@ -1,10 +1,10 @@
 export default [
 [
+       {name: 'NYS Capabilities', path: '/capabilities'},
        {name: 'Agencies', path: '/capabilities/agencies'},
-       {name: 'Local', path: '/capabilities/local'},
        {name: 'Resiliency', path: '/capabilities/resiliency'},
-       {name: 'RiskAssessment', path: '/capabilities/riskassessment'},
-       {name: 'TechSupport', path: '/capabilities/techsupport'},
+       {name: 'Risk Assessment', path: '/capabilities/riskassessment'},
+       {name: 'Technical Support', path: '/capabilities/techsupport'},
        {name: 'Funding', path: '/capabilities/administerfunding'},
        {name: 'Project Mgmt', path: '/capabilities/projectmanagement'},
        {name: 'Construction', path: '/capabilities/construction'},

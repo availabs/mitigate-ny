@@ -18,7 +18,7 @@ export const ATTRIBUTES = [
 	"contact_email",
 	"contact_title",
 	"contact_department",
-	"agency",
+	"agency", 
 	"partners",
 	"status_new_shmp",
 	"status_carryover_shmp",
@@ -141,7 +141,7 @@ export const META_DATA = {
 	"objective": { defaultValue: null, label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
-	"admin": { defaultValue: [], label: "Admin" },
+	"admin": { defaultValue: [], label: "Location" },
 	"priority": { defaultValue: null, label: "Priority"},
 	"type": { defaultValue: null, label: "Type"},
 

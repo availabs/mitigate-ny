@@ -95,14 +95,20 @@ class AdministerFunding extends Component {
 
             <div className="property-section">
               <Content content_id={`section7-funding_plans_projects`} />
+              <CapabilitiesTable 
+               title='Mitigation Funding Capabilities'  
+               type="program"
+               capability={'capability_administer_funding'}
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               expandColumns={ ["description"] }/>
+
             </div>
+
+            
 
           </div>
          </div>
-         <CapabilitiesTable 
-               title='Mitigation Funding Capabilities'  
-               type="program"
-               capability={'capability_administer_funding'}/>
       </div>
     )
   }

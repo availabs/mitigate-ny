@@ -17,16 +17,19 @@ class PlanningRegulatory extends Component {
         
            <div className="property-section">
               <Content content_id={`capabilities-planning_regulatory`} />
-               <CapabilitiesTable title='Planning and Regulatory Capabilities' capability={'capability_policy' , 'capability_regulatory'}/>              
+               <CapabilitiesTable 
+                 title='Planning and Regulatory Capabilities' 
+                 type="program"
+                 capability={'capability_policy' , 'capability_regulatory'}
+                 columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+                 filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 expandColumns={ ["description"] }/>               
             </div> 
 
          
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Planning and Regulatory Capabilities' 
-         type="program"
-         capability={'capability_policy' , 'capability_regulatory'}/> 
+
       </div>
     )
   }

@@ -21,15 +21,18 @@ class TechSupport extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-integration-statewide-efforts`} />
-             
+              <CapabilitiesTable 
+                 title='Technical Support and Training Capabilities'  
+                 type="program"
+                 capability={'capability_tech_support'}
+                 columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+                 filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 expandColumns={ ["description"] }/>
             </div>     
 
           </div>
         </div>
-         <CapabilitiesTable 
-         title='Technical Support and Training Capabilities'  
-         type="program"
-         capability={'capability_tech_support'}/>
+
       </div>
     )
   }

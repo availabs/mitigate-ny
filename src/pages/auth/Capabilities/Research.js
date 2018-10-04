@@ -17,16 +17,19 @@ class Research extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-research`} />
-               <CapabilitiesTable title='Hazard Mitigation Research Capabilities' capability={'capability_research'}/>
+               <CapabilitiesTable 
+                 title='Hazard Mitigation Research Capabilities' 
+                 type="program"
+                 capability={'capability_research'}
+                 columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+                 filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 expandColumns={ ["description"] }/>
             </div>
 
          
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Hazard Mitigation Research Capabilities' 
-         type="program"
-         capability={'capability_research'}/>
+            
       </div>
     )
   }

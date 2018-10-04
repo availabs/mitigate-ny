@@ -15,10 +15,11 @@ import Strategies from "pages/auth/Strategies"
 import Process from "pages/auth/Process"
 
 import Capabilities from "pages/auth/Capabilities"
+import About from "pages/auth/About/About"
 import Compare from "pages/auth/RiskIndex/Compare"
 import TestPage from "pages/auth/test_components/TestPage"
 import CountyPage from "pages/auth/RiskIndex/CountyPage"
-
+import Local from "pages/auth/Local/local"
 import ManageCapabilities from "pages/auth/Capabilities/manage"
 import NewCapability from "pages/auth/Capabilities/manage/NewCapability"
 
@@ -38,13 +39,15 @@ const routes = [
   ...Process,
   ...Capabilities,
   ...Strategies,
+  ...Local,
   ...Compare,
   ...Plan,
   ...TestPage,
   ...CountyPage,
-
+  ...About,
   ...ManageCapabilities,
   ...NewCapability,
+ 
   
   Login,
   Logout,

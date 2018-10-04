@@ -30,6 +30,10 @@ class nfip extends Component {
             </div>
 
             <div className="property-section">
+              <Content content_id={`riverine-repetitive_loss`} />
+            </div>
+
+            <div className="property-section">
               <Content content_id={`nfip-rlstrategy`} />
             </div>
 

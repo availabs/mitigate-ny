@@ -18,8 +18,10 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
 import nfip from './nfip'
+import bric from './bric'
+import builtenv from './builtenv'
 
-
+import riskindex from './riskindex'
 
 
 import {
@@ -200,5 +202,8 @@ export default [
   },
 
   ...nfip,
+  ...riskindex,
+  ...builtenv,
+  ...bric,
 
 ]
