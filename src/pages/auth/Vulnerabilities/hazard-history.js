@@ -17,11 +17,7 @@ import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
-import nfip from './nfip'
-import bric from './bric'
-import builtenv from './builtenv'
-import hazardhistory from './hazard-history'
-import riskindex from './riskindex'
+
 
 
 import {
@@ -33,7 +29,7 @@ import {
   LATEST_YEAR
 } from "../RiskIndex/components/yearsOfSevereWeatherData";
 
-class Geography extends Component {
+class Hazardhistory extends Component {
   constructor(props) {
     super(props);
 
@@ -115,26 +111,51 @@ class Geography extends Component {
     return (
       	
         <Element>
-          <h6 className="element-header">New York Statewide Risk</h6>
+          <h6 className="element-header">New York Statewide Hazard History</h6>
           <div className='property-single'> 
             <div className='property-info-w'>
 
 
                 <div className="property-section">
-                  <Content content_id={`risk-landing`} />
+                  <Content content_id={`risk-hazard_history`} />
                 </div>
-            </div>
-            <div className='property-info-w'>
-                <div className="property-section">
-                  <Content content_id={`risk-index`} />
-                </div>
-            </div>
-            <div className='property-info-w'>
-                <div className="property-section">
-                  <Content content_id={`risk-methodology`} />
-                </div>
+
+
             </div>
           </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+                <GeographyScoreTable { ...this.state }
+                  setGeoid={ this.setGeoid.bind(this) }/>
+            </div>
+          </div>
+
+          <div className='property-single'>
+            <div className='property-info-w' style={{paddingTop: 30}}>
+              <div className="property-section">
+                <Content content_id={`risk-hazards-loss-timeline`} />
+              </div>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+                <GeographyScoreBarChart
+                  { ...this.state }/>
+            </div>
+          </div>
+
+          <div className='property-single'>
+            <div className='property-info-w' style={{paddingTop: 30}}>
+              <div className="property-section">
+                <Content content_id={`risk-hazards-events-map`} />
+              </div>
+            </div>
+          </div>
+
+          <HazardEventsMapController
+            { ...this.state }/>
 
       	</Element>
     )
@@ -155,22 +176,13 @@ const mapDispatchToProps = {
 
 export default [
   {
-    path: '/risk',
-    name: 'Risk',
+    path: '/hazardhistory',
+    name: 'Hazard History',
     exact: true,
-    mainNav: true,
+    mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    breadcrumbs: [
-      {param: 'geoid', path: '/risk/'}
-    ],
     subMenus: Submenus,
-    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
-  },
-
-  ...nfip,
-  ...riskindex,
-  ...builtenv,
-  ...bric,
-  ...hazardhistory
+    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Hazardhistory))
+  }
 
 ]

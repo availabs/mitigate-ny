@@ -18,19 +18,19 @@ class MitigationFunding extends Component {
               <Content content_id={`capabilities-agency_administered_funding_sources`} />
             </div>
 
-            <div className="property-section">
+            <div className="property-section"> 
               <Content content_id={`capabilities-local_funding_sources`} />
             </div>
 
             <div className="property-section">
               <Content content_id={`capabilities-mitigation_strategies`} />
               <CapabilitiesTable
-                  columns={ ["name" , "description" , "hazards" , "capability_administer_funding" , 'capability_funding_amount'] }
-                  title="Mitigation Funding Sources"
-                  filterColumns={ ["capability_administer_funding" , 'capability_funding_amount' , 'hazards'] }
-                  expandColumns={ ["description"] }
-                  type="program"/>
-                  />
+                  title='Mitigation Funding Capabilities'  
+                   type="program"
+                   capability={'capability_administer_funding'}
+                   columns={ ["name" , "description" , "agency" , "hazards" , "capability_funding_amount" , 'admin' , 'url'] }
+                   filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                   expandColumns={ ["description"] }/>
             </div>
 
           </div>
