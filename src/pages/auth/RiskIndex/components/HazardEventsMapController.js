@@ -231,7 +231,6 @@ class HazardEventsMapController extends React.Component {
 
 	render() {
 		let {
-			showLegend,
 			numMaps,
 			height,
 			mapHeight,
@@ -245,7 +244,8 @@ class HazardEventsMapController extends React.Component {
 			radiusScale,
 			zoomPadding,
 			hazard,
-			allTime
+			allTime,
+			showLegend,
 		} = this.props;
 		showLegend = (showLegend !== "auto") ? showLegend : (numMaps > 1)
 		const maps = Array(this.props.numMaps).fill(getMapWidth(this.props.numMaps))

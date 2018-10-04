@@ -155,7 +155,8 @@ class Hazardhistory extends Component {
           </div>
 
           <HazardEventsMapController
-            { ...this.state }/>
+            { ...this.state }
+            showLegend = {true} />
 
       	</Element>
     )

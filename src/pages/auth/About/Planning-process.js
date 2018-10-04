@@ -12,13 +12,13 @@ class PlanningProcess extends Component {
    return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '70%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+          <div className="property-info-main" style={{maxWidth: '70%', paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`section2-planning_process`} />
             </div>
           </div>
           <div className='property-info-side' style={{maxWidth: '30%', borderRight: 'none'}}>
-            <div className='side-section-content' style={{paddingTop: 50 }}>
+            <div className='side-section-content' style={{paddingTop: 60 }}>
              <div className='projects-list row'>
               <ProjectBox title={`History of the New York State Hazard Mitigation Plan`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`process-history`} />
