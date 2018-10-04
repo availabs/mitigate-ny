@@ -132,7 +132,7 @@ class Hazardhistory extends Component {
           </div>
 
           <div className='property-single'>
-            <div className='property-info-w'>
+            <div className='property-info-w' style={{paddingTop: 30}}>
               <div className="property-section">
                 <Content content_id={`risk-hazards-loss-timeline`} />
               </div>
@@ -147,7 +147,7 @@ class Hazardhistory extends Component {
           </div>
 
           <div className='property-single'>
-            <div className='property-info-w'>
+            <div className='property-info-w' style={{paddingTop: 30}}>
               <div className="property-section">
                 <Content content_id={`risk-hazards-events-map`} />
               </div>
