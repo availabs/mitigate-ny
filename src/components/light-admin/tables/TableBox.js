@@ -56,7 +56,7 @@ import Pagination from './Pagination'
         split.forEach(s => values[s] = true);
       }
     })
-    return Object.keys(values).filter(d => d)
+    return Object.keys(values).filter(d => d).sort((a, b) => a < b ? -1 : 1)
   }
   toggleFilterColumn(column, value) {
     let { filteredColumns } = this.state;
@@ -129,7 +129,8 @@ import Pagination from './Pagination'
             filterColumns={ filterColumns }
             toggleFilterColumn={ this.toggleFilterColumn.bind(this) }
             filteredColumns={ this.state.filteredColumns }
-            expandColumns={ this.props.expandColumns }/>
+            expandColumns={ this.props.expandColumns }
+            urlColumn={ this.props.urlColumn }/>
         </div>
         { paginate }
       </ElementBox>
@@ -146,7 +147,8 @@ TableBox.defaultProps = {
   onClick: null,
   showControls: true,
   filterColumns: [],
-  expandColumns: []
+  expandColumns: [],
+  urlColumn: null
 }
 
 export default TableBox;

@@ -33,7 +33,8 @@ class Row extends React.Component {
       expandColumns,
       numColumns = 0,
       expansionRow = false,
-      expanded = false
+      expanded = false,
+      urlColumn = null
     } = this.props
     return (
       <tr onClick={ onClick ? onClick.bind(null, row) : null }
@@ -41,9 +42,13 @@ class Row extends React.Component {
         { columns.map((col, ii) => {
             return (
               (col in links) ?
-              <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
-                <Link to={ links[col](row) }>{ row[col] }</Link>
-              </td>
+                <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
+                  <Link to={ links[col](row) }>{ row[col] }</Link>
+                </td>
+              : (col === urlColumn) ?
+                <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
+                  { row[col] ? <a href={ row[col] } target="_blank">url</a> : null }
+                </td>
               : <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>{ row[col] }</td>
             )
           })
@@ -56,6 +61,12 @@ class Row extends React.Component {
 export default class DataTable extends React.Component {
   state = {
     expanded: -1
+  }
+  componentWillReceiveProps(newProps) {
+    const { expanded } = this.state;
+    if (expanded >= newProps.tableData.length) {
+      this.setState({ expanded: -1 });
+    }
   }
   onClick(i) {
     if (i === this.state.expanded) {
@@ -73,11 +84,13 @@ export default class DataTable extends React.Component {
       filterColumns,
       toggleFilterColumn,
       filteredColumns,
-      expandColumns=[]
+      expandColumns=[],
+      urlColumn=null
     } = this.props;
     if (!columns.length) {
       columns = Object.keys(tableData[0])
     }
+    const { expanded } = this.state;
     return (
       <table className="table table-lightborder table-hover">
         <thead>
@@ -100,20 +113,20 @@ export default class DataTable extends React.Component {
         </thead>
         <tbody>
           {
-            tableData.slice(0, this.state.expanded + 1).map((row, i) =>
-              <Row key={ i } row={ row } columns={ columns } links={ links }
+            tableData.slice(0, expanded + 1).map((row, i) =>
+              <Row key={ i } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
                 onClick={ onClick || (expandColumns.length && this.onClick.bind(this, i)) }
-                expanded={ this.state.expanded === i }/>
+                expanded={ expanded === i }/>
             )
           }
-          { this.state.expanded === -1 ? null :
-            <Row key={ -1 } row={ tableData.slice(this.state.expanded, this.state.expanded + 1).pop() }
+          { expanded === -1 ? null :
+            <Row key={ -1 } row={ tableData.slice(expanded, expanded + 1).pop() }
               columns={ expandColumns } links={ {} } numColumns={ columns.length } expansionRow={ true }/>
           }
           {
-            tableData.slice(this.state.expanded + 1, tableData.length).map((row, i) =>
-              <Row key={ i } row={ row } columns={ columns } links={ links }
-                onClick={ onClick || (expandColumns.length && this.onClick.bind(this, this.state.expanded + 1 + i)) }/>
+            tableData.slice(expanded + 1, tableData.length).map((row, i) =>
+              <Row key={ i } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
+                onClick={ onClick || (expandColumns.length && this.onClick.bind(this, expanded + 1 + i)) }/>
             )
           }
         </tbody>
