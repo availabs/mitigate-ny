@@ -234,6 +234,13 @@ criticalInfrastructure (hazard) {
     }
   }
 
+  criticalInfrastructureMap (hazard) {
+    if (hazard === 'riverine' || hazard === 'earthquake') {
+      return <Content content_id={`${hazard}-critical_infrastructure_map`} />
+    }
+    return
+  }
+
   repetitive (hazard) {
     if (hazard === 'riverine') {
       return <Content content_id={`${hazard}-repetitive_loss`} />
@@ -359,8 +366,9 @@ criticalInfrastructure (hazard) {
             <div className="property-section">
               <Content content_id={'hazard-vulnerability-introduction'} />
             </div>
-            {this.criticalInfrastructure (hazard)}
-
+             {/* {this.criticalInfrastructure (hazard)}
+             */}
+             {this.criticalInfrastructureMap (hazard)}
             
             <div className="property-section">
               <Content content_id={`${hazard}-hmgp`} /> 

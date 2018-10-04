@@ -15,12 +15,12 @@ class TechSupport extends Component {
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
         
             <div className="property-section">
-              <Content content_id={`capabilities-techsupport_training_planning`} />
+              <Content content_id={`risk-techsupport_training_planning`} />
                
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-integration-statewide-efforts`} />
+              
               <CapabilitiesTable 
                  title='Technical Support and Training Capabilities'  
                  type="program"
