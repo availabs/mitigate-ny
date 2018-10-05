@@ -22,6 +22,7 @@ import bric from './bric'
 import builtenv from './builtenv'
 import hazardhistory from './hazard-history'
 import riskindex from './riskindex'
+import riskVulnerabilities from './Vulnerabilities-page'
 
 
 import {
@@ -171,6 +172,7 @@ export default [
   ...riskindex,
   ...builtenv,
   ...bric,
-  ...hazardhistory
+  ...hazardhistory,
+  ...riskVulnerabilities,
 
 ]
