@@ -51,8 +51,7 @@ class ACS_Map extends React.Component {
 			type: "FeatureCollection",
 			features: []
 		},
-		colorScale: d3scale.scaleQuantile()
-			.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
+		colorScale: d3scale.scaleQuantile(),
 		acsDataProcessed: false
 	}
 
@@ -100,7 +99,7 @@ class ACS_Map extends React.Component {
 	}
 
 	processAcsData() {
-		const { geoid, geoLevel, variable, density, scaleType, thresholds } = this.props,
+		const { geoid, geoLevel, variable, density, scaleType, thresholds, range } = this.props,
 
 			acsData = {
 				type: "FeatureCollection",
@@ -108,7 +107,7 @@ class ACS_Map extends React.Component {
 			},
 			// colorScale = scaleCk()
 			colorScale = getScale(scaleType)
-				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
+				.range(range),
 			domain = [];
 
 		let min = Infinity,
@@ -116,7 +115,7 @@ class ACS_Map extends React.Component {
 
 			acsDataProcessed = false;
 
-		if (scaleType === 'thresholds') {
+		if (scaleType === 'threshold') {
 			colorScale.domain(thresholds);
 		}
 
@@ -273,7 +272,8 @@ ACS_Map.defaultProps = {
 	variable: 'population',
 	density: false,
 	scaleType: "ck",
-	thresholds: []
+	thresholds: [],
+	range: ["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]
 }
 
 const mapStateToProps = state => ({
