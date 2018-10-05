@@ -22,6 +22,8 @@ import CountyPage from "pages/auth/RiskIndex/CountyPage"
 import ManageCapabilities from "pages/auth/Capabilities/manage"
 import NewCapability from "pages/auth/Capabilities/manage/NewCapability"
 
+import FloodExplorer from "pages/auth/FloodExplorer"
+
 // -- Util Routes
 import Login from './pages/Login'
 import Logout from './pages/Logout'
@@ -46,6 +48,8 @@ const routes = [
   ...ManageCapabilities,
   ...NewCapability,
   
+  FloodExplorer,
+
   Login,
   Logout,
   NoMatch
