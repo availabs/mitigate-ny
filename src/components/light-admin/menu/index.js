@@ -28,7 +28,7 @@ class Menu extends Component {
   		'submenucolor': 'sub-menu-color-light',
   		'position': 'menu-position-top', 
   		'layout': 'menu-layout-full',
-  		'subemenustyle': 'sub-menu-style-flyout'
+  		'subemenustyle': this.props.menuSettings.subemenustyle ? this.props.menuSettings.subemenustyle :  'sub-menu-style-over'
   	}
     let displayOptions = Object.values(defaultOptions).join(' ')
 

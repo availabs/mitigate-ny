@@ -27,6 +27,7 @@ class ClimateAdaptation extends Component {
                capability={'capability_climate' }
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               urlColumn="url"
                expandColumns={ ["description"] }/>           
            </div>
 

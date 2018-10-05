@@ -77,11 +77,7 @@ class Landing extends Component {
                       
             <div className="property-section">
               <Content content_id={`section1-adoptionassurances`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section2-genplanguidelines`} />
-            </div>            
+            </div>           
 
           </div>           
         </div>

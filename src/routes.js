@@ -23,6 +23,8 @@ import Local from "pages/auth/Local/local"
 import ManageCapabilities from "pages/auth/Capabilities/manage"
 import NewCapability from "pages/auth/Capabilities/manage/NewCapability"
 
+import FloodExplorer from "pages/auth/FloodExplorer"
+
 // -- Util Routes
 import Login from './pages/Login'
 import Logout from './pages/Logout'
@@ -49,6 +51,8 @@ const routes = [
   ...NewCapability,
  
   
+  FloodExplorer,
+
   Login,
   Logout,
   NoMatch

@@ -8,6 +8,8 @@ import Submenus from './about-submenus'
 import ExecutiveSummary from './plan'
 import Glossary from './glossary'
 import Authorities from './authorities'
+import News from './news'
+import Implementation from './Implementation'
 class About extends Component {
   render () {
 return (
@@ -81,5 +83,7 @@ export default [
 ...ExecutiveSummary,
 ...Authorities,
 ...Glossary,
+...News,
+...Implementation,
 
 ]

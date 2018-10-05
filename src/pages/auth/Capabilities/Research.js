@@ -23,6 +23,7 @@ class Research extends Component {
                  capability={'capability_research'}
                  columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                  filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 urlColumn="url"
                  expandColumns={ ["description"] }/>
             </div>
 

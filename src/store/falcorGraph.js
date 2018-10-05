@@ -2,9 +2,10 @@
 import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
-// export const host = 'http://mitigateny.availabs.org/api/'
+export const host = 'http://mitigateny.availabs.org/api/'
 
-export const host = 'http://localhost:3333/'
+//export const host = 'http://localhost:3333/'
+
 
 class CustomSource extends HttpDataSource {
   onBeforeRequest (config) {
