@@ -27,6 +27,17 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
+                <ACS_Map variable="vulnerable"
+                  geoLevel="tracts"
+                  scaleType="quantile"
+                  density={ true }/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
                 <ACS_Map />
               </ElementBox>
             </div>
@@ -35,9 +46,29 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
+                <ACS_Map variable="vulnerable"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
                 <ACS_Map variable="population_change"
-                  scaleType="threshold"
-                  thresholds={ [-2500, -500, 500, 2500] }/>
+                  geoLevel="tracts"
+                  density={ true }
+                  range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
+                  scaleType="quantile"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Map variable="population_change"
+                  range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
+                  scaleType="quantile"/>
               </ElementBox>
             </div>
           </div>
