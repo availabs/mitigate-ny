@@ -17,7 +17,7 @@ import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
-import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
+import FemaDisasterDeclarationsTable from "pages/auth/RiskIndex/components/FemaDisasterDeclarationsTable"
 
 
 
