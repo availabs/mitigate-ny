@@ -21,7 +21,7 @@ const sheldusAttributes = {
 }
 
 const scaleCk = () => {
-	let domain = [0, 1, 2, 3],
+	let domain = [0, 1, 2, 3, 4],
 		range = ["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"],
 		scale = scaleThreshold()
 			.domain(domain)
@@ -49,8 +49,8 @@ const scaleCk = () => {
 		return scale.invertExtent(e);
 	}
 	function ckmeans() {
-		const ckmeans = ss.ckmeans(domain, range.length - 1),
-			thresholds = ckmeans.map(ck => ck[0]);
+		const ckmeans = ss.ckmeans(domain, range.length),
+			thresholds = ckmeans.slice(0, range.length).map(ck => ck[ck.length - 1]);
 		scale.domain(thresholds)
 			.range(range);
 	}

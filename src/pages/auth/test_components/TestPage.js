@@ -5,8 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
-import HazardEventsMapController from "pages/auth/RiskIndex/components/HazardEventsMapController"
+import ACS_Map from "components/mitigate-ny/ACS_Map"
 
 class TestPage extends React.Component {
 
@@ -18,10 +17,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable
-                  columns={ ["name", "agency", "funding_amount", "budget_provided", "goal", "primary_funding", "status", "admin", "url"] }
-                  filterColumns={ ["goal", "funding_amount"] }
-                  urlColumn="url"/>
+                <ACS_Map geoLevel="tracts"
+                  scaleType="quantile"
+                  density={ true }/>
               </ElementBox>
             </div>
           </div>
@@ -29,12 +27,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable
-                  columns={ ["name", "description", "hazards", "goal"] }
-                  filterColumns={ ["goal", "hazards"] }
-                  expandColumns={ ["description"] }
-                  title="Measures"
-                  type="measure"/>
+                <ACS_Map />
               </ElementBox>
             </div>
           </div>
@@ -42,8 +35,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HazardEventsMapController
-                  showLegend={ true }/>
+                <ACS_Map variable="population_change"
+                  scaleType="threshold"
+                  thresholds={ [-2500, -500, 500, 2500] }/>
               </ElementBox>
             </div>
           </div>

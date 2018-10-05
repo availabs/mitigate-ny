@@ -28,3 +28,4 @@ user.json
 #data tasks
 /tasks/atlas/build
 config.py*
+*.pyc

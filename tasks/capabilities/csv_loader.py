@@ -2,8 +2,6 @@ import argparse, csv, os, psycopg2, re
 
 from config import host
 
-HOME_DIR = os.environ['HOME']
-
 HAZARDS = [
     'wind',
     'wildfire',
