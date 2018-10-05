@@ -39,7 +39,7 @@ export default class HazardEventsLegend extends React.Component {
       		return this.props.riskIndexGraph.meta[hazard].name;
     	}
     	catch (e) {
-      		return getHazardName(hazard)
+      		return getHazardName(hazard.toString())
     	}
   	}
 
@@ -83,25 +83,15 @@ export default class HazardEventsLegend extends React.Component {
 
 		return (
 			<div className="col-lg-12">
-				<ElementBox>
-					<table className="hazard-events-legend"
-						style={ { width: "70%" } }>
+				<div style = {{backgroundColor: 'white' , width: '100%' , paddingBottom: 0 , margin: 'auto'}}>
+					<table className="hazard-events-legend" 
+						style={ { width: "100%" } }>
 						<tbody>
 							{ rows }
 						</tbody>
 					</table>
-					<div style={ { height: "100%", width: "30%", display: "inline-block", position: "relative" } }>
-
-						<div style={ { width: "100%", borderBottom: "2px solid #000", bottom: "100px", position: "absolute", fontSize: "18px" } }>
-							Property Damage
-						</div>
-
-						<CircleLabel bottom={ 0 } radius={ 40 } value={ radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000) }/>
-						<CircleLabel bottom={ 0 } radius={ 30 } value={ radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000) }/>
-						<CircleLabel bottom={ 0 } radius={ 10 } value={ radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000) }/>
-
-					</div>
-				</ElementBox>
+					
+				</div>
 			</div>
 		)
 	}

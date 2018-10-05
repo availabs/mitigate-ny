@@ -6,11 +6,9 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
+import HazardEventsMapController from "pages/auth/RiskIndex/components/HazardEventsMapController"
 
 class TestPage extends React.Component {
-
-  // fetchFalcorDeps() {
-  // }
 
   render() {
     try {
@@ -20,7 +18,10 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable />
+                <CapabilitiesTable
+                  columns={ ["name", "agency", "funding_amount", "budget_provided", "goal", "primary_funding", "status", "admin", "url"] }
+                  filterColumns={ ["goal", "funding_amount"] }
+                  urlColumn="url"/>
               </ElementBox>
             </div>
           </div>
@@ -29,11 +30,20 @@ class TestPage extends React.Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <CapabilitiesTable
-                  columns={ ["name", "description", "goal"] }
-                  filterColumns={ ["goal"] }
+                  columns={ ["name", "description", "hazards", "goal"] }
+                  filterColumns={ ["goal", "hazards"] }
                   expandColumns={ ["description"] }
                   title="Measures"
                   type="measure"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HazardEventsMapController
+                  showLegend={ true }/>
               </ElementBox>
             </div>
           </div>

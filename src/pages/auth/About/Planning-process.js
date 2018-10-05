@@ -5,19 +5,20 @@ import Content from 'components/cms/Content'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+import Submenus from './about-submenus'
 
-class Landing extends Component {
+class PlanningProcess extends Component {
   render () {
    return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '70%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+          <div className="property-info-main" style={{maxWidth: '70%', paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`section2-planning_process`} />
             </div>
           </div>
           <div className='property-info-side' style={{maxWidth: '30%', borderRight: 'none'}}>
-            <div className='side-section-content' style={{paddingTop: 50 }}>
+            <div className='side-section-content' style={{paddingTop: 60 }}>
              <div className='projects-list row'>
               <ProjectBox title={`History of the New York State Hazard Mitigation Plan`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`process-history`} />
@@ -77,7 +78,11 @@ class Landing extends Component {
                       
             <div className="property-section">
               <Content content_id={`section1-adoptionassurances`} />
-            </div>           
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section2-genplanguidelines`} />
+            </div>            
 
           </div>           
         </div>
@@ -91,11 +96,11 @@ class Landing extends Component {
 export default [
   {
     icon: 'icon-map',
-    path: '/process',
-    name: 'Planning Process',
+    path: '/about/process',
+    name: 'The Planning Process',
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: connect(() => {}, {})(Landing),
+    component: connect(() => {}, {})(PlanningProcess),
   }
 ]

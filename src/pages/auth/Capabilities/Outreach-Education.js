@@ -17,16 +17,19 @@ class Outreach extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-education_outreach`} />
-               
+               <CapabilitiesTable 
+               title='Outreach and Public Education Capabilities' 
+               type="program"
+               capability={'capability_outreach'}
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               expandColumns={ ["description"] }/>
             </div>
 
          
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Outreach and Public Education Capabilities' 
-         type="program"
-         capability={'capability_outreach'}/>
+         
       </div>
     )
   }

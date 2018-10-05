@@ -18,16 +18,16 @@ class Resiliency extends Component {
         
             <div className="property-section">
               <Content content_id={`capabilities-resiliency`} />
-              
-            </div>
-
-         
+              <CapabilitiesTable 
+                 title='Resiliency Capabilities' 
+                 type="program"
+                 capability={'capability_recovery'}
+                 columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+                 filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 expandColumns={ ["description"] }/>
+            </div>        
           </div>
          </div>
-         <CapabilitiesTable 
-         title='Resiliency Capabilities' 
-         type="program"
-         capability={'capability_recovery'}/>
       </div>
     )
   }

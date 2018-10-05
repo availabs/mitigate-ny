@@ -14,6 +14,10 @@ import {
   	getLabel
 } from "store/modules/capabilities"
 
+import {
+  getHazardName
+} from 'utils/sheldusUtils'
+
 /*
 	capability_mitigation
 	capability_preparedness
@@ -33,6 +37,17 @@ import {
 	capability_research
 	capability_policy
 	capability_regulatory
+	capability_resiliency
+*/
+
+/*
+	status_new_shmp
+	status_carryover_shmp
+	status_in_progess
+	status_on_going
+	status_unchanged
+	status_completed
+	status_discontinued
 */
 
 class CapabilitiesTable extends React.Component {
@@ -90,11 +105,32 @@ class CapabilitiesTable extends React.Component {
     	)
 	}
 
+	getHazardName(hazard) {
+  	try {
+    		return this.props.riskIndexGraph.meta[hazard].name;
+  	}
+  	catch (e) {
+    		return getHazardName(hazard);
+  	}
+	}
+
 	processData() {
 		const budgetRegex = /[$]?(\d+)([kKmMbBtT]?)/,
 			columns = this.props.columns,
 			data = this.props.capabilities
+				.filter(capability => {
+					let filtered = !this.props.goalRange;
+					if (!filtered) {
+						const range = this.props.goalRange.split(",").map(gr => +gr.trim()),
+							goal = capability.goal || "0",
+							split = goal.split("|").map(g => +g.trim()).sort();
+						range.push(range[range.length - 1] + 1);
+						filtered = split.reduce((a, c) => a || (c >= range[0] && c < range[range.length -1]), false);
+					}
+					return filtered;
+				})
 				.filter(capability => !this.props.capability || this.props.capability.split(",").reduce((a, c) => a || capability[c.trim()], false))
+				.filter(capability => !this.props.status || this.props.status.split(",").reduce((a, c) => a || capability[c.trim()], false))
 				.filter(({ type }) => !this.props.type || (type && (type === this.props.type)))
 				.filter(({ agency }) => !this.props.agency || (agency && (agency === this.props.agency)))
 				.filter(({ hazards }) => !this.props.hazard || (hazards && (hazards.includes(this.props.hazard))))
@@ -121,6 +157,10 @@ class CapabilitiesTable extends React.Component {
 									"admin_local"
 								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
 								break;
+							case "hazards":
+								if (!capability.hazards) break;
+								row.Hazards = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
+								break;
 							default:
 								row[getLabel(att)] = capability[att]
 						}
@@ -141,7 +181,8 @@ class CapabilitiesTable extends React.Component {
 				filterKey="Name"
 				pageSize={ 6 }
 				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }
-				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }/>
+				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }
+				urlColumn={ this.props.urlColumn && getLabel(this.props.urlColumn) }/>
 		)
 	}
 }
@@ -150,18 +191,22 @@ CapabilitiesTable.defaultProps = {
 	agency: null,
 	hazard: null,
 	capability: null,
+	status: null,
 	capabilities: [],
 	title: "Capabilities",
 	columns: ["name", "agency", "description", "budget_provided", "goal", "primary_funding", "status", "admin"],
 	type: null,
 	filterColumns: [],
-	expandColumns: []
+	expandColumns: [],
+	urlColumn: null,
+	goalRange: null
 }
 
 const mapStateToProps = state => ({
     router: state.router,
     hazards: state.capabilities.hazards,
-    capabilities: state.capabilities.capabilities
+    capabilities: state.capabilities.capabilities,
+    riskIndexGraph: state.graph.riskIndex
 })
 
 const mapDispatchToProps = {

@@ -18,8 +18,9 @@ export const ATTRIBUTES = [
 	"contact_email",
 	"contact_title",
 	"contact_department",
-	"agency",
+	"agency", 
 	"partners",
+
 	"status_new_shmp",
 	"status_carryover_shmp",
 	"status_in_progess",
@@ -27,10 +28,12 @@ export const ATTRIBUTES = [
 	"status_unchanged",
 	"status_completed",
 	"status_discontinued",
+
 	"admin_statewide",
 	"admin_regional",
 	"admin_county",
 	"admin_local",
+
 	"file_type_shp",
 	"file_type_lat_lon",
 	"file_type_address",
@@ -41,6 +44,7 @@ export const ATTRIBUTES = [
 	"num_staff",
 	"num_contract_staff",
 	"hazards",
+
 	"capability_mitigation",
 	"capability_preparedness",
 	"capability_response",
@@ -51,7 +55,9 @@ export const ATTRIBUTES = [
 	"capability_environmental",
 	"capability_risk_assessment",
 	"capability_administer_funding",
-	"capability_funding_amount",
+
+	"funding_amount",
+
 	"capability_tech_support",
 	"capability_construction",
 	"capability_outreach",
@@ -59,6 +65,7 @@ export const ATTRIBUTES = [
 	"capability_research",
 	"capability_policy",
 	"capability_regulatory",
+	
 	"related_policy",
 	"url",
 	"goal",
@@ -115,7 +122,7 @@ export const META_DATA = {
 	"secondary_funding": { defaultValue: null, label: "Secondary Funding" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: [], label: "Hazards" },
+	"hazards": { defaultValue: null, label: "Hazards" },
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
 	"capability_response": { defaultValue: false, label: "Response" },
@@ -126,7 +133,9 @@ export const META_DATA = {
 	"capability_environmental": { defaultValue: false, label: "Environmental Protection" },
 	"capability_risk_assessment": { defaultValue: false, label: "Risk Assessment" },
 	"capability_administer_funding": { defaultValue: false, label: "Administer Funding" },
-	"capability_funding_amount": { defaultValue: false, label: "Funding Amount" },
+
+	"funding_amount": { defaultValue: null, label: "Funding Amount" },
+
 	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
 	"capability_construction": { defaultValue: false, label: "Construction" },
 	"capability_outreach": { defaultValue: false, label: "Education / Outreach" },
@@ -141,11 +150,9 @@ export const META_DATA = {
 	"objective": { defaultValue: null, label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
-	"admin": { defaultValue: [], label: "Admin" },
-	"priority": { defaultValue: null, label: "Priority"},
-	"type": { defaultValue: null, label: "Type"},
+	"admin": { defaultValue: [], label: "Location" },
 
-	
+	"priority": { defaultValue: null, label: "Priority"},
 	"priority_1": { defaultValue: null, label: "Priority 1" }, 
 	"priority_2": { defaultValue: null, label: "Priority 2" },
 	"priority_3": { defaultValue: null, label: "Priority 3" },
@@ -157,6 +164,8 @@ export const META_DATA = {
 	"benefit_cost_analysis": { defaultValue: null, label: "BCA" },
 	"engineering_required": { defaultValue: null, label: "Engineering Required" },
 	"engineering_complete": { defaultValue: null, label: "Engineering Completed" },
+
+	"type": { defaultValue: null, label: "Type"},
 	
 	"municipality": {defaultValue: null, label: "Municipality" },
 	"county": { defaultValue: null, label: "County" },
