@@ -101,6 +101,7 @@ class AdministerFunding extends Component {
                capability={'capability_administer_funding'}
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               urlColumn="url"
                expandColumns={ ["description"] }/>
 
             </div>

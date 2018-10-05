@@ -23,6 +23,7 @@ class Outreach extends Component {
                capability={'capability_outreach'}
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               urlColumn="url"
                expandColumns={ ["description"] }/>
             </div>
 

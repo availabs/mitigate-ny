@@ -23,6 +23,7 @@ class PlanningRegulatory extends Component {
                  capability={'capability_policy' , 'capability_regulatory'}
                  columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                  filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+                 urlColumn="url"
                  expandColumns={ ["description"] }/>               
             </div> 
 
