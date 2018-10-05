@@ -28,7 +28,7 @@ class VulnerabilitiesPage extends Component {
   render () {
     return (
       <Element>
-        <h6 className="element-header">New York Statewide Vulnerabilities</h6>
+        <h6 className="element-header">New York State Population Change and Population Density Change</h6>
 
           <div className='property-single'>
             <div className='property-info-w'>
@@ -38,13 +38,10 @@ class VulnerabilitiesPage extends Component {
             </div>
           </div>
 
-
-          <div className='row'>
+         <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
                 <ACS_Map variable="population_change"
-                  geoLevel="tracts"
-                  density={ true }
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
               </ElementBox>
@@ -63,11 +60,14 @@ class VulnerabilitiesPage extends Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <ACS_Map variable="population_change"
+                  geoLevel="tracts"
+                  density={ true }
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
               </ElementBox>
             </div>
           </div>
+
       </Element>
     )
   }
