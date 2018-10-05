@@ -28,7 +28,7 @@ class MitigationFunding extends Component {
                   title='Mitigation Funding Capabilities'  
                    type="program"
                    capability={'capability_administer_funding'}
-                   columns={ ["name" , "description" , "agency" , "hazards" , "capability_funding_amount" , 'admin' , 'url'] }
+                   columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                    filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                    expandColumns={ ["description"] }/>
             </div>
