@@ -17,6 +17,7 @@ import HazardList from "pages/auth/RiskIndex/components/HazardListNew"
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
+import FemaDisasterDeclarationsTable from "./components/FemaDisasterDeclarationsTable"
 
 
 
@@ -157,7 +158,8 @@ class Hazardhistory extends Component {
           <HazardEventsMapController
             { ...this.state }
             showLegend = {true} />
-
+          <h4> Presidential Disaster Declarations </h4>
+          <FemaDisasterDeclarationsTable />
       	</Element>
     )
   }
