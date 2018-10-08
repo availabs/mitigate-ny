@@ -22,6 +22,10 @@ return (
             </div>
 
             <div className="property-section">
+              <Content content_id={`section1-strategicframework`} />
+            </div>
+
+            <div className="property-section">
               <Content content_id={`section1-essentialterms`} />
             </div>
 
@@ -52,9 +56,7 @@ return (
               <Content content_id={`essentialterms-4-phases-2`} />
             </div>
 
-            <div className="property-section">
-              <Content content_id={`section1-strategicframework`} />
-            </div>
+            
           
           </div>
         </div>

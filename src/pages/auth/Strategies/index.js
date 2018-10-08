@@ -31,7 +31,7 @@ class Strategies extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' , paddingBottom: 0}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 1`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -41,11 +41,17 @@ class Strategies extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none' , paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_1`} />
             </div>
-            <CapabilitiesTable
+          </div>
+        </div>
+        
+        <div className='property-info-w'>
+           <div className="property-info-main" style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-section">
+              <CapabilitiesTable
                   title= "NYS Agency Programs Addressing Goal 1"
                   type="program"
                   columns={ ["name", "description" , "agency", "hazards", "goal"] }
@@ -53,12 +59,13 @@ class Strategies extends Component {
                   urlColumn="url"
                   goalRange="1"
                   expandColumns={ ["description"] }/>
-          </div>
-        </div>
-        
+              </div>
+            </div>
+         </div>
+         
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' , paddingBottom: 0}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 2`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -68,11 +75,17 @@ class Strategies extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none' , paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_2`} />
             </div>
-            <CapabilitiesTable
+          </div>
+        </div>
+        
+        <div className='property-info-w'>
+           <div className="property-info-main" style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-section">
+              <CapabilitiesTable
                   title= "NYS Agency Programs Addressing Goal 2"
                   type="program"
                   columns={ ["name", "description" , "agency", "hazards", "goal"] }
@@ -80,11 +93,12 @@ class Strategies extends Component {
                   urlColumn="url"
                   goalRange="2"
                   expandColumns={ ["description"] }/>
+            </div>
           </div>
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' , paddingBottom: 0}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 3`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -94,11 +108,17 @@ class Strategies extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none' , paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_3`} />
             </div>
-            <CapabilitiesTable
+          </div>
+          </div>
+        
+        <div className='property-info-w'>
+           <div className="property-info-main" style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-section">
+              <CapabilitiesTable
                   title= "NYS Agency Programs Addressing Goal 3"
                   type="program"
                   columns={ ["name", "description" , "agency", "hazards", "goal"] }
@@ -106,11 +126,12 @@ class Strategies extends Component {
                   urlColumn="url"
                   goalRange="3"
                   expandColumns={ ["description"] }/>
+            </div>
           </div>
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none'}}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' , paddingBottom: 0}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 4`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -120,11 +141,17 @@ class Strategies extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, borderLeft: 'none' , paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_4`} />
             </div>
-            <CapabilitiesTable
+          </div>
+        </div>
+        
+        <div className='property-info-w'>
+           <div className="property-info-main" style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-section">
+              <CapabilitiesTable
                   title= "NYS Agency Programs Addressing Goal 4"
                   type="program"
                   columns={ ["name", "description" , "agency", "hazards", "goal"] }
@@ -132,11 +159,12 @@ class Strategies extends Component {
                   urlColumn="url"
                   goalRange="4"
                   expandColumns={ ["description"] }/>
+            </div>
           </div>
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' }}>
+          <div className='property-info-side' style={{maxWidth: '20%', borderRight: 'none' , paddingBottom: 0}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
              <div className='projects-list row'>
               <ProjectBox title={`goal 5`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -146,11 +174,17 @@ class Strategies extends Component {
             
             </div>
           </div>
-         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
+         <div className="property-info-main" style={{maxWidth: '80%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none' , paddingBottom: 0}}>
            <div className="property-section">
               <Content content_id={`capabilities-2019_goals_objectives_5`} />
             </div>
-            <CapabilitiesTable
+           </div> 
+          </div>
+        
+        <div className='property-info-w'>
+           <div className="property-info-main" style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-section">  
+              <CapabilitiesTable
                   title= "NYS Agency Programs Addressing Goal 5"
                   type="program"
                   columns={ ["name", "description" , "agency", "hazards", "goal"] }
@@ -158,10 +192,11 @@ class Strategies extends Component {
                   urlColumn="url"
                   goalRange="5"
                   expandColumns={ ["description"] }/>
+              </div>          
+            </div>
           </div>
-          
-        </div>          
-      </div>
+      </div>          
+
     )
   }
 }
