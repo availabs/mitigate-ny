@@ -194,8 +194,11 @@ class Strategies extends Component {
                   expandColumns={ ["description"] }/>
               </div>          
             </div>
+
+
           </div>
-      </div>          
+
+        </div>          
 
     )
   }
