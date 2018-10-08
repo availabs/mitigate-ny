@@ -27,8 +27,10 @@ class Local extends Component {
 
             <div className="property-section">
               <Content content_id={`section7-lhmp_submittal_review_process`} />
-            </div>  
-            
+            </div>
+            <div>  
+              <Content content_id={`section7-funding_plans_projects`} />
+            </div>
           </div>
          </div>
       </div>

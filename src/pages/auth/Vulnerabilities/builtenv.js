@@ -31,7 +31,6 @@ class BuiltEnv extends Component {
               <div className="property-section" style={{paddingTop:30}}>
                 <Content content_id={`vulnerabilities-built_environment`} />
               </div>
-              
             </div>
           </div>
         <div className='property-single'>

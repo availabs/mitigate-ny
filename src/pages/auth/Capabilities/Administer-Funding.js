@@ -21,20 +21,67 @@ class AdministerFunding extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-federal_funding`} />
             </div>
+          
+
+            <div className="property-section">
+              <Content content_id={`capabilities-dhses_administered_federal_funding`} />
+            </div>
           </div>
         </div>
 
-         <div className='property-info-w'>
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, borderRight: 'none'}}>
+        <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
-              <ProjectBox title={`Federal Funding Administered by DHSES`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`capabilities-dhses_administered_federal_funding`} />
-              </ProjectBox>  
+              <ProjectBox title={`Hazard Mitigation Grant Program (HMGP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-hmgp`} />
+              </ProjectBox>
+            </div>
+          </div>
+        </div>
+
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`Pre-Disaster Mitigation Program Grant (PDM)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-pdm`} />
+              </ProjectBox>
+
             </div>
            </div>
           </div>
         </div>
+
+        <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`Flood Mitigation Assistance Program (FMA)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-fma`} />
+              </ProjectBox>  
+            </div>
+          </div>
+        </div>
+        <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+            <div className='side-section-content' style={{paddingTop: 50 }}>
+             <div className='projects-list row'>
+              <ProjectBox title={`Other, Non-Mitigation Federal Funding Administered by DHSES`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`capabilities-funding_other`} />
+              </ProjectBox>
+              
+            </div>
+           </div>
+          </div>
+      </div>
+
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+           <div className="property-section">
+              <Content content_id={`capabilities-other_federal_funding`} />
+            </div>
+          </div>
+        </div>
+
 
         <div className='property-info-w'>
           <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
@@ -83,18 +130,8 @@ class AdministerFunding extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main"style={{paddingTop: 0}}> 
-
             <div className="property-section">
-              <Content content_id={`capabilities-agency_administered_funding_sources`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`local_funding_sources`} />
-
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`section7-funding_plans_projects`} />
+              <Content content_id={`capabilities-global_match`} />
               <CapabilitiesTable 
                title='Mitigation Funding Capabilities'  
                type="program"
