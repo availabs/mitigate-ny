@@ -129,8 +129,9 @@ class CapabilityItem extends React.Component {
 
 	makeHazardList() {
 		const { hazards } = this.props,
-			slice = Math.ceil(hazards.length / 3),
-			mappedHazards = hazards.map(hazard => ({ hazard, name: this.getHazardName(hazard) }))
+			split = hazards.split("|").map(h => h.trim()),
+			slice = Math.ceil(split.length / 3),
+			mappedHazards = split.map(hazard => ({ hazard, name: this.getHazardName(hazard) }))
 				.sort((a, b) => a.name < b.name ? -1 : 1);
 		return (
 			<div className="col-sm-12">

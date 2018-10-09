@@ -67,6 +67,18 @@ def toBoolean(string):
 		print "toBoolean ERROR:", string
 		raise e
 
+def toInt(string):
+	try:
+		if string is None:
+			return None
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		return int(string)
+	except Exception as e:
+		print "toInt ERROR:", string
+		raise e
+
 TYPES = [
 	'program',
 	'measure',
@@ -307,48 +319,48 @@ META = [
 		"convert": toString },
 
 	{ "column": "priority_1",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_2",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_3",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_4",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_5",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_6",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_7",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "priority_total",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "INT",
+		"convert": toInt },
 
 	{ "column": "benefit_cost_analysis",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "BOOLEAN",
+		"convert": toBoolean },
 
 	{ "column": "engineering_required",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "BOOLEAN",
+		"convert": toBoolean },
 
 	{ "column": "engineering_complete",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "BOOLEAN",
+		"convert": toBoolean },
 
 	{ "column": "type",
 		"type": "VARCHAR",
