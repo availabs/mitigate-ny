@@ -1,15 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { reduxFalcor } from 'utils/redux-falcor'
+
+import * as d3scale from "d3-scale";
 
 import {
   processSheldus5year,
-  getHazardName
+  getHazardName,
+  fnum
 } from 'utils/sheldusUtils'
+
+import {
+  EARLIEST_YEAR,
+  LATEST_YEAR
+} from "./yearsOfSevereWeatherData";
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
-class GeographyHazardScoreTable extends React.Component {
+class GeographyScoreTable extends React.Component {
 
   getHazardName(hazard) {
     try {
@@ -19,6 +28,25 @@ class GeographyHazardScoreTable extends React.Component {
       return getHazardName(hazard)
     }
   }
+
+    fetchFalcorDeps() {
+      const { geoLevel, dataType, geoid } = this.props;
+
+      return this.props.falcor.get(
+          ['riskIndex', 'hazards'],
+          ['geo', geoid, geoLevel]
+      )
+      .then(data => {
+          const hazards = data.json.riskIndex.hazards,
+            geoids = data.json.geo[geoid][geoLevel];
+          return this.props.falcor.get(
+            ['riskIndex', 'meta', hazards, ['id', 'name']],
+            ['geo', geoids, ['name']],
+            ['riskIndex', geoids, hazards, ['score', 'value']],
+            [dataType, geoids, hazards, { from: EARLIEST_YEAR, to: LATEST_YEAR }, ['property_damage', 'total_loss', 'num_events','num_episodes', 'num_loans']]
+          )
+      })
+    }
 
   renderGraphTable() {
     const { geoid, geoLevel, dataType, year } = this.props;
@@ -40,14 +68,12 @@ class GeographyHazardScoreTable extends React.Component {
               const column = this.getHazardName(hazard);//`${ hazard } Loss`;
               columns[column] = true;
               const processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
-              output[column] = parseInt((processedSheldus[year] / 1000), 10).toLocaleString();
+              output[column] = fnum(processedSheldus[year]);
               output['Total Loss'] += processedSheldus[year];
-              output['total-loss'] += processedSheldus[year];
           })
-          output['Total Loss'] = parseInt(output['Total Loss'] / 1000, 10).toLocaleString();
+          output['Total Loss'] = fnum(output['Total Loss']);
           return output;
         })
-        .sort((a, b) => b['total-loss'] - a['total-loss']);
     }
     catch (e) {
       return <ElementBox>Loading...</ElementBox>
@@ -76,6 +102,13 @@ class GeographyHazardScoreTable extends React.Component {
   }
 }
 
+GeographyScoreTable.defaultProps = {
+  geoLevel: 'counties',
+  geoid: '36',
+  year: LATEST_YEAR,
+  dataType: "severeWeather"
+}
+
 const mapStateToProps = state => ({
     riskIndexGraph: state.graph.riskIndex || {},
     sheldus: state.graph.sheldus || {},
@@ -88,4 +121,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GeographyHazardScoreTable)
+export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(GeographyScoreTable))

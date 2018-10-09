@@ -6,6 +6,7 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
 import {
+  getHazardName,
   fnum
 } from 'utils/sheldusUtils'
 
@@ -24,7 +25,8 @@ class HMAP_Table extends React.Component {
 			hazards = hazard ? [hazard] : hazards;
 // console.log("hazards:",hazards);
 	    	return this.props.falcor.get(
-	    		['hmap', geoid, hazards, years, 'length']
+	    		['hmap', geoid, hazards, years, 'length'],
+	    		["riskIndex", "meta", hazards, "name"]
 	    	)
 	    	.then(response => {
 	    		let max = 0;
@@ -66,24 +68,39 @@ class HMAP_Table extends React.Component {
 	    		['hmap', 'byId', project_ids,
 	    			[
 				  		"year",
+				  		"status",
 				  		"county",
 				  		"subgrantee",
 				  		"projecttype",
-				  		"projectamount"
+				  		"projectamount",
+				  		"hazardid",
+				  		"federalshareobligated"
 				  	]
 				]
 	    	)
 	    })
 	}
 
+	getHazardName(hazard) {
+  	try {
+    		return this.props.riskIndex.meta[hazard].name;
+  	}
+  	catch (e) {
+    		return getHazardName(hazard)
+  	}
+	}
+
 	createRow(data) {
 		const row = {};
 		row["year"] = data.year;
+		row["status"] = data.status;
 		row["project amount"] = fnum(data.projectamount);
+		row["federal share obligated"] = fnum(data.federalshareobligated);
 		row["county"] = data.county;
 		row["subgrantee"] = data.subgrantee;
 		row["project type"] = data.projecttype;
 		row["value"] = data.projectamount;
+		row["hazard"] = this.getHazardName(data.hazardid);
 		return row;
 	}
 
@@ -100,7 +117,8 @@ class HMAP_Table extends React.Component {
 		try {
 			return (
 				<TableBox { ...this.processData() }
-					filterKey="year"/>
+					filterKey="year"
+					filterColumns={ this.props.filterColumns }/>
 			)
 		}
 		catch (e) {
@@ -112,13 +130,15 @@ class HMAP_Table extends React.Component {
 HMAP_Table.defaultProps = {
 	geoid: '36',
 	geoLevel: 'state',
-	hazard: null
+	hazard: null,
+	filterColumns: []
 }
 
 const mapStateToProps = state => {
   return {
   	router: state.router,
-  	hmap: state.graph.hmap
+  	hmap: state.graph.hmap,
+  	riskIndex: state.graph.riskIndex
   };
 };
 

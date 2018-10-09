@@ -190,7 +190,7 @@ module.exports = {
 
 	getColorScale: domain =>
 		scaleOrdinal()
-			.domain(domain.sort())
+			.domain((domain && domain.sort()) || [1, 2])
 			.range(D3_CATEGORY20),
 
 	processSheldus : (data,key) => {

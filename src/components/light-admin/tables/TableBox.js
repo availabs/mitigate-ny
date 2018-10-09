@@ -9,12 +9,22 @@ import Pagination from './Pagination'
     this.state = {
       page: 0,
       filter: "",
-      filteredColumns: {}
+      filteredColumns: {},
+      sortColumn: "",
+      sortOrder: 1
     }
     this.setPage = this.setPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.setFilter = this.setFilter.bind(this);
+  }
+  toggleSortColumn(sortColumn) {
+    if (sortColumn === this.state.sortColumn) {
+      this.setState({ sortOrder: -this.state.sortOrder })
+    }
+    else {
+      this.setState({ sortColumn, sortOrder: -1 })
+    }
   }
   setPage(page) {
     this.setState({ page });
@@ -28,11 +38,51 @@ import Pagination from './Pagination'
     const page = Math.min(maxPages - 1, this.state.page + 1);
     this.setState({ page });
   }
+  getValue(data) {
+    if (!data) return data;
+    
+    const regex = /^[$]([0-9,.]+)([kKmMbBtT])*$/,
+      match = regex.exec(data && data.toString());
+    let value = data;
+    if (match) {
+      let num = +match[1].replace(",", ""),
+        mult = 1;
+      switch (match[2]) {
+        case "k":
+        case "K":
+          mult = 1000;
+          break;
+        case "m":
+        case "M":
+          mult = 1000000;
+          break;
+        case "b":
+        case "B":
+          mult = 1000000000;
+          break;
+        case "t":
+        case "T":
+          mult = 1000000000000;
+          break;
+      }
+      value = num * mult;
+    }
+    return value;
+  }
   getFilteredData() {
     let filterKey = this.props.filterKey,
       filter = this.state.filter,
-      data = this.props.data,
-      fc = this.state.filteredColumns;
+      data = this.props.data.slice(),
+      fc = this.state.filteredColumns,
+      sc = this.state.sortColumn,
+      so = this.state.sortOrder;
+    if (sc) {
+      data.sort((a, b) => {
+        const va = this.getValue(a[sc]),
+          vb = this.getValue(b[sc]);
+        return va < vb ? (-1 * so) : va > vb ? (1 * so) : 0;
+      })
+    }
     for (const c in fc) {
       data = data.filter(d => d[c] && fc[c].reduce((a, v) => a || d[c].toString().toLowerCase().includes(v), false))
     }
@@ -130,7 +180,10 @@ import Pagination from './Pagination'
             toggleFilterColumn={ this.toggleFilterColumn.bind(this) }
             filteredColumns={ this.state.filteredColumns }
             expandColumns={ this.props.expandColumns }
-            urlColumn={ this.props.urlColumn }/>
+            urlColumn={ this.props.urlColumn }
+            toggleSortColumn={ this.toggleSortColumn.bind(this) }
+            sortColumn={ this.state.sortColumn }
+            sortOrder={ this.state.sortOrder }/>
         </div>
         { paginate }
       </ElementBox>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import "./DataTable.css"
+
 const Selector = ({ value, options, onSelect, column }) =>
   <div className="btn-group">
     <button className="btn btn-primary dropdown-toggle"
@@ -12,7 +14,7 @@ const Selector = ({ value, options, onSelect, column }) =>
       {
         options.map(o =>
           <span className="dropdown-item" key={ o }
-            onClick={ () => onSelect(column, o) }
+            onClick={ e => (e.stopPropagation(), onSelect(column, o)) }
             style={ value.includes(o) ? { backgroundColor: "#00e", color: "#fff" } : null }>
             { o }
           </span>
@@ -85,7 +87,10 @@ export default class DataTable extends React.Component {
       toggleFilterColumn,
       filteredColumns,
       expandColumns=[],
-      urlColumn=null
+      urlColumn=null,
+      toggleSortColumn,
+      sortColumn,
+      sortOrder
     } = this.props;
     if (!columns.length) {
       columns = Object.keys(tableData[0])
@@ -99,7 +104,12 @@ export default class DataTable extends React.Component {
               columns.map(col => {
                 const filtered = filterColumns.filter(d => d.column === col);
                 if (!filtered.length) {
-                  return <th key={ col }>{ col }</th>;
+                  return (
+                    <th key={ col } onClick={ () => toggleSortColumn(col) } className="sortable"
+                      style={ sortColumn === col ? { borderRadius: "5px", backgroundColor: sortOrder === 1 ? "#0e0" : "#e00" } : null }>
+                      { col }
+                    </th>
+                  )
                 }
                 return <th key={ col }>
                   <Selector column={ col }
