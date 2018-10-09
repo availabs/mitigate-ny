@@ -118,7 +118,7 @@ export const META_DATA = {
 	"file_type_address": { defaultValue: false, label: "Address" },
 	"file_type_not_tracked": { defaultValue: false, label: "File Type Not Tracked" },
 	"budget_provided": { defaultValue: null, label: "Budget Provided" },
-	"primary_funding": { defaultValue: null, label: "Primary Funding" },
+	"primary_funding": { defaultValue: null, label: "Funding Sources" },
 	"secondary_funding": { defaultValue: null, label: "Secondary Funding" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
