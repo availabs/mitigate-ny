@@ -63,7 +63,7 @@ class CapabilitiesPanel extends React.Component {
 
 		if (hazardFilters.length) {
 			filteredCapabilities = filteredCapabilities.filter(c =>
-				Boolean(c.hazards) && c.hazards.reduce((a, h) => a || hazardFilters.includes(h), false)
+				Boolean(c.hazards) && hazardFilters.reduce((a, h) => a || c.hazards.includes(h), false)
 			)
 		}
 		if (agencyFilters.length) {
