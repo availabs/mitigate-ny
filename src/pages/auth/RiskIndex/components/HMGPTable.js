@@ -74,7 +74,8 @@ class HMAP_Table extends React.Component {
 				  		"projecttype",
 				  		"projectamount",
 				  		"hazardid",
-				  		"federalshareobligated"
+				  		"federalshareobligated",
+				  		"programarea"
 				  	]
 				]
 	    	)
@@ -94,6 +95,7 @@ class HMAP_Table extends React.Component {
 		const row = {};
 		row["year"] = data.year;
 		row["status"] = data.status;
+		row["program area"] = data.programarea;
 		row["project amount"] = fnum(data.projectamount);
 		row["federal share obligated"] = fnum(data.federalshareobligated);
 		row["county"] = data.county;
