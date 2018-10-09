@@ -6,6 +6,7 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import ACS_Map from "components/mitigate-ny/ACS_Map"
+import HMGPTable from "pages/auth/RiskIndex/components/HMGPTable"
 import GeographyScoreBarChart from "pages/auth/RiskIndex/components/GeographyScoreBarChart"
 import GeographyScoreTable from "pages/auth/RiskIndex/components/GeographyScoreTable"
 
@@ -15,6 +16,14 @@ class TestPage extends React.Component {
     try {
       return (
         <Element>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HMGPTable filterColumns={ ["program area"] }/>
+              </ElementBox>
+            </div>
+          </div>
 
           <div className='row'>
             <div className='col-lg-12'>
