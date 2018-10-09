@@ -316,17 +316,7 @@ criticalInfrastructure (hazard) {
           {this.municipalityTable(hazard)}
 
         </div>
-        <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%'}}>
-            {this.statewideEvents(hazard,hazardName)}
-              
-              {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
-              <i style={{color: '#afafaf'}}>
-                Source: NCDC Storm Events Dataset
-              </i>
-          </div>
-        </div>
-        {this.historicMaps(hazard, hazardName)}
+        
        
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0}}>
@@ -349,7 +339,17 @@ criticalInfrastructure (hazard) {
               </div>
           </div>
         </div>
-        
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
+            {this.statewideEvents(hazard,hazardName)}
+              
+              {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
+              <i style={{color: '#afafaf'}}>
+                Source: NCDC Storm Events Dataset
+              </i>
+          </div>
+        </div>
+        {this.historicMaps(hazard, hazardName)}
         {this.eventsLossTable(hazard)}
 
 
