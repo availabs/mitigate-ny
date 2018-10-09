@@ -38,7 +38,8 @@ class MitigationActions extends Component {
               <div className="property-section">
                 <Content content_id={'hazards-hmgp-overview'} />
               </div> 
-                 <HMGPTable />
+                 <HMGPTable 
+                 filterColumns={ ['hazards' ] }/>
                   <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
               </div>
             </div>

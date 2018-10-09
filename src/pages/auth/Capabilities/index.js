@@ -27,29 +27,23 @@ class Capabilities extends Component {
    return (
       <div className='property-single'>
         <div className='property-info-w'>
-          <div className="property-info-main">
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
 
             <div className="property-section">
               <Content content_id={`capabilities-overview`} />
             </div>
 
             <div className="property-section">
-              <Content content_id={`capabilities-whats_changed_2014`} />
-              <CapabilitiesTable 
-              title='Statewide Mitigation Capabilities' 
-               type="program"
-               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
-               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
-               expandColumns={ ["description"] }/> 
+              <Content content_id={`capabilities-coordination_among_agencies`} />
             </div>
           </div>
         </div>
 
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, paddingBottom: 0, borderLeft: 'none'}}>
-           <div className="property-section">
-              <Content content_id={`capabilities-coordination_among_agencies`} />
-            </div>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingTop: 0, paddingBottom: 0}}>
+            <div className="property-section">
+              <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
+            </div>  
           </div>
           <div className='property-info-side' style={{maxWidth: '40%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
@@ -62,26 +56,20 @@ class Capabilities extends Component {
           </div>
         </div>  
 
-        <div className='property-info-w'>
-          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
-        
-            <div className="property-section">
-              <Content content_id={`capabilities-mitigation_agencies_participation`} />
-            </div>  
-
-            <div className="property-section">
-              <Content content_id={`section2-agency_stakeholder_responsible_for_implementation`} />
-            </div>    
-
-          </div>
-        </div>
-
 
 
         <div className='property-info-w'>
           <div className="property-info-main"style={{paddingTop: 0}}>
             <div className="property-section">
-              <Content content_id={`capabilities-hmgp`} />
+              <Content content_id={`capabilities-whats_changed_2014`} /> 
+              <CapabilitiesTable 
+              title='Statewide Mitigation Capabilities' 
+               type="program"
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               urlColumn="url"
+               expandColumns={ ["description"] }/>
+
             </div>
           </div>
          </div>
