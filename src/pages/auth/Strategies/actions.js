@@ -12,8 +12,20 @@ class MitigationActions extends Component {
   render () {
    return (
     <div className='property-single'>
-        <div className='property-info-w'>
+        <div className='property-info-w' style={{paddingTop: 0 , paddingBottom: 0}}>
           <div className="property-info-main">
+
+            <div className="property-section">
+              <Content content_id={`strategies-actions`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`strategies-actions_activities`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`strategies-actions-prioritization`} />
+            </div>
 
             <div className="property-section">
               <Content content_id={`strategies-actions_table`} />
@@ -26,8 +38,8 @@ class MitigationActions extends Component {
               <div className="property-section">
                 <Content content_id={'hazards-hmgp-overview'} />
               </div> 
-               <HMGPTable />
-                <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+                 <HMGPTable />
+                  <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
               </div>
             </div>
           </div>

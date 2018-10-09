@@ -10,6 +10,7 @@ import Glossary from './glossary'
 import Authorities from './authorities'
 import News from './news'
 import Implementation from './Implementation'
+import Footer from 'components/light-admin/containers/Footer'
 class About extends Component {
   render () {
 return (
@@ -19,6 +20,10 @@ return (
           
             <div className="property-section">
               <Content content_id={`home-about`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`section1-strategicframework`} />
             </div>
 
             <div className="property-section">
@@ -52,13 +57,13 @@ return (
               <Content content_id={`essentialterms-4-phases-2`} />
             </div>
 
-            <div className="property-section">
-              <Content content_id={`section1-strategicframework`} />
-            </div>
+            
           
           </div>
         </div>
       </div>
+
+      <Footer> </Footer>
     </div>
     )
   }

@@ -17,92 +17,20 @@ import PopulationsTable from "./components/PopulationsTable.react"
 
 import Viewport from "components/mapping/escmap/Viewport"
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
-import Content from 'components/cms/Content'
+
 import Submenus from './risk-submenus'
+import ElementBox from 'components/light-admin/containers/ElementBox'
+
+import ACS_Map from "components/mitigate-ny/ACS_Map"
 
 
 class VulnerabilitiesPage extends Component {
   render () {
     return (
       <Element>
-        <h6 className="element-header">New York Statewide Vulnerabilities</h6>
-        <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-riskindex_vulnerabilities`} />
-              </div>
-            </div>
-          </div>
+        <h6 className="element-header">New York State Population Change and Population Density Change</h6>
 
-
-        <div className='property-info-w'>
-          <div className="property-info-main">
-            <div className="property-section" style={{background: '#fff'}}>
-              <div style={{paddingLeft:15}}>
-                  <h5> Social Vulnerability Index (SOVI) </h5>
-              </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'sovi'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-bric`} />
-              </div>
-            </div>
-          </div>
-
-        <div className='property-info-w'>
-          <div className="property-info-main">
-            <div className="property-section" style={{background: '#fff'}}>
-              <div style={{paddingLeft:15}}>
-                  <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
-              </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'bric'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='property-single'>
-            <div className='property-info-w'>
-              <div className="property-section" style={{paddingTop:30}}>
-                <Content content_id={`vulnerabilities-built_environment`} />
-              </div>
-            </div>
-          </div>
-
-        <div className='property-info-w'>
-          <div className="property-info-main">
-            <div className="property-section" style={{background: '#fff'}}>
-              <div style={{paddingLeft:15}}>
-                  <h5> Risk Index Built Environment </h5>
-              </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'builtenv'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='property-single'>
+          <div className='property-single'>
             <div className='property-info-w'>
               <div className="property-section" style={{paddingTop:30}}>
                 <Content content_id={`vulnerabilities-change_pop_built`} />
@@ -110,14 +38,16 @@ class VulnerabilitiesPage extends Component {
             </div>
           </div>
 
-        <div className='row'>
-          <div className='col-lg-12'>
-            <PopulationsMap
-                geoid={36}
-                geoLevel='counties'
-              />
+         <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Map variable="population_change"
+                  range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
+                  scaleType="quantile"/>
+              </ElementBox>
+            </div>
           </div>
-        </div>
+
         <div className='property-single'>
             <div className='property-info-w'>
               <div className="property-section" style={{paddingTop:30}}>
@@ -126,14 +56,18 @@ class VulnerabilitiesPage extends Component {
             </div>
           </div> 
 
-        <div className='row'>
-          <div className='col-lg-12'>
-            <PopulationsTable
-                 geoid={36}
-                geoLevel='counties'
-              />
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Map variable="population_change"
+                  geoLevel="tracts"
+                  density={ true }
+                  range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
+                  scaleType="quantile"/>
+              </ElementBox>
+            </div>
           </div>
-        </div>
+
       </Element>
     )
   }

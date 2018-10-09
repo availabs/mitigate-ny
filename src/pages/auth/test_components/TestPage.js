@@ -31,6 +31,19 @@ class TestPage extends React.Component {
             </div>
           </div>
 
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Map 
+                  variable="population_change"
+                  geoLevel= "tracts"
+                  scaleType="quantile"
+                  density= {true}
+                  />
+              </ElementBox>
+            </div>
+          </div>
+
         </Element>
       )
     }
