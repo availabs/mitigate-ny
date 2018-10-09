@@ -5,6 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
+import ACS_Map from "components/mitigate-ny/ACS_Map"
 import GeographyScoreBarChart from "pages/auth/RiskIndex/components/GeographyScoreBarChart"
 import GeographyScoreTable from "pages/auth/RiskIndex/components/GeographyScoreTable"
 
