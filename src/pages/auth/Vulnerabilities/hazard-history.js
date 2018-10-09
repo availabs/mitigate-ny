@@ -159,7 +159,8 @@ class Hazardhistory extends Component {
             { ...this.state }
             showLegend = {true} />
           <h4> Presidential Disaster Declarations </h4>
-          <FemaDisasterDeclarationsTable />
+          <FemaDisasterDeclarationsTable
+          filterColumns={ ['disastername' ] }/> />
       	</Element>
     )
   }

@@ -2177,7 +2177,7 @@ span.loginMenu {
 
 
   &.menu-with-image {
-    background-image: linear-gradient(to bottom, rgba(21,32,70,0.1) 0%, rgba(16,20,41,0.2) 75%, rgba(14,21,53,0.65) 100%),url(/img/header_image.png) !important;
+    background-image: linear-gradient(to bottom, rgba(21,32,70,0.1) 0%, rgba(16,20,41,0.2) 75%, rgba(14,21,53,0.65) 100%),url(/img/flood-lourdes-binghamton-mitigation-highlight-3.jpg) !important;
     background-color: #4B6576;
     background-size: cover;
     background-position: center center;
@@ -2189,7 +2189,7 @@ span.loginMenu {
     .messages-notifications {
       > .os-icon {
         color: #fff;
-        text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+        text-shadow: 1px 2px 3px rgba(0,0,0,0.1);
       }
     }
     > .element-search {
@@ -2218,12 +2218,12 @@ span.loginMenu {
     .menu-page-header {
       display: block;
       flex: 0 0 100%;
-      padding: calc(100vh - 592px) 20px;
+      padding: calc(100vh - 600px) 20px;
       margin-bottom: 0px;
       order: 5;
-      margin-top: 30px;
+      margin-top: 0px;
       color: #fff;
-      text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+      text-shadow: 1px 3px 5px rgba(0,0,0,0.2);
     }
     h1.menu-page-header {
       font-size: $h1-font-size * 1.3;

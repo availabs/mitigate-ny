@@ -22,7 +22,11 @@ class nfip extends Component {
             </div>
 
             <div className="property-section">
+               <h5>Map of Flood Losses by Census Tract</h5>
                <NfipChoropleth/>
+               <i style={{color: '#afafaf'}}>
+                  Source: FEMA National Flood Insurance Program
+                </i>
             </div>
 
             <div className="property-section">

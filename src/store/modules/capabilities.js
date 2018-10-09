@@ -133,6 +133,7 @@ export const META_DATA = {
 	"num_staff": { defaultValue: "", label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: "", label: "Num. Contract Staff" },
 	"hazards": { defaultValue: "", label: "Hazards" },
+
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
 	"capability_response": { defaultValue: false, label: "Response" },

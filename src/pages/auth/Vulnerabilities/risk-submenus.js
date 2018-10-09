@@ -6,6 +6,6 @@ export default [
        {name: 'Vulnerable Populations', path: '/risk/vulnerablepopulations'},
        {name: 'Baseline Resilience', path: '/risk/bric'},
        {name: 'Built Environment', path: '/risk/builtenvironment'},
-       {name: 'Flooding Impacts', path: '/risk/nfip'},
+       {name: 'National Flood Insurance Program', path: '/risk/nfip'},
     ]
 ]

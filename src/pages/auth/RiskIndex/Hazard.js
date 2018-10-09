@@ -316,20 +316,27 @@ criticalInfrastructure (hazard) {
           {this.municipalityTable(hazard)}
 
         </div>
+        
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%'}}>
-            {this.statewideEvents(hazard,hazardName)}
-              
-              {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
-              <i style={{color: '#afafaf'}}>
-                Source: NCDC Storm Events Dataset
-              </i>
+            <div className="property-info-main" style={{maxWidth: '100%'}}>
+              <h5>Damage in Dollars from Severe Weather Events, By Census Tract, 1996-2017</h5>
+              <HazardMap  
+                  height={ 600 }
+                  hazard={hazard}
+                  standardScale={false}
+                  threeD={false}
+                  highRisk={0.0}
+                  tractTotals={ true }
+                  geoid='36'
+                />
+                <i style={{color: '#afafaf'}}>
+                  Source: NCDC Storm Events Dataset
+                </i>
+              </div>
           </div>
-        </div>
-        {this.historicMaps(hazard, hazardName)}
        
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0}}>
+          <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0 , paddingTop: 0}}>
               <div className="property-section">
                 <h5> {hazardName} - Reported Loss in Dollars by County </h5>
                 <strong>1996-2017</strong>
@@ -349,7 +356,17 @@ criticalInfrastructure (hazard) {
               </div>
           </div>
         </div>
-        
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '100%'}}>
+            {this.statewideEvents(hazard,hazardName)}
+              
+              {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
+              <i style={{color: '#afafaf'}}>
+                Source: NCDC Storm Events Dataset
+              </i>
+          </div>
+        </div>
+        {this.historicMaps(hazard, hazardName)}
         {this.eventsLossTable(hazard)}
 
 
