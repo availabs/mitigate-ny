@@ -109,6 +109,7 @@ class HazardList extends React.Component {
 					<div className="row">
 						<div className="col-12">
 							<ElementBox>
+							<h5>Damage in Dollars from Severe Weather Events, By Census Tract, 1996-2017</h5>
 								<HazardMap height={ 600 }
 									{ ...this.state }
 									threeD={ false }
@@ -116,6 +117,9 @@ class HazardList extends React.Component {
 									tractTotals={ true }
 									highRisk={ 0.0}/>
 							</ElementBox>
+							<i style={{color: '#afafaf'}}>
+			                  Source: NCDC Storm Events Dataset
+			                </i>
 						</div>
 					</div>
 
