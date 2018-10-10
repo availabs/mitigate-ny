@@ -17,7 +17,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CountyCapabilitiesTable/>
+                <CountyCapabilitiesTable
+                descriptions={ ['Economic Development Plan' , 'Post-Disaster Redevelopment Plan' , 'Hazard Mitigation Plan' , 'Coastal Erosion Hazard Area' , 'Coastal Zone Management Plan'] }/>
+
               </ElementBox>
             </div>
           </div>
