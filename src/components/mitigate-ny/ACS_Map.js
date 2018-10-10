@@ -8,8 +8,6 @@ import * as d3format from "d3-format"
 
 import * as turf from "@turf/turf"
 
-import ElementBox from 'components/light-admin/containers/ElementBox'
-
 import SvgMap from "components/mapping/escmap/SvgMap.react"
 import Viewport from "components/mapping/escmap/Viewport"
 
@@ -95,7 +93,6 @@ class ACS_Map extends React.Component {
 			return requests.reduce((a, c) => a.then(() => this.props.falcor.get(['geo', c, LATEST_YEAR, variable], ['geo', c, 'name'])), Promise.resolve())
 		})
 		.then(res => this.processAcsData())
-		return Promise.resolve()
 	}
 
 	processAcsData() {

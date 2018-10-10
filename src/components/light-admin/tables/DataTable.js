@@ -93,7 +93,7 @@ export default class DataTable extends React.Component {
       sortOrder
     } = this.props;
     if (!columns.length) {
-      columns = Object.keys(tableData[0])
+      columns = tableData.length ? Object.keys(tableData[0]) : []
     }
     const { expanded } = this.state;
     return (

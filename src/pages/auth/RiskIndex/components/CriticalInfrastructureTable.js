@@ -120,7 +120,9 @@ class CritTable extends React.Component {
 		return (
 			!tableData.length ? <ElementBox>Loading...</ElementBox> :
 			<TableBox data={ tableData }
-				title={ `At Risk Infrastructure for: ${ this.getHazardName() }` }/>
+				title={ `At Risk Infrastructure for: ${ this.getHazardName() }` }
+				filterColumn={ this.props.filterColumns }
+				expandColumns={ this.props.expandColumns }/>
 		)
 	}
 }
@@ -129,7 +131,9 @@ CritTable.defaultProps = {
 	geoid: '36',
 	geoLevel: "tracts",
 	hazard: "riverine",
-	highRisk: 0.95
+	highRisk: 0.95,
+	filterColumns: [],
+	expandColumns: []
 }
 
 const mapStateToProps = state => ({

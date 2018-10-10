@@ -5,10 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import ACS_Map from "components/mitigate-ny/ACS_Map"
-import HMGPTable from "pages/auth/RiskIndex/components/HMGPTable"
-import GeographyScoreBarChart from "pages/auth/RiskIndex/components/GeographyScoreBarChart"
-import GeographyScoreTable from "pages/auth/RiskIndex/components/GeographyScoreTable"
+import ACS_Table from "components/mitigate-ny/ACS_Table"
+import FemaDisasterDeclarationsTable from "pages/auth/RiskIndex/components/FemaDisasterDeclarationsTable"
 
 class TestPage extends React.Component {
 
@@ -20,7 +18,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HMGPTable filterColumns={ ["program area"] }/>
+                <ACS_Table />
               </ElementBox>
             </div>
           </div>
@@ -28,28 +26,8 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <GeographyScoreTable />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <GeographyScoreBarChart />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <ACS_Map 
-                  variable="population_change"
-                  geoLevel= "tracts"
-                  scaleType="quantile"
-                  density= {true}
-                  />
+                <FemaDisasterDeclarationsTable
+                  filterColumns={ ['hazard', 'declaration type'] }/>
               </ElementBox>
             </div>
           </div>

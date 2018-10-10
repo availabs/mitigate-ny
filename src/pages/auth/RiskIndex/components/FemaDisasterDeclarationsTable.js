@@ -10,6 +10,10 @@ import {
 	LATEST_YEAR
 } from "./yearsOfFemaDisasterDeclarationsData"
 
+import {
+  getHazardName
+} from 'utils/sheldusUtils'
+
 class FemaDisasterDeclarationsTable extends React.Component {
 	
 	fetchFalcorDeps() {
@@ -22,7 +26,8 @@ class FemaDisasterDeclarationsTable extends React.Component {
 	    	hazards = hazard ? [hazard] : hazards;
 // `femaDisaster[{keys:geoids}][{keys:hazardids}][{integers:years}].length`
 		    return this.props.falcor.get(
-		    	["femaDisaster", geoid, hazards, { from: EARLIEST_YEAR, to: LATEST_YEAR }, "length"]
+		    	["femaDisaster", geoid, hazards, { from: EARLIEST_YEAR, to: LATEST_YEAR }, "length"],
+		    	['riskIndex', 'meta', hazards, 'name']
 		    )
 		    .then(response => {
 		    	let max = 0;
@@ -55,13 +60,34 @@ class FemaDisasterDeclarationsTable extends React.Component {
 			    })
 			    .then(disasternumbers => {
 			    	if (!disasternumbers.length) return;
-	// `femaDisaster.byDisasterNumber[{integers:disasternumbers}]['disastername', 'declarationtype', 'geoid', 'year']`
 			    	return this.props.falcor.get(
-			    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disasternumber', 'disastername', 'declarationtype', 'date']]
+			    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disastername', 'declarationtype', 'date', 'hazard']]
 			    	)
 			    })
 		    })
 		})
+	}
+
+  getHazardName(hazard) {
+    try {
+      return this.props.riskIndexGraph.meta[hazard].name;
+    }
+    catch (e) {
+      return getHazardName(hazard)
+    }
+  }
+
+	getColumnLabel(column) {
+		switch (column) {
+			case 'disasternumber':
+				return 'disaster number';
+			case 'disastername':
+				return 'disaster name]';
+			case 'declarationtype':
+				return 'declaration type';
+			default:
+				return column;
+		}
 	}
 
 	processData() {
@@ -69,21 +95,30 @@ class FemaDisasterDeclarationsTable extends React.Component {
 			keys = {},
 			data = Object.keys(graph)
 				.map(key => {
-					let row = Object.assign({}, graph[key]);
-					Object.keys(row).forEach(k => { keys[k] = true; });
-					const date = new Date(row.date);
-					row.date = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`;
-					row.dateValue = date.valueOf();
+					let row = {};
+					for (const column in graph[key]) {
+						const label = this.getColumnLabel(column);
+						keys[label] = true;
+						row[label] = graph[key][column];
+					}
+					row['hazard'] = this.getHazardName(row['hazard']);
+					if (this.props.hazard) {
+						delete keys['hazard'];
+					}
+					const date = new Date(row['date']);
+					row['date'] = `${ date.getMonth() + 1 }/${ date.getDate() }/${ date.getFullYear() }`;
 					return row;
-				})
-				.sort((a, b) => b.dateValue - a.dateValue);
+				});
 		return { data, columns: Object.keys(keys) };
 	}
 
 	render() {
 		try {
 			return (
-				<TableBox { ...this.processData() }/>
+				<TableBox { ...this.processData() }
+					columnTypes={ this.props.columnTypes }
+					filterColumns={ this.props.filterColumns }
+					expandColumns={ this.props.expandColumns }/>
 			)
 		}
 		catch (e) {
@@ -94,15 +129,17 @@ class FemaDisasterDeclarationsTable extends React.Component {
 
 FemaDisasterDeclarationsTable.defaultProps = {
 	geoid: "36",
-	hazard: null
+	hazard: null,
+	columnTypes: { date: 'date' },
+	filterColumns: [],
+	expandColumns: []
 }
 
-const mapStateToProps = state => {
-  return {
-  	router: state.router,
-  	femaDisaster: state.graph.femaDisaster
-  };
-};
+const mapStateToProps = state => ({
+	router: state.router,
+	femaDisaster: state.graph.femaDisaster,
+	riskIndexGraph: state.graph.riskIndex
+})
 
 const mapDispatchToProps = {};
 
