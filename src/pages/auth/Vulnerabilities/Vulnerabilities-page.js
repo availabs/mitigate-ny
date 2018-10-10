@@ -22,8 +22,7 @@ import Submenus from './risk-submenus'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import ACS_Map from "components/mitigate-ny/ACS_Map"
-
-
+import ACS_Table from "components/mitigate-ny/ACS_Table"
 class VulnerabilitiesPage extends Component {
   render () {
     return (
@@ -44,6 +43,7 @@ class VulnerabilitiesPage extends Component {
                 <ACS_Map variable="population_change"
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
+                  <ACS_Table />
               </ElementBox>
             </div>
           </div>
@@ -64,6 +64,10 @@ class VulnerabilitiesPage extends Component {
                   density={ true }
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
+                  <ACS_Table 
+
+                  density={ true }/>
+
               </ElementBox>
             </div>
           </div>

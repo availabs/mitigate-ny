@@ -23,7 +23,8 @@ import builtenv from './builtenv'
 import hazardhistory from './hazard-history'
 import riskindex from './riskindex'
 import riskVulnerabilities from './Vulnerabilities-page'
-
+import FloodplainMapper from './flood-mapper'
+import AssetInventory  from './asset-inventory'
 
 import {
   getColorScale
@@ -174,5 +175,7 @@ export default [
   ...bric,
   ...hazardhistory,
   ...riskVulnerabilities,
+  ...FloodplainMapper,
+  ...AssetInventory
 
 ]
