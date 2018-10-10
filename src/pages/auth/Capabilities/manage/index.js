@@ -74,7 +74,8 @@ class CapabilitiesIndex extends React.Component {
               capability[attribute] = graph[attribute];
             })
             if (graph.agency) {
-              agencies[graph.agency] = true;
+              const a = graph.agency.split("|").map(a => a.trim())
+              a.forEach(a => agencies[a] = true);
             }
           capabilities.push(capability);
         })

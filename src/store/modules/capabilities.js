@@ -38,11 +38,13 @@ export const ATTRIBUTES = [
 	"file_type_lat_lon",
 	"file_type_address",
 	"file_type_not_tracked",
+
 	"budget_provided",
 	"primary_funding",
 	"secondary_funding",
 	"num_staff",
 	"num_contract_staff",
+
 	"hazards",
 
 	"capability_mitigation",
@@ -65,6 +67,7 @@ export const ATTRIBUTES = [
 	"capability_research",
 	"capability_policy",
 	"capability_regulatory",
+	"capability_resiliency",
 	
 	"related_policy",
 	"url",
@@ -80,13 +83,15 @@ export const ATTRIBUTES = [
 	"priority_6",
 	"priority_7",
 	"priority_total",
+
 	"benefit_cost_analysis",
 	"engineering_required",
 	"engineering_complete",
+
 	"type",
+
 	"municipality",
 	"county",
-	"capability_resiliency",
 
 	"id",
 	"created_at",
@@ -94,35 +99,41 @@ export const ATTRIBUTES = [
 ]
 export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, ATTRIBUTES.length - 3);
 export const META_DATA = {
-	"name": { defaultValue: null, label: "Name" },
-	"description": { defaultValue: null, label: "Description" },
-	"contact": { defaultValue: null, label: "Contact" },
-	"contact_email": { defaultValue: null, label: "Contact Email" },
-	"contact_title": { defaultValue: null, label: "Contact Title" },
-	"contact_department": { defaultValue: null, label: "Contact Department" },
-	"agency": { defaultValue: null, label: "Agency" },
-	"partners": { defaultValue: null, label: "Partners" },
+	"name": { defaultValue: "", label: "Name" },
+	"description": { defaultValue: "", label: "Description" },
+	"contact": { defaultValue: "", label: "Contact" },
+	"contact_email": { defaultValue: "", label: "Contact Email" },
+	"contact_title": { defaultValue: "", label: "Contact Title" },
+	"contact_department": { defaultValue: "", label: "Contact Department" },
+	"agency": { defaultValue: "", label: "Agency" },
+	"partners": { defaultValue: "", label: "Partners" },
+
 	"status_new_shmp": { defaultValue: false, label: "New SHMP" },
 	"status_carryover_shmp": { defaultValue: false, label: "Carryover SHMP" },
+
 	"status_in_progess": { defaultValue: false, label: "In Progress" },
 	"status_on_going": { defaultValue: false, label: "On Going" },
 	"status_unchanged": { defaultValue: false, label: "Unchanged" },
 	"status_completed": { defaultValue: false, label: "Completed" },
 	"status_discontinued": { defaultValue: false, label: "Discontinued" },
+
 	"admin_statewide": { defaultValue: false, label: "Statewide" },
 	"admin_regional": { defaultValue: false, label: "Regional" },
 	"admin_county": { defaultValue: false, label: "County" },
 	"admin_local": { defaultValue: false, label: "Local" },
+
 	"file_type_shp": { defaultValue: false, label: "Shape File" },
 	"file_type_lat_lon": { defaultValue: false, label: "Lat / Lon .csv" },
 	"file_type_address": { defaultValue: false, label: "Address" },
 	"file_type_not_tracked": { defaultValue: false, label: "File Type Not Tracked" },
-	"budget_provided": { defaultValue: null, label: "Budget Provided" },
-	"primary_funding": { defaultValue: null, label: "Funding Sources" },
-	"secondary_funding": { defaultValue: null, label: "Secondary Funding" },
-	"num_staff": { defaultValue: null, label: "Num. Staff" },
-	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: null, label: "Hazards" },
+
+	"budget_provided": { defaultValue: "", label: "Budget Provided" },
+	"primary_funding": { defaultValue: "", label: "Primary Funding" },
+	"secondary_funding": { defaultValue: "", label: "Secondary Funding" },
+	"num_staff": { defaultValue: "", label: "Num. Staff" },
+	"num_contract_staff": { defaultValue: "", label: "Num. Contract Staff" },
+	"hazards": { defaultValue: "", label: "Hazards" },
+
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
 	"capability_response": { defaultValue: false, label: "Response" },
@@ -134,7 +145,7 @@ export const META_DATA = {
 	"capability_risk_assessment": { defaultValue: false, label: "Risk Assessment" },
 	"capability_administer_funding": { defaultValue: false, label: "Administer Funding" },
 
-	"funding_amount": { defaultValue: null, label: "Funding Amount" },
+	"funding_amount": { defaultValue: "", label: "Funding Amount" },
 
 	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
 	"capability_construction": { defaultValue: false, label: "Construction" },
@@ -143,38 +154,92 @@ export const META_DATA = {
 	"capability_research": { defaultValue: false, label: "Research" },
 	"capability_policy": { defaultValue: false, label: "Policy Framework" },
 	"capability_regulatory": { defaultValue: false, label: "Regulatory" },
-	"capability_resiliency": { defaultValue: null, label: "Resiliency" },
-	"related_policy": { defaultValue: null, label: "Related Policy" },
-	"url": { defaultValue: null, label: "Project URL" },
-	"goal": { defaultValue: null, label: "Goal" },
-	"objective": { defaultValue: null, label: "Objective" },
+	"capability_resiliency": { defaultValue: false, label: "Resiliency" },
+
+	"related_policy": { defaultValue: "", label: "Related Policy" },
+	"url": { defaultValue: "", label: "Project URL" },
+	"goal": { defaultValue: "", label: "Goal" },
+	"objective": { defaultValue: "", label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
 	"admin": { defaultValue: [], label: "Location" },
 
-	"priority": { defaultValue: null, label: "Priority"},
-	"priority_1": { defaultValue: null, label: "Priority 1" }, 
-	"priority_2": { defaultValue: null, label: "Priority 2" },
-	"priority_3": { defaultValue: null, label: "Priority 3" },
-	"priority_4": { defaultValue: null, label: "Priority 4" },
-	"priority_5": { defaultValue: null, label: "Priority 5" },
-	"priority_6": { defaultValue: null, label: "Priority 6" },
-	"priority_7": { defaultValue: null, label: "Priority 7" },
-	"priority_total": { defaultValue: null, label: "Priority_Total" },
-	"benefit_cost_analysis": { defaultValue: null, label: "BCA" },
-	"engineering_required": { defaultValue: null, label: "Engineering Required" },
-	"engineering_complete": { defaultValue: null, label: "Engineering Completed" },
+	"priority": { defaultValue: "", label: "Priority" },
 
-	"type": { defaultValue: null, label: "Type"},
-	
-	"municipality": {defaultValue: null, label: "Municipality" },
-	"county": { defaultValue: null, label: "County" },
-	
+	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population" },
+	"priority_2": { defaultValue: 0, label: "Funding Availability" },
+	"priority_3": { defaultValue: 0, label: "Probability of Matching Funds" },
+	"priority_4": { defaultValue: 0, label: "Benefit Cost Review" },
+	"priority_5": { defaultValue: 0, label: "Environmental Benefit" },
+	"priority_6": { defaultValue: 0, label: "Technical Feasibility" },
+	"priority_7": { defaultValue: 0, label: "Timeframe of implementation" },
+
+	"priority_total": { defaultValue: "", label: "Priority Total" },
+
+	"benefit_cost_analysis": { defaultValue: "", label: "Benefit Cost Analysis" },
+	"engineering_required": { defaultValue: "", label: "Engineering Required" },
+	"engineering_complete": { defaultValue: "", label: "Engineering Completed" },
+
+	"type": { defaultValue: 'program', label: "Type"},
+
+	"municipality": {defaultValue: "", label: "Municipality" },
+	"county": { defaultValue: "", label: "County" },
+
+}
+
+export const PRIORITY_META_DATA = {
+	priority_1: {
+		4: { label: "Likely to be endorsed by the entire population" },
+		3: { label: "Of benefit only to those directly affected and would not adversely affect others" },
+		2: { label: "Would be somewhat controversial with special interest groups or a small percentage of the population" },
+		1: { label: "Would be strongly opposed by special interest groups or a significant percentage of the population" },
+		0: { label: "Would be strongly opposed by nearly all of the population" },
+	},
+	priority_2: {
+		4: { label: "Little to no direct expenses" },
+		3: { label: "Can be funded by operating budget" },
+		2: { label: "Grant funding identified" },
+		1: { label: "Grant funding needed" },
+		0: { label: "Potential funding source unknown" }
+	},
+	priority_3: {
+		4: { label: "Funding match is available or funding match not required" },
+		2: { label: "Partial funding match available" },
+		0: { label: "No funding match available or funding match unknown" }
+	},
+	priority_4: {
+		4: { label: "Likely to meet Benefit Cost Review" },
+		2: { label: "Benefit Cost Review not required" },
+		0: { label: "Benefit Cost Review unknown" }
+	},
+	priority_5: {
+		4: { label: "Environmentally sound and relatively easy to implement; or no adverse impact on environment." },
+		3: { label: "Environmentally acceptable and not anticipated to be difficult to implement" },
+		2: { label: "Environmental concerns and somewhat difficult to implement because of complex requirements" },
+		1: { label: "Difficult to implement because of significantly complex requirements and environmental permitting" },
+		0: { label: "Very difficult to implement due to extremely complex requirements and environmental permitting problems" }
+	},
+	priority_6: {
+		4: { label: "Proven to be technically feasible" },
+		2: { label: "Expected to be technically feasible" },
+		0: { label: "Technical feasibility unknown or additional information needed" }
+	},
+	priority_7: {
+		4: { label: "1 year or less (Short Term)" },
+		2: { label: "2 – 5 years (Long-Term)" },
+		0: { label: "More than 5 years (Long-Term)" }
+	}
 }
 export const getDefaultValue = attribute =>
-	META_DATA[attribute].defaultValue;
-export const getLabel = attribute =>
-	META_DATA[attribute].label
+	META_DATA[attribute] ? META_DATA[attribute].defaultValue : null;
+export const getLabel = (attribute, score=null) => {
+	if (score && (attribute in PRIORITY_META_DATA)) {
+		return PRIORITY_META_DATA[attribute][score].label;
+	}
+	else {
+		return META_DATA[attribute] ? META_DATA[attribute].label : attribute
+	}
+}
 
 export const receiveCapabilities = capabilities =>
 	dispatch => (
@@ -241,6 +306,10 @@ const INITIAL_STATE = {
 	agencyFilters: [],
 	agencies: []
 }
+
+ATTRIBUTES.forEach(att => {
+	INITIAL_STATE.capabilityData[att] = getDefaultValue(att)
+})
 
 export default (state=INITIAL_STATE, action) => {
 	switch (action.type) {

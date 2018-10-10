@@ -17,6 +17,7 @@ import {
 import {
   ATTRIBUTES,
   NEW_CAPABILITY_ATTRIBUTES,
+  PRIORITY_META_DATA,
   receiveHazards,
   setCapabilityData,
   getDefaultValue,
@@ -48,7 +49,6 @@ const FormRow = ({ type="text", id, placeholder, value, onChange }) =>
   </div>
 
 const CheckGroup = ({ type="checkbox", onChange, checks, name=null, label=getLabel }) => {
-  const variables = checks.reduce((a, c) => a.concat(...c.map(d => d.id)), []);
   return (
     <div className="form-group row">
       <div className="col-sm-2"/>
@@ -56,20 +56,46 @@ const CheckGroup = ({ type="checkbox", onChange, checks, name=null, label=getLab
         checks.map((group, i) =>
           <div className="col-sm-5" key={ i }>
             {
-              group.map(d =>
-                <div className="form-check" key={ d.id }>
-                  <label className="form-check-label">
-                    <input type={ type } className="form-check-input"
-                      checked={ d.checked || false } onChange={ e => onChange(e, variables) }
-                      id={ d.id } name={ name }/>
-                    { label(d.id) }
-                  </label>
-                </div>
-              )
+              group.map(d => {
+                const variables = checks
+                  .reduce((a, c) => a.concat(...c.filter(g => d.name === g.name).map(d => d.id)), [])
+                return (
+                  <div className="form-check" key={ d.id }>
+                    <label className="form-check-label">
+                      <input type={ type } className="form-check-input"
+                        checked={ d.checked || false } onChange={ e => onChange(e, variables) }
+                        id={ d.id } name={ d.name || name }/>
+                      { label(d.id) }
+                    </label>
+                  </div>
+                )
+              })
             }
           </div>
         )
       }
+    </div>
+  )
+}
+
+const PriorityRow = ({ onChange, id, value }) => {
+  return (
+    <div className="form-group row">
+      <div className="col-sm-2"/>
+      <div className="col-sm-8">
+        {
+          Object.keys(PRIORITY_META_DATA[id]).sort((a, b) => b - a).map(key => {
+            return <div className="form-check" key={ key }>
+              <label className="form-check-label">
+                <input type="radio" className="form-check-input"
+                  checked={ key == value } onChange={ e => onChange(id, key) }
+                  name={ id }/>
+                ({ key }) { getLabel(id, key) }
+              </label>
+            </div>
+          })
+        }
+      </div>
     </div>
   )
 }
@@ -166,23 +192,34 @@ class NewCapability extends React.Component {
   }
   hazards(e) {
     const hazard = e.target.id;
-    let hazards = this.state.hazards;
-    if (hazards && hazards.includes(e.target.id)) {
+    let hazards = this.state.hazards ? this.state.hazards.split("|") : [];
+    if (hazards.length && hazards.includes(e.target.id)) {
       hazards = hazards.filter(h => h !== e.target.id);
     }
-    else if (hazards) {
+    else if (hazards.length) {
       hazards.push(e.target.id);
     }
     else {
       hazards = [hazard];
     }
-    this.setState({ hazards });
+    this.setState({ hazards: hazards.join("|") });
   }
   selectAllHazards() {
-    this.setState({ hazards: this.props.capabilities.hazards })
+    this.setState({ hazards: this.props.capabilities.hazards.join("|") })
   }
   deselectAllHazards() {
-    this.setState({ hazards: [] })
+    this.setState({ hazards: "" })
+  }
+  setPriority(id, value) {
+    this.setState({ [id]: +value });
+  }
+  setType(e) {
+    if (e.target.checked) {
+      this.setState({ type: e.target.id })
+    }
+    else {
+      this.setState({ type: null })
+    }
   }
   onSubmit(e) {
     e.preventDefault();
@@ -195,7 +232,7 @@ class NewCapability extends React.Component {
     if (id !== null) {
       const data = { ...this.state },
         { hazards } = data;
-      data.hazards = { $type: "atom", value: hazards };
+      data.hazards = data.hazards.join("|");
       return this.props.falcor.set({
         paths: [
           ['capabilities', 'byId', id, ATTRIBUTES]
@@ -242,6 +279,7 @@ class NewCapability extends React.Component {
         id,
         name,
         description,
+
         contact,
         contact_email,
         contact_title,
@@ -279,7 +317,9 @@ class NewCapability extends React.Component {
         capability_environmental,
         capability_risk_assessment,
         capability_administer_funding,
-        capability_funding_amount,
+
+        funding_amount,
+
         capability_tech_support,
         capability_construction,
         capability_outreach,
@@ -287,10 +327,29 @@ class NewCapability extends React.Component {
         capability_research,
         capability_policy,
         capability_regulatory,
+        capability_resiliency,
+
+        priority_1,
+        priority_2,
+        priority_3,
+        priority_4,
+        priority_5,
+        priority_6,
+        priority_7,
+
         related_policy,
         url,
         goal,
-        objective
+        objective,
+
+        type,
+
+        municipality,
+        county,
+
+        benefit_cost_analysis,
+        engineering_required,
+        engineering_complete
       } = this.state,
       title = (id === null) ? "New Capability" : "Edit Capability";
     return (
@@ -317,6 +376,50 @@ class NewCapability extends React.Component {
                     value={ url }
                     onChange={ this.onChange.bind(this) }/>
 
+                <FormRow id="county"
+                    placeholder="Enter a county..."
+                    value={ county }
+                    onChange={ this.onChange.bind(this) }/>
+
+                <FormRow id="municipality"
+                    placeholder="Enter a municipality..."
+                    value={ municipality }
+                    onChange={ this.onChange.bind(this) }/>
+
+                <div className="form-group row">
+                  <label className="col-form-label col-sm-3">Type</label>
+                  <div className="col-sm-6">
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="radio" className="form-check-input"
+                          checked={ type === "program" } name="type"
+                          id="program"
+                          onChange={ this.setType.bind(this) }/>
+                        Program
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="radio" className="form-check-input"
+                          checked={ type === "measure" } name="type"
+                          id="measure"
+                          onChange={ this.setType.bind(this) }/>
+                        Measure
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="radio" className="form-check-input"
+                          checked={ type === "action" } name="type"
+                          id="action"
+                          onChange={ this.setType.bind(this) }/>
+                        Action
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
                 <Accordion title="Contact Information">
                   <FormRow id="contact"
                       placeholder="Enter a contact..."
@@ -342,7 +445,6 @@ class NewCapability extends React.Component {
                       placeholder="Enter partners..."
                       value={ partners }
                       onChange={ this.onChange.bind(this) }/>
-
                 </Accordion>
 
                 <Accordion title="Budget Information">
@@ -365,6 +467,10 @@ class NewCapability extends React.Component {
                   <FormRow id="num_contract_staff"
                       type="number"
                       value={ num_contract_staff }
+                      onChange={ this.onChange.bind(this) }/>
+                  <FormRow id="funding_amount"
+                      placeholder="Enter funding amount..."
+                      value={ funding_amount }
                       onChange={ this.onChange.bind(this) }/>
                 </Accordion>
 
@@ -401,18 +507,18 @@ class NewCapability extends React.Component {
                 </Accordion>
 
                 <Accordion title="Status">
-                  <CheckGroup onChange={ this.checkbox.bind(this) }
+                  <CheckGroup onChange={ this.radios.bind(this) } type="radio"
                     checks={
                       [[
-                        { id: "status_new_shmp", checked: status_new_shmp },
-                        { id: "status_carryover_shmp", checked: status_carryover_shmp },
-                        { id: "status_in_progess", checked: status_in_progess },
-                        { id: "status_on_going", checked: status_on_going }
+                        { id: "status_new_shmp", checked: status_new_shmp, name: "shmp" },
+                        { id: "status_carryover_shmp", checked: status_carryover_shmp, name: "shmp" }
                       ],
                       [
-                        { id: "status_unchanged", checked: status_unchanged },
-                        { id: "status_completed", checked: status_completed },
-                        { id: "status_discontinued", checked: status_discontinued },
+                        { id: "status_unchanged", checked: status_unchanged, name: "status" },
+                        { id: "status_completed", checked: status_completed, name: "status" },
+                        { id: "status_discontinued", checked: status_discontinued, name: "status" },
+                        { id: "status_in_progess", checked: status_in_progess, name: "status" },
+                        { id: "status_on_going", checked: status_on_going, name: "status" }
                       ]]
                     }/>
                 </Accordion>
@@ -445,16 +551,45 @@ class NewCapability extends React.Component {
                       ],
                       [
                         { id: "capability_administer_funding", checked: capability_administer_funding },
-                        { id: "capability_funding_amount", checked: capability_funding_amount },
                         { id: "capability_tech_support", checked: capability_tech_support },
                         { id: "capability_construction", checked: capability_construction },
                         { id: "capability_outreach", checked: capability_outreach },
                         { id: "capability_project_management", checked: capability_project_management },
                         { id: "capability_research", checked: capability_research },
                         { id: "capability_policy", checked: capability_policy },
-                        { id: "capability_regulatory", checked: capability_regulatory }
+                        { id: "capability_regulatory", checked: capability_regulatory },
+                        { id: "capability_resiliency", checked: capability_resiliency }
                       ]]
                     }/>
+                </Accordion>
+
+                <Accordion title={ getLabel("priority_1") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_1" value={ priority_1 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_2") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_2" value={ priority_2 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_3") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_3" value={ priority_3 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_4") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_4" value={ priority_4 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_5") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_5" value={ priority_5 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_6") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_6" value={ priority_6 }/>
+                </Accordion>
+                <Accordion title={ getLabel("priority_7") }>
+                  <PriorityRow onChange={ this.setPriority.bind(this) }
+                    id="priority_7" value={ priority_7 }/>
                 </Accordion>
 
                 <Accordion title="File Type">
@@ -484,6 +619,46 @@ class NewCapability extends React.Component {
                     placeholder="Enter objective..."
                     value={ objective }
                     onChange={ this.onChange.bind(this) }/>
+
+                <div className="form-group row">
+                  <div className="col-sm-3"/>
+                  <div className="col-sm-6">
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input"
+                          checked={ benefit_cost_analysis } id="benefit_cost_analysis"
+                          onChange={ this.checkbox.bind(this) }/>
+                        { getLabel("benefit_cost_analysis") }
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <div className="col-sm-3"/>
+                  <div className="col-sm-6">
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input"
+                          checked={ engineering_required } id="engineering_required"
+                          onChange={ this.checkbox.bind(this) }/>
+                        { getLabel("engineering_required") }
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <div className="col-sm-3"/>
+                  <div className="col-sm-6">
+                    <div className="form-check">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input"
+                          checked={ engineering_complete } id="engineering_complete"
+                          onChange={ this.checkbox.bind(this) }/>
+                        { getLabel("engineering_complete") }
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="form-buttons-w">
                   <button className="btn btn-primary">Submit</button>

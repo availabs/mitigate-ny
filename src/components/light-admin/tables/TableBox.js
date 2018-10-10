@@ -3,6 +3,44 @@ import ElementBox from '../containers/ElementBox'
 import DataTable from './DataTable'
 import Pagination from './Pagination'
 
+import * as d3format from "d3-format"
+
+const getFnumValue = fnum => {
+  const regex = /^[$]([0-9,.]+)([kKmMbBtT])*$/,
+    match = regex.exec(fnum);
+  let value = fnum;
+  if (match) {
+    let num = +match[1].replace(",", ""),
+      mult = 1;
+    switch (match[2]) {
+      case "k":
+      case "K":
+        mult = 1000;
+        break;
+      case "m":
+      case "M":
+        mult = 1000000;
+        break;
+      case "b":
+      case "B":
+        mult = 1000000000;
+        break;
+      case "t":
+      case "T":
+        mult = 1000000000000;
+        break;
+    }
+    value = num * mult;
+  }
+  return value;
+}
+
+const COERCE = {
+  string: s => s && s.toString(),
+  number: n => n && +n,
+  date: d => d && new Date(d).valueOf()
+}
+
  class TableBox extends React.Component {
   constructor(props) {
     super(props);
@@ -38,8 +76,17 @@ import Pagination from './Pagination'
     const page = Math.min(maxPages - 1, this.state.page + 1);
     this.setState({ page });
   }
-  getValue(data) {
+  getValue(data, column) {
     if (!data) return data;
+
+    const ct = this.props.columnTypes;
+
+    if (column in ct) {
+      data = COERCE[ct[column]](data);
+      if (ct[column] !== 'string') {
+        return data;
+      }
+    }
     
     const regex = /^[$]([0-9,.]+)([kKmMbBtT])*$/,
       match = regex.exec(data && data.toString());
@@ -78,21 +125,36 @@ import Pagination from './Pagination'
       so = this.state.sortOrder;
     if (sc) {
       data.sort((a, b) => {
-        const va = this.getValue(a[sc]),
-          vb = this.getValue(b[sc]);
+        const va = this.getValue(a[sc], sc),
+          vb = this.getValue(b[sc], sc);
         return va < vb ? (-1 * so) : va > vb ? (1 * so) : 0;
       })
     }
     for (const c in fc) {
       data = data.filter(d => d[c] && fc[c].reduce((a, v) => a || d[c].toString().toLowerCase().includes(v), false))
     }
-    if (!filter) return data;
-    if (!filterKey.length) {
-      filterKey = Object.keys(data[0])[0];
+    if (filter) {;
+      if (!filterKey.length) {
+        filterKey = Object.keys(data[0])[0];
+      }
+      data = data.filter(d =>
+        d[filterKey] && d[filterKey].toString().toLowerCase().includes(filter)
+      );
     }
-    return data.filter(d =>
-      d[filterKey] && d[filterKey].toString().toLowerCase().includes(filter)
-    );
+    const cf = this.props.columnFormats,
+      num = Object.keys(cf).length;
+    if (num) {
+      data = data.map(d => {
+        const row = { ...d },
+          cf = this.props.columnFormats;
+        for (const c in cf) {
+          const format = d3format.format(cf[c]);
+          row[c] = format(row[c]);
+        }
+        return row;
+      })
+    }
+    return data;
   }
   setFilter(e) {
     this.setState({ filter: e.target.value.toLowerCase() });
@@ -201,7 +263,9 @@ TableBox.defaultProps = {
   showControls: true,
   filterColumns: [],
   expandColumns: [],
-  urlColumn: null
+  urlColumn: null,
+  columnTypes: {},
+  columnFormats: {}
 }
 
 export default TableBox;

@@ -55,7 +55,7 @@ class CapabilitiesPanel extends React.Component {
 			.sort((a, b) => {
 				const aDate = (new Date(a.updated_at)).valueOf(),
 					bDate = (new Date(b.updated_at)).valueOf();
-				if (aDate === bDate) {
+				if ((aDate === bDate) && a.name) {
 					return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
 				}
 				return bDate - aDate
@@ -63,7 +63,7 @@ class CapabilitiesPanel extends React.Component {
 
 		if (hazardFilters.length) {
 			filteredCapabilities = filteredCapabilities.filter(c =>
-				Boolean(c.hazards) && c.hazards.reduce((a, h) => a || hazardFilters.includes(h), false)
+				Boolean(c.hazards) && hazardFilters.reduce((a, h) => a || c.hazards.includes(h), false)
 			)
 		}
 		if (agencyFilters.length) {
