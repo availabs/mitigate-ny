@@ -160,7 +160,7 @@ class Hazardhistory extends Component {
             showLegend = {true} />
           <h4> Presidential Disaster Declarations </h4>
           <FemaDisasterDeclarationsTable
-          filterColumns={ ['declarationtype' ] }/> />
+              filterColumns={ ['hazard', 'declaration type'] }/>
       	</Element>
     )
   }
