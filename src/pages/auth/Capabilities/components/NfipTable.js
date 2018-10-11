@@ -18,7 +18,7 @@ class NfipTable extends React.Component {
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
 			return this.props.falcor.get(
-				['nfip', 'byGeoid', geoids, 'allTime', ['num_losses', 'total_loss']],
+				['nfip', 'byGeoid', geoids, 'allTime', ['num_losses', 'total_loss', 'num_properties', 'num_mitigated']],
 				['geo', geoids, 'name']
 			)
 		})
@@ -38,13 +38,15 @@ console.log(this.props.nfip)
 			data.push({
 				[label]: name,
 				"num losses": graph.num_losses,
-				"total loss": fnum(graph.total_loss),
+				"num properties": graph.num_properties,
+				"num mitigated": graph.num_mitigated,
+				"total paid out": fnum(graph.total_loss),
 				sort: graph.total_loss
 			})
 		})
 		return {
 			data: data.filter(d => d.sort).sort((a, b) => b.sort - a.sort),
-			columns: [label, "num losses", "total loss"]
+			columns: [label, "num losses", "num properties", "num mitigated", "total paid out"]
 		};
 	}
 
@@ -56,7 +58,12 @@ console.log(this.props.nfip)
 			return (
 				<TableBox { ...this.processData() }
 					pageSize={ 8 }
-					title={ "NFIP Losses " + (geoLevel === 'counties' ? "By County" : "For " + name) }/>
+					title={ "NFIP Losses " + (geoLevel === 'counties' ? "By County" : "For " + name) }
+					columnFormats= { {
+						"num losses": ",d",
+						"num properties": ",d",
+						"num mitigated": ",d"
+					} }/>
 			)
 		}
 		catch (e) {

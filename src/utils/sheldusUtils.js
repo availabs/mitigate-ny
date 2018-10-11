@@ -141,12 +141,16 @@ const getHazardName = hazardid =>
 			.map((d, i) => i === 0 ? d.toUpperCase() : d)
 			.join("")
 
-function fnum(x, withDollar=true) {
+function fnum(x, withDollar=true, roundUnder10K=false) {
 	if(isNaN(x)) return x;
 
-	if(x < 9999) {
+	if(x < 9999 && !roundUnder10K) {
 		const frmt = format(withDollar ? "$,.0f" : ",.0f")
 		return frmt(x);
+	}
+	if (x > 999 && x < 9999 && roundUnder10K) {
+		const frmt = format(withDollar ? "$,.0f" : ",.0f")
+		return frmt(x/1000) + "K";
 	}
 
 	if(x < 1000000) {
