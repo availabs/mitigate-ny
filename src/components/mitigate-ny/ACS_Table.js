@@ -5,6 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 import TableBox from 'components/light-admin/tables/TableBox'
 
+import * as d3format from "d3-format"
+
 import {
 	EARLIEST_YEAR,
 	LATEST_YEAR,
@@ -45,7 +47,8 @@ class ACS_Table extends React.Component {
 						[geoLevel]: name,
 						[year]: dL,
 						[year_minus_5]: d5,
-						change: dL - d5
+						change: dL - d5,
+						percent: ((dL - d5) / d5) * 100
 					};
 				data.push(row);
 			})
@@ -53,17 +56,19 @@ class ACS_Table extends React.Component {
 		catch (e) {
 			data = [];
 		}
-		return { data, columns: [geoLevel, year_minus_5, year, 'change'] }
+		return { data, columns: [geoLevel, year_minus_5, year, 'change', 'percent'] }
 	}
 
 	render() {
+		const format = d3format.format(".1f");
 		return (
 			<TableBox { ...this.processData() }
 				filterKey={ this.props.geoLevel }
 				columnFormats={ {
 					[LATEST_YEAR]: ",d",
 					[LATEST_YEAR - 5]: ",d",
-					change: ",d"
+					change: ",d",
+					percent: d => format(d) + "%"
 				} }/>
 		)
 	}

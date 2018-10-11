@@ -319,7 +319,7 @@ class HazardMap extends React.Component {
 		{ geoid, geoLevel, hazard, minLoss }=this.props) {
 
 		let scale = d3scale.scaleThreshold()
-				.domain([50000, 500000, 5000000, 10000000])
+				.domain(this.props.thresholds)
 				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
 
     		heightScale = getHeightScale(),
@@ -868,7 +868,8 @@ HazardMap.defaultProps = {
 	highRisk: 0.0,
 	standardScale: true,
 	tractTotals: false,
-	minLoss: 500000
+	minLoss: 500000,
+	thresholds: [50000, 500000, 5000000, 10000000]
 }
 
 const mapStateToProps = state => ({

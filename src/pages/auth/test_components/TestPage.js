@@ -5,7 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import CountyCapabilitiesTable from "components/mitigate-ny/CountyCapabilitiesTable"
+import ACS_Table from "components/mitigate-ny/ACS_Table"
+import HazardEventsTable from "pages/auth/RiskIndex/components/HazardEventsTable"
 
 class TestPage extends React.Component {
 
@@ -17,9 +18,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CountyCapabilitiesTable
-                descriptions={ ['Economic Development Plan' , 'Post-Disaster Redevelopment Plan' , 'Hazard Mitigation Plan' , 'Coastal Erosion Hazard Area' , 'Coastal Zone Management Plan'] }/>
-
+                <ACS_Table />
               </ElementBox>
             </div>
           </div>

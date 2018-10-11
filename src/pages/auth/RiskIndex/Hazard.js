@@ -34,6 +34,36 @@ class Hazard extends Component {
     })
   }
 
+  getHazardMap(hazard) {
+    if(['riverine'].includes(hazard)) {
+      return (
+        <HazardMap  
+          height={ 600 }
+          hazard={ hazard }
+          standardScale={ false }
+          threeD={ false }
+          highRisk={0.0}
+          tractTotals={ true }
+          geoid='36'
+          thresholds={ [10000, 100000, 500000, 1000000] }
+        />
+      )
+    } else {
+      return (
+        <HazardMap  
+          height={ 600 }
+          hazard={ hazard }
+          standardScale={ false }
+          threeD={ false }
+          highRisk={0.0}
+          tractTotals={ true }
+          geoid='36'
+          thresholds={ [5000, 50000, 100000, 500000] }
+        />
+    )
+   }   
+  }
+
   presidential (hazard) {
     if(['wildfire' , 'heatwave' , 'tsunami' , 'volcano', 'lightning'].includes(hazard)) {
       return ''
@@ -344,16 +374,11 @@ criticalInfrastructure (hazard) {
         
         <div className='property-info-w'>
             <div className="property-info-main" style={{maxWidth: '100%'}}>
+
               <h5>Damage in Dollars from {hazardName} Events, By Census Tract, 1996-2017</h5>
-              <HazardMap  
-                  height={ 600 }
-                  hazard={hazard}
-                  standardScale={false}
-                  threeD={false}
-                  highRisk={0.0}
-                  tractTotals={ true }
-                  geoid='36'
-                />
+              
+                { this.getHazardMap(hazard) }
+
                 <i style={{color: '#afafaf'}}>
                   Source: NCDC Storm Events Dataset
                 </i>
