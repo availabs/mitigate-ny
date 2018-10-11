@@ -28,9 +28,46 @@ class LocalCapabilities extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_map`} />
             </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-lhmp_building_codes`} />
+            </div>
+            
             <CountyCapabilitiesTable
-                descriptions={ ['Economic Development Plan' , 'Post-Disaster Redevelopment Plan' , 'Hazard Mitigation Plan' , 'Coastal Erosion Hazard Area' , 'Coastal Zone Management Plan'] }/>
+                descriptions={ [
+                  'Economic Development Plan' , 
+                  'Post-Disaster Redevelopment Plan' , 
+                  'Hazard Mitigation Plan' , 
+                  'Coastal Erosion Hazard Area' , 
+                  'Coastal Zone Management Plan'] }/>
+            
+            <div className="property-section">
+              <Content content_id={`capabilities-lhmp_zoning`} />
+            </div>
+            
+            <CountyCapabilitiesTable
+                descriptions={ [
+                  'Economic Development Plan' , 
+                  'Post-Disaster Redevelopment Plan' , 
+                  'Hazard Mitigation Plan' , 
+                  'Coastal Erosion Hazard Area' , 
+                  'Coastal Zone Management Plan'] }/>
+
+             <div className="property-section">
+              <Content content_id={`capabilities-lhmp_capital_improvement_planning`} />
+            </div>
+            
+            <CountyCapabilitiesTable
+                descriptions={ [
+                  'Economic Development Plan' , 
+                  'Post-Disaster Redevelopment Plan' , 
+                  'Hazard Mitigation Plan' , 
+                  'Coastal Erosion Hazard Area' , 
+                  'Coastal Zone Management Plan'] }/>
+
           </div>
+
+
          </div>
       </div>
     )
