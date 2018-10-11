@@ -25,6 +25,7 @@ import riskindex from './riskindex'
 import riskVulnerabilities from './Vulnerabilities-page'
 import FloodplainMapper from './flood-mapper'
 import AssetInventory  from './asset-inventory'
+import FloodLossEstimates from './flood-loss-estimation'
 
 import {
   getColorScale
@@ -176,6 +177,7 @@ export default [
   ...hazardhistory,
   ...riskVulnerabilities,
   ...FloodplainMapper,
-  ...AssetInventory
+  ...AssetInventory,
+  ...FloodLossEstimates,
 
 ]
