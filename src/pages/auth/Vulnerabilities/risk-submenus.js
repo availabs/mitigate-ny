@@ -9,5 +9,6 @@ export default [
        {name: 'National Flood Insurance Program', path: '/risk/nfip'},
        {name: 'State Owned Asset Inventory', path: '/risk/assetinventory'},
        {name: 'Floodplain Mapper', path: '/risk/floodmapper'},
+       {name: 'Flood Loss Estimatation', path: '/risk/floodlossestimates'},
     ]
 ]
