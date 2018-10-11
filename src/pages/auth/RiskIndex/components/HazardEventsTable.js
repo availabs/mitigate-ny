@@ -26,38 +26,19 @@ class HazardEventsTable extends React.Component {
     	.then(hazardids => {
 // console.log("hazardids",hazardids)
 // 'severeWeather.events[{keys:geoids}][{keys:hazardids}][{integers:years}].length'
-			return this.props.falcor.get(
-				[this.props.dataType, "events", this.props.geoid, hazardids, year, "length"]
-			)
-		    .then(response => {
-		    	let max = 0;
-		    	hazardids.forEach(hazardid => {
-		    		const length = +response.json[this.props.dataType].events[this.props.geoid][hazardid][year].length;
-		    		max = Math.max(max, length);
-		    	})
-		    	return max;
-		    })
-			.then(max => {
-				if (!max) return [];
-// 'severeWeather.events[{keys:geoids}][{keys:hazardids}][{integers:years}][{integers:indices}].event_id'
-		    	return this.props.falcor.get(
-					[this.props.dataType, "events", this.props.geoid, hazardids, year, "byIndex", { from: 0, to: max - 1 }, "event_id"]
+				return this.props.falcor.get(
+					[this.props.dataType, 'events', this.props.geoid, hazardids, 'top', 'property_damage']
 				)
-				.then(response => {
-					const event_ids = [],
-						graph = response.json[this.props.dataType].events[this.props.geoid];
-
-					hazardids.forEach(hazardid => {
-		    			for (let index = 0; index < max; ++index) {
-		    				const data = graph[hazardid][year].byIndex[index];
-		    				if (data) {
-		    					event_ids.push(data.event_id);
-		    				}
-		    			}
-			    	})
-					return event_ids;
-				})
-			})
+		    .then(response => {
+console.log("RESPONSE:",response)
+		    	let event_ids = [];
+		    	hazardids.forEach(hazardid => {
+		    		const ids = response.json[this.props.dataType].events[this.props.geoid][hazardid].top.property_damage;
+		    		event_ids = event_ids.concat(ids);
+		    	})
+// console.log("event_ids",event_ids)
+		    	return event_ids;
+		    })
 	    })
 	    .then(event_ids => {
 // console.log("event_ids",event_ids.length)
@@ -88,19 +69,18 @@ class HazardEventsTable extends React.Component {
 
 	     	hazardids = hazard ? [hazard] : this.props.riskIndex.hazards.value,
 
-			event_ids = [],
+			
 
 			graphEventsByGeoid = this.props[dataType].events[geoid],
 			graphEventsById = this.props[dataType].events.byId,
 
 			data = [];
 
+		let event_ids = [];
+
 		hazardids.forEach(hazardid => {
-			const length = graphEventsByGeoid[hazardid][year].length,
-				byIndex = graphEventsByGeoid[hazardid][year].byIndex;
-			for (let index = 0; index < length; ++index) {
-				event_ids.push(byIndex[index].event_id);
-			}
+  		const ids = this.props[this.props.dataType].events[this.props.geoid][hazardid].top.property_damage.value;
+  		event_ids = event_ids.concat(ids);
 		})
 		event_ids.forEach(event_id => {
 			const {
@@ -147,7 +127,8 @@ HazardEventsTable.defaultProps = {
 	dataType: "severeWeather",
 	geoid: "36",
 	year: 2017,
-	expandColumns: ['narrative']
+	expandColumns: ['narrative'],
+	hazard: "riverine"
 }
 
 const mapStateToProps = state => {
