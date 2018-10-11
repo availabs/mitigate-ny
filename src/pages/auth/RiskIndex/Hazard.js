@@ -35,18 +35,33 @@ class Hazard extends Component {
   }
 
   getHazardMap(hazard) {
-    return (
-      <HazardMap  
-        height={ 600 }
-        hazard={ hazard }
-        standardScale={ false }
-        threeD={ false }
-        highRisk={0.0}
-        tractTotals={ true }
-        geoid='36'
-        thresholds={ [50000, 500000, 5000000, 10000000] }
-      />
+    if(['riverine'].includes(hazard)) {
+      return (
+        <HazardMap  
+          height={ 600 }
+          hazard={ hazard }
+          standardScale={ false }
+          threeD={ false }
+          highRisk={0.0}
+          tractTotals={ true }
+          geoid='36'
+          thresholds={ [10000, 100000, 500000, 1000000] }
+        />
+      )
+    } else {
+      return (
+        <HazardMap  
+          height={ 600 }
+          hazard={ hazard }
+          standardScale={ false }
+          threeD={ false }
+          highRisk={0.0}
+          tractTotals={ true }
+          geoid='36'
+          thresholds={ [5000, 50000, 100000, 500000] }
+        />
     )
+   }   
   }
 
   presidential (hazard) {
@@ -109,6 +124,25 @@ class Hazard extends Component {
       )
     }
   }
+
+   CRS (hazard) {
+    if(['riverine'].includes(hazard)) {
+      return (
+        <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content' style={{paddingTop: 0 }}>
+              <div className='projects-list row'>
+                <ProjectBox title={`Community Rating System (CRS)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                  <Content content_id={`${hazard}-crs`} />
+                </ProjectBox>
+              </div>
+            </div>
+        </div>     
+       )
+    } else {
+      return ''
+    }
+  }
+
 
   historicMaps (hazard, hazardName) {
     if(['wildfire' , 'heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'landslide' , 'coldwave' , 'tsunami' , 'hail' , 'icestorm' , 'winterweat'].includes(hazard)) {
@@ -290,17 +324,10 @@ criticalInfrastructure (hazard) {
 
             <div className="property-section">
               <Content content_id={`${hazard}-setting_context`} />
-            </div>
-
-          <div className="property-section">
-              <Content content_id={`${hazard}-characteristics`} />
-           </div>
-
-            <div className="property-section">
-              <Content content_id={`${hazard}-magnitude`} />
-           </div>
-           
+            </div>         
           </div>
+           
+
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
@@ -309,10 +336,23 @@ criticalInfrastructure (hazard) {
               </ProjectBox>  
             </div>
                 {this.HeroStats(hazard)}
-              
             </div>
           </div>
         </div>
+       <div className='property-info-w'>
+          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
+            <div className="property-section">
+              <Content content_id={`${hazard}-characteristics`} />
+            </div>
+            <div className="property-section">
+               <Content content_id={`${hazard}-magnitude`} />
+            </div>
+           </div>
+           
+             {this.CRS(hazard)}
+        </div>
+
+
 
         {/*
            Section 2 - Location & Historic Events
@@ -334,7 +374,8 @@ criticalInfrastructure (hazard) {
         
         <div className='property-info-w'>
             <div className="property-info-main" style={{maxWidth: '100%'}}>
-              <h5>Damage in Dollars from Severe Weather Events, By Census Tract, 1996-2017</h5>
+
+              <h5>Damage in Dollars from {hazardName} Events, By Census Tract, 1996-2017</h5>
               
                 { this.getHazardMap(hazard) }
 

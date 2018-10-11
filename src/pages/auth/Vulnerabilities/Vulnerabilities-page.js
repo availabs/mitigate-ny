@@ -64,9 +64,6 @@ class VulnerabilitiesPage extends Component {
                   density={ true }
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
-                  <ACS_Table 
-
-                  density={ true }/>
 
               </ElementBox>
             </div>
