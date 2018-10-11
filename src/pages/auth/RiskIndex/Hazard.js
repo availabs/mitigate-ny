@@ -44,6 +44,7 @@ class Hazard extends Component {
         highRisk={0.0}
         tractTotals={ true }
         geoid='36'
+        thresholds={ [50000, 500000, 5000000, 10000000] }
       />
     )
   }
