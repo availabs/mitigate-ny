@@ -86,7 +86,7 @@ class HazardEventsTable extends React.Component {
 	processData() {
 	    const { hazard, dataType, geoid, year } = this.props,
 
-	     	hazardids = hazard ? [hazard] : this.props.riskIndex.hazards,
+	     	hazardids = hazard ? [hazard] : this.props.riskIndex.hazards.value,
 
 			event_ids = [],
 
@@ -129,7 +129,9 @@ class HazardEventsTable extends React.Component {
 			return (
 				<TableBox { ...this.processData() }
 					filterKey="narrative"
-					pageSize={ 8 }/>
+					pageSize={ 8 }
+					expandColumns={ this.props.expandColumns }
+					columnTypes={ { date: "date" } }/>
 			)
 		}
 		catch (e) {
@@ -144,7 +146,8 @@ class HazardEventsTable extends React.Component {
 HazardEventsTable.defaultProps = {
 	dataType: "severeWeather",
 	geoid: "36",
-	year: 2017
+	year: 2017,
+	expandColumns: ['narrative']
 }
 
 const mapStateToProps = state => {

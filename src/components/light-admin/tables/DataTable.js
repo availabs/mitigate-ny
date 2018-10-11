@@ -105,9 +105,14 @@ export default class DataTable extends React.Component {
                 const filtered = filterColumns.filter(d => d.column === col);
                 if (!filtered.length) {
                   return (
-                    <th key={ col } onClick={ () => toggleSortColumn(col) } className="sortable"
-                      style={ sortColumn === col ? { borderRadius: "5px", backgroundColor: sortOrder === 1 ? "#0e0" : "#e00" } : null }>
+                    <th key={ col } onClick={ () => toggleSortColumn(col) } className="sortable">
                       { col }
+                      {
+                        col !== sortColumn ? null :
+                        sortOrder === 1 ?
+                        <span className="os-icon os-icon-arrow-up5"/> :
+                        <span className="os-icon os-icon-arrow-down5"/>
+                      }
                     </th>
                   )
                 }

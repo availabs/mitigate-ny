@@ -169,8 +169,7 @@ class CapabilitiesTable extends React.Component {
 				});
 		return {
 			data,
-			columns: columns.filter(c => !this.props.expandColumns.includes(c))
-									.map(c => getLabel(c))
+			columns: columns.map(c => getLabel(c))
 		};
 	}
 

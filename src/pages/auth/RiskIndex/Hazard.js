@@ -34,6 +34,20 @@ class Hazard extends Component {
     })
   }
 
+  getHazardMap(hazard) {
+    return (
+      <HazardMap  
+        height={ 600 }
+        hazard={ hazard }
+        standardScale={ false }
+        threeD={ false }
+        highRisk={0.0}
+        tractTotals={ true }
+        geoid='36'
+      />
+    )
+  }
+
   presidential (hazard) {
     if(['wildfire' , 'heatwave' , 'tsunami' , 'volcano', 'lightning'].includes(hazard)) {
       return ''
@@ -320,15 +334,9 @@ criticalInfrastructure (hazard) {
         <div className='property-info-w'>
             <div className="property-info-main" style={{maxWidth: '100%'}}>
               <h5>Damage in Dollars from Severe Weather Events, By Census Tract, 1996-2017</h5>
-              <HazardMap  
-                  height={ 600 }
-                  hazard={hazard}
-                  standardScale={false}
-                  threeD={false}
-                  highRisk={0.0}
-                  tractTotals={ true }
-                  geoid='36'
-                />
+              
+                { this.getHazardMap(hazard) }
+
                 <i style={{color: '#afafaf'}}>
                   Source: NCDC Storm Events Dataset
                 </i>

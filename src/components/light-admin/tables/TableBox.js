@@ -148,7 +148,10 @@ const COERCE = {
         const row = { ...d },
           cf = this.props.columnFormats;
         for (const c in cf) {
-          const format = d3format.format(cf[c]);
+          let format = cf[c];
+          if (typeof format === "string") {
+            format = d3format.format(cf[c]);
+          }
           row[c] = format(row[c]);
         }
         return row;
@@ -235,7 +238,7 @@ const COERCE = {
         <div className="table-responsive"
           style={ { minHeight: `${ this.props.pageSize * 46 + 39 }px` } }>
           <DataTable tableData={ tableData }
-            columns={ this.props.columns }
+            columns={ this.props.columns.filter(c => !this.props.expandColumns.includes(c)) }
             links={ this.props.links }
             onClick={ this.props.onClick }
             filterColumns={ filterColumns }
