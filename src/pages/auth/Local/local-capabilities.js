@@ -5,6 +5,7 @@ import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
 import Submenus from './local-submenus'
+import CountyCapabilitiesTable from "components/mitigate-ny/CountyCapabilitiesTable"
 
 class LocalCapabilities extends Component {
   render () {
@@ -19,12 +20,16 @@ class LocalCapabilities extends Component {
 
             <div className="property-section">
               <Content content_id={`capabilities-implementation`} />
+              
+
             </div>
            
             
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_map`} />
             </div>
+            <CountyCapabilitiesTable
+                descriptions={ ['Economic Development Plan' , 'Post-Disaster Redevelopment Plan' , 'Hazard Mitigation Plan' , 'Coastal Erosion Hazard Area' , 'Coastal Zone Management Plan'] }/>
           </div>
          </div>
       </div>
