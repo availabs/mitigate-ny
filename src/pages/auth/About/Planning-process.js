@@ -41,6 +41,11 @@ class PlanningProcess extends Component {
                 <Content content_id={`section1-2019whatsnew`} />
               </ProjectBox>  
             </div>
+            <div className='projects-list row'>
+              <ProjectBox title={`The 2014 and 2019 SHMP Road Maps`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`process-road_map`} />
+              </ProjectBox>  
+            </div>
            </div>
           </div>
         </div> 

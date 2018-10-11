@@ -18,7 +18,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <ACS_Table />
+                <HazardEventsTable hazard="riverine"/>
               </ElementBox>
             </div>
           </div>

@@ -10,6 +10,10 @@ import {
 	getGeoMesh
 } from 'store/modules/geo'
 
+import {
+	fnum
+}	from "utils/sheldusUtils"
+
 import * as d3scale from 'd3-scale'
 import * as d3color from 'd3-color'
 import * as d3format from "d3-format"
@@ -19,7 +23,7 @@ import Viewport from "components/mapping/escmap/Viewport"
 
 const formats = {
 	num_losses: d => d,
-	total_loss: d3format.format("$,d")
+	total_loss: d => fnum(d, true, true)
 }
 
 class CountyPlanChoropleth extends React.Component {

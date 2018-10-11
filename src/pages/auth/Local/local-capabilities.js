@@ -35,11 +35,20 @@ class LocalCapabilities extends Component {
             
             <CountyCapabilitiesTable
                 descriptions={ [
-                  'Economic Development Plan' , 
-                  'Post-Disaster Redevelopment Plan' , 
-                  'Hazard Mitigation Plan' , 
-                  'Coastal Erosion Hazard Area' , 
-                  'Coastal Zone Management Plan'] }/>
+                  'New York State Building Codes' , 
+                  
+                  'Building Code Official' ,
+                  
+                  'Site Plan Review Requirememts' ,
+                  'Local Site Plan Regulation' ,
+                                    
+                  'Local Subdivision Regulations' ,
+                  'Subdivision Ordinance' ,       
+
+                  'Growth Management Ordinance' ,
+                  'Land Acquisition Ordinance' ,
+                                    
+                  ] }/>
             
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_zoning`} />
@@ -47,23 +56,64 @@ class LocalCapabilities extends Component {
             
             <CountyCapabilitiesTable
                 descriptions={ [
-                  'Economic Development Plan' , 
-                  'Post-Disaster Redevelopment Plan' , 
-                  'Hazard Mitigation Plan' , 
-                  'Coastal Erosion Hazard Area' , 
-                  'Coastal Zone Management Plan'] }/>
+                  
+                  'Comprehensive/Master Plan' , 
+                  'Zoning Ordinance/Land Use Regulations' ,
+                  'Historical Preservation Plan' ,
+                  'Land Use Plan' ,
 
-             <div className="property-section">
-              <Content content_id={`capabilities-lhmp_capital_improvement_planning`} />
+                  ] }/>
+
+            
+            <div className="property-section">
+              <Content content_id={`capabilities-flood_water_management`} />
             </div>
             
             <CountyCapabilitiesTable
                 descriptions={ [
-                  'Economic Development Plan' , 
+                  'National Flood Insurance Program' ,
+                  'Flood Mitigation Plan (CRS/NFIP/SFHA)' ,
+                  'Flood Insurance Rate Map (FIRM)' ,
+                  'Floodplain Ordinance' ,
+                  'Storm Water Management Plan' , 
+                  'Storm Water / Watershed Management Ordinance' ,
+                  'Flood Mitigation Assistance (FMA)' ,
+                  'Riparian protection or setbacks' ,
+                  'Local Drainage Regulations (Flood and Stormwater)' ,
+                  'Coastal Erosion Hazard Area' , 
+                  'Dam Safety Program' ,
+                  
+                  ] }/>
+
+             <div className="property-section">
+              <Content content_id={`capabilities-recovery_response_mitigation`} />
+            </div>
+            
+            <CountyCapabilitiesTable
+                descriptions={ [
                   'Post-Disaster Redevelopment Plan' , 
                   'Hazard Mitigation Plan' , 
-                  'Coastal Erosion Hazard Area' , 
-                  'Coastal Zone Management Plan'] }/>
+                  'Post-Disaster Recovery Ordinance' ,
+                  'Post-Disaster Recovery Plan' ,
+                  'Post-Disaster Redevelopment Plan' ,
+                  'Property Aquisition Program' ,
+                  'Pre-Disaster Mitigation (PDM)' ,
+                  'Continuity of Operations Plan' ,
+                  'Comprehensive Emergency Management Plan' ,
+                  'Emergency Management Plan' ,
+                  
+
+                  ] }/>
+
+             <div className="property-section">
+              <Content content_id={`capabilities-lhmp_capital_improvement_planning`} />
+            </div>
+
+            <CountyCapabilitiesTable
+                descriptions={ [
+                  'Economic Development Plan' , 
+                  'Capital Improvement Plan' ,
+                  ] }/>
 
           </div>
 
