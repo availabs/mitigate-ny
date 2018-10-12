@@ -128,11 +128,12 @@ class Hazard extends Component {
    CRS (hazard) {
     if(['riverine'].includes(hazard)) {
       return (
+        
         <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
-                <ProjectBox title={`Community Rating System`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                  <Content content_id={`${hazard}-crs`} />
+                <ProjectBox title={`Flooding Case Study`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                  <Content content_id={`${hazard}-flooding_story`} />
                 </ProjectBox>
               </div>
             </div>
@@ -236,7 +237,7 @@ probabilityMap (hazard) {
 
 
 municipalityTable (hazard) {
-    if(['volcano'].includes(hazard)) {
+    if(['volcano' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -324,7 +325,13 @@ criticalInfrastructure (hazard) {
 
             <div className="property-section">
               <Content content_id={`${hazard}-setting_context`} />
-            </div>         
+            </div> 
+            <div className="property-section">
+              <Content content_id={`${hazard}-characteristics`} />
+            </div> 
+            <div className="property-section">
+               <Content content_id={`${hazard}-magnitude`} />
+            </div>       
           </div>
            
 
@@ -336,21 +343,11 @@ criticalInfrastructure (hazard) {
               </ProjectBox>  
             </div>
                 {this.HeroStats(hazard)}
+                {this.CRS(hazard)}
             </div>
           </div>
         </div>
-       <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
-            <div className="property-section">
-              <Content content_id={`${hazard}-characteristics`} />
-            </div>
-            <div className="property-section">
-               <Content content_id={`${hazard}-magnitude`} />
-            </div>
-           </div>
-           
-             {this.CRS(hazard)}
-        </div>
+
 
 
 
