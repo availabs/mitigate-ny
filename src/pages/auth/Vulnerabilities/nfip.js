@@ -45,6 +45,10 @@ class nfip extends Component {
               <Content content_id={`nfip-acquisitions_process`} />
             </div>
 
+            <div className="property-section">
+              <Content content_id={`riverine-crs`} />
+            </div>
+
           </div>
          </div>
       </div>

@@ -131,7 +131,7 @@ class Hazard extends Component {
         <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
-                <ProjectBox title={`Community Rating System (CRS)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <ProjectBox title={`Community Rating System`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                   <Content content_id={`${hazard}-crs`} />
                 </ProjectBox>
               </div>
