@@ -449,6 +449,7 @@ criticalInfrastructure (hazard) {
               columns={ ["name" , "agency" , 'contact_department' , "description" , 'admin' , 'url' ] }
               filterColumns={ ["goal" , 'agency' , 'admin'] }
               expandColumns={ ["description"] }
+              urlColumn="url"
               />
               <CapabilitiesTable 
               hazard={hazard}
@@ -470,6 +471,7 @@ criticalInfrastructure (hazard) {
               type="measure"
               columns={ ["name" ,  "description" , 'goal'] }
               filterColumns={ ["goal"] }
+
               />
             </div>
           </div>
