@@ -88,7 +88,7 @@ class CommentBox extends React.Component {
               <div className="form-group clearfix">
                 <span style={ { float: "right" } }>
                   <input type="submit" className="btn btn-primary"
-                    value="Leave Comment"/>
+                    value="Post Comment"/>
                 </span>
               </div>
             </form>
@@ -124,9 +124,13 @@ const Comment = ({ id, comment, name, email, authed, deleteComment }) =>
 ////
 
 class Comments extends React.Component {
+  state = {
+    page: 0,
+    numPerPage: 5,
+    maxPages: 0
+  }
 
   fetchFalcorDeps() {
-console.log("FETCHING FALCOR DEPS");
     return this.props.falcor.get(
       ['comments', 'byIndex', 'length']
     )
@@ -147,7 +151,6 @@ console.log("FETCHING FALCOR DEPS");
       })
     })
     .then(ids => {
-console.log("IDS:",ids);
       if (!ids.length) return this.props.receiveComments([]);
       return this.props.falcor.get(
         ['comments', 'byId', ids, ['name', 'email', 'comment', 'created_at']]
@@ -199,9 +202,69 @@ console.log("IDS:",ids);
     )
   }
 
+  componentWillReceiveProps(newProps) {
+    this.updateState(newProps);
+  }
+
+  updateState(props) {
+    const {
+      comments
+    } = props;
+    const state = {
+      ...this.state
+    }
+    let {
+      page,
+      numPerPage
+    } = state;
+    const maxPages = Math.max(Math.ceil(comments.length / numPerPage) - 1, 0);
+    page = Math.min(maxPages, page);
+    this.setState({ ...state, maxPages, page });
+  }
+
+  setPage(page) {
+    this.setState({ page });
+  }
+  incPage() {
+    const page = Math.min(this.state.page + 1, this.state.maxPages);
+    this.setState({ page });
+  }
+  decPage() {
+    const page = Math.max(this.state.page - 1, 0);
+    this.setState({ page });
+  }
+
+  getPaginationRange() {
+    const {
+      page,
+      maxPages
+    } = this.state;
+
+    let low = page - 2,
+      high = page + 2;
+
+    if (low < 0) high -= low;
+    if (high > maxPages) low -= (high - maxPages);
+
+    low = Math.max(low, 0);
+    high = Math.min(high, maxPages);
+
+    const range = [];
+    for (let i = low; i <= high; ++i) {
+      range.push(i);
+    }
+    return range;
+  }
+
   render() {
     const { comments } = this.props,
-      { authed } = this.props.user;
+      { authed } = this.props.user,
+      {
+        page,
+        numPerPage,
+        maxPages
+      } = this.state;
+      const range = this.getPaginationRange();
     try {
       return (
         <Element>
@@ -213,7 +276,75 @@ console.log("IDS:",ids);
               <div className="col-sm-2"/>
               <div className="col-sm-8">
                 <ElementBox>
-                  CONTROLS HERE
+            <div className="row">
+              <div className="col-lg-8">
+                <div>
+                  Page: { page + 1 } of { maxPages + 1 }
+                </div>
+                <div className="btn-group">
+                  <button className="btn btn-sm btn-outline-primary"
+                    style={ { width: "4rem" } }
+                    onClick={ this.setPage.bind(this, 0) }>
+                    First
+                  </button>
+                  <button className="btn btn-sm btn-outline-primary"
+                    style={ { marginLeft: "-2px", width: "4rem" } }
+                    onClick={ this.decPage.bind(this) }>
+                    Prev
+                  </button>
+                  {
+                    range.map(p =>
+                      <button className={ "btn btn-sm " + ((p == page) ? "btn-primary" : "btn-outline-primary") }
+                        style={ { marginLeft: "-2px", width: "2rem" } }
+                        onClick={ this.setPage.bind(this, p) } key={ p }>
+                        { p + 1 }
+                      </button>
+                    , this)
+                  }
+                  <button className="btn btn-sm btn-outline-primary"
+                    style={ { marginLeft: "-2px", width: "4rem" } }
+                    onClick={ this.incPage.bind(this) }>
+                    Next
+                  </button>
+                  <button className="btn btn-sm btn-outline-primary"
+                    style={ { marginLeft: "-2px", width: "4rem" } }
+                    onClick={ this.setPage.bind(this, maxPages) }>
+                    Last
+                  </button>
+                </div>
+              </div>
+              {/*<div className="col-lg-4" style={ { marginTop: "-0.4em", marginBottom: "-0.4em" } }>
+                <div className="row" style={ { marginBottom: "-3px" } }>
+                  <div className="col-lg-3">
+                    <label style={ { paddingTop: "0.4rem" } }
+                      htmlFor="search-filter-key">Search:</label>
+                  </div>
+                  <div className="col-lg-9">
+                    <select onChange={ this.setSearchFilterKey.bind(this) }
+                      id="search-filter-key"
+                      className="form-control form-control-sm"
+                      style= { {
+                        borderBottomLeftRadius: "0px",
+                        borderBottomRightRadius: "0px",
+                        paddingTop: "0",
+                        paddingBottom: "0" } }
+                      value={ this.state.searchFilterKey }>
+                      <option value="content_id">Content ID</option>
+                      <option value="body">Content Body</option>
+                      <option value="keys">Attibute Keys</option>
+                      <option value="values">Attribute Values</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <input type="text" value={ this.state.searchFilter }
+                    style={ { borderTopRightRadius: "0px" } }
+                    className="form-control form-control-sm"
+                    onChange={ this.setSearchFilter.bind(this) }
+                    placeholder="search for..."/>
+                </div>
+              </div>*/}
+            </div>
                 </ElementBox>
               </div>
             </div>
@@ -222,7 +353,9 @@ console.log("IDS:",ids);
               <div className="col-sm-2"/>
               <div className="col-sm-8">
                 {
-                  comments.sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf())
+                  comments
+                    .sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf())
+                    .slice(page * numPerPage, page * numPerPage + numPerPage)
                     .map((c, i) =>
                       <Comment key={ i } { ...c } authed={ authed }
                         deleteComment={ this.deleteComment.bind(this) }/>
