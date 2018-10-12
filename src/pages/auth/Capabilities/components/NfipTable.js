@@ -58,7 +58,7 @@ console.log(this.props.nfip)
 			return (
 				<TableBox { ...this.processData() }
 					pageSize={ 8 }
-					title={ "NFIP Losses " + (geoLevel === 'counties' ? "By County" : "For " + name) }
+					title={ "NFIP Repetitive Loss Properties and Losses " + (geoLevel === 'counties' ? "By County" : "For " + name) }
 					columnFormats= { {
 						"num losses": ",d",
 						"num properties": ",d",

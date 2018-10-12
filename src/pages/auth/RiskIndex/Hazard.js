@@ -128,11 +128,12 @@ class Hazard extends Component {
    CRS (hazard) {
     if(['riverine'].includes(hazard)) {
       return (
+        
         <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
-                <ProjectBox title={`Community Rating System (CRS)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                  <Content content_id={`${hazard}-crs`} />
+                <ProjectBox title={`Flooding Case Study`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                  <Content content_id={`${hazard}-flooding_story`} />
                 </ProjectBox>
               </div>
             </div>
@@ -182,7 +183,7 @@ class Hazard extends Component {
              <div className="property-section">
                <h5>Events with Highest Reported Loss in Dollars</h5>
                <strong>1996-2017</strong>
-               <div>Individual {hazardName} events and descriptions.</div>
+               <div>Individual {hazardName} events. Click on a row to view the event description.</div>
                <HazardEventsTable hazard={hazard} />
                <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
             </div>
@@ -236,7 +237,7 @@ probabilityMap (hazard) {
 
 
 municipalityTable (hazard) {
-    if(['volcano'].includes(hazard)) {
+    if(['volcano' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -324,7 +325,13 @@ criticalInfrastructure (hazard) {
 
             <div className="property-section">
               <Content content_id={`${hazard}-setting_context`} />
-            </div>         
+            </div> 
+            <div className="property-section">
+              <Content content_id={`${hazard}-characteristics`} />
+            </div> 
+            <div className="property-section">
+               <Content content_id={`${hazard}-magnitude`} />
+            </div>       
           </div>
            
 
@@ -336,21 +343,11 @@ criticalInfrastructure (hazard) {
               </ProjectBox>  
             </div>
                 {this.HeroStats(hazard)}
+                {this.CRS(hazard)}
             </div>
           </div>
         </div>
-       <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
-            <div className="property-section">
-              <Content content_id={`${hazard}-characteristics`} />
-            </div>
-            <div className="property-section">
-               <Content content_id={`${hazard}-magnitude`} />
-            </div>
-           </div>
-           
-             {this.CRS(hazard)}
-        </div>
+
 
 
 
@@ -449,6 +446,7 @@ criticalInfrastructure (hazard) {
               columns={ ["name" , "agency" , 'contact_department' , "description" , 'admin' , 'url' ] }
               filterColumns={ ["goal" , 'agency' , 'admin'] }
               expandColumns={ ["description"] }
+              urlColumn="url"
               />
               <CapabilitiesTable 
               hazard={hazard}
@@ -470,6 +468,7 @@ criticalInfrastructure (hazard) {
               type="measure"
               columns={ ["name" ,  "description" , 'goal'] }
               filterColumns={ ["goal"] }
+
               />
             </div>
           </div>
