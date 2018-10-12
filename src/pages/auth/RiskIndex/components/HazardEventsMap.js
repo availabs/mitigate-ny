@@ -20,6 +20,10 @@ import {
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
 
+import {
+	fnum
+} from "utils/sheldusUtils"
+
 class HazardEventsMap extends React.Component {
 	constructor(props) {
 		super(props);
@@ -85,11 +89,11 @@ class HazardEventsMap extends React.Component {
 						<td style={ { position: "relative", height: "120px" } }>
 
 							<CircleLabel radius={ 40 } color={ "#000" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000)) }/>
 							<CircleLabel radius={ 30 } color={ "#000" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000)) }/>
 							<CircleLabel radius={ 10 } color={ "#000" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000)) }/>
 
 						</td>
 					</tr>
@@ -109,11 +113,11 @@ class HazardEventsMap extends React.Component {
 						<td style={ { position: "relative", height: "90px" } }>
 
 							<CircleLabel radius={ 25 } color={ "#fff" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 40 / 1000)) }/>
 							<CircleLabel radius={ 15 } color={ "#fff" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 30 / 1000)) }/>
 							<CircleLabel radius={ 5 } color={ "#fff" }
-								value={ this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000) }/>
+								value={ (this.props.radiusScale.invert(distanceScales.metersPerPixel[0] * 10 / 1000)) }/>
 
 						</td>
 					</tr>

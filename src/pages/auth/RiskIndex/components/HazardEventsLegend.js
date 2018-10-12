@@ -10,6 +10,10 @@ import { getHazardName } from 'utils/sheldusUtils'
 
 import "./HazardEventsLegend.css"
 
+import {
+	fnum
+} from "utils/sheldusUtils"
+
 const format = d3format.format(",.0f")
 
 export const CircleDiv = ({ color="#000", radius=10, thickness=2, children=null, style={} }) =>
@@ -21,7 +25,7 @@ export const CircleLabel = ({ center="25%", bottom=20, radius, value, color="#00
 	<CircleDiv radius={ radius } thickness={ 1 } color={ color } style={ { position: "absolute", left: `calc(${ center } - ${ radius }px)`, bottom: `${ bottom }px` } }>
 		<span style={ { width: "100px", position: "absolute", left: `${ radius }px`, bottom: `${ radius * 2 - 2 }px`, borderBottom: `1px dashed ${ color }` } }/>
 		<span style={ { color: color, position: "absolute", left: `${ radius + 110 }px`, bottom: `${ radius * 2 - 12 }px` } }>
-			${ format(value) }
+			${ fnum(value) }
 		</span>
 	</CircleDiv>
 
