@@ -182,7 +182,7 @@ class Hazard extends Component {
              <div className="property-section">
                <h5>Events with Highest Reported Loss in Dollars</h5>
                <strong>1996-2017</strong>
-               <div>Individual {hazardName} events and descriptions.</div>
+               <div>Individual {hazardName} events. Click on a row to view the event description.</div>
                <HazardEventsTable hazard={hazard} />
                <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
             </div>

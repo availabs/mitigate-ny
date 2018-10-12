@@ -17,6 +17,19 @@ class Authorities extends Component {
             <div className="property-section">
               <Content content_id={`section2-genplanguidelines`} />
             </div> 
+
+            <div className="property-section">
+              <Content content_id={`about-governing_federal`} />
+            </div>   
+
+
+            <div className="property-section">
+              <Content content_id={`about-governing_nystate`} />
+            </div>   
+            
+            <div className="property-section">
+              <Content content_id={`about-studies_plans_consulted`} />
+            </div>  
             
 
             
