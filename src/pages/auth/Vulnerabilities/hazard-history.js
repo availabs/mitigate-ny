@@ -34,7 +34,7 @@ class Hazardhistory extends Component {
   constructor(props) {
     super(props);
 
-    const { params } = createMatchSelector({ path: '/risk/:geoid' })(props) || { params: { geoid: '36' } },
+    const { params } = createMatchSelector({ path: '/m/:geoid' })(props) || { params: { geoid: '36' } },
       { geoid } = params,
       geoLevel = (geoid.length === 2) ? 'counties' : 'cousubs';
 
@@ -55,7 +55,7 @@ class Hazardhistory extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { params } = createMatchSelector({ path: '/risk/:geoid' })(newProps) || { params: { geoid: '36' } },
+    const { params } = createMatchSelector({ path: '/m/:geoid' })(newProps) || { params: { geoid: '36' } },
       { geoid } = params;
     let geoLevel;
     switch (geoid.length) {
@@ -99,10 +99,10 @@ class Hazardhistory extends Component {
   }
 
   setGeoid(geoid) {
-    let url = "/risk";
+    let url = "/m";
     switch (geoid.toString().length) {
       case 5:
-        url = `/risk/${ geoid }`
+        url = `/m/${ geoid }`
         break;
     }
     this.props.push(url);

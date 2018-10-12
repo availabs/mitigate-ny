@@ -6,9 +6,9 @@ export default [
        {name: 'Vulnerable Populations', path: '/risk/vulnerablepopulations'},
        {name: 'Baseline Resilience', path: '/risk/bric'},
        {name: 'Built Environment', path: '/risk/builtenvironment'},
-       {name: 'National Flood Insurance Program', path: '/risk/nfip'},
-       {name: 'State Owned Asset Inventory', path: '/risk/assetinventory'},
+       {name: 'NFIP', path: '/risk/nfip'},
+       {name: 'State Owned Assets', path: '/risk/assetinventory'},
        {name: 'Floodplain Mapper', path: '/risk/floodmapper'},
-       {name: 'Flood Loss Estimatation', path: '/risk/floodlossestimates'},
+       {name: 'Flood Loss Estimates', path: '/risk/floodlossestimates'},
     ]
 ]

@@ -75,6 +75,7 @@ class LocalCapabilities extends Component {
                   'Flood Mitigation Plan (CRS/NFIP/SFHA)' ,
                   'Flood Insurance Rate Map (FIRM)' ,
                   'Floodplain Ordinance' ,
+                  'Floodplain Administrator' ,
                   'Storm Water Management Plan' , 
                   'Storm Water / Watershed Management Ordinance' ,
                   'Flood Mitigation Assistance (FMA)' ,
@@ -113,6 +114,33 @@ class LocalCapabilities extends Component {
                 descriptions={ [
                   'Economic Development Plan' , 
                   'Capital Improvement Plan' ,
+                  'Capital Improvement Projects Funding' ,
+                  'Community Development Block Grant(s)' ,
+                  'DEP Floodplain Management Funding' ,
+                  'FEMA Hazard Mitigation Grant Program' ,
+                  'Levy taxes for specific purposes' ,
+                  'State Funding' ,
+                  ] }/>
+            <div className="property-section">
+              <Content content_id={`capabilities-lhmp_staff`} />
+            </div>
+
+            <CountyCapabilitiesTable
+                descriptions={ [
+                  
+                  'Grant Writer' ,
+                  'Planner' ,
+                  'Highway Department' ,
+                  'GIS Specialist' ,
+                  'Emergency Management Personnel' , 
+                  'Building Code Official' ,
+                  'Engineer' ,
+                  'Floodplain Administrator' ,
+                  'Floodplain Management Personnel' ,
+                  'HAZUS Specialist' ,
+                  'Public Information Officer' ,
+
+
                   ] }/>
 
           </div>
