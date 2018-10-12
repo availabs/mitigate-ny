@@ -43,15 +43,16 @@ class GeographyScoreTable extends React.Component {
             ['riskIndex', 'meta', hazards, ['id', 'name']],
             ['geo', geoids, ['name']],
             ['riskIndex', geoids, hazards, ['score', 'value']],
-            [dataType, geoids, hazards, { from: EARLIEST_YEAR, to: LATEST_YEAR }, ['property_damage', 'total_loss', 'num_events','num_episodes', 'num_loans']]
+            [dataType, geoids, hazards, 'allTime', 'property_damage']
           )
       })
+      .then(res => (console.log(res),res))
     }
 
   renderGraphTable() {
     const { geoid, geoLevel, dataType, year } = this.props;
     let graphTableData = [], countyName = "",
-      columns = { [geoLevel]: true, 'Total Loss': true };
+      columns = {};
     try {
       countyName = (geoLevel === 'cousubs') ? this.props.geoGraph[geoid].name : "";
       graphTableData = this.props.geoGraph[geoid][geoLevel].value
@@ -59,17 +60,19 @@ class GeographyScoreTable extends React.Component {
           let output =  {
             [geoLevel]: this.props.geoGraph[geoLevelid].name,
             'Total Loss': 0,
-            "total-loss": 0,
             geoid: geoLevelid
           };
           this.props.riskIndexGraph.hazards.value
-            .filter(hazard => ['tsunami', 'avalanche', 'volcano'].indexOf(hazard) === -1)
+            .filter(hazard => !['tsunami', 'avalanche', 'volcano'].includes(hazard))
             .forEach(hazard => {
               const column = this.getHazardName(hazard);//`${ hazard } Loss`;
-              columns[column] = true;
-              const processedSheldus = processSheldus5year(this.props[dataType][geoLevelid][hazard], 'property_damage', 'total');
-              output[column] = fnum(processedSheldus[year]);
-              output['Total Loss'] += processedSheldus[year];
+              if (!(column in columns)) {
+                columns[column] = 0;
+              }
+              const data = +this.props[dataType][geoLevelid][hazard].allTime.property_damage;
+              columns[column] += data;
+              output[column] = fnum(data);
+              output['Total Loss'] += data;
           })
           output['Total Loss'] = fnum(output['Total Loss']);
           return output;
@@ -78,17 +81,15 @@ class GeographyScoreTable extends React.Component {
     catch (e) {
       return <ElementBox>Loading...</ElementBox>
     }
-
-    const onClick = (geoLevel === 'counties') ?
-      row => this.props.setGeoid(row.geoid) : null
     
     return (
       <TableBox
         title={ `NY Hazard Loss ${ (geoLevel === 'counties') ? 'by County' : `for ${ countyName }` }` }
-        desc={ `in $1000 ` }
         data={ graphTableData }
-        columns={ Object.keys(columns) }
-        onClick={ onClick }
+        columns={ [geoLevel, "Total Loss", ...Object.keys(columns).sort((a, b) => columns[b] - columns[a])] }
+        links={ {
+          [geoLevel]: row => `/m/${ row.geoid }`
+        } }
       />
     )
   }

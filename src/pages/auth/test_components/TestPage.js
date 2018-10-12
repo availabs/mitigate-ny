@@ -5,8 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import ACS_Table from "components/mitigate-ny/ACS_Table"
-import HazardEventsMapController from "pages/auth/RiskIndex/components/HazardEventsMapController"
+import GeographyScoreTable from "pages/auth/RiskIndex/components/GeographyScoreTable"
 
 class TestPage extends React.Component {
 
@@ -18,9 +17,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HazardEventsMapController
-                  showLegend={ true }
-                  hazard="riverine"/>
+                <GeographyScoreTable />
               </ElementBox>
             </div>
           </div>

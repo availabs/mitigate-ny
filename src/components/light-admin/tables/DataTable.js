@@ -45,7 +45,7 @@ class Row extends React.Component {
             return (
               (col in links) ?
                 <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
-                  <Link to={ links[col](row) }>{ row[col] }</Link>
+                  <a href={ links[col](row) }>{ row[col] }</a>
                 </td>
               : (col === urlColumn) ?
                 <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>

@@ -20,7 +20,7 @@ export const CircleDiv = ({ color="#000", radius=10, thickness=2, children=null,
 	<div style={ { height: `${ radius * 2 }px`, width: `${ radius * 2 }px`, borderRadius: `${ radius }px`, border: `${ thickness }px solid ${ color }`, display: "inline-block", ...style } }>
 		{ children }
 	</div>
-
+////
 export const CircleLabel = ({ center="25%", bottom=20, radius, value, color="#000" }) =>
 	<CircleDiv radius={ radius } thickness={ 1 } color={ color } style={ { position: "absolute", left: `calc(${ center } - ${ radius }px)`, bottom: `${ bottom }px` } }>
 		<span style={ { width: "100px", position: "absolute", left: `${ radius }px`, bottom: `${ radius * 2 - 2 }px`, borderBottom: `1px dashed ${ color }` } }/>

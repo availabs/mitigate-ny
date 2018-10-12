@@ -1,0 +1,7 @@
+CREATE TABLE public.comments(
+	name TEXT NOT NULL,
+	email TEXT DEFAULT NULL,
+	comment TEXT NOT NULL,
+	id BIGSERIAL PRIMARY KEY,
+	created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT  now()
+)
