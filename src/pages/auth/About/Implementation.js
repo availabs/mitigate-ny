@@ -17,6 +17,11 @@ class Implementation extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-integration-statewide-efforts`} />
             </div> 
+
+            <div className="property-section">
+              <Content content_id={`capabilities-dhses_admin_plan`} />
+            </div>
+            
             
 
             
