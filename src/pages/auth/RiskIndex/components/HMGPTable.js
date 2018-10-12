@@ -14,16 +14,15 @@ class HMAP_Table extends React.Component {
 	
 	fetchFalcorDeps() {
 	    const { geoid, geoLevel, hazard } = this.props;
-
 	    return this.props.falcor.get(
 	    	["hmap", "yearsOfData"],
 	    	['riskIndex', 'hazards']
 	    )
+	    .then(res => (console.log(res),res))
 	    .then(response => [response.json.hmap.yearsOfData, response.json.riskIndex.hazards])
 	    .then(([years, hazards]) => {
 // `hmap[{keys:geoids}][{keys:hazardids}][{integers:years}].length`
 			hazards = hazard ? [hazard] : hazards;
-// console.log("hazards:",hazards);
 	    	return this.props.falcor.get(
 	    		['hmap', geoid, hazards, years, 'length'],
 	    		["riskIndex", "meta", hazards, "name"]

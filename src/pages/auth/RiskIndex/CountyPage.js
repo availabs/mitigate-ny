@@ -30,7 +30,7 @@ class CountyPage extends React.Component {
 
     this.state = {
       geoid,
-      geoLevel: 'county',
+      geoLevel: 'counties',
       dataType: 'severeWeather',
       colorScale: getColorScale([1, 2])
     }

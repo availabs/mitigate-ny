@@ -11,6 +11,7 @@ import capabilities from "./modules/capabilities"
 import agencies from './modules/agencies'
 
 import messages from "./modules/messages"
+import comments from "./modules/comments"
 
 import createHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk'
@@ -40,6 +41,7 @@ const store = createStore(
     vulnerabilities,
     cms,
     messages,
+    comments,
     graph,
     agencies,
     capabilities,
