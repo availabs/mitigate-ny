@@ -6,7 +6,7 @@ import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import ACS_Table from "components/mitigate-ny/ACS_Table"
-import HazardEventsTable from "pages/auth/RiskIndex/components/HazardEventsTable"
+import HazardEventsMapController from "pages/auth/RiskIndex/components/HazardEventsMapController"
 
 class TestPage extends React.Component {
 
@@ -18,7 +18,9 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HazardEventsTable hazard="riverine"/>
+                <HazardEventsMapController
+                  showLegend={ true }
+                  hazard="riverine"/>
               </ElementBox>
             </div>
           </div>
