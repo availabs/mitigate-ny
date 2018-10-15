@@ -13,6 +13,9 @@ class Home extends Component {
           <div className="property-info-main">
           
             <div className="property-section">
+              <Content content_id={`home-welcome`} />
+            </div>
+            <div className="property-section">
               <Content content_id={`home-about`} />
             </div>
 
