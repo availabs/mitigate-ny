@@ -12,6 +12,7 @@ import Methodology from './Methodology'
 import News from './news'
 import Implementation from './Implementation'
 import Footer from 'components/light-admin/containers/Footer'
+
 class About extends Component {
   render () {
 return (
@@ -63,8 +64,6 @@ return (
           </div>
         </div>
       </div>
-
-      <Footer> </Footer>
     </div>
     )
   }

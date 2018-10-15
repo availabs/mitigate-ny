@@ -51,7 +51,7 @@ class MapView extends Component {
         type: 'circle',
         source: {
           type: 'vector',
-          url: 'mapbox://am3081.8bc75gkh'
+          url: 'mapbox://am3081.9nklwcow'
         },
         'source-layer': 'ogsassets',
         paint: {
@@ -101,6 +101,7 @@ export default {
 	mainNav: false,
   menuSettings: {
     image: 'none',
+    noFooter: true,
     scheme: 'color-scheme-light', 
     position: 'menu-position-top',
     layout: 'menu-layout-full',
