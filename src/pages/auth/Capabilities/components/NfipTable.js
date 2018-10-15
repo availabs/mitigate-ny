@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
-import * as d3format from "d3-format"
-
 import { fnum } from "utils/sheldusUtils"
 
 import get from "lodash.get";
@@ -42,7 +40,7 @@ console.log(this.props.nfip)
 				"num losses": graph.num_losses,
 				"num properties": graph.num_properties,
 				"num mitigated": graph.num_mitigated,
-				"percent mitigated": (graph.num_mitigated / graph.num_properties) * 100,
+				"percent mitigated": graph.num_mitigated / graph.num_properties,
 				"total paid out": fnum(graph.total_loss),
 				sort: graph.total_loss
 			})
@@ -57,8 +55,7 @@ console.log(this.props.nfip)
 	render() {
 		const { geoid, geoLevel } = this.props;
 		try {
-			const name = this.props.geoGraph[geoid].name,
-				format = d3format.format(".2f");
+			const name = this.props.geoGraph[geoid].name;
 			return (
 				<TableBox { ...this.processData() }
 					pageSize={ 8 }
@@ -67,7 +64,7 @@ console.log(this.props.nfip)
 						"num losses": ",d",
 						"num properties": ",d",
 						"num mitigated": ",d",
-						"percent mitigated": d => format(d) + "%"
+						"percent mitigated": ".2%"
 					} }/>
 			)
 		}
