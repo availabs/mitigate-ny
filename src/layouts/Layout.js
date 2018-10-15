@@ -5,6 +5,7 @@ import { Route, Redirect } from "react-router-dom";
 import Menu from 'components/light-admin/menu'
 import BreadcrumbBar from 'components/light-admin/breadcrumb-bar'
 import ContentContainer from 'components/light-admin/containers/ContentContainer'
+import Footer from 'components/light-admin/containers/Footer'
 
 const DefaultLayout = ({component: Component, ...rest}) => {
   
@@ -39,6 +40,7 @@ const DefaultLayout = ({component: Component, ...rest}) => {
         <ContentContainer>
           <Component {...matchProps} {...rest}/>
         </ContentContainer>
+        <Footer {...rest}/>
       </div>  
     )} />
   )
