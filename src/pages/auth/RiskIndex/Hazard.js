@@ -92,7 +92,8 @@ class Hazard extends Component {
                   <h5>Statewide Map of {hazardName} Events </h5>
                   <strong>1996-2017</strong>
                   <div>
-                    Map of all individual {hazardName} events in New York State from 1996-2017 with damages above $50k, sized by total loss.<br />
+                    Below is a map of individual {hazardName} events in New York State from 1996-2017 with damages above $50k, sized by total loss.
+                    <br />
                   </div>
                  
                   <HazardEventsMapController
@@ -160,7 +161,10 @@ class Hazard extends Component {
         }
 
           <div className= 'col-12'>
-           
+           <h5>{hazardName} Events by Year</h5>
+           <div>
+            Click on the arrows next to the year above any map to view and compare historical years. <br />
+            </div>
             <HazardEventsMapController
               showLegend={ false }
               hazard={ hazard }
@@ -183,7 +187,7 @@ class Hazard extends Component {
              <div className="property-section">
                <h5>Events with Highest Reported Loss in Dollars</h5>
                <strong>1996-2017</strong>
-               <div>Individual {hazardName} events. Click on a row to view the event description.</div>
+               <div>The table below summarizes the top 50 {hazardName} events by loss in dollars. Click on a row to view the event description.</div>
                <HazardEventsTable hazard={hazard} />
                <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
             </div>
@@ -387,7 +391,7 @@ criticalInfrastructure (hazard) {
               <div className="property-section">
                 <h5> {hazardName} - Reported Loss in Dollars by County </h5>
                 <strong>1996-2017</strong>
-                <div>Summarizes the loss amount due to {hazardName} in dollars for each county. Severe events are considered those which cause more than $1M in damage.</div>
+                <div>The table below summarizes the loss amount due to Flooding in dollars for each county. Severe events are considered those which caused more than $1M in damage.</div>
                 
                 <HazardScoreTable 
                   hazard={hazard}

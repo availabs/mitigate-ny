@@ -16,12 +16,7 @@ class MitigationFunding extends Component {
            
            <div className="property-section">
               <Content content_id={`capabilities-administer_funding`} />
-            </div>
-
-           <div className="property-section">
-              <Content content_id={`capabilities-federal_funding`} />
-            </div>
-          
+            </div>       
 
             <div className="property-section">
               <Content content_id={`capabilities-dhses_administered_federal_funding`} />
@@ -30,7 +25,7 @@ class MitigationFunding extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`Hazard Mitigation Grant Program (HMGP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -39,8 +34,9 @@ class MitigationFunding extends Component {
             </div>
           </div>
         </div>
-
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+       </div>
+       <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`Pre-Disaster Mitigation Program Grant (PDM)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -51,9 +47,9 @@ class MitigationFunding extends Component {
            </div>
           </div>
         </div>
-
+       
         <div className='property-info-w'>
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`Flood Mitigation Assistance Program (FMA)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -62,7 +58,9 @@ class MitigationFunding extends Component {
             </div>
           </div>
         </div>
-        <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+      </div>
+      <div className='property-info-w'>
+        <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`Other, Non-Mitigation Federal Funding Administered by DHSES`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -84,7 +82,7 @@ class MitigationFunding extends Component {
 
 
         <div className='property-info-w'>
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`RiskMAP`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -93,8 +91,9 @@ class MitigationFunding extends Component {
             </div>
           </div>
         </div>
-
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+      </div>
+      <div className='property-info-w'>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`National Flood Insurance Program (NFIP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -106,7 +105,7 @@ class MitigationFunding extends Component {
         </div>
 
         <div className='property-info-w'>
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`FEMA Cooperating Technical Partners (CTP)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -115,8 +114,10 @@ class MitigationFunding extends Component {
             </div>
           </div>
         </div>
+      </div>
+       <div className='property-info-w'>
 
-          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '50%', borderRight: 'none'}}>
+          <div className='property-info-main' style={{paddingTop: 0, paddingBottom: 0, maxWidth: '100%', borderRight: 'none'}}>
             <div className='side-section-content' style={{paddingTop: 50 }}>
              <div className='projects-list row'>
               <ProjectBox title={`Community Development Block Grant (CDBG)`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -131,7 +132,6 @@ class MitigationFunding extends Component {
         <div className='property-info-w'>
           <div className="property-info-main"style={{paddingTop: 0}}> 
             <div className="property-section">
-              <Content content_id={`capabilities-global_match`} />
               <CapabilitiesTable 
                title='Mitigation Funding Capabilities'  
                type="program"

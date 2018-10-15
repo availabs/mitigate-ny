@@ -8,7 +8,7 @@ export default [
        {name: 'Built Environment', path: '/risk/builtenvironment'},
        {name: 'NFIP', path: '/risk/nfip'},
        {name: 'State Owned Assets', path: '/risk/assetinventory'},
-       {name: 'Floodplain Mapper', path: '/risk/floodmapper'},
+       {name: 'Floodplain Mapper', path: '/flood'},
        {name: 'Flood Loss Estimates', path: '/risk/floodlossestimates'},
     ]
 ]

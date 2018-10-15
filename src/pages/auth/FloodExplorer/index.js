@@ -38,12 +38,29 @@ class MapView extends Component {
     mapboxgl.accessToken = MAPBOX_TOKEN
     map = new mapboxgl.Map({
       container: this.state.mapId,
-      style: 'mapbox://styles/am3081/cjgi6glse001h2sqgjqcuov28',
-      center: [-77.250, 42.860],
-      minZoom: 9,
-      zoom: 7
+      style: 'mapbox://styles/am3081/cjnacvmc84qi72rqgsfkivtup',
+      center: [-75.250, 42.860],
+      // minZoom: ,
+      zoom: 6.5
     });
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+    map.on('load', function() {
+
+      map.addLayer({
+        id: 'ogsassets-rated',
+        type: 'circle',
+        source: {
+          type: 'vector',
+          url: 'mapbox://am3081.8bc75gkh'
+        },
+        'source-layer': 'ogsassets',
+        paint: {
+          'circle-radius': 3,
+          'circle-opacity': 0.8,
+          'circle-color': 'rgb(171, 72, 33)'
+        }
+      });
+    });
     // map.on('load',  () => {
     //   map.addSource("npmrds", {
     //       type: 'vector',
@@ -84,7 +101,7 @@ export default {
 	mainNav: false,
   menuSettings: {
     image: 'none',
-    scheme: 'color-scheme-dark', 
+    scheme: 'color-scheme-light', 
     position: 'menu-position-top',
     layout: 'menu-layout-full',
     style: 'color-style-default'  

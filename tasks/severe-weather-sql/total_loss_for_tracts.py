@@ -72,7 +72,7 @@ HAZARDS_TO_SEVERE_WEATHER = {
         'Flash Flood',
         "THUNDERSTORM WINDS/FLASH FLOOD",
         "THUNDERSTORM WINDS/ FLOOD",
-        
+        'Hurricane Flood'
     ],
     'lightning': [
         'Lightning',
@@ -89,7 +89,8 @@ HAZARDS_TO_SEVERE_WEATHER = {
         'Hurricane (Typhoon)',
         "Marine Hurricane/Typhoon",
         "Marine Tropical Storm",
-        "Tropical Storm"
+        "Tropical Storm",
+        'Hurricane Flood'
     ],
     'heatwave': [
         'Heat',
