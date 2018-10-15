@@ -36,6 +36,11 @@ class Capabilities extends Component {
             <div className="property-section">
               <Content content_id={`capabilities-coordination_among_agencies`} />
             </div>
+
+            <div className="property-section">
+              <Content content_id={`capabilities-integration-statewide-efforts`} />
+            </div>
+
           </div>
         </div>
 
