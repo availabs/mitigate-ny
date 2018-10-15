@@ -16,12 +16,7 @@ class MitigationFunding extends Component {
            
            <div className="property-section">
               <Content content_id={`capabilities-administer_funding`} />
-            </div>
-
-           <div className="property-section">
-              <Content content_id={`capabilities-federal_funding`} />
-            </div>
-          
+            </div>       
 
             <div className="property-section">
               <Content content_id={`capabilities-dhses_administered_federal_funding`} />
@@ -131,7 +126,6 @@ class MitigationFunding extends Component {
         <div className='property-info-w'>
           <div className="property-info-main"style={{paddingTop: 0}}> 
             <div className="property-section">
-              <Content content_id={`capabilities-global_match`} />
               <CapabilitiesTable 
                title='Mitigation Funding Capabilities'  
                type="program"
