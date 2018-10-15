@@ -20,7 +20,9 @@ class AssetInventory extends Component {
             <div className="property-section">
               <Content content_id={`risk-asset_inventory`} />
             </div>
-
+            <div className="property-section">
+              <Content content_id={`risk-flood_asset_values`} />
+            </div>
 
           </div>
          </div>
