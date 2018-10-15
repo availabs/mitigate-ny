@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { reduxFalcor } from 'utils/redux-falcor'
 import get from 'lodash.get'
 
-import { total, avg } from 'utils/sheldusUtils'
+import * as d3format from "d3-format"
+
+import { total, avg, fnum } from 'utils/sheldusUtils'
 
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 
@@ -12,6 +14,7 @@ import {
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
 
+const percentFormat = d3format.format(".2%")
 
 class HazardList extends Component {
   state = {
@@ -24,8 +27,8 @@ class HazardList extends Component {
     let hazard = this.props.hazard || 'riverine'
     
     return this.props.falcor.get(
-        ['riskIndex','meta', hazard, ['id', 'name']],
-        [dataType, geoid, hazard, {from: EARLIEST_YEAR, to: LATEST_YEAR}, ['num_events','num_episodes', 'num_severe_events' ,'total_damage', 'injuries', 'fatalities']]
+      ['riskIndex','meta', hazard, ['id', 'name']],
+      [dataType, geoid, hazard, 'allTime', ['daily_severe_event_prob', 'annualized_num_severe_events', 'daily_event_prob','annualized_damage', 'annualized_num_events', 'injuries', 'fatalities']]
     )
     // .then(data => {
     //   console.log('all data back', Object.keys(data.json[dataType][geoid][hazard]), data.json[dataType][geoid][hazard])
@@ -41,9 +44,7 @@ class HazardList extends Component {
     let hazardName = this.props.riskIndex.meta ? this.props.riskIndex.meta[hazard].name : ''
     if ( !get(this.props,`${dataType}.${geoid}.${hazard}`, true) ) return <span />
 
-    let hazardData =   get(this.props,`${dataType}[${geoid}][${hazard}]`, {})
-    
-// console.log("HAZARD DATA:",hazardData)
+    let hazardData =   get(this.props,`${dataType}[${geoid}][${hazard}].allTime`, {})
     return (
       <div className='projects-list row'>
       <ProjectBox title={`Statewide Statistics`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
@@ -53,8 +54,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> ${avg(hazardData,'property_damage')} </div>
-                    <div className="label"> Annualized Loss from {hazardName}<br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
+                    <div className="value">{ fnum(hazardData['annualized_damage']) }</div>
+                    <div className="label">Annualized Loss from {hazardName}<br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
                   </div>
               </div>
             </div>
@@ -62,8 +63,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> {avg(hazardData,'num_episodes')}  </div>
-                    <div className="label"> Annualized # of {hazardName} Episodes
+                    <div className="value">{ hazardData['annualized_num_events'] }</div>
+                    <div className="label">Annualized # of { hazardName } Episodes
                     <br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
                   </div>
               </div>
@@ -72,7 +73,7 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> { (avg(hazardData,'num_episodes') / (365) * 100).toFixed(2) }% </div>
+                    <div className="value">{ percentFormat(hazardData['daily_event_prob']) }</div>
                     <div className="label">  Daily Probability of {hazardName} Episode</div>
                   </div>
               </div>
@@ -82,8 +83,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> {avg(hazardData,'num_severe_events')} </div>
-                    <div className="label"> Annualized # of Severe {hazardName} Episodes<br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
+                    <div className="value">{ hazardData['annualized_num_severe_events'] }</div>
+                    <div className="label">Annualized # of Severe {hazardName} Episodes<br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
                   </div>
               </div>
             </div>
@@ -91,8 +92,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> { (avg(hazardData,'num_severe_events') / (365) * 100).toFixed(2) }% </div>
-                    <div className="label">  Daily Propbability of Severe {hazardName} Episode</div>
+                    <div className="value">{ percentFormat(hazardData['daily_severe_event_prob']) }</div>
+                    <div className="label">Daily Propbability of Severe {hazardName} Episode</div>
                   </div>
               </div>
             </div>
@@ -100,8 +101,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> {total(hazardData,'injuries')}  </div>
-                    <div className="label"> Total {hazardName} Injuries
+                    <div className="value">{ hazardData['injuries'] }</div>
+                    <div className="label">Total {hazardName} Injuries
                     <br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
                   </div>
               </div>
@@ -110,8 +111,8 @@ class HazardList extends Component {
             <div className="row">   
               <div className="col-12" style={{textAlign:'center', paddingBottom: 30}}>
                   <div className="el-tablo highlight">
-                    <div className="value"> {total(hazardData,'fatalities')}  </div>
-                    <div className="label"> Total {hazardName} Fatalities
+                    <div className="value">{ hazardData['fatalities'] }</div>
+                    <div className="label">Total {hazardName} Fatalities
                     <br />({EARLIEST_YEAR}- {LATEST_YEAR})</div>
                   </div>
               </div>

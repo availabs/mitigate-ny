@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
+import { push } from "react-router-redux"
+
+import { history } from "store"
 
 import get from "lodash.get";
 
@@ -27,12 +30,17 @@ class CountyPlanChoropleth extends React.Component {
 			features: []
 		},
 		scale: d3scale.scaleThreshold()
-					.domain([0.0, 1.0, 3.0])
-					.range(["#666", "#fc8d59","#ffffbf","#91cf60"]),
+					.domain([0.0, 1.0, 2.0, 3.0])
+					.range(["#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850"]),
+		statusScale: d3scale.scaleThreshold()
+					.domain([1, 10, 11, 12])
+					.range(["#d73027","#f46d43","#fdae61","#fee08b","#ffffbf"]),
 		viewport: Viewport(),
 		hoverData: null,
 		dataProcessed: false
-	}
+	}//["#ffeda0","#feb24c","#f03b20"]
+	//["#ffffcc","#c2e699","#78c679","#31a354","#006837"]
+	//["#d73027","#f46d43","#fdae61","#fee08b","#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850"]
 
 	componentWillMount() {
 		this.props.getChildGeo('36', 'counties');
@@ -62,7 +70,7 @@ class CountyPlanChoropleth extends React.Component {
 		.then(geoids => {
 			return this.props.falcor.get(
 				['geo', geoids, 'name'],
-				['counties', 'byFips', geoids, ['plan_expiration', 'plan_consultant', 'plan_url']]
+				['counties', 'byFips', geoids, ['plan_status', 'plan_expiration', 'plan_consultant', 'plan_url']]
 			)
 		})
 		.then(() => this.processData())
@@ -83,6 +91,13 @@ class CountyPlanChoropleth extends React.Component {
 
 				millisecondsPerYear = 1000 * 60 * 60 * 24 * 365;
 
+			let ny_city_plan = {
+					time: null,
+					exp: null,
+					consultant: null
+				},
+				ny_city_features = [];
+
 			props.geo['36']['counties'].features.forEach(feature => {
 				const { properties, geometry } = feature,
 					geoid = properties.geoid,
@@ -90,19 +105,47 @@ class CountyPlanChoropleth extends React.Component {
 					graph = props.counties.byFips[geoid],
 					exp = new Date(graph["plan_expiration"]),
 
-					time = (exp.valueOf() - now.valueOf()) / millisecondsPerYear;
+					time = (exp.valueOf() - now.valueOf()) / millisecondsPerYear,
 
-				data.features.push({
-					type: "Feature",
-					properties: {
-						geoid,
-						name,
+					newFeature = {
+						type: "Feature",
+						properties: {
+							geoid,
+							name,
+							time,
+							exp: graph.plan_expiration,
+							consultant: graph.plan_consultant,
+							status: graph.plan_status
+						},
+						geometry
+					};
+
+				if (geoid === "36061") {
+					ny_city_plan = {
 						time,
 						exp: graph.plan_expiration,
 						consultant: graph.plan_consultant
-					},
-					geometry
-				})
+					};
+				}
+				if (["36005", "36047", "36081", "36085"].includes(geoid)) {
+					ny_city_features.push(newFeature);
+				}
+				else {
+					data.features.push(newFeature)
+				}
+			})
+			ny_city_features.forEach(feature => {
+				const { properties, geometry } = feature,
+
+					newFeature = {
+						type: "Feature",
+						properties: {
+							...properties,
+							...ny_city_plan
+						},
+						geometry
+					};
+				data.features.push(newFeature)
 			})
 			this.setState({ data, dataProcessed: Boolean(data.features.length) })
 		}
@@ -112,73 +155,96 @@ class CountyPlanChoropleth extends React.Component {
 	}
 
 	generateLayers() {
-		const { scale, data } = this.state,
+		const { scale, data, statusScale } = this.state,
 
 			getFillColor = ({ properties }) => {
 				const time = get(properties, `time`, 0),
-					color = d3color.color(scale(time));
+					status = get(properties, 'status', 0);
+				let color = d3color.color(scale(time));
+				if (time < 0) {
+					color = d3color.color(statusScale(status));
+				}
 				return [color.r, color.g, color.b, 255];
+			},
+
+			getStatusLabelstatusMap = status => {
+				if (status === 0) return "Expired";
+				if (status < 10) return "Update in Progress";
+				if (status === 10) return "Approvable Pending Adoption";
+				if (status === 11) return "Plan Approved, Under 50% Jurisdictions Adopted";
+				if (status < 15) return "Plan Approved, Over 50% Jurisdictions Adopted";
+				return "Plan Current";
 			}
 
-    	const layers = [
-	    	{
-	    		id: 'counties-layer',
-	    		data,
-	    		filled: true,
-	    		stroked: false,
-	    		getFillColor,
-	    		pickable: true,
-	    		autoHighlight: true,
-	    		highlightColor: [200, 200, 200, 255],
+  	const layers = [
+    	{
+    		id: 'counties-layer',
+    		data,
+    		filled: true,
+    		stroked: false,
+    		getFillColor,
+    		pickable: true,
+    		autoHighlight: true,
+    		highlightColor: [200, 200, 200, 255],
 
-		      	onHover: event => {
-		      		const { object, x, y } = event;
-		      		let hoverData = null;
-		      		if (object) {
-		      			const {
-		      					geoid,
-			      				name,
-			      				exp,
-			      				consultant
-			      			} = object.properties,
-			      			rows = [
-			      				[name],
-			      				['geoid', geoid],
-			      				['Expiration', exp || "No Date"]
-			      			];
-			      		if (consultant) {
-			      			rows.push(['Consultant', consultant])
-			      		}
-		      			hoverData = {
-		      				rows, x, y
-		      			}
+	      	onHover: event => {
+	      		const { object, x, y } = event;
+	      		let hoverData = null;
+	      		if (object) {
+	      			const {
+	      					geoid,
+		      				name,
+		      				exp,
+		      				consultant,
+		      				status
+		      			} = object.properties,
+		      			rows = [
+		      				[name],
+		      				['Status', `(${status}) ${ getStatusLabelstatusMap(status) }`],
+		      				['Expiration', exp || "No Date"]
+		      			];
+		      		if (consultant) {
+		      			rows.push(['Consultant', consultant])
 		      		}
-		      		this.setState({ hoverData });
-		      	}
-	    	},
-	    	{
-	    		id: 'ny-mesh-layer',
-	    		data: this.props.geo['mesh']['36']['counties'],
-	    		filled: false,
-	    		stroked: true,
-	    		getLineColor: [200, 200, 200, 255],
-		      	pickable: false
-	    	},
-	    	{
-	    		id: 'ny-merge-layer-stroked',
-	    		data: this.props.geo['merge']['36']['counties'],
-	    		filled: false,
-	    		stroked: true,
-	    		getLineColor: [255, 255, 255, 255],
-	    		lineWidthMinPixels: 2,
-		      	pickable: false
-	    	}
-	    ]
-	    return { scale, layers };
+	      			hoverData = {
+	      				rows, x, y
+	      			}
+	      		}
+	      		this.setState({ hoverData });
+	      	},
+	      	onClick: event => {
+	      		const { object, x, y } = event;
+	      		if (object) {
+	      			const { geoid } = object.properties;
+	      			// this.props.push(`/m/${ geoid }`)
+	      			document.location.href = `/m/${ geoid }`
+	      		}
+	      	}
+    	},
+    	{
+    		id: 'ny-mesh-layer',
+    		data: this.props.geo['mesh']['36']['counties'],
+    		filled: false,
+    		stroked: true,
+    		getLineColor: [200, 200, 200, 255],
+	      	pickable: false
+    	},
+    	{
+    		id: 'ny-merge-layer-stroked',
+    		data: this.props.geo['merge']['36']['counties'],
+    		filled: false,
+    		stroked: true,
+    		getLineColor: [255, 255, 255, 255],
+    		lineWidthMinPixels: 2,
+	      	pickable: false
+    	}
+    ]
+    return { scale, layers };
 	}
 
-	generateLegend(scale=this.state.scale) {
+	generateLegend({ scale, statusScale }=this.state) {
   		const range = scale.range(),
+  			statusRange = statusScale.range(),
   			width = `${ 100 / range.length }%`,
   			domainValues = range.map(r => scale.invertExtent(r)[0]);
   		if (!domainValues.reduce((a, c) => a || Boolean(c), false)) return false;
@@ -198,6 +264,19 @@ class CountyPlanChoropleth extends React.Component {
 					<tr>
 						{
 							range.map(t => <td key={ t } style={ { width } }>{ scale.invertExtent(t)[0] }</td>)
+						}
+					</tr>
+					<tr>
+						<th className="no-border-bottom" colSpan={ statusRange.length }>Status&nbsp;Codes</th>
+					</tr>
+					<tr>
+						{
+							statusRange.map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
+						}
+					</tr>
+					<tr>
+						{
+							statusRange.map(t => <td key={ t } style={ { width } }>{ statusScale.invertExtent(t)[0] }</td>)
 						}
 					</tr>
 				</tbody>
@@ -242,7 +321,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	getChildGeo,
 	getGeoMerge,
-	getGeoMesh
+	getGeoMesh,
+	push
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(CountyPlanChoropleth));

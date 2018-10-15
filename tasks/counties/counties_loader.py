@@ -27,12 +27,23 @@ def toDate(string):
 		print "toDate ERROR:", string, e
 		return None
 
+def toInt(string):
+	try:
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		return int(string)
+	except Exception as e:
+		print "toInt ERROR:", string, e
+		return None
+
 META = [
-	{ "column": "fips",				"type": "VARCHAR(5)",	"convert": toString },
+	{ "column": "fips",							"type": "VARCHAR(5)",	"convert": toString },
 	{ "column": "plan_consultant",	"type": "VARCHAR",		"convert": toString },
-	{ "column": "plan_expiration",	"type": "DATE",			"convert": toDate },
-	{ "column": "plan_grant",		"type": "VARCHAR",		"convert": toString },
-	{ "column": "plan_url",			"type": "VARCHAR",		"convert": toString }
+	{ "column": "plan_expiration",	"type": "DATE",				"convert": toDate },
+	{ "column": "plan_grant",				"type": "VARCHAR",		"convert": toString },
+	{ "column": "plan_url",					"type": "VARCHAR",		"convert": toString },
+	{ "column": "plan_status",			"type": "INTEGER",		"convert": toInt }
 ]
 
 def convert(meta, v):
@@ -75,7 +86,7 @@ def deallocateStatement(cursor):
 # END deallocateStatement
 
 def transform(row):
-	return [row[0], row[2], row[3], row[4], row[12]]
+	return [row[0], row[2], row[3], row[4], row[12], row[13]]
 # END transform
 
 def loadCsvData(cursor, inputUrl):
@@ -107,15 +118,15 @@ def loadCsvData(cursor, inputUrl):
 	except Exception as e:
 		print e
 
-	ny_county_row = []
-	for row in rows:
-		if row[0] == "36061":
-			ny_county_row = row
+	# ny_county_row = []
+	# for row in rows:
+	# 	if row[0] == "36061":
+	# 		ny_county_row = row
 
-	ny_city = ["36005", "36047", "36081", "36085"]
-	for i, row in enumerate(rows):
-		if row[0] in ny_city:
-			rows[i] = row[0:1] + ny_county_row[1:]
+	# ny_city = ["36005", "36047", "36081", "36085"]
+	# for i, row in enumerate(rows):
+	# 	if row[0] in ny_city:
+	# 		rows[i] = row[0:1] + ny_county_row[1:]
 
 	for row in rows:
 		cursor.execute(sql, row)
