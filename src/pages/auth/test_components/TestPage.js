@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import GeographyScoreTable from "pages/auth/RiskIndex/components/GeographyScoreTable"
+import NfipTable from "pages/auth/Capabilities/components/NfipTable"
 
 class TestPage extends React.Component {
 
@@ -17,7 +17,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <GeographyScoreTable />
+                <NfipTable />
               </ElementBox>
             </div>
           </div>

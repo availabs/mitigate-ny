@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Content from 'components/cms/Content'
 
 export default (props) => {
   return props.menuSettings.noFooter ? '' : (        
@@ -9,37 +9,35 @@ export default (props) => {
     <div className="os-container">
         <div className="footer-i">
             <div className="row">
-                <div className="col-sm-7 col-lg-4 b-r padded">
+                <div className="col-sm-7 col-lg-3 b-r padded">
                     <div className="logo-element" />
                     <h3 className="heading-big">Mitigate NY</h3>
                     <h6 className="heading-small">New York State Hazard Mitigation Plan</h6>
                     
                 </div>
-                <div className="col-sm-5 col-lg-8">
+                <div className="col-sm-5 col-lg-9">
                     <div className="row">
-                        <div className="col-lg-4 b-r padded">
-                            <h6 className="heading-small">Locations</h6>
-                            <p>Eric Krans - ekrans@albany.edu<br />
-                      Albany Visualization and Informatics Lab<br />
-                      Room 331<br />
-                      1215 Western Ave. Albany, NY 12203<br /></p>
+                        <div className="col-lg-6 b-r padded">
+                            <h6 className="heading-small">Contact</h6>
+                            <Content content_id={`footer-content`} />
                         </div>
                         <div className="col-lg-4 b-r padded">
+                            <h6 className="heading-small">DHSES</h6>
+                            <p>
+                            <strong>Division of Homeland Security and Emergency Services (DHSES) - Mitigation Planning</strong><br/>
+                            1220 Washington Ave., Building 7a, 4th Floor, Albany NY 12242 <br/>
+                            518-292-2304 <br />
+                            <a href="mailto:oem.hazmit@dhses.ny.gov?subject=RE%20State%20Hazard%20Mitigation%20Plan">email</a>
+                            </p>
+                        </div>
+                        <div className="col-lg-2  padded">
                             <h6 className="heading-small">Public Feedback</h6>
                             <p><Link to='/comments'>Leave Feedback</Link></p>
+                            
                         </div>
-                        <div className="col-lg-4 padded">
-                            <h6 className="heading-small">DHSES</h6>
-                            <ul className="social-links">
-                                <li>
-                                    <a href="#"><i className="os-icon os-icon-facebook" /></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i className="os-icon os-icon-twitter" /></a>
-                                </li>
-                            </ul>
-                        </div>
+                        
                     </div>
+
                 </div>
             </div>
         </div>

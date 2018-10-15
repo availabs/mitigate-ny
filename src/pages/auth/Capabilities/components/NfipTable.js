@@ -40,13 +40,14 @@ console.log(this.props.nfip)
 				"num losses": graph.num_losses,
 				"num properties": graph.num_properties,
 				"num mitigated": graph.num_mitigated,
+				"percent mitigated": graph.num_mitigated / graph.num_properties,
 				"total paid out": fnum(graph.total_loss),
 				sort: graph.total_loss
 			})
 		})
 		return {
 			data: data.filter(d => d.sort).sort((a, b) => b.sort - a.sort),
-			columns: [label, "num losses", "num properties", "num mitigated", "total paid out"]
+			columns: [label, "num losses", "num properties", "num mitigated", "percent mitigated", "total paid out"]
 		};
 	}
 
@@ -62,7 +63,8 @@ console.log(this.props.nfip)
 					columnFormats= { {
 						"num losses": ",d",
 						"num properties": ",d",
-						"num mitigated": ",d"
+						"num mitigated": ",d",
+						"percent mitigated": ".2%"
 					} }/>
 			)
 		}

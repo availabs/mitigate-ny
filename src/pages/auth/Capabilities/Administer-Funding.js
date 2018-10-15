@@ -17,6 +17,9 @@ class AdministerFunding extends Component {
            <div className="property-section">
               <Content content_id={`capabilities-administer_funding`} />
             </div>
+            <div className="property-section">
+              <Content content_id={`capabilities-administer_funding_more`} />
+            </div>
 
            
             <div className="property-section">

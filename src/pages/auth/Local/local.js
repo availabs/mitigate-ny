@@ -6,6 +6,7 @@ import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
 import Submenus from './local-submenus'
 import LocalCapabilities from './local-capabilities'
+import HMGPTable from 'pages/auth/RiskIndex/components/HMGPTable'
 
 class Local extends Component {
   render () {
@@ -28,8 +29,15 @@ class Local extends Component {
             <div className="property-section">
               <Content content_id={`section7-lhmp_submittal_review_process`} />
             </div>
-            <div>  
+            <div className="property-section">  
               <Content content_id={`section7-funding_plans_projects`} />
+            </div>
+            <HMGPTable 
+                 filterColumns={ ['hazard' , 'status' , 'program area' ] }/>
+                  <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+            
+            <div className="property-section">  
+              <Content content_id={`capabilities-lhmp_criteria`} />
             </div>
           </div>
          </div>
