@@ -17,7 +17,7 @@ export default (props) => {
                 </div>
                 <div className="col-sm-5 col-lg-9">
                     <div className="row">
-                        <div className="col-lg-6 b-r padded">
+                        <div className="col-lg-5 b-r padded">
                             <h6 className="heading-small">Contact</h6>
                             <Content content_id={`footer-content`} />
                         </div>
@@ -30,7 +30,7 @@ export default (props) => {
                             <a href="mailto:oem.hazmit@dhses.ny.gov?subject=RE%20State%20Hazard%20Mitigation%20Plan">email</a>
                             </p>
                         </div>
-                        <div className="col-lg-2  padded">
+                        <div className="col-lg-3  padded">
                             <h6 className="heading-small">Public Feedback</h6>
                             <p><Link to='/comments'>Leave Feedback</Link></p>
                             
