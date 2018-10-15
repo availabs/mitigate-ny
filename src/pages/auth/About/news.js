@@ -14,6 +14,10 @@ class MitigationNews extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
             
+            
+            <div className="property-section">
+              <Content content_id={`about-funding_news`} />
+            </div> 
             <div className="property-section">
               <Content content_id={`about-news`} />
             </div> 
