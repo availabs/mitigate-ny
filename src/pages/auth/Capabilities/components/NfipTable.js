@@ -47,7 +47,7 @@ console.log(this.props.nfip)
 		})
 		return {
 			data: data.filter(d => d.sort).sort((a, b) => b.sort - a.sort),
-			columns: [label, "num losses", "num properties", "num mitigated", "percent mitigated", "total paid out"]
+			columns: [label, "num losses", "num properties", "num mitigated", "total paid out"]
 		};
 	}
 
