@@ -67,7 +67,10 @@ class Capabilities extends Component {
           <div className="property-info-main"style={{paddingTop: 0}}>
             <div className="property-section">
               <Content content_id={`capabilities-whats_changed_2014`} /> 
-              <CapabilitiesTable 
+
+
+            </div>
+            <CapabilitiesTable 
               title='Statewide Mitigation Capabilities' 
                type="program"
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
@@ -77,8 +80,6 @@ class Capabilities extends Component {
                tableLink="/capabilities/manage/new"
                tableLinkLabel="Add Your Agency Programs"
                expandColumns={ ["description"] }/>
-
-            </div>
           </div>
          </div>
       </div>
