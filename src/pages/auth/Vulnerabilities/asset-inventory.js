@@ -15,7 +15,7 @@ class AssetInventory extends Component {
       <div className='property-single'>
 
         <div className='property-info-w'>
-          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+          <div className="property-info-main" style={{paddingTop: 30}}>
         
             <div className="property-section">
               <Content content_id={`risk-asset_inventory`} />
