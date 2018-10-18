@@ -181,7 +181,10 @@ class CapabilitiesTable extends React.Component {
 				pageSize={ 6 }
 				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }
 				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }
-				urlColumn={ this.props.urlColumn && getLabel(this.props.urlColumn) }/>
+				urlColumn={ this.props.urlColumn && getLabel(this.props.urlColumn) }			
+				tableLink={ this.props.tableLink }
+				tableLinkLabel={ this.props.tableLinkLabel }
+				downloadedFileName={ this.props.downloadedFileName }/>
 		)
 	}
 }
@@ -198,7 +201,10 @@ CapabilitiesTable.defaultProps = {
 	filterColumns: [],
 	expandColumns: [],
 	urlColumn: null,
-	goalRange: null
+	goalRange: null,
+	tableLink: null,
+	tableLinkLabel: "Link",
+	downloadedFileName: 'capabilities-data'
 }
 
 const mapStateToProps = state => ({
