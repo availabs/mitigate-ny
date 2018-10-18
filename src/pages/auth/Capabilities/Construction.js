@@ -24,6 +24,9 @@ class Construction extends Component {
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                urlColumn="url"
+               tableScroll={ true }
+               tableLink="/capabilities/manage/new"
+               tableLinkLabel="Add Your Agency Programs"
                expandColumns={ ["description"] }/> 
             </div>
          

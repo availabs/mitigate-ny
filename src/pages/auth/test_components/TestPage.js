@@ -25,9 +25,10 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <ACS_Table tableScroll={ true }
-                  tableLink="/test"
-                  tableLinkLabel="Table Link"/>
+                <ACS_Table 
+                  tableScroll={ true }
+                  tableLink="/capabilities/manage/new"
+                  tableLinkLabel="Add Your Agency Programs"/>
               </ElementBox>
             </div>
           </div>
