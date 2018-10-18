@@ -200,13 +200,13 @@ const COERCE = {
     if (!columns.length) {
       columns = Object.keys(data[0])
     }
-    const rows = [columns.join(",")]
+    const rows = ['"' + columns.join('","') + '"']
     data.forEach(d => {
       const row = [];
       columns.forEach(c => {
         row.push(d[c])
       })
-      rows.push(row.join(","));
+      rows.push('"' + row.join('","') + '"');
     })
     const csv = rows.join("\n"),
       fileName = `${ this.props.downloadedFileName }.csv`,
