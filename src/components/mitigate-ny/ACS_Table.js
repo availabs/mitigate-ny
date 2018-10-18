@@ -69,7 +69,11 @@ class ACS_Table extends React.Component {
 					[LATEST_YEAR - 5]: ",d",
 					change: ",d",
 					percent: d => format(d) + "%"
-				} }/>
+				} }
+				tableScroll={ this.props.tableScroll }
+				tableLink={ this.props.tableLink }
+				tableLinkLabel={ this.props.tableLinkLabel }
+				downloadedFileName={ this.props.downloadedFileName }/>
 		)
 	}
 
@@ -78,7 +82,11 @@ class ACS_Table extends React.Component {
 ACS_Table.defaultProps = {
 	geoid: '36',
 	geoLevel: 'counties',
-	variable: 'population'
+	variable: 'population',
+	tableScroll: false,
+	tableLink: null,
+	tableLinkLabel: "Link",
+	downloadedFileName: 'acs-data'
 }
 
 const mapStateToProps = state => ({

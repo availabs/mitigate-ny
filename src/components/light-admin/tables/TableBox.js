@@ -41,6 +41,9 @@ const COERCE = {
   date: d => d && new Date(d).valueOf()
 }
 
+let LINK_ID = 0;
+const getLinkId = () => `download-link-${ ++LINK_ID }`
+
  class TableBox extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +52,8 @@ const COERCE = {
       filter: "",
       filteredColumns: {},
       sortColumn: "",
-      sortOrder: 1
+      sortOrder: 1,
+      linkId: getLinkId()
     }
     this.setPage = this.setPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -192,6 +196,31 @@ const COERCE = {
     this.setState({ filteredColumns });
   }
 
+  downloadAsCsv(e) {
+    e.preventDefault();
+
+    let { data, columns } = this.props;
+    if (!data.length) return;
+    if (!columns.length) {
+      columns = Object.keys(data[0])
+    }
+    const rows = [columns.join(",")]
+    data.forEach(d => {
+      const row = [];
+      columns.forEach(c => {
+        row.push(d[c])
+      })
+      rows.push(row.join(","));
+    })
+    const csv = rows.join("\n"),
+      fileName = `${ this.props.downloadedFileName }.csv`,
+      uri = encodeURI("data:text/csv;charset=utf-8," + csv),
+      link = document.createElement('a');
+    link.setAttribute('href', uri);
+    link.setAttribute('download', fileName);
+    link.click();
+  }
+
   render() {
     const data = this.getFilteredData(),
       paginate = data.length > this.props.pageSize ? (
@@ -209,14 +238,20 @@ const COERCE = {
 
 ////
     const page = this.state.page,
-      size = this.props.pageSize,
-      tableData = data.slice(page * size, page * size + size);
+      size = this.props.pageSize;
+    let tableData = data.slice();
+    if (!this.props.tableScroll) {
+      tableData = tableData.slice(page * size, page * size + size);
+    }
 
     const filterColumns = this.props.filterColumns.map(column =>
       ({ column, values: this.getFilterValues(column) }))
 
+    const tableLink = this.props.tableLink ? <a href={ this.props.tableLink }>{ this.props.tableLinkLabel }</a> : null;
+
     return (
-      <ElementBox title={this.props.title} desc={this.props.desc}>
+      <ElementBox title={this.props.title}
+        desc={ this.props.desc || tableLink }>
         { !this.props.showControls ? null :
           <div className="controls-above-table">
             <div className="row">
@@ -229,14 +264,21 @@ const COERCE = {
               </div>
               <div className="col-sm-6">
                 <form className="form-inline justify-content-sm-end">
-                  <a className="btn btn-sm btn-secondary" href="#">Download CSV</a>
+                  <a className="btn btn-sm btn-secondary" href="#" id={ this.state.linkId }
+                    onClick={ this.downloadAsCsv.bind(this) }>
+                    Download CSV
+                  </a>
                 </form>
               </div>
             </div>
           </div>
         }
         <div className="table-responsive"
-          style={ { minHeight: `${ this.props.pageSize * 46 + 39 }px` } }>
+          style={ {
+            minHeight: `${ this.props.pageSize * 46 + 39 }px`,
+            maxHeight: this.props.tableScroll ? `${ this.props.pageSize * 46 + 39 }px` : 'auto',
+            overflowY: this.props.tableScroll ? 'auto' : 'inherit'
+          } }>
           <DataTable tableData={ tableData }
             columns={ this.props.columns.filter(c => !this.props.expandColumns.includes(c)) }
             links={ this.props.links }
@@ -250,7 +292,7 @@ const COERCE = {
             sortColumn={ this.state.sortColumn }
             sortOrder={ this.state.sortOrder }/>
         </div>
-        { paginate }
+        { !this.props.tableScroll ? paginate : null }
       </ElementBox>
     )
   }
@@ -268,7 +310,11 @@ TableBox.defaultProps = {
   expandColumns: [],
   urlColumn: null,
   columnTypes: {},
-  columnFormats: {}
+  columnFormats: {},
+  tableScroll: false,
+  tableLink: null,
+  tableLinkLabel: "Link",
+  downloadedFileName: "table-data"
 }
 
 export default TableBox;

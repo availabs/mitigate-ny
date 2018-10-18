@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import ACS_Map from "components/mitigate-ny/ACS_Map"
+import ACS_Table from "components/mitigate-ny/ACS_Table"
 
 class TestPage extends React.Component {
 
@@ -15,14 +15,19 @@ class TestPage extends React.Component {
         <Element>
 
           <div className='row'>
-            <div className='col-lg-6'>
+            <div className='col-lg-12'>
               <ElementBox>
-                <ACS_Map />
+                <ACS_Table />
               </ElementBox>
             </div>
-            <div className='col-lg-6'>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
               <ElementBox>
-                <ACS_Map interactive={ true }/>
+                <ACS_Table tableScroll={ true }
+                  tableLink={ "/test" }
+                  tableLinkLabel="Click me"/>
               </ElementBox>
             </div>
           </div>
