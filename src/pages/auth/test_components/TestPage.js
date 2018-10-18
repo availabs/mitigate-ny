@@ -26,7 +26,7 @@ class TestPage extends React.Component {
             <div className='col-lg-12'>
               <ElementBox>
                 <ACS_Table tableScroll={ true }
-                  tableLink={ "/test" }
+                  tableLink="/test"
                   tableLinkLabel="Table Link"/>
               </ElementBox>
             </div>
