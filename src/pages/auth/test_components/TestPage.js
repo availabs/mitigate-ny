@@ -27,7 +27,7 @@ class TestPage extends React.Component {
               <ElementBox>
                 <ACS_Table tableScroll={ true }
                   tableLink={ "/test" }
-                  tableLinkLabel="Click me"/>
+                  tableLinkLabel="Table Link"/>
               </ElementBox>
             </div>
           </div>
