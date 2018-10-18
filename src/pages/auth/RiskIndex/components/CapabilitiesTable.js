@@ -184,7 +184,8 @@ class CapabilitiesTable extends React.Component {
 				urlColumn={ this.props.urlColumn && getLabel(this.props.urlColumn) }			
 				tableLink={ this.props.tableLink }
 				tableLinkLabel={ this.props.tableLinkLabel }
-				downloadedFileName={ this.props.downloadedFileName }/>
+				downloadedFileName={ this.props.downloadedFileName }
+				tableScroll={ this.props.tableScroll }/>
 		)
 	}
 }
@@ -204,7 +205,8 @@ CapabilitiesTable.defaultProps = {
 	goalRange: null,
 	tableLink: null,
 	tableLinkLabel: "Link",
-	downloadedFileName: 'capabilities-data'
+	downloadedFileName: 'capabilities-data',
+	tableScroll: false
 }
 
 const mapStateToProps = state => ({

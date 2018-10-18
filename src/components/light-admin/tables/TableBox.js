@@ -41,9 +41,6 @@ const COERCE = {
   date: d => d && new Date(d).valueOf()
 }
 
-let LINK_ID = 0;
-const getLinkId = () => `download-link-${ ++LINK_ID }`
-
  class TableBox extends React.Component {
   constructor(props) {
     super(props);
@@ -52,8 +49,7 @@ const getLinkId = () => `download-link-${ ++LINK_ID }`
       filter: "",
       filteredColumns: {},
       sortColumn: "",
-      sortOrder: 1,
-      linkId: getLinkId()
+      sortOrder: 1
     }
     this.setPage = this.setPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
@@ -264,7 +260,7 @@ const getLinkId = () => `download-link-${ ++LINK_ID }`
               </div>
               <div className="col-sm-6">
                 <form className="form-inline justify-content-sm-end">
-                  <a className="btn btn-sm btn-secondary" href="#" id={ this.state.linkId }
+                  <a className="btn btn-sm btn-secondary" href="#"
                     onClick={ this.downloadAsCsv.bind(this) }>
                     Download CSV
                   </a>
