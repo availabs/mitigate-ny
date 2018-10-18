@@ -5,6 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
+import ACS_Table from "components/mitigate-ny/ACS_Table"
 import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
 
 class TestPage extends React.Component {
@@ -31,6 +32,24 @@ class TestPage extends React.Component {
                   tableLink="/capabilities/manage/new"
                   tableLinkLabel="Add Your Agency Programs"/>
 
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Table />
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <ACS_Table tableScroll={ true }
+                  tableLink="/test"
+                  tableLinkLabel="Table Link"/>
               </ElementBox>
             </div>
           </div>
