@@ -18,12 +18,12 @@ import { fnum } from "utils/sheldusUtils"
 
 class HighRiskMunicipalities extends React.Component {
 
-	fetchFalcorDeps({ hazard }=this.props) {
+	fetchFalcorDeps({ hazard, geoLevel }=this.props) {
     	return this.props.falcor.get(
-      		['severeWeather', 'highRisk', hazard]
+      		['severeWeather', 'highRisk', geoLevel, hazard]
     	)
     	.then(response => {
-      		const data = response.json.severeWeather.highRisk[hazard],
+      		const data = response.json.severeWeather.highRisk[geoLevel][hazard],
       			geoids = data.map(d => d.geoid);
       		return this.props.falcor.get(
       			['geo', geoids, 'name']
@@ -33,9 +33,9 @@ class HighRiskMunicipalities extends React.Component {
 
 	processData() {
 		const data = [],
-			{ hazard } = this.props;
+			{ hazard, geoLevel } = this.props;
 		try {
-			const values = this.props.severeWeather.highRisk[hazard].value,
+			const values = this.props.severeWeather.highRisk[geoLevel][hazard].value,
 				geo = this.props.geoGraph;
 			values.forEach(v => {
 				data.push({
@@ -68,7 +68,8 @@ class HighRiskMunicipalities extends React.Component {
 }
 
 HighRiskMunicipalities.defaultProps = {
-	hazard: 'riverine'
+	hazard: 'riverine',
+	geoLevel: 'cousubs'
 }
 
 const mapStateToProps = state => ({

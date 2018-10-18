@@ -5,8 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import CountyPlanChoropleth from "pages/auth/Capabilities/components/CountyPlanChoropleth"
-import HazardStats from "pages/auth/RiskIndex/components/HazardStats"
+import ACS_Map from "components/mitigate-ny/ACS_Map"
 
 class TestPage extends React.Component {
 
@@ -16,17 +15,14 @@ class TestPage extends React.Component {
         <Element>
 
           <div className='row'>
-            <div className='col-lg-12'>
+            <div className='col-lg-6'>
               <ElementBox>
-                <HazardStats />
+                <ACS_Map />
               </ElementBox>
             </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
+            <div className='col-lg-6'>
               <ElementBox>
-                <CountyPlanChoropleth />
+                <ACS_Map interactive={ true }/>
               </ElementBox>
             </div>
           </div>

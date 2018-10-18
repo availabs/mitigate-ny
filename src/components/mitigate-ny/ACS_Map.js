@@ -9,6 +9,7 @@ import * as d3format from "d3-format"
 import * as turf from "@turf/turf"
 
 import SvgMap from "components/mapping/escmap/SvgMap.react"
+import MapTest from "components/mapping/escmap/MapTest.react"
 import Viewport from "components/mapping/escmap/Viewport"
 
 import {
@@ -255,10 +256,16 @@ class ACS_Map extends React.Component {
 
 	render () {
   	return (
-      <SvgMap layers={ this.generateLayers() }
-      	viewport={ this.state.viewport }
-      	hoverData={ this.state.hoverData }
-      	controls={ this.generateControls() }/>
+	  	!this.props.interactive ?
+	      <SvgMap layers={ this.generateLayers() }
+	      	viewport={ this.state.viewport }
+	      	hoverData={ this.state.hoverData }
+	      	controls={ this.generateControls() }/> :
+	      <MapTest layers={ this.generateLayers() }
+	      	viewport={ this.state.viewport }
+	      	hoverData={ this.state.hoverData }
+	      	controls={ this.generateControls() }
+	      	mapStyle=""/>
   	) 
 	}
 }
@@ -270,6 +277,7 @@ ACS_Map.defaultProps = {
 	density: false,
 	scaleType: "ck",
 	thresholds: [],
+	interactive: false,
 	range: ["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]
 }
 
