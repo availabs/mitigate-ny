@@ -23,7 +23,6 @@ class HighRiskMunicipalities extends React.Component {
       		['severeWeather', 'highRisk', geoLevel, hazard]
     	)
     	.then(response => {
-console.log("?????",response)
       		const data = response.json.severeWeather.highRisk[geoLevel][hazard],
       			geoids = data.map(d => d.geoid);
       		return this.props.falcor.get(
