@@ -62,6 +62,7 @@ class VulnerabilitiesPage extends Component {
                 <ACS_Map variable="population_change"
                   geoLevel="tracts"
                   density={ true }
+                  interactive={ true }
                   range={ ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"] }
                   scaleType="quantile"/>
 

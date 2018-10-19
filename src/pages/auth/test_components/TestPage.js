@@ -18,7 +18,20 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable />
+
+                <ACS_Table />
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesTable 
+                  tableScroll={ true }
+                  tableLink="/capabilities/manage/new"
+                  tableLinkLabel="Add Your Agency Programs"/>
+
               </ElementBox>
             </div>
           </div>
