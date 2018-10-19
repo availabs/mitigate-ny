@@ -139,7 +139,7 @@ class CapabilitiesTable extends React.Component {
 					columns.forEach(att => {
 						switch (att) {
 							case "status":
-								row.Status = [
+								row[getLabel("status")] = [
 									"status_new_shmp",
 									"status_carryover_shmp",
 									"status_in_progess",
@@ -150,7 +150,7 @@ class CapabilitiesTable extends React.Component {
 								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
 								break;
 							case "admin":
-								row.Admin = [
+								row[getLabel("admin")] = [
 									"admin_statewide",
 									"admin_regional",
 									"admin_county",
