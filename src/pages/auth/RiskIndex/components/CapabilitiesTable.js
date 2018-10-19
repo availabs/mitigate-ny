@@ -159,7 +159,7 @@ class CapabilitiesTable extends React.Component {
 								break;
 							case "hazards":
 								if (!capability.hazards) break;
-								row.Hazards = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
+								row.[getLabel("hazards")] = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
 								break;
 							default:
 								row[getLabel(att)] = capability[att]
@@ -178,7 +178,7 @@ class CapabilitiesTable extends React.Component {
 			<TableBox { ...this.processData() }
 				title={ this.props.title }
 				filterKey="Name"
-				pageSize={ 6 }
+				pageSize={ this.props.pageSize }
 				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }
 				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }
 				urlColumn={ this.props.urlColumn && getLabel(this.props.urlColumn) }			
@@ -206,7 +206,8 @@ CapabilitiesTable.defaultProps = {
 	tableLink: null,
 	tableLinkLabel: "Link",
 	downloadedFileName: 'capabilities-data',
-	tableScroll: false
+	tableScroll: false,
+	pageSize: 6
 }
 
 const mapStateToProps = state => ({
