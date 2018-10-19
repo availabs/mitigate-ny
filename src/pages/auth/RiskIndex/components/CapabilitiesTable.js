@@ -147,7 +147,7 @@ class CapabilitiesTable extends React.Component {
 									"status_unchanged",
 									"status_completed",
 									"status_discontinued"
-								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(", ");
+								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(" | ");
 								break;
 							case "admin":
 								row[getLabel("admin")] = [
@@ -155,7 +155,7 @@ class CapabilitiesTable extends React.Component {
 									"admin_regional",
 									"admin_county",
 									"admin_local"
-								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(". ");
+								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(" | ");
 								break;
 							case "hazards":
 								if (!capability.hazards) break;
