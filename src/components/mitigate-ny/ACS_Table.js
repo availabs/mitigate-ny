@@ -73,7 +73,8 @@ class ACS_Table extends React.Component {
 				tableScroll={ this.props.tableScroll }
 				tableLink={ this.props.tableLink }
 				tableLinkLabel={ this.props.tableLinkLabel }
-				downloadedFileName={ this.props.downloadedFileName }/>
+				downloadedFileName={ this.props.downloadedFileName }
+				pageSize={ this.props.pageSize }/>
 		)
 	}
 
@@ -86,7 +87,8 @@ ACS_Table.defaultProps = {
 	tableScroll: false,
 	tableLink: null,
 	tableLinkLabel: "Link",
-	downloadedFileName: 'acs-data'
+	downloadedFileName: 'acs-data',
+	pageSize: 13
 }
 
 const mapStateToProps = state => ({
