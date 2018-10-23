@@ -159,7 +159,7 @@ class CapabilitiesTable extends React.Component {
 								break;
 							case "hazards":
 								if (!capability.hazards) break;
-								row.[getLabel("hazards")] = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
+								row[getLabel("hazards")] = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
 								break;
 							default:
 								row[getLabel(att)] = capability[att]
