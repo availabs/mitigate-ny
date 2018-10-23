@@ -79,6 +79,7 @@ class Capabilities extends Component {
                tableScroll={ true }
                tableLink="/capabilities/manage/new"
                tableLinkLabel="Add Your Agency Programs"
+               pageSize={ 20 }
                expandColumns={ ["description"] }/>
           </div>
          </div>
