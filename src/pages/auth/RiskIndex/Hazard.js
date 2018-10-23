@@ -147,7 +147,7 @@ class Hazard extends Component {
 
 
   historicMaps (hazard, hazardName) {
-    if(['wildfire' , 'heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'landslide' , 'coldwave' , 'tsunami' , 'hail' , 'icestorm' , 'winterweat'].includes(hazard)) {
+    if(['wildfire' , 'coastal' , 'heatwave' , 'volcano' , 'avalanche' , 'drought' , 'earthquake' , 'landslide' , 'coldwave' , 'tsunami' , 'hail' , 'icestorm' , 'winterweat'].includes(hazard)) {
       return ''
     } else {
       // console.log('historicMaps', ['wildfire'].includes(hazard), hazard)
@@ -177,7 +177,7 @@ class Hazard extends Component {
   }
 
   eventsLossTable (hazard, hazardName) {
-    if(['wildfire' , 'avalanche' , 'tsunami' , 'volcano' , 'earthquake'].includes(hazard)) {
+    if(['wildfire' , 'avalanche' , 'tsunami' , 'volcano' , 'coastal' , 'earthquake'].includes(hazard)) {
       return ''
     } else {
       return (
