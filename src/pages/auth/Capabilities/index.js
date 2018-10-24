@@ -73,7 +73,7 @@ class Capabilities extends Component {
             <CapabilitiesTable 
               title='Statewide Mitigation Capabilities' 
                type="program"
-               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url' , 'capability'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                urlColumn="url"
                tableScroll={ true }

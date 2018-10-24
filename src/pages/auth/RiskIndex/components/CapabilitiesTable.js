@@ -149,6 +149,29 @@ class CapabilitiesTable extends React.Component {
 									"status_discontinued"
 								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(" | ");
 								break;
+							case "capability":
+								row[getLabel("capability")] = [
+									"capability_mitigation",
+									"capability_preparedness",
+									"capability_response",
+									"capability_recovery",
+									"capability_climate",
+									"capability_critical",
+									"capability_preservation",
+									"capability_environmental",
+									"capability_risk_assessment",
+									"capability_administer_funding",
+									"capability_funding_amount",
+									"capability_tech_support",
+									"capability_construction",
+									"capability_outreach",
+									"capability_project_management",
+									"capability_research",
+									"capability_policy",
+									"capability_regulatory",
+									"capability_resiliency",
+								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(" | ");
+								break;	
 							case "admin":
 								row[getLabel("admin")] = [
 									"admin_statewide",
