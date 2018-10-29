@@ -14,14 +14,23 @@ class New2019 extends Component {
         <div className='property-info-w'>
           <div className="property-info-main">
             
-            
+            <div className="property-section">
+              <Content content_id={`new-new`} />
+            </div> 
             <div className="property-section">
               <Content content_id={`new-climate`} />
             </div> 
             <div className="property-section">
               <Content content_id={`new-hazards`} />
-            </div> 
-            
+            </div>
+            <div className="property-section">
+              <Content content_id={`new-now`} />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`new-next`} />
+            </div>
+ 
 
             
           </div>
