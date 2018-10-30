@@ -79,9 +79,9 @@ class LocalCapabilities extends Component {
                   'Storm Water Management Plan' , 
                   'Storm Water / Watershed Management Ordinance' ,
                   'Flood Mitigation Assistance (FMA)' ,
-                  'Riparian protection or setbacks' ,
+                  
                   'Local Drainage Regulations (Flood and Stormwater)' ,
-                  'Coastal Erosion Hazard Area' , 
+
                   'Dam Safety Program' ,
                   
                   ] }/>
@@ -98,7 +98,7 @@ class LocalCapabilities extends Component {
                   'Post-Disaster Recovery Plan' ,
                   'Post-Disaster Redevelopment Plan' ,
                   'Property Aquisition Program' ,
-                  'Pre-Disaster Mitigation (PDM)' ,
+                 
                   'Continuity of Operations Plan' ,
                   'Comprehensive Emergency Management Plan' ,
                   'Emergency Management Plan' ,
