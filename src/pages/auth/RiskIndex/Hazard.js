@@ -177,7 +177,7 @@ class Hazard extends Component {
   }
 
   eventsLossTable (hazard, hazardName) {
-    if(['wildfire' , 'avalanche' , 'tsunami' , 'volcano' , 'coastal' , 'earthquake'].includes(hazard)) {
+    if(['wildfire' , 'avalanche' , 'tsunami' , 'volcano' , '' , 'earthquake'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -241,7 +241,7 @@ probabilityMap (hazard) {
 
 
 municipalityTable (hazard) {
-    if(['volcano' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
+    if(['volcano' , 'riverine' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
       return ''
     } else {
       return (
@@ -300,6 +300,22 @@ criticalInfrastructure (hazard) {
       return <Content content_id={`${hazard}-repetitive_loss`} />
     }
     return
+  }
+
+    methodology (hazard) {
+    if(['riverine' , 'hurricane' , 'coastal'].includes(hazard)) {
+      return (
+       <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+            <div className="property-section">
+              <Content content_id={`${hazard}-methodology`} />
+            </div>
+          </div>
+        </div>    
+       )
+    } else {
+      return ''
+    }
   }
 
   render () {
@@ -482,6 +498,7 @@ criticalInfrastructure (hazard) {
             </div>
              */ }
 
+        {this.methodology (hazard)}
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">

@@ -73,12 +73,13 @@ class Capabilities extends Component {
             <CapabilitiesTable 
               title='Statewide Mitigation Capabilities' 
                type="program"
-               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url'] }
+               columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url' , 'capability'] }
                filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                urlColumn="url"
                tableScroll={ true }
                tableLink="/capabilities/manage/new"
                tableLinkLabel="Add Your Agency Programs"
+               pageSize={ 20 }
                expandColumns={ ["description"] }/>
           </div>
          </div>

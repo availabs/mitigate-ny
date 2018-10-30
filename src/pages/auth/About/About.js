@@ -10,6 +10,7 @@ import Glossary from './glossary'
 import Authorities from './authorities'
 import Methodology from './Methodology'
 import News from './news'
+import New2019 from './new2019'
 import Implementation from './Implementation'
 import Footer from 'components/light-admin/containers/Footer'
 
@@ -90,5 +91,6 @@ export default [
 ...Glossary,
 ...News,
 ...Implementation,
-...Methodology
+...Methodology,
+...New2019
 ]
