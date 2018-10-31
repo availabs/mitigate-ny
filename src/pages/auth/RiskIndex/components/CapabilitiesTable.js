@@ -53,56 +53,56 @@ import {
 class CapabilitiesTable extends React.Component {
 
 	fetchFalcorDeps() {
-    	return this.props.falcor.get(
-      		['capabilities', 'length'],
-      		['riskIndex', 'hazards']
-    	)
-    	.then(response => {
-      		const hazards = response.json.riskIndex.hazards;
-      		this.props.receiveHazards(hazards);
-      		return this.props.falcor.get(
-        		['riskIndex', 'meta', hazards, 'name']
-      		)
-      		.then(() => response.json.capabilities.length)
-    	})
-    	.then(length =>
+  	return this.props.falcor.get(
+    		['capabilities', 'length'],
+    		['riskIndex', 'hazards']
+  	)
+  	.then(response => {
+    		const hazards = response.json.riskIndex.hazards;
+    		this.props.receiveHazards(hazards);
+    		return this.props.falcor.get(
+      		['riskIndex', 'meta', hazards, 'name']
+    		)
+    		.then(() => response.json.capabilities.length)
+  	})
+  	.then(length =>
+  		this.props.falcor.get(
+      		['capabilities', 'byIndex', { from: 0, to: length -1 }, 'id']
+      	)
+      	.then(response => {
+        	const ids = [];
+        	for (let i = 0; i < length; ++i) {
+          		const graph = response.json.capabilities.byIndex[i]
+          		if (graph) {
+            		ids.push(graph.id);
+          		}
+        	}
+        	return ids;
+      	})
+    )
+  	.then(ids =>
     		this.props.falcor.get(
-        		['capabilities', 'byIndex', { from: 0, to: length -1 }, 'id']
-	      	)
-	      	.then(response => {
-	        	const ids = [];
-	        	for (let i = 0; i < length; ++i) {
-	          		const graph = response.json.capabilities.byIndex[i]
-	          		if (graph) {
-	            		ids.push(graph.id);
-	          		}
-	        	}
-	        	return ids;
-	      	})
-	    )
-    	.then(ids =>
-      		this.props.falcor.get(
-        		['capabilities', 'byId', ids, ATTRIBUTES]
-      		)
-      		.then(response => {
-        		const capabilities = [],
-          			agencies = {};
-        		ids.forEach(id => {
-          			const graph = response.json.capabilities.byId[id],
-            			capability = {
-              				id
-            			};
-            		ATTRIBUTES.forEach(attribute => {
-              			capability[attribute] = graph[attribute];
-            		})
-            		if (graph.agency) {
-	              		agencies[graph.agency] = true;
-	            	}
-          			capabilities.push(capability);
-        		})
-        		this.props.receiveCapabilities(capabilities);
+      		['capabilities', 'byId', ids, ATTRIBUTES]
+    		)
+    		.then(response => {
+      		const capabilities = [],
+        			agencies = {};
+      		ids.forEach(id => {
+        			const graph = response.json.capabilities.byId[id],
+          			capability = {
+            				id
+          			};
+          		ATTRIBUTES.forEach(attribute => {
+            			capability[attribute] = graph[attribute];
+          		})
+          		if (graph.agency) {
+              		agencies[graph.agency] = true;
+            	}
+        			capabilities.push(capability);
       		})
-    	)
+      		this.props.receiveCapabilities(capabilities);
+    		})
+  	)
 	}
 
 	getHazardName(hazard) {
@@ -161,7 +161,6 @@ class CapabilitiesTable extends React.Component {
 									"capability_environmental",
 									"capability_risk_assessment",
 									"capability_administer_funding",
-									"capability_funding_amount",
 									"capability_tech_support",
 									"capability_construction",
 									"capability_outreach",
@@ -218,7 +217,6 @@ CapabilitiesTable.defaultProps = {
 	hazard: null,
 	capability: null,
 	status: null,
-	capabilities: [],
 	title: "Capabilities",
 	columns: ["name", "agency", "description", "budget_provided", "goal", "primary_funding", "status", "admin"],
 	type: null,
