@@ -166,7 +166,10 @@ class CCTable extends React.Component {
 
 	}
 	splitByHazards() {
-		const caps = this.props.capabilities.filter(c => c.hazards),
+		const filterBy = this.props.filterBy,
+			caps = this.props.capabilities
+												.filter(c => !filterBy || c.type === filterBy)
+												.filter(c => c.hazards),
 			data = [],
 			hazards = {},
 			_agencies = {},
@@ -201,7 +204,10 @@ class CCTable extends React.Component {
 		return data;
 	}
 	splitByAgencies() {
-		const caps = this.props.capabilities.filter(c => c.agency),
+		const filterBy = this.props.filterBy,
+			caps = this.props.capabilities
+												.filter(c => !filterBy || c.type === filterBy)
+												.filter(c => c.agency),
 			data = [],
 			agencies = {},
 			_hazards = {},
@@ -235,7 +241,8 @@ class CCTable extends React.Component {
 		return data;
 	}
 	splitByCapabilities() {
-		const caps = this.props.capabilities,
+		const filterBy = this.props.filterBy,
+			caps = this.props.capabilities.filter(c => !filterBy || c.type === filterBy),
 			data = [],
 			capabilities = {},
 			_hazards = {},
@@ -271,7 +278,10 @@ class CCTable extends React.Component {
 		return data;
 	}
 	splitByGoals() {
-		const caps = this.props.capabilities.filter(c => c.goal && c.goal.trim()),
+		const filterBy = this.props.filterBy,
+			caps = this.props.capabilities
+												.filter(c => !filterBy || c.type === filterBy)
+												.filter(c => c.goal),
 			data = [],
 			goals = {},
 			_hazards = {},
@@ -329,13 +339,14 @@ class CCTable extends React.Component {
 	}
 	render() {
 		return (
-			<TableBox { ...this.processData() }/>
+			<TableBox { ...this.processData() }
+				pageSize={ this.props.pageSize }/>
 		)
 	}
 }
 
 CCTable.defaultProps = {
-	groupBy: "hazard",
+	groupBy: "hazard", // agency, capability, goal
 	columns: ["programs",
 						"measures",
 						"actions",
@@ -349,7 +360,8 @@ CCTable.defaultProps = {
 						"regional",
 						"statewide",
 						"local"],
-	sortBy: "programs"
+	filterBy: null, // measure, action, program
+	pageSize: 9
 }
 
 const mapStateToProps = state => ({
