@@ -26,7 +26,71 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <CapabilitiesTable hazard="avalanche"/>
+                <CapabilitiesSummaryTable
+                  groupBy="agency"
+                  columns={ [
+                    "programs",
+                    "measures",
+                    "actions",
+                    "hazards",
+                    "capabilities",
+                    "goals",
+                    "funding",
+                    "budget",
+                    "staff",
+                    "contract staff",
+                    "regional",
+                    "statewide",
+                    "local"
+                  ] }/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesSummaryTable
+                  groupBy="capability"
+                  columns={ [
+                    "programs",
+                    "measures",
+                    "actions",
+                    "hazards",
+                    "agencies",
+                    "goals",
+                    "funding",
+                    "budget",
+                    "staff",
+                    "contract staff",
+                    "regional",
+                    "statewide",
+                    "local"
+                  ] }/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesSummaryTable
+                  groupBy="goal"
+                  columns={ [
+                    "programs",
+                    "measures",
+                    "actions",
+                    "hazards",
+                    "agencies",
+                    "capabilities",
+                    "funding",
+                    "budget",
+                    "staff",
+                    "contract staff",
+                    "regional",
+                    "statewide",
+                    "local"
+                  ] }/>
               </ElementBox>
             </div>
           </div>
