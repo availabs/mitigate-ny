@@ -18,16 +18,19 @@ class HMAP_Table extends React.Component {
 	    	["hmap", "yearsOfData"],
 	    	['riskIndex', 'hazards']
 	    )
-	    .then(res => (console.log(res),res))
 	    .then(response => [response.json.hmap.yearsOfData, response.json.riskIndex.hazards])
 	    .then(([years, hazards]) => {
 // `hmap[{keys:geoids}][{keys:hazardids}][{integers:years}].length`
-			hazards = hazard ? [hazard] : hazards;
-	    	return this.props.falcor.get(
-	    		['hmap', geoid, hazards, years, 'length'],
-	    		["riskIndex", "meta", hazards, "name"]
-	    	)
+				hazards = hazard === 'all' ? hazards : [hazard];
+				let requests = [
+					['hmap', geoid, hazards, years, 'length']
+				]
+				if (hazard !== 'none') {
+					requests.push(["riskIndex", "meta", hazards, "name"])
+				}
+	    	return this.props.falcor.get(...requests)
 	    	.then(response => {
+// console.log("????????????",response)
 	    		let max = 0;
 	    		hazards.forEach(hazard => {
 		    		const data = response.json.hmap[geoid][hazard];
@@ -77,7 +80,7 @@ class HMAP_Table extends React.Component {
 				  		"programarea"
 				  	]
 				]
-	    	)
+	    	)//.then(res => console.log(this.props.hazard, res))
 	    })
 	}
 
@@ -86,7 +89,7 @@ class HMAP_Table extends React.Component {
     		return this.props.riskIndex.meta[hazard].name;
   	}
   	catch (e) {
-    		return getHazardName(hazard)
+    		return null
   	}
 	}
 
@@ -100,7 +103,6 @@ class HMAP_Table extends React.Component {
 		row["county"] = data.county;
 		row["subgrantee"] = data.subgrantee;
 		row["project type"] = data.projecttype;
-		row["value"] = data.projectamount;
 		row["hazard"] = this.getHazardName(data.hazardid);
 		return row;
 	}
@@ -108,10 +110,15 @@ class HMAP_Table extends React.Component {
 	processData() {
 		const graph = this.props.hmap.byId,
 			data = Object.keys(graph)
-				.map(key => this.createRow(graph[key]))
-				.sort((a, b) => b.value - a.value);
+				.filter(k => {
+					if (this.props.hazard === 'none') return true;
+					const d = graph[k];
+					if (this.props.hazard === 'all') return this.props.riskIndex.hazards.value.includes(d.hazardid);
+					return d.hazardid === this.props.hazard
+				})
+				.map(key => this.createRow(graph[key]));
 		if (!data.length) throw new Error("No Data.");
-		return { data, columns: Object.keys(data[0]).filter(d => d !== "value") };
+		return { data, columns: Object.keys(data[0]) };
 	}
 
 	render() {
@@ -123,6 +130,7 @@ class HMAP_Table extends React.Component {
 			)
 		}
 		catch (e) {
+// console.log("ERROR:",this.props.hazard,e)
 			return null;
 		}
 	}
@@ -131,7 +139,7 @@ class HMAP_Table extends React.Component {
 HMAP_Table.defaultProps = {
 	geoid: '36',
 	geoLevel: 'state',
-	hazard: null,
+	hazard: "all", // a hazard, "none", "all"
 	filterColumns: []
 }
 

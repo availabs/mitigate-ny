@@ -7,6 +7,7 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import CapabilitiesSummaryTable from "components/mitigate-ny/CapabilitiesSummaryTable"
 import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
+import HMGPTable from "pages/auth/RiskIndex/components/HMGPTable"
 
 class TestPage extends React.Component {
 
@@ -16,6 +17,31 @@ class TestPage extends React.Component {
         <Element>
 
           <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HMGPTable hazard="none"
+                  filterColumns={ ["program area"] }/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HMGPTable hazard="all"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <HMGPTable hazard="riverine"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          {/*<div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
                 <CapabilitiesSummaryTable />
@@ -93,7 +119,7 @@ class TestPage extends React.Component {
                   ] }/>
               </ElementBox>
             </div>
-          </div>
+          </div>*/}
 
         </Element>
       )
