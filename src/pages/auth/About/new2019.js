@@ -16,7 +16,10 @@ class New2019 extends Component {
             
             <div className="property-section">
               <Content content_id={`new-new`} />
-            </div> 
+            </div>
+            <div className="property-section">
+              <Content content_id={`new-website`} />
+            </div>  
             <div className="property-section">
               <Content content_id={`new-climate`} />
             </div> 
@@ -30,7 +33,7 @@ class New2019 extends Component {
             <div className="property-section">
               <Content content_id={`new-next`} />
             </div>
- 
+
 
             
           </div>
