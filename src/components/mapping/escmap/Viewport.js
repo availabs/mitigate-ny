@@ -33,9 +33,9 @@ export default (args={}) => {
 
 	function Viewport() {
 		if (transitioning) {
-            viewport.transitionInterpolator = new FlyToInterpolator();
-            viewport.transitionEasing = easeCubic;
-            viewport.transitionDuration = 2000;
+      viewport.transitionInterpolator = new FlyToInterpolator();
+      viewport.transitionEasing = easeCubic;
+      viewport.transitionDuration = 2000;
 			transitioning = false;
 		}
 		else {

@@ -35,7 +35,7 @@ class HazardListHeroStats extends React.Component {
 			return (
 				<div className="row">
 					<div className="col-6">
-						<h4><Link style={{color: '#047bf8'}} to={ `hazards/${ hazard }` }
+						<h4><Link style={{color: '#047bf8'}} to={ `/hazards/${ hazard }` }
 							className="hazard-link">
 							{ name } <span style={{fontSize: 10}}>View Hazard Profile</span>  
 						</Link></h4>

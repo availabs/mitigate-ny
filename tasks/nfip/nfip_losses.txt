@@ -1,0 +1,1272 @@
+ALBANY COUNTY                   ALBANY, CITY OF                         59         40          5         14         792,625.75
+                                  ALTAMONT, VILLAGE OF                    13          9          0          4          32,586.91
+                                  BERNE,TOWN OF                            3          3          0          0          26,910.88
+                                  BETHLEHEM, TOWN OF                      27         18          0          9         251,266.49
+                                  COEYMANS, TOWN OF                       21         16          0          5         586,757.81
+                                  COHOES, CITY OF                         25         20          0          5          94,508.00
+                                  COLONIE, TOWN OF                        95         80          0         15       1,321,837.53
+                                  GREEN ISLAND, VILLAGE OF                 7          5          0          2          34,789.74
+                                  GUILDERLAND, TOWN OF                    17         11          0          6         342,390.13
+                                  KNOX, TOWNSHIP OF                        2          0          0          2                .00
+                                  MENANDS, VILLAGE OF                      9          3          0          6          69,503.26
+                                  NEW SCOTLAND, TOWN OF                   15         10          0          5         200,069.04
+                                  RAVENA, VILLAGE OF                       4          1          0          3           1,038.50
+                                  RENSSELAERVILLE, TOWN OF                 8          6          0          2         199,436.52
+                                  VOORHEESVILLE, VILLAGE OF               12         10          0          2          67,231.46
+                                  WATERVLIET, CITY OF                     16          9          0          7          67,663.83
+                                  WESTERLO, TOWN OF                        5          4          0          1          48,361.39
+  ALLEGANY COUNTY                 ALFRED, TOWN OF                          1          1          0          0           2,742.40
+                                  ALFRED, VILLAGE OF                       4          3          0          1           1,585.82
+                                  ALLEN, TOWN OF                           1          1          0          0          15,149.94
+                                  ALMA, TOWN OF                            2          2          0          0           6,201.17
+                                  ALMOND, TOWN OF                         12          9          0          3          21,471.58
+                                  ALMOND, VILLAGE OF                      20         13          0          7          35,455.04
+                                  AMITY, TOWN OF                           8          7          0          1         367,095.26
+                                  ANDOVER, TOWN OF                         2          2          0          0           5,293.47
+                                  ANDOVER, VILLAGE OF                     19         13          0          6          29,884.35
+                                  ANGELICA, TOWN OF                        1          1          0          0           3,054.55
+                                  ANGELICA, VILLAGE OF                     1          1          0          0           3,349.05
+                                  BELMONT, VILLAGE OF                      4          2          0          2          19,368.01
+                                  BOLIVAR, TOWN OF                         2          0          0          2                .00
+                                  BURNS, TOWN OF                           4          3          0          1          10,921.59
+                                  CANASERAGA, VILLAGE OF                   5          4          0          1          18,837.30
+                                  CANEADEA, TOWN OF                        8          7          0          1          73,014.04
+                                  CLARKSVILLE, TOWN OF                     5          3          0          2           1,123.46
+                                  CUBA, TOWN OF                            4          4          0          0           2,400.31
+                                  CUBA, VILLAGE OF                         1          1          0          0           2,559.59
+                                  FILLMORE, VILLAGE OF                     2          1          0          1          34,625.81
+                                  FRIENDSHIP, TOWN OF                      2          2          0          0           9,013.96
+                                  GENESEE, TOWN OF                         1          0          0          1                .00
+                                  GRANGER, TOWN OF                         2          2          0          0          18,240.24
+                                  GROVE, TOWN OF                           9          7          0          2          51,004.50
+                                  HUME, TOWN OF                            6          5          0          1          84,839.75
+                                  RICHBURG, VILLAGE OF                     3          3          0          0          37,401.44
+                                  RUSHFORD, TOWN OF                        1          0          0          1                .00
+                                  SCIO, TOWN OF                           22         12          0         10          48,501.07
+                                  SENECA NATION OF INDIANS               364        330          0         34       1,110,086.94
+                                  WELLSVILLE, TOWN OF                     27         20          0          7          73,294.02
+                                  WELLSVILLE, VILLAGE OF                  35         20          0         15          63,070.07
+                                  WILLING, TOWN OF                         7          4          0          3          13,979.10
+  BRONX COUNTY                    NEW YORK, CITY OF                   41,785     35,169        124      6,492   1,389,582,533.78
+  BROOME COUNTY                   BARKER, TOWN OF                          7          5          0          2          50,073.21
+                                  BINGHAMTON, CITY OF                    308        274          7         27      16,679,403.39
+                                  BINGHAMTON, TOWN OF                     19         16          0          3         924,105.59
+                                  CHENANGO, TOWN OF                      109         85          1         23       2,316,225.07
+                                  COLESVILLE, TOWN OF                     73         65          1          7       1,728,710.24
+                                  CONKLIN, TOWN OF                       768        694         16         58      35,259,010.59
+                                  DEPOSIT, VILLAGE OF                    119        105          0         14       2,793,680.82
+                                  DICKINSON, TOWN OF                      27         25          0          2       1,080,697.59
+                                  ENDICOTT, VILLAGE OF                    94         89          0          5       3,990,710.52
+                                  FENTON, TOWN OF                         47         36          0         11         546,088.32
+                                  JOHNSON CITY, VILLAGE OF               202        195          0          7      14,848,133.81
+                                  KIRKWOOD, TOWN OF                      226        198          3         25       8,036,035.94
+                                  LISLE, TOWN OF                           7          6          0          1         129,822.30
+                                  LISLE, VILLAGE OF                        2          2          0          0         226,432.33
+                                  MAINE, TOWN OF                          22         21          0          1         676,854.40
+                                  NANTICOKE, TOWN OF                       2          2          0          0          61,940.39
+                                  PORT DICKINSON, VILLAGE OF              14         13          0          1         363,306.23
+                                  SANFORD, TOWN OF                        19         15          0          4         316,822.82
+                                  TRIANGLE, TOWN OF                        1          0          0          1                .00
+                                  UNION, TOWN OF                         530        484          0         46      22,991,470.34
+                                  VESTAL, TOWN OF                        486        428          5         53      24,183,156.09
+                                  WHITNEY POINT, VILLAGE OF                4          3          0          1          36,456.79
+                                  WINDSOR, TOWN OF                        56         47          0          9       1,394,058.42
+                                  WINDSOR, VILLAGE OF                     12         10          0          2         113,623.54
+  CATTARAUGUS COUNTY              ALLEGANY, TOWN OF                       21         13          0          8          67,136.31
+                                  ALLEGANY, VILLAGE OF                    29         19          0         10         331,273.85
+                                  CARROLLTON, TOWN OF                      2          0          0          2                .00
+                                  CATTARAUGUS, VILLAGE OF                 21         17          0          4          33,394.58
+                                  COLD SPRING, TOWN OF                     9          6          0          3          47,275.76
+                                  CONEWANGO, TOWN OF                       6          5          0          1           5,570.60
+                                  DAYTON, TOWN OF                          1          1          0          0             541.30
+                                  EAST OTTO, TOWN OF                      25         16          0          9         305,874.38
+                                  EAST RANDOLPH, VILLAGE OF                4          4          0          0          15,689.50
+                                  ELLICOTTVILLE, TOWN OF                   7          5          0          2          55,131.17
+                                  ELLICOTTVILLE, VILLAGE OF               21         17          0          4          96,138.05
+                                  FARMERSVILLE, TOWN OF                    2          2          0          0          16,410.66
+                                  FRANKLINVILLE, TOWN OF                   2          1          0          1          11,319.09
+                                  FRANKLINVILLE, VILLAGE OF                1          1          0          0           7,186.93
+                                  FREEDOM, TOWN OF                         4          3          0          1          81,006.26
+                                  GOWANDA, VILLAGE OF                    135        118          0         17       2,332,780.40
+                                  GREAT VALLEY, TOWN OF                   18         15          0          3         119,521.69
+                                  HINSDALE, TOWN OF                        7          3          0          4           9,875.84
+                                  ISCHUA, TOWN OF                          1          1          0          0          41,951.22
+                                  LIMESTONE, VILLAGE OF                    1          1          0          0           2,519.28
+                                  LITTLE VALLEY, VILLAGE OF                1          1          0          0              74.97
+                                  LYNDON, TOWN OF                          1          1          0          0          11,245.81
+                                  MANSFIELD, TOWN OF                       2          2          0          0           5,073.87
+                                  NAPOLI, TOWN OF                          1          1          0          0             826.00
+                                  NEW ALBION, TOWN OF                      4          3          0          1          13,989.24
+                                  OLEAN, CITY OF                          28         14          0         14         214,595.10
+                                  OLEAN, TOWN OF                          25         20          0          5         329,532.01
+                                  PERRYSBURG, TOWN OF                      3          2          0          1           2,233.85
+                                  PORTVILLE, TOWN OF                      87         68          0         19         568,118.24
+                                  PORTVILLE, VILLAGE OF                   14         11          0          3         530,647.00
+                                  RANDOLPH, TOWN OF                        1          1          0          0             261.25
+                                  RANDOLPH, VILLAGE OF                     5          3          0          2           6,610.82
+                                  SALAMANCA, CITY OF                       6          1          0          5           2,273.49
+                                  SALAMANCA, TOWN OF                       2          1          0          1           6,554.47
+                                  SOUTH VALLEY, TOWN OF                    1          1          0          0             126.60
+                                  YORKSHIRE, TOWN OF                       3          2          0          1          12,838.77
+  CATTARAVUS COUNTY               ASHFORD, TOWNSHIP OF                    14         11          0          3          37,851.91
+  CAYUGA COUNTY                   AUBURN, CITY OF                         18          7          0         11         106,962.19
+                                  AURELIUS, TOWN OF                       12          8          0          4          35,542.69
+                                  AURORA, VILLAGE OF                       4          3          0          1          12,567.26
+                                  BRUTUS, TOWN OF                         11          9          0          2          35,356.59
+                                  CATO, TOWN OF                           42         34          0          8         221,054.19
+                                  CATO, VILLAGE OF                         9          8          0          1          17,977.86
+                                  CAYUGA, VILLAGE OF                      18         10          0          8          42,023.59
+                                  CONQUEST, TOWN OF                        5          4          0          1          48,261.02
+                                  FAIR HAVEN, VILLAGE OF                   1          1          0          0          16,751.25
+                                  FLEMING, TOWN OF                         6          5          0          1          12,382.01
+                                  GENOA,TOWN OF                            5          2          0          3           5,889.23
+                                  LEDYARD, TOWN OF                        18         12          0          6          48,177.69
+                                  LOCKE, TOWN OF                           8          5          0          3          10,707.29
+                                  MENTZ, TOWN OF                           5          3          0          2          12,359.44
+                                  MERIDIAN, VILLAGE OF                     4          3          0          1          34,200.55
+                                  MONTEZUMA, TOWN OF                       5          5          0          0          17,784.13
+                                  MORAVIA, TOWN OF                         1          1          0          0             242.00
+                                  MORAVIA, VILLAGE OF                     34         27          0          7         177,730.75
+                                  NILES, TOWN OF                           3          3          0          0          56,922.71
+                                  OWASCO, TOWN OF                          9          7          0          2           5,195.81
+                                  PORT BYRON, VILLAGE OF                   5          3          0          2           4,716.94
+                                  SCIPIO, TOWN OF                          4          1          0          3           6,596.21
+                                  SEMPRONIUS, TOWN OF                      5          4          0          1          32,378.70
+                                  SENNETT, TOWN OF                         1          1          0          0           7,914.15
+                                  SPRINGPORT, TOWN OF                     15          8          0          7          69,656.55
+                                  SUMMER HILL, TOWN OF                     6          3          0          3          61,345.40
+                                  THROOP, TOWN OF                          5          2          1          2           1,936.64
+                                  UNION SPRINGS, VILLAGE OF               16         15          0          1         154,822.98
+                                  VENICE, TOWN OF                          2          1          0          1           6,440.82
+                                  VICTORY, TOWN OF                         2          1          0          1           2,678.00
+                                  WEEDSPORT, VILLAGE OF                    4          0          0          4                .00
+  CHAUTAUQUA COUNTY               BEMUS POINT, VILLAGE OF                  2          1          0          1             367.95
+                                  BUSTI, TOWN OF                          16          8          0          8          40,052.78
+                                  CARROLL, TOWN OF                         6          3          0          3           5,694.12
+                                  CELORON, VILLAGE OF                      7          6          0          1          31,492.35
+                                  CHARLOTTE, TOWN OF                       1          1          0          0             156.23
+                                  CHAUTAUQUA, TOWN OF                     54         47          0          7         337,202.76
+                                  CHERRY CREEK, VILLAGE OF                 2          2          0          0          11,039.77
+                                  DUNKIRK, CITY OF                        59         46          0         13         162,385.26
+                                  DUNKIRK, TOWN OF                        11          4          0          7          23,354.84
+                                  ELLERY, TOWN OF                         17         13          0          4         165,762.28
+                                  ELLICOTT, TOWN OF                       24         16          0          8          59,800.79
+                                  ELLINGTON, TOWN OF                       4          4          0          0          28,279.11
+                                  FALCONER, VILLAGE OF                    12         11          0          1          16,199.78
+                                  FORESTVILLE, VILLAGE OF                  2          1          0          1           1,304.00
+                                  FREDONIA, VILLAGE OF                   108         87          0         21         792,450.65
+                                  GERRY, TOWN OF                           2          2          0          0           4,941.02
+                                  HANOVER, TOWN OF                     1,394      1,197          1        196       5,894,008.87
+                                  JAMESTOWN, CITY OF                      29         17          0         12          83,440.89
+                                  KIANTONE, TOWN OF                        7          5          0          2         160,874.48
+                                  LAKEWOOD, VILLAGE OF                    18          9          0          9          23,399.05
+                                  MAYVILLE, VILLAGE OF                     4          3          0          1          23,578.17
+                                  NORTH HARMONY, TOWN OF                  33         23          0         10          94,308.99
+                                  PANAMA, VILLAGE OF                       2          1          0          1           3,588.69
+                                  POLAND, TOWN OF                         10          6          0          4          14,482.22
+                                  POMFRET, TOWN OF                         9          6          0          3          57,081.64
+                                  PORTLAND, TOWN OF                       14          4          0         10          11,916.14
+                                  SHERIDAN, TOWN OF                       11         10          0          1         134,669.95
+                                  SILVER CREEK, VILLAGE OF                78         72          0          6       1,530,169.44
+                                  SINCLAIRVILLE, VILLAGE OF               15         14          0          1          41,911.87
+                                  WESTFIELD, VILLAGE OF                    2          1          0          1             110.30
+  CHEMUNG COUNTY                  ASHLAND, TOWN OF                        29         24          1          4         322,464.44
+                                  BALDWIN, TOWN OF                        35         24          0         11         922,515.94
+                                  BIG FLATS, TOWN OF                      47         22          8         17         158,052.70
+                                  CATLIN, TOWN OF                          3          2          0          1          30,316.23
+                                  CHEMUNG, TOWN OF                        13          8          0          5          39,449.38
+                                  ELMIRA HEIGHTS, VILLAGE OF              16         10          0          6          33,495.38
+                                  ELMIRA, CITY OF                         58         26          0         32         149,019.42
+                                  ELMIRA, TOWN OF                         16         10          0          6          37,329.37
+                                  HORSEHEADS, TOWN OF                     18          8          3          7          40,122.78
+                                  HORSEHEADS, VILLAGE OF                   6          4          0          2          30,565.49
+                                  MILLPORT, VILLAGE OF                     1          1          0          0          11,076.99
+                                  SOUTHPORT, TOWN OF                      22         15          2          5         110,528.47
+                                  VAN ETTEN, TOWN OF                       3          2          0          1           8,266.95
+                                  VAN ETTEN, VILLAGE OF                    1          1          0          0           1,063.33
+                                  VETERAN, TOWN OF                         2          2          0          0           4,950.55
+                                  WELLSBURG, VILLAGE OF                   45         39          2          4       1,041,953.10
+  CHENANGO COUNTY                 AFTON, TOWN OF                          43         35          0          8         684,884.79
+                                  AFTON, VILLAGE OF                       27         24          0          3         554,017.88
+                                  BAINBRIDGE, TOWN OF                     37         35          0          2         686,418.48
+                                  BAINBRIDGE, VILLAGE OF                  36         32          0          4         679,420.26
+                                  COLUMBUS, TOWN OF                        4          3          0          1          17,048.60
+                                  COVENTRY, TOWN OF                        5          5          0          0          34,640.93
+                                  GREENE, TOWN OF                         50         45          0          5       1,314,868.66
+                                  GREENE, VILLAGE OF                      80         75          0          5       2,463,943.26
+                                  GUILFORD, TOWN OF                       18         15          0          3         171,966.12
+                                  NEW BERLIN, TOWN OF                      9          7          0          2          62,943.97
+                                  NEW BERLIN, VILLAGE OF                   6          4          0          2          34,296.23
+                                  NORTH NORWICH, TOWN OF                   3          3          0          0          40,346.71
+                                  NORWICH, CITY OF                       196        142          0         54       1,391,879.27
+                                  NORWICH, TOWN OF                        22         17          0          5       1,698,161.27
+                                  OTSELIC, TOWN OF                         2          1          0          1          10,534.60
+                                  OXFORD, TOWN OF                         17         14          0          3         159,231.39
+                                  OXFORD, VILLAGE OF                      48         38          0         10         518,975.55
+                                  PLYMOUTH, TOWN OF                        2          2          0          0          20,623.60
+                                  PRESTON, TOWN OF                         1          1          0          0          75,000.00
+                                  SHERBURNE, TOWN OF                      17         13          1          3         175,610.90
+                                  SHERBURNE, VILLAGE OF                   11         10          0          1         332,635.80
+                                  SMITHVILLE, TOWN OF                      1          0          0          1                .00
+                                  SMYRNA, TOWN OF                          3          3          0          0          55,523.07
+  CLINTON COUNTY                  ALTONA, TOWN OF                          4          4          0          0          60,732.14
+                                  AUSABLE, TOWN OF                        18         14          0          4         510,630.37
+                                  BEEKMANTOWN, TOWN OF                    12         10          0          2         174,911.95
+                                  BLACK BROOK, TOWN OF                    21         18          0          3         495,149.19
+                                  CHAMPLAIN, TOWN OF                      35         28          0          7         304,208.64
+                                  CHAMPLAIN, VILLAGE OF                   33         21          0         12         131,526.99
+                                  CHAZY, TOWN OF                          18         16          0          2         333,017.52
+                                  CLINTON, TOWN OF                         2          2          0          0          32,159.34
+                                  ELLENBURG, TOWN OF                       8          8          0          0         192,053.74
+                                  MOOERS, TOWN OF                          4          3          1          0           7,939.37
+                                  MOOERS, VILLAGE OF                       3          3          0          0          18,937.30
+                                  PERU,TOWN OF                            23         15          0          8         424,454.22
+                                  PLATTSBURGH, CITY OF                    25         17          0          8       1,280,088.75
+                                  PLATTSBURGH, TOWN OF                    43         24          0         19         565,904.60
+                                  ROUSES POINT, VILLAGE OF                 1          1          0          0          19,410.42
+                                  SARANAC, TOWN OF                         8          7          0          1          45,832.25
+                                  SCHUYLER FALLS, TOWN OF                 25         22          0          3         232,594.02
+  COLUMBIA COUNTY                 ANCRAM, TOWN OF                          5          5          0          0          79,684.02
+                                  AUSTERLITZ, TOWN OF                      6          5          0          1          38,342.21
+                                  CANAAN, TOWN OF                          3          3          0          0          33,767.82
+                                  CHATHAM, TOWN OF                         9          5          0          4         118,461.00
+                                  CHATHAM, VILLAGE OF                      2          1          0          1             682.51
+                                  CLAVERACK, TOWN OF                       7          5          0          2          13,814.97
+                                  CLERMONT, TOWNSHIP OF                    1          1          0          0          93,201.06
+                                  COPAKE, TOWN OF                         20         16          0          4         235,555.80
+                                  GALLATIN, TOWN OF                       13          9          0          4          50,531.23
+                                  GHENT, TOWN OF                           3          3          0          0          44,867.08
+                                  GREENPORT, TOWN OF                       7          6          0          1          12,635.65
+                                  HILLSDALE, TOWN OF                       7          5          0          2          30,305.09
+                                  HUDSON, CITY OF                          3          2          0          1           2,915.34
+                                  KINDERHOOK, TOWN OF                      7          4          0          3          58,651.04
+                                  KINDERHOOK, VILLAGE OF                   5          5          0          0         375,559.27
+                                  LIVINGSTON, TOWN OF                     19         17          0          2          85,401.60
+                                  MINEOLA, VILLAGE OF                     13         12          0          1         178,996.53
+                                  NEW LEBANON, TOWN OF                    71         64          0          7         918,071.46
+                                  STOCKPORT, TOWN OF                      28         21          0          7         218,060.10
+                                  STUYVESANT, TOWN OF                     12         12          0          0         540,560.69
+                                  TAGHKANIC, TOWN OF                       4          2          0          2          14,911.40
+                                  VALATIE, VILLAGE OF                      4          3          0          1          16,401.57
+  CORTLAND COUNTY                 CINCINNATUS, TOWN OF                    12         10          0          2         556,552.00
+                                  CORTLAND, CITY OF                      161        117          0         44         719,448.57
+                                  CORTLANDVILLE, TOWN OF                  36         29          0          7         407,944.64
+                                  HARFORD, TOWN OF                         8          7          0          1         118,471.44
+                                  HOMER, TOWN OF                          18         12          0          6         102,128.85
+                                  HOMER, VILLAGE OF                        7          7          0          0         103,197.62
+                                  MARATHON, VILLAGE OF                    32         29          0          3         118,883.61
+                                  MCGRAW, VILLAGE OF                      46         35          0         11         763,098.98
+                                  PREBLE, TOWN OF                          4          3          0          1          11,003.58
+                                  SCOTT, TOWN OF                           6          3          0          3          12,034.45
+                                  TRUXTON, TOWN OF                        17         13          0          4         135,185.61
+                                  VIRGIL, TOWN OF                          4          4          0          0         521,444.25
+  DELAWARE COUNTY                 ANDES, TOWN OF                          10         10          0          0         123,687.53
+                                  ANDES, VILLAGE OF                       16         13          0          3         109,729.01
+                                  BOVINA, TOWN OF                          6          6          0          0         357,937.70
+                                  COLCHESTER,TOWN OF                     109         97          0         12       2,063,128.75
+                                  DAVENPORT, TOWN OF                      22         17          0          5         122,395.12
+                                  DELHI, TOWN OF                          10          9          1          0          94,868.66
+                                  DELHI, VILLAGE OF                       23         16          0          7         107,039.62
+                                  DEPOSIT, TOWN OF                        24         22          0          2         354,095.24
+                                  FLEISCHMANNS, VILLAGE OF                43         39          0          4         840,082.22
+                                  FRANKLIN, TOWN OF                        9          5          0          4          58,497.42
+                                  FRANKLIN, VILLAGE OF                     2          2          0          0          91,818.45
+                                  HAMDEN,TOWN OF                          10          8          0          2          76,008.19
+                                  HANCOCK, TOWN OF                       125        103          0         22       2,056,873.25
+                                  HANCOCK, VILLAGE OF                      7          6          1          0          92,137.90
+                                  HARPERSFIELD, TOWN OF                    1          1          0          0           3,700.00
+                                  HOBART, VILLAGE OF                       2          1          0          1             650.00
+                                  KORTRIGHT, TOWN OF                       1          0          0          1                .00
+                                  MARGARETVILLE, VILLAGE OF              128        109          0         19       5,374,408.27
+                                  MASONVILLE, TOWN OF                      3          2          0          1           7,815.51
+                                  MEREDITH, TOWN OF                        5          4          0          1          42,861.46
+                                  MIDDLETOWN, TOWN OF                     64         55          0          9       1,351,735.42
+                                  ROXBURY, TOWN OF                        15          6          0          9          80,666.06
+                                  SIDNEY, TOWN OF                         46         39          0          7         874,144.19
+                                  SIDNEY, VILLAGE OF                     336        321          2         13      15,647,506.74
+                                  STAMFORD, TOWN OF                        1          1          0          0          12,231.50
+                                  STAMFORD, VILLAGE OF                     1          1          0          0           1,212.78
+                                  TOMPKINS, TOWN OF                        7          3          0          4          48,718.48
+                                  WALTON, TOWN OF                         41         32          0          9         981,451.98
+                                  WALTON, VILLAGE OF                     184        166          0         18       7,291,856.62
+  DUTCHESS COUNTY                 AMENIA, TOWN OF                         13          4          0          9          30,791.81
+                                  BEACON, CITY OF                         29         19          0         10         271,133.31
+                                  BEEKMAN, TOWN OF                         6          3          0          3           5,493.80
+                                  CLINTON, TOWN OF                         8          6          0          2         107,028.82
+                                  DOVER, TOWN OF                          48         35          0         13         403,441.95
+                                  EAST FISHKILL, TOWN OF                 111         96          0         15       1,810,805.47
+                                  FISHKILL, TOWN OF                       33         28          0          5         407,770.07
+                                  FISHKILL, VILLAGE OF                    50         40          0         10       1,268,875.97
+                                  HYDE PARK, TOWN OF                      35         24          0         11         377,228.05
+                                  LAGRANGE, TOWN OF                       37         32          0          5         406,971.71
+                                  MILAN, TOWN OF                           6          3          0          3          15,888.73
+                                  MILLBROOK, VILLAGE OF                    1          0          0          1                .00
+                                  MILLERTON, VILLAGE OF                    2          2          0          0           6,939.07
+                                  NORTH EAST, TOWN OF                      3          3          0          0          21,266.12
+                                  PAWLING, TOWN OF                         9          9          0          0          36,875.24
+                                  PAWLING, VILLAGE OF                     14         13          0          1       1,941,505.63
+                                  PINE PLAINS, TOWN OF                     1          1          0          0           2,169.72
+                                  PLEASANT VALLEY, TOWN OF                52         47          0          5       1,309,367.89
+                                  POUGHKEEPSIE, CITY OF                   46         39          0          7         553,773.10
+                                  POUGHKEEPSIE, TOWN OF                   46         34          1         11         954,844.97
+                                  RED HOOK, TOWN OF                       21         17          0          4         384,451.19
+                                  RHINEBECK, TOWN OF                       3          3          0          0          28,632.56
+                                  RHINEBECK, VILLAGE OF                    8          7          0          1          49,310.95
+                                  STANFORD, TOWN OF                        8          6          0          2          44,101.13
+                                  TIVOLI, VILLAGE OF                       2          2          0          0          16,562.22
+                                  UNION VALE, TOWN OF                      2          0          0          2                .00
+                                  WAPPINGER, TOWN OF                      25         21          0          4         313,495.17
+                                  WAPPINGERS FALLS, VILLAGE OF            10          4          0          6           7,865.00
+                                  WASHINGTON, TOWN OF                      4          3          0          1          30,873.81
+  ERIE COUNTY                     AKRON, VILLAGE OF                        4          3          0          1           8,104.43
+                                  ALDEN, TOWN OF                          19         12          0          7         187,357.88
+                                  ALDEN, VILLAGE OF                        5          5          0          0           4,711.36
+                                  AMHERST, TOWN OF                       439        286          0        153       1,409,205.12
+                                  ANGOLA, VILLAGE OF                      19         17          0          2          91,619.03
+                                  AURORA, TOWN OF                         13         11          0          2          98,973.98
+                                  BLASDELL, VILLAGE OF                    25         17          0          8         150,556.25
+                                  BOSTON, TOWN OF                         19         15          0          4         180,739.54
+                                  BRANT, TOWN OF                         101         92          0          9         307,622.73
+                                  BUFFALO, CITY OF                       419        277          0        142       1,064,702.41
+                                  CHEEKTOWAGA, TOWN OF                   205        141          0         64       1,197,345.13
+                                  CLARENCE, TOWN OF                       41         25          0         16          77,189.64
+                                  COLDEN, TOWN OF                          7          4          0          3           4,446.00
+                                  COLLINS,TOWN OF                          5          4          0          1          74,714.50
+                                  CONCORD, TOWN OF                         8          8          0          0          58,397.62
+                                  DEPEW, VILLAGE OF                       33         22          0         11          23,674.86
+                                  EAST AURORA, VILLAGE OF                 38         32          0          6         186,845.27
+                                  EDEN, TOWN OF                            6          5          0          1          35,311.43
+                                  ELMA,TOWN OF                            25         19          0          6          54,676.13
+                                  EVANS, TOWN OF                          95         66          0         29         446,727.03
+                                  FARNHAM, VILLAGE OF                      1          1          0          0           2,445.32
+                                  GRAND ISLAND, TOWN OF                   29         21          0          8          62,487.27
+                                  HAMBURG, TOWN OF                       159        125          1         33       1,315,308.80
+                                  HAMBURG, VILLAGE OF                     26         17          0          9         217,430.46
+                                  HOLLAND, TOWN OF                         2          1          0          1           2,738.44
+                                  KENMORE,VILLAGE OF                       8          7          0          1           3,379.05
+                                  LACKAWANNA, CITY OF                     94         64          0         30         110,735.85
+                                  LANCASTER, TOWN OF                      50         34          0         16         361,804.68
+                                  LANCASTER, VILLAGE OF                    5          1          0          4           4,698.45
+                                  MARILLA, TOWN OF                         1          1          0          0          15,190.41
+                                  NEWSTEAD, TOWN OF                        7          4          0          3          24,937.88
+                                  ORCHARD PARK, TOWN OF                   13          5          0          8           8,609.01
+                                  ORCHARD PARK, VILLAGE OF                 7          4          0          3          59,650.85
+                                  SARDINIA, TOWN OF                        6          4          0          2         114,204.53
+                                  SLOAN, VILLAGE OF                        1          0          0          1                .00
+                                  SPRINGVILLE, VILLAGE OF                 18         16          0          2         320,645.61
+                                  TONAWANDA, CITY OF                      11          8          0          3          32,027.66
+                                  TONAWANDA, TOWN OF                      53         30          0         23          69,590.56
+                                  WALES, TOWN OF                           4          2          0          2           2,133.22
+                                  WEST SENECA, TOWN OF                   181        130          0         51         771,091.77
+                                  WILLIAMSVILLE, VILLAGE OF              134         92          0         42         516,723.95
+  ESSEX COUNTY                    CHESTERFIELD, TOWN OF                   11          8          0          3         230,558.08
+                                  CROWN POINT,TOWN OF                      4          2          0          2           7,014.25
+                                  ELIZABETHTOWN, TOWN OF                  27         23          0          4         273,106.19
+                                  ELIZABETHTOWN, VILLAGE OF                1          1          0          0           3,162.25
+                                  ESSEX, TOWN OF                           7          3          0          4          17,651.65
+                                  JAY, TOWN OF                           188        165          1         22       3,133,068.35
+                                  KEENE, TOWN OF                          39         31          0          8         922,335.45
+                                  KEESEVILLE, VILLAGE OF                   4          2          0          2             258.40
+                                  LAKE PLACID, VILLAGE OF                  1          0          0          1                .00
+                                  LEWIS, TOWN OF                           3          3          0          0          81,086.96
+                                  NEWCOMB, TOWN OF                        12         12          0          0         210,146.19
+                                  NORTH ELBA, TOWN OF                     16         12          0          4         235,800.34
+                                  NORTH HUDSON, TOWN OF                    5          1          0          4          36,802.73
+                                  PORT HENRY, VILLAGE OF                   1          0          0          1                .00
+                                  SARANAC LAKE, VILLAGE OF                10          4          0          6          10,247.27
+                                  SCHROON, TOWN OF                        29         20          0          9         269,022.19
+                                  TICONDEROGA, TOWN OF                     4          3          0          1          41,614.15
+                                  WESTPORT, TOWN OF                       16         12          0          4         169,544.96
+                                  WILLSBORO, TOWN OF                      14          9          1          4         104,697.31
+                                  WILMINGTON, TOWN OF                      3          3          0          0          17,136.74
+  FRANKLIN COUNTY                 BANGOR, TOWN OF                          1          0          0          1                .00
+                                  BELLMONT, TOWN OF                        2          1          0          1           2,944.54
+                                  BOMBAY, TOWN OF                          4          4          0          0          24,186.22
+                                  DICKINSON, TOWN OF                       1          1          0          0          10,923.92
+                                  FORT COVINGTON, TOWN OF                  1          1          0          0           3,892.74
+                                  MALONE, TOWN OF                          8          6          0          2          79,326.77
+                                  MALONE, VILLAGE OF                       5          3          0          2          13,399.34
+                                  TUPPER LAKE, TOWN OF                     6          2          0          4           4,270.68
+                                  TUPPER LAKE,VILLAGE OF                   5          4          0          1          15,358.60
+                                  WAVERLY, TOWN OF                         4          4          0          0         113,150.10
+                                  WESTVILLE, TOWN OF                       1          1          0          0           2,991.97
+  FULTON COUNTY                   BLEECKER,TOWN OF                         1          1          0          0           4,803.43
+                                  CAROGA, TOWN OF                          2          1          0          1           3,955.00
+                                  EPHRATAH, TOWN OF                        1          0          0          1                .00
+                                  GLOVERSVILLE, CITY OF                   40         34          0          6         398,305.40
+                                  JOHNSTOWN, CITY OF                      40         27          0         13         324,905.23
+                                  MAYFIELD, TOWN OF                        5          4          0          1          19,980.95
+                                  NORTHAMPTON, TOWN OF                     1          0          0          1                .00
+                                  NORTHVILLE, VILLAGE OF                   1          0          0          1                .00
+                                  STRATFORD, TOWN OF                       1          1          0          0           2,163.00
+  GENESEE COUNTY                  ALABAMA, TOWN OF                         1          0          0          1                .00
+                                  ALEXANDER, VILLAGE OF                   11         10          0          1         136,020.21
+                                  ALEXANDER,TOWN OF                       14         12          0          2         117,881.56
+                                  ATTICA, VILLAGE OF                      70         57          0         13       1,062,801.72
+                                  BATAVIA, CITY OF                        49         33          0         16          93,985.10
+                                  BATAVIA, TOWN OF                        15         11          0          4          59,069.18
+                                  BERGEN, TOWN OF                          2          2          0          0           2,244.54
+                                  LE ROY, TOWN OF                          4          3          0          1          14,843.50
+                                  LE ROY, VILLAGE OF                       2          2          0          0           4,879.37
+                                  OAKFIELD, TOWN OF                        1          0          0          1                .00
+                                  PAVILION, TOWN OF                        1          1          0          0              15.61
+                                  STAFFORD,TOWN OF                         1          0          0          1                .00
+  GREENE COUNTY                   ASHLAND, TOWN OF                        12          9          0          3         345,412.17
+                                  ATHENS, TOWN OF                          7          4          1          2         168,639.13
+                                  ATHENS, VILLAGE OF                      21         17          0          4         603,305.90
+                                  CAIRO, TOWN OF                          43         31          0         12         560,907.62
+                                  CATSKILL, TOWN OF                      128         99          0         29       4,717,859.98
+                                  CATSKILL, VILLAGE OF                    38         31          0          7       2,370,028.50
+                                  COXSACKIE, TOWN OF                       3          2          0          1          11,389.88
+                                  COXSACKIE, VILLAGE OF                   15         13          0          2         251,480.03
+                                  DURHAM, TOWN OF                         14         11          0          3         222,436.08
+                                  GREENVILLE, TOWN OF                      2          2          0          0          67,610.58
+                                  HALCOTT, TOWN OF                         2          2          0          0          18,826.39
+                                  HUNTER, TOWN OF                         23         20          0          3         250,290.70
+                                  HUNTER, VILLAGE OF                      25         20          0          5         285,872.27
+                                  JEWETT, TOWN OF                         28         24          0          4         365,019.97
+                                  LEXINGTON, TOWN OF                      49         44          0          5       1,149,978.63
+                                  NEW BALTIMORE, TOWN OF                   5          3          0          2          32,422.06
+                                  PRATTSVILLE, TOWN OF                    97         87          0         10       4,287,211.67
+                                  TANNERSVILLE, VILLAGE OF                27         17          0         10         233,346.40
+                                  WINDHAM, TOWN OF                        47         41          0          6       2,737,659.02
+  HAMILTON COUNTY                 BENSON, TOWN OF                          1          1          0          0           1,505.31
+                                  HOPE, TOWN OF                           40         38          0          2         218,479.14
+                                  INDIAN LAKE, TOWN OF                     4          3          0          1          58,620.23
+                                  LONG LAKE, TOWN OF                      14          8          2          4         242,068.61
+  HERKIMER COUNTY                 COLD BROOK, VILLAGE OF                   3          2          0          1           3,012.23
+                                  COLUMBIA, TOWN OF                        1          1          0          0             151.82
+                                  DANUBE, TOWN OF                          2          1          0          1          10,371.63
+                                  DOLGEVILLE, VILLAGE OF                  51         39          0         12         208,000.87
+                                  FAIRFIELD, TOWN OF                       1          0          0          1                .00
+                                  FRANKFORT, TOWN OF                       4          4          0          0          11,601.22
+                                  FRANKFORT, VILLAGE OF                    7          7          0          0          23,205.30
+                                  GERMAN FLATTS, TOWN OF                  12         10          0          2          90,139.95
+                                  HERKIMER, TOWN OF                        7          5          0          2          26,834.94
+                                  HERKIMER, VILLAGE OF                    12         12          0          0         159,791.52
+                                  ILION, VILLAGE OF                      178        152          1         25       1,292,947.27
+                                  LITCHFIELD, TOWN OF                      5          3          0          2          14,182.80
+                                  LITTLE FALLS, CITY OF                   12         12          0          0         300,577.39
+                                  LITTLE FALLS, TOWN OF                    4          3          0          1          14,371.84
+                                  MANHEIM, TOWN OF                         6          6          0          0          63,943.08
+                                  MIDDLEVILLE, VILLAGE OF                 10          9          0          1         180,883.48
+                                  MOHAWK, VILLAGE OF                      34         33          0          1         865,284.24
+                                  NEWPORT, TOWN OF                         7          5          0          2          41,096.07
+                                  NEWPORT, VILLAGE OF                      7          3          0          4          75,841.21
+                                  OHIO, TOWN OF                            1          1          0          0           1,852.71
+                                  POLAND, VILLAGE OF                       1          0          0          1                .00
+                                  RUSSIA, TOWN OF                          5          5          0          0         127,836.10
+                                  SALISBURY, TOWN OF                       1          1          0          0          14,467.52
+                                  SCHUYLER, TOWN OF                        3          1          0          2             449.83
+                                  STARK, TOWN OF                          12         10          0          2         126,748.60
+                                  WEBB, TOWN OF                            2          1          0          1             460.50
+                                  WEST WINFIELD, VILLAGE OF                2          2          0          0           7,042.42
+                                  WINFIELD, TOWN OF                        1          1          0          0          60,691.70
+  JEFFERSON COUNTY                ADAMS, VILLAGE OF                        3          3          0          0          21,945.41
+                                  ALEXANDRIA BAY, VILLAGE OF               6          3          0          3         114,481.93
+                                  ALEXANDRIA, TOWN OF                      7          3          0          4          12,973.76
+                                  ANTWERP, TOWN OF                         6          5          0          1          33,327.54
+                                  ANTWERP, VILLAGE OF                      2          0          0          2                .00
+                                  BROWNVILLE, TOWN OF                     16          8          0          8         357,656.98
+                                  CAPE VINCENT, TOWN OF                    5          4          0          1          10,691.73
+                                  CAPE VINCENT, VILLAGE OF                 4          4          0          0          10,797.08
+                                  CARTHAGE, VILLAGE OF                    27         17          0         10          78,902.63
+                                  CHAMPION, TOWN OF                        4          2          0          2          21,842.72
+                                  CHAUMONT, VILLAGE OF                     9          6          0          3          29,571.02
+                                  CLAYTON, TOWN OF                        10          7          0          3          28,544.80
+                                  CLAYTON, VILLAGE OF                     16         10          0          6         302,808.88
+                                  DEFERIET, VILLAGE OF                     1          0          0          1                .00
+                                  DEXTER, VILLAGE OF                       5          2          0          3           4,528.91
+                                  ELLISBURG, TOWN OF                       8          5          0          3          68,596.89
+                                  ELLISBURG, VILLAGE OF                    5          3          0          2           7,631.72
+                                  GLEN PARK, VILLAGE OF                    1          1          0          0             367.96
+                                  HENDERSON, TOWN OF                      22         14          0          8         143,556.44
+                                  HERRINGS, VILLAGE OF                     1          0          0          1                .00
+                                  LERAY, TOWN OF                           4          4          0          0          33,769.73
+                                  LYME, TOWN OF                           12          4          0          8          26,818.76
+                                  ORLEANS, TOWN OF                         9          4          0          5          39,163.08
+                                  PAMELIA, TOWN OF                         2          2          0          0           4,699.81
+                                  RUTLAND, TOWN OF                         1          1          0          0           3,135.24
+                                  SACKETS HARBOR, VILLAGE OF               7          2          0          5           2,743.20
+                                  THERESA, VILLAGE OF                      1          1          0          0           2,000.00
+                                  WATERTOWN, CITY OF                      24         16          0          8          64,714.89
+                                  WATERTOWN, TOWN OF                       5          4          0          1           9,048.09
+                                  WEST CARTHAGE, VILLAGE OF                3          2          0          1           9,539.34
+                                  WILNA, TOWN OF                          14         12          0          2         114,990.94
+  LEWIS COUNTY                    CASTORLAND, VILLAGE OF                   3          2          0          1          20,040.49
+                                  CROGHAN, TOWN OF                         1          1          0          0           3,442.24
+                                  DENMARK, TOWN OF                        13          8          0          5         113,749.59
+                                  DIANA, TOWN OF                           4          4          0          0         154,859.27
+                                  GREIG, TOWN OF                           7          6          0          1          34,876.99
+                                  LEWIS, TOWN OF                           1          0          0          1                .00
+                                  LEYDEN, TOWN OF                          4          4          0          0          12,385.27
+                                  LOWVILLE, TOWN OF                        2          1          0          1           7,950.46
+                                  LOWVILLE, VILLAGE OF                     2          1          0          1           3,945.00
+                                  LYONS FALLS, VILLAGE OF                  1          1          0          0          82,721.24
+                                  PORT LEYDEN, VILLAGE OF                  2          2          0          0           3,835.33
+                                  TURIN, TOWN OF                           2          1          0          1          26,602.86
+                                  WATSON, TOWN OF                          8          5          0          3          48,488.07
+  LIVINGSTON COUNTY               AVON, TOWN OF                            2          1          0          1          58,963.91
+                                  AVON, VILLAGE OF                         6          2          0          4          48,639.37
+                                  CALEDONIA, TOWN OF                       8          7          0          1          26,926.35
+                                  CALEDONIA, VILLAGE OF                    1          0          0          1                .00
+                                  CONESUS, TOWN OF                        21         13          0          8          57,065.14
+                                  DANSVILLE, VILLAGE OF                   20         10          0         10          56,987.25
+                                  GENESEO, TOWN OF                        12          9          0          3          51,889.07
+                                  GROVELAND, TOWN OF                       6          4          0          2           4,905.09
+                                  LEICESTER, TOWN OF                       5          4          0          1          31,666.94
+                                  LIMA, TOWN OF                            2          0          0          2                .00
+                                  LIVONIA, TOWN OF                        27         19          0          8         117,015.89
+                                  MOUNT MORRIS, TOWN OF                    2          1          0          1           3,546.91
+                                  MOUNT MORRIS, VILLAGE OF                 1          0          0          1                .00
+                                  NORTH DANSVILLE, TOWN OF                 1          1          0          0             977.00
+                                  NUNDA, TOWN OF                           4          2          0          2          60,409.52
+                                  NUNDA, VILLAGE OF                        4          2          0          2           5,712.95
+                                  SPARTA, TOWN OF                          1          1          0          0          10,233.09
+                                  SPRINGWATER, TOWN OF                     4          4          0          0          39,376.90
+                                  WEST SPARTA, TOWN OF                     7          6          0          1          53,436.35
+                                  YORK, TOWN OF                            2          2          0          0           2,136.84
+  MADISON COUNTY                  BROOKFIELD, TOWN OF                      7          5          0          2          11,841.31
+                                  CANASTOTA , VILLAGE OF                  26         15          0         11          32,933.15
+                                  CAZENOVIA, TOWN OF                       3          2          0          1          15,498.06
+                                  CAZENOVIA, VILLAGE OF                   13         12          0          1          66,261.76
+                                  CHITTENANGO, VILLAGE OF                 66         49          0         17         175,914.79
+                                  DE RUYTER, VILLAGE OF                    1          0          0          1                .00
+                                  GEORGETOWN, TOWN OF                      4          4          0          0          22,848.13
+                                  HAMILTON, TOWN OF                        3          2          0          1          99,708.30
+                                  HAMILTON,VILLAGE of                        2          2          0          0           7,915.11
+                                  LEBANON, TOWN OF                        18         16          0          2          56,208.06
+                                  LENOX, TOWN OF                          12          8          0          4          31,621.61
+                                  LINCOLN, TOWN OF                         4          2          0          2           4,931.59
+                                  MADISON, TOWN OF                         2          2          0          0          18,213.12
+                                  MORRISVILLE, VILLAGE OF                  1          1          0          0           1,057.27
+                                  MUNNSVILLE, VILLAGE OF                   6          6          0          0         434,907.55
+                                  NELSON, TOWN OF                          2          0          0          2                .00
+                                  ONEIDA, CITY OF                        128        119          0          9       3,652,375.15
+                                  SMITHFIELD, TOWN OF                      1          1          0          0           1,371.31
+                                  STOCKBRIDGE, TOWN OF                     1          0          0          1                .00
+                                  SULLIVAN, TOWN OF                       60         48          0         12         808,211.66
+  MONROE COUNTY                   BRIGHTON, TOWN OF                       24         13          0         11          50,900.83
+                                  BROCKPORT, VILLAGE OF                    1          1          0          0           1,237.90
+                                  CHILI, TOWN OF                          53         23          0         30         111,636.92
+                                  CHURCHVILLE, VILLAGE OF                  1          0          0          1                .00
+                                  CLARKSON, TOWN OF                        7          6          0          1           9,711.25
+                                  FAIRPORT, VILLAGE OF                     1          1          0          0             500.00
+                                  GATES, TOWN OF                          43         18          0         25          53,777.33
+                                  GREECE, TOWN OF                        144         91          0         53         710,538.43
+                                  HAMLIN, TOWN OF                         51         32          1         18         186,500.43
+                                  HENRIETTA, TOWN OF                      45         26          0         19         131,002.52
+                                  HILTON, VILLAGE OF                      17         12          0          5         436,547.47
+                                  HONEOYE FALLS, VILLAGE OF                5          2          0          3          17,355.36
+                                  IRONDEQUOIT, TOWN OF                    60         23          0         37         116,094.77
+                                  MENDON, TOWN OF                          8          4          0          4          23,661.13
+                                  OGDEN, TOWN OF                           8          5          0          3         152,840.62
+                                  PARMA, TOWN OF                          38         23          1         14         425,623.21
+                                  PENFIELD, TOWN OF                       44         22          0         22         448,092.95
+                                  PERINTON, TOWN OF                       28         20          1          7         241,578.49
+                                  PITTSFORD, TOWN OF                      34         15          0         19         116,032.47
+                                  RIGA, TOWN OF                            6          1          0          5           1,475.50
+                                  ROCHESTER, CITY OF                      43         18          0         25          97,259.16
+                                  RUSH, TOWN OF                            3          3          0          0           1,850.41
+                                  SCOTTSVILLE, VILLAGE OF                  6          2          0          4          12,919.84
+                                  SPENCERPORT, VILLAGE OF                 15         10          0          5         161,549.77
+                                  SWEDEN, TOWN OF                          3          1          0          2           1,515.00
+                                  WEBSTER, TOWN OF                        40         29          0         11         122,716.19
+                                  WEBSTER, VILLAGE OF                      2          2          0          0         101,403.46
+                                  WHEATLAND, TOWN OF                      24         22          0          2         599,758.26
+  MONTGOMERY COUNTY               AMSTERDAM, CITY OF                      18          9          0          9         269,084.70
+                                  AMSTERDAM, TOWN OF                       8          7          0          1         111,478.60
+                                  CANAJOHARIE, TOWN OF                     9          6          0          3          27,310.49
+                                  CANAJOHARIE, VILLAGE OF                  4          3          0          1         403,735.52
+                                  CHARLESTON, TOWN OF                     14         12          0          2         497,456.23
+                                  FLORIDA, TOWN OF                         6          6          0          0          64,402.62
+                                  FONDA, VILLAGE OF                       48         39          0          9       1,620,559.13
+                                  FORT JOHNSON, VILLAGE OF                14         11          0          3          50,938.86
+                                  FORT PLAIN, VILLAGE OF                  96         89          0          7       3,492,564.81
+                                  FULTONVILLE, VILLAGE OF                 19         19          0          0       1,156,810.63
+                                  GLEN, TOWN OF                            6          6          0          0         343,610.22
+                                  HAGAMAN, VILLAGE OF                      1          0          0          1                .00
+                                  MINDEN, TOWN OF                         13         11          0          2         213,491.98
+                                  MOHAWK, TOWN OF                          6          4          0          2          26,605.17
+                                  ROOT, TOWN OF                            9          8          0          1          28,284.39
+                                  ST. JOHNSVILLE, TOWN OF                  2          2          0          0          17,699.41
+                                  ST. JOHNSVILLE, VILLAGE OF              24         21          0          3         409,949.23
+  NASSAU COUNTY                   ATLANTIC BEACH, VILLAGE OF             230        202          1         27       8,959,519.52
+                                  BAXTER ESTATES, VILLAGE OF               5          4          0          1         573,849.75
+                                  BAYVILLE, VILLAGE OF                 1,280      1,098          0        182      22,395,594.97
+                                  CEDARHURST, VILLAGE OF                 343        296          0         47      16,926,009.52
+                                  CENTRE ISLAND, VILLAGE OF               51         36          0         15       1,091,279.35
+                                  COVE NECK, VILLAGE OF                    7          4          0          3         598,486.31
+                                  EAST HILLS, VILLAGE OF                  16         11          0          5         137,868.79
+                                  EAST ROCKAWAY, VILLAGE OF            1,158      1,031          2        125      49,126,878.02
+                                  EAST WILLISTON, VILLAGE OF               1          0          0          1                .00
+                                  FLORAL PARK, VILLAGE OF                  2          1          0          1           3,922.90
+                                  FLOWER HILL, VILLAGE OF                  2          1          0          1           6,036.46
+                                  FREEPORT, VILLAGE OF                 6,079      5,411         15        653     242,385,506.61
+                                  GARDEN CITY, VILLAGE OF                  5          1          0          4           4,849.08
+                                  GLEN COVE, CITY OF                     165        122          0         43       2,772,224.38
+                                  GREAT NECK ESTATES, VILLAGE OF          33         26          0          7         364,302.92
+                                  GREAT NECK, VILLAGE OF                 129         98          0         31       1,178,977.25
+                                  HEMPSTEAD, TOWN OF                  21,180     18,382         47      2,751     957,640,685.73
+                                  HEMPSTEAD, VILLAGE OF                   13         12          0          1         222,195.27
+                                  HEWLETT BAY PARK, VILLAGE OF            29         23          0          6       1,744,460.44
+                                  HEWLETT HARBOR, VILLAGE OF             238        190          0         48      18,424,103.33
+                                  HEWLETT NECK, VILLAGE OF                70         51          0         19       6,112,891.60
+                                  ISLAND PARK, VILLAGE OF              1,916      1,764         13        139     111,205,656.71
+                                  KENSINGTON, VILLAGE OF                   4          4          0          0          10,997.63
+                                  KINGS POINT, VILLAGE OF                130         75          0         55       1,525,865.25
+                                  LAKE SUCCESS, VILLAGE OF                16         14          0          2         267,532.00
+                                  LATTINGTOWN, VILLAGE OF                 38         24          0         14       1,061,046.48
+                                  LAUREL HOLLOW, VILLAGE OF                7          3          0          4          21,797.24
+                                  LAWRENCE, VILLAGE OF                   450        380          2         68      29,562,472.55
+                                  LONG BEACH, CITY OF                  8,422      7,578         52        792     431,225,829.37
+                                  MALVERNE, VILLAGE OF                     3          1          0          2           9,650.63
+                                  MANORHAVEN, VILLAGE OF                  84         55          0         29         597,157.11
+                                  MASSAPEQUA PARK, VILLAGE OF            667        548          1        118      23,484,519.08
+                                  MILL NECK, VILLAGE OF                    9          5          0          4          12,533.55
+                                  MUNSEY PARK, VILLAGE OF                  2          2          0          0          12,069.97
+                                  NEW HYDE PARK, VILLAGE OF                2          1          0          1          17,454.72
+                                  NORTH HEMPSTEAD, TOWN OF               229        162          0         67       2,453,772.34
+                                  NORTH HILLS, VILLAGE OF                 12          9          0          3          41,565.43
+                                  OYSTER BAY COVE, VILLAGE OF             23         16          0          7         605,717.67
+                                  OYSTER BAY, TOWN OF                  5,176      4,511          8        657     277,583,114.72
+                                  PLANDOME HEIGHTS, VILLAGE OF             8          6          0          2          12,590.75
+                                  PLANDOME MANOR, VILLAGE OF              20         15          0          5         222,286.35
+                                  PLANDOME, VILLAGE OF                    17          9          0          8         358,250.87
+                                  PORT WASHINGTON NORTH, VILLAGE of         32         20          0         12         230,259.24
+                                  ROCKVILLE CENTRE, VILLAGE OF            71         52          0         19       1,073,374.56
+                                  ROSLYN ESTATES, VILLAGE OF               1          1          0          0          14,664.93
+                                  ROSLYN HARBOR, VILLAGE OF               19         16          0          3         460,301.33
+                                  ROSLYN, VILLAGE OF                      43         28          0         15         228,986.70
+                                  RUSSELL GARDENS, VILLAGE OF              2          1          0          1           1,554.70
+                                  SADDLE ROCK, VILLAGE OF                 23         15          0          8         456,546.82
+                                  SANDS POINT, VILLAGE OF                 99         66          0         33       1,230,781.52
+                                  SEA CLIFF, VILLAGE OF                   29         24          0          5         200,333.98
+                                  THOMASTON, VILLAGE OF                   12          7          0          5          21,919.30
+                                  VALLEY STREAM, VILLAGE OF              309        213          0         96       4,029,970.22
+                                  WESTBURY, VILLAGE OF                     1          0          0          1                .00
+                                  WOODSBURGH, VILLAGE OF                  50         43          0          7       4,146,801.81
+  NIAGARA COUNTY                  BARKER, VILLAGE OF                       5          4          0          1         327,469.20
+                                  CAMBRIA, TOWN OF                        11          9          0          2          85,097.30
+                                  LEWISTON, TOWN OF                        1          1          0          0             556.00
+                                  LEWISTON, VILLAGE OF                     2          1          0          1           3,306.72
+                                  LOCKPORT, CITY OF                       10          6          0          4          40,537.58
+                                  LOCKPORT, TOWN OF                        8          2          0          6           3,672.21
+                                  MIDDLEPORT, VILLAGE OF                   1          0          0          1                .00
+                                  NEWFANE, TOWN OF                         5          4          0          1          19,734.54
+                                  NIAGARA FALLS, CITY OF                  51         27          0         24          74,937.46
+                                  NIAGARA, TOWN OF                        21         16          0          5         119,003.69
+                                  NORTH TONAWANDA, CITY OF                 9          7          0          2          12,874.33
+                                  PENDLETON, TOWN OF                       6          4          0          2         114,812.96
+                                  PORTER, TOWN OF                          3          1          0          2             544.00
+                                  ROYALTON, TOWN OF                       12         10          0          2          67,978.03
+                                  SOMERSET, TOWN OF                        1          1          0          0             446.00
+                                  WHEATFIELD, TOWN OF                     16         12          0          4          30,673.69
+                                  WILSON, TOWN OF                          2          0          0          2                .00
+                                  WILSON, VILLAGE OF                       1          1          0          0          53,552.87
+                                  YOUNGSTOWN, VILLAGE OF                   2          1          0          1           9,213.43
+  ONEIDA COUNTY                   ANNSVILLE, TOWN OF                       3          2          0          1           3,696.19
+                                  AUGUSTA, TOWN OF                         7          4          1          2          58,269.84
+                                  BARNEVELD, VILLAGE OF                    2          2          0          0           1,115.29
+                                  BOONVILLE, TOWN OF                       6          4          0          2          33,386.68
+                                  BRIDGEWATER, VILLAGE OF                  1          0          0          1                .00
+                                  CAMDEN, VILLAGE OF                       2          1          0          1             667.85
+                                  CLINTON, VILLAGE OF                     41         38          0          3       1,113,052.88
+                                  DEERFIELD, TOWN OF                      15          9          0          6          90,789.88
+                                  KIRKLAND, TOWN OF                      185        152          0         33       1,302,801.46
+                                  LEE, TOWN OF                             2          2          0          0          33,821.42
+                                  MARCY, TOWN OF                           2          1          0          1           4,658.35
+                                  MARSHALL, TOWN OF                        1          1          0          0          19,793.88
+                                  NEW HARTFORD, TOWN OF                   31         25          0          6       1,028,716.70
+                                  NEW HARTFORD, VILLAGE OF                 2          1          0          1           9,048.75
+                                  NEW YORK MILLS, VILLAGE OF              34         27          0          7       1,334,078.85
+                                  ONEIDA CASTLE, VILLAGE OF                5          3          0          2          19,980.99
+                                  ORISKANY FALLS, VILLAGE OF               3          1          0          2          17,415.23
+                                  ORISKANY, VILLAGE OF                     2          1          0          1           1,717.06
+                                  PARIS, TOWN OF                           2          1          0          1             148.33
+                                  ROME, CITY OF                           38         18          0         20          43,171.73
+                                  SANGERFIELD, TOWN OF                     1          1          0          0           5,453.81
+                                  SHERRILL, CITY OF                        1          0          0          1                .00
+                                  STEUBEN, TOWN OF                         1          1          0          0           9,066.53
+                                  SYLVAN BEACH, VILLAGE OF                45         37          1          7         555,779.22
+                                  TRENTON, TOWN OF                         5          3          0          2          23,910.58
+                                  UTICA, CITY OF                          50         38          0         12         402,359.69
+                                  VERNON, TOWN OF                          7          7          0          0         219,346.72
+                                  VERONA, TOWN OF                         17         10          0          7          97,027.37
+                                  VIENNA, TOWN OF                         26         21          0          5         136,188.96
+                                  WATERVILLE, VILLAGE OF                   1          1          0          0           2,492.54
+                                  WESTERN, TOWN OF                         3          2          0          1           8,136.69
+                                  WESTMORELAND, TOWN OF                   16         14          0          2          80,288.55
+                                  WHITESBORO, VILLAGE OF                 341        287          0         54       4,020,629.44
+                                  WHITESTOWN, TOWN OF                     10          7          0          3         110,505.12
+                                  YORKVILLE, VILLAGE OF                   27         24          0          3       1,710,720.53
+  ONONDAGA COUNTY                 BALDWINSVILLE, VILLAGE OF               40         30          0         10         258,013.38
+                                  CAMILLUS, TOWN OF                        7          2          0          5          10,900.00
+                                  CAMILLUS, VILLAGE OF                     7          5          0          2          21,981.35
+                                  CICERO, TOWN OF                        198        147          0         51       1,388,786.88
+                                  CLAY, TOWN OF                           52         43          0          9         265,438.61
+                                  DEWITT, TOWN OF                         44         34          0         10       1,649,990.26
+                                  EAST SYRACUSE, VILLAGE OF               21         17          0          4         416,455.58
+                                  ELBRIDGE, TOWN OF                       13         12          0          1          71,603.26
+                                  ELBRIDGE, VILLAGE OF                     9          7          0          2          22,910.69
+                                  FABIUS, TOWN OF                          1          1          0          0           1,037.47
+                                  FAYETTEVILLE, VILLAGE OF                55         40          0         15         192,223.57
+                                  GEDDES, TOWN OF                          4          2          0          2          46,924.97
+                                  JORDAN, VILLAGE OF                      10          7          0          3          43,653.43
+                                  LAFAYETTE, TOWN OF                       5          4          0          1          19,533.63
+                                  LIVERPOOL, VILLAGE OF                   13          8          0          5          11,242.13
+                                  LYSANDER, TOWN OF                       52         39          0         13         499,429.59
+                                  MANLIUS, TOWN OF                        60         45          0         15         309,586.89
+                                  MANLIUS, VILLAGE OF                     15         10          0          5          38,832.93
+                                  MARCELLUS, TOWN OF                      10          5          0          5           8,741.73
+                                  MARCELLUS, VILLAGE OF                   13          8          0          5          13,116.07
+                                  MINOA, VILLAGE OF                       14          8          0          6          16,060.62
+                                  ONONDAGA, TOWN OF                       43         33          0         10         230,830.16
+                                  OTISCO, TOWN OF                          3          3          0          0           7,041.65
+                                  POMPEY, TOWN OF                         12          7          1          4          91,552.83
+                                  SALINA, TOWN OF                         15         11          0          4          40,003.08
+                                  SKANEATELES, TOWN OF                     7          5          0          2          15,418.74
+                                  SKANEATELES, VILLAGE OF                  4          3          0          1          21,605.96
+                                  SOLVAY, VILLAGE OF                       8          7          0          1          12,737.46
+                                  SYRACUSE, CITY OF                      148         98          0         50         608,433.00
+                                  TULLY, VILLAGE OF                        1          0          0          1                .00
+                                  VAN BUREN, TOWN OF                      32         27          0          5         380,809.30
+  ONTARIO COUNTY                  BRISTOL, TOWN OF                         3          1          0          2          34,621.84
+                                  CANADICE, TOWN OF                        6          3          0          3          17,993.26
+                                  CANANDAIGUA, CITY OF                    23         13          0         10         165,318.76
+                                  CANANDAIGUA, TOWN OF                    42         26          0         16         256,612.99
+                                  EAST BLOOMFIELD, TOWN OF                 3          3          0          0         135,833.58
+                                  FARMINGTON, TOWN OF                      3          0          0          3                .00
+                                  GENEVA, CITY OF                          8          3          0          5          10,559.86
+                                  GENEVA, TOWN OF                         16         14          0          2         142,697.52
+                                  GORHAM, TOWN OF                         35         24          0         11         262,882.73
+                                  HOPEWELL, TOWN OF                       10          7          0          3         134,676.04
+                                  NAPLES, TOWN OF                          4          3          0          1          20,547.64
+                                  NAPLES, VILLAGE OF                       7          7          0          0         215,592.18
+                                  PHELPS, TOWN OF                          5          4          0          1           9,473.55
+                                  RICHMOND, TOWN OF                      100         74          0         26       2,553,946.02
+                                  SENECA, TOWN OF                          5          5          0          0           9,832.59
+                                  SOUTH BRISTOL, TOWN OF                  24         18          0          6         186,943.53
+                                  VICTOR, TOWN OF                          2          2          0          0          28,889.57
+  ORANGE COUNTY                   BLOOMING GROVE, TOWN OF                156        123          0         33       1,991,054.25
+                                  CHESTER, TOWN OF                        60         51          0          9         873,605.43
+                                  CHESTER, VILLAGE OF                     15         12          0          3         108,089.68
+                                  CORNWALL ON THE HUDSON, VILLAGe of          13         11          0          2          47,372.33
+                                  CORNWALL, TOWN OF                       26         18          0          8         477,493.33
+                                  CRAWFORD, TOWN OF                        9          8          0          1         278,640.29
+                                  DEER PARK, TOWN OF                     183        159          0         24       3,747,900.82
+                                  FLORIDA, VILLAGE OF                     16         15          0          1         538,443.51
+                                  GOSHEN, TOWN OF                         56         39          1         16         552,803.23
+                                  GOSHEN, VILLAGE OF                      50         33          0         17         795,345.25
+                                  GREENVILLE, TOWN OF                      2          0          0          2                .00
+                                  GREENWOOD LAKE, VILLAGE OF              94         55          0         39         433,645.99
+                                  HAMPTONBURGH, TOWN OF                   41         35          0          6         584,890.70
+                                  HARRIMAN, VILLAGE OF                     3          2          0          1          49,642.88
+                                  HIGHLAND FALLS, VILLAGE OF               3          3          0          0          31,632.21
+                                  HIGHLANDS, TOWNSHIP OF                   2          1          0          1             270.05
+                                  KIRYAS JOEL, VILLAGE OF                  1          1          0          0           1,465.51
+                                  MIDDLETOWN, CITY OF                     83         59          0         24         548,244.47
+                                  MINISINK, TOWN OF                        8          6          0          2          27,623.82
+                                  MONROE, TOWN OF                         88         56          0         32         469,792.05
+                                  MONROE, VILLAGE OF                     106         78          0         28       1,131,591.91
+                                  MONTGOMERY, TOWN OF                      7          5          0          2          42,733.21
+                                  MONTGOMERY, VILLAGE OF                  15         13          0          2         425,768.95
+                                  MOUNT HOPE, TOWN OF                      7          6          0          1          35,197.24
+                                  NEW WINDSOR, TOWN OF                    41         30          0         11         471,251.25
+                                  NEWBURGH, CITY OF                       35         26          0          9         514,835.69
+                                  NEWBURGH, TOWN OF                       61         38          0         23         295,007.90
+                                  PORT JERVIS, CITY OF                   127        110          0         17       1,388,429.86
+                                  SOUTH BLOOMING GROVE, VILLAGE of           10          3          0          7          31,483.91
+                                  TUXEDO PARK, VILLAGE OF                  1          1          0          0           3,479.46
+                                  TUXEDO, TOWN OF                         33         29          0          4       1,309,901.02
+                                  UNIONVILLE, VILLAGE OF                   6          5          0          1          93,574.73
+                                  WALDEN, VILLAGE OF                       7          4          0          3          54,021.52
+                                  WALLKILL, TOWN OF                       46         43          0          3         464,735.33
+                                  WARWICK, TOWN OF                        57         39          0         18         292,723.72
+                                  WARWICK, VILLAGE OF                     50         30          0         20         377,606.36
+                                  WASHINGTONVILLE, VILLAGE OF            240        218          0         22       4,507,977.51
+                                  WAWAYANDA, TOWN OF                      11         10          0          1         114,248.71
+                                  WOODBURY, VILLAGE OF                    60         45          1         14         584,330.21
+  ORLEANS COUNTY                  ALBION, VILLAGE OF                       1          1          0          0           1,972.65
+                                  BARRE, TOWN OF                           1          1          0          0           2,796.79
+                                  CARLTON, TOWN OF                        15         11          0          4          75,498.74
+                                  CLARENDON,TOWN OF                        8          7          0          1          30,491.66
+                                  HOLLEY, VILLAGE OF                       1          0          0          1                .00
+                                  KENDALL, TOWN OF                        10          4          0          6          17,080.98
+                                  LYNDONVILLE, VILLAGE OF                  2          0          0          2                .00
+                                  MEDINA, VILLAGE OF                       3          3          0          0           1,756.27
+                                  YATES, TOWN OF                           5          1          0          4           6,995.29
+  OSWEGO                          GILBERTSVILLE, VILLAGE OF                2          2          0          0          34,697.56
+  OSWEGO COUNTY                   ALBION, TOWN OF                          1          0          0          1                .00
+                                  ALTMAR, VILLAGE OF                       9          8          0          1          77,513.56
+                                  CENTRAL SQUARE,VILLAGE OF                5          3          0          2           8,830.15
+                                  CLEVELAND, VILLAGE OF                   33         28          0          5         195,060.65
+                                  CONSTANTIA, TOWN OF                     16         12          0          4         145,089.16
+                                  FULTON, CITY OF                         11          7          0          4          18,567.56
+                                  GRANBY, TOWN OF                          1          1          0          0           5,164.25
+                                  HASTINGS, TOWN OF                       10          6          0          4          36,876.22
+                                  MEXICO, TOWN OF                          8          3          0          5          88,886.19
+                                  MEXICO, VILLAGE OF                       9          6          0          3           9,315.91
+                                  MINETTO, TOWN OF                         4          3          0          1         394,973.14
+                                  NEW HAVEN, TOWN OF                       1          0          0          1                .00
+                                  OSWEGO, CITY OF                         13         11          0          2         381,869.07
+                                  OSWEGO, TOWN OF                          5          3          0          2           1,924.02
+                                  PARISH, TOWN OF                          3          1          0          2           9,937.36
+                                  PHOENIX, VILLAGE OF                      1          1          0          0             623.50
+                                  PULASKI, VILLAGE OF                     12          6          3          3          32,481.82
+                                  RICHLAND, TOWN OF                        9          4          0          5           4,493.98
+                                  SANDY CREEK, TOWN OF                    24         12          1         11         144,224.89
+                                  SCHROEPPEL, TOWN OF                     21         13          0          8          45,444.16
+                                  SCRIBA, TOWN OF                         13         10          0          3          89,099.59
+                                  VOLNEY, TOWN OF                          2          0          0          2                .00
+                                  WEST MONROE, TOWN OF                    20         15          0          5         106,180.25
+  OTSEGO COUNTY                   BUTTERNUTS, TOWN OF                      7          6          0          1          55,715.19
+                                  CHERRY VALLEY, TOWN OF                   1          0          0          1                .00
+                                  CHERRY VALLEY, VILLAGE OF                1          0          0          1                .00
+                                  COOPERSTOWN, VILLAGE OF                  4          4          0          0           9,348.36
+                                  DECATUR, TOWN OF                         4          3          0          1          49,182.85
+                                  EDMESTON, TOWN OF                        1          1          0          0           6,538.69
+                                  EXETER, TOWN OF                          2          1          0          1           3,534.31
+                                  HARTWICK, TOWN OF                        3          1          0          2          26,809.55
+                                  LAURENS, TOWN OF                         3          2          0          1           5,024.06
+                                  LAURENS, VILLAGE OF                      7          5          0          2          37,522.13
+                                  MARYLAND, TOWN OF                       20         17          0          3         272,021.57
+                                  MIDDLEFIELD, TOWN OF                     5          4          0          1          31,468.95
+                                  MILFORD, TOWN OF                        18         13          0          5         119,043.78
+                                  MORRIS, TOWN OF                          1          0          0          1                .00
+                                  MORRIS, VILLAGE OF                       1          1          0          0          75,000.00
+                                  NEW LISBON, TOWN OF                      1          1          0          0          30,194.62
+                                  ONEONTA, CITY OF                        65         46          0         19       1,187,302.06
+                                  ONEONTA, TOWN OF                        40         34          0          6       2,115,736.93
+                                  OTEGO, TOWN OF                          13          7          0          6         137,955.97
+                                  OTEGO, VILLAGE OF                       22         20          0          2         700,513.02
+                                  OTSEGO, TOWN OF                         17         10          0          7          39,971.07
+                                  PITTSFIELD, TOWN OF                      1          1          0          0             860.00
+                                  PLAINFIELD, TOWN OF                      1          0          0          1                .00
+                                  RICHFIELD SPRINGS, VILLAGE OF           12         12          0          0         166,678.62
+                                  RICHFIELD, TOWN OF                      17         14          0          3         416,735.80
+                                  SPRINGFIELD, TOWN OF                     2          0          0          2                .00
+                                  UNADILLA, TOWN OF                       38         34          0          4       1,042,714.24
+                                  UNADILLA, VILLAGE OF                   157        131          0         26       2,411,382.54
+                                  WESTFORD, TOWN OF                        1          0          0          1                .00
+                                  WORCESTER, TOWN OF                       6          5          0          1          50,150.68
+  PUTNAM COUNTY                   BREWSTER, VILLAGE OF                     7          6          0          1          41,240.74
+                                  CARMEL,TOWN OF                         123         73          0         50         290,267.48
+                                  COLD SPRING, VILLAGE OF                 29         23          0          6       1,906,668.29
+                                  KENT, TOWN OF                           19         12          0          7          28,811.47
+                                  NELSONVILLE, VILLAGE OF                  3          2          0          1          32,205.41
+                                  PATTERSON, TOWN OF                      13          7          0          6         133,664.53
+                                  PHILIPSTOWN,TOWN OF                     47         36          0         11       1,119,896.61
+                                  PUTNAM VALLEY, TOWN OF                  84         62          0         22       1,426,913.81
+                                  SOUTHEAST, TOWN OF                      13          4          0          9          27,544.31
+  RENSSELAER COUNTY               BERLIN, TOWN OF                          1          0          0          1                .00
+                                  BRUNSWICK, TOWN OF                       9          6          0          3         112,702.75
+                                  CASTLETON-ON-HUDSON, VILLAGE Of          18         11          0          7          45,111.22
+                                  EAST GREENBUSH, TOWN OF                  5          2          0          3           5,454.71
+                                  HOOSICK FALLS, VILLAGE OF               21         21          0          0         488,317.52
+                                  HOOSICK, TOWN OF                         7          5          0          2          34,366.48
+                                  NASSAU, TOWN OF                         97         75          1         21       3,000,835.18
+                                  NASSAU, VILLAGE OF                      24         21          0          3         802,055.98
+                                  NORTH GREENBUSH,TOWN OF                 16         10          0          6         112,565.55
+                                  PETERSBURG, TOWN OF                      6          2          0          4          17,093.29
+                                  PITTSTOWN, TOWN OF                       5          5          0          0          58,261.78
+                                  POESTENKILL, TOWN OF                    14         11          0          3         320,694.08
+                                  RENSSELAER, CITY OF                     64         42          0         22         382,193.85
+                                  SAND LAKE, TOWN OF                      11          8          0          3          63,140.59
+                                  SCHAGHTICOKE, TOWN OF                   33         24          0          9         270,667.52
+                                  SCHODACK, TOWN OF                        8          5          0          3          65,478.04
+                                  STEPHENTOWN, TOWN OF                     1          0          0          1                .00
+                                  TROY, CITY OF                          193        128          0         65       2,219,293.62
+                                  VALLEY FALLS, VILLAGE OF                 2          1          0          1             647.25
+  ROCKLAND COUNTY                 CHESTNUT RIDGE, VILLAGE OF              12          8          0          4         122,824.71
+                                  CLARKSTOWN, TOWN OF                    914        678          1        235       7,587,891.84
+                                  GRAND VIEW-ON-HUDSON, VILLAGE of           44         26          0         18       1,248,570.41
+                                  HAVERSTRAW, TOWN OF                     63         33          0         30         370,691.39
+                                  HAVERSTRAW, VILLAGE OF                   5          3          0          2           7,767.50
+                                  HILLBURN, VILLAGE OF                    43         31          0         12       1,267,279.30
+                                  MONTEBELLO, VILLAGE OF                  40         32          0          8         974,960.26
+                                  NEW HEMPSTEAD, VILLAGE OF                7          6          0          1          45,073.36
+                                  NEW SQUARE, VILLAGE OF                  12         10          0          2          29,707.09
+                                  NYACK, VILLAGE OF                      100         73          0         27       2,620,448.62
+                                  ORANGETOWN, TOWN OF                    339        257          0         82       3,122,002.86
+                                  PIERMONT, VILLAGE OF                   120         97          0         23       4,525,005.47
+                                  POMONA, VILLAGE OF                      36         28          0          8         103,707.18
+                                  RAMAPO, TOWN OF                        470        367          1        102       2,074,662.34
+                                  SLOATSBURG, VILLAGE OF                  55         50          0          5         505,680.09
+                                  SOUTH NYACK, VILLAGE OF                 28         23          0          5         560,653.53
+                                  SPRING VALLEY, VILLAGE OF              306        250          1         55       1,357,182.15
+                                  STONY POINT, TOWN OF                    91         70          0         21       2,969,380.39
+                                  SUFFERN, VILLAGE OF                    462        391          0         71       5,208,692.12
+                                  UPPER NYACK, VILLAGE OF                 13          7          0          6         227,316.69
+                                  WESLEY HILLS, VILLAGE OF                 6          2          0          4           2,806.44
+                                  WEST HAVERSTRAW, VILLAGE OF             26         19          0          7       3,919,161.94
+  SARATOGA COUNTY                 BALLSTON SPA, VILLAGE OF                13         10          0          3          68,596.03
+                                  BALLSTON, TOWN OF                        2          2          0          0           7,769.15
+                                  CHARLTON, TOWN OF                        7          5          0          2          30,629.70
+                                  CLIFTON PARK, TOWN OF                   23         19          0          4         310,420.13
+                                  CORINTH, TOWN OF                         9          6          0          3          46,435.99
+                                  CORINTH, VILLAGE OF                      1          1          0          0           4,294.31
+                                  GALWAY, TOWN OF                          1          0          0          1                .00
+                                  GREENFIELD, TOWN OF                      4          1          0          3          23,804.00
+                                  HADLEY, TOWN OF                          3          2          0          1          42,024.73
+                                  HALFMOON, TOWN OF                       22         15          0          7         435,548.87
+                                  MALTA, TOWN OF                          19          9          0         10         148,576.88
+                                  MECHANICVILLE, CITY OF                  22         16          0          6         113,582.47
+                                  MILTON, TOWN OF                          1          1          0          0             360.57
+                                  MOREAU, TOWN OF                          7          6          0          1         108,663.12
+                                  NORTHUMBERLAND, TOWN OF                  3          2          0          1          15,628.88
+                                  ROUND LAKE, VILLAGE OF                   1          0          0          1                .00
+                                  SARATOGA SPRINGS, CITY OF               12          9          0          3          92,668.11
+                                  SARATOGA, TOWN OF                       39         25          0         14         220,932.98
+                                  SCHUYLERVILLE, VILLAGE OF                8          8          0          0          47,057.38
+                                  SOUTH GLENS FALLS, VILLAGE OF            2          1          0          1             396.61
+                                  STILLWATER, TOWN OF                     32         31          0          1         144,644.16
+                                  STILLWATER, VILLAGE OF                  15         10          0          5          66,409.50
+                                  WATERFORD, TOWN OF                     143        120          0         23       2,830,026.78
+                                  WATERFORD, VILLAGE OF                  216        181          0         35       3,190,849.40
+                                  WILTON,TOWN OF                           1          1          0          0           4,228.71
+  SCHENECTADY COUNTY              DELANSON, VILLAGE OF                     2          2          0          0          11,779.50
+                                  DUANESBURG, TOWN OF                      8          8          0          0         497,928.23
+                                  GLENVILLE,TOWN OF                       41         36          0          5         535,517.14
+                                  NISKAYUNA, TOWN OF                      55         45          0         10         384,720.61
+                                  ROTTERDAM, TOWN OF                      44         38          0          6       2,006,491.15
+                                  SCHENECTADY, CITY OF                   148        125          0         23       3,195,088.03
+                                  SCOTIA, VILLAGE OF                      54         48          0          6       1,344,949.17
+  SCHOHARIE COUNTY                BLENHEIM, TOWN OF                       19         17          0          2         436,448.83
+                                  BROOME, TOWN OF                         13         11          0          2         215,165.67
+                                  COBLESKILL, TOWN OF                     10          8          0          2          42,768.27
+                                  COBLESKILL, VILLAGE OF                  28         22          0          6         174,759.84
+                                  CONESVILLE, TOWN OF                      4          3          0          1          55,014.71
+                                  ESPERANCE, TOWN OF                      91         86          0          5       4,521,467.93
+                                  ESPERANCE, VILLAGE OF                   29         27          0          2         971,224.97
+                                  FULTON, TOWN OF                         28         26          0          2         917,314.39
+                                  GILBOA, TOWN OF                          9          8          0          1         102,396.06
+                                  MIDDLEBURGH, TOWN OF                    78         70          0          8       3,738,177.70
+                                  MIDDLEBURGH, VILLAGE OF                211        182          0         29       5,939,887.44
+                                  RICHMONDVILLE, TOWN OF                   5          5          0          0          49,760.74
+                                  RICHMONDVILLE, VILLAGE OF                3          3          0          0         180,383.47
+                                  SCHOHARIE, TOWN OF                      26         26          0          0       1,523,887.54
+                                  SCHOHARIE, VILLAGE OF                  131        126          0          5      12,850,419.21
+                                  SEWARD, TOWN OF                          2          0          0          2                .00
+                                  SHARON, TOWN OF                          2          1          0          1           1,402.94
+                                  WRIGHT, TOWN OF                         12          9          0          3         255,159.12
+  SCHUYLER COUNTY                 DIX, TOWN OF                             2          2          0          0           3,712.15
+                                  HECTOR, TOWN OF                         10          8          0          2          54,852.10
+                                  MONTOUR FALLS, VILLAGE OF                8          7          1          0          85,596.18
+                                  MONTOUR, TOWN OF                         1          0          1          0                .00
+                                  ORANGE, TOWN OF                         18         11          0          7         122,043.17
+                                  READING, TOWN OF                         2          1          0          1           6,206.10
+                                  TYRONE, TOWN OF                          1          1          0          0             232.80
+                                  WATKINS GLEN, VILLAGE OF                13          8          0          5          52,767.86
+  SENECA COUNTY                   COVERT, TOWN OF                          7          3          2          2          13,811.31
+                                  FAYETTE, TOWN OF                        11          9          0          2          79,358.45
+                                  LODI, TOWN OF                            8          3          4          1          61,912.19
+                                  LODI, VILLAGE OF                         1          1          0          0          23,712.57
+                                  OVID, TOWN OF                           20         12          4          4         165,723.98
+                                  ROMULUS, TOWN OF                         9          2          0          7           6,499.00
+                                  SENECA FALLS, TOWN OF                   25         22          0          3         148,528.06
+                                  SENECA FALLS, VILLAGE OF                10          5          0          5           7,860.29
+                                  VARICK, TOWN OF                         10          5          0          5          17,699.31
+                                  WATERLOO, TOWN OF                        2          1          0          1           2,077.00
+                                  WATERLOO, VILLAGE OF                     2          1          0          1           2,147.53
+  ST. LAWRENCE COUNTY             BRASHER, TOWN OF                         5          3          0          2          51,241.30
+                                  CANTON, TOWN OF                          4          3          0          1          46,485.51
+                                  CANTON, VILLAGE OF                       7          6          0          1           4,375.69
+                                  CLIFTON, TOWN OF                         1          0          0          1                .00
+                                  FINE, TOWN OF                            3          2          0          1          18,036.75
+                                  FOWLER, TOWN OF                          3          3          0          0          54,694.66
+                                  GOUVERNEUR, TOWN OF                      3          2          0          1          27,072.44
+                                  GOUVERNEUR, VILLAGE OF                  16         12          0          4          43,314.69
+                                  HAMMOND, TOWN OF                         1          1          0          0           1,173.22
+                                  HERMON, TOWN OF                          1          1          0          0           9,773.98
+                                  HEUVELTON, VILLAGE OF                    1          1          0          0          13,326.96
+                                  LAWRENCE, TOWN OF                       19         14          0          5         316,361.14
+                                  LOUISVILLE, TOWN OF                      8          8          0          0          96,372.43
+                                  MADRID, TOWN OF                          5          2          0          3           4,283.50
+                                  MASSENA, TOWN OF                         1          1          0          0           5,079.37
+                                  MASSENA, VILLAGE OF                      2          2          0          0          10,562.84
+                                  MORRISTOWN, TOWN OF                      5          2          0          3           2,691.25
+                                  MORRISTOWN, VILLAGE OF                   3          3          0          0           1,041.82
+                                  NORWOOD, VILLAGE OF                      2          1          0          1           4,865.01
+                                  OGDENSBURG, CITY OF                      2          2          0          0           1,313.00
+                                  OSWEGATCHIE, TOWN OF                     9          6          0          3          41,873.09
+                                  PITCAIRN, TOWN OF                        1          0          0          1                .00
+                                  POTSDAM, VILLAGE OF                      1          1          0          0           1,047.38
+                                  RENSSELAER FALLS, VILLAGE OF             1          0          0          1                .00
+                                  RICHVILLE, VILLAGE OF                    1          0          0          1                .00
+                                  ROSSIE, TOWN OF                          3          2          0          1          52,352.56
+                                  RUSSELL, TOWN OF                         2          1          0          1             969.30
+                                  STOCKHOLM, TOWN OF                       6          5          0          1          40,334.53
+  STEUBEN COUNTY                  ADDISON, TOWN OF                         5          4          0          1          52,991.47
+                                  ADDISON, VILLAGE OF                     21         20          0          1         192,810.51
+                                  ARKPORT, VILLAGE OF                      3          2          0          1          11,041.29
+                                  AVOCA, TOWN OF                          10          8          0          2          79,322.23
+                                  AVOCA, VILLAGE OF                        6          4          0          2          10,259.63
+                                  BATH, TOWN OF                           24         20          0          4          84,567.06
+                                  BATH, VILLAGE OF                         2          2          0          0             976.78
+                                  CAMERON, TOWN OF                         1          1          0          0             657.59
+                                  CAMPBELL, TOWN OF                       55         33          0         22         301,733.37
+                                  CANISTEO, TOWN OF                        8          7          0          1          27,562.19
+                                  CANISTEO, VILLAGE OF                     4          2          0          2             706.10
+                                  CATON, TOWN OF                           1          1          0          0          24,351.76
+                                  COHOCTON, TOWN OF                        1          1          0          0             562.39
+                                  CORNING, CITY OF                        19          8          0         11          39,958.53
+                                  CORNING, TOWN OF                        16          7          2          7          39,042.49
+                                  ERWIN, TOWN OF                          39         30          0          9         143,763.46
+                                  GREENWOOD, TOWN OF                       2          2          0          0           3,301.39
+                                  HAMMONDSPORT, VILLAGE OF                13          6          0          7          13,660.48
+                                  HORNBY, TOWN OF                          3          3          0          0          12,103.97
+                                  HORNELL, CITY OF                        16          9          0          7          45,620.79
+                                  HORNELLSVILLE, TOWN OF                  11          9          0          2          61,355.29
+                                  HOWARD, TOWN OF                          3          3          0          0          55,692.29
+                                  JASPER, TOWN OF                          1          1          0          0             448.73
+                                  LINDLEY, TOWN OF                        42         27          0         15         591,652.84
+                                  NORTH HORNELL, VILLAGE OF                3          1          0          2           3,198.60
+                                  PAINTED POST, VILLAGE OF                13         10          0          3         212,286.62
+                                  PRATTSBURG, TOWN OF                      2          0          0          2                .00
+                                  PULTENEY, TOWN OF                       20         11          0          9          32,943.64
+                                  RIVERSIDE, VILLAGE OF                    2          2          0          0           3,134.78
+                                  SOUTH CORNING, VILLAGE OF                6          2          0          4          14,724.00
+                                  TUSCARORA, TOWN OF                      11          9          0          2          42,482.67
+                                  URBANA, TOWN OF                         20          8          0         12          66,820.25
+                                  WAYLAND, TOWN OF                         3          2          0          1           2,791.38
+                                  WAYNE, TOWN OF                          10          9          0          1          43,488.01
+                                  WHEELER, TOWN OF                         1          1          0          0           1,482.96
+                                  WOODHULL, TOWN OF                        1          1          0          0             488.26
+  SUFFOLK COUNTY                  AMITYVILLE, VILLAGE OF               1,549      1,391          6        152      87,170,277.84
+                                  ASHAROKEN, VILLAGE OF                  249        206          0         43       6,535,048.22
+                                  BABYLON, VILLAGE OF                  1,820      1,595         12        213      97,226,748.27
+                                  BABYLON,TOWN OF                      4,495      3,885         12        598     178,987,951.56
+                                  BELLE TERRE, VILLAGE OF                  6          5          0          1          65,990.55
+                                  BELLPORT, VILLAGE OF                    49         37          0         12         924,136.66
+                                  BRIGHTWATERS, VILLAGE OF               133        110          0         23       3,742,643.04
+                                  BROOKHAVEN,TOWN OF                   4,696      3,719         13        964     121,837,983.84
+                                  DERING HARBOR, VILLAGE OF                2          0          0          2                .00
+                                  EAST HAMPTON,TOWN OF                   816        557          1        258       7,150,294.36
+                                  EAST HAMPTON,VILLAGE OF                 72         44          0         28       1,237,297.70
+                                  GREENPORT, VILLAGE OF                  156        101          0         55       2,456,472.45
+                                  HEAD OF THE HARBOR, VILLAGE OF           4          1          0          3          17,188.24
+                                  HUNTINGTON BAY, VILLAGE OF              84         64          0         20       1,813,340.09
+                                  HUNTINGTON, TOWN OF                    540        373          0        167       6,970,997.48
+                                  ISLIP,TOWN OF                        5,735      4,735         10        990     215,446,787.63
+                                  LINDENHURST, VILLAGE OF              2,838      2,499         12        327      98,423,166.15
+                                  LLOYD HARBOR, VILLAGE OF                31         14          0         17         338,867.13
+                                  MASTIC BEACH, VILLAGE OF                 3          1          1          1             637.65
+                                  NISSEQUOGUE, VILLAGE OF                 41         32          0          9         694,747.67
+                                  NORTH HAVEN, VILLAGE OF                 59         38          0         21         435,737.16
+                                  NORTHPORT, VILLAGE OF                   94         66          0         28       1,416,415.15
+                                  OCEAN BEACH, VILLAGE OF                999        862          6        131      49,705,877.54
+                                  OLD FIELD, VILLAGE OF                   20         14          0          6         171,545.22
+                                  PATCHOGUE, VILLAGE OF                  380        298          4         78      13,730,130.31
+                                  POQUOTT, VILLAGE OF                      2          2          0          0          61,321.95
+                                  PORT JEFFERSON, VILLAGE OF              65         49          0         16       1,071,920.09
+                                  QUOGUE, VILLAGE OF                     362        266          1         95       8,333,308.92
+                                  RIVERHEAD, TOWN OF                     795        640          1        154      13,161,911.79
+                                  SAG HARBOR, VILLAGE OF                 153        114          0         39       1,946,401.93
+                                  SAGAPONACK, VILLAGE OF                  16         11          0          5       1,085,558.60
+                                  SALTAIRE,VILLAGE OF                    389        321          1         67      15,332,051.68
+                                  SHELTER ISLAND, TOWN OF                112         74          0         38       1,930,138.64
+                                  SHOREHAM, VILLAGE OF                     5          4          0          1           1,033.20
+                                  SMITHTOWN, TOWN OF                     300        206          0         94       1,170,202.99
+                                  SOUTHAMPTON, TOWN OF                 3,328      2,496         17        815      79,914,579.94
+                                  SOUTHAMPTON, VILLAGE OF                239        134          2        103       3,507,125.37
+                                  SOUTHOLD,TOWN OF                     1,132        851          2        279      16,908,575.10
+                                  THE BRANCH, VILLAGE OF                   4          2          0          2           7,881.19
+                                  WEST HAMPTON DUNES, VILLAGE OF          57         33          0         24         881,768.19
+                                  WESTHAMPTON BEACH, VILLAGE OF        1,399      1,004          4        391      34,964,530.21
+  SULLIVAN COUNTY                 BETHEL, TOWN OF                         14          9          0          5         121,220.22
+                                  BLOOMINGBURG, VILLAGE OF                 1          0          0          1                .00
+                                  CALLICOON, TOWN OF                      57         49          1          7         934,626.40
+                                  COCHECTON, TOWN OF                      15         15          0          0         385,826.29
+                                  DELAWARE, TOWN OF                       47         42          0          5         798,931.75
+                                  FALLSBURG, TOWN OF                      20         12          0          8          89,593.42
+                                  FORESTBURGH, TOWN OF                     5          5          0          0           8,370.22
+                                  FREMONT, TOWN OF                        25         16          0          9         413,136.97
+                                  HIGHLAND, TOWN OF                       21         17          0          4         850,650.76
+                                  JEFFERSONVILLE, VILLAGE OF              67         56          0         11         976,560.39
+                                  LIBERTY, TOWN OF                        25         15          0         10         135,583.47
+                                  LIBERTY, VILLAGE OF                      9          6          0          3          70,734.02
+                                  LUMBERLAND, TOWN OF                     11          9          0          2          58,826.22
+                                  MAMAKATING, TOWN OF                     49         37          0         12         369,241.00
+                                  MONTICELLO, VILLAGE OF                   4          3          0          1          37,518.23
+                                  NEVERSINK, TOWN OF                      23         23          0          0         390,927.90
+                                  ROCKLAND, TOWN OF                      614        521          0         93       9,265,859.36
+                                  THOMPSON, TOWN OF                       72         62          0         10         347,346.33
+                                  TUSTEN, TOWN OF                         43         38          0          5       1,278,252.33
+                                  WOODRIDGE, VILLAGE OF                    2          1          0          1             118.00
+                                  WURTSBORO, VILLAGE OF                   14         10          0          4          23,970.07
+  TIOGA COUNTY                    BARTON, TOWN OF                         75         63          0         12       1,263,244.26
+                                  BERKSHIRE, TOWN OF                       4          3          0          1          14,729.87
+                                  CANDOR, TOWN OF                         27         19          0          8         448,163.88
+                                  CANDOR, VILLAGE OF                      10         10          0          0         211,034.28
+                                  NEWARK VALLEY, TOWN OF                  13         12          0          1         183,483.36
+                                  NEWARK VALLEY, VILLAGE OF               15         10          1          4         204,635.32
+                                  NICHOLS, TOWN OF                        96         85          0         11       2,925,307.79
+                                  NICHOLS, VILLAGE OF                      4          3          0          1          28,512.26
+                                  OWEGO, TOWN OF                         438        400          5         33      23,457,859.80
+                                  OWEGO, VILLAGE OF                      699        640          1         58      28,006,074.15
+                                  RICHFORD, TOWN OF                        4          1          0          3           1,731.12
+                                  SPENCER, TOWN OF                        30         25          0          5         634,350.03
+                                  SPENCER, VILLAGE OF                      5          4          0          1          12,171.45
+                                  TIOGA, TOWN OF                         124        110          0         14       3,466,234.45
+                                  WAVERLY, VILLAGE OF                     22         13          0          9          94,744.18
+  TOMPKINS COUNTY                 CAROLINE, TOWN OF                       21         17          0          4          72,531.40
+                                  CAYUGA HEIGHTS, VILLAGE OF               4          3          0          1          15,790.79
+                                  DRYDEN, TOWN OF                          8          8          0          0          85,072.29
+                                  DRYDEN, VILLAGE OF                      20         14          0          6         114,914.53
+                                  FREEVILLE, VILLAGE OF                    4          4          0          0          17,760.16
+                                  GROTON, TOWN OF                          6          4          0          2          16,773.65
+                                  GROTON, VILLAGE OF                      14         10          0          4         620,880.83
+                                  ITHACA, CITY OF                         91         68          0         23         247,727.68
+                                  ITHACA, TOWN OF                         18         14          0          4          36,215.01
+                                  LANSING, TOWN OF                        55         44          0         11         464,829.26
+                                  LANSING, VILLAGE OF                      5          1          0          4           6,588.85
+                                  NEWFIELD, TOWN OF                        5          4          0          1          35,742.25
+                                  TRUMANSBURG, VILLAGE OF                  3          2          0          1             902.32
+                                  ULYSSES, TOWN OF                         3          1          0          2           5,798.14
+  ULSTER COUNTY                   DENNING, TOWN OF                        16         11          0          5         235,716.59
+                                  ELLENVILLE, VILLAGE OF                  34         27          0          7         752,085.78
+                                  ESOPUS, TOWN OF                         13         10          0          3          86,547.61
+                                  GARDINER, TOWN OF                       28         25          0          3         881,068.39
+                                  HARDENBURGH, TOWN OF                     1          1          0          0          36,550.29
+                                  HURLEY, TOWN OF                         35         31          1          3       1,010,672.90
+                                  KINGSTON, CITY OF                       89         78          0         11       1,482,050.40
+                                  KINGSTON,TOWN OF                        24         19          0          5         598,994.64
+                                  LLOYD, TOWN OF                          43         33          0         10       1,592,195.69
+                                  MARBLETOWN, TOWN OF                     18         13          0          5         343,449.90
+                                  MARLBOROUGH, TOWN OF                    14         13          0          1         244,057.98
+                                  NEW PALTZ, TOWN OF                      59         49          0         10       1,097,362.89
+                                  NEW PALTZ, VILLAGE OF                   13          9          0          4       1,042,095.68
+                                  OLIVE, TOWN OF                          39         27          0         12       1,836,938.08
+                                  PINE HILL, VILLAGE OF                    1          1          0          0             255.00
+                                  PLATTEKILL, TOWN OF                      5          5          0          0         132,797.51
+                                  ROCHESTER, TOWN OF                      51         37          0         14         623,401.44
+                                  ROSENDALE, TOWN OF                      41         33          0          8         771,124.10
+                                  SAUGERTIES, TOWN OF                     51         44          0          7       1,266,997.17
+                                  SAUGERTIES, VILLAGE OF                  48         42          0          6       1,595,555.95
+                                  SHANDAKEN, TOWN OF                     274        212          3         59       5,764,828.30
+                                  SHAWANGUNK, TOWN OF                      7          4          0          3          42,815.35
+                                  ULSTER, TOWN OF                        219        184          0         35       4,988,563.61
+                                  WAWARSING, TOWN OF                      89         74          0         15       2,331,979.69
+                                  WOODSTOCK, TOWN OF                      76         46          0         30         406,452.11
+  WARREN COUNTY                   BOLTON, TOWN OF                          5          5          0          0          40,327.84
+                                  CHESTER, TOWN OF                        39         28          0         11          92,183.26
+                                  HAGUE, TOWN OF                           4          1          0          3           8,021.38
+                                  HORICON, TOWN OF                         6          6          0          0         104,431.60
+                                  JOHNSBURG, TOWN OF                       4          3          0          1          56,869.74
+                                  LAKE GEORGE, TOWN OF                     8          6          0          2          54,722.66
+                                  LAKE GEORGE, VILLAGE OF                  7          5          0          2         133,045.28
+                                  LAKE LUZERNE, TOWN OF                   27         18          0          9         786,405.07
+                                  QUEENSBURY, TOWN OF                     53         43          0         10       1,259,705.20
+                                  STONY CREEK, TOWN OF                     4          1          0          3           2,355.28
+                                  THURMAN, TOWN OF                         5          4          0          1          85,530.04
+                                  WARRENSBURG, TOWN OF                     8          3          0          5          11,648.54
+  WASHINGTON COUNTY               ARGYLE, TOWN OF                          4          1          0          3           7,453.57
+                                  ARGYLE, VILLAGE OF                       1          1          0          0             428.55
+                                  CAMBRIDGE, TOWN OF                       3          3          0          0           6,623.84
+                                  CAMBRIDGE, VILLAGE OF                    9          5          0          4          13,999.13
+                                  DRESDEN, TOWN OF                        14         10          0          4         154,153.52
+                                  EASTON, TOWN OF                          2          0          0          2                .00
+                                  FORT ANN, TOWN OF                        5          3          0          2         132,754.36
+                                  FORT EDWARD, TOWN OF                     6          3          0          3         134,205.18
+                                  FORT EDWARD, VILLAGE OF                  2          2          0          0           9,952.97
+                                  GRANVILLE, TOWN OF                       5          5          0          0         156,318.82
+                                  GRANVILLE, VILLAGE OF                   14         10          0          4         165,198.06
+                                  GREENWICH, VILLAGE OF                    1          1          0          0           3,744.91
+                                  GREENWICH,TOWN OF                        3          1          0          2           7,632.74
+                                  HAMPTON, TOWN OF                         3          1          0          2           1,597.30
+                                  HEBRON, TOWN OF                          2          2          0          0          30,911.54
+                                  JACKSON, TOWN OF                         3          1          0          2             891.00
+                                  PUTNAM, TOWN OF                          8          6          0          2           9,832.31
+                                  SALEM, VILLAGE OF                       12         10          0          2         169,438.49
+                                  SALEM,TOWN OF                            5          4          0          1          43,466.40
+                                  WHITE CREEK, TOWN OF                     2          2          0          0          25,245.99
+                                  WHITEHALL, TOWN OF                      10          8          0          2          60,952.55
+                                  WHITEHALL, VILLAGE OF                   40         20          0         20         301,222.99
+  WAYNE COUNTY                    ARCADIA, TOWN OF                         5          4          0          1           5,792.02
+                                  CLYDE, VILLAGE OF                        4          4          0          0          12,045.14
+                                  GALEN, TOWN OF                          20         14          0          6         105,992.89
+                                  HURON, TOWN OF                          26         15          4          7         208,787.48
+                                  LYONS, TOWN OF                           1          0          0          1                .00
+                                  LYONS, VILLAGE OF                        1          1          0          0             227.75
+                                  MARION, TOWN OF                          2          1          0          1          38,889.83
+                                  NEWARK, VILLAGE OF                       1          0          0          1                .00
+                                  ONTARIO, TOWN OF                         8          2          0          6          12,470.07
+                                  PALMYRA, TOWN OF                         4          3          0          1          48,905.74
+                                  RED CREEK, VILLAGE OF                    5          3          0          2          10,970.77
+                                  ROSE, TOWN OF                            1          1          0          0           4,494.49
+                                  SAVANNAH, TOWN OF                        2          1          0          1          14,529.98
+                                  SODUS POINT, VILLAGE OF                 50         37          2         11         634,995.25
+                                  SODUS, TOWN OF                          11          7          0          4         224,415.82
+                                  WILLIAMSON, TOWN of                          2          1          0          1           5,209.45
+                                  WOLCOTT, TOWN OF                         4          1          0          3           1,560.46
+                                  WOLCOTT, VILLAGE OF                      3          3          0          0           8,122.89
+  WESTCHESTER COUNTY              ARDSLEY, VILLAGE OF                    278        238          0         40       2,112,197.43
+                                  BEDFORD, TOWN OF                        59         37          0         22         397,959.57
+                                  BRIARCLIFF MANOR, VILLAGE OF            81         68          0         13       1,486,377.75
+                                  BRONXVILLE, VILLAGE OF                 214        183          0         31       5,672,807.93
+                                  BUCHANAN, VILLAGE OF                     1          0          0          1                .00
+                                  CORTLANDT, TOWN OF                      87         69          0         18       2,007,014.14
+                                  CROTON-ON-HUDSON, VILLAGE OF            16          9          0          7          68,056.98
+                                  DOBBS FERRY, VILLAGE OF                 16         12          0          4         542,511.13
+                                  EASTCHESTER, TOWN OF                   104         83          0         21         498,319.42
+                                  ELMSFORD, VILLAGE OF                   327        259          0         68       5,882,713.61
+                                  GREENBURGH,TOWN OF                     342        259          0         83       3,935,254.90
+                                  HARRISON, TOWN OF                      777        649          0        128       4,990,163.79
+                                  HASTINGS-ON-HUDSON, VILLAGE OF          37         25          0         12         864,744.31
+                                  IRVINGTON, VILLAGE OF                   83         65          0         18       2,471,193.11
+                                  LARCHMONT, VILLAGE OF                  379        311          1         67       5,114,897.94
+                                  LEWISBORO, TOWN OF                      29         21          0          8         161,346.51
+                                  MAMARONECK, TOWN OF                    554        473          0         81       4,890,737.83
+                                  MAMARONECK, VILLAGE OF               1,571      1,341          0        230      29,972,263.34
+                                  MOUNT KISCO, VILLAGE OF                 46         34          0         12       1,296,003.58
+                                  MOUNT PLEASANT, TOWN OF                154        116          0         38       1,784,607.99
+                                  MOUNT VERNON, CITY OF                   72         52          0         20         472,120.13
+                                  NEW CASTLE, TOWN OF                    173        132          2         39       1,260,958.07
+                                  NEW ROCHELLE, CITY OF                  671        520          1        150       8,500,792.88
+                                  NORTH CASTLE, TOWN OF                   49         32          0         17         224,218.32
+                                  NORTH SALEM, TOWN OF                    20         10          0         10          70,831.97
+                                  OSSINING, TOWN OF                       18         14          0          4         159,061.51
+                                  OSSINING, VILLAGE OF                    57         36          0         21       1,018,457.32
+                                  PEEKSKILL, CITY OF                      40         33          0          7         498,968.34
+                                  PELHAM MANOR, VILLAGE OF                45         37          0          8         403,693.08
+                                  PELHAM, VILLAGE OF                      33         28          0          5         193,935.92
+                                  PLEASANTVILLE, VILLAGE OF               36         30          0          6         245,043.88
+                                  PORT CHESTER, VILLAGE OF               143        121          0         22       1,264,053.06
+                                  POUND RIDGE, TOWN OF                    22         14          0          8         113,755.50
+                                  RYE BROOK, VILLAGE OF                  262        214          0         48       2,079,420.99
+                                  RYE, CITY OF                         1,627      1,333          0        294      36,852,957.47
+                                  SCARSDALE, VILLAGE OF                  384        309          1         74       2,603,409.60
+                                  SLEEPY HOLLOW, VILLAGE OF               13          8          0          5         105,537.19
+                                  SOMERS, TOWN OF                         33         25          0          8         305,255.88
+                                  TARRYTOWN, VILLAGE OF                   28         23          0          5         926,664.51
+                                  TUCKAHOE, VILLAGE OF                    26         20          0          6         128,373.59
+                                  WHITE PLAINS, CITY OF                  174        122          0         52         682,389.62
+                                  YONKERS, CITY OF                       659        540          0        119      10,812,114.62
+                                  YORKTOWN, TOWN OF                      187        114          0         73         729,688.76
+  WYOMING COUNTY                  ARCADE, TOWN OF                          5          2          0          3           7,377.65
+                                  ARCADE, VILLAGE OF                      26         17          0          9         500,463.71
+                                  ATTICA, TOWN OF                         11         10          0          1         283,018.42
+                                  BENNINGTON, TOWN OF                      1          1          0          0          22,952.33
+                                  CASTILE, TOWN OF                         1          1          0          0           2,648.24
+                                  EAGLE, TOWN OF                           4          2          0          2           5,048.37
+                                  GAINESVILLE, TOWN OF                     1          1          0          0           1,512.84
+                                  JAVA, TOWN OF                            1          1          0          0           8,228.03
+                                  PERRY, TOWN OF                           3          2          0          1           5,734.85
+                                  PIKE, TOWN OF                           21         18          0          3         104,846.06
+                                  PIKE, VILLAGE OF                         3          2          0          1          21,742.96
+                                  SHELDON, TOWN OF                         2          2          0          0          16,362.42
+                                  WARSAW, TOWN OF                          7          5          0          2          43,667.60
+                                  WARSAW, VILLAGE OF                       7          3          0          4          10,674.84
+  YATES COUNTY                    BARRINGTON, TOWN OF                      9          6          0          3           5,969.88
+                                  DRESDEN, VILLAGE OF                      4          2          0          2           3,063.59
+                                  DUNDEE, VILLAGE OF                       8          6          0          2          11,312.47
+                                  ITALY, TOWN OF                           4          2          0          2          29,426.79
+                                  JERUSALEM, TOWN OF                      49         25          0         24         446,165.88
+                                  MIDDLESEX, TOWN OF                       4          2          0          2          31,499.08
+                                  MILO, TOWN OF                           17         10          1          6         117,111.42
+                                  PENN YAN, VILLAGE OF                    27         15          0         12         209,432.58
+                                  POTTER, TOWN OF                          2          1          0          1             957.79
+                                  RUSHVILLE, VILLAGE OF                    5          2          0          3           4,258.00
+                                  STARKEY, TOWN OF                        13          9          1          3          18,367.96
+                                  TORREY, TOWN OF                          2          2          0          0           4,409.13

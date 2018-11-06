@@ -5,9 +5,8 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import CapabilitiesSummaryTable from "components/mitigate-ny/CapabilitiesSummaryTable"
-import CapabilitiesTable from "pages/auth/RiskIndex/components/CapabilitiesTable"
-import HMGPTable from "pages/auth/RiskIndex/components/HMGPTable"
+import NfipLossesChoropleth from "components/mitigate-ny/NfipLossesChoropleth"
+import NfipLossesTable from "components/mitigate-ny/NfipLossesTable"
 
 class TestPage extends React.Component {
 
@@ -19,8 +18,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HMGPTable hazard="none"
-                  filterColumns={ ["program area"] }/>
+                <NfipLossesChoropleth />
               </ElementBox>
             </div>
           </div>
@@ -28,7 +26,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HMGPTable hazard="all"/>
+                <NfipLossesTable />
               </ElementBox>
             </div>
           </div>
@@ -36,90 +34,10 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <HMGPTable hazard="riverine"/>
+                <NfipLossesTable geoLevel="counties"/>
               </ElementBox>
             </div>
           </div>
-
-          {/*<div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CapabilitiesSummaryTable />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CapabilitiesSummaryTable
-                  groupBy="agency"
-                  columns={ [
-                    "programs",
-                    "measures",
-                    "actions",
-                    "hazards",
-                    "capabilities",
-                    "goals",
-                    "funding",
-                    "budget",
-                    "staff",
-                    "contract staff",
-                    "regional",
-                    "statewide",
-                    "local"
-                  ] }/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CapabilitiesSummaryTable
-                  groupBy="capability"
-                  columns={ [
-                    "programs",
-                    "measures",
-                    "actions",
-                    "hazards",
-                    "agencies",
-                    "goals",
-                    "funding",
-                    "budget",
-                    "staff",
-                    "contract staff",
-                    "regional",
-                    "statewide",
-                    "local"
-                  ] }/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <CapabilitiesSummaryTable
-                  groupBy="goal"
-                  columns={ [
-                    "programs",
-                    "measures",
-                    "actions",
-                    "hazards",
-                    "agencies",
-                    "capabilities",
-                    "funding",
-                    "budget",
-                    "staff",
-                    "contract staff",
-                    "regional",
-                    "statewide",
-                    "local"
-                  ] }/>
-              </ElementBox>
-            </div>
-          </div>*/}
 
         </Element>
       )
@@ -152,7 +70,7 @@ export default [
     path: '/test',
     exact: true,
     name: 'Test Page',
-    mainNav: false,
+    mainNav: true,
     breadcrumbs: [
     	{ name: 'Test Page', path: '/test' }
     ],

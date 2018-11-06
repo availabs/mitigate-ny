@@ -9,8 +9,7 @@ import * as d3color from 'd3-color';
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-// import DeckMap from "components/mapping/escmap/DeckMap.react"
-// import MapTest from "components/mapping/escmap/MapTest.react"
+import DeckMap from "components/mapping/escmap/DeckMap.react"
 import SvgMap from "components/mapping/escmap/SvgMap.react"
 
 import { CircleLabel } from "./HazardEventsLegend"

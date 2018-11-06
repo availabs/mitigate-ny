@@ -1,7 +1,7 @@
   
 import React, { Component } from 'react'
 import MainMenu from './MainMenu'
-import MobileMenu from './MobileMenu'
+// import MobileMenu from './MobileMenu'
 import {
   Logo,
   LoginMenu,
@@ -42,7 +42,7 @@ class Menu extends Component {
 
     return (
   		<div>
-  			<MobileMenu />
+			{/*<MobileMenu />*/}
 	  		<div className={displayOptions} style={dynamicStyle}>
 	            <Logo />
 	            {userMenu}
