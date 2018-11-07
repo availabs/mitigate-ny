@@ -7,7 +7,9 @@ import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable
 import Submenus from './risk-submenus'
 import NfipTable from 'pages/auth/Capabilities/components/NfipTable'
 import NfipChoropleth from 'pages/auth/Capabilities/components/NfipChoropleth'
-
+import ElementBox from 'components/light-admin/containers/ElementBox'
+import NfipLossesChoropleth from "components/mitigate-ny/NfipLossesChoropleth"
+import NfipLossesTable from "components/mitigate-ny/NfipLossesTable"
 
 class nfip extends Component {
   render () {
@@ -19,6 +21,24 @@ class nfip extends Component {
         
             <div className="property-section">
               <Content content_id={`nfip`} />
+            </div>
+
+
+            <div className='col-lg-12'>
+                <NfipLossesChoropleth />
+
+                <NfipLossesTable
+                title={ "NFIP Losses by Municipality" } 
+                />
+                
+                <NfipLossesTable 
+                geoLevel="counties"
+                title={ "NFIP Losses by County" }
+                />
+            </div>
+
+            <div className="property-section">
+              <Content content_id={`riverine-repetitive_loss`} />
             </div>
 
             <div className="property-section">
@@ -33,9 +53,7 @@ class nfip extends Component {
                <NfipTable/>
             </div>
 
-            <div className="property-section">
-              <Content content_id={`riverine-repetitive_loss`} />
-            </div>
+            
 
             <div className="property-section">
               <Content content_id={`nfip-rlstrategy`} />

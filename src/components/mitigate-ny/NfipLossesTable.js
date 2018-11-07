@@ -55,7 +55,7 @@ class NfipTable extends React.Component {
 			return (
 				<TableBox { ...this.processData() }
 					pageSize={ 8 }
-					title={ "NFIP Losses" }
+					title={ this.props.title }
 					columnFormats= { {
 						"total losses": ",d",
 						"closed losses": ",d",
@@ -74,13 +74,15 @@ class NfipTable extends React.Component {
 // //
 NfipTable.defaultProps = {
 	geoid: '36',
-	geoLevel: 'cousubs'
+	geoLevel: 'cousubs',
+	title: "NFIP Losses"
 }
 
 const mapStateToProps = state => ({
   	router: state.router,
     geoGraph: state.graph.geo,
     nfip: state.graph.nfip
+
 })
 
 const mapDispatchToProps = {

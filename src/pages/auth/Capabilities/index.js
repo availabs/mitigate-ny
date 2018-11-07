@@ -18,6 +18,7 @@ import ClimateAdaptation from './Climate-Adaptation'
 import HistoricEnvironmental from './Historic-Environmental'
 import PlanningRegulatory from './Planning-Regulatory'
 import Local from './Counties'
+import CapabilitiesSummaryTable from "components/mitigate-ny/CapabilitiesSummaryTable"
 
 import subMenus from './capabilities-submenu'
 
@@ -81,6 +82,16 @@ class Capabilities extends Component {
                tableLinkLabel="Add Your Agency Programs"
                pageSize={ 20 }
                expandColumns={ ["description"] }/>
+            <CapabilitiesSummaryTable
+              title= "Statewide Programs Summary by Hazard"
+              groupBy= "hazard"
+              columns= {["programs",
+                        "regional",
+                        "statewide",
+                        "local"]}
+            filterBy= "program"
+            pageSize= { 9 }
+            />
           </div>
          </div>
       </div>

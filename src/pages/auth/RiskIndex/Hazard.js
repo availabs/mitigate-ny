@@ -73,7 +73,7 @@ class Hazard extends Component {
           <h5>Presidential Disaster Declarations</h5>
           <Content content_id={'hazards-presidential-disaster-declarations'} />
           <FemaDisasterDeclarationsTable hazard={hazard} />
-          <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/disasters'>FEMA Disaster Declarations</a></i>
+          <i style={{color: '#afafaf'}}>Source: <a href="https://www.fema.gov/disasters" target="_blank">FEMA Disaster Declarations</a></i>
         </div>
       )
     }
@@ -119,7 +119,7 @@ class Hazard extends Component {
             dataType={'severeWeather'}
           />
           <div>
-            <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
           </div>
         </div>
       )
@@ -189,7 +189,7 @@ class Hazard extends Component {
                <strong>1996-2017</strong>
                <div>The table below summarizes the top 50 {hazardName} events by loss in dollars. Click on a row to view the event description.</div>
                <HazardEventsTable hazard={hazard} />
-               <i style={{color: '#afafaf'}}>Source: NCDC Storm Events Dataset</i>
+               <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ probability (hazard) {
                 dataType='severeWeather'
                 display='full'
               />
-              <i style={{color: '#afafaf', paddingBottom: 0}}>Source: NCDC Storm Events Dataset</i>
+              <i style={{color: '#afafaf', paddingBottom: 0}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
             </div>
           </div>
         </div>
@@ -257,8 +257,7 @@ municipalityTable (hazard) {
               </div>
               
             </div>
-            <i style={{color: '#afafaf'}}>
-                Source: NCDC Storm Events Dataset, 1996-2017
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
               </i>
           </div>
       )
@@ -396,8 +395,7 @@ criticalInfrastructure (hazard) {
               
                 { this.getHazardMap(hazard) }
 
-                <i style={{color: '#afafaf'}}>
-                  Source: NCDC Storm Events Dataset
+                <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
                 </i>
               </div>
           </div>
@@ -413,7 +411,7 @@ criticalInfrastructure (hazard) {
                   hazard={hazard}
                 />
                 <i style={{color: '#afafaf'}}>
-                  Source: NCDC Storm Events Dataset
+                  Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NCDC Storm Events Dataset</a>
                 </i>
                 {this.repetitive(hazard)}
                 
@@ -429,7 +427,7 @@ criticalInfrastructure (hazard) {
               
               {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
               <i style={{color: '#afafaf'}}>
-                Source: NCDC Storm Events Dataset
+                Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
               </i>
           </div>
         </div>
@@ -480,7 +478,7 @@ criticalInfrastructure (hazard) {
                 <Content content_id={'hazards-hmgp-overview'} />
               </div>
                 <HMGPTable hazard={hazard} />
-                <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+                <i style={{color: '#afafaf'}}>Source: <a href="https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1" target="_blank">FEMA Hazard Mitigation Assistance Projects - V1</a></i>
               </div>
               <CapabilitiesTable 
               hazard={hazard} 
