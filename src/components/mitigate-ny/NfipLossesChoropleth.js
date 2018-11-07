@@ -26,7 +26,7 @@ const formats = {
 	total_loss: d => fnum(d, true, true)
 }
 
-class NfipChoropleth extends React.Component {
+class NfipLossesChoropleth extends React.Component {
 
 	state = {
 		data: {
@@ -67,25 +67,13 @@ class NfipChoropleth extends React.Component {
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
 			return this.props.falcor.get(
-				['nfip', 'severe', 'byGeoid', geoids, 'allTime', attribute]
+				['nfip', 'losses', 'byGeoid', geoids, 'allTime', attribute]
 			)
-			.then(() => {
-				return this.props.falcor.get(
-					['nfip', 'byGeoid', geoids, 'allTime', attribute]
-				)
-			})
-			.then(() => {
+			.then(res => {
+console.log("RES:",res)
 				return this.props.falcor.get(
 					['geo', geoids, 'name']
 				)
-			})
-			.then(() => {
-				if (geoids[0].length === 11) {
-					geoids = geoids.map(d => d.slice(0, 5))
-					return this.props.falcor.get(
-						['geo', geoids, 'name']
-					)
-				}
 			});
 		})
 		.then(() => this.processData())
@@ -103,27 +91,14 @@ class NfipChoropleth extends React.Component {
 
 				domain = [];
 
-			let scale = d3scale.scaleThreshold()
-					.domain([5, 25, 100, 250])
-					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
-
-			if (attribute === 'total_loss') {
-				scale = d3scale.scaleQuantile()
-					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
-			}
-			if ((attribute === 'num_losses') && (geoLevel === 'counties')) {
-				scale.domain([25, 50, 200, 500])
-			}
+			let scale = d3scale.scaleQuantile()
+				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);;
 
 			props.geo['36'][geoLevel].features.forEach(feature => {
 				const { properties, geometry } = feature,
 					geoid = properties.geoid,
-					name = geoid.length < 10 ?
-						props.geoGraph[geoid].name :
-						props.geoGraph[geoid.slice(0, 5)].name,
-					d = this.props.severe ?
-						props.nfip.severe.byGeoid[geoid].allTime[attribute] :
-						props.nfip.byGeoid[geoid].allTime[attribute];
+					name = props.geoGraph[geoid].name,
+					d = props.nfip.losses.byGeoid[geoid].allTime[attribute];
 
 				if (d > 0) {
 					domain.push(d);
@@ -140,9 +115,7 @@ class NfipChoropleth extends React.Component {
 
 			})
 
-			if (attribute === 'total_loss') {
-				scale.domain(domain);
-			}
+			scale.domain(domain);
 
 			this.setState({ data, scale, dataProcessed: Boolean(data.features.length) })
 		}
@@ -192,7 +165,7 @@ class NfipChoropleth extends React.Component {
 			      			rows = [
 			      				[name],
 			      				['geoid', geoid],
-			      				[attribute.replace("_", " "), formats[attribute](data)]
+			      				[attribute.replace("_", " "), fnum(data, true, true)]
 			      			];
 		      			hoverData = {
 		      				rows, x, y
@@ -219,7 +192,7 @@ class NfipChoropleth extends React.Component {
 		      	pickable: false
 	    	}
 	    ]
-	    return { scale, layers };
+	    return layers;
 	}
 
 	generateLegend(scale=this.state.scale, { attribute }=this.props) {
@@ -243,7 +216,7 @@ class NfipChoropleth extends React.Component {
 					</tr>
 					<tr>
 						{
-							range.map(t => <td key={ t } style={ { width } }>{ formats[attribute](scale.invertExtent(t)[0]) }</td>)
+							range.map(t => <td key={ t } style={ { width } }>{ fnum(scale.invertExtent(t)[0]) }</td>)
 						}
 					</tr>
 				</tbody>
@@ -260,26 +233,23 @@ class NfipChoropleth extends React.Component {
 		return controls;
 	}
 
-// //
-  	render () {
-  		const { layers } = this.generateLayers();
-    	return (
-    		<DeckMap layers={ layers }
-    			height={ this.props.height }
-    			hoverData={ this.state.hoverData }
-        	viewport={ this.state.viewport }
-        	controls={ this.generateMapControls() }/>
-    	) 
-  	}
+	render () {
+  	return (
+  		<DeckMap layers={ this.generateLayers() }
+  			height={ this.props.height }
+  			hoverData={ this.state.hoverData }
+      	viewport={ this.state.viewport }
+      	controls={ this.generateMapControls() }/>
+  	) 
+	}
 }
 
 // //
-NfipChoropleth.defaultProps = {
+NfipLossesChoropleth.defaultProps = {
 	height: 800,
 	geoid: '36',
-	geoLevel: 'tracts',
-	attribute: 'total_loss',
-	severe: false
+	geoLevel: 'cousubs',
+	attribute: 'total_payments'
 }
 
 const mapStateToProps = state => ({
@@ -295,4 +265,4 @@ const mapDispatchToProps = {
 	getGeoMesh
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(NfipChoropleth));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(NfipLossesChoropleth));

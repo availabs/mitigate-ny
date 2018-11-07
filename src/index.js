@@ -1,6 +1,5 @@
 import React from 'react'
-// import ReactDOM from 'react-dom'
-import { render } from 'react-snapshot';
+import { hydrate, render } from 'react-dom'
 
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
@@ -13,15 +12,22 @@ import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
 
-render(
+const rootElement = document.getElementById('root')
+
+const app = 
   <Provider store={store}>
   	<FalcorProvider store={store} falcor={falcorGraph}>
 	    <ConnectedRouter history={history}>
 	     	<App />
 	    </ConnectedRouter>
-	</FalcorProvider>
-  </Provider>,
-  document.getElementById('root')
-)
+		</FalcorProvider>
+  </Provider>
+
+if (rootElement.hasChildNodes()) {
+	hydrate(app, rootElement);
+}
+else {
+	render(app, rootElement);
+}
 
 registerServiceWorker();

@@ -35,7 +35,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.1.4",
-    "react-snapshot": "^1.3.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "simple-statistics": "^6.1.0",
@@ -46,19 +45,28 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build": "npm-run-all build-css build-js post-build",
+    "post-build": "react-snap",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ --include-path ./node_modules src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "reactSnapshot": {
-    "include": [
-      "/hazard/riverine"
-    ],
+    "include": [],
     "exclude": [
-      "/login"
+      "/login",
+      "/hazards/*"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-snap": "^1.19.0"
+  },
+  "reactSnap": {
+    "puppeteer": {
+      "cache": false
+    },
+    "skipThirdPartyRequests": false,
+    "concurrency": 1
+  }
 }

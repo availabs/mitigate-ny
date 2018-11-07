@@ -351,7 +351,7 @@ class NewCapability extends React.Component {
         engineering_required,
         engineering_complete
       } = this.state,
-      title = (id === null) ? "New Capability" : "Edit Capability";
+      title = (id === null) ? "Add New Program, Measure, or Action Below" : "Edit Program, Measure, or Action";
     return (
       <Element>
         <h6 className="element-header">{ title }</h6>
