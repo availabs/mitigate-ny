@@ -707,7 +707,7 @@ export default [
     path: '/capabilities/manage/edit/:id',
     name: 'Capabilities',
     mainNav: false,
-    auth: true,
+    auth: false,
     subMenus: [],
     exact: true,
     breadcrumbs: [
