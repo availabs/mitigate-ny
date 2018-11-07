@@ -27,5 +27,9 @@ user.json
 
 #data tasks
 /tasks/atlas/build
+tasks/atlas/tiger_vt/build
+tasks/atlas/tiger_vt/mbview
+*.ndjson
+*.mbtiles
 config.py*
 *.pyc
