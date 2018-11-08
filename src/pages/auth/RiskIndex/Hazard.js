@@ -302,7 +302,7 @@ criticalInfrastructure (hazard) {
   }
 
     methodology (hazard) {
-    if(['riverine' , 'hurricane' , 'coastal'].includes(hazard)) {
+    if(['riverine' , 'hurricane' , 'coastal' , 'coldwave' , 'drought' , 'hail' , 'heatwave' , 'icestorm'].includes(hazard)) {
       return (
        <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
