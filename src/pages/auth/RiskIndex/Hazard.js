@@ -301,21 +301,6 @@ criticalInfrastructure (hazard) {
     return
   }
 
-    methodology (hazard) {
-    if(['riverine' , 'hurricane' , 'coastal' , 'coldwave' , 'drought' , 'hail' , 'heatwave' , 'icestorm'].includes(hazard)) {
-      return (
-       <div className='property-info-w'>
-          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
-            <div className="property-section">
-              <Content content_id={`${hazard}-methodology`} />
-            </div>
-          </div>
-        </div>    
-       )
-    } else {
-      return ''
-    }
-  }
 
   render () {
     const { params } = createMatchSelector({ path: '/hazards/:hazard' })(this.props) || {};
@@ -496,7 +481,13 @@ criticalInfrastructure (hazard) {
             </div>
              */ }
 
-        {this.methodology (hazard)}
+        <div className='property-info-w'>
+          <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
+            <div className="property-section">
+              <Content content_id={`${hazard}-methodology`} />
+            </div>
+          </div>
+        </div>    
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
