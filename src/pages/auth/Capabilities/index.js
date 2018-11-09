@@ -75,7 +75,7 @@ class Capabilities extends Component {
               title='Statewide Mitigation Capabilities' 
                type="program"
                columns={ ["name" , "description" , "agency" , "hazards" , 'admin' , 'url' , 'capability'] }
-               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
+               filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin' , 'capability'] }
                urlColumn="url"
                tableScroll={ true }
                tableLink="/capabilities/manage/new"
