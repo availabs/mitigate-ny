@@ -4,7 +4,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
-
+import CapabilitiesSummaryTable from "components/mitigate-ny/CapabilitiesSummaryTable"
 import NfipLossesChoropleth from "components/mitigate-ny/NfipLossesChoropleth"
 import NfipLossesTable from "components/mitigate-ny/NfipLossesTable"
 
@@ -38,6 +38,22 @@ class TestPage extends React.Component {
               </ElementBox>
             </div>
           </div>
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <CapabilitiesSummaryTable
+                    title= "Statewide Programs Summary by Hazard"
+                    groupBy= "hazard"
+                    columns= {["programs",
+                              "regional",
+                              "statewide",
+                              "local"]}
+                  filterBy= "program"
+                  pageSize= { 9 }
+                  />
+              </ElementBox>
+            </div>
+          </div>    
 
         </Element>
       )

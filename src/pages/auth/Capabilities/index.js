@@ -82,16 +82,7 @@ class Capabilities extends Component {
                tableLinkLabel="Add Your Agency Programs"
                pageSize={ 20 }
                expandColumns={ ["description"] }/>
-            <CapabilitiesSummaryTable
-              title= "Statewide Programs Summary by Hazard"
-              groupBy= "hazard"
-              columns= {["programs",
-                        "regional",
-                        "statewide",
-                        "local"]}
-            filterBy= "program"
-            pageSize= { 9 }
-            />
+            
           </div>
          </div>
       </div>
