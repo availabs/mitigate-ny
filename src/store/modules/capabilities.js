@@ -99,14 +99,14 @@ export const ATTRIBUTES = [
 ]
 export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, ATTRIBUTES.length - 3);
 export const META_DATA = {
-	"name": { defaultValue: "", label: "Name" },
+	"name": { defaultValue: "", label: "Program/Action Name" },
 	"description": { defaultValue: "", label: "Description" },
 	"contact": { defaultValue: "", label: "Contact" },
 	"contact_email": { defaultValue: "", label: "Contact Email" },
 	"contact_title": { defaultValue: "", label: "Contact Title" },
 	"contact_department": { defaultValue: "", label: "Contact Department" },
-	"agency": { defaultValue: "", label: "Agency" },
-	"partners": { defaultValue: "", label: "Partners" },
+	"agency": { defaultValue: "", label: "Agency (acronym)" },
+	"partners": { defaultValue: "", label: "Partners (agency acronyms)" },
 
 	"status_new_shmp": { defaultValue: false, label: "New SHMP" },
 	"status_carryover_shmp": { defaultValue: false, label: "Carryover SHMP" },
@@ -167,13 +167,13 @@ export const META_DATA = {
 
 	"priority": { defaultValue: "", label: "Priority" },
 
-	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population" },
-	"priority_2": { defaultValue: 0, label: "Funding Availability" },
-	"priority_3": { defaultValue: 0, label: "Probability of Matching Funds" },
-	"priority_4": { defaultValue: 0, label: "Benefit Cost Review" },
-	"priority_5": { defaultValue: 0, label: "Environmental Benefit" },
-	"priority_6": { defaultValue: 0, label: "Technical Feasibility" },
-	"priority_7": { defaultValue: 0, label: "Timeframe of implementation" },
+	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population (Only applicable for new Actions)" },
+	"priority_2": { defaultValue: 0, label: "Funding Availability (Only applicable for new Actions)" },
+	"priority_3": { defaultValue: 0, label: "Probability of Matching Funds (Only applicable for new Actions)" },
+	"priority_4": { defaultValue: 0, label: "Benefit Cost Review (Only applicable for new Actions)" },
+	"priority_5": { defaultValue: 0, label: "Environmental Benefit (Only applicable for new Actions)" },
+	"priority_6": { defaultValue: 0, label: "Technical Feasibility (Only applicable for new Actions)" },
+	"priority_7": { defaultValue: 0, label: "Timeframe of implementation (Only applicable for new Actions)" },
 
 	"priority_total": { defaultValue: "", label: "Priority Total" },
 

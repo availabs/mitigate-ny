@@ -387,7 +387,7 @@ class NewCapability extends React.Component {
                     onChange={ this.onChange.bind(this) }/>
 
                 <div className="form-group row">
-                  <label className="col-form-label col-sm-3">Type</label>
+                  <label className="col-form-label col-sm-3">Type (choose one)</label>
                   <div className="col-sm-6">
                     <div className="form-check">
                       <label className="form-check-label">
@@ -693,7 +693,7 @@ export default [
     path: '/capabilities/manage/new',
     name: 'Capabilities',
     mainNav: false,
-    auth: true,
+    auth: false,
     subMenus: [],
     exact: true,
     breadcrumbs: [
