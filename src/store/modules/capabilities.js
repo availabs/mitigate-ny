@@ -167,7 +167,7 @@ export const META_DATA = {
 
 	"priority": { defaultValue: "", label: "Priority" },
 
-	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population (Only applicable for new Actions)" },
+	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population", instruction: "(Only applicable for new Actions)" },
 	"priority_2": { defaultValue: 0, label: "Funding Availability (Only applicable for new Actions)" },
 	"priority_3": { defaultValue: 0, label: "Probability of Matching Funds (Only applicable for new Actions)" },
 	"priority_4": { defaultValue: 0, label: "Benefit Cost Review (Only applicable for new Actions)" },
