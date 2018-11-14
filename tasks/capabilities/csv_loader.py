@@ -32,7 +32,7 @@ def mapHazards(string):
 	try:
 		string = string.strip().lower()
 		if len(string) is 0:
-			return None
+			return ""
 		if (string == "all") or (string == "all hazards"):
 			return "|".join(HAZARDS)
 		hazards = [s.strip() for s in string.split(",")]
@@ -79,6 +79,18 @@ def toInt(string):
 		print "toInt ERROR:", string
 		raise e
 
+def toFloat(string):
+	try:
+		if string is None:
+			return None
+		string = string.strip()
+		if len(string) is 0:
+			return None
+		return float(string)
+	except Exception as e:
+		print "toFloat ERROR:", string
+		raise e
+
 TYPES = [
 	'program',
 	'measure',
@@ -106,7 +118,7 @@ def convert(meta, v):
 	try:
 		return meta["convert"](v)
 	except Exception as e:
-		print e, "\n"
+		print e
 		raise e
 
 META = [
@@ -203,8 +215,8 @@ META = [
 		"convert": toBoolean },
 
 	{ "column": "budget_provided",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "NUMERIC",
+		"convert": toFloat },
 
 	{ "column": "primary_funding",
 		"type": "VARCHAR",
@@ -215,12 +227,12 @@ META = [
 		"convert": toString },
 
 	{ "column": "num_staff",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "NUMERIC",
+		"convert": toFloat },
 
 	{ "column": "num_contract_staff",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "NUMERIC",
+		"convert": toFloat },
 
 	{ "column": "hazards",
 		"type": "VARCHAR",
@@ -267,8 +279,8 @@ META = [
 		"convert": toBoolean },
 
 	{ "column": "funding_amount",
-		"type": "VARCHAR",
-		"convert": toString },
+		"type": "NUMERIC",
+		"convert": toFloat },
 
 	{ "column": "capability_tech_support",
 		"type": "BOOLEAN",
@@ -439,6 +451,7 @@ def loadCsvData(cursor, inputUrl):
 				try:
 					rows.append(map(convert, META, row))
 				except:
+					print row, "\n"
 					CONVERT_ERRORS += 1
 			else:
 				firstLineRead = True

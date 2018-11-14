@@ -6,7 +6,7 @@ import {
 	set as d3set
 } from 'd3-collection'
 
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import { MAPBOX_TOKEN } from 'store/config'
 mapboxgl.accessToken = MAPBOX_TOKEN
 

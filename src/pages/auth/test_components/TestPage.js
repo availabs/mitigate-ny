@@ -53,7 +53,7 @@ export default [
     path: '/test',
     exact: true,
     name: 'Test Page',
-    mainNav: true,
+    mainNav: false,
     breadcrumbs: [
     	{ name: 'Test Page', path: '/test' }
     ],

@@ -29,3 +29,10 @@
 .accordion-header:hover {
   background-color: #ddd;
   cursor: pointer; }
+
+.accordion-instructions {
+  padding-bottom: 15px;
+  font-weight: bold;
+  font-size: 1rem;
+  padding-left: 20px;
+  margin-top: -5px; }

@@ -17,6 +17,7 @@ import {
 import {
   ATTRIBUTES,
   NEW_CAPABILITY_ATTRIBUTES,
+  getInstructions,
   PRIORITY_META_DATA,
   receiveHazards,
   setCapabilityData,
@@ -117,6 +118,12 @@ class Accordion extends React.Component {
           <h5 style={ { marginBottom: 0 } }>{ this.props.title }</h5>
         </div>
         <div style={ { overflowY: "auto", overflowX: "hidden", height: opened ? "auto" : 0, padding: "0px 10px 0px 10px" } }>
+          {
+            !this.props.instructions ? null :
+            <div className="accordion-instructions">
+              { this.props.instructions }
+            </div>
+          }
           { this.props.children }
         </div>
       </div>
@@ -229,10 +236,10 @@ class NewCapability extends React.Component {
       name
     } = this.state;
 
+    if (!name) return;
+
     if (id !== null) {
-      const data = { ...this.state },
-        { hazards } = data;
-      data.hazards = data.hazards.join("|");
+      const data = { ...this.state };
       return this.props.falcor.set({
         paths: [
           ['capabilities', 'byId', id, ATTRIBUTES]
@@ -387,7 +394,7 @@ class NewCapability extends React.Component {
                     onChange={ this.onChange.bind(this) }/>
 
                 <div className="form-group row">
-                  <label className="col-form-label col-sm-3">Type</label>
+                  <label className="col-form-label col-sm-3">Type (choose one)</label>
                   <div className="col-sm-6">
                     <div className="form-check">
                       <label className="form-check-label">
@@ -563,31 +570,38 @@ class NewCapability extends React.Component {
                     }/>
                 </Accordion>
 
-                <Accordion title={ getLabel("priority_1") }>
+                <Accordion title={ getLabel("priority_1") }
+                  instructions={ getInstructions("priority_1") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_1" value={ priority_1 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_2") }>
+                <Accordion title={ getLabel("priority_2") }
+                  instructions={ getInstructions("priority_2") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_2" value={ priority_2 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_3") }>
+                <Accordion title={ getLabel("priority_3") }
+                  instructions={ getInstructions("priority_3") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_3" value={ priority_3 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_4") }>
+                <Accordion title={ getLabel("priority_4") }
+                  instructions={ getInstructions("priority_4") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_4" value={ priority_4 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_5") }>
+                <Accordion title={ getLabel("priority_5") }
+                  instructions={ getInstructions("priority_5") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_5" value={ priority_5 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_6") }>
+                <Accordion title={ getLabel("priority_6") }
+                  instructions={ getInstructions("priority_6") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_6" value={ priority_6 }/>
                 </Accordion>
-                <Accordion title={ getLabel("priority_7") }>
+                <Accordion title={ getLabel("priority_7") }
+                  instructions={ getInstructions("priority_7") }>
                   <PriorityRow onChange={ this.setPriority.bind(this) }
                     id="priority_7" value={ priority_7 }/>
                 </Accordion>
@@ -693,7 +707,7 @@ export default [
     path: '/capabilities/manage/new',
     name: 'Capabilities',
     mainNav: false,
-    auth: true,
+    auth: false,
     subMenus: [],
     exact: true,
     breadcrumbs: [
@@ -707,7 +721,7 @@ export default [
     path: '/capabilities/manage/edit/:id',
     name: 'Capabilities',
     mainNav: false,
-    auth: true,
+    auth: false,
     subMenus: [],
     exact: true,
     breadcrumbs: [

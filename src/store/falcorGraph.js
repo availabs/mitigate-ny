@@ -42,7 +42,7 @@ class CustomSource extends HttpDataSource {
 // }
 
 export const falcorGraph = (function () {
-  var storedGraph = {}//JSON.parse(localStorage.getItem('falcorCache')) || {};
+  var storedGraph = {} //JSON.parse(localStorage.getItem('falcorCache')) || {};
   console.log('loading cache', storedGraph)
   let model = new Model({
     source: new CustomSource(host + 'graph', {

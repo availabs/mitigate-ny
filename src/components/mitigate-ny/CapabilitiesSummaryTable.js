@@ -340,12 +340,14 @@ class CCTable extends React.Component {
 	render() {
 		return (
 			<TableBox { ...this.processData() }
+				title={ this.props.title }
 				pageSize={ this.props.pageSize }/>
 		)
 	}
 }
 
 CCTable.defaultProps = {
+	title: "title" ,
 	groupBy: "hazard", // agency, capability, goal
 	columns: ["programs",
 						"measures",
