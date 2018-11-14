@@ -5,8 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import NfipLossesChoropleth from "components/mitigate-ny/NfipLossesChoropleth"
-import NfipLossesTable from "components/mitigate-ny/NfipLossesTable"
+import MapBoxMap from "components/mapping/escmap/MapBoxMap.react"
 
 class TestPage extends React.Component {
 
@@ -18,23 +17,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <NfipLossesChoropleth />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <NfipLossesTable />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <NfipLossesTable geoLevel="counties"/>
+                <MapBoxMap />
               </ElementBox>
             </div>
           </div>
