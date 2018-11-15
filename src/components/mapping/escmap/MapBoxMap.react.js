@@ -120,14 +120,14 @@ class MapBoxMap extends React.Component {
 					const { features, point } = e,
 						{ x, y } = point;
 					if (layer.onHover) {
-						layer.onHover({ features, x, y })
+						layer.onHover({ object: features && features[0], x, y })
 					}
 				})
 				glMap.on("mouseout", layer.id, e => {
 					const { features, point } = e,
 						{ x, y } = point;
 					if (layer.onHover) {
-						layer.onHover({ features, x, y })
+						layer.onHover({ object: features && features[0], x, y })
 					}
 				})
 			}

@@ -85,20 +85,15 @@ class TestMap extends React.Component {
         geoids,
         'fill-color': fillColor,
         onHover: e => {
-          const { features, x, y } = e;
+          const { object, x, y } = e;
           let hoverData = null;
-          try {
-            if (features && features.length) {
-              hoverData = {
-                rows: [
-                  ["Total Loss", fnum(this.state.scores[features[0].properties.geoid])]
-                ],
-                x, y
-              }
+          if (object) {
+            hoverData = {
+              rows: [
+                ["Total Loss", fnum(this.state.scores[object.properties.geoid])]
+              ],
+              x, y
             }
-          }
-          catch (e) {
-            hoverData = null;
           }
           this.setState({ hoverData })
         }

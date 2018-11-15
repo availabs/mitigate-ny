@@ -240,6 +240,13 @@ class NewCapability extends React.Component {
 
     if (id !== null) {
       const data = { ...this.state };
+      data.priority_total = data.priority_1 + 
+                            data.priority_2 +
+                            data.priority_3 +
+                            data.priority_4 +
+                            data.priority_5 +
+                            data.priority_6 +
+                            data.priority_7
       return this.props.falcor.set({
         paths: [
           ['capabilities', 'byId', id, ATTRIBUTES]
@@ -266,6 +273,15 @@ class NewCapability extends React.Component {
     }
     else {
       const args = NEW_CAPABILITY_ATTRIBUTES.map(attribute => {
+        if (attribute === 'priority_total') {
+          return this.state['priority_1'] || getDefaultValue('priority_1') +
+                this.state['priority_2'] || getDefaultValue('priority_2') +
+                this.state['priority_3'] || getDefaultValue('priority_3') +
+                this.state['priority_4'] || getDefaultValue('priority_4') +
+                this.state['priority_5'] || getDefaultValue('priority_5') +
+                this.state['priority_6'] || getDefaultValue('priority_6') +
+                this.state['priority_7'] || getDefaultValue('priority_7')
+        }
         return this.state[attribute] || getDefaultValue(attribute)
       })
       return this.props.falcor.call(
@@ -567,41 +583,55 @@ class NewCapability extends React.Component {
                     }/>
                 </Accordion>
 
-                <Accordion title={ getLabel("priority_1") }
-                  instructions={ getInstructions("priority_1") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_1" value={ priority_1 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_2") }
-                  instructions={ getInstructions("priority_2") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_2" value={ priority_2 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_3") }
-                  instructions={ getInstructions("priority_3") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_3" value={ priority_3 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_4") }
-                  instructions={ getInstructions("priority_4") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_4" value={ priority_4 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_5") }
-                  instructions={ getInstructions("priority_5") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_5" value={ priority_5 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_6") }
-                  instructions={ getInstructions("priority_6") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_6" value={ priority_6 }/>
-                </Accordion>
-                <Accordion title={ getLabel("priority_7") }
-                  instructions={ getInstructions("priority_7") }>
-                  <PriorityRow onChange={ this.setPriority.bind(this) }
-                    id="priority_7" value={ priority_7 }/>
-                </Accordion>
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_1") }
+                    instructions={ getInstructions("priority_1") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_1" value={ priority_1 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_2") }
+                    instructions={ getInstructions("priority_2") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_2" value={ priority_2 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_3") }
+                    instructions={ getInstructions("priority_3") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_3" value={ priority_3 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_4") }
+                    instructions={ getInstructions("priority_4") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_4" value={ priority_4 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_5") }
+                    instructions={ getInstructions("priority_5") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_5" value={ priority_5 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_6") }
+                    instructions={ getInstructions("priority_6") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_6" value={ priority_6 }/>
+                  </Accordion>
+                }
+                { type !== 'action' ? null :
+                  <Accordion title={ getLabel("priority_7") }
+                    instructions={ getInstructions("priority_7") }>
+                    <PriorityRow onChange={ this.setPriority.bind(this) }
+                      id="priority_7" value={ priority_7 }/>
+                  </Accordion>
+                }
 
                 <Accordion title="File Type"
                   instructions="Please let us know if there is a location file associated with this project/program">
