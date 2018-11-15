@@ -236,17 +236,30 @@ class NewCapability extends React.Component {
       name
     } = this.state;
 
-    if (!name) return;
+    if (!name) {
+      this.props.sendSystemMessage(`Missing required parameter: name.`);
+      return;
+    }
 
+    const data = { ...this.state };
+
+    if (data.type !== 'action') {
+      data.priority_1 = 0;
+      data.priority_2 = 0;
+      data.priority_3 = 0;
+      data.priority_4 = 0;
+      data.priority_5 = 0;
+      data.priority_6 = 0;
+      data.priority_7 = 0;
+    }
+    data.priority_total = data.priority_1 + 
+                          data.priority_2 +
+                          data.priority_3 +
+                          data.priority_4 +
+                          data.priority_5 +
+                          data.priority_6 +
+                          data.priority_7;
     if (id !== null) {
-      const data = { ...this.state };
-      data.priority_total = data.priority_1 + 
-                            data.priority_2 +
-                            data.priority_3 +
-                            data.priority_4 +
-                            data.priority_5 +
-                            data.priority_6 +
-                            data.priority_7
       return this.props.falcor.set({
         paths: [
           ['capabilities', 'byId', id, ATTRIBUTES]
@@ -273,16 +286,7 @@ class NewCapability extends React.Component {
     }
     else {
       const args = NEW_CAPABILITY_ATTRIBUTES.map(attribute => {
-        if (attribute === 'priority_total') {
-          return this.state['priority_1'] || getDefaultValue('priority_1') +
-                this.state['priority_2'] || getDefaultValue('priority_2') +
-                this.state['priority_3'] || getDefaultValue('priority_3') +
-                this.state['priority_4'] || getDefaultValue('priority_4') +
-                this.state['priority_5'] || getDefaultValue('priority_5') +
-                this.state['priority_6'] || getDefaultValue('priority_6') +
-                this.state['priority_7'] || getDefaultValue('priority_7')
-        }
-        return this.state[attribute] || getDefaultValue(attribute)
+        return data[attribute] || getDefaultValue(attribute)
       })
       return this.props.falcor.call(
         ['capabilities', 'insert'],
