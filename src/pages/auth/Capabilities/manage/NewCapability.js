@@ -266,9 +266,6 @@ class NewCapability extends React.Component {
     }
     else {
       const args = NEW_CAPABILITY_ATTRIBUTES.map(attribute => {
-        if (attribute === "hazards") {
-          return { $type: "atom", value: this.state.hazards || getDefaultValue(attribute) };
-        }
         return this.state[attribute] || getDefaultValue(attribute)
       })
       return this.props.falcor.call(

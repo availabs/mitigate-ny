@@ -6,6 +6,8 @@ import {
 	set as d3set
 } from 'd3-collection'
 
+import "./MapTest.css"
+
 import mapboxgl from 'mapbox-gl'
 import { MAPBOX_TOKEN } from 'store/config'
 mapboxgl.accessToken = MAPBOX_TOKEN
@@ -27,11 +29,12 @@ const getPaint = layer => {
 	const paint = {};
 	switch (layer.type) {
 		case 'line':
+			paint['line-color'] = '#000';
 			paint['line-width'] = layer['line-width'] || 1
 			if (typeof layer['line-color'] === 'string') {
 				paint['line-color'] = layer['line-color'];
 			}
-			else {
+			else if (layer['line-color']) {
 				paint['line-color'] = [
 					"get",
 					["get", "geoid"],
@@ -40,15 +43,20 @@ const getPaint = layer => {
 			}
 			return paint;
 		case 'fill':
+			paint['fill-color'] = '#000';
 			if (typeof layer['fill-color'] === 'string') {
 				paint['fill-color'] = layer['fill-color'];
 			}
-			else {
-				paint['fill-color'] = [
-					"get",
-					["get", "geoid"],
-					["literal", layer['fill-color']]
-				]
+			else if (layer['fill-color']) {
+				paint['fill-color'] =
+					['case',
+						['boolean', ['feature-state', 'hover'], false],
+						'#c8c8c8',
+						["get",
+							["get", "geoid"],
+							["literal", layer['fill-color']]
+						]
+					]
 			}
 			return paint;
 	}
@@ -56,7 +64,6 @@ const getPaint = layer => {
 const getLayerData = layer => {
 	const data = {
 		id: layer.id,
-		type: layer.type,
 		type: layer.type,
 		source: layer.geoLevel,
 		'source-layer': layer.geoLevel,
@@ -77,8 +84,8 @@ class MapBoxMap extends React.Component {
 		const glMap = new mapboxgl.Map({
 			container: this.state.id,
 			style: this.props.style,
-			zoom: 6,
-			center: [-75.250, 42.860]
+			zoom: this.props.zoom,
+			center: this.props.center
 		});
 		glMap.on('load', e => {
 			Object.keys(SOURCES).forEach(geoLevel => {
@@ -104,63 +111,107 @@ class MapBoxMap extends React.Component {
 		oldProps.layers.forEach(({ id }) => {
 			oldLayers.add(id);
 		})
+		const currentLayers = d3map();
 
 		this.props.layers.forEach(layer => {
 			if (!glMap.getLayer(layer.id) && glMap.getSource(layer.geoLevel)) {
 				glMap.addLayer(getLayerData(layer));
-				if (layer.onMouseover) {
-					glMap.on("mouseover", layer.id, layer.onMouseover)
-				}
+				glMap.on("mousemove", layer.id, e => {
+					const { features, point } = e,
+						{ x, y } = point;
+					if (layer.onHover) {
+						layer.onHover({ features, x, y })
+					}
+				})
+				glMap.on("mouseout", layer.id, e => {
+					const { features, point } = e,
+						{ x, y } = point;
+					if (layer.onHover) {
+						layer.onHover({ features, x, y })
+					}
+				})
 			}
 			oldLayers.remove(layer.id);
+			currentLayers.set(layer.id, layer);
 		})
 
 		oldLayers.each(id => {
 			glMap.removeLayer(id);
 		})
+		currentLayers.each((layer, id) => {
+			if (layer.geoids) {
+				glMap.setFilter(id, ['in', 'geoid', ...layer.geoids])
+			}
+			const paint = getPaint(layer);
+			for (const p in paint) {
+				glMap.setPaintProperty(id, p, paint[p]);
+			}
+		})
 	}
 	render() {
 		return (
 			<div id={ this.state.id }
-				style={ { height: `${ this.props.height }px` } }/>
+				style={ { height: `${ this.props.height }px` } }>
+      	{ !this.props.hoverData ? null :
+      		<MapHover { ...this.props.hoverData }/>
+      	}
+      	{
+      		this.props.controls.map((control, i) => <MapControl key={ i } { ...control }/>)
+      	}
+			</div>
 		)
 	}
+}
+
+const MapHover = ({ rows, x, y }) => {
+	if (!rows || (rows.length === 0)) return null;
+	const hasHeader = (rows[0].length === 1) && (rows.length > 1),
+		bodyData = rows.slice(hasHeader ? 1 : 0);
+	return (
+		<div className="map-test-table-div"
+			style={ { 
+				left: x + 10,
+				top: y + 10 } }>
+			<table className="map-test-table">
+				{ hasHeader ?
+					<thead>
+						<tr>
+							<th colSpan="2">
+								{ rows[0] }
+							</th>
+						</tr>
+					</thead>
+					: null
+				}
+				<tbody>
+					{
+						bodyData.map((row, i) =>
+							<tr key={ i }>
+								{ row.map((d, ii) => <td key={ i + "-" + ii }>{ d }</td>) }
+							</tr>
+						)
+					}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
+const MapControl = ({ comp, pos="top-left" }) => {
+	return (
+		<div className={ "map-test-table-div " + pos }>
+			{ comp }
+		</div>
+	)
 }
 
 MapBoxMap.defaultProps = {
 	style: 'mapbox://styles/am3081/cjo7cnvsd2bsm2rkftn4njgee',
 	height: 800,
-	layers: [
-		{ id: 'states-fill',
-			geoLevel: 'states',
-			type: 'fill',
-			'fill-color': "#f2efe9",
-			geoids: ['36']
-		},
-		{ id: 'counties-fill',
-			geoLevel: 'counties',
-			type: 'fill',
-			'fill-color': {
-				'36001': '#f00',
-				'36011': '#0f0'
-			},
-			geoids: ['36001', '36011']
-		},
-		{ id: 'counties-line',
-			geoLevel: 'counties',
-			type: 'line',
-			'line-color': "#c8c8c8",
-			'line-width': 2,
-			geoids: ['36001', '36011']
-		},
-		{ id: 'states-line',
-			geoLevel: 'states',
-			type: 'line',
-			'line-color': "#fff",
-			'line-width': 2,
-			geoids: ['36']
-		}
-	]
+	layers: [],
+	hoverData: null,
+	zoom: 6.5,
+	center: [-75.250, 42.860]
 }
 
 export default MapBoxMap

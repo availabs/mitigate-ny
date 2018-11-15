@@ -5,7 +5,9 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import MapBoxMap from "components/mapping/escmap/MapBoxMap.react"
+import MapBoxMapTest from "./components/MapBoxMapTest"
+
+import HighRisk from "pages/auth/RiskIndex/components/HighRiskMunicipalities"
 
 class TestPage extends React.Component {
 
@@ -17,7 +19,7 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <MapBoxMap />
+                <MapBoxMapTest />
               </ElementBox>
             </div>
           </div>
