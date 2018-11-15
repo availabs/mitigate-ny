@@ -157,13 +157,13 @@ export const META_DATA = {
 
 	"priority": { defaultValue: "", label: "Priority" },
 
-	"priority_1": { defaultValue: 0, label: "Probability of Acceptance by Population", instruction: "(Only applicable for new Actions)" },
-	"priority_2": { defaultValue: 0, label: "Funding Availability (Only applicable for new Actions)" },
-	"priority_3": { defaultValue: 0, label: "Probability of Matching Funds (Only applicable for new Actions)" },
-	"priority_4": { defaultValue: 0, label: "Benefit Cost Review (Only applicable for new Actions)" },
-	"priority_5": { defaultValue: 0, label: "Environmental Benefit (Only applicable for new Actions)" },
-	"priority_6": { defaultValue: 0, label: "Technical Feasibility (Only applicable for new Actions)" },
-	"priority_7": { defaultValue: 0, label: "Timeframe of implementation (Only applicable for new Actions)" },
+	"priority_1": { defaultValue: 0, label: "Priorty Scoring: Probability of Acceptance by Population", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_2": { defaultValue: 0, label: "Priorty Scoring: Funding Availability", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_3": { defaultValue: 0, label: "Priorty Scoring: Probability of Matching Funds", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_4": { defaultValue: 0, label: "Priorty Scoring: Benefit Cost Review", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_5": { defaultValue: 0, label: "Priorty Scoring: Environmental Benefit", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_6": { defaultValue: 0, label: "Priorty Scoring: Technical Feasibility", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_7": { defaultValue: 0, label: "Priorty Scoring: Timeframe of implementation", instruction: "Priority Information is Only Applicable to New Actions" },
 
 	"priority_total": { defaultValue: 0, label: "Priority Total" },
 

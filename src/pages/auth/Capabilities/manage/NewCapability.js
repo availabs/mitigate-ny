@@ -606,7 +606,8 @@ class NewCapability extends React.Component {
                     id="priority_7" value={ priority_7 }/>
                 </Accordion>
 
-                <Accordion title="File Type">
+                <Accordion title="File Type"
+                  instructions="Please let us know if there is a location file associated with this project/program">
                   <CheckGroup onChange={ this.radios.bind(this) }
                     type="radio" name={ "file-type" }
                     checks={

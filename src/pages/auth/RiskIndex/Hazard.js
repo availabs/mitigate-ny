@@ -241,9 +241,27 @@ probabilityMap (hazard) {
 
 
 municipalityTable (hazard) {
-    if(['volcano' , 'riverine' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
-      return ''
-    } else {
+    if(['volcano' , 'avalanche' , 'coastal' , 'coldwave' , 'drought' , 'earthquake' , 'heatwave' , 'icestorm' , 'landslide' , 'winterweat' , 'tsunami' , 'wildfire'].includes(hazard)) {
+      return (
+      <div className='property-info-side' style={{maxWidth: 398}}>
+            <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
+              
+              <div className='projects-list row'>
+
+                <ProjectBox title={`High Risk Counties`} style={{backgroundColor: '#f2f4f8', width:'100%', paddingBottom: 0 }}>
+                  <HighRiskMunicipalities hazard={hazard}
+                  geoLevel="counties"  />
+                </ProjectBox> 
+                
+              </div>
+              
+            </div>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+              </i>
+        </div>
+      )
+    } 
+    else {
       return (
           <div className='property-info-side' style={{maxWidth: 398}}>
             <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
@@ -252,6 +270,21 @@ municipalityTable (hazard) {
 
                 <ProjectBox title={`High Risk Municipalities`} style={{backgroundColor: '#f2f4f8', width:'100%', paddingBottom: 0 }}>
                   <HighRiskMunicipalities hazard={hazard}  />
+                </ProjectBox> 
+                
+              </div>
+              
+            </div>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+              </i>
+
+            <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
+              
+              <div className='projects-list row'>
+
+                <ProjectBox title={`High Risk Counties`} style={{backgroundColor: '#f2f4f8', width:'100%', paddingBottom: 0 }}>
+                  <HighRiskMunicipalities hazard={hazard}
+                  geoLevel="counties"  />
                 </ProjectBox> 
                 
               </div>

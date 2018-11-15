@@ -8,7 +8,7 @@ export default [
        {name: 'Hazard History', path: '/hazardhistory'},
        {name: 'NFIP', path: '/risk/nfip'},
        {name: 'Population +/-', path: '/risk/vulnerabilities'},
-       {name: 'State Owned Assets', path: '/risk/assetinventory'},
+       {name: 'State-owned Assets', path: '/risk/assetinventory'},
        {name: 'Vulnerable Populations', path: '/risk/vulnerablepopulations'},
        
        
