@@ -30,7 +30,7 @@ class NfipTable extends React.Component {
 			geoids = this.props.geoGraph[geoid][geoLevel].value,
 			data = [];
 
-console.log(this.props.nfip)
+// console.log(this.props.nfip)
 		geoids.forEach(geoid => {
 			const graph = this.props.nfip.byGeoid[geoid].allTime,
 				name = this.props.geoGraph[geoid].name;

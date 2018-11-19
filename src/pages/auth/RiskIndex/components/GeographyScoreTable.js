@@ -46,7 +46,7 @@ class GeographyScoreTable extends React.Component {
             [dataType, geoids, hazards, 'allTime', 'property_damage']
           )
       })
-      .then(res => (console.log(res),res))
+      // .then(res => (console.log(res),res))
     }
 
   renderGraphTable() {
