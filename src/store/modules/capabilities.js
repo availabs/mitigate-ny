@@ -117,7 +117,7 @@ export const META_DATA = {
 	"file_type_address": { defaultValue: false, label: "Address" },
 	"file_type_not_tracked": { defaultValue: false, label: "File Type Not Tracked" },
 
-	"budget_provided": { defaultValue: null, label: "Budget Provided" },
+	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Budget Provided for Program or Cost of Mitigation Action"  },
 	"primary_funding": { defaultValue: "", label: "Primary Funding" },
 	"secondary_funding": { defaultValue: "", label: "Secondary Funding" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
@@ -135,7 +135,7 @@ export const META_DATA = {
 	"capability_risk_assessment": { defaultValue: false, label: "Risk Assessment" },
 	"capability_administer_funding": { defaultValue: false, label: "Administer Funding" },
 
-	"funding_amount": { defaultValue: null, label: "Funding Amount" },
+	"funding_amount": { defaultValue: null, label: "Funding Amount", instruction: "Only for programs/actions that provide funding"  },
 
 	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
 	"capability_construction": { defaultValue: false, label: "Construction" },
@@ -157,13 +157,13 @@ export const META_DATA = {
 
 	"priority": { defaultValue: "", label: "Priority" },
 
-	"priority_1": { defaultValue: 0, label: "Priorty Scoring: Probability of Acceptance by Population", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_2": { defaultValue: 0, label: "Priorty Scoring: Funding Availability", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_3": { defaultValue: 0, label: "Priorty Scoring: Probability of Matching Funds", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_4": { defaultValue: 0, label: "Priorty Scoring: Benefit Cost Review", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_5": { defaultValue: 0, label: "Priorty Scoring: Environmental Benefit", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_6": { defaultValue: 0, label: "Priorty Scoring: Technical Feasibility", instruction: "Priority Information is Only Applicable to New Actions" },
-	"priority_7": { defaultValue: 0, label: "Priorty Scoring: Timeframe of implementation", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_1": { defaultValue: 0, label: "Priority Scoring: Probability of Acceptance by Population", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_2": { defaultValue: 0, label: "Priority Scoring: Funding Availability", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_3": { defaultValue: 0, label: "Priority Scoring: Probability of Matching Funds", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_4": { defaultValue: 0, label: "Priority Scoring: Benefit Cost Review", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_5": { defaultValue: 0, label: "Priority Scoring: Environmental Benefit", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_6": { defaultValue: 0, label: "Priority Scoring: Technical Feasibility", instruction: "Priority Information is Only Applicable to New Actions" },
+	"priority_7": { defaultValue: 0, label: "Priority Scoring: Timeframe of implementation", instruction: "Priority Information is Only Applicable to New Actions" },
 
 	"priority_total": { defaultValue: 0, label: "Priority Total" },
 
