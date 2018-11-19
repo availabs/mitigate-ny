@@ -125,7 +125,7 @@ export default [
     path: '/capabilities/manage',
     exact: true,
     name: 'Capabilities Management',
-    auth: false,
+    auth: true,
     mainNav: false,
     breadcrumbs: [
       { name: 'Capabilities', path: '/capabilities/manage' }

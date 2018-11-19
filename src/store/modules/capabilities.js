@@ -98,7 +98,7 @@ export const META_DATA = {
 	"agency": { defaultValue: "", label: "Agency (acronym)" },
 	"partners": { defaultValue: "", label: "Partners (agency acronyms)" },
 
-	"status_new_shmp": { defaultValue: false, label: "New SHMP" },
+	"status_new_shmp": { defaultValue: false, label: "New 2019 SHMP" },
 	"status_carryover_shmp": { defaultValue: false, label: "Carryover SHMP" },
 
 	"status_in_progess": { defaultValue: false, label: "In Progress" },
