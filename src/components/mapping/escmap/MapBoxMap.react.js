@@ -23,14 +23,13 @@ const SOURCES = {
 let UNIQUE_ID = 0;
 const getUniqueId = () => `mapbox-map-${ ++UNIQUE_ID }`
 
-const getType = layer =>
-	layer.filled ? 'fill' : 'line'
 const getPaint = layer => {
 	const paint = {};
 	switch (layer.type) {
 		case 'line':
 			paint['line-color'] = '#000';
-			paint['line-width'] = layer['line-width'] || 1
+			paint['line-width'] = layer['line-width'] || 1;
+			paint['line-opacity'] = layer['line-opacity'] || 1;
 			if (typeof layer['line-color'] === 'string') {
 				paint['line-color'] = layer['line-color'];
 			}
@@ -43,15 +42,26 @@ const getPaint = layer => {
 			}
 			return paint;
 		case 'fill':
-			paint['fill-color'] = '#000';
+			paint['fill-color'] =
+				['case',
+					['boolean', ['feature-state', 'hover'], false],
+					layer.autoHighlightColor || '#c8c8c8',
+					'#f2efe9'
+				];
+			paint['fill-opacity'] = layer['fill-opacity'] || 1;
 			if (typeof layer['fill-color'] === 'string') {
-				paint['fill-color'] = layer['fill-color'];
+				paint['fill-color'] = 
+					['case',
+						['boolean', ['feature-state', 'hover'], false],
+						layer.autoHighlightColor || '#c8c8c8',
+						layer['fill-color']
+					]
 			}
 			else if (layer['fill-color']) {
 				paint['fill-color'] =
 					['case',
 						['boolean', ['feature-state', 'hover'], false],
-						'#c8c8c8',
+						layer.autoHighlightColor || '#c8c8c8',
 						["get",
 							["get", "geoid"],
 							["literal", layer['fill-color']]
@@ -119,6 +129,9 @@ class MapBoxMap extends React.Component {
 				glMap.on("mousemove", layer.id, e => {
 					const { features, point } = e,
 						{ x, y } = point;
+					if (layer.autoHighlight) {
+						// ADD SET FEATURE STATE HERE
+					}
 					if (layer.onHover) {
 						layer.onHover({ object: features && features[0], x, y })
 					}
@@ -143,8 +156,8 @@ class MapBoxMap extends React.Component {
 				glMap.setFilter(id, ['in', 'geoid', ...layer.geoids])
 			}
 			const paint = getPaint(layer);
-			for (const p in paint) {
-				glMap.setPaintProperty(id, p, paint[p]);
+			for (const property in paint) {
+				glMap.setPaintProperty(id, property, paint[property]);
 			}
 		})
 	}
@@ -210,7 +223,7 @@ MapBoxMap.defaultProps = {
 	height: 800,
 	layers: [],
 	hoverData: null,
-	zoom: 6.5,
+	zoom: 6.25,
 	center: [-75.250, 42.860]
 }
 

@@ -9,6 +9,8 @@
 .map-test-table {
 	border-collapse: collapse;
 	border: 0;
+	table-layout: fixed;
+	width: 300px;
 }
 .map-test-table th, td {
 	padding: 3px 5px;

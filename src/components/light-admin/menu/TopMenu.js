@@ -1,14 +1,14 @@
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+
+import MitigateLogo from "components/mitigate-ny/Logo"
 
 class Logo extends Component {
   render () {
     return (
       <div className="logo-w">
         <Link className="logo" to="/">
-          <div className="logo-element" />
-          <div className="logo-label">Mitigate NY</div>
+          <MitigateLogo width="175"/>
         </Link>
       </div>
     )

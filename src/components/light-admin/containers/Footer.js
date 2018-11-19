@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Content from 'components/cms/Content'
 
+import Logo from 'components/mitigate-ny/Logo'
+
 export default (props) => {
   return props.menuSettings.noFooter ? '' : (        
     <div className="footer-w">
@@ -10,7 +12,7 @@ export default (props) => {
         <div className="footer-i">
             <div className="row">
                 <div className="col-sm-7 col-lg-3 b-r padded">
-                    <div className="logo-element" />
+                    <Logo compact={ true } width="350"/>
                     <h3 className="heading-big">Mitigate NY</h3>
                     <h6 className="heading-small">New York State Hazard Mitigation Plan</h6>
                     

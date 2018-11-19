@@ -184,7 +184,14 @@ class CapabilitiesTable extends React.Component {
 								row[getLabel("hazards")] = capability.hazards.split("|").map(h => this.getHazardName(h.trim())).join(" | ")
 								break;
 							default:
-								row[getLabel(att)] = capability[att]
+								const value = capability[att];
+								if (typeof value === "boolean") {
+									row[getLabel(att)] = value.toString()
+								}
+								else {
+									row[getLabel(att)] =  capability[att]
+								}
+								break;
 						}
 					});
 					return row;

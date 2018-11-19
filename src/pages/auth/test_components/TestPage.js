@@ -5,9 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import MapBoxMapTest from "./components/MapBoxMapTest"
-
-import HighRisk from "pages/auth/RiskIndex/components/HighRiskMunicipalities"
+import Logo from "components/mitigate-ny/Logo"
 
 class TestPage extends React.Component {
 
@@ -19,7 +17,31 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <MapBoxMapTest />
+                <Logo />
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <Logo compact={ true } width="450"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <Logo fill="#900" width="228"/>
+              </ElementBox>
+            </div>
+          </div>
+
+          <div className='row'>
+            <div className='col-lg-12'>
+              <ElementBox>
+                <Logo fill="#900" width="90" compact={ true }/>
               </ElementBox>
             </div>
           </div>
@@ -42,11 +64,11 @@ class TestPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    router: state.router
-  };
-};
+// //
+
+const mapStateToProps = state => ({
+  router: state.router
+});
 
 const mapDispatchToProps = {};
 

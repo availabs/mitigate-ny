@@ -163,6 +163,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: subMenus,
-    component: connect(() => {}, {})(MitigationFunding),
+    component: MitigationFunding,
   },
 ]

@@ -9,7 +9,8 @@ import get from 'lodash.get'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import HazardListHeroStats from "./HazardListHeroStats"
-import HazardMap from "./HazardMap"
+// import HazardMap from "./HazardMap"
+import HazardMap from "components/mitigate-ny/HazardMapSimple"
 import HazardEventsMapController from "./HazardEventsMapController"
 
 import { fnum } from "utils/sheldusUtils"

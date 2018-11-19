@@ -24,6 +24,12 @@ class TestMap extends React.Component {
       .range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
   }
 
+  componentDidUpdate(oldProps) {
+    if (oldProps.hazard !== this.props.hazard) {
+      this.fetchFalcorDeps()
+    }
+  }
+
   fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
     return this.props.falcor.get(
       ['geo', geoid, ['tracts', 'counties']],
@@ -205,7 +211,8 @@ class TestMap extends React.Component {
 
 	render() {
 		return (
-			<MapBoxMap
+			<MapBoxMap height={ this.props.height }
+        zoom={ this.props.zoom }
         layers={ this.createLayers() }
         controls={ this.generateControls() }
         hoverData={ this.state.hoverData }/>
@@ -218,7 +225,9 @@ TestMap.defaultProps = {
   geoLevel: 'tracts',
   hazard: 'riverine',
   scaleType: 'thresholds', // quantile, quantize, ckmeans
-  thresholds: [50000, 500000, 2500000, 5000000]
+  thresholds: [50000, 500000, 2500000, 5000000],
+  height: 600,
+  zoom: 6
 }
 
 const mapStateToProps = state => ({

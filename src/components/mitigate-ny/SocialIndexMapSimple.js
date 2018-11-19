@@ -19,41 +19,30 @@ class TestMap extends React.Component {
     fillColor: null,
     hoverData: null,
     scores: {},
-    scale: d3scale.scaleThreshold()
-      .domain([50000, 500000, 2500000, 5000000])
+    scale: d3scale.scaleQuantile()
       .range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
   }
 
-  fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
+  componentDidUpdate(oldProps) {
+    if (oldProps.index !== this.props.index) {
+      this.fetchFalcorDeps()
+    }
+  }
+
+  fetchFalcorDeps({ geoid, geoLevel, index } = this.props) {
     return this.props.falcor.get(
-      ['geo', geoid, ['tracts', 'counties']],
-      ['riskIndex', 'meta', hazard, 'name']
+      ['geo', geoid, ['tracts', 'counties']]
     )
     .then(res => res.json.geo[geoid][geoLevel])
     .then(geoids => this.props.falcor.get(
-      ['severeWeather', geoids, hazard, 'tract_totals', 'total_damage']
+      ["riskIndex", geoids, index, 'score']
     ))
     .then(() => this.processData())
   }
 
-  processData({ geoid, geoLevel, hazard, scaleType } = this.props) {
-    let scale;
-    switch (scaleType) {
-      case "thresholds":
-        scale = d3scale.scaleThreshold()
-          .domain(this.props.thresholds);
-        break;
-      case "quantile":
-        scale = d3scale.scaleQuantile();
-        break;
-      case "quantize":
-        scale = d3scale.scaleQuantize();
-        break;
-      case "ckmeans":
-        scale = scaleCk();
-        break;
-    }
-    scale.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
+  processData({ geoid, geoLevel, index } = this.props) {
+    let scale = d3scale.scaleQuantile()
+          .range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
     try {
       const geoids = this.props.geoGraph['36'][geoLevel].value,
         fillColor = {},
@@ -63,23 +52,21 @@ class TestMap extends React.Component {
         min = Infinity,
         max = -Infinity;
 
+      const graph = this.props.riskIndex;
       geoids.forEach(geoid => {
-        const score = +this.props.severeWeather[geoid][hazard].tract_totals.total_damage;
+        
+        if (!graph[geoid][index]) {
+          fillColor[geoid] = '#f2efe9'
+          return;
+        };
+        const score = +this.props.riskIndex[geoid][index].score;
         scores[geoid] = score;
         domain.push(score);
         min = Math.min(min, score);
         max = Math.max(max, score);
       })
       domain.sort((a, b) => a - b);
-      switch (scaleType) {
-        case "quantile":
-        case "ckmeans":
-          scale.domain(domain);
-          break;
-        case "quantize":
-          scale.domain([min, max]);
-          break;
-      }
+      scale.domain(domain);
 
       for (const geoid in scores) {
         fillColor[geoid] = scale(scores[geoid]);
@@ -93,7 +80,7 @@ class TestMap extends React.Component {
     }
   }
 
-  createLayers({ geoid, geoLevel, hazard } = this.props) {
+  createLayers({ geoid, geoLevel, index } = this.props) {
     const { fillColor, scores } = this.state;
 
     let counties = [],
@@ -154,15 +141,14 @@ class TestMap extends React.Component {
 
   generateLegend() {
     const { scale } = this.state,
-      { hazard, scaleType } = this.props,
-      name = this.getHazardName(hazard),
+      { index } = this.props,
       range = scale.range();
     return (
       <table className="map-test-table">
         <thead>
           <tr>
             <th className="no-border-bottom" colSpan={ range.length }>
-              { "Total Loss" }
+              { index.toUpperCase() }
             </th>
           </tr>
         </thead>
@@ -194,18 +180,10 @@ class TestMap extends React.Component {
     return controls;
   }
 
-  getHazardName(hazard) {
-    try {
-        return this.props.riskIndex.meta[hazard].name;
-    }
-    catch (e) {
-        return hazard
-    }
-  }
-
 	render() {
 		return (
-			<MapBoxMap
+			<MapBoxMap zoom={ this.props.zoom }
+        height={ this.props.height }
         layers={ this.createLayers() }
         controls={ this.generateControls() }
         hoverData={ this.state.hoverData }/>
@@ -216,9 +194,9 @@ class TestMap extends React.Component {
 TestMap.defaultProps = {
   geoid: '36',
   geoLevel: 'tracts',
-  hazard: 'riverine',
-  scaleType: 'thresholds', // quantile, quantize, ckmeans
-  thresholds: [50000, 500000, 2500000, 5000000]
+  index: 'bric', // 'nri', 'sovi', 'sovist', 'builtenv'
+  height: 600,
+  zoom: 6
 }
 
 const mapStateToProps = state => ({

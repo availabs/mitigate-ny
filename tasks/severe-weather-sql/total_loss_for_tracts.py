@@ -139,9 +139,11 @@ HAZARDS_TO_SEVERE_WEATHER = {
 } # END HAZARDS_TO_SEVERE_WEATHER
 SEVERE_WEATHER_TO_HAZARDS = {}
 for hazard in HAZARDS_TO_SEVERE_WEATHER:
-	sw = HAZARDS_TO_SEVERE_WEATHER[hazard]
-	for h in sw:
-		SEVERE_WEATHER_TO_HAZARDS[h] = hazard
+    sw = HAZARDS_TO_SEVERE_WEATHER[hazard]
+    for h in sw:
+        if h not in SEVERE_WEATHER_TO_HAZARDS:
+            SEVERE_WEATHER_TO_HAZARDS[h] = []
+        SEVERE_WEATHER_TO_HAZARDS[h].append(hazard)
 
 TRACTS_PER_COUNTY = {}
 COUNTY_TOTALS = {}
@@ -195,71 +197,70 @@ def deallocateStatement(cursor):
 	cursor.execute("DEALLOCATE stmt")
 
 def main():
-	connection = psycopg2.connect(host)
-	cursor = connection.cursor()
+    connection = psycopg2.connect(host)
+    cursor = connection.cursor()
+    
+    for tract in getTracts(cursor):
+        county = tract[0:5]
+        if not county in TRACTS_PER_COUNTY:
+            TRACTS_PER_COUNTY[county] = 0
 
-	for tract in getTracts(cursor):
-		county = tract[0:5]
-		if not county in TRACTS_PER_COUNTY:
-			TRACTS_PER_COUNTY[county] = 0
+        TRACTS_PER_COUNTY[county] += 1
 
-		TRACTS_PER_COUNTY[county] += 1
+        if not county in COUNTY_TOTALS:
+            COUNTY_TOTALS[county] = {}
+            for hazard in HAZARDS:
+                COUNTY_TOTALS[county][hazard] = 0
 
-		if not county in COUNTY_TOTALS:
-			COUNTY_TOTALS[county] = {}
-			for hazard in HAZARDS:
-				COUNTY_TOTALS[county][hazard] = 0
+        TRACT_TOTALS[tract] = {}
+        for hazard in HAZARDS:
+            TRACT_TOTALS[tract][hazard] = 0
 
-		TRACT_TOTALS[tract] = {}
-		for hazard in HAZARDS:
-			TRACT_TOTALS[tract][hazard] = 0
+    for event in getEvents(cursor):
+        geoid = event[0]
+        sw = event[1]
+        total = event[2]
+        if not sw in SEVERE_WEATHER_TO_HAZARDS:
+            continue
 
-	for event in getEvents(cursor):
-		geoid = event[0]
-		sw = event[1]
-		total = event[2]
-		if not sw in SEVERE_WEATHER_TO_HAZARDS:
-			continue
+        for hazard in SEVERE_WEATHER_TO_HAZARDS[sw]:
+            if (len(geoid) == 5) and (geoid in COUNTY_TOTALS):
+                COUNTY_TOTALS[geoid][hazard] += total
+            elif geoid in TRACT_TOTALS:
+                TRACT_TOTALS[geoid][hazard] += total
 
-		hazard = SEVERE_WEATHER_TO_HAZARDS[sw]
+    for k in COUNTY_TOTALS:
+        for h in HAZARDS:
+            COUNTY_TOTALS[k][h] /= TRACTS_PER_COUNTY[k]
 
-		if (len(geoid) == 5) and (geoid in COUNTY_TOTALS):
-			COUNTY_TOTALS[geoid][hazard] += total
-		elif geoid in TRACT_TOTALS:
-			TRACT_TOTALS[geoid][hazard] += total
+    for k in TRACT_TOTALS:
+        for h in HAZARDS:
+            TRACT_TOTALS[k][h] += COUNTY_TOTALS[k[0:5]][h]
 
-	for k in COUNTY_TOTALS:
-		for h in HAZARDS:
-			COUNTY_TOTALS[k][h] /= TRACTS_PER_COUNTY[k]
+    createTable(cursor)
 
-	for k in TRACT_TOTALS:
-		for h in HAZARDS:
-			TRACT_TOTALS[k][h] += COUNTY_TOTALS[k[0:5]][h]
+    prepareStatement(cursor)
 
-	createTable(cursor)
-	
-	prepareStatement(cursor)
-
-	inserts = ",".join(["%s" for i in range(len(HAZARDS) + 1)])
-	sql = """
+    inserts = ",".join(["%s" for i in range(len(HAZARDS) + 1)])
+    sql = """
 		EXECUTE stmt({})
 	""".format(inserts)
 
-	print "INSERTING DATA INTO TABLE..."
-	for geoid in TRACT_TOTALS:
-		row = [geoid]
-		for hazard in HAZARDS:
-			row.append(round(TRACT_TOTALS[geoid][hazard], 2))
+    print "INSERTING DATA INTO TABLE..."
+    for geoid in TRACT_TOTALS:
+        row = [geoid]
+        for hazard in HAZARDS:
+            row.append(round(TRACT_TOTALS[geoid][hazard], 2))
+        
+        cursor.execute(sql, row)
+    print "COMPLETED DATA INSERTS.\n"
 
-		cursor.execute(sql, row)
-	print "COMPLETED DATA INSERTS.\n"
+    deallocateStatement(cursor)
 
-	deallocateStatement(cursor)
+    connection.commit()
 
-	connection.commit()
-
-	cursor.close()
-	connection.close()
+    cursor.close()
+    connection.close()
 # END main
 
 if __name__ == "__main__":

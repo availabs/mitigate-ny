@@ -217,7 +217,7 @@ export default [
     breadcrumbs: [
       {name: 'Strategies', path: '/strategies'}
     ],
-    component: connect(() => {}, {})(Strategies),
+    component: Strategies
   },
 
 ...Actions,

@@ -30,7 +30,7 @@ class MitigationActions extends Component {
             <div className="property-section">
               <Content content_id={`strategies-actions_table`} />
               <CapabilitiesTable
-                  columns={ ["name" , "description" , "agency" , "hazards" , 'primary_funding' , "goal" , "status" , "priority" , "benefit_cost_analysis"] }
+                  columns={ ["name" , "description" , "agency" , "hazards" , 'primary_funding' , "goal" , "status", "priority", "benefit_cost_analysis"] }
                   title="Mitigation Actions"
                   filterColumns={ ["goal" , 'agency', 'hazards' , 'status' , 'priority' , 'benefit_cost_analysis' , 'primary_funding'] }
                   expandColumns={ ["description"] }
@@ -62,6 +62,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: subMenus,
-    component: connect(() => {}, {})(MitigationActions),
+    component: MitigationActions,
   },
 ]
