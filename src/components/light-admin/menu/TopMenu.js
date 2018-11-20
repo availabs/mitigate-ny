@@ -8,7 +8,7 @@ class Logo extends Component {
     return (
       <div className="logo-w">
         <Link className="logo" to="/">
-          <MitigateLogo width="175"/>
+          <MitigateLogo fill={'#fff'} width="175"/>
         </Link>
       </div>
     )
