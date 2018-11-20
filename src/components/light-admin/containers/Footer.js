@@ -43,7 +43,13 @@ export default (props) => {
                 </div>
             </div>
         </div>
-        <div className="deep-footer">Use of this site constitutes acceptance of our <a href="#">User Agreement</a> and <a href="#">Privacy Policy</a>. © 2017 Pinsupreme.com All rights reserved. </div>
+        
+        <div className="deep-footer">
+        {/*
+        Use of this site constitutes acceptance of our <a href="#">User Agreement</a> and <a href="#">Privacy Policy</a>. © 2017 Pinsupreme.com All rights reserved. 
+        */}
+        </div>
+    
     </div>
 </div>
 
