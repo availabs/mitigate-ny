@@ -44,7 +44,7 @@ class Menu extends Component {
   		<div>
 			{/*<MobileMenu />*/}
 	  		<div className={displayOptions} style={dynamicStyle}>
-	            <Logo />
+	            <Logo fill={this.props.menuSettings.image ?  '#5d87a1' : '#fff'}/>
 	            {userMenu}
 	            <h1 className="menu-page-header">{this.props.title}</h1>
 	            <MainMenu {...this.props} />

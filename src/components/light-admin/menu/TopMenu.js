@@ -6,9 +6,9 @@ import MitigateLogo from "components/mitigate-ny/Logo"
 class Logo extends Component {
   render () {
     return (
-      <div className="logo-w">
+      <div className="logo-w" style={{padding: '3px 10px 0px 10px'}}>
         <Link className="logo" to="/">
-          <MitigateLogo width="175"/>
+          <MitigateLogo fill={this.props.fill || '#5d87a1'} width="175"/>
         </Link>
       </div>
     )

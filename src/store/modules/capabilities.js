@@ -138,7 +138,7 @@ export const META_DATA = {
 	"capability_risk_assessment": { defaultValue: false, label: "Risk Assessment" },
 	"capability_administer_funding": { defaultValue: false, label: "Administer Funding" },
 
-	"funding_amount": { defaultValue: null, label: "Funding Amount", instruction: "Only for programs/actions that provide funding"  },
+	"funding_amount": { defaultValue: null, label: "Funding Amount Administered", instruction: "Only for programs/actions that provide funding"  },
 
 	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
 	"capability_construction": { defaultValue: false, label: "Construction" },
@@ -176,8 +176,8 @@ export const META_DATA = {
 
 	"type": { defaultValue: 'program', label: "Type"},
 
-	"municipality": {defaultValue: "", label: "Municipality" },
-	"county": { defaultValue: "", label: "County" },
+	"municipality": {defaultValue: "", label: "Action Municipality" },
+	"county": { defaultValue: "", label: "Action County" },
 
 }
 
