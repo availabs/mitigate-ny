@@ -20,13 +20,16 @@ export const ATTRIBUTES = [
 	"contact_department",
 	"agency",
 	"partners",
+
 	"status_new_shmp",
 	"status_carryover_shmp",
+	
 	"status_in_progess",
 	"status_on_going",
 	"status_unchanged",
 	"status_completed",
 	"status_discontinued",
+	
 	"admin_statewide",
 	"admin_regional",
 	"admin_county",

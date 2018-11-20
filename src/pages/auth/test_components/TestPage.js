@@ -5,7 +5,7 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import Element from 'components/light-admin/containers/Element'
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-import Logo from "components/mitigate-ny/Logo"
+import HighRiskMunicipalities from "pages/auth/RiskIndex/components/HighRiskMunicipalities"
 
 class TestPage extends React.Component {
 
@@ -17,31 +17,8 @@ class TestPage extends React.Component {
           <div className='row'>
             <div className='col-lg-12'>
               <ElementBox>
-                <Logo />
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <Logo compact={ true } width="450"/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <Logo fill="#900" width="228"/>
-              </ElementBox>
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-12'>
-              <ElementBox>
-                <Logo fill="#900" width="90" compact={ true }/>
+                <HighRiskMunicipalities hazard='drought'
+                  geoLevel='counties'/>
               </ElementBox>
             </div>
           </div>

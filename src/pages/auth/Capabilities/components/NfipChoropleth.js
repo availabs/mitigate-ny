@@ -5,221 +5,174 @@ import { reduxFalcor } from 'utils/redux-falcor'
 import get from "lodash.get";
 
 import {
-	getChildGeo,
-	getGeoMerge,
-	getGeoMesh
-} from 'store/modules/geo'
-
-import {
 	fnum
 }	from "utils/sheldusUtils"
 
 import * as d3scale from 'd3-scale'
 import * as d3color from 'd3-color'
 import * as d3format from "d3-format"
+import { set as d3set } from 'd3-collection'
 
-import DeckMap from "components/mapping/escmap/DeckMap.react"
-import Viewport from "components/mapping/escmap/Viewport"
+import MapBoxMap from "components/mapping/escmap/MapBoxMap.react"
 
 const formats = {
 	num_losses: d => d,
 	total_loss: d => fnum(d, true, true)
 }
 
+let UNIQUE_ID = 0;
+const getUniqueId = () => `choropleth-${ ++UNIQUE_ID }`;
+const ACTIVE_CHOROPLETHS = d3set();
+
 class NfipChoropleth extends React.Component {
 
 	state = {
-		data: {
-			type: "FeatureCollection",
-			features: []
-		},
 		scale: d3scale.scaleQuantile()
 					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]),
-		viewport: Viewport(),
 		hoverData: null,
-		dataProcessed: false
-	}
-
-	componentWillMount({ geoLevel }=this.props) {
-		this.props.getChildGeo('36', geoLevel);
-		this.props.getGeoMerge('36', geoLevel);
-		this.props.getGeoMesh('36', 'counties');
+		fillColor: {},
+		scores: {}
 	}
 
 	componentDidMount() {
-		this.state.viewport.register(this, this.forceUpdate, false);
+		ACTIVE_CHOROPLETHS.add(this.state.id);
 	}
-	componentWillnmount() {
-		this.state.viewport.unregister(this);
-	}
-
-	componentWillReceiveProps(newProps) {
-		this.state.viewport.fitGeojson(newProps.geo['merge']['36'][newProps.geoLevel], { padding: 20 });
-		if (!this.state.dataProcessed) {
-			this.processData(newProps)
-		}
+	componentWillUnmount() {
+		ACTIVE_CHOROPLETHS.remove(this.state.id);
 	}
 
 	fetchFalcorDeps({ geoid, geoLevel, attribute }=this.props) {
 		return this.props.falcor.get(
-			["geo", geoid, geoLevel]
+			["geo", geoid, geoLevel],
+			['geo', '36', 'counties']
 		)
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
-			return this.props.falcor.get(
-				['nfip', 'severe', 'byGeoid', geoids, 'allTime', attribute]
-			)
-			.then(() => {
-				return this.props.falcor.get(
+			return this.props.severe ?
+				this.props.falcor.get(
+					['nfip', 'severe', 'byGeoid', geoids, 'allTime', attribute]
+				) :
+				this.props.falcor.get(
 					['nfip', 'byGeoid', geoids, 'allTime', attribute]
-				)
-			})
-			.then(() => {
-				return this.props.falcor.get(
-					['geo', geoids, 'name']
-				)
-			})
-			.then(() => {
-				if (geoids[0].length === 11) {
-					geoids = geoids.map(d => d.slice(0, 5))
-					return this.props.falcor.get(
-						['geo', geoids, 'name']
-					)
-				}
-			});
+				);
 		})
 		.then(() => this.processData())
 	}
 
 	processData(props=this.props) {
+		if (!ACTIVE_CHOROPLETHS.has(this.state.id)) return;
+
+		const { geoid, geoLevel, attribute } = props;
+
+		let scale = d3scale.scaleThreshold()
+				.domain([5, 25, 100, 250])
+				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
+
+		if (attribute === 'total_loss') {
+			scale = d3scale.scaleQuantile()
+				.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
+		}
+		if ((attribute === 'num_losses') && (geoLevel === 'counties')) {
+			scale.domain([25, 50, 200, 500])
+		}
+
 		try {
 
-			const { geoid, geoLevel, attribute } = props,
+			const domain = [],
 
-				data = {
-					type: "FeatureCollection",
-					features: []
-				},
+				fillColor = {},
+				scores = {};
 
-				domain = [];
-
-			let scale = d3scale.scaleThreshold()
-					.domain([5, 25, 100, 250])
-					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
-
-			if (attribute === 'total_loss') {
-				scale = d3scale.scaleQuantile()
-					.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"]);
-			}
-			if ((attribute === 'num_losses') && (geoLevel === 'counties')) {
-				scale.domain([25, 50, 200, 500])
-			}
-
-			props.geo['36'][geoLevel].features.forEach(feature => {
-				const { properties, geometry } = feature,
-					geoid = properties.geoid,
-					name = geoid.length < 10 ?
-						props.geoGraph[geoid].name :
-						props.geoGraph[geoid.slice(0, 5)].name,
-					d = this.props.severe ?
-						props.nfip.severe.byGeoid[geoid].allTime[attribute] :
-						props.nfip.byGeoid[geoid].allTime[attribute];
+			props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
+				const d = this.props.severe ?
+					props.nfip.severe.byGeoid[geoid].allTime[attribute] :
+					props.nfip.byGeoid[geoid].allTime[attribute];
 
 				if (d > 0) {
 					domain.push(d);
-					data.features.push({
-						type: "Feature",
-						properties: {
-							geoid,
-							name,
-							data: d
-						},
-						geometry
-					})
 				}
-
+				scores[geoid] = d;
 			})
 
 			if (attribute === 'total_loss') {
 				scale.domain(domain);
 			}
 
-			this.setState({ data, scale, dataProcessed: Boolean(data.features.length) })
+			props.geoGraph[geoid][geoLevel].value.forEach(geoid => {
+				fillColor[geoid] = scale(scores[geoid]);
+			})
+
+			this.setState({ fillColor, scores, scale })
 		}
 		catch (e) {
 // console.log("ERROR:",e)
+			this.setState({ fillColor: {}, scores: {}, scale })
 		}
 	}
 
 	generateLayers() {
 		const { geoid, geoLevel, attribute } = this.props,
-			{ scale, data } = this.state,
+			{ fillColor } = this.state;
 
-			getFillColor = ({ properties }) => {
-				const data = get(properties, `data`, 0),
-					color = d3color.color(scale(data));
-				return [color.r, color.g, color.b, 255];
-			}
+    let counties = [],
+      geoids = [];
+    try {
+      counties = this.props.geoGraph['36']['counties'].value;
+      geoids = this.props.geoGraph[geoid][geoLevel].value;
+    }
+    catch (e) {
+      counties = [];
+      geoids = [];
+    }
 
-    	const layers = [
-	    	{
-	    		id: 'ny-merge-layer-filled',
-	    		data: this.props.geo['merge']['36'][geoLevel],
-	    		filled: true,
-	    		stroked: false,
-	    		getFillColor: [242, 239, 233, 255],
-		      	pickable: false
-	    	},
-	    	{
-	    		id: 'choropleth-layer',
-	    		data,
-	    		filled: true,
-	    		stroked: false,
-	    		getFillColor,
-	    		pickable: true,
-	    		autoHighlight: true,
-	    		highlightColor: [200, 200, 200, 255],
+  	return [
+      { id: 'states-fill',
+        type: 'fill',
+        geoLevel: 'states',
+        geoids: ['36'],
+        'fill-color': "#f2efe9"
+      },
 
-		      	onHover: event => {
-		      		const { object, x, y } = event;
-		      		let hoverData = null;
-		      		if (object) {
-		      			const {
-		      					geoid,
-			      				name,
-			      				data
-			      			} = object.properties,
-			      			rows = [
-			      				[name],
-			      				['geoid', geoid],
-			      				[attribute.replace("_", " "), formats[attribute](data)]
-			      			];
-		      			hoverData = {
-		      				rows, x, y
-		      			}
-		      		}
-		      		this.setState({ hoverData });
-		      	}
-	    	},
-	    	{
-	    		id: 'ny-mesh-layer',
-	    		data: this.props.geo['mesh']['36']['counties'],
-	    		filled: false,
-	    		stroked: true,
-	    		getLineColor: [200, 200, 200, 255],
-		      	pickable: false
-	    	},
-	    	{
-	    		id: 'ny-merge-layer-stroked',
-	    		data: this.props.geo['merge']['36'][geoLevel],
-	    		filled: false,
-	    		stroked: true,
-	    		getLineColor: [255, 255, 255, 255],
-	    		lineWidthMinPixels: 2,
-		      	pickable: false
-	    	}
-	    ]
-	    return { scale, layers };
+      { id: 'state-layer',
+      	type: 'fill',
+      	geoLevel,
+      	geoids,
+      	'fill-color': fillColor,
+        autoHighlight: true,
+        onHover: e => {
+          const { object, x, y } = e;
+          let hoverData = null;
+          if (object ) {
+          	const geoid = object.properties.geoid;
+          	if ((geoid in this.state.scores) && (this.state.scores[geoid] > 0)) {
+          		const rows = [
+          			["Total", fnum(this.state.scores[geoid])]
+          		]
+	            hoverData = {
+	              rows,
+	              x, y
+	            }
+	          }
+          }
+          this.setState({ hoverData })
+        }
+      },
+
+      { id: 'counties-line',
+        type: 'line',
+        geoLevel: 'counties',
+        geoids: counties,
+        'line-color': "#c8c8c8",
+        'line-width': 1
+      },
+      { id: 'states-line',
+        type: 'line',
+        geoLevel: 'states',
+        geoids: ['36'],
+        'line-color': "#fff",
+        'line-width': 2
+      }
+    ]
 	}
 
 	generateLegend(scale=this.state.scale, { attribute }=this.props) {
@@ -262,13 +215,12 @@ class NfipChoropleth extends React.Component {
 
 // //
   	render () {
-  		const { layers } = this.generateLayers();
     	return (
-    		<DeckMap layers={ layers }
+    		<MapBoxMap layers={ this.generateLayers() }
     			height={ this.props.height }
     			hoverData={ this.state.hoverData }
-        	viewport={ this.state.viewport }
-        	controls={ this.generateMapControls() }/>
+        	controls={ this.generateMapControls() }
+        	zoomable={ false }/>
     	) 
   	}
 }
@@ -283,16 +235,9 @@ NfipChoropleth.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  	router: state.router,
-    geo: state.geo,
-    geoGraph: state.graph.geo,
-    nfip: state.graph.nfip
+	router: state.router,
+  geoGraph: state.graph.geo,
+  nfip: state.graph.nfip
 })
 
-const mapDispatchToProps = {
-	getChildGeo,
-	getGeoMerge,
-	getGeoMesh
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(NfipChoropleth));
+export default connect(mapStateToProps, {})(reduxFalcor(NfipChoropleth));

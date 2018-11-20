@@ -259,6 +259,9 @@ class NewCapability extends React.Component {
                           data.priority_5 +
                           data.priority_6 +
                           data.priority_7;
+    for (const attribute in data) {
+      data[attribute] = data[attribute] || getDefaultValue(attribute)
+    }
     if (id !== null) {
       return this.props.falcor.set({
         paths: [

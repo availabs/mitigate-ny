@@ -23,11 +23,13 @@ class HighRiskMunicipalities extends React.Component {
       		['severeWeather', 'highRisk', geoLevel, hazard]
     	)
     	.then(response => {
-      		const data = response.json.severeWeather.highRisk[geoLevel][hazard],
-      			geoids = data.map(d => d.geoid);
-      		return this.props.falcor.get(
-      			['geo', geoids, 'name']
-      		)
+      		const data = response.json.severeWeather.highRisk[geoLevel][hazard];
+      		if (data) {
+	      		const geoids = data.map(d => d.geoid);
+	      		return this.props.falcor.get(
+	      			['geo', geoids, 'name']
+	      		)
+	      	}
     	})
 	}
 
@@ -48,14 +50,16 @@ class HighRiskMunicipalities extends React.Component {
 		catch (e) {
 			
 		}
-		return data;
+		return data.filter(d => typeof d.name === 'string');
 	}
 
 	render() {
+const data = this.processData()
+console.log("DATA:",data)
 		return (
 			<div>
 				{ 
-					this.processData().map(d =>
+					data.map(d =>
 						<h6 key={ d.geoid }>
 							<span>{ d.name }</span>
 							<span className="float-right">{ d.annualized_damage }</span>

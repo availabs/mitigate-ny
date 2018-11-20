@@ -25,7 +25,7 @@ class CMS_BodyViewer extends React.Component {
 				this.setState({ error: null, body });
 			}
 			catch (e) {
-				this.setState({ error: `Invalid content id: "${ content_id }"`, body: "" });
+				this.setState({ error: `Invalid content id: "${ content_id }"`, body: null });
 			}
 			return response;
 		})
