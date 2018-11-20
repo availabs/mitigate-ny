@@ -111,9 +111,18 @@ class TestMap extends React.Component {
           const { object, x, y } = e;
           let hoverData = null;
           if (object) {
+            let value = this.state.scores[object.properties.geoid];
+            switch (index) {
+              case "builtenv":
+                value = fnum(value, false)
+                break;
+              case "bric":
+                value = value && value.toFixed(2);
+                break;
+            }
             hoverData = {
               rows: [
-                ["Total Loss", fnum(this.state.scores[object.properties.geoid])]
+                [index.toUpperCase(), value]
               ],
               x, y
             }
@@ -161,7 +170,16 @@ class TestMap extends React.Component {
           <tr>
             {
               range.map(t => {
-                return <td key={ t }>{ fnum(scale.invertExtent(t)[0]) }</td>
+                let value = scale.invertExtent(t)[0];
+                switch (index) {
+                  case "builtenv":
+                    value = fnum(value, false)
+                    break;
+                  case "bric":
+                    value = value && value.toFixed(2);
+                    break;
+                }
+                return <td key={ t }>{ value }</td>
               })
             }
           </tr>
@@ -186,7 +204,8 @@ class TestMap extends React.Component {
         height={ this.props.height }
         layers={ this.createLayers() }
         controls={ this.generateControls() }
-        hoverData={ this.state.hoverData }/>
+        hoverData={ this.state.hoverData }
+        zoomable={ false }/>
 		)
 	}
 }

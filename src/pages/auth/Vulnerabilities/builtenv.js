@@ -18,6 +18,8 @@ import PopulationsTable from "./components/PopulationsTable.react"
 import Viewport from "components/mapping/escmap/Viewport"
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 
+import SocialIndexMap from "components/mitigate-ny/SocialIndexMapSimple"
+
 import Submenus from './risk-submenus'
 
 
@@ -47,13 +49,7 @@ class BuiltEnv extends Component {
               <div style={{paddingLeft:15}}>
                   <h5> Risk Index Built Environment </h5>
               </div>
-              <HazardMap  
-                height={ 600 }
-                hazard={'builtenv'}
-                threeD={false}
-                highRisk={0.0}
-                geoid='36'
-              />
+              <SocialIndexMap index={'builtenv'}/>
             </div>
           </div>
         </div>

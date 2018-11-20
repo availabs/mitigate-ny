@@ -70,7 +70,7 @@ class NfipLossesChoropleth extends React.Component {
 				['nfip', 'losses', 'byGeoid', geoids, 'allTime', attribute]
 			)
 			.then(res => {
-console.log("RES:",res)
+// console.log("RES:",res)
 				return this.props.falcor.get(
 					['geo', geoids, 'name']
 				)

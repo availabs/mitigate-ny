@@ -18,6 +18,8 @@ import PopulationsTable from "./components/PopulationsTable.react"
 import Viewport from "components/mapping/escmap/Viewport"
 import HazardMap from "pages/auth/RiskIndex/components/HazardMap"
 
+import SocialIndexMap from "components/mitigate-ny/SocialIndexMapSimple"
+
 import Submenus from './risk-submenus'
 
 
@@ -42,13 +44,7 @@ class BRIC extends Component {
                 <div style={{paddingLeft:15}}>
                     <h5> Baseline Resilience Indicators for Communities (BRIC) </h5>
                 </div>
-                <HazardMap  
-                  height={ 600 }
-                  hazard={'bric'}
-                  threeD={false}
-                  highRisk={0.0}
-                  geoid='36'
-                />
+                <SocialIndexMap />
               </div>
             </div>
           </div>
@@ -70,6 +66,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: Submenus,
-    component: connect(() => {}, {})(BRIC),
+    component: BRIC,
   },
 ]

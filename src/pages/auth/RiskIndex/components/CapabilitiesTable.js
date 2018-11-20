@@ -186,10 +186,10 @@ class CapabilitiesTable extends React.Component {
 							default:
 								const value = capability[att];
 								if (typeof value === "boolean") {
-									row[getLabel(att)] = value.toString()
+									row[getLabel(att)] = value.toString();
 								}
 								else {
-									row[getLabel(att)] =  capability[att]
+									row[getLabel(att)] =  value;
 								}
 								break;
 						}

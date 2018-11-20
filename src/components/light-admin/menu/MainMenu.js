@@ -8,7 +8,7 @@ class MainMenu extends Component {
     this.renderMenus = this.renderMenus.bind(this)
   }  
   
-  renderMenus (menus) {
+  renderMenus (menus, menuSettings) {
     return menus
       .filter(menu => menu.mainNav)
       .filter(menu => !menu.auth || this.props.authed)
@@ -109,7 +109,7 @@ class MainMenu extends Component {
   render () {
     return (
       <ul className="main-menu">
-        {this.renderMenus(this.props.menus)}      
+        {this.renderMenus(this.props.menus, this.props.menuSettings)}      
       </ul>
     )
   }

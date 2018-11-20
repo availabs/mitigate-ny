@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
 
 import * as d3scale from "d3-scale";
+import { set as d3set } from "d3-collection"
 
 import * as turf from "@turf/turf"
 
@@ -25,6 +26,11 @@ import {
   EARLIEST_YEAR,
   LATEST_YEAR
 } from "./yearsOfSevereWeatherData";
+
+let UNIQUE_ID = 0;
+const getUniqueId = () => `controller-${ ++UNIQUE_ID }`
+
+const ACTIVE_CONTROLLERS = d3set()
 
 const getMapDefaults = (width, height=null) =>
 	width === 12 ? {
@@ -65,10 +71,12 @@ class HazardEventsMapController extends React.Component {
 			loadedRanges: {},
 			bounds: null,
 			colorScale: getColorScale([1, 2]),
+			controllerId: getUniqueId(),
 			radiusScale: d3scale.scaleLog()
 				.domain([50000, 10000000]) // Dollar amount
 				.range([4, 40]) // radius in kilometers
 		}
+		ACTIVE_CONTROLLERS.add(this.state.controllerId)
 	}
 
   	componentWillMount() {
@@ -78,8 +86,12 @@ class HazardEventsMapController extends React.Component {
 	    this.props.getGeoMerge(geoid.slice(0, 2), 'counties');
 	    this.props.getChildGeo(geoid.slice(0, 2), 'cousubs');
   	}
+  	componentWillUnmount() {
+  		ACTIVE_CONTROLLERS.remove(this.state.controllerId)
+  	}
 
   	updateLoadedRanges({ from, to }) {
+  		if (!ACTIVE_CONTROLLERS.has(this.state.controllerId)) return;
   		const key = `loaded-${ from }-${ to }`;
   		let { loadedRanges } = this.state;
   		if (!(key in loadedRanges)) {

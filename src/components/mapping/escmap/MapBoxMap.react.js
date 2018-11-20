@@ -109,6 +109,12 @@ class MapBoxMap extends React.Component {
 		glMap.on('sourcedata', e => {
 			this.forceUpdate();
 		})
+		if (!this.props.zoomable) {
+			glMap.scrollZoom.disable();
+			glMap.boxZoom.disable();
+			glMap.dragRotate.disable();
+			glMap.dragPan.disable();
+		}
 	}
 	componentDidUpdate(oldProps) {
 		this.updateLayers(oldProps);
@@ -224,7 +230,8 @@ MapBoxMap.defaultProps = {
 	layers: [],
 	hoverData: null,
 	zoom: 6.25,
-	center: [-75.250, 42.860]
+	center: [-75.250, 42.860],
+	zoomable: true
 }
 
 export default MapBoxMap
