@@ -49,7 +49,8 @@ class Row extends React.Component {
                 </td>
               : (col === urlColumn) ?
                 <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
-                  { row[col] ? <a href={ row[col] } target="_blank">url</a> : null }
+                  { row[col] ? <span style={ { color: "blue", cursor: "pointer" } }
+                                  onClick={ e => { e.stopPropagation(); window.open(row[col]) } }>url</span> : null }
                 </td>
               : <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>{ row[col] }</td>
             )
@@ -140,7 +141,7 @@ export default class DataTable extends React.Component {
           }
           {
             tableData.slice(expanded + 1, tableData.length).map((row, i) =>
-              <Row key={ i } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
+              <Row key={ i + expanded + 1 } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
                 onClick={ onClick || (expandColumns.length && this.onClick.bind(this, expanded + 1 + i)) }/>
             )
           }

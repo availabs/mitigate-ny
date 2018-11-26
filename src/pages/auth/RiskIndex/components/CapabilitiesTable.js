@@ -206,7 +206,7 @@ class CapabilitiesTable extends React.Component {
 		return (
 			<TableBox { ...this.processData() }
 				title={ this.props.title }
-				filterKey="Name"
+				filterKey={ getLabel("name") }
 				pageSize={ this.props.pageSize }
 				filterColumns={ this.props.filterColumns.map(fc => getLabel(fc)) }
 				expandColumns={ this.props.expandColumns.map(ec => getLabel(ec)) }
