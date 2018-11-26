@@ -44,7 +44,7 @@ const getPaint = layer => {
 		case 'fill':
 			paint['fill-color'] =
 				['case',
-					['boolean', ['feature-state', 'hover'], false],
+					['boolean', false, false],
 					layer.autoHighlightColor || '#c8c8c8',
 					'#f2efe9'
 				];
@@ -52,7 +52,7 @@ const getPaint = layer => {
 			if (typeof layer['fill-color'] === 'string') {
 				paint['fill-color'] = 
 					['case',
-						['boolean', ['feature-state', 'hover'], false],
+						['boolean', false, false],
 						layer.autoHighlightColor || '#c8c8c8',
 						layer['fill-color']
 					]
@@ -60,7 +60,7 @@ const getPaint = layer => {
 			else if (layer['fill-color']) {
 				paint['fill-color'] =
 					['case',
-						['boolean', ['feature-state', 'hover'], false],
+						['boolean', false, false],
 						layer.autoHighlightColor || '#c8c8c8',
 						["get",
 							["get", "geoid"],
@@ -131,6 +131,7 @@ class MapBoxMap extends React.Component {
 
 		this.props.layers.forEach(layer => {
 			if (!glMap.getLayer(layer.id) && glMap.getSource(layer.geoLevel)) {
+				console.log('testing', layer, getLayerData(layer))
 				glMap.addLayer(getLayerData(layer));
 				glMap.on("mousemove", layer.id, e => {
 					const { features, point } = e,
