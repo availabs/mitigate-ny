@@ -32,7 +32,8 @@ class TestMap extends React.Component {
 
   fetchFalcorDeps({ geoid, geoLevel, hazard } = this.props) {
     return this.props.falcor.get(
-      ['geo', geoid, ['tracts', 'counties']],
+      ['geo', geoid, geoLevel],
+      ['geo', '36', 'counties'],
       ['riskIndex', 'meta', hazard, 'name']
     )
     .then(res => res.json.geo[geoid][geoLevel])
@@ -61,7 +62,7 @@ class TestMap extends React.Component {
     }
     scale.range(["#f2efe9", "#fadaa6", "#f7c475", "#f09a10", "#cf4010"])
     try {
-      const geoids = this.props.geoGraph['36'][geoLevel].value,
+      const geoids = this.props.geoGraph[geoid][geoLevel].value,
         fillColor = {},
         scores = {};
 
@@ -106,12 +107,13 @@ class TestMap extends React.Component {
       geoids = [];
     try {
       counties = this.props.geoGraph['36']['counties'].value;
-      geoids = this.props.geoGraph['36'][geoLevel].value;
+      geoids = this.props.geoGraph[geoid][geoLevel].value;
     }
     catch (e) {
       counties = [];
       geoids = [];
     }
+
     return [
       { id: 'states-fill',
         type: 'fill',
