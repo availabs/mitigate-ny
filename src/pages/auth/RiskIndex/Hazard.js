@@ -119,7 +119,7 @@ class Hazard extends Component {
             dataType={'severeWeather'}
           />
           <div>
-            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a></i>
           </div>
         </div>
       )
@@ -189,7 +189,7 @@ class Hazard extends Component {
                <strong>1996-2017</strong>
                <div>The table below summarizes the top 50 {hazardName} events by loss in dollars. Click on a row to view the event description.</div>
                <HazardEventsTable hazard={hazard} />
-               <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
+               <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a></i>
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ probability (hazard) {
                 dataType='severeWeather'
                 display='full'
               />
-              <i style={{color: '#afafaf', paddingBottom: 0}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a></i>
+              <i style={{color: '#afafaf', paddingBottom: 0}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a></i>
             </div>
           </div>
         </div>
@@ -256,7 +256,7 @@ municipalityTable (hazard) {
               </div>
               
             </div>
-            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
               </i>
         </div>
       )
@@ -275,7 +275,7 @@ municipalityTable (hazard) {
               </div>
               
             </div>
-            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
               </i>
 
             <div className='side-section-content' style={{paddingTop: 0, paddingBottom:0 }}>
@@ -290,7 +290,7 @@ municipalityTable (hazard) {
               </div>
               
             </div>
-            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+            <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
               </i>
           </div>
       )
@@ -413,7 +413,7 @@ criticalInfrastructure (hazard) {
               
                 { this.getHazardMap(hazard) }
 
-                <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+                <i style={{color: '#afafaf'}}>Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
                 </i>
               </div>
           </div>
@@ -429,7 +429,7 @@ criticalInfrastructure (hazard) {
                   hazard={hazard}
                 />
                 <i style={{color: '#afafaf'}}>
-                  Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NCDC Storm Events Dataset</a>
+                  Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
                 </i>
                 {this.repetitive(hazard)}
                 
@@ -445,7 +445,7 @@ criticalInfrastructure (hazard) {
               
               {hazardName} events by year. Use the date controls to compare any three historical years.<br/>
               <i style={{color: '#afafaf'}}>
-                Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank">NCDC Storm Events Dataset</a>
+                Source: <a href="https://www.ncdc.noaa.gov/stormevents/" target="_blank"> NOAA NCEI Storm Events Dataset</a>
               </i>
           </div>
         </div>
