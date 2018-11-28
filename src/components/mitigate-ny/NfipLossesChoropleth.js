@@ -44,14 +44,24 @@ class NfipLossesChoropleth extends React.Component {
 		)
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
-			return this.props.falcor.get(
-				['nfip', 'losses', 'byGeoid', geoids, 'allTime', attribute]
-			)
-			.then(res => {
-				return this.props.falcor.get(
-					['geo', geoids, 'name']
-				)
-			});
+			const requests = [];
+			for (let i = 0; i < geoids.length; i += 500) {
+				requests.push(geoids.slice(i, i + 500));
+			}
+			return requests.reduce((a, c) =>
+				a.then(() => this.props.falcor.get(
+					['nfip', 'losses', 'byGeoid', c, 'allTime', attribute],
+					['geo', c, 'name']
+				))
+			, Promise.resolve())
+			// return this.props.falcor.get(
+			// 	['nfip', 'losses', 'byGeoid', geoids, 'allTime', attribute]
+			// )
+			// .then(res => {
+			// 	return this.props.falcor.get(
+			// 		['geo', geoids, 'name']
+			// 	)
+			// });
 		})
 		.then(() => this.processData())
 	}

@@ -20,7 +20,7 @@ export default [
        {name: 'Landslide', path: '/hazards/landslide'},
        {name: 'Lightning', path: '/hazards/lightning'},
        {name: 'Snow Storm', path: '/hazards/winterweat'},
-       {name: 'Tsunami', path: '/hazards/tsunami'},
+       {name: 'Tsunami/Seiche', path: '/hazards/tsunami'},
           
 ],
 [
