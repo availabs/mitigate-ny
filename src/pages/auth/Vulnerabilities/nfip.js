@@ -67,6 +67,10 @@ class nfip extends Component {
               <Content content_id={`riverine-crs`} />
             </div>
 
+            <div className="property-section">
+              <Content content_id={`nfip-lossavoidance`} />
+            </div>
+
           </div>
          </div>
       </div>
