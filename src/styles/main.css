@@ -108,7 +108,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 body {
   margin: 0;
   font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #3E4B5B;
@@ -375,7 +375,7 @@ h6, .h6 {
   font-size: 1rem; }
 
 .lead {
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-weight: 300; }
 
 .display-1 {
@@ -433,7 +433,7 @@ mark,
 
 .blockquote {
   margin-bottom: 1rem;
-  font-size: 1.125rem; }
+  font-size: 1.375rem; }
 
 .blockquote-footer {
   display: block;
@@ -1645,7 +1645,7 @@ pre {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
@@ -1670,7 +1670,7 @@ pre {
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.1rem + 4px); }
+  height: calc(2.4rem + 4px); }
 
 select.form-control:focus::-ms-value {
   color: #495057;
@@ -2005,7 +2005,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   user-select: none;
   border: 2px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.5;
   border-radius: 4px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
@@ -2465,7 +2465,7 @@ input[type="button"].btn-block {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #3E4B5B;
   text-align: left;
   list-style: none;
@@ -2800,7 +2800,7 @@ input[type="button"].btn-block {
   align-items: center;
   padding: 0.375rem 0.75rem;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -2923,7 +2923,7 @@ input[type="button"].btn-block {
 .custom-select {
   display: inline-block;
   width: 100%;
-  height: calc(2.1rem + 4px);
+  height: calc(2.4rem + 4px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
@@ -2966,14 +2966,14 @@ input[type="button"].btn-block {
   position: relative;
   display: inline-block;
   width: 100%;
-  height: calc(2.1rem + 4px);
+  height: calc(2.4rem + 4px);
   margin-bottom: 0; }
 
 .custom-file-input {
   position: relative;
   z-index: 2;
   width: 100%;
-  height: calc(2.1rem + 4px);
+  height: calc(2.4rem + 4px);
   margin: 0;
   opacity: 0; }
   .custom-file-input:focus ~ .custom-file-control {
@@ -2990,7 +2990,7 @@ input[type="button"].btn-block {
   right: 0;
   left: 0;
   z-index: 1;
-  height: calc(2.1rem + 4px);
+  height: calc(2.4rem + 4px);
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
@@ -3004,7 +3004,7 @@ input[type="button"].btn-block {
     bottom: 0;
     z-index: 3;
     display: block;
-    height: calc(calc(2.1rem + 4px) - 2px * 2);
+    height: calc(calc(2.4rem + 4px) - 2px * 2);
     padding: 0.375rem 0.75rem;
     line-height: 1.5;
     color: #495057;
@@ -3275,7 +3275,7 @@ input[type="button"].btn-block {
   font-weight: 500; }
 
 .alert-dismissible {
-  padding-right: 3.85rem; }
+  padding-right: 4.15rem; }
   .alert-dismissible .close {
     position: absolute;
     top: 0;
@@ -3365,7 +3365,7 @@ input[type="button"].btn-block {
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: 0.675rem;
+  font-size: 0.825rem;
   background-color: #e9ecef;
   border-radius: 4px; }
 
@@ -3387,7 +3387,7 @@ input[type="button"].btn-block {
 
 .close {
   float: right;
-  font-size: 1.35rem;
+  font-size: 1.65rem;
   font-weight: 500;
   line-height: 1;
   color: #000;
@@ -3725,7 +3725,7 @@ button.close {
 .popover-header {
   padding: 12px 15px;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #fff;
   background-color: #047bf8;
   border-bottom: 0px solid #046fdf;
@@ -6703,7 +6703,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-weight: 500; }
 
 .table .smaller, .table.smaller {
-  font-size: 0.72rem; }
+  font-size: 0.88rem; }
 
 .table .lighter {
   color: rgba(90, 99, 126, 0.49); }
@@ -6729,10 +6729,10 @@ a.text-dark:hover, a.text-dark:focus {
   padding-right: 0px;
   border-top-color: rgba(0, 0, 0, 0.05); }
   .table.table-clean td .value {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     line-height: 1.2; }
   .table.table-clean td .sub-value {
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     color: rgba(90, 99, 126, 0.49); }
 
 .table.table-lightfont td {
@@ -6755,7 +6755,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .table tfoot th,
 .table thead th {
-  font-size: 0.63rem;
+  font-size: 0.77rem;
   text-transform: uppercase;
   border-top: none; }
 
@@ -6811,7 +6811,7 @@ a.text-dark:hover, a.text-dark:focus {
     .table .cell-image-list .cell-img + .cell-img:hover {
       transform: translateX(5px) scale(1.1); }
   .table .cell-image-list .cell-img-more {
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
@@ -6859,7 +6859,7 @@ a.text-dark:hover, a.text-dark:focus {
 .controls-below-table {
   display: flex;
   justify-content: space-between;
-  font-size: 0.81rem; }
+  font-size: 0.99rem; }
   .controls-below-table .table-records-info {
     color: rgba(0, 0, 0, 0.5); }
   .controls-below-table .table-records-pages ul {
@@ -6878,7 +6878,7 @@ a.text-dark:hover, a.text-dark:focus {
   border-spacing: 0 5px; }
   .table.table-padded thead tr th {
     border: none;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     color: rgba(90, 99, 126, 0.49);
     letter-spacing: 1px;
     padding: 0.3rem 1.1rem; }
@@ -6895,7 +6895,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-right: 1px solid rgba(0, 0, 0, 0.03); }
     .table.table-padded tbody td.bolder {
       font-weight: 500;
-      font-size: 0.99rem; }
+      font-size: 1.21rem; }
     .table.table-padded tbody td img {
       display: inline-block;
       vertical-align: middle; }
@@ -6937,7 +6937,7 @@ select.form-control.rounded {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=); }
 
 .form-text {
-  font-size: 0.81rem; }
+  font-size: 0.99rem; }
   .form-text.with-errors {
     color: #e65252; }
 
@@ -7001,7 +7001,7 @@ select.form-control.rounded {
     margin-left: 10px; }
 
 label.bigger {
-  font-size: 1.08rem;
+  font-size: 1.32rem;
   margin-bottom: 1rem;
   margin-top: 1rem; }
 
@@ -7016,7 +7016,7 @@ fieldset {
   margin-top: 2rem; }
 
 legend {
-  font-size: 0.99rem;
+  font-size: 1.21rem;
   display: block;
   margin-bottom: 1.5rem;
   position: relative;
@@ -7046,7 +7046,7 @@ legend {
   color: #999;
   margin-bottom: 1.5rem;
   font-weight: 300;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: block; }
@@ -7079,7 +7079,7 @@ legend {
 
 /* 3d. Override bootstrap navigation styles */
 .nav.smaller {
-  font-size: 0.72rem; }
+  font-size: 0.88rem; }
   .nav.smaller.nav-tabs .nav-link {
     padding: 0.7em 1.1em; }
   .nav.smaller.nav-pills .nav-link {
@@ -7100,7 +7100,7 @@ legend {
     margin-right: 2rem; }
 
 .nav.upper {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
   text-transform: uppercase;
@@ -7136,7 +7136,7 @@ legend {
 
 .nav-link span {
   display: block;
-  font-size: 0.72rem; }
+  font-size: 0.88rem; }
 
 .nav-link.active i {
   color: #047bf8; }
@@ -7201,7 +7201,7 @@ legend {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 500;
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   padding: 4px 8px;
   color: rgba(0, 0, 0, 0.3);
   margin: 5px 0px; }
@@ -7214,7 +7214,7 @@ legend {
 .toggled-buttons.solid .btn-toggled {
   background-color: rgba(0, 0, 0, 0.07);
   color: rgba(0, 0, 0, 0.6);
-  font-size: 0.81rem; }
+  font-size: 0.99rem; }
   .toggled-buttons.solid .btn-toggled.on, .toggled-buttons.solid .btn-toggled:hover {
     background-color: #047bf8;
     color: #fff; }
@@ -7331,7 +7331,7 @@ legend {
   .btn.btn-secondary:focus, .all-wrapper .btn-secondary.fc-button:focus, .btn.btn-secondary.focus, .all-wrapper .btn-secondary.focus.fc-button {
     box-shadow: none; }
   .btn .os-icon, .all-wrapper .fc-button .os-icon {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     display: inline-block;
     vertical-align: middle; }
   .btn .os-icon + span, .all-wrapper .fc-button .os-icon + span {
@@ -7361,7 +7361,7 @@ legend {
     .btn.btn-underlined span, .all-wrapper .btn-underlined.fc-button span {
       border-bottom: 2px solid #047bf8; }
     .btn.btn-underlined i, .all-wrapper .btn-underlined.fc-button i {
-      font-size: 0.63rem;
+      font-size: 0.77rem;
       transition: all 0.2s ease; }
     .btn.btn-underlined:hover, .all-wrapper .btn-underlined.fc-button:hover {
       color: #0362c6; }
@@ -7390,7 +7390,7 @@ legend {
     margin-bottom: 0px;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 0.585rem;
+    font-size: 0.715rem;
     font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
     .breadcrumb li a {
       color: #3E4B5B; }
@@ -7415,7 +7415,7 @@ legend {
   background-color: rgba(0, 0, 0, 0.05); }
 
 .modal-header.smaller {
-  font-size: 0.99rem; }
+  font-size: 1.21rem; }
 
 .modal-header span, .modal-header strong, .modal-header .avatar {
   display: inline-block;
@@ -7437,13 +7437,13 @@ legend {
 
 /* 3h. Override bootstrap popover styles */
 .popover {
-  font-size: 0.99rem;
+  font-size: 1.21rem;
   box-shadow: 0 5px 50px rgba(4, 123, 248, 0.3); }
 
 .popover-header {
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #fff; }
 
 /* 3i. Override bootstrap alerts styles */
@@ -7457,11 +7457,11 @@ legend {
     border: none; }
   .alert.compact {
     padding: 15px 20px;
-    font-size: 0.72rem; }
+    font-size: 0.88rem; }
 
 /* 3i. Override bootstrap badges styles */
 .badge {
-  font-size: 0.81rem; }
+  font-size: 0.99rem; }
 
 .badge-default-inverted {
   background-color: #b4bbc3;
@@ -7747,12 +7747,12 @@ body .daterangepicker {
       line-height: 1;
       vertical-align: middle;
       text-transform: none;
-      font-size: 0.81rem; }
+      font-size: 0.99rem; }
   body .daterangepicker th {
     font-weight: 500;
     text-align: center;
     padding: 5px 0px;
-    font-size: 0.72rem; }
+    font-size: 0.88rem; }
     body .daterangepicker th.prev {
       text-align: left;
       cursor: pointer; }
@@ -7763,9 +7763,9 @@ body .daterangepicker {
     border-bottom-color: #3E4B5B; }
   body .daterangepicker .calendar td {
     font-weight: 300;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     text-align: right;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     padding: 5px 8px;
     border: 1px solid #eee; }
   body .daterangepicker .calendar th.month {
@@ -8706,7 +8706,7 @@ a.mapboxgl-ctrl-logo {
   padding-bottom: 5px; }
 
 .user-profile.compact .up-sub-header {
-  font-size: 0.81rem; }
+  font-size: 0.99rem; }
 
 .user-profile + .element-wrapper {
   margin-top: 2rem; }
@@ -8715,12 +8715,12 @@ a.mapboxgl-ctrl-logo {
   display: inline-block; }
   .value-pair .label {
     color: rgba(0, 0, 0, 0.4);
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase;
     display: inline-block; }
   .value-pair .value {
     display: inline-block;
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase; }
 
 .value-pair + .value-pair {
@@ -8794,7 +8794,7 @@ strong {
 
 .section-heading {
   padding: 5% 10%;
-  font-size: 1.26rem;
+  font-size: 1.54rem;
   color: rgba(0, 0, 0, 0.5); }
   .section-heading.centered {
     text-align: center; }
@@ -8871,7 +8871,7 @@ body.menu-side-right .layout-w {
   padding: 4px 10px;
   border-radius: 6px;
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
   display: none;
   position: absolute;
@@ -8929,7 +8929,7 @@ body.menu-side-right .layout-w {
         color: #fff;
         padding: 4px 7px;
         border-radius: 4px;
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         white-space: nowrap;
         top: -30px;
         left: 50%;
@@ -8969,7 +8969,7 @@ body.menu-side-right .layout-w {
       border-radius: 50%; }
   .logged-user-w .logged-user-role {
     display: block;
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.4);
     letter-spacing: 1px; }
@@ -9108,7 +9108,7 @@ span.loginMenu {
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     position: relative;
     margin-left: 10px; }
     .menu-w .logo-w .logo-label:after,
@@ -9189,7 +9189,7 @@ span.loginMenu {
             display: inline-block; }
           .menu-w .logged-user-menu ul li a span {
             vertical-align: middle;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             transition: all 0.2s ease;
             display: inline-block; }
           .menu-w .logged-user-menu ul li a:hover {
@@ -9294,7 +9294,7 @@ span.loginMenu {
       .menu-w ul.main-menu > li.sub-header {
         text-transform: uppercase;
         color: #448eef;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         letter-spacing: 1px;
         padding-top: 20px;
         padding-bottom: 0px;
@@ -9308,7 +9308,7 @@ span.loginMenu {
         display: flex;
         align-items: center;
         position: relative;
-        font-size: 0.99rem; }
+        font-size: 1.21rem; }
         .menu-w ul.main-menu > li > a:focus {
           text-decoration: none; }
         .menu-w ul.main-menu > li > a:hover {
@@ -9348,7 +9348,7 @@ span.loginMenu {
         padding: 0.4rem 10px 0.4rem 10px;
         display: block;
         position: relative;
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         transition: all 0.2s ease; }
         .menu-w ul.sub-menu li a:before {
           content: "";
@@ -9501,7 +9501,7 @@ span.loginMenu {
     opacity: 0;
     transition: all 0.1s ease; }
   .menu-w.sub-menu-style-flyout .sub-menu-header {
-    font-size: 1.35rem;
+    font-size: 1.65rem;
     font-weight: 500;
     color: #047bf8;
     text-align: center;
@@ -9534,7 +9534,7 @@ span.loginMenu {
       .menu-w.sub-menu-style-flyout ul.sub-menu li a {
         color: #3E4B5B;
         white-space: nowrap;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         padding: 8px 12px; }
         .menu-w.sub-menu-style-flyout ul.sub-menu li a:before {
           opacity: 0;
@@ -9547,7 +9547,7 @@ span.loginMenu {
             opacity: 1;
             transform: translate(12px, -50%); }
       .menu-w.sub-menu-style-flyout ul.sub-menu li .badge {
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         padding: 2px 5px;
         margin-left: 5px; }
     .menu-w.sub-menu-style-flyout ul.sub-menu + ul.sub-menu {
@@ -9645,7 +9645,7 @@ span.loginMenu {
           color: #fff;
           display: block;
           padding: 12px 50px;
-          font-size: 0.99rem;
+          font-size: 1.21rem;
           position: relative;
           white-space: nowrap; }
           .menu-w.sub-menu-style-over .sub-menu-w > ul > li > a:before, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a:before {
@@ -9755,12 +9755,12 @@ span.loginMenu {
           right: 5px; }
         .menu-w.menu-layout-compact ul.main-menu > li.sub-header {
           text-transform: uppercase;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           letter-spacing: 1px;
           padding-top: 10px;
           padding-bottom: 0px; }
         .menu-w.menu-layout-compact ul.main-menu > li > a {
-          font-size: 0.9rem; }
+          font-size: 1.1rem; }
           .menu-w.menu-layout-compact ul.main-menu > li > a:focus {
             text-decoration: none; }
           @media (min-width: 1025px) {
@@ -9786,7 +9786,7 @@ span.loginMenu {
         .menu-w.menu-layout-compact.sub-menu-style-inside ul.sub-menu li a {
           padding: 4px 0px 4px 10px; }
           .menu-w.menu-layout-compact.sub-menu-style-inside ul.sub-menu li a .badge {
-            font-size: 0.72rem;
+            font-size: 0.88rem;
             padding: 2px 3px;
             border-radius: 2px;
             margin-left: 3px; }
@@ -9840,7 +9840,7 @@ span.loginMenu {
       right: -12px;
       padding: 4px 4px;
       vertical-align: middle;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       line-height: 1; }
     .menu-position-side.menu-w .messages-notifications i {
       vertical-align: middle; }
@@ -10005,7 +10005,7 @@ span.loginMenu {
       right: -12px;
       padding: 4px 4px;
       vertical-align: middle;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       line-height: 1; }
     .menu-position-top.menu-w .messages-notifications i {
       vertical-align: middle; }
@@ -10151,7 +10151,7 @@ span.loginMenu {
         .menu-position-top.menu-w.menu-layout-full ul.main-menu > li > a .icon-w {
           display: none; }
         .menu-position-top.menu-w.menu-layout-full ul.main-menu > li > a span {
-          font-size: 0.81rem;
+          font-size: 0.99rem;
           font-weight: 500;
           text-transform: uppercase;
           white-space: nowrap;
@@ -10253,7 +10253,7 @@ span.loginMenu {
             .menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu li a {
               white-space: nowrap;
               padding: 15px 15px;
-              font-size: 0.9rem; }
+              font-size: 1.1rem; }
               .menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu li a:hover {
                 transform: translateY(-2px); }
               .menu-position-top.menu-w ul.main-menu > li.selected .sub-menu-w .sub-menu-i ul.sub-menu li a:before {
@@ -10341,7 +10341,7 @@ span.loginMenu {
           .menu-position-top.menu-w.sub-menu-style-inside .sub-menu-w .sub-menu-i ul.sub-menu li a {
             white-space: nowrap;
             padding: 15px 15px;
-            font-size: 0.9rem; }
+            font-size: 1.1rem; }
             .menu-position-top.menu-w.sub-menu-style-inside .sub-menu-w .sub-menu-i ul.sub-menu li a:hover {
               transform: translateY(-2px); }
             .menu-position-top.menu-w.sub-menu-style-inside .sub-menu-w .sub-menu-i ul.sub-menu li a:before {
@@ -10592,7 +10592,7 @@ span.loginMenu {
       .menu-mobile ul.sub-menu li:last-child {
         border-bottom: none; }
       .menu-mobile ul.sub-menu li a {
-        font-size: 0.81rem; }
+        font-size: 0.99rem; }
   .menu-mobile.color-scheme-dark {
     background-image: linear-gradient(to bottom, #3D4D75 0%, #31395B 100%);
     background-repeat: repeat-x;
@@ -10749,7 +10749,7 @@ span.loginMenu {
   .element-wrapper .element-inner-desc {
     color: #999;
     font-weight: 300;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     display: block; }
   .element-wrapper .element-search {
     position: relative; }
@@ -10830,12 +10830,12 @@ span.loginMenu {
     padding-right: 5px; }
   .el-tablo .label {
     display: block;
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.4);
     letter-spacing: 1px; }
   .el-tablo .value {
-    font-size: 2.43rem;
+    font-size: 2.97rem;
     font-weight: 500;
     font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     letter-spacing: 1px;
@@ -10846,7 +10846,7 @@ span.loginMenu {
     padding: 3px 10px;
     border-radius: 30px;
     display: inline-block;
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     vertical-align: middle;
     margin-left: 10px; }
     .el-tablo .trending .os-icon {
@@ -10877,7 +10877,7 @@ span.loginMenu {
       padding: 2px 4px;
       border-radius: 4px;
       line-height: 1.2;
-      font-size: 0.63rem; }
+      font-size: 0.77rem; }
       .el-tablo.trend-in-corner .trending i {
         font-size: 12px; }
   .el-tablo.centered {
@@ -10890,13 +10890,13 @@ span.loginMenu {
   .el-tablo.padded {
     padding: 2rem; }
   .el-tablo.bigger .value {
-    font-size: 3.33rem; }
+    font-size: 4.07rem; }
   .el-tablo.bigger .label {
-    font-size: 0.9rem; }
+    font-size: 1.1rem; }
   .el-tablo.smaller .value {
-    font-size: 1.71rem; }
+    font-size: 2.09rem; }
   .el-tablo.smaller .label {
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     letter-spacing: 2px; }
   .el-tablo.smaller.trend-in-corner .trending {
     top: 3px;
@@ -10905,7 +10905,7 @@ span.loginMenu {
     color: #047bf8; }
   .el-tablo.bold-label .label {
     text-transform: none;
-    font-size: 0.99rem;
+    font-size: 1.21rem;
     letter-spacing: 0px; }
 
 a.el-tablo {
@@ -10954,12 +10954,12 @@ a.el-tablo {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase;
     z-index: 1; }
     .el-chart-w .inside-donut-chart-label strong {
       display: block;
-      font-size: 1.98rem;
+      font-size: 2.42rem;
       line-height: 1.1; }
     .el-chart-w .inside-donut-chart-label span {
       display: block;
@@ -11006,7 +11006,7 @@ a.el-tablo {
     line-height: 1; }
   .el-legend .legend-value .legend-sub-value {
     color: rgba(90, 99, 126, 0.49);
-    font-size: 0.63rem; }
+    font-size: 0.77rem; }
 
 /*
  #4. Profile Tile
@@ -11046,7 +11046,7 @@ a.el-tablo {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 0.5rem;
     margin-top: 0.5rem;
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase; }
   .profile-tile .pt-new-icon {
     background-color: #047bf8;
@@ -11069,7 +11069,7 @@ a.el-tablo {
     padding-left: 30px; }
     .profile-tile .profile-tile-meta ul {
       list-style: none;
-      font-size: 0.63rem;
+      font-size: 0.77rem;
       text-transform: uppercase;
       color: rgba(0, 0, 0, 0.4);
       margin: 0px;
@@ -11104,7 +11104,7 @@ a.el-tablo {
     border-top: none;
     padding-top: 0px;
     text-transform: none;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     line-height: 1.2;
     margin-top: 5px; }
 
@@ -11167,7 +11167,7 @@ a.el-tablo {
   .users-list-w .user-w .user-title {
     margin-bottom: 4px; }
   .users-list-w .user-w .user-role {
-    font-size: 0.63rem;
+    font-size: 0.77rem;
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.4); }
   .users-list-w .user-w .user-action {
@@ -11206,23 +11206,23 @@ a.el-tablo {
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link span {
         display: inline-block;
         vertical-align: middle;
-        font-size: 0.9rem; }
+        font-size: 1.1rem; }
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link span.badge {
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         padding: 3px 5px; }
         .os-tabs-controls.os-tabs-complex .nav-item .nav-link span.badge span {
-          font-size: 0.72rem; }
+          font-size: 0.88rem; }
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link.active {
         opacity: 1; }
         .os-tabs-controls.os-tabs-complex .nav-item .nav-link.active .tab-label {
-          font-size: 1.26rem;
+          font-size: 1.54rem;
           line-height: 1.25; }
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link .tab-label {
         display: inline-block;
         margin-right: 10px;
         text-transform: none;
         letter-spacing: normal;
-        font-size: 1.08rem;
+        font-size: 1.32rem;
         vertical-align: middle;
         transition: all 0.2s ease; }
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link .tab-value {
@@ -11235,7 +11235,7 @@ a.el-tablo {
       .os-tabs-controls.os-tabs-complex .nav-item .nav-link .badge {
         display: inline-block;
         vertical-align: middle;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         letter-spacing: normal; }
         .os-tabs-controls.os-tabs-complex .nav-item .nav-link .badge i.os-icon {
           color: #fff;
@@ -11247,7 +11247,7 @@ a.el-tablo {
         .os-tabs-controls.os-tabs-complex .nav-item .nav-link .badge span {
           display: inline-block;
           vertical-align: middle;
-          font-size: 0.72rem; }
+          font-size: 0.88rem; }
 
 /*
  #7. Activity Boxes
@@ -11283,7 +11283,7 @@ a.el-tablo {
 
 .activity-boxes-w .activity-time {
   flex: 0 0 100px;
-  font-size: 0.63rem;
+  font-size: 0.77rem;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.4);
   text-align: right;
@@ -11321,13 +11321,13 @@ a.el-tablo {
   flex: 1; }
 
 .activity-boxes-w .activity-role {
-  font-size: 0.63rem;
+  font-size: 0.77rem;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.4);
   margin-bottom: 0.2rem; }
 
 .activity-boxes-w .activity-title {
-  font-size: 0.63rem;
+  font-size: 0.77rem;
   text-transform: uppercase;
   display: block; }
 
@@ -11345,7 +11345,7 @@ a.el-tablo {
   .note-box .note-content {
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
-    font-size: 0.81rem; }
+    font-size: 0.99rem; }
 
 /*
  #9. Steps
@@ -11364,7 +11364,7 @@ a.el-tablo {
     padding-bottom: 1rem;
     flex: 1;
     text-align: center;
-    font-size: 1.08rem;
+    font-size: 1.32rem;
     color: rgba(0, 0, 0, 0.3);
     position: relative;
     transition: all 0.4s ease; }
@@ -11416,13 +11416,13 @@ a.el-tablo {
     display: flex;
     justify-content: space-between; }
     .invoice-w .infos .info-1 {
-      font-size: 1.08rem; }
+      font-size: 1.32rem; }
       .invoice-w .infos .info-1 .company-name {
-        font-size: 2.25rem;
+        font-size: 2.75rem;
         margin-bottom: 0.5rem;
         margin-top: 10px; }
       .invoice-w .infos .info-1 .company-extra {
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         color: rgba(0, 0, 0, 0.4);
         margin-top: 1rem; }
     .invoice-w .infos .info-2 {
@@ -11430,14 +11430,14 @@ a.el-tablo {
       text-align: right; }
       .invoice-w .infos .info-2 .company-name {
         margin-bottom: 1rem;
-        font-size: 1.26rem; }
+        font-size: 1.54rem; }
       .invoice-w .infos .info-2 .company-address {
         color: rgba(0, 0, 0, 0.6); }
   .invoice-w .terms {
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     margin-top: 2.5rem; }
     .invoice-w .terms .terms-header {
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       margin-bottom: 10px; }
     .invoice-w .terms .terms-content {
       color: rgba(0, 0, 0, 0.4); }
@@ -11453,7 +11453,7 @@ a.el-tablo {
 
 .invoice-table tfoot tr td {
   border-top: 3px solid #333;
-  font-size: 1.26rem; }
+  font-size: 1.54rem; }
 
 .invoice-heading {
   margin-bottom: 4rem;
@@ -11490,7 +11490,7 @@ a.el-tablo {
   display: flex; }
   .invoice-body .invoice-desc {
     flex: 0 1 250px;
-    font-size: 1.17rem; }
+    font-size: 1.43rem; }
 
 /*
  #11. Error Page
@@ -11583,7 +11583,7 @@ a.el-tablo {
 .timed-activity {
   display: flex;
   margin-bottom: 2rem;
-  font-size: 1.08rem; }
+  font-size: 1.32rem; }
   .timed-activity .ta-date {
     flex: 0 0 130px;
     color: rgba(0, 0, 0, 0.4);
@@ -11684,14 +11684,14 @@ a.el-tablo {
   .timed-activities.compact .timed-activity .ta-record {
     display: block; }
   .timed-activities.compact .timed-activity .ta-timestamp {
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     margin-bottom: 5px; }
     .timed-activities.compact .timed-activity .ta-timestamp:after {
       right: auto;
       left: -20px;
       font-size: 8px; }
   .timed-activities.compact .timed-activity .ta-activity {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
     padding-bottom: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
@@ -11706,9 +11706,9 @@ a.el-tablo {
     justify-content: space-between;
     margin-bottom: 5px; }
     .os-progress-bar .bar-labels span {
-      font-size: 0.72rem; }
+      font-size: 0.88rem; }
       .os-progress-bar .bar-labels span.bigger {
-        font-size: 0.99rem; }
+        font-size: 1.21rem; }
   .os-progress-bar .bar-label-left span {
     margin-right: 5px; }
     .os-progress-bar .bar-label-left span.positive {
@@ -11771,9 +11771,9 @@ a.el-tablo {
       border-left: 1px solid rgba(0, 0, 0, 0.03); }
   .element-balances .balance-title {
     color: rgba(90, 99, 126, 0.49);
-    font-size: 1.08rem; }
+    font-size: 1.32rem; }
   .element-balances .balance-value {
-    font-size: 2.07rem;
+    font-size: 2.53rem;
     font-weight: 500;
     color: #303a46;
     white-space: nowrap; }
@@ -11791,7 +11791,7 @@ a.el-tablo {
     padding: 3px 10px;
     border-radius: 30px;
     display: inline-block;
-    font-size: 0.99rem;
+    font-size: 1.21rem;
     vertical-align: middle;
     margin-left: 10px; }
     .element-balances span.trending .os-icon {
@@ -11820,7 +11820,7 @@ a.el-tablo {
     .element-balances .balance.balance-v2 .balance-title {
       color: #047bf8; }
     .element-balances .balance.balance-v2 .balance-value {
-      font-size: 2.88rem;
+      font-size: 3.52rem;
       line-height: 1; }
 
 /* 
@@ -11910,13 +11910,13 @@ a.el-tablo {
   .post-box .post-text {
     color: rgba(90, 99, 126, 0.49);
     margin-bottom: 10px;
-    font-size: 0.81rem; }
+    font-size: 0.99rem; }
   .post-box .post-foot {
     display: flex;
     justify-content: space-between;
     align-items: center; }
     .post-box .post-foot .post-link {
-      font-size: 0.81rem; }
+      font-size: 0.99rem; }
       .post-box .post-foot .post-link i {
         margin-left: 10px;
         display: inline-block;
@@ -11963,7 +11963,7 @@ a.el-tablo {
   align-items: center;
   margin-bottom: 2rem; }
   .fancy-progress-with-label .fpl-label {
-    font-size: 1.35rem;
+    font-size: 1.65rem;
     font-weight: 500;
     padding-right: 20px; }
   .fancy-progress-with-label .fpl-progress-w {
@@ -13394,7 +13394,7 @@ Chat Styles
   display: flex;
   align-items: center;
   vertical-align: middle;
-  font-size: 1.08rem;
+  font-size: 1.32rem;
   cursor: pointer;
   transition: all 0.2s ease; }
   .floated-chat-btn i {
@@ -13477,7 +13477,7 @@ Chat Styles
         color: #047bf8; }
       .floated-chat-w .chat-head .user-w .user-role {
         font-weight: 500;
-        font-size: 0.81rem; }
+        font-size: 0.99rem; }
       .floated-chat-w .chat-head .user-w .user-action {
         width: 50px;
         color: #047bf8;
@@ -13534,7 +13534,7 @@ Chat Styles
           background-color: rgba(0, 0, 0, 0.9);
           color: #fff;
           font-weight: 500;
-          font-size: 0.63rem;
+          font-size: 0.77rem;
           text-transform: uppercase;
           display: inline-block;
           padding: 2px 7px;
@@ -13753,17 +13753,17 @@ Chat Styles
         top: -10px;
         right: 0px;
         color: rgba(0, 0, 0, 0.3);
-        font-size: 0.63rem; }
+        font-size: 0.77rem; }
       .ae-list-w .ae-list .aei-content .aei-title {
         margin-bottom: 4px; }
       .ae-list-w .ae-list .aei-content .aei-sub-title {
         color: #a7aeb5;
         text-transform: uppercase;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         font-weight: 500; }
       .ae-list-w .ae-list .aei-content .aei-text {
         color: rgba(0, 0, 0, 0.5);
-        font-size: 0.81rem; }
+        font-size: 0.99rem; }
   .ae-list-w .ae-load-more {
     display: block;
     padding: 10px;
@@ -13837,7 +13837,7 @@ Chat Styles
     left: 50%;
     top: -55px;
     color: rgba(0, 0, 0, 0.4);
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     transform: translateX(-50%);
     display: inline-block;
     border-bottom: 1px solid transparent;
@@ -13914,7 +13914,7 @@ Chat Styles
         color: #047bf8; }
       .aec-full-message-w .message-head .user-w .user-role {
         font-weight: 500;
-        font-size: 0.81rem; }
+        font-size: 0.99rem; }
         .aec-full-message-w .message-head .user-w .user-role span {
           display: inline-block;
           margin-left: 5px;
@@ -13925,7 +13925,7 @@ Chat Styles
         font-size: 18px; }
     .aec-full-message-w .message-head .message-info {
       color: rgba(0, 0, 0, 0.3);
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-align: right; }
   .aec-full-message-w .message-content {
     padding: 6% 10% 8% 10%; }
@@ -13935,7 +13935,7 @@ Chat Styles
     margin-top: 20px; }
     .aec-full-message-w .message-attachments .attachments-heading {
       text-transform: uppercase;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       color: rgba(0, 0, 0, 0.4); }
     .aec-full-message-w .message-attachments .attachments-docs {
       margin-top: 15px; }
@@ -13978,7 +13978,7 @@ Chat Styles
       left: -70px; }
     .aec-reply .reply-header h5 {
       margin: 0px;
-      font-size: 1.08rem; }
+      font-size: 1.32rem; }
       .aec-reply .reply-header h5 span {
         color: #047bf8;
         border-bottom: 1px dotted #047bf8;
@@ -14124,7 +14124,7 @@ Chat Styles
         padding: 2px 7px;
         border-radius: 12px;
         color: #fff;
-        font-size: 0.63rem; }
+        font-size: 0.77rem; }
   .projects-list .project-info {
     padding: 20px 40px; }
     .projects-list .project-info .os-progress-bar {
@@ -14206,18 +14206,18 @@ Chat Styles
         flex: 1 1 auto; }
       .full-chat-w .full-chat-left .user-list .user-w .user-name {
         font-weight: 500;
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         transition: all 0.2s ease; }
       .full-chat-w .full-chat-left .user-list .user-w .last-message {
         color: rgba(0, 0, 0, 0.4);
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         transition: all 0.2s ease; }
       .full-chat-w .full-chat-left .user-list .user-w .user-date {
         float: right;
         padding: 2px 7px;
         background-color: #fff;
         border-radius: 12px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         color: rgba(0, 0, 0, 0.3);
         transition: all 0.2s ease; }
       .full-chat-w .full-chat-left .user-list .user-w:hover {
@@ -14240,7 +14240,7 @@ Chat Styles
       justify-content: space-between;
       align-items: center; }
     .full-chat-w .full-chat-middle .user-info {
-      font-size: 1.08rem; }
+      font-size: 1.32rem; }
       .full-chat-w .full-chat-middle .user-info span {
         display: inline-block;
         vertical-align: middle;
@@ -14266,7 +14266,7 @@ Chat Styles
     .full-chat-w .chat-content-w .chat-date-separator {
       text-align: center;
       color: rgba(0, 0, 0, 0.3);
-      font-size: 0.81rem;
+      font-size: 0.99rem;
       position: relative;
       margin: 40px 0px; }
       .full-chat-w .chat-content-w .chat-date-separator:before {
@@ -14309,7 +14309,7 @@ Chat Styles
         vertical-align: bottom;
         margin-left: 10px;
         margin-right: 10px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         color: rgba(0, 0, 0, 0.3); }
       .full-chat-w .chat-content-w .chat-message.self {
         text-align: right; }
@@ -14362,7 +14362,7 @@ Chat Styles
         color: rgba(0, 0, 0, 0.3);
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         margin-top: 5px; }
       .full-chat-w .user-intro .user-intro-info .user-social {
         margin-top: 1rem; }
@@ -14401,7 +14401,7 @@ Chat Styles
         .full-chat-w .chat-info-section .ci-content .ci-file-list ul li {
           margin: 5px; }
           .full-chat-w .chat-info-section .ci-content .ci-file-list ul li a {
-            font-size: 0.81rem;
+            font-size: 0.99rem;
             border-bottom: 1px solid #047bf8; }
             .full-chat-w .chat-info-section .ci-content .ci-file-list ul li a:hover {
               text-decoration: none; }
@@ -14487,7 +14487,7 @@ Pricing Plans Styles
     padding-top: 40px;
     margin-bottom: 40px; }
     .pricing-plan .plan-price-w .price-value {
-      font-size: 3.6rem;
+      font-size: 4.4rem;
       line-height: 1;
       transition: all 0.2s ease; }
     .pricing-plan .plan-price-w .price-label {
@@ -14646,9 +14646,9 @@ Pricing Plans Styles
   .pipeline-header .pipeline-value {
     color: #FFD038;
     letter-spacing: 3px;
-    font-size: 1.17rem; }
+    font-size: 1.43rem; }
   .pipeline-header .pipeline-count {
-    font-size: 0.81rem;
+    font-size: 0.99rem;
     color: rgba(255, 255, 255, 0.7); }
   .pipeline-header .pipeline-settings {
     color: rgba(255, 255, 255, 0.7);
@@ -14719,7 +14719,7 @@ Pricing Plans Styles
       margin-bottom: 0px; }
     .pipeline-item .pi-body .pi-sub {
       color: rgba(0, 0, 0, 0.5);
-      font-size: 0.81rem; }
+      font-size: 0.99rem; }
   .pipeline-item .pi-foot {
     background-color: #F1F4F8;
     padding: 10px;
@@ -14737,7 +14737,7 @@ Pricing Plans Styles
         border: 1px solid #047bf8;
         color: #047bf8;
         margin-right: 2px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         border-radius: 4px;
         margin-bottom: 2px;
         margin-top: 2px; }
@@ -14746,7 +14746,7 @@ Pricing Plans Styles
       white-space: nowrap;
       text-transform: uppercase;
       color: rgba(0, 0, 0, 0.6);
-      font-size: 0.63rem;
+      font-size: 0.77rem;
       letter-spacing: 1px; }
       .pipeline-item .pi-foot .extra-info i {
         margin-right: 5px;
@@ -14767,7 +14767,7 @@ Pricing Plans Styles
     border-color: rgba(0, 0, 0, 0.5); }
   .control-header label {
     text-transform: uppercase;
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     letter-spacing: 1px; }
   .control-header .form-group {
     margin-bottom: 0px; }
@@ -14857,7 +14857,7 @@ Pricing Plans Styles
   border-radius: 4px;
   box-shadow: 0px 10px 25px 0px rgba(26, 32, 39, 0.1);
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-align: left; }
   .os-dropdown > .icon-w {
     position: absolute;
@@ -14880,7 +14880,7 @@ Pricing Plans Styles
         padding: 10px 10px 10px 10px;
         line-height: 1;
         color: #fff;
-        font-size: 0.9rem; }
+        font-size: 1.1rem; }
         .os-dropdown ul li a:hover {
           text-decoration: none; }
         .os-dropdown ul li a i {
@@ -14894,7 +14894,7 @@ Pricing Plans Styles
           display: inline-block;
           vertical-align: middle;
           color: #fff;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           transition: all 0.2s ease; }
         .os-dropdown ul li a i + span {
           padding-right: 10px; }
@@ -14936,7 +14936,7 @@ Pricing Plans Styles
           margin-bottom: 5px; }
         .os-dropdown.message-list li > a .message-content .message-title {
           color: rgba(255, 255, 255, 0.6);
-          font-size: 0.54rem;
+          font-size: 0.66rem;
           letter-spacing: 1px;
           text-transform: uppercase;
           margin-top: 2px;
@@ -15014,7 +15014,7 @@ TODO Application
       padding-left: 30px; }
     .todo-app-w .todo-sidebar ul.projects-list {
       list-style: none;
-      font-size: 0.99rem;
+      font-size: 1.21rem;
       margin-bottom: 0px; }
       .todo-app-w .todo-sidebar ul.projects-list li {
         position: relative;
@@ -15049,7 +15049,7 @@ TODO Application
             color: #047bf8;
             border-bottom: 1px solid #047bf8;
             display: inline-block;
-            font-size: 0.9rem; }
+            font-size: 1.1rem; }
             .todo-app-w .todo-sidebar ul.projects-list li.add-new-project a:hover {
               text-decoration: none; }
     .todo-app-w .todo-sidebar ul.tasks-list {
@@ -15063,7 +15063,7 @@ TODO Application
           display: block; }
         .todo-app-w .todo-sidebar ul.tasks-list li span {
           color: rgba(0, 0, 0, 0.4);
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           display: inline-block; }
         .todo-app-w .todo-sidebar ul.tasks-list li:before {
           content: "";
@@ -15108,7 +15108,7 @@ TODO Application
         .todo-app-w .todo-sidebar .todo-sidebar-section-sub-section .todo-sidebar-section-sub-header h6 {
           text-transform: uppercase;
           letter-spacing: 1px;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           margin: 0px;
           color: #047bf8; }
       .todo-app-w .todo-sidebar .todo-sidebar-section-sub-section .todo-sidebar-section-sub-section-content ul {
@@ -15121,9 +15121,9 @@ TODO Application
           .todo-app-w .todo-sidebar .todo-sidebar-section-sub-section .todo-sidebar-section-sub-section-content ul li a {
             color: #3E4B5B;
             display: inline-block;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             line-height: 1.2;
-            height: 1.08rem;
+            height: 1.32rem;
             overflow: hidden; }
   .todo-app-w .todo-content {
     background-color: #fff;
@@ -15166,7 +15166,7 @@ TODO Application
         display: inline-block;
         margin-left: 10px;
         color: rgba(0, 0, 0, 0.3);
-        font-size: 0.81rem; }
+        font-size: 0.99rem; }
       .todo-app-w .todo-content .tasks-header-w .add-task-btn {
         float: right; }
         .todo-app-w .todo-content .tasks-header-w .add-task-btn span, .todo-app-w .todo-content .tasks-header-w .add-task-btn i {
@@ -15181,11 +15181,11 @@ TODO Application
       text-transform: uppercase;
       color: #047bf8;
       letter-spacing: 1px;
-      font-size: 0.81rem;
+      font-size: 0.99rem;
       font-weight: 500;
       margin-bottom: 5px; }
     .todo-app-w .todo-content .tasks-list {
-      font-size: 1.08rem;
+      font-size: 1.32rem;
       padding: 0px;
       list-style: none;
       border-radius: 4px;
@@ -15236,7 +15236,7 @@ TODO Application
               background-color: #111;
               color: #fff;
               font-weight: 500;
-              font-size: 0.72rem;
+              font-size: 0.88rem;
               text-transform: uppercase;
               letter-spacing: 1px;
               visibility: hidden;
@@ -15296,7 +15296,7 @@ TODO Application
             background-color: #e65252;
             color: #fff;
             font-weight: 500;
-            font-size: 0.72rem;
+            font-size: 0.88rem;
             padding: 1px 10px;
             border-radius: 10px;
             text-decoration: none; }
@@ -15324,7 +15324,7 @@ TODO Application
   background-color: #fff;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   margin: 0px;
-  font-size: 1.08rem;
+  font-size: 1.32rem;
   position: relative;
   border-radius: 4px; }
   .draggable-task.gu-mirror .todo-task-drag {
@@ -15438,7 +15438,7 @@ TODO Application
       padding: 8px 10px;
       padding-right: 20px; }
       .fancy-selector-w .fancy-selector-current .fs-main-info .fs-name, .fancy-selector-w .fancy-selector-option .fs-main-info .fs-name {
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         font-weight: 500;
         line-height: 1;
         letter-spacing: 1px;
@@ -15449,7 +15449,7 @@ TODO Application
       .fancy-selector-w .fancy-selector-current .fs-main-info .fs-sub, .fancy-selector-w .fancy-selector-option .fs-main-info .fs-sub {
         color: rgba(255, 255, 255, 0.6);
         letter-spacing: 0.5px;
-        font-size: 0.72rem; }
+        font-size: 0.88rem; }
         .fancy-selector-w .fancy-selector-current .fs-main-info .fs-sub strong, .fancy-selector-w .fancy-selector-option .fs-main-info .fs-sub strong {
           color: #F6DB77;
           margin-left: 5px; }
@@ -15459,7 +15459,7 @@ TODO Application
       text-align: center;
       color: rgba(255, 255, 255, 0.6); }
       .fancy-selector-w .fancy-selector-current .fs-extra-info strong, .fancy-selector-w .fancy-selector-option .fs-extra-info strong {
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         margin-bottom: 5px;
         font-weight: 500;
         display: block;
@@ -15468,7 +15468,7 @@ TODO Application
       .fancy-selector-w .fancy-selector-current .fs-extra-info span, .fancy-selector-w .fancy-selector-option .fs-extra-info span {
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.4);
-        font-size: 0.54rem;
+        font-size: 0.66rem;
         letter-spacing: 2px;
         line-height: 1;
         display: block; }
@@ -15608,7 +15608,7 @@ TODO Application
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 500;
-      font-size: 1.08rem;
+      font-size: 1.32rem;
       position: relative; }
       .top-bar-rentals .logo-w .logo-label:after {
         height: 2px;
@@ -15633,13 +15633,13 @@ TODO Application
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 500;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         margin: 0px; }
     .top-bar-rentals .filters .filter-w {
       padding: 15px 20px;
       border-left: 1px solid rgba(255, 255, 255, 0.1); }
       .top-bar-rentals .filters .filter-w label {
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
@@ -15664,7 +15664,7 @@ TODO Application
         color: #4472fd;
         font-size: 20px; }
     .top-bar-rentals .filters .buttons-w .btn, .top-bar-rentals .filters .buttons-w .all-wrapper .fc-button, .all-wrapper .top-bar-rentals .filters .buttons-w .fc-button {
-      font-size: 0.81rem; }
+      font-size: 0.99rem; }
       .top-bar-rentals .filters .buttons-w .btn i.os-icon, .top-bar-rentals .filters .buttons-w .all-wrapper .fc-button i.os-icon, .all-wrapper .top-bar-rentals .filters .buttons-w .fc-button i.os-icon {
         margin: 0px; }
       .top-bar-rentals .filters .buttons-w .btn i.os-icon + span, .top-bar-rentals .filters .buttons-w .all-wrapper .fc-button i.os-icon + span, .all-wrapper .top-bar-rentals .filters .buttons-w .fc-button i.os-icon + span {
@@ -15690,7 +15690,7 @@ TODO Application
       .rentals-list-w .filter-side .filters-header h4 {
         text-transform: uppercase;
         letter-spacing: 2px;
-        font-size: 1.08rem;
+        font-size: 1.32rem;
         margin-bottom: 0px; }
       .rentals-list-w .filter-side .filters-header .reset-filters {
         color: #BC8F8F;
@@ -15706,7 +15706,7 @@ TODO Application
           vertical-align: middle;
           text-transform: uppercase;
           letter-spacing: 1px;
-          font-size: 0.63rem; }
+          font-size: 0.77rem; }
     .rentals-list-w .filter-side .filter-w {
       position: relative; }
       .rentals-list-w .filter-side .filter-w .filter-toggle {
@@ -15739,7 +15739,7 @@ TODO Application
     .rentals-list-w .filter-side .filter-header {
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 0.81rem;
+      font-size: 0.99rem;
       position: relative;
       padding: 40px;
       padding-bottom: 20px;
@@ -15767,7 +15767,7 @@ TODO Application
       .rentals-list-w .filter-side .select2.select2-container--default .select2-selection--multiple .select2-selection__choice {
         border: 2px solid #047bf8;
         border-radius: 16px;
-        font-size: 0.63rem;
+        font-size: 0.77rem;
         text-transform: uppercase;
         letter-spacing: 2px;
         background-color: transparent;
@@ -15787,21 +15787,21 @@ TODO Application
       align-items: center; }
       .rentals-list-w .rentals-list .list-controls .list-info {
         color: rgba(0, 0, 0, 0.4);
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
-        font-size: 0.72rem; }
+        font-size: 0.88rem; }
       .rentals-list-w .rentals-list .list-controls .list-order {
         margin-left: auto; }
         .rentals-list-w .rentals-list .list-controls .list-order label {
           margin-right: 10px;
           color: rgba(0, 0, 0, 0.4);
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           margin-bottom: 0px; }
   .rentals-list-w .property-items.as-list .property-item {
     display: flex; }
@@ -15870,23 +15870,23 @@ TODO Application
         padding-left: 10px;
         margin-left: 10px;
         border-left: 1px solid rgba(0, 0, 0, 0.1);
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
         color: rgba(0, 0, 0, 0.4); }
     .rentals-list-w .property-item .item-price strong {
       color: #047bf8;
-      font-size: 1.8rem; }
+      font-size: 2.2rem; }
     .rentals-list-w .property-item .item-price span {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
       color: #999;
       margin-left: 5px; }
     .rentals-list-w .property-item .item-features {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
@@ -15930,14 +15930,14 @@ TODO Application
     justify-content: space-between;
     padding: 10px 20px; }
     .rentals-list-w .pagination-w .pagination-info {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
       color: rgba(0, 0, 0, 0.4); }
     .rentals-list-w .pagination-w .pagination-links .pagination {
       margin-bottom: 0;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
@@ -15969,7 +15969,7 @@ TODO Application
         background-color: rgba(255, 255, 255, 0.8);
         padding: 6px 12px;
         border-radius: 4px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
@@ -16014,12 +16014,12 @@ TODO Application
           line-height: 1; }
         .property-single .property-info-w .property-info-main .property-price span {
           display: inline-block;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
           color: rgba(0, 0, 0, 0.4);
-          font-size: 0.81rem;
+          font-size: 0.99rem;
           letter-spacing: 1px; }
       .property-single .property-info-w .property-info-main h1 {
         font-size: 3rem; }
@@ -16041,18 +16041,18 @@ TODO Application
           .property-single .property-info-w .property-info-main .property-features-highlight .feature span {
             display: block;
             margin-top: 10px;
-            font-size: 0.72rem;
+            font-size: 0.88rem;
             text-transform: uppercase;
             font-weight: 500;
             letter-spacing: 1px;
             font-size: 12px; }
       .property-single .property-info-w .property-info-main .property-description {
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         font-weight: 300;
         margin: 30px 0px; }
       .property-single .property-info-w .property-info-main .badge {
         border-radius: 0px;
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
@@ -16068,19 +16068,19 @@ TODO Application
           padding-left: 10px;
           margin-left: 10px;
           border-left: 1px solid rgba(0, 0, 0, 0.1);
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
           color: rgba(0, 0, 0, 0.4); }
       .property-single .property-info-w .property-info-main .item-features {
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
         color: #777;
         margin: 10px 0px;
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         position: relative; }
         .property-single .property-info-w .property-info-main .item-features:before {
           content: "";
@@ -16127,7 +16127,7 @@ TODO Application
         .property-single .property-info-w .property-info-side .side-action-form .form-buttons {
           text-align: center; }
         .property-single .property-info-w .property-info-side .side-action-form .btn, .property-single .property-info-w .property-info-side .side-action-form .all-wrapper .fc-button, .all-wrapper .property-single .property-info-w .property-info-side .side-action-form .fc-button {
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
@@ -16151,7 +16151,7 @@ TODO Application
           content: ""; }
         .property-single .property-info-w .property-info-side .side-magic .side-magic-title {
           color: #fff;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
@@ -16161,7 +16161,7 @@ TODO Application
           text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); }
         .property-single .property-info-w .property-info-side .side-magic .side-magic-desc {
           position: relative;
-          font-size: 1.08rem; }
+          font-size: 1.32rem; }
         .property-single .property-info-w .property-info-side .side-magic .side-magic-btn {
           position: relative;
           background-color: #fff;
@@ -16169,25 +16169,25 @@ TODO Application
           box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.7);
           padding: 7px 15px;
           color: #111;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           text-transform: uppercase;
           font-weight: 500;
           letter-spacing: 1px;
-          font-size: 1.08rem;
+          font-size: 1.32rem;
           display: inline-block;
           margin-top: 30px;
           text-decoration: none; }
       .property-single .property-info-w .property-info-side .side-section .side-section-header {
         padding: 20px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
         position: relative;
         color: #111;
         text-align: center;
-        font-size: 0.99rem; }
+        font-size: 1.21rem; }
         .property-single .property-info-w .property-info-side .side-section .side-section-header:before {
           content: "";
           background-color: #047bf8;
@@ -16203,7 +16203,7 @@ TODO Application
       .property-single .property-info-w .property-info-side .property-side-features .feature {
         padding: 15px 40px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px; }
@@ -16225,13 +16225,13 @@ TODO Application
       padding: 20px 0px;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
       position: relative;
       color: #111;
-      font-size: 0.99rem; }
+      font-size: 1.21rem; }
       .property-single .property-info-w .property-section .property-section-header:before, .property-single .property-info-w .property-section h3:before, .property-single .property-info-w .property-section h4:before {
         content: "";
         background-color: #047bf8;
@@ -16263,7 +16263,7 @@ TODO Application
           color: #fff; }
     .property-single .property-info-w .property-section .property-section-body {
       padding: 40px 0px;
-      font-size: 0.99rem;
+      font-size: 1.21rem;
       font-weight: 300; }
       .property-single .property-info-w .property-section .property-section-body iframe {
         max-width: 100%; }
@@ -16281,12 +16281,12 @@ TODO Application
         padding: 20px;
         background-color: #FBF9F3;
         color: #383328;
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         margin: 20px 0px; }
         .property-single .property-info-w .property-section .property-section-body .property-note:last-child {
           margin-bottom: 0px; }
         .property-single .property-info-w .property-section .property-section-body .property-note h6 {
-          font-size: 0.81rem; }
+          font-size: 0.99rem; }
         .property-single .property-info-w .property-section .property-section-body .property-note p:last-child {
           margin-bottom: 0px; }
 
@@ -16360,23 +16360,23 @@ TODO Application
         padding-left: 10px;
         margin-left: 10px;
         border-left: 1px solid rgba(0, 0, 0, 0.1);
-        font-size: 0.72rem;
+        font-size: 0.88rem;
         text-transform: uppercase;
         font-weight: 500;
         letter-spacing: 1px;
         color: rgba(0, 0, 0, 0.4); }
     .related-listings-w .property-item .item-price strong {
       color: #047bf8;
-      font-size: 1.8rem; }
+      font-size: 2.2rem; }
     .related-listings-w .property-item .item-price span {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
       color: #999;
       margin-left: 5px; }
     .related-listings-w .property-item .item-features {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1px;
@@ -16490,7 +16490,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       color: #047bf8;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       margin-bottom: 20px; }
     .footer-w .footer-i ul {
       list-style-type: square;
@@ -16517,7 +16517,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   .footer-w .deep-footer {
     text-align: center;
     padding: 20px;
-    font-size: 0.72rem;
+    font-size: 0.88rem;
     margin-top: 50px;
     border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
@@ -16531,11 +16531,11 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   .call-to-action .cta-desc {
     font-weight: 300;
     color: #868686;
-    font-size: 1.17rem; }
+    font-size: 1.43rem; }
   .call-to-action .cta-btn {
     margin-top: 40px; }
     .call-to-action .cta-btn .btn-lg, .call-to-action .cta-btn .btn-group-lg > .btn, .call-to-action .cta-btn .all-wrapper .btn-group-lg > .fc-button, .all-wrapper .call-to-action .cta-btn .btn-group-lg > .fc-button {
-      font-size: 1.44rem;
+      font-size: 1.76rem;
       font-weight: 500;
       padding: 18px 40px;
       text-transform: uppercase;
@@ -16628,7 +16628,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
         padding: 4px 10px 4px 40px;
         display: block;
         width: 100%;
-        font-size: 0.81rem;
+        font-size: 0.99rem;
         outline: none; }
         .support-index .support-tickets-header .tickets-control .element-search input::placeholder {
           color: rgba(0, 0, 0, 0.3); }
@@ -16685,7 +16685,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       color: #EAA81D;
       font-size: 16px; }
     .support-index .st-meta .badge {
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       padding: 2px 5px; }
   .support-index .st-body {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
@@ -16704,13 +16704,13 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       margin-bottom: 5px; }
     .support-index .st-body .ticket-content .ticket-description {
       color: #636c72;
-      font-size: 0.81rem;
+      font-size: 0.99rem;
       font-weight: 300;
-      height: 1.215rem;
+      height: 1.485rem;
       overflow: hidden; }
   .support-index .st-foot {
     padding: 10px 20px;
-    font-size: 0.81rem; }
+    font-size: 0.99rem; }
     .support-index .st-foot .label {
       color: #636c72;
       font-weight: 300;
@@ -16764,7 +16764,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
           text-transform: uppercase;
           color: #636c72;
           letter-spacing: 1px;
-          font-size: 0.72rem;
+          font-size: 0.88rem;
           font-weight: 500; }
         .support-index .support-ticket-content-w .support-ticket-content .show-ticket-info i,
         .support-index .support-ticket-content-w .support-ticket-content .back-to-index i {
@@ -16814,7 +16814,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
             position: absolute;
             background-color: #0f2338;
             color: #fff;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             padding: 12px 12px;
             border-radius: 6px;
             visibility: hidden;
@@ -16875,7 +16875,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       .support-index .support-ticket-content-w .ticket-reply .ticket-reply-content {
         padding: 20px 25px;
         margin-left: 15px;
-        font-size: 0.99rem;
+        font-size: 1.21rem;
         background-color: #f3f3f7;
         border-radius: 6px; }
         .support-index .support-ticket-content-w .ticket-reply .ticket-reply-content p:last-child {
@@ -16891,7 +16891,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
           background-color: #F6F7F8;
           color: #047bf8;
           border-radius: 6px;
-          font-size: 0.72rem; }
+          font-size: 0.88rem; }
           .support-index .support-ticket-content-w .ticket-reply .ticket-attachments .attachment i {
             display: inline-block;
             vertical-align: middle;
@@ -16969,7 +16969,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
                 display: block;
                 border-bottom: none;
                 color: #3E4B5B;
-                font-size: 0.72rem; }
+                font-size: 0.88rem; }
               .support-index .support-ticket-content-w .support-ticket-info ul.users-list.as-tiles li a .avatar {
                 margin: 0px;
                 width: 50px;
@@ -17105,7 +17105,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
     color: #C26C6C;
     letter-spacing: 1px;
     font-weight: 500;
-    font-size: 0.81rem; }
+    font-size: 0.99rem; }
 
 .onboarding-modal .onboarding-content {
   padding: 40px 50px; }
@@ -17121,7 +17121,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   .onboarding-modal .onboarding-content .onboarding-text {
     color: rgba(69, 76, 96, 0.49);
     font-weight: 300;
-    font-size: 0.99rem;
+    font-size: 1.21rem;
     margin-bottom: 30px;
     padding-left: 20px;
     padding-right: 20px; }
@@ -17252,7 +17252,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   border: none;
   background-color: transparent;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #046fdf;
   bottom: 25px;
   position: absolute;
@@ -17358,7 +17358,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
     color: #3E4B5B;
     font-weight: 500;
     letter-spacing: 2px;
-    font-size: 0.99rem; }
+    font-size: 1.21rem; }
     .top-bar > ul li {
       display: inline-block; }
       .top-bar > ul li a {
@@ -17404,7 +17404,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       color: #3E4B5B;
       letter-spacing: 2px;
       text-transform: uppercase;
-      font-size: 0.81rem;
+      font-size: 0.99rem;
       font-weight: 500; }
     .top-bar .logo-w.menu-size {
       width: 260px; }
@@ -17465,7 +17465,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       right: -12px;
       padding: 4px 4px;
       vertical-align: middle;
-      font-size: 0.72rem;
+      font-size: 0.88rem;
       line-height: 1; }
     .top-bar .messages-notifications i {
       vertical-align: middle; }
@@ -17547,7 +17547,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
               display: inline-block; }
             .top-bar .logged-user-w .logged-user-menu ul li a span {
               vertical-align: middle;
-              font-size: 0.9rem;
+              font-size: 1.1rem;
               transition: all 0.2s ease;
               display: inline-block; }
             .top-bar .logged-user-w .logged-user-menu ul li a:hover {
@@ -17693,7 +17693,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       color: #047bf8;
       font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-weight: 500;
-      font-size: 0.99rem; }
+      font-size: 1.21rem; }
     .search-with-suggestions-w .search-suggestions-group .ssg-header .ssg-info {
       margin-left: auto;
       color: rgba(0, 0, 0, 0.4);
@@ -17844,7 +17844,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   display: flex;
   align-items: center;
   vertical-align: middle;
-  font-size: 1.08rem;
+  font-size: 1.32rem;
   cursor: pointer;
   transition: all 0.2s ease; }
   .floated-customizer-btn.third-floated-btn {
@@ -17913,7 +17913,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
     color: #334152;
-    font-size: 1.08rem; }
+    font-size: 1.32rem; }
     .floated-customizer-panel .fcp-header span {
       display: inline-block;
       vertical-align: middle; }
@@ -17946,7 +17946,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       border-bottom: none;
       margin-bottom: 0px; }
     .floated-customizer-panel .fcp-content .fcp-group-contents .fcp-field label {
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       flex: 0 0 54%;
       padding-right: 10px;
       margin: 0px; }
@@ -17958,7 +17958,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
       padding-right: 30px;
       background-color: #fff;
       line-height: 1.1;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       border-radius: 20px;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -18024,7 +18024,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
   display: flex;
   align-items: center;
   vertical-align: middle;
-  font-size: 1.08rem;
+  font-size: 1.32rem;
   cursor: pointer;
   transition: all 0.2s ease; }
   .floated-colors-btn.second-floated-btn {
@@ -18592,7 +18592,7 @@ Contents:
   .support-index .support-tickets {
     flex: 0 0 400px; }
   .support-index .st-foot {
-    font-size: 0.72rem; }
+    font-size: 0.88rem; }
   .support-index .st-foot .value + .label {
     margin-left: 10px; }
   .support-index .support-tickets {
@@ -18793,7 +18793,7 @@ Contents:
   .nav.upper.nav-tabs .nav-link {
     margin-right: 0.7rem;
     padding-bottom: 10px;
-    font-size: 0.72rem; }
+    font-size: 0.88rem; }
   .display-type {
     content: "tablet"; }
   .content-box {
@@ -18912,7 +18912,7 @@ Contents:
     padding-right: 25px;
     padding-top: 50px; }
   .onboarding-modal .onboarding-content .onboarding-text {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     padding-left: 0px;
     padding-right: 0px; }
   .onboarding-modal .onboarding-slide .onboarding-side-by-side .onboarding-media {
@@ -18960,7 +18960,7 @@ Contents:
       float: right;
       margin-bottom: 0; }
   .el-tablo.smaller .value {
-    font-size: 1.26rem;
+    font-size: 1.54rem;
     margin-top: 3px; }
   .todo-app-w {
     display: block; }
@@ -19023,7 +19023,7 @@ Contents:
   .nav.upper.nav-tabs .nav-link {
     margin-right: 0.7rem;
     padding-bottom: 10px;
-    font-size: 0.72rem; }
+    font-size: 0.88rem; }
   .app-email-w.forse-show-content .ae-content-w {
     display: block; }
   .app-email-w.forse-show-content .ae-list-w {
@@ -19081,7 +19081,7 @@ Contents:
     padding: 0; }
   .timed-activity {
     display: block;
-    font-size: 0.9rem; }
+    font-size: 1.1rem; }
     .timed-activity .ta-date {
       flex: 0 0 auto;
       margin-bottom: 3rem;
@@ -19097,7 +19097,7 @@ Contents:
       padding-bottom: 1rem;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
     .timed-activity .ta-activity {
-      font-size: 0.81rem; }
+      font-size: 0.99rem; }
   .post-box {
     flex-wrap: wrap; }
     .post-box .post-media {
