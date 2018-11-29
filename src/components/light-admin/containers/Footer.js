@@ -13,7 +13,7 @@ export default (props) => {
             <div className="row">
                 <div className="col-sm-7 col-lg-3 b-r padded" >
                     <div style={{paddingTop:'20%', paddingLeft: 20}}>
-                    <Logo width="350"/>
+                    <Logo width="275"/>
                     <h6 className="heading-small" style={{paddingTop: 10}}>New York State Hazard Mitigation Plan</h6>
                     </div>
                 </div>
