@@ -30,7 +30,6 @@ let initialState = {
 		"panynj",
 		"suny",
 		"redcross",
-		"eiso",
 		"ovs",
 		"gosr",
 		"nycoem",
