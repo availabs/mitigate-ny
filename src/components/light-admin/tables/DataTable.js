@@ -23,42 +23,43 @@ const Selector = ({ value, options, onSelect, column }) =>
     </div>
   </div>
 
-////
+// //
 
-class Row extends React.Component {
-  render() {
-    const {
-      onClick,
-      columns,
-      links,
-      row,
-      expandColumns,
-      numColumns = 0,
-      expansionRow = false,
-      expanded = false,
-      urlColumn = null
-    } = this.props
-    return (
-      <tr onClick={ onClick ? onClick.bind(null, row) : null }
-        style={ expansionRow ? { backgroundColor: "#eee" } : expanded ? { backgroundColor: "#ddd" } : null }>
-        { columns.map((col, ii) => {
-            return (
-              (col in links) ?
-                <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
-                  <a href={ links[col](row) }>{ row[col] }</a>
-                </td>
-              : (col === urlColumn) ?
-                <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
-                  { row[col] ? <a href={ row[col] } target="_blank">url</a> : null }
-                </td>
-              : <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>{ row[col] }</td>
-            )
-          })
-        }
-      </tr>
-    )
-  }
+const Row = args => {
+  const {
+    onClick,
+    columns,
+    links,
+    row,
+    expandColumns,
+    numColumns = 0,
+    expansionRow = false,
+    expanded = false,
+    urlColumn = null
+  } = args;
+  return (
+    <tr onClick={ onClick ? onClick.bind(null, row) : null }
+      style={ expansionRow ? { backgroundColor: "#eee" } : expanded ? { backgroundColor: "#ddd" } : null }>
+      { columns.map((col, ii) => {
+          return (
+            (col in links) ?
+              <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
+                <a href={ links[col](row) }>{ row[col] }</a>
+              </td>
+            : (col === urlColumn) ?
+              <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>
+                { row[col] ? <span style={ { color: "blue", cursor: "pointer" } }
+                                onClick={ e => { e.stopPropagation(); window.open(row[col]) } }>url</span> : null }
+              </td>
+            : <td key={ ii } colSpan={ Math.floor(numColumns / columns.length) }>{ row[col] }</td>
+          )
+        })
+      }
+    </tr>
+  )
 }
+
+// //
 
 export default class DataTable extends React.Component {
   state = {
@@ -140,7 +141,7 @@ export default class DataTable extends React.Component {
           }
           {
             tableData.slice(expanded + 1, tableData.length).map((row, i) =>
-              <Row key={ i } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
+              <Row key={ i + expanded + 1 } row={ row } columns={ columns } links={ links } urlColumn={ urlColumn }
                 onClick={ onClick || (expandColumns.length && this.onClick.bind(this, expanded + 1 + i)) }/>
             )
           }

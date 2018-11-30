@@ -7,6 +7,7 @@ const RECEIVE_CAPABILITIES = "RECEIVE_CAPABILITIES",
 
 	TOGGLE_HAZARD_FILTER = "TOGGLE_HAZARD_FILTER",
 	TOGGLE_AGENCY_FILTER = "TOGGLE_AGENCY_FILTER",
+	TOGGLE_TYPE_FILTER = "TOGGLE_TYPE_FILTER",
 
 	SET_CAPABILITY_DATA = "SET_CAPABILITY_DATA",
 	CLEAR_CAPABILITY_DATA = "CLEAR_CAPABILITY_DATA";
@@ -277,6 +278,12 @@ export const toggleAgencyFilter = agency =>
 			type: TOGGLE_AGENCY_FILTER,
 			agency
 		}), Promise.resolve())
+export const toggleTypeFilter = ct =>
+	dispatch => (
+		dispatch({
+			type: TOGGLE_TYPE_FILTER,
+			ct
+		}), Promise.resolve())
 
 export const setCapabilityData = capabilityData =>
 	dispatch => (
@@ -300,7 +307,9 @@ const INITIAL_STATE = {
 	hazardFilters: [],
 	hazards: [],
 	agencyFilters: [],
-	agencies: []
+	agencies: [],
+	typeFilters: [],
+	types: ['program', 'measure', 'action']
 }
 
 ATTRIBUTES.forEach(att => {
@@ -349,6 +358,18 @@ export default (state=INITIAL_STATE, action) => {
 			return {
 				...state,
 				agencyFilters
+			}
+		case TOGGLE_TYPE_FILTER:
+			let typeFilters = state.typeFilters.slice();
+			if (!typeFilters.includes(action.ct)) {
+				typeFilters.push(action.ct);
+			}
+			else {
+				typeFilters = typeFilters.filter(a => a !== action.ct)
+			}
+			return {
+				...state,
+				typeFilters
 			}
 		case SET_CAPABILITY_DATA:
 			return {

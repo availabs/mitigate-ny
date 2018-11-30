@@ -5,7 +5,8 @@ import ElementBox from 'components/light-admin/containers/ElementBox'
 
 import {
   toggleHazardFilter,
-  toggleAgencyFilter
+  toggleAgencyFilter,
+  toggleTypeFilter
 } from 'store/modules/capabilities';
 
 import {
@@ -81,10 +82,13 @@ class FilterPanel extends React.Component {
 			hazardFilters,
 			hazards,
 			agencyFilters,
-			agencies
+			agencies,
+			types,
+			typeFilters
 		} = this.props;
 		const mappedHazards = hazards.map(filter => ({ filter, label: this.getHazardName(filter) })),
-			mappedAgencies = agencies.map(filter => ({ filter, label: filter }));
+			mappedAgencies = agencies.map(filter => ({ filter, label: filter })),
+			mappedTypes = types.map(filter => ({ filter, label: filter }));
 		return (
           	<div className={ this.props.className }>
 				<ElementBox>
@@ -101,6 +105,12 @@ class FilterPanel extends React.Component {
 						opened={ this.state.opened === 0 }
 						activeFilters={ hazardFilters }
 						toggleActiveFilter={ this.props.toggleHazardFilter }/>
+
+					<FilterHeading heading="Types" filters={ mappedTypes }
+						toggleOpened={ this.toggleOpened.bind(this, 2) }
+						opened={ this.state.opened === 2 }
+						activeFilters={ typeFilters }
+						toggleActiveFilter={ this.props.toggleTypeFilter }/>
 
 				</ElementBox>
       		</div>
@@ -119,12 +129,15 @@ const mapStateToProps = state => ({
     hazards: state.capabilities.hazards,
     agencyFilters: state.capabilities.agencyFilters,
     agencies: state.capabilities.agencies,
-    riskIndex: state.graph.riskIndex
+    riskIndex: state.graph.riskIndex,
+    typeFilters: state.capabilities.typeFilters,
+    types: state.capabilities.types
 })
 
 const mapDispatchToProps = {
   toggleHazardFilter,
-  toggleAgencyFilter
+  toggleAgencyFilter,
+  toggleTypeFilter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel);

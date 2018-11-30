@@ -18,7 +18,7 @@ class CapabilitiesPanel extends React.Component {
 		numPerPage: 5,
 		filteredCapabilities: [],
 		maxPages: 0,
-		searchFilterKey: "",
+		searchFilterKey: "name",
 		searchFilter: ""
 	}
 
@@ -37,6 +37,7 @@ class CapabilitiesPanel extends React.Component {
 		const {
 			hazardFilters,
 			agencyFilters,
+			typeFilters,
 			capabilities
 		} = props.capabilities;
 		const state = {
@@ -69,6 +70,11 @@ class CapabilitiesPanel extends React.Component {
 		if (agencyFilters.length) {
 			filteredCapabilities = filteredCapabilities.filter(c =>
 				Boolean(c.agency) && agencyFilters.includes(c.agency)
+			)
+		}
+		if (typeFilters.length) {
+			filteredCapabilities = filteredCapabilities.filter(c =>
+				Boolean(c.type) && typeFilters.includes(c.type)
 			)
 		}
 		if (searchFilter.length) {

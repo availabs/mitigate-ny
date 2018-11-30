@@ -48,13 +48,25 @@ class NfipChoropleth extends React.Component {
 		)
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
-			return this.props.severe ?
-				this.props.falcor.get(
-					['nfip', 'severe', 'byGeoid', geoids, 'allTime', attribute]
-				) :
-				this.props.falcor.get(
-					['nfip', 'byGeoid', geoids, 'allTime', attribute]
-				);
+			const requests = [];
+			for (let i = 0; i < geoids.length; i += 500) {
+				requests.push(geoids.slice(i, i + 500));
+			}
+			return requests.reduce((a, c) =>
+				a.then(() => this.props.falcor.get(
+					this.props.severe ?
+						['nfip', 'severe', 'byGeoid', c, 'allTime', attribute] :
+						['nfip', 'byGeoid', c, 'allTime', attribute]
+				))
+			, Promise.resolve())
+
+			// return this.props.severe ?
+			// 	this.props.falcor.get(
+			// 		['nfip', 'severe', 'byGeoid', geoids, 'allTime', attribute]
+			// 	) :
+			// 	this.props.falcor.get(
+			// 		['nfip', 'byGeoid', geoids, 'allTime', attribute]
+			// 	);
 		})
 		.then(() => this.processData())
 	}

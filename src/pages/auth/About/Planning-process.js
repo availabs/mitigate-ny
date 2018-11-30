@@ -22,7 +22,12 @@ class PlanningProcess extends Component {
              <div className='projects-list row'>
               <ProjectBox title={`History of the New York State Hazard Mitigation Plan`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
                 <Content content_id={`process-history`} />
+              </ProjectBox>
+
+              <ProjectBox title={`2019 SHMP Milestones`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
+                <Content content_id={`process-milestones`} />
               </ProjectBox>  
+
             </div>
            </div>
           </div>

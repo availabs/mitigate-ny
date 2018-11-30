@@ -131,7 +131,7 @@ class MapBoxMap extends React.Component {
 
 		this.props.layers.forEach(layer => {
 			if (!glMap.getLayer(layer.id) && glMap.getSource(layer.geoLevel)) {
-				console.log('testing', layer, getLayerData(layer))
+// console.log('testing', layer, getLayerData(layer))
 				glMap.addLayer(getLayerData(layer));
 				glMap.on("mousemove", layer.id, e => {
 					const { features, point } = e,

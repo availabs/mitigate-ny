@@ -50,7 +50,7 @@ class HazardList extends React.Component {
 		.then(response => response.json.riskIndex.hazards)
 		.then(hazards => this.props.falcor.get(
 			['riskIndex', 'meta', hazards, 'name'],
-			['severeWeather', '36', hazards, 'allTime', 'annualized_damage']
+			['severeWeather', this.props.geoid, hazards, 'allTime', 'annualized_damage']
 		))
 	}
 
@@ -62,8 +62,8 @@ class HazardList extends React.Component {
 		try {
 			return this.props.riskIndex.hazards.value.slice()
 				.sort((a, b) => {
-					const aVal = this.props.severeWeather['36'][a].allTime.annualized_damage,
-						bVal = this.props.severeWeather['36'][b].allTime.annualized_damage;
+					const aVal = this.props.severeWeather[this.props.geoid][a].allTime.annualized_damage,
+						bVal = this.props.severeWeather[this.props.geoid][b].allTime.annualized_damage;
 					return bVal < aVal ? -1 : 1;
 				})
 				.map(hazard => {
@@ -74,7 +74,7 @@ class HazardList extends React.Component {
 							hazard={ hazard }
 							name={ name }
 							active={ hazard === this.state.hazard }
-							annualized_damage={ this.props.severeWeather['36'][hazard].allTime.annualized_damage }/>
+							annualized_damage={ this.props.severeWeather[this.props.geoid][hazard].allTime.annualized_damage }/>
 					)
 				})
 		}

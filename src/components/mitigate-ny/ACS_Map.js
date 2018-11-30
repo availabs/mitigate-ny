@@ -61,7 +61,7 @@ class ACS_Map extends React.Component {
 		this.props.getChildGeo(geoid.slice(0, 2), geoLevel);
 		this.props.getGeoMerge(geoid.slice(0, 2), geoLevel);
 		this.props.getGeoMesh(geoid.slice(0, 2), geoLevel);
-		this.props.getGeoMesh('36', 'counties');
+		this.props.getGeoMesh(geoid.slice(0, 2), 'counties');
 	}
 
 	componentDidMount() {
@@ -91,7 +91,10 @@ class ACS_Map extends React.Component {
 				requests.push(geoids.slice(i, i + skip));
 			}
 
-			return requests.reduce((a, c) => a.then(() => this.props.falcor.get(['geo', c, LATEST_YEAR, variable], ['geo', c, 'name'])), Promise.resolve())
+			return requests.reduce((a, c) =>
+				a.then(() => this.props.falcor.get(['geo', c, LATEST_YEAR, variable], ['geo', c, 'name'])),
+				Promise.resolve()
+			)
 		})
 		.then(res => this.processAcsData())
 	}
@@ -120,8 +123,8 @@ class ACS_Map extends React.Component {
 		try {
 			const features = [];
 			this.props.geo[geoid][geoLevel].features.forEach(feature => {
-				let geoid = feature.properties.geoid,
-					data = this.props.geoGraph[geoid][LATEST_YEAR][variable];
+				const geoid = feature.properties.geoid;
+				let data = this.props.geoGraph[geoid][LATEST_YEAR][variable];
 				if (density) {
 					const area = turf.area(feature);
 					data /= area;
@@ -151,9 +154,10 @@ class ACS_Map extends React.Component {
 				default:
 					colorScale.domain(domain);
 			}
-			acsDataProcessed = true;
+			acsDataProcessed = Boolean(features.length);
 		}
 		catch (e) {
+// console.log("ERROR:",e)
 		}
 		this.setState({ acsData, colorScale, acsDataProcessed });
 	}
@@ -266,7 +270,7 @@ class ACS_Map extends React.Component {
 	      	hoverData={ this.state.hoverData }
 	      	controls={ this.generateControls() }
 	      	mapStyle=""/>
-  	) 
+  	)
 	}
 }
 
