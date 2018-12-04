@@ -40,6 +40,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: Submenus,
-    component: connect(() => {}, {})(Glossary),
+    component: connect(() => ({}), {})(Glossary),
   }
 ]

@@ -83,7 +83,7 @@ export default [
     breadcrumbs: [
       {path: '/about'}
     ],
-    component: connect(() => {}, {})(About),
+    component: connect(() => ({}), {})(About),
   },
 ...Planning,
 ...ExecutiveSummary,

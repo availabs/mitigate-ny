@@ -45,6 +45,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: Submenus,
-    component: connect(() => {}, {})(Implementation),
+    component: connect(() => ({}), {})(Implementation),
   }
 ]

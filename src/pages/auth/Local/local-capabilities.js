@@ -96,7 +96,6 @@ class LocalCapabilities extends Component {
                   'Hazard Mitigation Plan' , 
                   'Post-Disaster Recovery Ordinance' ,
                   'Post-Disaster Recovery Plan' ,
-                  'Post-Disaster Redevelopment Plan' ,
                   'Property Aquisition Program' ,
                  
                   'Continuity of Operations Plan' ,
@@ -163,7 +162,7 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: Submenus,
-    component: connect(() => {}, {})(LocalCapabilities),
+    component: connect(() => ({}), {})(LocalCapabilities),
   }
 
 ]

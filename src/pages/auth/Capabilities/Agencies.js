@@ -43,7 +43,7 @@ export default [
        {name: 'Agencies', path: '/capabilities/agencies'},
        {name: 'Counties', path: '/counties'},
     ]],
-    component: connect(() => {}, {})(Agencies),
+    component: connect(() => ({}), {})(Agencies),
 
   }
 ]
