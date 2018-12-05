@@ -231,8 +231,7 @@ class NfipChoropleth extends React.Component {
     		<MapBoxMap layers={ this.generateLayers() }
     			height={ this.props.height }
     			hoverData={ this.state.hoverData }
-        	controls={ this.generateMapControls() }
-        	zoomable={ false }/>
+        	controls={ this.generateMapControls() }/>
     	) 
   	}
 }

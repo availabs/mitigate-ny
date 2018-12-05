@@ -114,6 +114,9 @@ class MapBoxMap extends React.Component {
 			glMap.boxZoom.disable();
 			glMap.dragRotate.disable();
 			glMap.dragPan.disable();
+			glMap.keyboard.disable();
+			glMap.doubleClickZoom.disable();
+			glMap.touchZoomRotate.disable();
 		}
 	}
 	componentDidUpdate(oldProps) {

@@ -24,82 +24,129 @@ import {
   getDefaultValue,
   getLabel,
   clearCapabilityData,
-  updateCapability
+  updateCapability,
+  JUSTIFICATION_META,
+  getJustificationLabel,
+  GOAL_METADATA
 } from "store/modules/capabilities"
 
 import "./components/capabilities.css"
 
-const FormRow = ({ type="text", id, placeholder, value, onChange }) =>
+const FormRow = ({ type="text", id, placeholder, value, onChange=null, instructions=getInstructions, dollar=false, percent=false, readonly=false }) =>
   <div className="form-group row">
     <label htmlFor={ id } className="col-form-label col-sm-3">{ getLabel(id) }</label>
-    <div className="col-sm-9">
+    <div className="input-group col-sm-9">
+      { !dollar ? null :
+        <div className="input-group-prepend">
+          <div className="input-group-text">$</div>
+        </div>
+      }
       { type === "textarea" ?
         <textarea id={ id }
           className="form-control"
           placeholder={ placeholder }
           onChange={ onChange }
-          value={ value || "" }/>
+          value={ value || "" }
+          disabled={ readonly }/>
         :
         <input type={ type } id={ id }
           className="form-control"
           placeholder={ placeholder }
           onChange={ onChange }
-          value={ value || "" }/>
+          value={ value || "" }
+          disabled={ readonly }/>
+      }
+      { !percent ? null :
+        <div className="input-group-append">
+          <div className="input-group-text">%</div>
+        </div>
+      }
+    </div>
+    { !instructions(id) ? null :
+      <div className="col-sm-3"/>
+    }
+    { !instructions(id) ? null :
+      <div className="col-sm-9 row-instructions">
+        { instructions(id) }
+      </div>
+    }
+  </div>
+
+// //
+
+const CheckGroup = ({ type="checkbox", onChange, checks, name=null, label=getLabel, header=null, instructions=null, labelFunc=null, large=false }) =>
+  <div className="form-group row">
+    { header === null ?
+      <div className="col-sm-2"/> :
+      <div className="col-sm-3">
+        { header }
+      </div>
+    }
+    
+    {
+      checks.map((group, i) =>
+        <div className={ large ? "col-sm-8" : "col-sm-5" } key={ i }>
+          {
+            group.map(d => {
+              const variables = checks
+                .reduce((a, c) => a.concat(...c.filter(g => d.name === g.name).map(d => d.id)), [])
+              return (
+                <div className="form-check" key={ d.id }>
+                  <label className="form-check-label">
+                    <input type={ type } className="form-check-input"
+                      checked={ d.checked || false } onChange={ e => onChange(e, variables) }
+                      id={ d.id } name={ d.name || name }/>
+                    { labelFunc ? labelFunc(d) : label(d.id) }
+                  </label>
+                </div>
+              )
+            })
+          }
+        </div>
+      )
+    }
+    { !instructions ? null :
+      <div className="col-sm-12"/>
+    }
+    { !instructions ? null :
+      header === null ?
+        <div className="col-sm-2"/> :
+        <div className="col-sm-3"/>
+    }
+    {
+      !instructions ? null :
+      header === null ?
+        <div className="col-sm-10 row-instructions">
+          { instructions }
+        </div> :
+        <div className="col-sm-9 row-instructions">
+          { instructions }
+        </div>
+    }
+  </div>
+
+// //
+
+const PriorityRow = ({ onChange, id, value }) =>
+  <div className="form-group row">
+    <div className="col-sm-2"/>
+    <div className="col-sm-8">
+      {
+        Object.keys(PRIORITY_META_DATA[id]).sort((a, b) => b - a).map(key => {
+          return <div className="form-check" key={ key }>
+            <label className="form-check-label">
+              <input type="radio" className="form-check-input"
+                checked={ key == value } onChange={ e => onChange(id, key) }
+                name={ id }/>
+              ({ key }) { getLabel(id, key) }
+            </label>
+          </div>
+        })
       }
     </div>
   </div>
 
-const CheckGroup = ({ type="checkbox", onChange, checks, name=null, label=getLabel }) => {
-  return (
-    <div className="form-group row">
-      <div className="col-sm-2"/>
-      {
-        checks.map((group, i) =>
-          <div className="col-sm-5" key={ i }>
-            {
-              group.map(d => {
-                const variables = checks
-                  .reduce((a, c) => a.concat(...c.filter(g => d.name === g.name).map(d => d.id)), [])
-                return (
-                  <div className="form-check" key={ d.id }>
-                    <label className="form-check-label">
-                      <input type={ type } className="form-check-input"
-                        checked={ d.checked || false } onChange={ e => onChange(e, variables) }
-                        id={ d.id } name={ d.name || name }/>
-                      { label(d.id) }
-                    </label>
-                  </div>
-                )
-              })
-            }
-          </div>
-        )
-      }
-    </div>
-  )
-}
-
-const PriorityRow = ({ onChange, id, value }) => {
-  return (
-    <div className="form-group row">
-      <div className="col-sm-2"/>
-      <div className="col-sm-8">
-        {
-          Object.keys(PRIORITY_META_DATA[id]).sort((a, b) => b - a).map(key => {
-            return <div className="form-check" key={ key }>
-              <label className="form-check-label">
-                <input type="radio" className="form-check-input"
-                  checked={ key == value } onChange={ e => onChange(id, key) }
-                  name={ id }/>
-                ({ key }) { getLabel(id, key) }
-              </label>
-            </div>
-          })
-        }
-      </div>
-    </div>
-  )
-}
+// //
 
 class Accordion extends React.Component {
   state = {
@@ -127,6 +174,43 @@ class Accordion extends React.Component {
           { this.props.children }
         </div>
       </div>
+    )
+  }
+}
+
+// //
+
+class GoalAccordion extends React.Component {
+  render() {
+    const {
+      onChange,
+      goal=""
+    } = this.props;
+    return (
+      <Accordion title={ getLabel("goal") }>
+        {
+          GOAL_METADATA.map((group, i) =>
+            <div className="form-group row" key={ i }>
+              <div className="col-sm-1"/>
+              <div className="col-sm-11">
+                <CheckGroup name={ group.cat }
+                  labelFunc={ d => <span><b>{ d.id }</b> { d.desc }</span> }
+                  header={ group.cat }
+                  onChange={ onChange }
+                  large={ true }
+                  checks={[
+                    group.goals.map(g => ({
+                      id: g.goal,
+                      checked: goal.includes(g.goal),
+                      desc: g.desc
+                    }))
+                  ]}/>
+
+              </div>
+            </div>
+          )
+        }
+      </Accordion>
     )
   }
 }
@@ -228,6 +312,27 @@ class NewCapability extends React.Component {
       this.setState({ type: null })
     }
   }
+  updateGoal(e) {
+    console.log("UPDATE GOAL", e.target.id)
+    let goal = this.state.goal.split("|").filter(d => Boolean(d));
+    if (goal.includes(e.target.id)) {
+      goal = goal.filter(d => d !== e.target.id);
+    }
+    else {
+      goal.push(e.target.id);
+    }
+    this.setState({ goal: goal.join("|") });
+  }
+  updateJustifications(e) {
+    let justification = this.state.justification.split("|").filter(d => Boolean(d));
+    if (e.target.checked) {
+      justification.push(e.target.id);
+    }
+    else {
+      justification = justification.filter(d => d !== e.target.id);
+    }
+    this.setState({ justification: justification.join("|") });
+  }
   onSubmit(e) {
     e.preventDefault();
 
@@ -313,6 +418,7 @@ class NewCapability extends React.Component {
         contact_department,
         agency,
         partners,
+
         status_new_shmp,
         status_carryover_shmp,
         status_in_progess,
@@ -320,6 +426,8 @@ class NewCapability extends React.Component {
         status_unchanged,
         status_completed,
         status_discontinued,
+        status_proposed,
+
         admin_statewide,
         admin_regional,
         admin_county,
@@ -333,7 +441,7 @@ class NewCapability extends React.Component {
         secondary_funding,
         num_staff,
         num_contract_staff,
-        hazards,
+        hazards="",
         capability_mitigation,
         capability_preparedness,
         capability_response,
@@ -346,6 +454,7 @@ class NewCapability extends React.Component {
         capability_administer_funding,
 
         funding_amount,
+        funding_received,
 
         capability_tech_support,
         capability_construction,
@@ -366,7 +475,7 @@ class NewCapability extends React.Component {
 
         related_policy,
         url,
-        goal,
+        goal="",
         objective,
 
         type,
@@ -376,9 +485,25 @@ class NewCapability extends React.Component {
 
         benefit_cost_analysis,
         engineering_required,
-        engineering_complete
+        engineering_complete,
+
+        repetitive_loss,
+
+        origin_plan_name,
+        origin_plan_year,
+
+        design_percent_complete,
+        scope_percent_complete,
+
+        start_date,
+        completed_date,
+
+        justification="",
       } = this.state,
       title = (id === null) ? "Add New Program, Measure, or Action Below" : "Edit Program, Measure, or Action";
+
+    const JUSTIFICATIONS = Object.keys(JUSTIFICATION_META)
+
     return (
       <Element>
         <h6 className="element-header">{ title }</h6>
@@ -403,102 +528,115 @@ class NewCapability extends React.Component {
                     value={ url }
                     onChange={ this.onChange.bind(this) }/>
 
-                <FormRow id="county"
+                <CheckGroup type="radio" name="type" header={ getLabel("type") }
+                  onChange={ this.setType.bind(this) }
+                  label={ d => d.split("").map((d, i) => i === 0 ? d.toUpperCase() : d).join("") }
+                  checks={[
+                      [{ id: "program", checked: type === "program" },
+                      { id: "measure", checked: type === "measure" },
+                      { id: "action", checked: type === "action" }]
+                    ]
+                  }/>
+
+                <FormRow id="start_date" type="date"
+                  value={ start_date }
+                  onChange={ this.onChange.bind(this) }/>
+
+                <FormRow id="completed_date" type="date"
+                  value={ completed_date }
+                  onChange={ this.onChange.bind(this) }/>
+
+                <CheckGroup onChange={ this.checkbox.bind(this) }
+                  instructions={ getInstructions("repetitive_loss") }
+                  header={ "" }
+                  checks={
+                    [[
+                      { id: "repetitive_loss", checked: repetitive_loss }
+                    ]]
+                  }/>
+
+                { type !== "action" ? null :
+                  <FormRow id="county"
                     placeholder="Enter a county..."
                     value={ county }
                     onChange={ this.onChange.bind(this) }/>
+                }
 
-                <FormRow id="municipality"
+                { type !== "action" ? null :
+                  <FormRow id="municipality"
                     placeholder="Enter a municipality..."
                     value={ municipality }
                     onChange={ this.onChange.bind(this) }/>
+                }
 
-                <div className="form-group row">
-                  <label className="col-form-label col-sm-3">Type (choose one)</label>
-                  <div className="col-sm-6">
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="radio" className="form-check-input"
-                          checked={ type === "program" } name="type"
-                          id="program"
-                          onChange={ this.setType.bind(this) }/>
-                        Program
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="radio" className="form-check-input"
-                          checked={ type === "measure" } name="type"
-                          id="measure"
-                          onChange={ this.setType.bind(this) }/>
-                        Measure
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="radio" className="form-check-input"
-                          checked={ type === "action" } name="type"
-                          id="action"
-                          onChange={ this.setType.bind(this) }/>
-                        Action
-                      </label>
-                    </div>
-                  </div>
-                </div>
-
-
-                <Accordion title="Contact Information">
-                  <FormRow id="contact"
-                      placeholder="Enter a contact..."
-                      value={ contact }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="contact_email"
-                      placeholder="Enter contact's email..."
-                      value={ contact_email }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="contact_title"
-                      placeholder="Enter contact's title..."
-                      value={ contact_title }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="contact_department"
-                      placeholder="Enter contact's department..."
-                      value={ contact_department }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="agency"
-                      placeholder="Enter agency..."
-                      value={ agency }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="partners"
-                      placeholder="Enter partners..."
-                      value={ partners }
-                      onChange={ this.onChange.bind(this) }/>
-                </Accordion>
+                { type === "measure" ? null :
+                  <Accordion title="Contact Information">
+                    <FormRow id="contact"
+                        placeholder="Enter a contact..."
+                        value={ contact }
+                        onChange={ this.onChange.bind(this) }/>
+                    <FormRow id="contact_email"
+                        placeholder="Enter contact's email..."
+                        value={ contact_email }
+                        onChange={ this.onChange.bind(this) }/>
+                    <FormRow id="contact_title"
+                        placeholder="Enter contact's title..."
+                        value={ contact_title }
+                        onChange={ this.onChange.bind(this) }/>
+                    <FormRow id="contact_department"
+                        placeholder="Enter contact's department..."
+                        value={ contact_department }
+                        onChange={ this.onChange.bind(this) }/>
+                    <FormRow id="agency"
+                        placeholder="Enter agency..."
+                        value={ agency }
+                        onChange={ this.onChange.bind(this) }/>
+                    <FormRow id="partners"
+                        placeholder="Enter partners..."
+                        value={ partners }
+                        onChange={ this.onChange.bind(this) }/>
+                  </Accordion>
+                }
 
                 <Accordion title="Budget Information">
-                  <FormRow id="budget_provided"
-                      placeholder="Enter a budget..."
-                      value={ budget_provided }
-                      onChange={ this.onChange.bind(this) }/>
+                  { type === "measure" ? null :
+                    <FormRow id="budget_provided" type="number"
+                        placeholder="Enter budget provided..."
+                        value={ budget_provided } dollar={ true }
+                        onChange={ this.onChange.bind(this) }/>
+                  }
+                  { type !== "action" ? null :
+                    <FormRow id="funding_received" type="number"
+                        placeholder="Enter funding received..."
+                        value={ funding_received } dollar={ true }
+                        onChange={ this.onChange.bind(this) }/>
+                  }
+                  { !capability_administer_funding ? null :
+                    <FormRow id="funding_amount" type="number"
+                        placeholder="Enter funding administered..."
+                        value={ funding_amount } dollar={ true }
+                        onChange={ this.onChange.bind(this) }/>
+                  }
                   <FormRow id="primary_funding"
-                      placeholder="Enter primary funding..."
+                      placeholder="Enter primary funding source..."
                       value={ primary_funding }
                       onChange={ this.onChange.bind(this) }/>
                   <FormRow id="secondary_funding"
-                      placeholder="Enter secondary funding..."
+                      placeholder="Enter secondary funding source..."
                       value={ secondary_funding }
                       onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="num_staff"
-                      type="number"
-                      value={ num_staff }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="num_contract_staff"
-                      type="number"
-                      value={ num_contract_staff }
-                      onChange={ this.onChange.bind(this) }/>
-                  <FormRow id="funding_amount"
-                      placeholder="Enter funding amount..."
-                      value={ funding_amount }
-                      onChange={ this.onChange.bind(this) }/>
+                  { type === "measure" ? null :
+                    <FormRow id="num_staff"
+                        type="number"
+                        value={ num_staff }
+                        onChange={ this.onChange.bind(this) }/>
+                  }
+                  { type === "measure" ? null :
+                    <FormRow id="num_contract_staff"
+                        type="number"
+                        value={ num_contract_staff }
+                        onChange={ this.onChange.bind(this) }/>
+                  }
                 </Accordion>
 
                 <Accordion title="Hazards">
@@ -533,34 +671,72 @@ class NewCapability extends React.Component {
                     }/>
                 </Accordion>
 
-                <Accordion title="Status">
-                  <CheckGroup onChange={ this.radios.bind(this) } type="radio"
-                    checks={
-                      [[
-                        { id: "status_new_shmp", checked: status_new_shmp, name: "shmp" },
-                        { id: "status_carryover_shmp", checked: status_carryover_shmp, name: "shmp" }
-                      ],
-                      [
-                        { id: "status_unchanged", checked: status_unchanged, name: "status" },
-                        { id: "status_completed", checked: status_completed, name: "status" },
-                        { id: "status_discontinued", checked: status_discontinued, name: "status" },
-                        { id: "status_in_progess", checked: status_in_progess, name: "status" },
-                        { id: "status_on_going", checked: status_on_going, name: "status" }
-                      ]]
-                    }/>
-                </Accordion>
+                { type === "measure" ? null :
+                  <Accordion title="Status">
 
-                <Accordion title="Administration">
-                  <CheckGroup onChange={ this.checkbox.bind(this) }
-                    checks={
-                      [[
-                        { id: "admin_statewide", checked: admin_statewide },
-                        { id: "admin_regional", checked: admin_regional },
-                        { id: "admin_county", checked: admin_county },
-                        { id: "admin_local", checked: admin_local }
-                      ]]
-                    }/>
-                </Accordion>
+                    <CheckGroup onChange={ this.radios.bind(this) } type="radio"
+                      checks={
+                        [[
+                          { id: "status_new_shmp", checked: status_new_shmp, name: "shmp" },
+                          { id: "status_carryover_shmp", checked: status_carryover_shmp, name: "shmp" }
+                        ],
+                        [
+                          { id: "status_unchanged", checked: status_unchanged, name: "status" },
+                          { id: "status_completed", checked: status_completed, name: "status" },
+                          { id: "status_discontinued", checked: status_discontinued, name: "status" },
+                          { id: "status_in_progess", checked: status_in_progess, name: "status" },
+                          { id: "status_on_going", checked: status_on_going, name: "status" },
+                          { id: "status_proposed", checked: status_proposed, name: "status" }
+                        ].filter(d => type === "program" ? true : d.id !== "status_on_going")]
+                      }/>
+
+                    <div className="accordion-instructions">
+                      { getInstructions("justification") }
+                    </div>
+
+                    <CheckGroup onChange={ this.updateJustifications.bind(this) }
+                      label={ getJustificationLabel }
+                      checks={
+                        [ 
+                          JUSTIFICATIONS.slice(0, Math.ceil(JUSTIFICATIONS.length * 0.5))
+                            .map(id => ({ id, checked: justification.includes(id) })),
+                          JUSTIFICATIONS.slice(Math.ceil(JUSTIFICATIONS.length * 0.5))
+                            .map(id => ({ id, checked: justification.includes(id) }))
+                        ]
+                      }/>
+
+                  </Accordion>
+                }
+                    
+                { type !== "action" ? null :
+                  !(status_in_progess || status_unchanged || status_proposed) ? null :
+                  <FormRow id="design_percent_complete" type="number"
+                    placeholder="Enter percent completed..."
+                    value={ design_percent_complete } percent={ true }
+                    onChange={ this.onChange.bind(this) }/>
+                }
+                      
+                { type !== "action" ? null :
+                  !(status_in_progess || status_unchanged || status_proposed) ? null :
+                  <FormRow id="scope_percent_complete" type="number"
+                    placeholder="Enter percent completed..."
+                    value={ scope_percent_complete } percent={ true }
+                    onChange={ this.onChange.bind(this) }/>
+                }
+
+                { type === "measure" ? null :
+                  <Accordion title="Administration">
+                    <CheckGroup onChange={ this.checkbox.bind(this) }
+                      checks={
+                        [[
+                          { id: "admin_statewide", checked: admin_statewide },
+                          { id: "admin_regional", checked: admin_regional },
+                          { id: "admin_county", checked: admin_county },
+                          { id: "admin_local", checked: admin_local }
+                        ]]
+                      }/>
+                  </Accordion>
+                }
 
                 <Accordion title="Capabilities">
                   <CheckGroup onChange={ this.checkbox.bind(this) }
@@ -640,74 +816,81 @@ class NewCapability extends React.Component {
                   </Accordion>
                 }
 
-                <Accordion title="File Type"
-                  instructions="Please let us know if there is a location file associated with this project/program">
-                  <CheckGroup onChange={ this.radios.bind(this) }
-                    type="radio" name={ "file-type" }
-                    checks={
-                      [[
-                        { id: "file_type_shp", checked: file_type_shp },
-                        { id: "file_type_lat_lon", checked: file_type_lat_lon },
-                        { id: "file_type_address", checked: file_type_address },
-                        { id: "file_type_not_tracked", checked: file_type_not_tracked }
-                      ]]
-                    }/>
-                </Accordion>
+                <GoalAccordion goal={ goal }
+                  onChange={ this.updateGoal.bind(this) }/>
+
+                { type === "measure" ? null :
+                  <Accordion title={ getLabel("file_type") }
+                    instructions={ getInstructions("file_type") }>
+                    <CheckGroup onChange={ this.radios.bind(this) }
+                      type="radio" name={ "file-type" }
+                      checks={
+                        [[
+                          { id: "file_type_shp", checked: file_type_shp },
+                          { id: "file_type_lat_lon", checked: file_type_lat_lon },
+                          { id: "file_type_address", checked: file_type_address },
+                          { id: "file_type_not_tracked", checked: file_type_not_tracked }
+                        ]]
+                      }/>
+                  </Accordion>
+                }
 
                 <FormRow id="related_policy"
-                    placeholder="Enter related policy..."
-                    value={ related_policy }
-                    onChange={ this.onChange.bind(this) }/>
+                  placeholder="Enter related policy..."
+                  value={ related_policy }
+                  onChange={ this.onChange.bind(this) }/>
 
-                <FormRow id="goal"
-                    placeholder="Enter goal..."
-                    value={ goal }
+                { type === "measure" ? null :
+                  <FormRow id="origin_plan_name"
+                    placeholder="Enter origin plan name..."
+                    value={ origin_plan_name }
                     onChange={ this.onChange.bind(this) }/>
+                }
+
+                { type === "measure" ? null :
+                  <FormRow id="origin_plan_year"
+                    placeholder="Enter origin plan year..."
+                    value={ origin_plan_year } type="number"
+                    onChange={ this.onChange.bind(this) }/>
+                }
 
                 <FormRow id="objective"
-                    placeholder="Enter objective..."
-                    value={ objective }
-                    onChange={ this.onChange.bind(this) }/>
+                  placeholder="Enter objective..."
+                  value={ objective }
+                  onChange={ this.onChange.bind(this) }/>
 
-                <div className="form-group row">
-                  <div className="col-sm-3"/>
-                  <div className="col-sm-6">
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input"
-                          checked={ benefit_cost_analysis } id="benefit_cost_analysis"
-                          onChange={ this.checkbox.bind(this) }/>
-                        { getLabel("benefit_cost_analysis") }
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <div className="col-sm-3"/>
-                  <div className="col-sm-6">
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input"
-                          checked={ engineering_required } id="engineering_required"
-                          onChange={ this.checkbox.bind(this) }/>
-                        { getLabel("engineering_required") }
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <div className="col-sm-3"/>
-                  <div className="col-sm-6">
-                    <div className="form-check">
-                      <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input"
-                          checked={ engineering_complete } id="engineering_complete"
-                          onChange={ this.checkbox.bind(this) }/>
-                        { getLabel("engineering_complete") }
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                { type !== "action" ? null :
+                  <Accordion title="Action Requirements">
+                    <CheckGroup onChange={ this.checkbox.bind(this) }
+                      instructions={ getInstructions("benefit_cost_analysis") }
+                      header={ "" }
+                      checks={
+                        [[
+                          { id: "benefit_cost_analysis", checked: benefit_cost_analysis }
+                        ]]
+                      }/>
+
+                    <CheckGroup onChange={ this.checkbox.bind(this) }
+                      instructions={ getInstructions("engineering_required") }
+                      header={ "" }
+                      checks={
+                        [[
+                          { id: "engineering_required", checked: engineering_required }
+                        ]]
+                      }/>
+
+                    { !engineering_required ? null :
+                      <CheckGroup onChange={ this.checkbox.bind(this) }
+                        instructions={ getInstructions("engineering_complete") }
+                        header={ "" }
+                        checks={
+                          [[
+                            { id: "engineering_complete", checked: engineering_complete }
+                          ]]
+                        }/>
+                    }
+                  </Accordion>
+                }
 
                 <div className="form-buttons-w">
                   <button className="btn btn-primary">Submit</button>

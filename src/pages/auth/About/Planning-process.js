@@ -111,6 +111,6 @@ export default [
     exact: true,
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
-    component: connect(() => {}, {})(PlanningProcess),
+    component: connect(() => ({}), {})(PlanningProcess),
   }
 ]

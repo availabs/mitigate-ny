@@ -1,15 +1,8 @@
 let initialState = {
 	ids :[
-		"cscic",
-		"oits",
-		"ofpc",
-		"oiec",
-		"oem",
-		"oct",
 		"mta",
 		"dos",
 		"doh",
-		"insurance",
 		"ba",
 		"dam",
 		"nysed",
@@ -37,7 +30,6 @@ let initialState = {
 		"panynj",
 		"suny",
 		"redcross",
-		"eiso",
 		"ovs",
 		"gosr",
 		"nycoem",

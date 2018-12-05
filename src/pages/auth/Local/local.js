@@ -129,7 +129,7 @@ export default [
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: Submenus,
-    component: connect(() => {}, {})(Local),
+    component: connect(() => ({}), {})(Local),
   },
 
   ...LocalCapabilities

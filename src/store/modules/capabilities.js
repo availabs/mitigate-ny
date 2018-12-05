@@ -21,16 +21,13 @@ export const ATTRIBUTES = [
 	"contact_department",
 	"agency",
 	"partners",
-
 	"status_new_shmp",
 	"status_carryover_shmp",
-	
 	"status_in_progess",
 	"status_on_going",
 	"status_unchanged",
 	"status_completed",
 	"status_discontinued",
-	
 	"admin_statewide",
 	"admin_regional",
 	"admin_county",
@@ -79,13 +76,35 @@ export const ATTRIBUTES = [
 	"priority_6",
 	"priority_7",
 	"priority_total",
+
 	"benefit_cost_analysis",
+
 	"engineering_required",
 	"engineering_complete",
+
 	"type",
+
 	"municipality",
 	"county",
+
 	"capability_resiliency",
+
+	"repetitive_loss",
+
+	"origin_plan_name",
+	"origin_plan_year",
+
+	"funding_received",
+
+	"design_percent_complete",
+	"scope_percent_complete",
+
+	"status_proposed",
+
+	"start_date",
+	"completed_date",
+
+	"justification",
 	
 	"id",
 	"created_at",
@@ -120,6 +139,8 @@ export const META_DATA = {
 	"file_type_lat_lon": { defaultValue: false, label: "Lat / Lon .csv" },
 	"file_type_address": { defaultValue: false, label: "Address" },
 	"file_type_not_tracked": { defaultValue: false, label: "File Type Not Tracked" },
+	"file_type": { instruction: "Please let us know if there is a location file associated with this project/program",
+								label: "File Type" },
 
 	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Budget Provided for Program or Cost of Mitigation Action"  },
 	"primary_funding": { defaultValue: "", label: "Primary Funding" },
@@ -152,7 +173,7 @@ export const META_DATA = {
 
 	"related_policy": { defaultValue: "", label: "Related Policy" },
 	"url": { defaultValue: "", label: "Project URL" },
-	"goal": { defaultValue: "", label: "Goal" },
+	"goal": { defaultValue: "", label: "Goals" },
 	"objective": { defaultValue: "", label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
@@ -175,12 +196,41 @@ export const META_DATA = {
 	"engineering_required": { defaultValue: false, label: "Engineering Required" },
 	"engineering_complete": { defaultValue: false, label: "Engineering Completed" },
 
-	"type": { defaultValue: 'program', label: "Type"},
+	"type": { defaultValue: 'program', label: "Type (choose one)" },
 
-	"municipality": {defaultValue: "", label: "Action Municipality" },
+	"municipality": { defaultValue: "", label: "Action Municipality" },
 	"county": { defaultValue: "", label: "Action County" },
 
+	"repetitive_loss": { defaultValue: false, label: "Repetitive Loss", instruction: "Check this if the action deals with repetitive loss" },
+
+	"origin_plan_name": { defaultValue: null, label: "Origin: Plan Name" },
+	"origin_plan_year": { defaultValue: null, label: "Origin: Plan Year" },
+
+	"funding_received": { defaultValue: 0.00, label: "Funding Received to Date" },
+
+	"design_percent_complete": { defaultValue: 0, label: "Design: % Complete" },
+	"scope_percent_complete": { defaultValue: 0, label: "Scope: % Complete" },
+
+	"status_proposed": { defaultValue: false, label: "Proposed" },
+
+	"start_date": { defaultValue: null, label: "Start Date" },
+	"completed_date": { defaultValue: null, label: "Completed Date" },
+
+	"justification": { defaultValue: "", label: "Justification", instruction: "Select a justification for current status" },
 }
+
+export const JUSTIFICATION_META = {
+  "lack_of_funding": { label: "Lack of Funding" },
+  "funding_change": { label: "Funding Change "},
+  "env_hist_preservation": { label: "Env. / Hist. Preservation" },
+  "staffing": { label: "Staffing" },
+  "public_support": { label: "Public Support" },
+  "legal": { label: "Legal" },
+  "fixed": { label: "Fixed"},
+  "priority_change": { label: "Priority Change" }
+}
+export const getJustificationLabel = id =>
+	JUSTIFICATION_META[id] ? JUSTIFICATION_META[id].label : id
 
 export const PRIORITY_META_DATA = {
 	priority_1: {
@@ -237,6 +287,93 @@ export const getLabel = (attribute, score=null) => {
 }
 export const getInstructions = attribute =>
 	META_DATA[attribute] ? META_DATA[attribute].instruction : null
+
+export const GOAL_METADATA = [
+	{ cat: "Federal, State, and Local Coordination",
+		goals: [
+			{ goal: "1.1",
+				desc: "Promote integrated land use planning and development to encourage resilience and sustainability through statewide programs that address zoning, building codes, smart growth, capital improvement programs, open space preservation, critical infrastructure siting, and storm water management regulations."
+			},
+			{ goal: "1.2",
+				desc: "Continue to participate in state and local programs and efforts that focus on practices that support or enhance resiliency."
+			},
+			{	goal: "1.3",
+				desc: "Improve hazard data through studies, research, and mapping to enhance information related to the impacts of hazards and related risks, vulnerability, and losses."
+			}
+		]
+	},
+
+	{ cat: "Protect Existing Properties",
+		goals: [
+			{ goal: "2.1",
+				desc: "Encourage homeowners, renters, and businesses to insure property for all hazards, including flood coverage under the National Flood Insurance Program (NFIP)."
+			},
+			{ goal: "2.2",
+				desc: "Identify mitigation opportunities to protect, upgrade and strengthen existing structures from all-hazards through acquisition, elevation, relocation, and retrofit."
+			},
+			{ goal: "2.3",
+				desc: "Encourage resilient and sustainable structural practices that reduce vulnerabilities and encourage the use of green and natural infrastructure."
+			},
+			{ goal: "2.4",
+				desc: "Promote the continued use of natural systems and features, open space preservation, and land use development planning with local jurisdictions.",
+			},
+			{ goal: "2.5",
+				desc: "Acquire, retrofit, or relocate repetitive loss properties from hazard-prone areas in the state."
+			}
+		]
+	},
+
+	{ cat: "Increase Awareness",
+		goals: [
+			{ goal: "3.1",
+				desc: "Offer trainings, education, technical support and awareness programs to better utilize funding opportunities and integrate mitigation into ongoing planning efforts and program functions."
+			},
+			{ goal: "3.2",
+				desc: "Offer dedicated education and awareness programs to reduce the impact of hazards on vulnerable populations."
+			},
+			{ goal: "3.3",
+				desc: "Continue to develop and improve systems that provide warning, awareness, and emergency communication."
+			},
+			{ goal: "3.4",
+				desc: "Inventory, evaluate, and build state, and local capacity for risk reduction."
+			}
+		]
+	},
+
+	{ cat: "Preserve or Restore Natural Systems",
+		goals: [
+			{ goal: "4.1",
+				desc: "Encourage the use of green and natural infrastructure."
+			},
+			{ goal: "4.2",
+				desc: "Provide technical assistance to communities and stakeholders in the application and implementation of mitigation projects that preserve or restore natural systems."
+			},
+			{ goal: "4.3",
+				desc: "Maintain and encourage ongoing relationships between state agencies and partners to play an active and vital role in preservation and restoration of vulnerable natural systems."
+			},
+			{ goal: "4.4",
+				desc: "Facilitate, encourage, and manage retreat where appropriate."
+			}
+		]
+	},
+
+	{ cat: "Build Stronger",
+		goals: [
+			{ goal: "5.1",
+				desc: "Encourage building and rebuilding practices that address resiliency through higher standards and sustainable design to resist impacts of natural hazards."
+			},
+			{ goal: "5.2",
+				desc: "Enhance coordination with state and local agencies that promote resiliency and sustainability."
+			},
+			{ goal: "5.3",
+				desc: "Identify sustainable flood and erosion control projects and activities that demonstrate resiliency practices."
+			},
+			{ goal: "5.4",
+				desc: "Provide assistance in the implementation of flood mitigation plans and projects in flood-prone areas, in accordance with federal and state regulatory, funding, and technical assistance programs. Pursuing these goals and objectives will allow the State to achieve the ideal described in the State’s Hazard Mitigation Vision Statement."
+			}
+		]
+	}
+]
 
 export const receiveCapabilities = capabilities =>
 	dispatch => (
@@ -299,11 +436,7 @@ export const clearCapabilityData = () =>
 
 const INITIAL_STATE = {
 	capabilities: [],
-	capabilityData: {
-		id: null,
-		name: "",
-		description: ""
-	},
+	capabilityData: {},
 	hazardFilters: [],
 	hazards: [],
 	agencyFilters: [],

@@ -50,6 +50,6 @@ export default [
     mainNav: false,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: subMenus,
-    component: connect(() => {}, {})(Research),
+    component: connect(() => ({}), {})(Research),
   },
 ]

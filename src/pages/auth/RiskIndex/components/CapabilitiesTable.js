@@ -48,6 +48,7 @@ import {
 	status_unchanged
 	status_completed
 	status_discontinued
+	status_proposed
 */
 
 class CapabilitiesTable extends React.Component {
@@ -146,7 +147,8 @@ class CapabilitiesTable extends React.Component {
 									"status_on_going",
 									"status_unchanged",
 									"status_completed",
-									"status_discontinued"
+									"status_discontinued",
+									"status_proposed"
 								].reduce((a, c) => capability[c] ? a.concat(getLabel(c)) : a, []).join(" | ");
 								break;
 							case "capability":
