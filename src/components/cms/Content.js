@@ -47,11 +47,13 @@ class CMS_BodyViewer extends React.Component {
 			overflow: "auto"
 		};
 		return (
-			!error ?
+			!error && !body ?
+				<div>Loading...</div>
+			: !error ?
 				<div style={ style } id={ content_id } style={ { position: "relative" } }>
 					{ !(authed && showLink) ? null :
 						<Link to={ `/cms/edit/${ content_id }` }
-							style={ { position: "absolute", right: "5px", top: "5px", zIndex: 1000 } }>
+							style={ { position: "absolute", right: `${ this.props.right }px`, top: `${ this.props.top }px`, zIndex: 1000 } }>
 							edit #{ content_id }
 						</Link>
 					}
@@ -65,7 +67,9 @@ class CMS_BodyViewer extends React.Component {
 }
 
 CMS_BodyViewer.defaultProps = {
-	showLink: true
+	showLink: true,
+	right: 5,
+	top: 5
 }
 
 const mapStateToProps = state => ({
