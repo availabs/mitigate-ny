@@ -78,7 +78,7 @@ class CountyPage extends React.Component {
 
             <div className="property-section">
               <Content content_id={ `${ this.state.geoid }-about` }
-                top={ -20 } placeholder="Work in progress..."/>
+                top={ -20 } right={ 0 }/>
             </div>
 
             <div className="property-section">

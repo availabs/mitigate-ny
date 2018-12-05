@@ -60,8 +60,6 @@ class CMS_BodyViewer extends React.Component {
 					<MarkdownRenderer markdown={ body }
                   		options={ { html: true } }/>
 				</div>
-			: error && this.props.placeholder ?
-				<div>{ this.props.placeholder }</div>
 			:
 				authed ? <div>{ `There was an error: ${ error }` }</div> : <span />
 		)
@@ -71,8 +69,7 @@ class CMS_BodyViewer extends React.Component {
 CMS_BodyViewer.defaultProps = {
 	showLink: true,
 	right: 5,
-	top: 5,
-	placeholder: ""
+	top: 5
 }
 
 const mapStateToProps = state => ({
