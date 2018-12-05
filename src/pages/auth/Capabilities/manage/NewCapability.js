@@ -694,16 +694,18 @@ class NewCapability extends React.Component {
                       { getInstructions("justification") }
                     </div>
 
-                    <CheckGroup onChange={ this.updateJustifications.bind(this) }
-                      label={ getJustificationLabel }
-                      checks={
-                        [ 
-                          JUSTIFICATIONS.slice(0, Math.ceil(JUSTIFICATIONS.length * 0.5))
-                            .map(id => ({ id, checked: justification.includes(id) })),
-                          JUSTIFICATIONS.slice(Math.ceil(JUSTIFICATIONS.length * 0.5))
-                            .map(id => ({ id, checked: justification.includes(id) }))
-                        ]
-                      }/>
+                    { !(status_unchanged || status_discontinued) ? null :
+                      <CheckGroup onChange={ this.updateJustifications.bind(this) }
+                        label={ getJustificationLabel }
+                        checks={
+                          [ 
+                            JUSTIFICATIONS.slice(0, Math.ceil(JUSTIFICATIONS.length * 0.5))
+                              .map(id => ({ id, checked: justification.includes(id) })),
+                            JUSTIFICATIONS.slice(Math.ceil(JUSTIFICATIONS.length * 0.5))
+                              .map(id => ({ id, checked: justification.includes(id) }))
+                          ]
+                        }/>
+                    }
 
                   </Accordion>
                 }
