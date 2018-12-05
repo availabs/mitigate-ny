@@ -6729,7 +6729,7 @@ a.text-dark:hover, a.text-dark:focus {
   padding-right: 0px;
   border-top-color: rgba(0, 0, 0, 0.05); }
   .table.table-clean td .value {
-    font-size: 1.1rem;
+    font-size: 0.088rem;
     line-height: 1.2; }
   .table.table-clean td .sub-value {
     font-size: 0.88rem;
