@@ -10,6 +10,8 @@ import HazardList from "./components/HazardListNew"
 import CousubTotalLossTable from "./components/CousubTotalLossTable"
 import HMGPTable from "./components/HMGPTable"
 
+import Content from "components/cms/Content"
+
 import {
   getColorScale,
   getColors
@@ -73,6 +75,11 @@ class CountyPage extends React.Component {
           <div className="property-info-main" style={ { maxWidth: '60%' } }>
             
             <h1>{ this.getGeoidName() }</h1>
+
+            <div className="property-section">
+              <Content content_id={ `${ this.state.geoid }-about` }
+                top={ -20 } placeholder="Work in progress..."/>
+            </div>
 
             <div className="property-section">
               <GeographyScoreBarChart
