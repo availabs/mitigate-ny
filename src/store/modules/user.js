@@ -1,8 +1,8 @@
 import { sendSystemMessage } from "./messages"
 
 // const HOST = 'https://aauth.availabs.org/';
-// const HOST = 'https://availauth.availabs.org'
-const HOST = 'http://localhost:3457'
+const HOST = 'https://availauth.availabs.org'
+// const HOST = 'http://localhost:3457'
 
 // ------------------------------------
 // Constants
