@@ -23,7 +23,7 @@ const DefaultLayout = ({component: Component, ...rest}) => {
       )} />
     )
   } 
-  
+
   return checkAuth(rest) ?
   (
     <Redirect

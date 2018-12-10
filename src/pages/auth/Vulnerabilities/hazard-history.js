@@ -178,8 +178,6 @@ const mapDispatchToProps = {
   push: url => dispatch => dispatch(push(url))
 };
 
-console.log("???????",Submenus)
-
 export default [
   {
     path: '/hazardhistory',

@@ -1,17 +1,22 @@
-const HOST = 'https://aauth.availabs.org/';
+import { sendSystemMessage } from "./messages"
+
+// const HOST = 'https://aauth.availabs.org/';
+// const HOST = 'https://availauth.availabs.org'
+const HOST = 'http://localhost:3457'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 const USER_LOGIN = 'USER_LOGIN';
 const USER_LOGOUT = 'USER_LOGOUT';
+const AUTH_FAILURE = 'AUTH_FAILURE'
 // ------------------------------------
 // Actions
 // ------------------------------------
-function receiveAuthResponse(res) {
+function receiveAuthResponse(user) {
   return {
     type: USER_LOGIN,
-    res
+    user
   };
 }
 
@@ -28,27 +33,92 @@ export function logout() {
   };
 }
 
-export const login = (user) => {
-  // console.log('### Login Request ###');
-  // console.log(user.email, user.password, user.token);
-  return dispatch => {
-    // console.log('----- USER LOGIN -----');
-    if (user && user.token) {
-      return dispatch(TODO_AuthServerVerifiesToken(user));
-    }
+const setUserToken = user => {
+  if (localStorage) {
+    localStorage.setItem("userToken", user.token);
+  }
+}
+const getUserToken = user => {
+  if (localStorage) {
+    return localStorage.getItem("userToken");
+  }
+  return null;
+}
+const removeUserToken = () => {
+  if (localStorage) {
+    localStorage.removeItem("userToken");
+  }
+}
 
-    return fetch(`${HOST}login/auth`, {
+export const login = (email, password) =>
+  dispatch =>
+    fetch(`${ HOST }/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: user.email, password: user.password, token: user.token })
+      body: JSON.stringify({ email, password, project: "hazard_mitigation" })
     })
-      .then(response => response.json())
-      .then(json => dispatch(receiveAuthResponse(json.message || json)));
-  };
-};
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+          dispatch({ type: AUTH_FAILURE })
+          dispatch(sendSystemMessage(res.error));
+      }
+      else {
+          dispatch(receiveAuthResponse(res.user))
+      }
+    })
+export const auth = () =>
+  dispatch => {
+    const token = getUserToken();
+    if (token) {
+      return fetch(`${ HOST }/auth`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ token, project: "hazard_mitigation" })
+        })
+      .then(res => res.json())
+      .then(res => {
+          if (res.error) {
+            dispatch({ type: AUTH_FAILURE })
+            dispatch(sendSystemMessage(res.error));
+          }
+          else {
+            dispatch(receiveAuthResponse(res.user))
+          }
+      });
+    }
+    else {
+      // return Promise.resolve();
+      return dispatch({ type: AUTH_FAILURE })
+    }
+  }
+
+export const signup = email =>
+  dispatch => {
+    return fetch(`${ HOST }/signup/request`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, project: "hazard_mitigation" })
+      })
+    .then(res => res.json())
+    .then(res => {
+      if (res.error) {
+        dispatch(sendSystemMessage(res.error));
+      }
+      else {
+        dispatch(sendSystemMessage(res.message));
+      }
+    })
+  }
 
 export const actions = {
   login,
@@ -59,6 +129,9 @@ export const actions = {
 // Initial State
 // -------------------------------------
 let initialState = {
+  token: null,
+  groups: [],
+  authLevel: 0,
   authed: false,
   attempts: 0
 };
@@ -67,27 +140,22 @@ let initialState = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [USER_LOGIN]: (state, action) => {
+  [USER_LOGIN]: (state = initialState, action) => {
     // Not sure why, but state comes in as an empty object rather than the initialState.
-    let newState = Object.assign({}, initialState, state);
+    let newState = Object.assign({}, newState, ...action.user, { authed: true });
     ++newState.attempts;
-    if (action.res.type === 'error') {
-      newState.error = action.res.text;
-    } else if (action.res.id !== -1) {
-      // console.log('authed', action.res);
-      // action.res
-      newState = Object.assign({}, newState, action.res, { authed: true });
-      if (typeof Storage !== 'undefined') {
-        localStorage.setItem('user', JSON.stringify(action.res));
-      }
-    }
+    setUserToken(action.user);
+    return newState;
+  },
+  [AUTH_FAILURE]: (state=initialState, action) => {
+    removeUserToken()
+    let newState = initialState;
+    ++newState.attempts;
+console.log(AUTH_FAILURE,newState)
     return newState;
   },
   [USER_LOGOUT]: (state = initialState, action) => {
-    if (typeof Storage !== 'undefined') {
-      localStorage.removeItem('user');
-      localStorage.removeItem('key');
-    }
+    removeUserToken()
     return initialState;
   }
 };

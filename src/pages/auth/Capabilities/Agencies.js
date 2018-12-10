@@ -44,6 +44,5 @@ export default [
        {name: 'Counties', path: '/counties'},
     ]],
     component: connect(() => ({}), {})(Agencies),
-
   }
 ]

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 
-import { login } from '../store/modules/user';
+import { signup } from '../store/modules/user';
 
 import Logo from "components/mitigate-ny/Logo"
 
@@ -10,14 +10,12 @@ import './Login.css'
 
 class Login extends Component {
   state = {
-      isLoading: false,
       email: '',
-      password: '',
-      redirectToReferrer: false
+      email_verify: ''
   }
   
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.email === this.state.email_verify;
   }
 
   handleChange = event => {
@@ -28,32 +26,18 @@ class Login extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ isLoading: true });
-    this.props.login(this.state.email, this.state.password);
+    this.props.signup(this.state.email);
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuthenticated) {
-      this.setState({ redirectToReferrer: true });
-    } else {
-      this.setState({ isLoading: false });
-    }
-  }
-
   render () {
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
-      return <Redirect to={from} />;
-    }
 
     return (
-      <div className="auth-box-w">
+
+      	<div className="auth-box-w">
   		  <div className="logo-w">
   		    <Logo width="300"/>
   		  </div>
-  		  <h4 className="auth-header">Login</h4>
+  		  <h4 className="auth-header">Signup</h4>
   		  <form onSubmit={this.handleSubmit}>
   		    <div className="form-group">
   		      <label htmlFor=''>Email</label>
@@ -70,24 +54,19 @@ class Login extends Component {
   		      <div className="pre-icon os-icon os-icon-user-male-circle" />
   		    </div>
   		    <div className="form-group">
-  		      <label htmlFor=''>Password</label>
-  		      <input
-              value={this.state.password}
+  		      <label htmlFor=''>Verify Email</label>
+            <input
+              id="email_verify"
+              type="email"
+              value={this.state.email_verify}
               onChange={this.handleChange}
-              id="password"
-              type="password"
               className="login-form-control"
-              placeholder="Enter your password"
-              required
+              placeholder="Verify your email"
             />
   		      <div className="pre-icon os-icon os-icon-fingerprint" />
   		    </div>
   		    <div className="buttons-w">
-  		      <button className="btn btn-primary btn-lg btn-block" disabled={!this.validateForm()}>Log me in</button>
-  		      {
-  		      	this.state.isLoading ? 
-  		      	(<div> Loading </div>) : ''
-  		      }
+  		      <button className="btn btn-primary btn-lg btn-block" disabled={!this.validateForm()}>Sign me up</button>
   		    </div>
   		  </form>
   		</div>
@@ -96,19 +75,14 @@ class Login extends Component {
   }
 }
 
-const mapDispatchToProps = { login };
+const mapStateToProps = state => ({});
 
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: !!state.user.authed,
-    attempts: state.user.attempts // so componentWillReceiveProps will get called.
-  };
-};
+const mapDispatchToProps = { signup };
  
 export default
 {
   icon: 'icon-map',
-  path: '/login',
+  path: '/signup',
   mainNav: false,
   component: connect(mapStateToProps, mapDispatchToProps)(Login),
   menuSettings: {image: 'none', 'scheme': 'color-scheme-light'}
