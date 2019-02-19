@@ -62,6 +62,12 @@ class LoginMenu extends Component {
             <i className='pre-icon os-icon os-icon-user-male-circle' />
           </div>
         </Link>
+        <Link to={'/signup'}>
+          <div className="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
+            <span className='loginMenu'>SIGN UP </span>
+            <i className='pre-icon os-icon os-icon-mail-07' />
+          </div>
+        </Link>
       </div>
     )
   }

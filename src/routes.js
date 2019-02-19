@@ -29,6 +29,7 @@ import Comments from "pages/comments"
 
 // // -- Util Routes
 import Login from './pages/Login'
+import Signup from "./pages/Signup"
 import Logout from './pages/Logout'
 import NoMatch from './pages/404.js'
 
@@ -57,6 +58,7 @@ const routes = [
   FloodExplorer,
 
   Login,
+  Signup,
   Logout,
   NoMatch
 ]

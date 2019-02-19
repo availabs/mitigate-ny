@@ -376,7 +376,8 @@ criticalInfrastructure (hazard) {
             <div className='side-section-content' style={{paddingTop: 0 }}>
               <div className='projects-list row'>
               <ProjectBox title={`definition`} style={{backgroundColor: '#f2f4f8', width:'100%'}}>
-                <Content content_id={`${hazard}-definition`} />
+                <Content content_id={`${hazard}-definition`}
+                  top={ -20 }/>
               </ProjectBox>  
             </div>
                 {this.HeroStats(hazard)}

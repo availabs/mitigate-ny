@@ -101,7 +101,7 @@ export default [
     mainNav: true,
     menuSettings: {image: 'none', 'scheme': 'color-scheme-light'},
     subMenus: subMenus,
-    component: connect(() => {}, {})(Capabilities),
+    component: connect(() => ({}), {})(Capabilities),
   },
   ...Local,
   ...MitigatingAgencies,
