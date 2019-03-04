@@ -112,14 +112,14 @@ export const ATTRIBUTES = [
 ]
 export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, ATTRIBUTES.length - 3);
 export const META_DATA = {
-	"name": { defaultValue: "", label: "Program/Action Name" },
+	"name": { defaultValue: "", label: "Program/Action/Measure Name" },
 	"description": { defaultValue: "", label: "Description" },
 	"contact": { defaultValue: "", label: "Contact" },
 	"contact_email": { defaultValue: "", label: "Contact Email" },
 	"contact_title": { defaultValue: "", label: "Contact Title" },
 	"contact_department": { defaultValue: "", label: "Contact Department" },
 	"agency": { defaultValue: "", label: "Agency (acronym)" },
-	"partners": { defaultValue: "", label: "Partners (agency acronyms)" },
+	"partners": { defaultValue: "", label: "Partners" },
 
 	"status_new_shmp": { defaultValue: false, label: "New 2019 SHMP" },
 	"status_carryover_shmp": { defaultValue: false, label: "Carryover SHMP" },
@@ -227,7 +227,7 @@ export const JUSTIFICATION_META = {
   "staffing": { label: "Staffing" },
   "public_support": { label: "Public Support" },
   "legal": { label: "Legal" },
-  "fixed": { label: "Fixed"},
+  "fixed": { label: "Fixed or Otherwise Mitigated"},
   "priority_change": { label: "Priority Change" }
 }
 export const getJustificationLabel = id =>

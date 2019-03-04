@@ -508,6 +508,8 @@ class NewCapability extends React.Component {
       title = (id === null) ? "Add New Program, Measure, or Action Below" : "Edit Program, Measure, or Action";
 
     const JUSTIFICATIONS = Object.keys(JUSTIFICATION_META)
+    let hazardList = this.props.capabilities.hazards.sort()
+    console.log('hazardList', hazardList)
 
     return (
       <Element>
@@ -616,10 +618,6 @@ class NewCapability extends React.Component {
                     <CheckGroup onChange={ this.radios.bind(this) } type="radio"
                       checks={
                         [[
-                          { id: "status_new_shmp", checked: status_new_shmp, name: "shmp" },
-                          { id: "status_carryover_shmp", checked: status_carryover_shmp, name: "shmp" }
-                        ],
-                        [
                           { id: "status_unchanged", checked: status_unchanged, name: "status" },
                           { id: "status_completed", checked: status_completed, name: "status" },
                           { id: "status_discontinued", checked: status_discontinued, name: "status" },
@@ -728,10 +726,10 @@ class NewCapability extends React.Component {
                     label={ this.getHazardName.bind(this) }
                     checks={
                       [
-                        this.props.capabilities.hazards.slice(0, 9).map(hazard =>
+                        hazardList.slice(0, 9).map(hazard =>
                           ({ id: hazard, checked: hazards && hazards.includes(hazard) })
                         ),
-                        this.props.capabilities.hazards.slice(9).map(hazard =>
+                        hazardList.slice(9).map(hazard =>
                           ({ id: hazard, checked: hazards && hazards.includes(hazard) })
                         )
                       ]
@@ -743,7 +741,7 @@ class NewCapability extends React.Component {
                 </Accordion>
 
 
-                { type === "measure" ? null :
+                { type !== "program" ? null :
                   <Accordion title="Administration">
                     <CheckGroup onChange={ this.checkbox.bind(this) }
                       checks={
@@ -764,26 +762,28 @@ class NewCapability extends React.Component {
                   <CheckGroup onChange={ this.checkbox.bind(this) }
                     checks={
                       [[
+                        { id: "capability_administer_funding", checked: capability_administer_funding },
+                        { id: "capability_climate", checked: capability_climate },
+                        { id: "capability_construction", checked: capability_construction }, 
+                        { id: "capability_critical", checked: capability_critical },
+                        { id: "capability_outreach", checked: capability_outreach },
+                        { id: "capability_environmental", checked: capability_environmental },
+                        { id: "capability_preservation", checked: capability_preservation },
                         { id: "capability_mitigation", checked: capability_mitigation },
                         { id: "capability_preparedness", checked: capability_preparedness },
-                        { id: "capability_response", checked: capability_response },
-                        { id: "capability_recovery", checked: capability_recovery },
-                        { id: "capability_climate", checked: capability_climate },
-                        { id: "capability_critical", checked: capability_critical },
-                        { id: "capability_preservation", checked: capability_preservation },
-                        { id: "capability_environmental", checked: capability_environmental },
-                        { id: "capability_risk_assessment", checked: capability_risk_assessment },
+                                                
                       ],
                       [
-                        { id: "capability_administer_funding", checked: capability_administer_funding },
-                        { id: "capability_tech_support", checked: capability_tech_support },
-                        { id: "capability_construction", checked: capability_construction },
-                        { id: "capability_outreach", checked: capability_outreach },
-                        { id: "capability_project_management", checked: capability_project_management },
-                        { id: "capability_research", checked: capability_research },
                         { id: "capability_policy", checked: capability_policy },
+                        { id: "capability_project_management", checked: capability_project_management },
+                        { id: "capability_recovery", checked: capability_recovery },
                         { id: "capability_regulatory", checked: capability_regulatory },
-                        { id: "capability_resiliency", checked: capability_resiliency }
+                        { id: "capability_research", checked: capability_research },
+                        { id: "capability_resiliency", checked: capability_resiliency },
+                        { id: "capability_response", checked: capability_response },
+                        { id: "capability_risk_assessment", checked: capability_risk_assessment },
+                        { id: "capability_tech_support", checked: capability_tech_support },
+                      
                       ]]
                     }/>
                     <div className="accordion-instructions">
