@@ -58,6 +58,7 @@ class Strategies extends Component {
                   filterColumns={ ["hazards", "goal"] }
                   urlColumn="url"
                   goalRange="1"
+                  tableScroll={ true }
                   expandColumns={ ["description"] }/>
               </div>
             </div>
@@ -92,6 +93,7 @@ class Strategies extends Component {
                   filterColumns={ ["hazards", "goal"] }
                   urlColumn="url"
                   goalRange="2"
+                  tableScroll={ true }
                   expandColumns={ ["description"] }/>
             </div>
           </div>
@@ -125,6 +127,7 @@ class Strategies extends Component {
                   filterColumns={ ["hazards", "goal"] }
                   urlColumn="url"
                   goalRange="3"
+                  tableScroll={ true }
                   expandColumns={ ["description"] }/>
             </div>
           </div>
@@ -158,6 +161,7 @@ class Strategies extends Component {
                   filterColumns={ ["hazards", "goal"] }
                   urlColumn="url"
                   goalRange="4"
+                  tableScroll={ true }
                   expandColumns={ ["description"] }/>
             </div>
           </div>
@@ -191,6 +195,7 @@ class Strategies extends Component {
                   filterColumns={ ["hazards", "goal"] }
                   urlColumn="url"
                   goalRange="5"
+                  tableScroll={ true }
                   expandColumns={ ["description"] }/>
               </div>          
             </div>
