@@ -142,12 +142,12 @@ export const META_DATA = {
 	"file_type": { instruction: "Please let us know if there is a location file associated with this project/program",
 								label: "File Type" },
 
-	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Budget Provided for Program or Cost of Mitigation Action"  },
-	"primary_funding": { defaultValue: "", label: "Primary Funding" },
-	"secondary_funding": { defaultValue: "", label: "Secondary Funding" },
+	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Annual Budget Provided for Program or Estimate/Actual Cost of Mitigation Action"  },
+	"primary_funding": { defaultValue: "", label: "Primary Funding", instruction: "State/Federal"  },
+	"secondary_funding": { defaultValue: "", label: "Secondary Funding", instruction: "Source" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: "", label: "Hazards" },
+	"hazards": { defaultValue: "", label: "Hazards", instruction: "Select all that apply" },
 
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
@@ -173,11 +173,11 @@ export const META_DATA = {
 
 	"related_policy": { defaultValue: "", label: "Related Policy" },
 	"url": { defaultValue: "", label: "Project URL" },
-	"goal": { defaultValue: "", label: "Goals" },
+	"goal": { defaultValue: "", label: "Goals", instruction: "Select all that apply" },
 	"objective": { defaultValue: "", label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
-	"admin": { defaultValue: [], label: "Location" },
+	"admin": { defaultValue: [], label: "Location", instruction: "At what geographic scale is this program administered? Select all that apply"  },
 	
 
 	"priority": { defaultValue: "", label: "Priority" },
@@ -201,7 +201,7 @@ export const META_DATA = {
 	"municipality": { defaultValue: "", label: "Action Municipality" },
 	"county": { defaultValue: "", label: "Action County" },
 
-	"repetitive_loss": { defaultValue: false, label: "Repetitive Loss", instruction: "Check this if the action deals with repetitive loss" },
+	"repetitive_loss": { defaultValue: false, label: "Repetitive Loss", instruction: "Check this if the Action or Program deals with repetitive loss properties" },
 
 	"origin_plan_name": { defaultValue: null, label: "Origin: Plan Name" },
 	"origin_plan_year": { defaultValue: null, label: "Origin: Plan Year" },
@@ -217,6 +217,8 @@ export const META_DATA = {
 	"completed_date": { defaultValue: null, label: "Completed Date" },
 
 	"justification": { defaultValue: "", label: "Justification", instruction: "Select a justification for current status" },
+
+	"capability": { defaultValue: "", label: "Capability", instruction: "Select all that apply" },
 }
 
 export const JUSTIFICATION_META = {
