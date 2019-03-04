@@ -787,7 +787,7 @@ class NewCapability extends React.Component {
                       ]]
                     }/>
                     <div className="accordion-instructions">
-                      { getInstructions("capability") }
+                      { getInstructions("capability_tech_support") }
                     </div>
                 </Accordion>
 

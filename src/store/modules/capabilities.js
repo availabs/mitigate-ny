@@ -162,7 +162,7 @@ export const META_DATA = {
 
 	"funding_amount": { defaultValue: null, label: "Funding Amount Administered", instruction: "Only for programs/actions that provide funding"  },
 
-	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
+	"capability_tech_support": { defaultValue: false, label: "Technical Support", instruction: "Select all that apply"  },
 	"capability_construction": { defaultValue: false, label: "Construction" },
 	"capability_outreach": { defaultValue: false, label: "Education / Outreach" },
 	"capability_project_management": { defaultValue: false, label: "Project Management" },
@@ -218,7 +218,6 @@ export const META_DATA = {
 
 	"justification": { defaultValue: "", label: "Justification", instruction: "Select a justification for current status" },
 
-	"capability": { defaultValue: "", label: "Capability", instruction: "Select all that apply" },
 }
 
 export const JUSTIFICATION_META = {
