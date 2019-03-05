@@ -236,7 +236,7 @@ CapabilitiesTable.defaultProps = {
 	tableLink: null,
 	tableLinkLabel: "Link",
 	downloadedFileName: 'capabilities-data',
-	tableScroll: false,
+	tableScroll: true,
 	pageSize: 6
 }
 

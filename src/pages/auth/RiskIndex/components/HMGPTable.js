@@ -126,7 +126,8 @@ class HMAP_Table extends React.Component {
 			return (
 				<TableBox { ...this.processData() }
 					filterKey="year"
-					filterColumns={ this.props.filterColumns }/>
+					filterColumns={ this.props.filterColumns }
+					tableScroll={ this.props.tableScroll } />
 			)
 		}
 		catch (e) {
