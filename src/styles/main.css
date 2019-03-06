@@ -19184,3 +19184,5 @@ Contents:
     margin: 0px auto; } }
 
 /* ##. User Override Styles */
+.img-box img {
+  width: 100%; }

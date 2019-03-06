@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
+
 
 class AgencyList extends Component {
   render () {
    let agencies = this.props.agency ? [this.props.agency] : this.props.agencies
    return (
         <div className='property-info-w'>
-          <div className="property-info-main" style={{maxWidth: '100%'}}>
-            {agencies.map(agencyId => {
-              return (
-                <div key={ agencyId }>
-                   <div className="property-section" style={{paddingTop: 30, paddingBottom: 30, borderBottom: '1px solid black'}}>
-                     <div className='row'>
-                        <div className='col-8'>
-                        <Content content_id={`agency-${agencyId}_narrative`} />
-                        </div>
-                        <div className='col-4'>
+          <div className="property-info-main" style={{maxWidth: '100%', backgroundColor: '#f2f4f8', paddingLeft: 5, paddingRight: 5}}>
+            <div className="property-section" style={{paddingTop: 0, paddingBottom: 30, borderBottom: '1px solid black'}}>
+              <h1 style={{color: '#047bf8', paddingLeft: 15, borderBottom: '1px solid #cdcdcd', margin: 15}}>Agencies</h1>
+              <div className='row' style={{display: 'flex', justifyContent: 'center'}}>
+                {agencies.map(agencyId => {
+                  return (
+                    <Link to={'/capabilities/agencies/' + agencyId} key={ agencyId } className='element-box img-box' 
+                      style={{margin:4,  display:'flex', alignItems: 'center', justifyContent: 'center', width:355, height: 220}}>    
                         <Content content_id={`agency-${agencyId}_logo`} />
-                        </div>
-                        
-                        <hr/>
-                    </div>
-                   </div>
-                </div>
-              )
-            })}
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
     )
