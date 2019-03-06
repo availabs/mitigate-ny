@@ -142,7 +142,7 @@ export const META_DATA = {
 	"file_type": { instruction: "Please let us know if there is a location file associated with this project/program",
 								label: "File Type" },
 
-	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Annual Budget Provided for Program or Estimate/Actual Cost of Mitigation Action"  },
+	"budget_provided": { defaultValue: null, label: "Budget/Cost", instruction: "Annual Budget Provided for Program or Estimate/Actual Cost of Mitigation Action"  },
 	"primary_funding": { defaultValue: "", label: "Primary Funding", instruction: "State/Federal"  },
 	"secondary_funding": { defaultValue: "", label: "Secondary Funding", instruction: "Source" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
