@@ -2,20 +2,31 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Content from 'components/cms/Content'
-import { createMatchSelector } from 'react-router-redux'
-import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 import subMenus from "./capabilities-submenu"
+import SideNav from './components/SideNav'
+
 
 class Agency extends Component {
   render () {
     console.log('test', this.props)
     const  agencyId  = this.props.match.params.agencyId;
-    
+    const navItems = Object.keys(this.props.agencies).map(d => {
+      let link = '/capabilities/agencies/' + d 
+      let val = this.props.agencies[d]
+      val.to = link
+      val.id = d
+      return val 
+    })
+
+
     return (
       <div className='property-single'>
-        <div className='property-info-w'>
+       
+        <div className='property-info-w' style={{maxWidth: 1550}}>
+          <SideNav items={navItems} title={'Mitigating Agencies'} activeLink={agencyId} />
           <div className="property-info-main" style={{maxWidth: '100%'}}>
+
             <div key={ agencyId }>
                <div className="property-section" style={{paddingTop: 30, paddingBottom: 30, borderBottom: '1px solid black'}}>
                  <div className='row'>
@@ -54,7 +65,8 @@ class Agency extends Component {
 
 const mapStateToProps = state => {
   return {
-    router: state.router
+    router: state.router,
+    agencies: state.agencies.meta
   };
 };
 

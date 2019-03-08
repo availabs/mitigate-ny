@@ -8,10 +8,9 @@ class AgencyList extends Component {
   render () {
    let agencies = this.props.agency ? [this.props.agency] : this.props.agencies
    return (
-        <div className='property-info-w'>
+        
           <div className="property-info-main" style={{maxWidth: '100%', backgroundColor: '#f2f4f8', paddingLeft: 5, paddingRight: 5}}>
-            <div className="property-section" style={{paddingTop: 0, paddingBottom: 30, borderBottom: '1px solid black'}}>
-              <h1 style={{color: '#047bf8', paddingLeft: 15, borderBottom: '1px solid #cdcdcd', margin: 15}}>Agencies</h1>
+            <div className="property-section" style={{paddingTop: 0, marginTop: 0, paddingBottom: 30, borderBottom: '1px solid black'}}>
               <div className='row' style={{display: 'flex', justifyContent: 'center'}}>
                 {agencies.map(agencyId => {
                   return (
@@ -24,7 +23,7 @@ class AgencyList extends Component {
               </div>
             </div>
           </div>
-        </div>
+        
     )
   }
 }
