@@ -27,6 +27,8 @@ import FloodExplorer from "pages/auth/FloodExplorer"
 
 import Comments from "pages/comments"
 
+import Analysis from 'pages/auth/Analysis'
+
 // // -- Util Routes
 import Login from './pages/Login'
 import Signup from "./pages/Signup"
@@ -55,6 +57,7 @@ const routes = [
  
  ...Comments,
   
+  Analysis,
   FloodExplorer,
 
   Login,

@@ -16,6 +16,7 @@ class MunicipalityStats extends React.Component {
 
 	processData({ geoid }=this.props) {
 		let data = [];
+		console.log('got pop data', this.props.geoGraph[geoid])
 		try {
 			data = [
 				{ 
