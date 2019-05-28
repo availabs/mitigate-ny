@@ -3,7 +3,7 @@
 ```
 git clone https://github.com/availabs/mitigate-ny.git
 cd mitigate-ny
-yarn install
+npm install
 npm start
 ```
 
