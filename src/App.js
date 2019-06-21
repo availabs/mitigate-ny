@@ -39,7 +39,7 @@ console.log("<App.componentWillReceiveProps>",newProps.user)
   	    			<Layout
                 key = {i}
                 { ...route }
-                isAuthenticating = { false/*this.state.isAuthenticating*/ }
+                isAuthenticating = { this.state.isAuthenticating }
                 authed = { this.props.user.authed }
                 router = {this.props.router}
                 user = {this.props.user}
