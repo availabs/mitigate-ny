@@ -21,6 +21,7 @@ class MitigationMeasures extends Component {
                   title="Mitigation Measures"
                   filterColumns={ ["goal" , 'hazards'] }
                   expandColumns={ ["description"] }
+                  tableScroll={ true }
                   type="measure"/>
             </div>
             </div>

@@ -112,14 +112,14 @@ export const ATTRIBUTES = [
 ]
 export const NEW_CAPABILITY_ATTRIBUTES = ATTRIBUTES.slice(0, ATTRIBUTES.length - 3);
 export const META_DATA = {
-	"name": { defaultValue: "", label: "Program/Action Name" },
+	"name": { defaultValue: "", label: "Program/Action/Measure Name" },
 	"description": { defaultValue: "", label: "Description" },
 	"contact": { defaultValue: "", label: "Contact" },
 	"contact_email": { defaultValue: "", label: "Contact Email" },
 	"contact_title": { defaultValue: "", label: "Contact Title" },
 	"contact_department": { defaultValue: "", label: "Contact Department" },
 	"agency": { defaultValue: "", label: "Agency (acronym)" },
-	"partners": { defaultValue: "", label: "Partners (agency acronyms)" },
+	"partners": { defaultValue: "", label: "Partners" },
 
 	"status_new_shmp": { defaultValue: false, label: "New 2019 SHMP" },
 	"status_carryover_shmp": { defaultValue: false, label: "Carryover SHMP" },
@@ -142,12 +142,12 @@ export const META_DATA = {
 	"file_type": { instruction: "Please let us know if there is a location file associated with this project/program",
 								label: "File Type" },
 
-	"budget_provided": { defaultValue: null, label: "Budget Provided", instruction: "Budget Provided for Program or Cost of Mitigation Action"  },
-	"primary_funding": { defaultValue: "", label: "Primary Funding" },
-	"secondary_funding": { defaultValue: "", label: "Secondary Funding" },
+	"budget_provided": { defaultValue: null, label: "Budget/Cost", instruction: "Annual Budget Provided for Program or Estimate/Actual Cost of Mitigation Action"  },
+	"primary_funding": { defaultValue: "", label: "Primary Funding", instruction: "State/Federal"  },
+	"secondary_funding": { defaultValue: "", label: "Secondary Funding", instruction: "Source" },
 	"num_staff": { defaultValue: null, label: "Num. Staff" },
 	"num_contract_staff": { defaultValue: null, label: "Num. Contract Staff" },
-	"hazards": { defaultValue: "", label: "Hazards" },
+	"hazards": { defaultValue: "", label: "Hazards", instruction: "Select all that apply" },
 
 	"capability_mitigation": { defaultValue: false, label: "Mitigation" },
 	"capability_preparedness": { defaultValue: false, label: "Preparedness" },
@@ -162,7 +162,7 @@ export const META_DATA = {
 
 	"funding_amount": { defaultValue: null, label: "Funding Amount Administered", instruction: "Only for programs/actions that provide funding"  },
 
-	"capability_tech_support": { defaultValue: false, label: "Technical Support" },
+	"capability_tech_support": { defaultValue: false, label: "Technical Support", instruction: "Select all that apply"  },
 	"capability_construction": { defaultValue: false, label: "Construction" },
 	"capability_outreach": { defaultValue: false, label: "Education / Outreach" },
 	"capability_project_management": { defaultValue: false, label: "Project Management" },
@@ -173,11 +173,11 @@ export const META_DATA = {
 
 	"related_policy": { defaultValue: "", label: "Related Policy" },
 	"url": { defaultValue: "", label: "Project URL" },
-	"goal": { defaultValue: "", label: "Goals" },
+	"goal": { defaultValue: "", label: "Goals", instruction: "Select all that apply" },
 	"objective": { defaultValue: "", label: "Objective" },
 	
 	"status": { defaultValue: [], label: "Status" },
-	"admin": { defaultValue: [], label: "Location" },
+	"admin": { defaultValue: [], label: "Location", instruction: "At what geographic scale is this program administered? Select all that apply"  },
 	
 
 	"priority": { defaultValue: "", label: "Priority" },
@@ -201,7 +201,7 @@ export const META_DATA = {
 	"municipality": { defaultValue: "", label: "Action Municipality" },
 	"county": { defaultValue: "", label: "Action County" },
 
-	"repetitive_loss": { defaultValue: false, label: "Repetitive Loss", instruction: "Check this if the action deals with repetitive loss" },
+	"repetitive_loss": { defaultValue: false, label: "Repetitive Loss", instruction: "Check this if the Action or Program deals with repetitive loss properties" },
 
 	"origin_plan_name": { defaultValue: null, label: "Origin: Plan Name" },
 	"origin_plan_year": { defaultValue: null, label: "Origin: Plan Year" },
@@ -217,6 +217,7 @@ export const META_DATA = {
 	"completed_date": { defaultValue: null, label: "Completed Date" },
 
 	"justification": { defaultValue: "", label: "Justification", instruction: "Select a justification for current status" },
+
 }
 
 export const JUSTIFICATION_META = {
@@ -226,7 +227,7 @@ export const JUSTIFICATION_META = {
   "staffing": { label: "Staffing" },
   "public_support": { label: "Public Support" },
   "legal": { label: "Legal" },
-  "fixed": { label: "Fixed"},
+  "fixed": { label: "Fixed or Otherwise Mitigated"},
   "priority_change": { label: "Priority Change" }
 }
 export const getJustificationLabel = id =>

@@ -5,6 +5,7 @@ import Content from 'components/cms/Content'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
 import CapabilitiesTable from 'pages/auth/RiskIndex/components/CapabilitiesTable'
 
+import Agency from './Agency'
 import MitigatingAgencies from './Mitigating-Agencies'
 import Resiliency from './Resiliency'
 import RiskAssessment from './Risk-Assessment'
@@ -116,6 +117,7 @@ export default [
   ...ClimateAdaptation,
   ...HistoricEnvironmental,
   ...PlanningRegulatory,
+  ...Agency
 ]
 
 

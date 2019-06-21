@@ -17,6 +17,8 @@ import { fnum } from "utils/sheldusUtils"
 
 import "./HazardList.css"
 
+
+
 // <i class="os-icon os-icon-phone-21"></i>
 			
 const ListItem = ({ hazard, name, onClick, active, annualized_damage }) =>

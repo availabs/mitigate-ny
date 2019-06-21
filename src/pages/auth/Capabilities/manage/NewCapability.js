@@ -188,11 +188,15 @@ class GoalAccordion extends React.Component {
     } = this.props;
     return (
       <Accordion title={ getLabel("goal") }>
+        <div className="accordion-instructions">
+                      { getInstructions("goal") }
+            </div>
         {
           GOAL_METADATA.map((group, i) =>
             <div className="form-group row" key={ i }>
               <div className="col-sm-1"/>
               <div className="col-sm-11">
+
                 <CheckGroup name={ group.cat }
                   labelFunc={ d => <span><b>{ d.id }</b> { d.desc }</span> }
                   header={ group.cat }
@@ -208,6 +212,7 @@ class GoalAccordion extends React.Component {
 
               </div>
             </div>
+            
           )
         }
       </Accordion>
@@ -503,6 +508,8 @@ class NewCapability extends React.Component {
       title = (id === null) ? "Add New Program, Measure, or Action Below" : "Edit Program, Measure, or Action";
 
     const JUSTIFICATIONS = Object.keys(JUSTIFICATION_META)
+    let hazardList = this.props.capabilities.hazards.sort()
+    console.log('hazardList', hazardList)
 
     return (
       <Element>
@@ -538,23 +545,7 @@ class NewCapability extends React.Component {
                     ]
                   }/>
 
-                <FormRow id="start_date" type="date"
-                  value={ start_date }
-                  onChange={ this.onChange.bind(this) }/>
-
-                <FormRow id="completed_date" type="date"
-                  value={ completed_date }
-                  onChange={ this.onChange.bind(this) }/>
-
-                <CheckGroup onChange={ this.checkbox.bind(this) }
-                  instructions={ getInstructions("repetitive_loss") }
-                  header={ "" }
-                  checks={
-                    [[
-                      { id: "repetitive_loss", checked: repetitive_loss }
-                    ]]
-                  }/>
-
+                
                 { type !== "action" ? null :
                   <FormRow id="county"
                     placeholder="Enter a county..."
@@ -596,6 +587,80 @@ class NewCapability extends React.Component {
                         value={ partners }
                         onChange={ this.onChange.bind(this) }/>
                   </Accordion>
+                }
+
+                { type !== "action" ? null :
+                  <Accordion title="Status">
+
+            
+                <FormRow id="start_date" type="date"
+                  value={ start_date }
+                  onChange={ this.onChange.bind(this) }/>
+             
+
+               
+                <FormRow id="completed_date" type="date"
+                  value={ completed_date }
+                  onChange={ this.onChange.bind(this) }/>
+
+                  <FormRow id="origin_plan_name"
+                    placeholder="Enter origin plan name..."
+                    value={ origin_plan_name }
+                    onChange={ this.onChange.bind(this) }/>
+
+                  <FormRow id="origin_plan_year"
+                    placeholder="Enter origin plan year..."
+                    value={ origin_plan_year } type="number"
+                    onChange={ this.onChange.bind(this) }/>
+
+                
+
+                    <CheckGroup onChange={ this.radios.bind(this) } type="radio"
+                      checks={
+                        [[
+                          { id: "status_unchanged", checked: status_unchanged, name: "status" },
+                          { id: "status_completed", checked: status_completed, name: "status" },
+                          { id: "status_discontinued", checked: status_discontinued, name: "status" },
+                          { id: "status_in_progess", checked: status_in_progess, name: "status" },
+                          { id: "status_on_going", checked: status_on_going, name: "status" },
+                          { id: "status_proposed", checked: status_proposed, name: "status" }
+                        ].filter(d => type === "program" ? true : d.id !== "status_on_going")]
+                      }/>
+
+                    <div className="accordion-instructions">
+                      { getInstructions("justification") }
+                    </div>
+
+                    { !(status_unchanged || status_discontinued) ? null :
+                      <CheckGroup onChange={ this.updateJustifications.bind(this) }
+                        label={ getJustificationLabel }
+                        checks={
+                          [ 
+                            JUSTIFICATIONS.slice(0, Math.ceil(JUSTIFICATIONS.length * 0.5))
+                              .map(id => ({ id, checked: justification.includes(id) })),
+                            JUSTIFICATIONS.slice(Math.ceil(JUSTIFICATIONS.length * 0.5))
+                              .map(id => ({ id, checked: justification.includes(id) }))
+                          ]
+                        }/>
+                    }
+
+                  </Accordion>
+                }
+                    
+                { type !== "action" ? null :
+                  !(status_in_progess || status_unchanged || status_proposed) ? null :
+                  <FormRow id="design_percent_complete" type="number"
+                    placeholder="Enter percent completed..."
+                    value={ design_percent_complete } percent={ true }
+                    onChange={ this.onChange.bind(this) }/>
+                }
+                      
+                { type !== "action" ? null :
+                  !(status_in_progess || status_unchanged || status_proposed) ? null :
+                  <FormRow id="scope_percent_complete" type="number"
+                    placeholder="Enter percent completed..."
+                    value={ scope_percent_complete } percent={ true }
+                    onChange={ this.onChange.bind(this) }/>
                 }
 
                 <Accordion title="Budget Information">
@@ -661,72 +726,22 @@ class NewCapability extends React.Component {
                     label={ this.getHazardName.bind(this) }
                     checks={
                       [
-                        this.props.capabilities.hazards.slice(0, 9).map(hazard =>
+                        hazardList.slice(0, 9).map(hazard =>
                           ({ id: hazard, checked: hazards && hazards.includes(hazard) })
                         ),
-                        this.props.capabilities.hazards.slice(9).map(hazard =>
+                        hazardList.slice(9).map(hazard =>
                           ({ id: hazard, checked: hazards && hazards.includes(hazard) })
                         )
                       ]
                     }/>
-                </Accordion>
-
-                { type === "measure" ? null :
-                  <Accordion title="Status">
-
-                    <CheckGroup onChange={ this.radios.bind(this) } type="radio"
-                      checks={
-                        [[
-                          { id: "status_new_shmp", checked: status_new_shmp, name: "shmp" },
-                          { id: "status_carryover_shmp", checked: status_carryover_shmp, name: "shmp" }
-                        ],
-                        [
-                          { id: "status_unchanged", checked: status_unchanged, name: "status" },
-                          { id: "status_completed", checked: status_completed, name: "status" },
-                          { id: "status_discontinued", checked: status_discontinued, name: "status" },
-                          { id: "status_in_progess", checked: status_in_progess, name: "status" },
-                          { id: "status_on_going", checked: status_on_going, name: "status" },
-                          { id: "status_proposed", checked: status_proposed, name: "status" }
-                        ].filter(d => type === "program" ? true : d.id !== "status_on_going")]
-                      }/>
 
                     <div className="accordion-instructions">
-                      { getInstructions("justification") }
+                      { getInstructions("hazards") }
                     </div>
+                </Accordion>
 
-                    { !(status_unchanged || status_discontinued) ? null :
-                      <CheckGroup onChange={ this.updateJustifications.bind(this) }
-                        label={ getJustificationLabel }
-                        checks={
-                          [ 
-                            JUSTIFICATIONS.slice(0, Math.ceil(JUSTIFICATIONS.length * 0.5))
-                              .map(id => ({ id, checked: justification.includes(id) })),
-                            JUSTIFICATIONS.slice(Math.ceil(JUSTIFICATIONS.length * 0.5))
-                              .map(id => ({ id, checked: justification.includes(id) }))
-                          ]
-                        }/>
-                    }
 
-                  </Accordion>
-                }
-                    
-                { type !== "action" ? null :
-                  !(status_in_progess || status_unchanged || status_proposed) ? null :
-                  <FormRow id="design_percent_complete" type="number"
-                    placeholder="Enter percent completed..."
-                    value={ design_percent_complete } percent={ true }
-                    onChange={ this.onChange.bind(this) }/>
-                }
-                      
-                { type !== "action" ? null :
-                  !(status_in_progess || status_unchanged || status_proposed) ? null :
-                  <FormRow id="scope_percent_complete" type="number"
-                    placeholder="Enter percent completed..."
-                    value={ scope_percent_complete } percent={ true }
-                    onChange={ this.onChange.bind(this) }/>
-                }
-
-                { type === "measure" ? null :
+                { type !== "program" ? null :
                   <Accordion title="Administration">
                     <CheckGroup onChange={ this.checkbox.bind(this) }
                       checks={
@@ -737,6 +752,9 @@ class NewCapability extends React.Component {
                           { id: "admin_local", checked: admin_local }
                         ]]
                       }/>
+                    <div className="accordion-instructions">
+                      { getInstructions("admin") }
+                    </div>
                   </Accordion>
                 }
 
@@ -744,28 +762,33 @@ class NewCapability extends React.Component {
                   <CheckGroup onChange={ this.checkbox.bind(this) }
                     checks={
                       [[
+                        { id: "capability_administer_funding", checked: capability_administer_funding },
+                        { id: "capability_climate", checked: capability_climate },
+                        { id: "capability_construction", checked: capability_construction }, 
+                        { id: "capability_critical", checked: capability_critical },
+                        { id: "capability_outreach", checked: capability_outreach },
+                        { id: "capability_environmental", checked: capability_environmental },
+                        { id: "capability_preservation", checked: capability_preservation },
                         { id: "capability_mitigation", checked: capability_mitigation },
                         { id: "capability_preparedness", checked: capability_preparedness },
-                        { id: "capability_response", checked: capability_response },
-                        { id: "capability_recovery", checked: capability_recovery },
-                        { id: "capability_climate", checked: capability_climate },
-                        { id: "capability_critical", checked: capability_critical },
-                        { id: "capability_preservation", checked: capability_preservation },
-                        { id: "capability_environmental", checked: capability_environmental },
-                        { id: "capability_risk_assessment", checked: capability_risk_assessment },
+                                                
                       ],
                       [
-                        { id: "capability_administer_funding", checked: capability_administer_funding },
-                        { id: "capability_tech_support", checked: capability_tech_support },
-                        { id: "capability_construction", checked: capability_construction },
-                        { id: "capability_outreach", checked: capability_outreach },
-                        { id: "capability_project_management", checked: capability_project_management },
-                        { id: "capability_research", checked: capability_research },
                         { id: "capability_policy", checked: capability_policy },
+                        { id: "capability_project_management", checked: capability_project_management },
+                        { id: "capability_recovery", checked: capability_recovery },
                         { id: "capability_regulatory", checked: capability_regulatory },
-                        { id: "capability_resiliency", checked: capability_resiliency }
+                        { id: "capability_research", checked: capability_research },
+                        { id: "capability_resiliency", checked: capability_resiliency },
+                        { id: "capability_response", checked: capability_response },
+                        { id: "capability_risk_assessment", checked: capability_risk_assessment },
+                        { id: "capability_tech_support", checked: capability_tech_support },
+                      
                       ]]
                     }/>
+                    <div className="accordion-instructions">
+                      { getInstructions("capability_tech_support") }
+                    </div>
                 </Accordion>
 
                 { type !== 'action' ? null :
@@ -837,29 +860,18 @@ class NewCapability extends React.Component {
                   </Accordion>
                 }
 
-                <FormRow id="related_policy"
-                  placeholder="Enter related policy..."
-                  value={ related_policy }
-                  onChange={ this.onChange.bind(this) }/>
+                <CheckGroup onChange={ this.checkbox.bind(this) }
+                  instructions={ getInstructions("repetitive_loss") }
+                  header={ "" }
+                  checks={
+                    [[
+                      { id: "repetitive_loss", checked: repetitive_loss }
+                    ]]
+                  }/>
 
-                { type === "measure" ? null :
-                  <FormRow id="origin_plan_name"
-                    placeholder="Enter origin plan name..."
-                    value={ origin_plan_name }
-                    onChange={ this.onChange.bind(this) }/>
-                }
 
-                { type === "measure" ? null :
-                  <FormRow id="origin_plan_year"
-                    placeholder="Enter origin plan year..."
-                    value={ origin_plan_year } type="number"
-                    onChange={ this.onChange.bind(this) }/>
-                }
+              
 
-                <FormRow id="objective"
-                  placeholder="Enter objective..."
-                  value={ objective }
-                  onChange={ this.onChange.bind(this) }/>
 
                 { type !== "action" ? null :
                   <Accordion title="Action Requirements">
