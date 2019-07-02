@@ -141,10 +141,14 @@ let initialState = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [USER_LOGIN]: (state = initialState, action) => {
-    // Not sure why, but state comes in as an empty object rather than the initialState.
-    let newState = Object.assign({}, newState, ...action.user, { authed: true });
-    ++newState.attempts;
-    setUserToken(action.user);
+    // Not sure why, but state comes in as an empty object rather than the initialState
+    let newState = state;
+    console.log('login user', action.user)
+    if(action.user) {
+      newState = Object.assign({}, state, action.user, { authed: true });
+      ++newState.attempts;
+      setUserToken(action.user);
+    }
     return newState;
   },
   [AUTH_FAILURE]: (state=initialState, action) => {

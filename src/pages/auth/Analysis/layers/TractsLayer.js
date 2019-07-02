@@ -15,6 +15,8 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl'
 
 import COLOR_RANGES from "constants/color-ranges"
 
+
+
 const getColor = ( name ) => COLOR_RANGES[5].reduce((a, c) => c.name === name ? c.colors : a).slice()
 
 const hazardMeta = [
@@ -87,11 +89,11 @@ class TractLayer extends MapLayer {
       'fill-color', 
       ["get", ["to-string", ["get", "geoid"]], ["literal", mapColors]]
     );
-     map.setPaintProperty(
-      'tracts-layer', 
-      'fill-opacity', 
-       0.7
-    );
+    //  map.setPaintProperty(
+    //   'tracts-layer', 
+    //   'fill-opacity', 
+    //    0.7
+    // );
     // map.setPaintProperty(
     //   'tracts-layer', 
     //   'line-color', 
@@ -103,7 +105,7 @@ class TractLayer extends MapLayer {
 
 
 
-const tractLayer = new TractLayer("Buildings Layer", {
+const tractLayer = new TractLayer("Tracts Layer", {
   active: true,
   sources: [
     { id: "tracts",
@@ -128,7 +130,7 @@ const tractLayer = new TractLayer("Buildings Layer", {
       name: "hazard",
       type: "hidden",
       domain: hazardMeta,
-      value: "riverine"
+      value: "hurricane"
     }
   },
   popover: {

@@ -11,44 +11,51 @@ import HMGPTable from 'pages/auth/RiskIndex/components/HMGPTable'
 class MitigationActions extends Component {
   render () {
    return (
-    <div className='property-single'>
-        <div className='property-info-w' style={{paddingTop: 0 , paddingBottom: 0}}>
-          <div className="property-info-main">
+    <div>
+      <div className='property-single'>
+          <div className='property-info-w' style={{paddingTop: 0 , paddingBottom: 0}}>
+            <div className="property-info-main">
 
-            <div className="property-section">
-              <Content content_id={`strategies-actions`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`strategies-actions_activities`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`strategies-actions-prioritization`} />
-            </div>
-
-            <div className="property-section">
-              <Content content_id={`strategies-actions_table`} />
-              <CapabilitiesTable
-                  columns={ ["name" , "description" , "agency" , "hazards" , 'primary_funding' , "budget_provided" , "status"] }
-                  title="Mitigation Actions"
-                  filterColumns={ ["goal" , 'agency', 'hazards' , 'status' , 'priority' , 'benefit_cost_analysis' , 'primary_funding'] }
-                  expandColumns={ ["description"] }
-                  tableScroll={ true }
-                  type="action"/>
               <div className="property-section">
-                <Content content_id={'hazards-hmgp-overview'} />
-              </div> 
-                 <HMGPTable 
-                 filterColumns={ ['hazard' , 'status' , 'program area' ] }
-                 tableScroll={ true }
-                 hazard="none" 
-                 />
-                  <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+                <Content content_id={`strategies-actions`} />
+              </div>
+
+              <div className="property-section">
+                <Content content_id={`strategies-actions_activities`} />
+              </div>
+
+              <div className="property-section">
+                <Content content_id={`strategies-actions-prioritization`} />
+              </div>
+
+              <div className="property-section">
+                <Content content_id={`strategies-actions_table`} />
+                <CapabilitiesTable
+                    columns={ ["name" , "description" , "agency" , "hazards" , 'primary_funding' , "budget_provided" , "status"] }
+                    title="Mitigation Actions"
+                    filterColumns={ ["goal" , 'agency', 'hazards' , 'status' , 'priority' , 'benefit_cost_analysis' , 'primary_funding'] }
+                    expandColumns={ ["description"] }
+                    tableScroll={ true }
+                    type="action"/>
+                <div className="property-section">
+                  <Content content_id={'hazards-hmgp-overview'} />
+                </div> 
+                  
+                </div>
               </div>
             </div>
           </div>
-      </div>
+          <div className='property-single' style={{padding: 15}}>
+           <HMGPTable 
+               filterColumns={ ['hazard' , 'status' , 'program area' ] }
+               tableScroll={ true }
+               hazard="none" 
+               />
+                <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
+          </div>
+        </div>
+
+      
     )
   }
 }
