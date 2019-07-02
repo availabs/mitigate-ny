@@ -31,10 +31,10 @@ class CountyPlanChoropleth extends React.Component {
 		},
 		scale: d3scale.scaleThreshold()
 					.domain([0.0, 1.0, 2.0, 3.0])
-					.range(["#ffffbf","#d9ef8b","#a6d96a","#66bd63","#1a9850"]),
+					.range(["#999", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850"]),
 		statusScale: d3scale.scaleThreshold()
-					.domain([1, 10, 11, 12])
-					.range(["#d73027","#f46d43","#fdae61","#fee08b","#ffffbf"]),
+					.domain([1, 10, 11])
+					.range(["#d73027", "#f46d43", "#fdae61", "#999"]),
 		viewport: Viewport(),
 		hoverData: null,
 		dataProcessed: false
@@ -161,19 +161,20 @@ class CountyPlanChoropleth extends React.Component {
 				const time = get(properties, `time`, 0),
 					status = get(properties, 'status', 0);
 				let color = d3color.color(scale(time));
+				
 				if (time < 0) {
 					color = d3color.color(statusScale(status));
 				}
 				return [color.r, color.g, color.b, 255];
 			},
 
-			getStatusLabelstatusMap = status => {
-				if (status === 0) return "Expired";
-				if (status < 10) return "Update in Progress";
-				if (status === 10) return "Approvable Pending Adoption";
-				if (status === 11) return "Plan Approved, Under 50% Jurisdictions Adopted";
-				if (status < 15) return "Plan Approved, Over 50% Jurisdictions Adopted";
-				return "Plan Current";
+			getStatusLabelstatusMap = (time, status) => {
+				const current = time < 0 ? "Plan Expired" : "Plan Current";
+
+				if ((status >= 1) && (status <= 9)) return `${ current }: Update in Progress`;
+				if (status === 10) return `${ current }: Approvable Pending Adoption`;
+
+				return current;
 			}
 
   	const layers = [
@@ -196,11 +197,12 @@ class CountyPlanChoropleth extends React.Component {
 		      				name,
 		      				exp,
 		      				consultant,
-		      				status
+		      				status,
+		      				time
 		      			} = object.properties,
 		      			rows = [
 		      				[name],
-		      				['Status', `(${status}) ${ getStatusLabelstatusMap(status) }`],
+		      				['Status', `(${status}) ${ getStatusLabelstatusMap(time, status) }`],
 		      				['Expiration', exp || "No Date"]
 		      			];
 		      		if (consultant) {

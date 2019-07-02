@@ -244,7 +244,7 @@ class CapabilityItem extends React.Component {
 								</button>
 							</div>
 							<div className="col-lg-3" style={ { paddingTop: "10px" } }>
-								<h5 style={ { display: "inline-block", paddingRight: "10px" } }>Updated At:</h5>
+								<h5 style={ { display: "inline-block", paddingRight: "10px" } }>Updated:</h5>
 								{ new Date(updated_at).toLocaleString() }
 							</div>
 							<div className="col-lg-4">
