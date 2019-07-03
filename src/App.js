@@ -13,13 +13,16 @@ import Messages from "./components/messages"
 class App extends Component {
   constructor(props) {
     super(props)
+     this.props.auth();
     this.state = {
       isAuthenticating: true
     }
   }
 
   componentWillMount() {
-    this.props.auth();
+    if (this.props.user.attempts) {
+      this.setState({ isAuthenticating: false });
+    }
   }
 
   componentWillReceiveProps(newProps) {
