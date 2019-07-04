@@ -47,16 +47,16 @@ class TractLayer extends MapLayer {
     return falcorGraph.get(['geo','36', 'tracts'])
       .then(data => {
         console.log('geodata', data)
-        let tracts = data.json.geo[36].tracts
+        let tracts = data.json.geo[36].tracts;
         this.tracts = tracts;
-        map.setFilter('tracts-layer', ['all', ['in', 'geoid', ...tracts]])
+        map.setFilter('tracts-layer', ['all', ['in', 'geoid', ...tracts]]);
         this.fetchData().then(data => this.receiveData(map, data))
       })
 
   }
 
   fetchData() {
-    if (this.tracts.length < 2) return Promise.resolve({ route: [] })
+    if (this.tracts.length < 2) return Promise.resolve({ route: [] });
     return falcorGraph.get(['severeWeather', this.tracts, this.filters.hazard.value, 'tract_totals', 'total_damage'])
       .then(fullData => {
         // console.log('get full data', fullData.json.severeWeather)
@@ -69,26 +69,25 @@ class TractLayer extends MapLayer {
       out[curr] = data[curr][this.filters.hazard.value].tract_totals.total_damage
       return out;
     },{})
-    
-    let range = hazardMeta.filter(d => d.value === this.filters.hazard.value)[0].colors
-    console.log('range', range)
+    console.log('keyDomain',keyDomain);
+    let range = hazardMeta.filter(d => d.value === this.filters.hazard.value)[0].colors;
+    console.log('range', range);
     let colorScale = d3scale.scaleThreshold()
         .domain([50000,1000000,2000000,4000000,600000])
-        .range(range) 
+        .range(range);
 
     let mapColors = Object.keys(keyDomain).reduce((out,curr) => {
       out[curr] = colorScale(keyDomain[curr])
       return out;
-    },{})
-    console.log(mapColors)
-    
+    },{});
+    console.log('mapColors',mapColors)
     map.setPaintProperty(
       'tracts-layer', 
       'fill-color', 
       ["get", ["to-string", ["get", "geoid"]], ["literal", mapColors]]
     );
      map.setPaintProperty(
-      'tracts-layer', 
+      'tracts-layer',
       'fill-opacity', 
        0.7
     );
