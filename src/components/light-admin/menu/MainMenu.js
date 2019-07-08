@@ -9,6 +9,8 @@ class MainMenu extends Component {
   }  
   
   renderMenus (menus, menuSettings) {
+    console.log('menus',menus)
+    console.log('props',this.props.authed)
     return menus
       .filter(menu => menu.mainNav)
       .filter(menu => !menu.auth || this.props.authed)

@@ -12,7 +12,6 @@ class RiskIndex extends Component {
     return (
 	 
    <Element>
-     
      <div className='property-single'> 
       <div className='property-info-w'>
         <div className="property-section">

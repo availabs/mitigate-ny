@@ -343,7 +343,7 @@ class NewCapability extends React.Component {
 
     const {
       id,
-      name
+      name,
     } = this.state;
 
     if (!name) {
@@ -399,8 +399,10 @@ class NewCapability extends React.Component {
     }
     else {
       const args = NEW_CAPABILITY_ATTRIBUTES.map(attribute => {
+          console.log('attribute',attribute)
         return data[attribute] || getDefaultValue(attribute)
       })
+      console.log('args',args)
       return this.props.falcor.call(
         ['capabilities', 'insert'],
         args, [], []

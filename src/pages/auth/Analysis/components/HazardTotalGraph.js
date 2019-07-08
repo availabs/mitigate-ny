@@ -154,22 +154,17 @@ class HazardList extends React.Component {
 
 	renderHazardSelector() {
 		try {
-
 			let sortedHazards = this.props.riskIndex.hazards.value.slice()
 				.sort((a, b) => {
 					const aVal = this.props.severeWeather[this.props.geoid][a].allTime.annualized_damage,
 						bVal = this.props.severeWeather[this.props.geoid][b].allTime.annualized_damage;
 					return bVal < aVal ? -1 : 1;
 				})
-
 			let totalLoss = this.props.riskIndex.hazards.value.slice().reduce((sum, curr) => {
 				sum += this.props.severeWeather[this.props.geoid][curr].allTime.annualized_damage
 				return sum
 			},0)
-
-			totalLoss =  this.props.severeWeather[this.props.geoid][sortedHazards[0]].allTime.annualized_damage
-			
-
+			totalLoss =  this.props.severeWeather[this.props.geoid][sortedHazards[0]].allTime.annualized_damage;
 			return sortedHazards
 				.filter(d => this.props.severeWeather[this.props.geoid][d].allTime.annualized_damage > 1)
 				.map(hazard => {
