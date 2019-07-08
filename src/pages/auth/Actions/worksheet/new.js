@@ -391,14 +391,14 @@ export default [
             style: 'color-style-default'
         },
         name: 'Create Actions Worksheet',
-        auth: true,
+        auth: false,
         component: connect(mapStateToProps,mapDispatchToProps)(HomeView)
     },
     {
         path: '/actions/worksheet/edit/:worksheetId',
         name: 'Edit Actions',
         mainNav: false,
-        auth: true,
+        auth: false,
         exact: true,
         breadcrumbs: [
             { name: 'Actions', path: '/actions/' },
