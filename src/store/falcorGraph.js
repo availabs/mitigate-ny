@@ -5,7 +5,7 @@ import HttpDataSource from 'falcor-http-datasource'
 //export const host = 'https://mitigateny.availabs.org/api/'
   let host = 'http://localhost:3333/'
 if (process.env.NODE_ENV === 'production') {
-  host  = 'https://dev.npmrds.availabs.org/graph/graph'
+  host  = '/api'
 }
 
 class CustomSource extends HttpDataSource {

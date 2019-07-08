@@ -36,6 +36,7 @@
     "history": "^4.7.2",
     "keymirror": "^0.1.1",
     "lodash.get": "^4.4.2",
+    "lodash.pick": "^4.4.0",
     "lodash.throttle": "^4.1.1",
     "luma.gl": "^6.4.3",
     "mapbox-gl": "^0.51.0",
