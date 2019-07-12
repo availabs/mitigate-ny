@@ -1,6 +1,6 @@
 import React from 'react';
 import Wizard from 'components/light-admin/wizard'
-import { reduxFalcor } from 'utils/redux-falcor'
+import { falcorGraph } from "store/falcorGraph"
 import {sendSystemMessage} from 'store/modules/messages';
 import {connect} from "react-redux";
 import Element from 'components/light-admin/containers/Element'
@@ -10,9 +10,8 @@ const counties = ["36101","36003","36091","36075","36111","36097","36089","36031
     "36109","36001","36011","36039","36043","36113","36045","36019","36059","36053","36115","36119","36049","36069",
     "36023","36085","36029","36079","36057","36105","36073","36065","36009","36123","36107","36055","36095","36007",
     "36083","36099","36081","36037","36117","36063","36047","36015","36121","36061","36021","36013","36033","36017",
-    "36067","36035","36087","36051","36025","36071","36093","36005"];
-let countyNames = [];
-class Worksheet extends React.Component {
+    "36067","36035","36087","36051","36025","36071","36093","36005"]
+class HomeView extends React.Component {
 
     constructor (props) {
         super(props)
@@ -53,28 +52,13 @@ class Worksheet extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.listCousubDropdown = this.listCousubDropdown.bind(this)
-
-
+        //this.listCousubDropdown = this.listCousubDropdown.bind(this)
     }
-
-    fetchFalcorDeps(){
-        return this.props.falcor.get(['geo',counties,['name']])
-            .then(response => {
-                counties.map((county) => {
-                    countyNames.push(response.json.geo[county].name)
-                });
-                this.props.falcor.get(['geo',counties,'cousubs'])
-                    .then(res => {
-                        return res
-                    })
-            });
-    }
-
 
     componentDidMount(){
+        let edit_state = [];
         if(this.props.match.params.worksheetId) {
-            this.props.falcor.get(['actions','worksheet','byId',[this.props.match.params.worksheetId],Object.keys(this.state)])
+            falcorGraph.get(['actions','worksheet','byId',[this.props.match.params.worksheetId],Object.keys(this.state)])
                 .then(response =>{
                     Object.keys(this.state).forEach((key,i)=>{
                         let tmp_state = {};
@@ -87,23 +71,22 @@ class Worksheet extends React.Component {
                 })
         }
 
+
     }
 
+
     listCousubDropdown(event){
-        let county = event.target.value;
-        if (event.target.value !== 'None'){
-            return this.props.falcor.get(['geo',[county],'cousubs'])
-                .then(response => response.json.geo[county].cousubs)
-                .then(cousubs => this.props.falcor.get(['geo',cousubs,['name']]))
-        }
-        else{
-            return null
-        }
+        //console.log('check',event.target.value)
+        let county = event.target.value
+        return falcorGraph.get(['geo',[county],'cousubs'])
+            .then(response => {
+                return response
+            });
 
 
     }
     handleChange(e) {
-        console.log('---',e.target.id,e.target.value,this.state);
+        console.log('---',e.target.id,e.target.value,this.state)
         this.setState({ ...this.state, [e.target.id]: e.target.value });
     };
 
@@ -119,7 +102,7 @@ class Worksheet extends React.Component {
             Object.values(this.state).forEach(function(step_content){
                 args.push(step_content)
             })
-            return this.props.falcor.call(['actions', 'worksheet', 'insert'], args, [], [])
+            return falcorGraph.call(['actions', 'worksheet', 'insert'], args, [], [])
                 .then(response => {
                     this.props.sendSystemMessage(`Action worksheet was successfully created.`, {type: "success"});
                 })
@@ -137,7 +120,7 @@ class Worksheet extends React.Component {
                     updated_data[d] = this.state[d]
                 }
             })
-            return this.props.falcor.set({
+            return falcorGraph.set({
                 paths: [
                     ['actions', 'worksheet', 'byId', [this.props.match.params.worksheetId], attributes]
                 ],
@@ -152,6 +135,7 @@ class Worksheet extends React.Component {
                 }
             })
                 .then(response => {
+
                     this.props.sendSystemMessage(`Action worksheet was successfully edited.`, {type: "success"});
                 })
         }
@@ -159,19 +143,15 @@ class Worksheet extends React.Component {
     }
 
     render () {
-        let cousubsArray = [];
-        let cousubsNames = [];
-        if(this.props.cousubs !== undefined && this.state.county !== undefined && this.props.cousubs[this.state.county] !== undefined) {
-            this.props.cousubs[this.state.county].cousubs.value.forEach(cousub => {
-                cousubsArray.push(cousub)
-            });
-            Object.keys(this.props.cousubs).forEach(item => {
-                if(this.props.cousubs[item].name !== undefined && item.slice(0,5)=== this.state.county && item.length >5){
-                    cousubsNames.push(this.props.cousubs[item].name)
-                }
+        let cousubsArray = []
+        if(this.props.cousubs !== undefined && this.state.county !== undefined) {
+            Object.values(this.props.cousubs).forEach(item => {
+                item.cousubs.value.forEach(cousub => {
+                        cousubsArray.push(cousub)
+                    }
+                )
             })
         }
-
         const wizardSteps = [
             {
                 title: (<span>
@@ -188,12 +168,10 @@ class Worksheet extends React.Component {
                     </div>
                     <div className="col-sm-12">
                         <div className="form-group"><label htmlFor>County</label>
-                            <select className="form-control justify-content-sm-end" id='county' onChange={this.handleChange} value={this.state.county} onClick={this.listCousubDropdown}>
-                                <option default>--Select County--</option>
-                                <option className="form-control" key={0} value="None">No County selected</option>
+                            <select className="form-control justify-content-sm-end" id='county' onChange={this.handleChange} value={this.state.county} onClick={this.listCousubDropdown.bind(this)}>
                                 {
                                     counties.map((county,i) =>{
-                                        return(<option  className="form-control" key={i+1} value={county}>{countyNames[i]}</option>)
+                                        return(<option  className="form-control" key={i} value={county}>{county}</option>)
                                     })
                                 }
                             </select>
@@ -204,11 +182,10 @@ class Worksheet extends React.Component {
                             (
                                 <div className="form-group"><label htmlFor>Municipality</label>
                                     <select className="form-control justify-content-sm-end" id='cousub' onChange={this.handleChange} value={this.state.cousub}>
-
                                         {
                                             cousubsArray.map((cousub,i) =>{
                                                 if(cousub.slice(0,5) === this.state.county){
-                                                    return(<option className="form-control" key={i} value={cousub}>{cousubsNames[i]}</option>)
+                                                    return(<option className="form-control" key={i} value={cousub}>{cousub}</option>)
                                                 }
 
                                             })
@@ -392,8 +369,7 @@ const mapStateToProps = state => {
     return {
         isAuthenticated: !!state.user.authed,
         attempts: state.user.attempts, // so componentWillReceiveProps will get called.
-        cousubs: get(state.graph,'geo'),
-
+        cousubs: get(state.graph,'geo')
     };
 };
 
@@ -415,14 +391,14 @@ export default [
             style: 'color-style-default'
         },
         name: 'Create Actions Worksheet',
-        auth: true,
-        component: connect(mapStateToProps,mapDispatchToProps)(reduxFalcor(Worksheet))
+        auth: false,
+        component: connect(mapStateToProps,mapDispatchToProps)(HomeView)
     },
     {
         path: '/actions/worksheet/edit/:worksheetId',
         name: 'Edit Actions',
         mainNav: false,
-        auth: true,
+        auth: false,
         exact: true,
         breadcrumbs: [
             { name: 'Actions', path: '/actions/' },
@@ -435,7 +411,7 @@ export default [
             layout: 'menu-layout-compact',
             style: 'color-style-default'
         },
-        component: connect(mapStateToProps,mapDispatchToProps)(reduxFalcor(Worksheet))
+        component: connect(mapStateToProps,mapDispatchToProps)(HomeView)
     }
 
 ]

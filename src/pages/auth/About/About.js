@@ -12,6 +12,7 @@ import Methodology from './Methodology'
 import News from './news'
 import New2019 from './new2019'
 import Implementation from './Implementation'
+import ChangeLog from './change-log'
 import Footer from 'components/light-admin/containers/Footer'
 
 class About extends Component {
@@ -92,5 +93,6 @@ export default [
 ...News,
 ...Implementation,
 ...Methodology,
-...New2019
+...New2019,
+...ChangeLog
 ]

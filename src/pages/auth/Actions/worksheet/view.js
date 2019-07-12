@@ -138,7 +138,7 @@ export default [
         path: '/actions/worksheet/view/:worksheetId',
         exact: true,
         name: 'Actions',
-        auth: true,
+        auth: false,
         mainNav: false,
         breadcrumbs: [
             { name: 'Actions', path: '/actions/worksheet/view/' },

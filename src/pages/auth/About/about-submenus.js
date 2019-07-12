@@ -8,5 +8,6 @@ export default [
        {name: 'Guiding Authorities', path: '/about/authorities'},
        {name: 'Glossary', path: '/about/glossary'},
        {name: 'Mitigation News', path: '/about/news'},
+       {name: 'Changelog', path: '/about/changelog'},
     ]
 ]
