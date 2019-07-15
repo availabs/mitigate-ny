@@ -2,8 +2,8 @@
 import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
-//export const host = 'https://mitigateny.availabs.org/api/'
-  let host = 'http://localhost:3333/'
+export const host = 'https://mitigateny.availabs.org/api/'
+//let host = 'http://localhost:3333/'
 if (process.env.NODE_ENV === 'production') {
   host  = 'api/'
 }

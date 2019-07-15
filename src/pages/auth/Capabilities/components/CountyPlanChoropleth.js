@@ -70,7 +70,7 @@ class CountyPlanChoropleth extends React.Component {
 		.then(geoids => {
 			return this.props.falcor.get(
 				['geo', geoids, 'name'],
-				['counties', 'byFips', geoids, ['plan_status', 'plan_expiration', 'plan_consultant', 'plan_url']]
+				['counties', 'byFips', geoids, ['plan_status', 'plan_expiration', 'plan_url']]
 			)
 		})
 		.then(() => this.processData())
