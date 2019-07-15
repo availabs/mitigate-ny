@@ -131,14 +131,23 @@ class HazardMap extends React.Component {
 			.then(response => response.json.geo[geoid][geoLevel])
 			.then(geoids => {
 				if (!geoids.length) return;
-				return this.props.falcor.get(
-					["riskIndex", geoids, [hazard, 'sovi', 'builtenv'], 'score']
-				)
-				.then(() => {
-					return this.props.falcor.get(
-						['severeWeather', geoids, hazard, 'tract_totals', 'total_damage']
-					)
-				})
+				let requests = []
+			    let chunkSize = 200
+			    for (let i = 0; i < geoids.length; i += chunkSize) {
+			      requests.push(geoids.slice(i, i + chunkSize))
+			    }
+
+			    return requests
+			      	.reduce((a, c) => a.then(() => this.props.falcor.get(
+				        ["riskIndex", c, [hazard, 'sovi', 'builtenv'], 'score'])), 
+				      Promise.resolve())
+
+					.then(() => {
+						return requests
+					      	.reduce((a, c) => a.then(() => this.props.falcor.get(
+						       ['severeWeather', c, hazard, 'tract_totals', 'total_damage'])), 
+						      Promise.resolve())
+					})
 			})
 			.then(() => tractTotals ? this.processTractData() : this.processData())
 	}
