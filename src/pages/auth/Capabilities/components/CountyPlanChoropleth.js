@@ -250,8 +250,28 @@ class CountyPlanChoropleth extends React.Component {
   			width = `${ 100 / range.length }%`,
   			domainValues = range.map(r => scale.invertExtent(r)[0]);
   		if (!domainValues.reduce((a, c) => a || Boolean(c), false)) return false;
+
+  		const statusScaleMap = {
+  			 "0":"No Current Plan or Grant",
+			 "1":"Update in Progress",
+			 "2":"Update in Progress",
+			 "3":"Update in Progress",
+			 "4":"Update in Progress",
+			 "5":"Update in Progress",
+			 "6":"Update in Progress",
+			 "7":"Update in Progress",
+			 "8":"Update in Progress",
+			 "9":"Update in Progress",
+			 "10":"Approvable Pending Adoption",
+			 "11":"Approvable Pending Adoption",
+			 "12":"Plan Current",
+			 "13":"Plan Current",
+			 "14":"Plan Current",
+			 "15":"Plan Current"
+  		}
+
 		return (	
-			<table className="map-test-table">
+			<table className="map-test-table" style={{width:"auto"}}>
 				<thead>
 					<tr>
 						<th className="no-border-bottom" colSpan={ range.length }>Expiration&nbsp;Years</th>
@@ -278,7 +298,7 @@ class CountyPlanChoropleth extends React.Component {
 					</tr>
 					<tr>
 						{
-							statusRange.map(t => <td key={ t } style={ { width } }>{ statusScale.invertExtent(t)[0] }</td>)
+							statusRange.map(t => <td key={ t } style={ { width } }>{ statusScaleMap[statusScale.invertExtent(t)[0]] }</td>)
 						}
 					</tr>
 				</tbody>
@@ -289,7 +309,7 @@ class CountyPlanChoropleth extends React.Component {
 // //
 	generateMapControls() {
 		const controls = [{
-			pos: 'top-left',
+			pos: 'bottom-left',
 			comp: this.generateLegend()
 		}];
 		return controls;
