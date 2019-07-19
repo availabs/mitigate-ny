@@ -33,8 +33,8 @@ class CountyPlanChoropleth extends React.Component {
 					.domain([0.0, 1.0, 2.0, 3.0])
 					.range(["#999", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850"]),
 		statusScale: d3scale.scaleThreshold()
-					.domain([1, 10, 11])
-					.range(["#d73027", "#f46d43", "#fdae61", "#999"]),
+					.domain([0, 1, 10])
+					.range(["#999", "#d73027", "#f46d43", "#fdae61"]),
 		viewport: Viewport(),
 		hoverData: null,
 		dataProcessed: false
@@ -263,7 +263,7 @@ class CountyPlanChoropleth extends React.Component {
 			 "8":"Update in Progress",
 			 "9":"Update in Progress",
 			 "10":"Approvable Pending Adoption",
-			 "11":"Approvable Pending Adoption",
+			 "11":"Plan Current",
 			 "12":"Plan Current",
 			 "13":"Plan Current",
 			 "14":"Plan Current",
@@ -280,12 +280,12 @@ class CountyPlanChoropleth extends React.Component {
 				<tbody>
 					<tr>
 						{
-							range.map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
+							range.slice(1).map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
 						}
 					</tr>
 					<tr>
 						{
-							range.map(t => <td key={ t } style={ { width } }>{ scale.invertExtent(t)[0] }</td>)
+							range.slice(1).map(t => <td key={ t } style={ { width } }>{ scale.invertExtent(t)[0] }</td>)
 						}
 					</tr>
 					<tr>
@@ -293,12 +293,12 @@ class CountyPlanChoropleth extends React.Component {
 					</tr>
 					<tr>
 						{
-							statusRange.map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
+							statusRange.slice(1).map(t => <td key={ t } style={ { width, height: '10px', background: t } }/>)
 						}
 					</tr>
 					<tr>
 						{
-							statusRange.map(t => <td key={ t } style={ { width } }>{ statusScaleMap[statusScale.invertExtent(t)[0]] }</td>)
+							statusRange.slice(1).map(t => <td key={ t } style={ { width } }>{ statusScaleMap[statusScale.invertExtent(t)[0]] }</td>)
 						}
 					</tr>
 				</tbody>
