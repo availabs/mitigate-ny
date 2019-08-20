@@ -9,7 +9,7 @@ class MunicipalityStats extends React.Component {
 	fetchFalcorDeps({ geoid }=this.props) {
 // `geo[{keys:geoids}][{keys:years}]['${ CENSUS_API_VARIABLE_NAMES.join(`', '`)}']`
 		return this.props.falcor.get(
-			['geo', geoid, 2016, 'population'],
+			['acs', geoid, 2016, 'B01003_001E'],
 			['geo', geoid, 'cousubs']
 		)
 	}
@@ -21,7 +21,7 @@ class MunicipalityStats extends React.Component {
 			data = [
 				{ 
 					label: "County Population (2016)",
-					value: this.props.geoGraph[geoid][2016].population.toLocaleString()
+					value: this.props.acsGraph[geoid][2016].B01003_001E.toLocaleString()
 				},
 				{
 					label: "Number of County Subdivisions",
@@ -51,6 +51,7 @@ MunicipalityStats.defaultProps = {
 
 const mapStateToProps = state => ({
     geoGraph: state.graph.geo || {},
+    acsGraph: state.graph.acs || {},
     router: state.router
 })
 
