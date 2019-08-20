@@ -28,6 +28,9 @@ import FloodExplorer from "pages/auth/FloodExplorer"
 import Comments from "pages/comments"
 
 import Analysis from 'pages/auth/Analysis'
+import ActionsIndex from 'pages/auth/Actions'
+import ActionsView from 'pages/auth/Actions/worksheet/view'
+import ActionWorksheet from 'pages/auth/Actions/worksheet/new'
 
 // // -- Util Routes
 import Login from './pages/Login'
@@ -54,6 +57,9 @@ const routes = [
   ...About,
   ...ManageCapabilities,
   ...NewCapability,
+  ...ActionWorksheet,
+  ...ActionsIndex,
+  ...ActionsView,
  
  ...Comments,
   

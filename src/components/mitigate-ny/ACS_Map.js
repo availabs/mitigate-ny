@@ -67,7 +67,7 @@ class ACS_Map extends React.Component {
 	componentDidMount() {
 		this.state.viewport.register(this, this.forceUpdate, false);
 	}
-	componentWillunmount() {
+	componentWillUnmount() {
 		this.state.viewport.unregister(this);
 	}
 

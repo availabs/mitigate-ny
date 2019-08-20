@@ -40,7 +40,7 @@ class AvatarUser extends Component {
             <ul>
               <li><a href="/cms"><i className="os-icon os-icon-newspaper" /><span>Content Management</span></a></li>
               <li><a href="/capabilities/manage"><i className="os-icon os-icon-window-content" /><span>Capabilities Management</span></a></li>
-              <li><a href="apps_email.html"><i className="os-icon os-icon-mail-01" /><span>Incoming Mail</span></a></li>
+              <li><Link to="/actions"><i className="os-icon os-icon-mail-01" /><span>Action Worksheets</span></Link></li>
               <li><a href="users_profile_big.html"><i className="os-icon os-icon-user-male-circle2" /><span>Profile Details</span></a></li>
               <li><a href="/"><i className="os-icon os-icon-others-43" /><span>Notifications</span></a></li>
               <li><Link to="/logout"><i className="os-icon os-icon-signs-11" /><span>Logout</span></Link></li>

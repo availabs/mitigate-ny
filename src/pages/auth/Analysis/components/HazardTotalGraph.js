@@ -16,25 +16,25 @@ import COLOR_RANGES from "constants/color-ranges"
 
 const getColor = ( name ) => COLOR_RANGES[5].reduce((a, c) => c.name === name ? c.colors : a).slice()
 
-const hazardColors = {
-  'wind': getColor('Greys'),
-  'wildfire': getColor('Blues'),
-  'tsunami': getColor('Blues'),
-  'tornado': getColor('Blues'),
-  'riverine': getColor('PuBuGn'),
-  'lightning': getColor('Blues'),
-  'landslide': getColor('Blues'),
-  'icestorm': getColor('Blues'),
-  'hurricane': getColor('Purples'),
-  'heatwave': getColor('Blues'),
-  'hail': getColor('Blues'),
-  'earthquake': getColor('Blues'),
-  'drought': getColor('Blues'),
-  'avalanche': getColor('Blues'),
-  'coldwave': getColor('Blues'),
-  'winterweat': getColor('Blues'),
-  'volcano': getColor('Blues'),
-  'coastal': getColor('Blues'),
+const hazardMeta = {
+  'wind':{ color:getColor('Greys'), icon: 'wind'},
+  'wildfire':{ color:getColor('Blues'), icon: 'forest-fire'},
+  'tsunami':{ color:getColor('Blues'), icon: 'tsunami'},
+  'tornado':{ color:getColor('Oranges'), icon: 'tornado'},
+  'riverine':{ color:getColor('PuBuGn'), icon: 'flood'},
+  'lightning':{ color:getColor('YlOrRd'), icon: 'storm'},
+  'landslide':{ color:getColor('BrBG'), icon: 'landslide'},
+  'icestorm':{ color:getColor('BuPu'), icon: 'snow'},
+  'hurricane':{ color:getColor('Purples'), icon: 'flood-1'},
+  'heatwave':{ color:getColor('YlOrBr'), icon: 'drought'},
+  'hail':{ color:getColor('Blues'), icon: 'hail'},
+  'earthquake':{ color:getColor('Blues'), icon: 'earthquake'},
+  'drought':{ color:getColor('Blues'), icon: 'drought'},
+  'avalanche':{ color:getColor('Blues'), icon: 'avalanche'},
+  'coldwave':{ color:getColor('Blues'), icon: 'snow'},
+  'winterweat':{ color:getColor('Blues'), icon: 'snow'},
+  'volcano':{ color:getColor('Blues'), icon: 'flood'},
+  'coastal':{ color:getColor('Blues'), icon: 'flood'},
 }
 
 
@@ -53,9 +53,12 @@ let GraphListItem =  styled.li`
 
 let GraphIcon = styled.i`
 	margin-right: .8em;
-    color: ${props => props.color || '#5c6587'};
+    background-color: ${props => props.color || '#5c6587'};
+    color: #fefefe;
+    border-radius: 50%;
     font-size: 35px;
-    height: 40px;
+    height: 45px;
+    padding: 5px;
     transition: all 80ms linear;
     flex: 0 0 40px;
 `
@@ -151,29 +154,24 @@ class HazardList extends React.Component {
 
 	renderHazardSelector() {
 		try {
-
 			let sortedHazards = this.props.riskIndex.hazards.value.slice()
 				.sort((a, b) => {
 					const aVal = this.props.severeWeather[this.props.geoid][a].allTime.annualized_damage,
 						bVal = this.props.severeWeather[this.props.geoid][b].allTime.annualized_damage;
 					return bVal < aVal ? -1 : 1;
 				})
-
 			let totalLoss = this.props.riskIndex.hazards.value.slice().reduce((sum, curr) => {
 				sum += this.props.severeWeather[this.props.geoid][curr].allTime.annualized_damage
 				return sum
 			},0)
-
-			totalLoss =  this.props.severeWeather[this.props.geoid][sortedHazards[0]].allTime.annualized_damage
-			
-
+			totalLoss =  this.props.severeWeather[this.props.geoid][sortedHazards[0]].allTime.annualized_damage;
 			return sortedHazards
 				.filter(d => this.props.severeWeather[this.props.geoid][d].allTime.annualized_damage > 1)
 				.map(hazard => {
 					const name = this.props.riskIndex.meta[hazard].name
 					return (
 						<GraphListItem onClick={this.props.setHazard.bind(this,hazard)}>
-							<GraphIcon color={hazardColors[hazard][3]} className="fi flaticon-007-flood" />
+							<GraphIcon color={hazardMeta[hazard].color[3]} className={`fi fa-${hazardMeta[hazard].icon}`} />
 							<BarContainer>
 								<GraphLabel>
 									<NameLabel>
@@ -186,7 +184,7 @@ class HazardList extends React.Component {
 								<Bar>
 									<BarValue 
 										width={((this.props.severeWeather[this.props.geoid][hazard].allTime.annualized_damage / totalLoss) * 100)}
-										color={hazardColors[hazard][3]}
+										color={hazardMeta[hazard].color[3]}
 									/>
 								</Bar>
 							</BarContainer>

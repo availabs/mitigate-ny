@@ -61,7 +61,7 @@ class FemaDisasterDeclarationsTable extends React.Component {
 			    .then(disasternumbers => {
 			    	if (!disasternumbers.length) return;
 			    	return this.props.falcor.get(
-			    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disastername', 'declarationtype', 'date', 'hazard']]
+			    		["femaDisaster", "byDisasterNumber", disasternumbers, ['disasternumber','disastername', 'declarationtype', 'date', 'hazard']]
 			    	)
 			    })
 		    })
