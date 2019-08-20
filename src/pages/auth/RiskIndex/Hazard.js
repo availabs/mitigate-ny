@@ -20,6 +20,8 @@ import CapabilitiesTable from './components/CapabilitiesTable'
 import HMGPTable from './components/HMGPTable'
 import HighRiskMunicipalities from "./components/HighRiskMunicipalities"
 
+import IsVisible from 'components/isVisible'
+
 class Hazard extends Component {
 
   fetchFalcorDeps() {
@@ -347,29 +349,36 @@ criticalInfrastructure (hazard) {
         {/*
            Section 1 - Intro, Overview & Stats
         */}
-        
-        <div className='property-info-w'>
-          <div className="property-info-main" style={{paddingBottom: 0}}>
-            <h1>{hazardName}</h1>
+        <IsVisible>
+          <div className='property-info-w'>
+            <div className="property-info-main" style={{paddingBottom: 0}}>
+              <h1>{hazardName}</h1>
 
-            
+              
+            </div>
           </div>
-        </div>
+        </IsVisible>
 
         <div className='property-info-w'>
+
           <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
             
+           
+              <div className="property-section">
+                <Content content_id={`${hazard}-setting_context`} />
+              </div> 
+            
+              <div className="property-section">
+                <Content content_id={`${hazard}-characteristics`} />
+              </div> 
+            
+              <div className="property-section">
+                 <Content content_id={`${hazard}-magnitude`} />
+              </div> 
 
-            <div className="property-section">
-              <Content content_id={`${hazard}-setting_context`} />
-            </div> 
-            <div className="property-section">
-              <Content content_id={`${hazard}-characteristics`} />
-            </div> 
-            <div className="property-section">
-               <Content content_id={`${hazard}-magnitude`} />
-            </div>       
+              
           </div>
+         
            
 
           <div className='property-info-side' style={{maxWidth: 398}}>
@@ -392,6 +401,7 @@ criticalInfrastructure (hazard) {
         {/*
            Section 2 - Location & Historic Events
         */}
+        <IsVisible>
          <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '60%', paddingBottom: 0, paddingTop: 0}}>
             <div className="property-section">
@@ -406,7 +416,8 @@ criticalInfrastructure (hazard) {
           {this.municipalityTable(hazard)}
 
         </div>
-        
+        </IsVisible>
+        <IsVisible>
         <div className='property-info-w'>
             <div className="property-info-main" style={{maxWidth: '100%'}}>
 
@@ -418,7 +429,8 @@ criticalInfrastructure (hazard) {
                 </i>
               </div>
           </div>
-       
+        </IsVisible>
+       <IsVisible>
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0 , paddingTop: 0}}>
               <div className="property-section">
@@ -440,6 +452,8 @@ criticalInfrastructure (hazard) {
               </div>
           </div>
         </div>
+        </IsVisible>
+        <IsVisible>
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             {this.statewideEvents(hazard,hazardName)}
@@ -450,18 +464,27 @@ criticalInfrastructure (hazard) {
               </i>
           </div>
         </div>
+        </IsVisible>
+        <IsVisible>
         {this.historicMaps(hazard, hazardName)}
+        </IsVisible>
+        <IsVisible>
         {this.eventsLossTable(hazard)}
-
+        </IsVisible>
 
         {/*
            Section 3 - Probability
         */}
+        <IsVisible>
           {this.probability(hazard)}
+        </IsVisible>
+        <IsVisible>
           {this.probabilityMap (hazard)}
+        </IsVisible>
         {/*
            Section 3 - Vulnerability
         */}
+        <IsVisible>
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%', paddingBottom: 0}}>
             <div className="property-section">
@@ -509,19 +532,22 @@ criticalInfrastructure (hazard) {
               />
             </div>
           </div>
+          </IsVisible>
             { /*
             <div className="property-section">
               <Content content_id={`${hazard}-related_narrative`} />
             </div>
              */ }
-
+        <IsVisible>
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
             <div className="property-section">
               <Content content_id={`${hazard}-methodology`} />
             </div>
           </div>
-        </div>    
+        </div>
+        </IsVisible>
+        <IsVisible>
         <div className='property-info-w'>
           <div className="property-info-main" style={{maxWidth: '100%'}}>
             <div className="property-section">
@@ -529,6 +555,7 @@ criticalInfrastructure (hazard) {
             </div>
           </div>
         </div>
+        </IsVisible>
  
     </div>
     )
