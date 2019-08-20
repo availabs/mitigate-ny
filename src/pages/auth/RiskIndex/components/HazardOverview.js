@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ProjectBox from 'components/light-admin/containers/ProjectBox'
+
 import LineGraph from 'components/charts/line/simple'
+
 // import BarGraph from 'components/charts/bar/simple'
 import { processSheldus } from 'utils/sheldusUtils'
 import Content from 'components/cms/Content'
@@ -41,18 +43,18 @@ export default (props) => (
 		        </div>
 		      </div> */ }
 		      <div className="col-sm-12">
-		        { 
+		        {
 		        	Object.keys(props.display === 'full' ? sheldusAttributes : LimitedAttributes).map(key => {
 		        		let fullData = processSheldus(props.sheldus, key)
-			         	return( 
-					     	<div className="row" key={key}>   
+			         	return(
+					     	<div className="row" key={key}>
 						        <div className="col-12" style={{textAlign:'center'}}>
 						            <div className="el-tablo highlight">
 						              <div className="label">{sheldusAttributes[key]}</div>
-						             
+
 						            </div>
 						       	</div>
-						       	
+
 						       	<div className="col-12">
 						            <div style={{width: 'calc(100% + 110px)', height: 100, marginLeft: -50, marginTop: -20}}>
 						              	<LineGraph data={fullData}/>
