@@ -65,7 +65,7 @@ class CMS_FilterPanel extends React.Component {
 			activeFilters
 		} = this.props.cms;
 		contentFilters.sort((a, b) => a.heading < b.heading ? -1 : 1);
-console.log("CONTENT FILTERS:", contentFilters, activeFilters)
+    
 		return (
           	<div className={ this.props.className }>
 				<ElementBox>

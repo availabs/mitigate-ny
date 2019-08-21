@@ -73,7 +73,6 @@ class CMS_HomePage extends React.Component {
           })
         }, Promise.resolve())
         .then(response => {
-console.log("FILTERS:", filters)
           this.props.setContentFilters(Object.keys(filters).map(key => ({ heading: key, filters: filters[key] })));
           this.props.receiveContent(content);
         })
