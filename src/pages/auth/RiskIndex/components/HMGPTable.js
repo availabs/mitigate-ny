@@ -11,7 +11,7 @@ import {
 } from 'utils/sheldusUtils'
 
 class HMAP_Table extends React.Component {
-	
+
 	fetchFalcorDeps() {
 	    const { geoid, geoLevel, hazard } = this.props;
 	    return this.props.falcor.get(
@@ -30,7 +30,6 @@ class HMAP_Table extends React.Component {
 				}
 	    	return this.props.falcor.get(...requests)
 	    	.then(response => {
-// console.log("????????????",response)
 	    		let max = 0;
 	    		hazards.forEach(hazard => {
 		    		const data = response.json.hmap[geoid][hazard];
@@ -66,24 +65,48 @@ class HMAP_Table extends React.Component {
 	    .then(project_ids => {
 // console.log("project_ids:",project_ids)
 	    	if (!project_ids || project_ids.length === 0) return;
-	    	return this.props.falcor.get(
-	    		['hmap', 'byId', project_ids,
-	    			[
-				  		"year",
-				  		"status",
-				  		"county",
-				  		"subgrantee",
-				  		"projecttype",
-				  		"projectamount",
-				  		"hazardid",
-				  		"disasternumber",
-				  		"projectcounties",
-				  		"projecttitle",
-				  		"federalshareobligated",
-				  		"programarea"
-				  	]
-				]
-	    	)//.then(res => console.log(this.props.hazard, res))
+
+        const chunkSize = 50,
+          requests = [];
+        for (let n = 0; n < project_ids.length; n += chunkSize) {
+          requests.push(
+  	    		['hmap', 'byId', project_ids.slice(n, n + chunkSize),
+  	    			[
+  				  		"year",
+  				  		"status",
+  				  		"county",
+  				  		"subgrantee",
+  				  		"projecttype",
+  				  		"projectamount",
+  				  		"hazardid",
+  				  		"disasternumber",
+  				  		"projectcounties",
+  				  		"projecttitle",
+  				  		"federalshareobligated",
+  				  		"programarea"
+  				  	]
+  				])
+        }
+        return requests.reduce((a, c) => a.then(() => this.props.falcor.get(c)), Promise.resolve());
+
+	    	// return this.props.falcor.get(
+	    	// 	['hmap', 'byId', project_ids,
+	    	// 		[
+				//   		"year",
+				//   		"status",
+				//   		"county",
+				//   		"subgrantee",
+				//   		"projecttype",
+				//   		"projectamount",
+				//   		"hazardid",
+				//   		"disasternumber",
+				//   		"projectcounties",
+				//   		"projecttitle",
+				//   		"federalshareobligated",
+				//   		"programarea"
+				//   	]
+				// ]
+	    	// )
 	    })
 	}
 
@@ -107,7 +130,7 @@ class HMAP_Table extends React.Component {
 		row["county"] = data.county;
 		row["subgrantee"] = data.subgrantee;
 		row["project type"] = data.projecttype;
-		
+
 		row["narrative"] = data.projecttitle;
 		row["hazard"] = this.getHazardName(data.hazardid);
 		return row;

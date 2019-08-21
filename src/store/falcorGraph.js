@@ -3,10 +3,10 @@ import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
 // export let host = 'https://mitigateny.availabs.org/api/'
-let host = 'http://localhost:3333/'
-if (process.env.NODE_ENV === 'production') {
-  host  = '/api/'
-}
+let host = 'http://localhost:4444/'
+// if (process.env.NODE_ENV === 'production') {
+//   host  = '/api/'
+// }
 
 class CustomSource extends HttpDataSource {
   onBeforeRequest (config) {

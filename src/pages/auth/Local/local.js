@@ -16,8 +16,8 @@ class Local extends Component {
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingBottom: 0}}>
 
-           
-           
+
+
             <div className="property-section">
               <Content content_id={`capabilities-lhmp_status_narrative`} />
               <CountyPlanChoropleth />
@@ -32,10 +32,10 @@ class Local extends Component {
           </div>
          </div>
 
-          
+
 
             <CountyCapabilitiesTable
-                
+
                 descriptions={ [
                      'Avalanche' ,
                      'Coastal Erosion' ,
@@ -46,7 +46,7 @@ class Local extends Component {
                       'Extreme Heat' ,
                       'Flood' ,
                       'Hail' ,
-                      
+
                       'High Winds' ,
                       'Hurricane'  ,
                       'Ice' ,
@@ -55,11 +55,10 @@ class Local extends Component {
                       'Snow' ,
                       'Tornado' ,
                       'Tsunami' ,
-                      'Wildfire' , 
-                      'Volcano' , 
-                                           
-                      ] }/> 
+                      'Wildfire' ,
+                      'Volcano' ,
 
+                      ] }/>
 
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
@@ -67,10 +66,10 @@ class Local extends Component {
               <Content content_id={`capabilities-lhmp_hazards-of-concern`} />
             </div>
            </div>
-         </div> 
+         </div>
 
             <CountyCapabilitiesTable
-                
+
                 descriptions={ [
                       'Hazardous Materials (HAZMAT fixed and in transit)' ,
                        'HazMat-Fixed Site' ,
@@ -86,29 +85,31 @@ class Local extends Component {
                        'Terrorism' ,
                        'Food Shortage' ,
                        'Water Supply Contamination' ,
-                       'Air Contamination' , 
+                       'Air Contamination' ,
                        'Contamination - air and water' ,
                        'Transportation Accident'
-                                           
-                      ] }/>          
 
-          
+                      ] }/>
+
 
          <div className='property-info-w'>
           <div className="property-info-main"  style={{paddingTop: 0}}>
             <div className="property-section">
               <Content content_id={`section7-lhmp_submittal_review_process`} />
             </div>
-            <div className="property-section">  
+            <div className="property-section">
               <Content content_id={`section7-funding_plans_projects`} />
             </div>
-            <HMGPTable 
+
+
+            <HMGPTable
                  filterColumns={ ['hazard' , 'status' , 'program area' ] }
-                 hazard="none" 
+                 hazard="none"
                  />
+
                   <i style={{color: '#afafaf'}}>Source: <a href='https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1'> FEMA Hazard Mitigation Assistance Projects - V1</a></i>
-                 
-            <div className="property-section">  
+
+            <div className="property-section">
               <Content content_id={`capabilities-lhmp_criteria`} />
             </div>
           </div>

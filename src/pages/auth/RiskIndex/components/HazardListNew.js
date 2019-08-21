@@ -20,7 +20,7 @@ import "./HazardList.css"
 
 
 // <i class="os-icon os-icon-phone-21"></i>
-			
+
 const ListItem = ({ hazard, name, onClick, active, annualized_damage }) =>
 	<li className={ active ? " active" : "" }
 		key={ hazard }>
@@ -32,7 +32,7 @@ const ListItem = ({ hazard, name, onClick, active, annualized_damage }) =>
 				{ fnum(annualized_damage) }
 			</span>
 		</a>
-		
+
 	</li>
 
 class HazardList extends React.Component {
@@ -113,6 +113,7 @@ class HazardList extends React.Component {
 						<div className="col-12">
 							<ElementBox>
 							<h5>Damage in Dollars from Events, By Census Tract, 1996-2017</h5>
+
 								<HazardMap height={ 600 }
 									{ ...this.state }
 									threeD={ false }
@@ -120,7 +121,8 @@ class HazardList extends React.Component {
 									tractTotals={ true }
 									highRisk={ 0.0}
 									thresholds={ [10000, 100000, 500000, 1000000] }
-									/> 
+									/>
+									
 							</ElementBox>
 							<i style={{color: '#afafaf'}}>
 			                  Source: NCDC Storm Events Dataset

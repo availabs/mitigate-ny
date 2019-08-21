@@ -103,13 +103,14 @@ export default (state=INITIAL_STATE, action) => {
 		}
 		case REMOVE_ACTIVE_FILTER: {
 			const newState = Object.assign({}, state);
-			newState.activeFilters = newState.activeFilters.filter(f => f !== action.filter);
+			newState.activeFilters = newState.activeFilters.filter(({ heading, filter }) => !(heading === action.filter.heading && filter === action.filter.filter));
 			return newState;
 		}
 		case TOGGLE_ACTIVE_FILTER: {
 			let newState = Object.assign({}, state);
-			if (newState.activeFilters.includes(action.filter)) {
-				newState.activeFilters = newState.activeFilters.filter(filter => filter !== action.filter);
+console.log("TOGGLE_ACTIVE_FILTER", action.filter)
+			if (newState.activeFilters.find(d => d.heading === action.filter.heading && d.filter === action.filter.filter)) {
+				newState.activeFilters = newState.activeFilters.filter(({ heading, filter }) => !(heading === action.filter.heading && filter === action.filter.filter));
 			}
 			else {
 				newState.activeFilters.push(action.filter);

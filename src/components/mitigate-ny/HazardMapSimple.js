@@ -37,9 +37,17 @@ class TestMap extends React.Component {
       ['riskIndex', 'meta', hazard, 'name']
     )
     .then(res => res.json.geo[geoid][geoLevel])
-    .then(geoids => this.props.falcor.get(
-      ['severeWeather', geoids, hazard, 'tract_totals', 'total_damage']
-    ))
+    .then(geoids => {
+      const chunkSize = 50,
+        requests = [];
+      for (let n = 0; n < geoids.length; n += chunkSize) {
+        requests.push(['severeWeather', geoids.slice(n, n + chunkSize), hazard, 'tract_totals', 'total_damage'])
+      }
+      return requests.reduce((a,c) => a.then(() => this.props.falcor.get(c)), Promise.resolve());
+      // this.props.falcor.get(
+      //   ['severeWeather', geoids, hazard, 'tract_totals', 'total_damage']
+      // )
+    })
     .then(() => this.processData())
   }
 

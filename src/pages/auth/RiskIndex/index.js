@@ -10,9 +10,9 @@ class RiskIndex extends Component {
 
   render () {
     return (
-	 
+
    <Element>
-     <div className='property-single'> 
+     <div className='property-single'>
       <div className='property-info-w'>
         <div className="property-section">
          <Content content_id={`risk-hazards`} />

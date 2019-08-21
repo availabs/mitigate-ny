@@ -30,42 +30,52 @@ class CMS_HomePage extends React.Component {
         ["content", "byIndex", { from: 0, to: length - 1 }, "content_id"]
       )
       .then(response => {
-        const content_ids = [];
+        const content_ids = [],
+          content = [],
+          filters = {},
+          requests = [],
+          chunkSize = 50;
         for (let index = 0; index < length; ++index) {
           content_ids.push(response.json.content.byIndex[index].content_id);
         }
-        return this.props.falcor.get(
-          ["content", "byId", content_ids, ["attributes", "body", "created_at", "updated_at"]]
-        )
+        for (let n = 0; n < content_ids.length; n += chunkSize) {
+          const ids = content_ids.slice(n, n + chunkSize);
+          requests.push([ids, ["content", "byId", ids, ["attributes", "body", "created_at", "updated_at"]]])
+        }
+        return requests.reduce((a, [ids, request]) => {
+          return a.then(() => {
+            return this.props.falcor.get(request)
+              .then(response => {
+                ids.forEach(content_id => {
+                  const {
+                    attributes,
+                    body,
+                    created_at,
+                    updated_at
+                  } = response.json.content.byId[content_id];
+                  for (const key in attributes) {
+                    if (!(key in filters)) {
+                      filters[key] = [];
+                    }
+                    if (!filters[key].includes(attributes[key])) {
+                      filters[key].push(attributes[key]);
+                    }
+                  }
+                  content.push({
+                    content_id,
+                    attributes,
+                    body: body,
+                    created_at: new Date(created_at),
+                    updated_at: new Date(updated_at)
+                  });
+                });
+              })
+          })
+        }, Promise.resolve())
         .then(response => {
-          const content = [],
-            filters = {};
-          content_ids.forEach(content_id => {
-            const {
-              attributes,
-              body,
-              created_at,
-              updated_at
-            } = response.json.content.byId[content_id];
-            for (const key in attributes) {
-              if (!(key in filters)) {
-                filters[key] = [];
-              }
-              if (!filters[key].includes(attributes[key])) {
-                filters[key].push(attributes[key]);
-              }
-            }
-            content.push({
-              content_id,
-              attributes,
-              body: body,
-              created_at: new Date(created_at),
-              updated_at: new Date(updated_at)
-            });
-          });
+console.log("FILTERS:", filters)
           this.props.setContentFilters(Object.keys(filters).map(key => ({ heading: key, filters: filters[key] })));
           this.props.receiveContent(content);
-          return response;
         })
       })
     })

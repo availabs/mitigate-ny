@@ -84,14 +84,14 @@ class CMS_ContentEditorPanel extends React.Component {
 	editContent(e) {
 		e.preventDefault();
 
-    	const {
-      		content_id,
-      		new_content_id,
-      		attributes,
-      		body
-    	} = this.props.cms.newContentData;
+  	const {
+    		content_id,
+    		new_content_id,
+    		attributes,
+    		body
+  	} = this.props.cms.newContentData;
 
-    	if (content_id && body) {
+    if (content_id && body) {
 			this.props.falcor.set({
 				paths: [
 					['content', 'byId', content_id, ['content_id', 'body', 'attributes', 'updated_at', 'created_at']]
@@ -112,15 +112,12 @@ class CMS_ContentEditorPanel extends React.Component {
 				this.props.sendSystemMessage(`Content "${ new_content_id }" was successfully edited.`, { type: "success" });
 				if (new_content_id != content_id) {
 					history.replace(`/cms/edit/${ new_content_id }`);
-				}
-				const {
-					content_id,
-					body,
-					attributes,
-					updated_at,
-					created_at
-				} = response.json.content.byId[new_content_id]
-				this.props.updateContent({ content_id, body, attributes, updated_at, created_at });
+				};
+        const {
+          $__path,
+          ...content
+        } = response.json.content.byId[new_content_id];
+  			this.props.updateContent(content);
 			})
 		}
 	}

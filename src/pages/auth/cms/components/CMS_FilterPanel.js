@@ -7,9 +7,9 @@ import {
 
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
-const FilterItem = ({ filter, active, onClick }) =>
+const FilterItem = ({ heading, filter, active, onClick }) =>
 	<div className={ `filter-item ${ active ? "active" : "" }` }
-		onClick={ e => { e.stopPropagation(); onClick(filter); } }>
+		onClick={ e => { e.stopPropagation(); onClick({ heading, filter }); } }>
 		{ filter }
 	</div>
 
@@ -22,7 +22,7 @@ class FilterHeading extends React.Component {
 			activeFilters
 		} = this.props;
 		const isActive = activeFilters.reduce((a, c) =>
-			a || filters.includes(c)
+			a || (c.heading === heading && filters.includes(c.filter))
 		, false)
 		return (
 			<div className="filter-item filter-heading"
@@ -36,9 +36,10 @@ class FilterHeading extends React.Component {
 					{ !this.props.opened ? null :
 						filters.sort().map(filter =>
 							<FilterItem key={ filter }
+                heading={ heading }
 								filter={ filter }
 								onClick={ toggleActiveFilter }
-								active={ activeFilters.includes(filter) }/>
+								active={ activeFilters.reduce((a, c) => a || (c.heading === heading && c.filter === filter), false) }/>
 						, this)
 					}
 				</div>
@@ -64,6 +65,7 @@ class CMS_FilterPanel extends React.Component {
 			activeFilters
 		} = this.props.cms;
 		contentFilters.sort((a, b) => a.heading < b.heading ? -1 : 1);
+console.log("CONTENT FILTERS:", contentFilters, activeFilters)
 		return (
           	<div className={ this.props.className }>
 				<ElementBox>

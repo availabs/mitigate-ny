@@ -4,6 +4,8 @@ import { push } from 'react-router-redux';
 
 import { Link } from "react-router-dom"
 
+import styled from "styled-components"
+
 import ElementBox from 'components/light-admin/containers/ElementBox'
 
 // import AttributesTable from "./CMS_AttributesTable"
@@ -12,6 +14,22 @@ import ContentItem from "./CMS_ContentItem"
 import {
   sendSystemMessage
 } from 'store/modules/messages';
+
+const ClearFilterIcon = styled.div`
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 4px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  :hover {
+    background-color: #e2e6ea;
+  }
+`
 
 class CMS_ContentPanel extends React.Component {
 	state = {
@@ -47,8 +65,7 @@ class CMS_ContentPanel extends React.Component {
 			.sort((a, b) => b.updated_at.valueOf() - a.updated_at.valueOf());
 		if (activeFilters.length) {
 			filteredContent = filteredContent.filter(cntnt => {
-				const values = Object.values(cntnt.attributes);
-				return activeFilters.reduce((a, c) => a || values.includes(c), false);
+				return activeFilters.reduce((a, c) => a || (cntnt.attributes[c.heading] === c.filter), false);
 			});
 		}
 		if (searchFilter.length) {
@@ -85,6 +102,9 @@ class CMS_ContentPanel extends React.Component {
 	setSearchFilterKey(e) {
 		this.updateState(this.props, { searchFilterKey: e.target.value });
 	}
+  clearSearchFilter() {
+    this.updateState(this.props, { searchFilter: "" });
+  }
 
 	setPage(page) {
 		this.setState({ page });
@@ -129,7 +149,7 @@ class CMS_ContentPanel extends React.Component {
 		} = this.state;
 
 		const range = this.getPaginationRange();
-		
+
 		const content = filteredContent
 				.slice(page * numPerPage, page * numPerPage + numPerPage);
 		return (
@@ -154,7 +174,7 @@ class CMS_ContentPanel extends React.Component {
 	  							{
 	  								range.map(p =>
 			  							<button className={ "btn btn-sm " + ((p == page) ? "btn-primary" : "btn-outline-primary") }
-			  								style={ { marginLeft: "-2px", width: "2rem" } }
+			  								style={ { marginLeft: "-2px", width: "2.5rem", padding: "0px", display: "flex", justifyContent: "center", alignItems: "center" } }
 			  								onClick={ this.setPage.bind(this, p) } key={ p }>
 			  								{ p + 1 }
 			  							</button>
@@ -183,8 +203,6 @@ class CMS_ContentPanel extends React.Component {
 	  									id="search-filter-key"
 	  									className="form-control form-control-sm"
 	  									style= { {
-	  										borderBottomLeftRadius: "0px",
-	  										borderBottomRightRadius: "0px",
 	  										paddingTop: "0",
 	  										paddingBottom: "0" } }
 	  									value={ this.state.searchFilterKey }>
@@ -195,12 +213,16 @@ class CMS_ContentPanel extends React.Component {
 	  								</select>
 	  							</div>
   							</div>
-  							<div>
+  							<div style={ { position: "relative" } }>
   								<input type="text" value={ this.state.searchFilter }
-  									style={ { borderTopRightRadius: "0px" } }
   									className="form-control form-control-sm"
   									onChange={ this.setSearchFilter.bind(this) }
   									placeholder="search for..."/>
+                  { !this.state.searchFilter.length ? null :
+                    <ClearFilterIcon onClick={ e => (e.stopPropagation(), this.clearSearchFilter()) }>
+                      X
+                    </ClearFilterIcon>
+                  }
   							</div>
   						</div>
   						<div className="col-lg-2">
@@ -212,7 +234,7 @@ class CMS_ContentPanel extends React.Component {
   						</div>
   					</div>
   				</ElementBox>
-	      		{ 
+	      		{
 	      			content.map(cntnt =>
 		      			<ContentItem key={ cntnt.content_id } { ...cntnt }
 		      				deleteContent={ this.props.deleteContent }

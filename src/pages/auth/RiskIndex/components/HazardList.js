@@ -61,26 +61,26 @@ class HazardList extends Component {
         let sheldus = this.props[dataType][geoid][hazard]
         // console.log('sheldus', sheldus)
         return (
-          <HazardOverview 
+          <HazardOverview
             hazard={ hazard }
-            key={i} 
-            title={this.props.riskIndex.meta[hazard].name + ' Occurences By Year'} 
+            key={i}
+            title={this.props.riskIndex.meta[hazard].name + ' Occurences By Year'}
             value={this.props.riskIndex[geoid][hazard].value || 'N/A'}
             score={this.props.riskIndex[geoid][hazard].score || 'N/A'}
             sheldus={sheldus}
             display={this.props.display}
             size={this.props.size}
-            link={`/hazards/${hazard}`} 
+            link={`/hazards/${hazard}`}
           />
         )
       })
 
-    
+
     return (
       <div className='projects-list row'>
         {hazards}
       </div>
-    ) 
+    )
   }
 }
 
