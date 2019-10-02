@@ -18,7 +18,7 @@ class nfip extends Component {
 
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
-        
+
             <div className="property-section">
               <Content content_id={`nfip`} />
             </div>
@@ -28,10 +28,10 @@ class nfip extends Component {
                 <NfipLossesChoropleth />
 
                 <NfipLossesTable
-                title={ "NFIP Losses by Municipality" } 
+                title={ "NFIP Losses by Municipality" }
                 />
-                
-                <NfipLossesTable 
+
+                <NfipLossesTable
                 geoLevel="counties"
                 title={ "NFIP Losses by County" }
                 />
@@ -53,7 +53,7 @@ class nfip extends Component {
                <NfipTable/>
             </div>
 
-            
+
 
             <div className="property-section">
               <Content content_id={`nfip-rlstrategy`} />

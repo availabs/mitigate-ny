@@ -2,6 +2,9 @@
 import { Model } from 'falcor'
 import HttpDataSource from 'falcor-http-datasource'
 
+import store from "store"
+import { update } from "utils/redux-falcor/components/duck"
+
 // export let host = 'https://mitigateny.availabs.org/api/'
 let host = 'http://localhost:4444/'
 // if (process.env.NODE_ENV === 'production') {
@@ -43,6 +46,56 @@ class CustomSource extends HttpDataSource {
 //   }
 //   return restoreGraph // {}
 // }
+
+export const chunker = (values, request, options = {}) => {
+  const {
+    placeholder = "replace_me",
+    chunkSize = 50
+  } = options;
+
+  const requests = [];
+
+  for (let n = 0; n < values.length; n += chunkSize) {
+    requests.push(request.map(r => r === placeholder ? values.slice(n, n + chunkSize) : r));
+  }
+
+  return requests;
+}
+export const falcorChunker = (values, request, options = {}) => {
+  const {
+    falcor = falcorGraph,
+    ...rest
+  } = options;
+
+  return chunker(values, request, rest).reduce((a, c) => a.then(() => falcor.get(c)), Promise.resolve());
+}
+
+export const falcorChunkerWithUpdate = (...args) =>
+  falcorChunker(...args)
+    .then(() => store.dispatch(update(falcorGraph.getCache())));
+
+export const falcorChunkerNice = (request, options = {}) => {
+  const {
+    index = null,
+    placeholder = "replace_me",
+    ...rest
+  } = options;
+
+  let values = [], found = false;
+
+  const replace = request.map((r, i) => {
+    if (Array.isArray(r) && !found && (index === null || index === i)) {
+      found = true;
+      values = r;
+      return placeholder;
+    }
+    return r;
+  })
+  return falcorChunker(values, replace, { ...rest, placeholder });
+}
+export const falcorChunkerNiceWithUpdate = (...args) =>
+  falcorChunkerNice(...args)
+    .then(() => store.dispatch(update(falcorGraph.getCache())));
 
 export const falcorGraph = (function () {
   var storedGraph = {} //JSON.parse(localStorage.getItem('falcorCache')) || {};

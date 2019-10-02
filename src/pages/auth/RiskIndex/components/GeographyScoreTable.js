@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
+import { falcorChunkerNice } from "store/falcorGraph"
 
 import * as d3scale from "d3-scale";
 
@@ -39,14 +40,13 @@ class GeographyScoreTable extends React.Component {
       .then(data => {
           const hazards = data.json.riskIndex.hazards,
             geoids = data.json.geo[geoid][geoLevel];
-          return this.props.falcor.get(
+          return [
             ['riskIndex', 'meta', hazards, ['id', 'name']],
             ['geo', geoids, ['name']],
             ['riskIndex', geoids, hazards, ['score', 'value']],
             [dataType, geoids, hazards, 'allTime', 'property_damage']
-          )
+          ].reduce((a, c) => a.then(() => falcorChunkerNice(c)), Promise.resolve());
       })
-      // .then(res => (console.log(res),res))
     }
 
   renderGraphTable() {
@@ -81,7 +81,7 @@ class GeographyScoreTable extends React.Component {
     catch (e) {
       return <ElementBox>Loading...</ElementBox>
     }
-    
+
     return (
       <TableBox
         title={ `NY Hazard Loss ${ (geoLevel === 'counties') ? 'by County' : `for ${ countyName }` }` }
@@ -99,7 +99,7 @@ class GeographyScoreTable extends React.Component {
       <div>
        { this.renderGraphTable() }
       </div>
-    ) 
+    )
   }
 }
 

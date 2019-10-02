@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
+import { falcorChunkerNice } from "store/falcorGraph"
 
 import { fnum } from "utils/sheldusUtils"
 
@@ -17,10 +18,8 @@ class NfipTable extends React.Component {
 		)
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
-			return this.props.falcor.get(
-				['nfip', 'byGeoid', geoids, 'allTime', ['num_losses', 'total_loss', 'num_properties', 'num_mitigated']],
-				['geo', geoids, 'name']
-			)
+			return falcorChunkerNice(['nfip', 'byGeoid', geoids, 'allTime', ['num_losses', 'total_loss', 'num_properties', 'num_mitigated']])
+				.then(() => falcorChunkerNice(['geo', geoids, 'name']))
 		})
 	}
 

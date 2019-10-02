@@ -157,7 +157,7 @@ class SvgMap extends React.Component {
 				layers[0].data
 			)
 		}
-		else if (bounds) {
+		else if (bounds && isValidGeojson(bounds)) {
 			projection.fitExtent(
 				[[padding, padding], [width-padding, height-padding]],
 				bounds
@@ -178,19 +178,19 @@ class SvgMap extends React.Component {
 							height: `${ height }px`,
 						} }>
 						{
-							
+
 							layers.map(layer =>
 								<g id={ layer.id } key={ layer.id }>
 									{ this.getLayerPaths(layer) }
 								</g>
 							)
-							
+
 						}
 					</svg>
 					{
 						controls.map((control, i) => <MapControl key={ i } { ...control }/>)
 					}
-		          	{ this.props.hoverData ? 
+		          	{ this.props.hoverData ?
 		          		<MapHover { ...this.props.hoverData }/>
 		          		: null
 		          	}

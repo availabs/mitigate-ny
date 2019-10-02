@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
+import { falcorChunkerNice } from "store/falcorGraph"
 
 import * as d3scale from "d3-scale";
 
@@ -71,15 +72,31 @@ class GeographyScoreBarChart extends React.Component {
           ['geo', geoid, geoLevel]
       )
       .then(res => res.json.riskIndex.hazards)
-      .then(hazards => geoLevel === 'state' ? Promise.resolve({ hazards, geoids: [geoid] }) : this.props.falcor.get(['geo', geoid, geoLevel]).then(res => ({ hazards, geoids: res.json.geo[geoid][geoLevel] })))
+      .then(hazards => geoLevel === 'state' ?
+					Promise.resolve({ hazards, geoids: [geoid] })
+				:
+					this.props.falcor.get(['geo', geoid, geoLevel])
+						.then(res => ({ hazards, geoids: res.json.geo[geoid][geoLevel] }))
+				)
       .then(({ hazards, geoids }) => {
           this.props.colorScale.domain(hazards);
-          return this.props.falcor.get(
-            ['riskIndex', 'meta', hazards, ['id', 'name']],
-            ['geo', geoids, ['name']],
-            ['riskIndex', geoids, hazards, ['score', 'value']],
-            [dataType, geoids, hazards, { from: EARLIEST_YEAR, to: LATEST_YEAR }, ['property_damage', 'total_loss', 'num_events','num_episodes', 'num_loans']]
-          )
+
+					return [
+						['riskIndex', 'meta', hazards, ['id', 'name']],
+						['geo', geoids, ['name']]
+					].reduce((a, c) => a.then(() => falcorChunkerNice(c)), Promise.resolve())
+					.then(() => falcorChunkerNice(['riskIndex', geoids, hazards, ['score', 'value']], { chunckSize: 5 }))
+					.then(() => {
+						const requests = [];
+						for (let h = 0; h < hazards.length; h += 5) {
+							requests.push([dataType, geoids, hazards.slice(h, h + 5),
+								{ from: EARLIEST_YEAR, to: LATEST_YEAR },
+								['property_damage', 'total_loss', 'num_events','num_episodes', 'num_loans']
+							])
+						}
+						return requests.reduce((a, c) => a.then(() => falcorChunkerNice(c, { chunkSize: 5 })), Promise.resolve())
+					})
+
       })
     }
 
@@ -113,7 +130,8 @@ class GeographyScoreBarChart extends React.Component {
 					indexBy="year"
 					colorBy={ d => this.props.colorScale(d.id) }
 					enableLabel={ false }
-					tooltipFormat={ this.props.format }
+					tooltipFormat={ format }
+					animate={ false }
 					margin={ {
 			            "top": 25,
 			            "right": this.props.showYlabel ? 25 : 0,
@@ -126,7 +144,7 @@ class GeographyScoreBarChart extends React.Component {
 			            "tickPadding": 5,
 			            "tickRotation": 0,
 			            "legend": this.props.showXlabel ? "Year" : undefined,
-			            "legendPosition": "center",
+			            "legendPosition": "middle",
 		            	"legendOffset": 40,
 		            	"tickRotation": this.props.showYlabel ? 0 : 45
 		        	} }
@@ -136,7 +154,7 @@ class GeographyScoreBarChart extends React.Component {
 			            "tickPadding": 5,
 			            "tickRotation": 0,
 			            "legend": this.props.showYlabel ? this.props.lossType : undefined,
-			            "legendPosition": "center",
+			            "legendPosition": "middle",
 			            "legendOffset": -100,
 		            	"format": fnum
 			        } }
