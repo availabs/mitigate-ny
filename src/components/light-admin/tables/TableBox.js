@@ -4,6 +4,7 @@ import DataTable from './DataTable'
 import Pagination from './Pagination'
 
 import * as d3format from "d3-format"
+import sort from "d3-selection/src/selection/sort";
 
 const COERCE = {
   string: s => s && s.toString(),
@@ -31,6 +32,7 @@ const COERCE = {
       this.setState({ sortOrder: -this.state.sortOrder })
     }
     else {
+
       this.setState({ sortColumn, sortOrder: -1 })
     }
   }
@@ -53,7 +55,7 @@ const COERCE = {
 
     if (column in ct) {
       data = COERCE[ct[column]](data);
-      if (ct[column] !== 'string') {
+      if (ct[column]) {
         return data;
       }
     }
@@ -95,9 +97,27 @@ const COERCE = {
       so = this.state.sortOrder;
     if (sc) {
       data.sort((a, b) => {
-        const va = this.getValue(a[sc], sc),
-          vb = this.getValue(b[sc], sc);
-        return va < vb ? -so : va > vb ? so : 0;
+          const va = this.getValue(a[sc], sc),
+              vb = this.getValue(b[sc], sc);
+          if (va === vb) {
+            return 0;
+          }
+          // nulls sort after anything else
+          else if (va === null) {
+            return 1;
+          }
+          else if (vb === null) {
+            return -1;
+          }
+          // otherwise, if we're ascending, lowest sorts first
+          else if (va < vb) {
+            return -so;
+          }
+          // if descending, highest sorts first
+          else {
+            return so;
+          }
+
       })
     }
     for (const c in fc) {
@@ -164,7 +184,6 @@ const COERCE = {
 
   downloadAsCsv(e) {
     e.preventDefault();
-
     let { data, columns } = this.props;
     if (!data.length) return;
     if (!columns.length) {
@@ -174,7 +193,7 @@ const COERCE = {
     data.forEach(d => {
       const row = [];
       columns.forEach(c => {
-        row.push(d[c])
+          row.push(d[c])
       })
       rows.push('"' + row.join('","') + '"');
     })
