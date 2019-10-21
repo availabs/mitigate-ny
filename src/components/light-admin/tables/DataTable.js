@@ -96,6 +96,11 @@ export default class DataTable extends React.Component {
     if (!columns.length) {
       columns = tableData.length ? Object.keys(tableData[0]) : []
     }
+    if(filterColumns.length === 1){
+      filterColumns.map(item =>{
+        item.values = ["fma", "hmgp", "lpdm", "pdm", "srl"]
+      })
+    }
     const { expanded } = this.state;
     return (
       <table className="table table-lightborder table-hover">
