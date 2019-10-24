@@ -49,8 +49,8 @@ class NfipChoropleth extends React.Component {
 		.then(response => response.json.geo[geoid][geoLevel])
 		.then(geoids => {
 			const requests = [];
-			for (let i = 0; i < geoids.length; i += 500) {
-				requests.push(geoids.slice(i, i + 500));
+			for (let i = 0; i < geoids.length; i += 50) {
+				requests.push(geoids.slice(i, i + 50));
 			}
 			return requests.reduce((a, c) =>
 				a.then(() => this.props.falcor.get(
@@ -193,7 +193,7 @@ class NfipChoropleth extends React.Component {
   			domainValues = range.map(r => scale.invertExtent(r)[0]);
   		if (!domainValues.reduce((a, c) => a || Boolean(c), false)) return false;
   		const label = attribute.split("_").map(d => d.split("").map((c, i) => i === 0 ? c.toUpperCase() : c).join("")).join(" ")
-		return (	
+		return (
 			<table className="map-test-table">
 				<thead>
 					<tr>
@@ -232,7 +232,7 @@ class NfipChoropleth extends React.Component {
     			height={ this.props.height }
     			hoverData={ this.state.hoverData }
         	controls={ this.generateMapControls() }/>
-    	) 
+    	)
   	}
 }
 

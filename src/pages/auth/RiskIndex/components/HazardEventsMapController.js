@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxFalcor } from 'utils/redux-falcor'
+import { falcorChunkerNice } from "store/falcorGraph"
 
 import * as d3scale from "d3-scale";
 import { set as d3set } from "d3-collection"
@@ -150,9 +151,9 @@ class HazardEventsMapController extends React.Component {
         		requests.push([dataType, 'events', 'borked', geoids, hazards, { from: Math.max(i - yearsPerRequest + 1, EARLIEST_YEAR), to: i }, 'property_damage'])
       		}
 	      	return requests.reduce((a, c) =>
-	      		a.then(() => this.props.falcor.get(c))
+	      		a.then(() => falcorChunkerNice(c, { chunckSize: 5 }))
 	      			.then(() => this.updateLoadedRanges(c[5]))
-	      	, this.props.falcor.get(['riskIndex', 'meta', falcorResponse.json.riskIndex.hazards, ['id', 'name']]));
+	      	, falcorChunkerNice(['riskIndex', 'meta', hazards, ['id', 'name']], { chunckSize: 10 }));
 	    })
   	}
 
@@ -263,25 +264,25 @@ class HazardEventsMapController extends React.Component {
 		const maps = Array(this.props.numMaps).fill(getMapWidth(this.props.numMaps))
 			.map((width, n) =>
 				<div className={ `col-lg-${ width }` } key={ n }>
-	              	<HazardEventsMap
-	              		eventsData={ this.state.eventsData }
-	              		yearDelta={ n + 1 - this.props.numMaps }
-	              		geoLevel={ geoLevel }
+            	<HazardEventsMap
+            		eventsData={ this.state.eventsData }
+            		yearDelta={ n + 1 - this.props.numMaps }
+            		geoLevel={ geoLevel }
       					geoid={ geoid }
       					dataType={ dataType }
-	              		{ ...getMapDefaults(width, (height || mapHeight)) }
-	              		mapLegendLocation={ mapLegendLocation }
-	              		mapLegendSize={ mapLegendSize }
-	              		mapControlsLocation={ mapControlsLocation }
-		              	viewport={ this.state.viewport }
-		                colorScale={ colorScale || this.state.colorScale }
-		                radiusScale={ this.state.radiusScale }
-		                zoomPadding={ zoomPadding }
-		                hazard={ hazard }
-		                bounds={ this.state.bounds }
-		                allTime={ allTime }/>
-	            </div>
-	        , this);
+            		{ ...getMapDefaults(width, (height || mapHeight)) }
+            		mapLegendLocation={ mapLegendLocation }
+            		mapLegendSize={ mapLegendSize }
+            		mapControlsLocation={ mapControlsLocation }
+              	viewport={ this.state.viewport }
+                colorScale={ colorScale || this.state.colorScale }
+                radiusScale={ this.state.radiusScale }
+                zoomPadding={ zoomPadding }
+                hazard={ hazard }
+                bounds={ this.state.bounds }
+                allTime={ allTime }/>
+          </div>
+      , this);
 
 		return (
 			<div className='row'>

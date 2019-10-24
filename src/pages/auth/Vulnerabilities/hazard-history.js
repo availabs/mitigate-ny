@@ -51,7 +51,7 @@ class Hazardhistory extends Component {
     const { geoid, geoLevel } = this.state;
     if (!this.props.riskIndex[geoid] || !this.props.riskIndex[geoid][geoLevel]) {
       this.props.getHazardDetail(geoid)
-    } 
+    }
   }
 
   componentWillReceiveProps(newProps) {
@@ -110,10 +110,10 @@ class Hazardhistory extends Component {
 
   render () {
     return (
-      	
+
         <Element>
           <h6 className="element-header">New York Statewide Hazard History</h6>
-          <div className='property-single'> 
+          <div className='property-single'>
             <div className='property-info-w'>
 
 
