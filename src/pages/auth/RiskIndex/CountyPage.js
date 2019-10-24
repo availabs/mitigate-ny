@@ -34,7 +34,8 @@ class CountyPage extends React.Component {
       geoid,
       geoLevel: 'counties',
       dataType: 'severeWeather',
-      colorScale: getColorScale([1, 2])
+      colorScale: getColorScale([1, 2]),
+      filterColumns : ["program area"] //["fma", "hmgp", "lpdm", "pdm", "srl"]
     }
   }
 
@@ -122,7 +123,8 @@ class CountyPage extends React.Component {
 
         <div className='row'>
           <div className= 'col-12'>
-            <HMGPTable { ...this.state }/>
+            <HMGPTable { ...this.state }
+            />
           </div>
         </div>
 

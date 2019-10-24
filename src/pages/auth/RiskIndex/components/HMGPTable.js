@@ -122,7 +122,7 @@ class HMAP_Table extends React.Component {
 	createRow(data) {
 		const row = {};
 		row["year"] = data.year;
-		row["disaster #"] = data.disasternumber;
+		row["disaster number"] = data.disasternumber;
 		row["status"] = data.status;
 		row["program area"] = data.programarea;
 		row["project amount"] = fnum(data.projectamount);
@@ -154,9 +154,12 @@ class HMAP_Table extends React.Component {
 		try {
 			return (
 				<TableBox { ...this.processData() }
-					filterKey="year"
+					filterKey="county"
 					filterColumns={ this.props.filterColumns }
-					tableScroll={ this.props.tableScroll } />
+					tableScroll={ this.props.tableScroll }
+				    sortColumn={this.props.sortColumn}
+				    columnTypes = {this.props.columnTypes}
+				/>
 			)
 		}
 		catch (e) {
@@ -170,7 +173,9 @@ HMAP_Table.defaultProps = {
 	geoid: '36',
 	geoLevel: 'state',
 	hazard: "all", // a hazard, "none", "all"
-	filterColumns: []
+	filterColumns: [],
+	sortColumn: "county",
+	columnTypes: {county:"string"}
 }
 
 const mapStateToProps = state => {
