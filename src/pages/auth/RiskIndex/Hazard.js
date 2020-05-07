@@ -436,7 +436,7 @@ criticalInfrastructure (hazard) {
               <div className="property-section">
                 <h5> {hazardName} - Reported Loss in Dollars by County </h5>
                 <strong>1996-2017</strong>
-                <div>The table below summarizes the loss amount due to Flooding in dollars for each county. Severe events are considered those which caused more than $1M in damage.</div>
+                <div>The table below summarizes the loss amount due to {hazardName} in dollars for each county. Severe events are considered those which caused more than $1M in damage.</div>
                 
                 <HazardScoreTable 
                   hazard={hazard}
