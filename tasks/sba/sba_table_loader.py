@@ -1,6 +1,6 @@
 import argparse, csv, io, psycopg2
 
-from config import host
+import database_config
 
 UNCONVERTED_BUSINESS_FILE = 'sba_disaster_loan_data_business_FY01-17.csv'
 BUSINESS_FILE = 'sba_business_FY01-17.csv'
@@ -14,7 +14,7 @@ def toFloat(string):
 			return None
 		return float(string.replace(",", ""))
 	except:
-		print "toFloat ERROR:", string
+		print("toFloat ERROR:", string)
 		return None
 
 def toString(string):
@@ -23,7 +23,7 @@ def toString(string):
 			return None
 		return string
 	except:
-		print "toString ERROR:", string
+		print("toString ERROR:", string)
 		return None
 
 def toZip(string):
@@ -32,7 +32,7 @@ def toZip(string):
 			return None
 		return string.zfill(5)
 	except:
-		print "toZip ERROR:", string
+		print("toZip ERROR:", string)
 		return None
 
 def toInt(string):
@@ -41,7 +41,7 @@ def toInt(string):
 			return None
 		return int(string)
 	except:
-		print "toInt ERROR:", string
+		print("toInt ERROR:", string)
 		return None
 
 def tryTransformRow(row):
@@ -64,13 +64,13 @@ def convert(meta, v):
 	return meta["convert"](v)
 
 BUSINESS_META = [
-	{ "convert": toInt,		"type": "INTEGER" },
+	{ "convert": toInt,		"type": "INTEGER"},
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
-	{ "convert": toZip,		"type": "VARCHAR(5)" },
+	{ "convert": toZip,		"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toString,	"type": "VARCHAR" },
 	{ "convert": toFloat,	"type": "NUMERIC" },
@@ -79,9 +79,19 @@ BUSINESS_META = [
 	{ "convert": toFloat,	"type": "NUMERIC" },
 	{ "convert": toFloat,	"type": "NUMERIC" },
 	{ "convert": toFloat,	"type": "NUMERIC" },
-	{ "convert": toFloat,	"type": "NUMERIC" },
-	{ 						"type": "VARCHAR", "name": "loan_type" }
+	{ "convert": toFloat,	"type": "NUMERIC"},
+	{"type": "VARCHAR", "name": "loan_type"}
 ]
+
+def get_state_fips_code(cursor):
+	sql = """
+		SELECT statefp,stusps
+	FROM geo.tl_2017_us_state
+	"""
+	cursor.execute(sql)
+	fips_data = [{'fips': t[0], 'state_code': t[1]} for t in cursor.fetchall()]
+
+	return fips_data
 
 def createTable(cursor):
 	sql = """
@@ -100,7 +110,6 @@ def createTable(cursor):
 	columns = []
 	for meta in BUSINESS_META:
 		columns.append("{} {}".format(meta["name"], meta["type"]))
-
 	cursor.execute(sql.format(",".join(columns)))
 
 def prepareStatement(cursor):
@@ -128,12 +137,12 @@ def populateIncidentTypes(cursor):
 		WHERE fema_disaster_number IS NOT NULL
 	"""
 
-	print "STARTING POPULATION OF INCIDENT TYPES..."
-	print "THIS COULD TAKE A FEW MINUTES..."
+	print("STARTING POPULATION OF INCIDENT TYPES...")
+	print("THIS COULD TAKE A FEW MINUTES...")
 
 	cursor.execute(sql)
 
-	print "COMPLETED POPULATION OF INCIDENT TYPES.\n"
+	print("COMPLETED POPULATION OF INCIDENT TYPES.\n")
 
 def populateFemaDates(cursor):
 	sql = """
@@ -146,67 +155,76 @@ def populateFemaDates(cursor):
 		WHERE fema_disaster_number IS NOT NULL
 	"""
 
-	print "STARTING POPULATION OF FEMA DATES..."
-	print "THIS COULD TAKE A FEW MINUTES..."
+	print("STARTING POPULATION OF FEMA DATES...")
+	print("THIS COULD TAKE A FEW MINUTES...")
 
 	cursor.execute(sql)
 
-	print "COMPLETED POPULATION OF FEMA DATES.\n"
+	print("COMPLETED POPULATION OF FEMA DATES.\n")
 
 def populateStateGeoids(cursor):
-	sql = """
-		UPDATE public.sba_disaster_loan_data
-		SET geoid = '36'
-		WHERE lower(damaged_property_state_code) = 'ny'
-		AND geoid IS NULL;
-	"""
-	cursor.execute(sql);
+	print("POPULATING STATE GEOIDS")
+	fips_data = get_state_fips_code(cursor)
+	for item in fips_data:
+		sql = """
+			UPDATE public.sba_disaster_loan_data
+			SET geoid = """+"'"+str(item["fips"])+"'"+"""
+			WHERe damaged_property_state_code = """ +"'"+str(item["state_code"])+"'"+"""
+			AND geoid IS NULL;
+		"""
+		cursor.execute(sql)
 # END populateStateGeoids
 
 def populateCountyGeoids(cursor):
-	sql = """
-		CREATE OR REPLACE FUNCTION temp(TEXT) RETURNS TEXT
-			AS $$ SELECT geotl.geoid
-			FROM geo.tl_2017_us_county AS geotl
-			WHERE lower(geotl.name) = lower($1)
-			AND geotl.statefp = '36'
-			GROUP BY geotl.geoid $$
-		LANGUAGE SQL
-		IMMUTABLE
-		RETURNS NULL ON NULL INPUT;
-
-		UPDATE public.sba_disaster_loan_data
-		SET geoid = temp(damaged_property_county_or_parish_name::TEXT)
-		WHERE damaged_property_county_or_parish_name IS NOT NULL
-		AND lower(damaged_property_state_code) = 'ny'
-		AND geoid IS NULL;
-
-		DROP FUNCTION temp(TEXT);
-	"""
-	cursor.execute(sql);
+	print("POPULATING COUNTY GEOIDS")
+	fips_data = get_state_fips_code(cursor)
+	for item in fips_data:
+		sql = """
+			CREATE OR REPLACE FUNCTION temp(TEXT) RETURNS TEXT
+				AS $$ SELECT geotl.geoid
+				FROM geo.tl_2017_us_county AS geotl
+				WHERE lower(geotl.name) = lower($1)
+				AND geotl.statefp = """+"'"+str(item["fips"])+"'"+"""
+				GROUP BY geotl.geoid $$
+			LANGUAGE SQL
+			IMMUTABLE
+			RETURNS NULL ON NULL INPUT;
+	
+			UPDATE public.sba_disaster_loan_data
+			SET geoid = temp(damaged_property_county_or_parish_name::TEXT)
+			WHERE damaged_property_county_or_parish_name IS NOT NULL
+			AND damaged_property_state_code = """ +"'"+str(item["state_code"])+"'"+"""
+			AND geoid IS NULL;
+	
+			DROP FUNCTION temp(TEXT);
+		"""
+		cursor.execute(sql);
 # END populateCountyGeoids
 
 def populateCousubGeoids(cursor):
-	sql = """
-		CREATE OR REPLACE FUNCTION temp(TEXT) RETURNS TEXT
-			AS $$ SELECT geotl.geoid
-			FROM geo.tl_2017_36_cousub AS geotl
-			WHERE lower(geotl.name) = lower($1)
-			AND geotl.statefp = '36'
-			GROUP BY geotl.geoid $$
-		LANGUAGE SQL
-		IMMUTABLE
-		RETURNS NULL ON NULL INPUT;
-
-		UPDATE public.sba_disaster_loan_data
-		SET geoid = temp(damaged_property_city_name::TEXT)
-		WHERE damaged_property_city_name IS NOT NULL
-		AND lower(damaged_property_state_code) = 'ny'
-		AND geoid IS NULL;
-
-		DROP FUNCTION temp(TEXT);
-	"""
-	cursor.execute(sql)
+	print("POPULATING COOUSUB GEOIDS")
+	fips_data = get_state_fips_code(cursor)
+	for item in fips_data:
+		sql = """
+			CREATE OR REPLACE FUNCTION temp(TEXT) RETURNS TEXT
+				AS $$ SELECT geotl.geoid
+				FROM geo.tl_2017_36_cousub AS geotl
+				WHERE lower(geotl.name) = lower($1)
+				AND geotl.statefp = """+"'"+str(item["fips"])+"'"+"""
+				GROUP BY geotl.geoid $$
+			LANGUAGE SQL
+			IMMUTABLE
+			RETURNS NULL ON NULL INPUT;
+	
+			UPDATE public.sba_disaster_loan_data
+			SET geoid = temp(damaged_property_city_name::TEXT)
+			WHERE damaged_property_city_name IS NOT NULL
+			AND damaged_property_state_code = """ +"'"+str(item["state_code"])+"'"+"""
+			AND geoid IS NULL;
+	
+			DROP FUNCTION temp(TEXT);
+		"""
+		cursor.execute(sql)
 # END populateCousubGeoids
 
 def clearGeoids(cursor):
@@ -217,14 +235,14 @@ def clearGeoids(cursor):
 	cursor.execute(sql)
 
 def populateGeoids(cursor):
-	print "STARTING POPULATION OF GEO IDs..."
+	print("STARTING POPULATION OF GEO IDs...")
 
 	clearGeoids(cursor)
 	populateCousubGeoids(cursor)
 	populateCountyGeoids(cursor)
 	populateStateGeoids(cursor)
 	
-	print "COMPLETED POPULATION OF GEO IDs.\n"
+	print("COMPLETED POPULATION OF GEO IDs.\n")
 # END populateGeoids
 
 def loadTable(cursor, businessIn, homeIn, **rest):
@@ -234,21 +252,19 @@ def loadTable(cursor, businessIn, homeIn, **rest):
 		EXECUTE stmt({})
 	""".format(inserts)
 
-	print "LOADING BUSINESS DATA..."
+	print("LOADING BUSINESS DATA...")
 	firstLineRead = False
 	META_DATA = []
-	with open(businessIn, 'rb') as businessData:
+	with open(businessIn, 'r') as businessData:
 		reader = csv.reader(businessData, delimiter=',', dialect='excel')
 		for row in reader:
 			if firstLineRead:
-				row = map(convert, META_DATA, tryTransformRow(row))
+				row = list(map(convert, META_DATA, tryTransformRow(row)))
 				row.append("business")
 				cursor.execute(sql, row)
-
 			else:
 				for i, column in enumerate(row):
 					BUSINESS_META[i]["name"] = column.replace(" ", "_").replace("/", "_or_").lower()
-
 				createTable(cursor)
 				prepareStatement(cursor)
 
@@ -257,15 +273,15 @@ def loadTable(cursor, businessIn, homeIn, **rest):
 			# end if
 		# end for
 	# end with
-	print "BUSINESS DATA LOADED.\n"
+	print("BUSINESS DATA LOADED.\n")
 
-	print "LOADING HOME DATA..."
+	print("LOADING HOME DATA...")
 	firstLineRead = False
 	with open(homeIn) as homeData:
 		reader = csv.reader(homeData, delimiter=',', dialect='excel')
 		for row in reader:
 			if firstLineRead:
-				row = map(convert, META_DATA, tryTransformRow(row))
+				row = list(map(convert, META_DATA, tryTransformRow(row)))
 				row.append(None)
 				row.append("home")
 				cursor.execute(sql, row)
@@ -276,7 +292,7 @@ def loadTable(cursor, businessIn, homeIn, **rest):
 			# end if
 		# end for
 	# end with
-	print "HOME DATA LOADED.\n"
+	print("HOME DATA LOADED.\n")
 
 	deallocateStatement(cursor)
 
@@ -351,31 +367,35 @@ parser.add_argument('-o', '--output-format',
 
 def main():
 	args = vars(parser.parse_args())
+	connection = psycopg2.connect(host=database_config.DATABASE_CONFIG['host'],
+								  database=database_config.DATABASE_CONFIG['dbname'],
+								  user=database_config.DATABASE_CONFIG['user'],
+								  port=database_config.DATABASE_CONFIG['port'],
+								  password=database_config.DATABASE_CONFIG['password'])
+	cursor = connection.cursor()
 
-	conn = psycopg2.connect(host)
-	cursor = conn.cursor()
 
 	if args["convert"]:
 		convertFiles(**args)
 
 	if not args["noTable"]:
 		loadTable(cursor, **args)
-		conn.commit()
+		connection.commit()
 
 	if not args["noIncidentTypes"]:
 		populateIncidentTypes(cursor)
-		conn.commit()
+		connection.commit()
 
 	if not args["noDates"]:
 		populateFemaDates(cursor)
-		conn.commit()
+		connection.commit()
 
 	if not args["noGeoids"]:
 		populateGeoids(cursor)
-		conn.commit()
+		connection.commit()
 
 	cursor.close()
-	conn.close()
+	connection.close()
 
 if __name__ == "__main__":
 	main()
