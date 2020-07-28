@@ -34,3 +34,4 @@ tasks/atlas/tiger_vt/mbview
 config.py*
 *.pyc
 /tasks/sba/database_config.py
+/tasks/hmap/database_config.py
