@@ -35,3 +35,4 @@ config.py*
 *.pyc
 /tasks/sba/database_config.py
 /tasks/hmap/database_config.py
+/tasks/severe-weather-sql/database_config.py
