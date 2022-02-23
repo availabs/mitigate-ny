@@ -1,4 +1,5 @@
 
+
 -- Remove colums ---------------------------
 ALTER TABLE severe_weather.details
 	DROP COLUMN IF EXISTS geoid,
