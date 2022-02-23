@@ -48,8 +48,9 @@ class TractLayer extends MapLayer {
     console.log('adding data')
     return falcorGraph.get(['geo','36', 'tracts'])
       .then(data => {
-        console.log('geodata', data)
+        
         let tracts = data.json.geo[36].tracts;
+        console.log('geodata', data, tracts)
         this.tracts = tracts;
         map.setFilter('tracts-layer', ['all', ['in', 'geoid', ...tracts]]);
         this.fetchData().then(data => this.receiveData(map, data))
@@ -58,7 +59,7 @@ class TractLayer extends MapLayer {
   }
 
   fetchData() {
-    if (this.tracts.length < 2) return Promise.resolve({ route: [] });
+    if (this.tracts && this.tracts.length < 2) return Promise.resolve({ route: [] });
     return falcorGraph.get(['severeWeather', this.tracts, this.filters.hazard.value, 'tract_totals', 'total_damage'])
       .then(fullData => {
         // console.log('get full data', fullData.json.severeWeather)

@@ -19,6 +19,7 @@ import Content from 'components/cms/Content'
 import Submenus from './risk-submenus'
 import nfip from './nfip'
 import bric from './bric'
+import dams from './dam-safety'
 import builtenv from './builtenv'
 import hazardhistory from './hazard-history'
 import riskindex from './riskindex'
@@ -169,7 +170,7 @@ export default [
     subMenus: Submenus,
     component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Geography))
   },
-
+  ...dams,
   ...nfip,
   ...riskindex,
   ...builtenv,

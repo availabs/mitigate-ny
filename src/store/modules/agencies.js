@@ -39,7 +39,7 @@ let initialState = {
 		"usgs",
 		"usace",
 		"nysfma",
-		
+		'lipa'
 	],
 	meta: {
 		"dhses":{name: 'NYS Division of Homeland Security and Emergency Services'},
@@ -80,7 +80,8 @@ let initialState = {
 		"nycoem":{name: 'New York City Emergency Management'},
 		"usgs":{name: 'United States Geological Survey'},
 		"usace":{name: 'United States Army Corp of Engineers'},
-		"nysfma":{name: 'New York State Floodplain and Stormwater Manager\'s Association'}
+		"nysfma":{name: 'New York State Floodplain and Stormwater Manager\'s Association'},
+		"lip":{name: 'Long Island Power Authority'}
 	}
 }
 

@@ -519,7 +519,10 @@ criticalInfrastructure (hazard) {
               <div className="property-section">
                 <Content content_id={'hazards-hmgp-overview'} />
               </div>
-                <HMGPTable hazard={hazard} />
+                <HMGPTable 
+                  filterColumns={ ['hazard' , 'status' , 'program area' ] }
+                  hazard={hazard} 
+                />
                 <i style={{color: '#afafaf'}}>Source: <a href="https://www.fema.gov/openfema-dataset-hazard-mitigation-assistance-projects-v1" target="_blank">FEMA Hazard Mitigation Assistance Projects - V1</a></i>
               </div>
               <CapabilitiesTable 

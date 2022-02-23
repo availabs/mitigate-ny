@@ -941,7 +941,7 @@ export default [
     path: '/capabilities/manage/new',
     name: 'Capabilities',
     mainNav: false,
-    auth: false,
+    auth: true,
     subMenus: [],
     exact: true,
     breadcrumbs: [
@@ -955,7 +955,7 @@ export default [
     path: '/capabilities/manage/edit/:id',
     name: 'Capabilities',
     mainNav: false,
-    auth: false,
+    auth: true,
     subMenus: [],
     exact: true,
     breadcrumbs: [
