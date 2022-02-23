@@ -6,11 +6,6 @@ import store from "store"
 import { update } from "utils/redux-falcor/components/duck"
 
 export let host = 'https://graph.availabs.org/'
-<<<<<<< Updated upstream
-
-=======
-//let host = 'http://localhost:4444/'
->>>>>>> Stashed changes
 if (process.env.NODE_ENV === 'production') {
   host  = 'https://graph.availabs.org/'
 }

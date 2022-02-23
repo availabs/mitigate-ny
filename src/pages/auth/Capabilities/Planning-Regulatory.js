@@ -11,13 +11,11 @@ class PlanningRegulatory extends Component {
   render () {
    return (
       <div className='property-single'>
-
         <div className='property-info-w'>
           <div className="property-info-main" style={{paddingTop: 0, paddingBottom: 0}}>
-        
-           <div className="property-section">
+            <div className="property-section">
               <Content content_id={`capabilities-planning_regulatory`} />
-               <CapabilitiesTable 
+              <CapabilitiesTable 
                  title='Planning and Regulatory Capabilities' 
                  type="program"
                  capability={'capability_policy' , 'capability_regulatory'}
@@ -25,15 +23,13 @@ class PlanningRegulatory extends Component {
                  filterColumns={ ["goal" , 'agency' , 'hazards' , 'admin'] }
                  urlColumn="url"
                  tableScroll={ true }
-               tableLink="/capabilities/manage/new"
-               tableLinkLabel="Add Your Agency Programs"
-                 expandColumns={ ["description"] }/>               
-            </div> 
-
-         
+                 tableLink="/capabilities/manage/new"
+                 tableLinkLabel="Add Your Agency Programs"
+                 expandColumns={ ["description"] }
+              />               
+            </div>
           </div>
-         </div>
-
+        </div>
       </div>
     )
   }

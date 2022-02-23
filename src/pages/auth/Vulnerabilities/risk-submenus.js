@@ -12,5 +12,9 @@ export default [
        {name: 'Population +/-', path: '/risk/vulnerabilities'},
        {name: 'State-owned Assets', path: '/risk/assetinventory'},
        {name: 'Vulnerable Populations', path: '/risk/vulnerablepopulations'},
+    ],
+    [
+       {name: 'Dam Safety', path: '/risk/dams'},
+      
     ]
 ]
